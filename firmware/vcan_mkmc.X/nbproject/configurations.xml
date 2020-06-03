@@ -7,25 +7,23 @@
       <logicalFolder name="f1" displayName="config" projectFiles="true">
         <logicalFolder name="f1" displayName="default" projectFiles="true">
           <logicalFolder name="f1" displayName="peripheral" projectFiles="true">
-            <logicalFolder name="f4" displayName="clk" projectFiles="true">
+            <logicalFolder name="f3" displayName="clk" projectFiles="true">
               <itemPath>../src/config/default/peripheral/clk/plib_clk.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f1" displayName="coretimer" projectFiles="true">
-              <itemPath>../src/config/default/peripheral/coretimer/plib_coretimer.h</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f6" displayName="evic" projectFiles="true">
+            <logicalFolder name="f5" displayName="evic" projectFiles="true">
               <itemPath>../src/config/default/peripheral/evic/plib_evic.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f5" displayName="gpio" projectFiles="true">
+            <logicalFolder name="f4" displayName="gpio" projectFiles="true">
               <itemPath>../src/config/default/peripheral/gpio/plib_gpio.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="qei" projectFiles="true">
               <itemPath>../src/config/default/peripheral/qei/plib_qei_common.h</itemPath>
               <itemPath>../src/config/default/peripheral/qei/plib_qei1.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f3" displayName="uart" projectFiles="true">
+            <logicalFolder name="f1" displayName="uart" projectFiles="true">
               <itemPath>../src/config/default/peripheral/uart/plib_uart_common.h</itemPath>
-              <itemPath>../src/config/default/peripheral/uart/plib_uart1.h</itemPath>
+              <itemPath>../src/config/default/peripheral/uart/plib_uart3.h</itemPath>
+              <itemPath>../src/config/default/peripheral/uart/plib_uart6.h</itemPath>
             </logicalFolder>
           </logicalFolder>
           <itemPath>../src/config/default/toolchain_specifics.h</itemPath>
@@ -39,6 +37,7 @@
           <itemPath>../src/packs/PIC32MK1024MCF100_DFP/device.h</itemPath>
         </logicalFolder>
       </logicalFolder>
+      <itemPath>../src/m35qei.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -50,23 +49,21 @@
       <logicalFolder name="f1" displayName="config" projectFiles="true">
         <logicalFolder name="f1" displayName="default" projectFiles="true">
           <logicalFolder name="f1" displayName="peripheral" projectFiles="true">
-            <logicalFolder name="f4" displayName="clk" projectFiles="true">
+            <logicalFolder name="f3" displayName="clk" projectFiles="true">
               <itemPath>../src/config/default/peripheral/clk/plib_clk.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f1" displayName="coretimer" projectFiles="true">
-              <itemPath>../src/config/default/peripheral/coretimer/plib_coretimer.c</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f6" displayName="evic" projectFiles="true">
+            <logicalFolder name="f5" displayName="evic" projectFiles="true">
               <itemPath>../src/config/default/peripheral/evic/plib_evic.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f5" displayName="gpio" projectFiles="true">
+            <logicalFolder name="f4" displayName="gpio" projectFiles="true">
               <itemPath>../src/config/default/peripheral/gpio/plib_gpio.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="qei" projectFiles="true">
               <itemPath>../src/config/default/peripheral/qei/plib_qei1.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f3" displayName="uart" projectFiles="true">
-              <itemPath>../src/config/default/peripheral/uart/plib_uart1.c</itemPath>
+            <logicalFolder name="f1" displayName="uart" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/uart/plib_uart3.c</itemPath>
+              <itemPath>../src/config/default/peripheral/uart/plib_uart6.c</itemPath>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f2" displayName="stdio" projectFiles="true">
@@ -77,6 +74,7 @@
           <itemPath>../src/config/default/exceptions.c</itemPath>
         </logicalFolder>
       </logicalFolder>
+      <itemPath>../src/m35qei.c</itemPath>
       <itemPath>../src/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -115,7 +113,7 @@
         </archiverTool>
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
-          <parseOnProdLoad>false</parseOnProdLoad>
+          <parseOnProdLoad>true</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
         <subordinates>
@@ -144,8 +142,8 @@
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
         <property key="make-warnings-into-errors" value="true"/>
-        <property key="optimization-level" value="-O1"/>
-        <property key="place-data-into-section" value="false"/>
+        <property key="optimization-level" value="-O2"/>
+        <property key="place-data-into-section" value="true"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros" value=""/>
@@ -391,6 +389,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="memories.configurationmemory" value="true"/>
         <property key="memories.dataflash" value="true"/>
         <property key="memories.eeprom" value="true"/>

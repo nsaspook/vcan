@@ -4,7 +4,7 @@
 
 
 project: qei_test
-creation_date: 2020-06-03T07:15:59.029-07:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2020-06-03T16:34:43.931-07:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Linux
 mhc_mode: IDE            # [IDE|Standalone|Headless]
 mplabx_version: v5.30        # if MPLAB X plugin only
