@@ -61,6 +61,14 @@
 // *****************************************************************************
 // *****************************************************************************
 
+/*** Macros for HOME1 pin ***/
+#define HOME1_Set()               (LATBSET = (1<<9))
+#define HOME1_Clear()             (LATBCLR = (1<<9))
+#define HOME1_Toggle()            (LATBINV= (1<<9))
+#define HOME1_Get()               ((PORTB >> 9) & 0x1)
+#define HOME1_OutputEnable()      (TRISBCLR = (1<<9))
+#define HOME1_InputEnable()       (TRISBSET = (1<<9))
+#define HOME1_PIN                  GPIO_PIN_RB9
 
 
 // *****************************************************************************

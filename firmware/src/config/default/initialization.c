@@ -70,11 +70,11 @@
 #pragma config EJTAGBEN =   NORMAL
 
 /*** DEVCFG1 ***/
-#pragma config FNOSC =      SPLL
+#pragma config FNOSC =      POSC
 #pragma config DMTINTV =    WIN_127_128
 #pragma config FSOSCEN =    ON
 #pragma config IESO =       ON
-#pragma config POSCMOD =    OFF
+#pragma config POSCMOD =    EC
 #pragma config OSCIOFNC =   OFF
 #pragma config FCKSM =      CSECME
 #pragma config WDTPS =      PS1048576
@@ -89,14 +89,14 @@
 #pragma config FPLLIDIV =   DIV_1
 #pragma config FPLLRNG =    RANGE_8_16_MHZ
 #pragma config FPLLICLK =   PLL_POSC
-#pragma config FPLLMULT =   MUL_60
+#pragma config FPLLMULT =   MUL_40
 #pragma config FPLLODIV =   DIV_4
 #pragma config VBATBOREN =  ON
 #pragma config DSBOREN =    ON
 #pragma config DSWDTPS =    DSPS32
 #pragma config DSWDTOSC =   LPRC
 #pragma config DSWDTEN =    OFF
-#pragma config FDSEN =      ON
+#pragma config FDSEN =      OFF
 #pragma config BORSEL =     HIGH
 #pragma config UPLLEN =     OFF
 
@@ -177,13 +177,14 @@ void SYS_Initialize ( void* data )
     __builtin_mtc0(16, 0,(__builtin_mfc0(16, 0) | 0x3));
 
     /* Configure Wait States and Prefetch */
-    CHECONbits.PFMWS = 3;
+    CHECONbits.PFMWS = 1;
     CHECONbits.PREFEN = 1;
 
 
 
 	GPIO_Initialize();
 
+    CORETIMER_Initialize();
     QEI1_Initialize();
 
 	UART1_Initialize();
