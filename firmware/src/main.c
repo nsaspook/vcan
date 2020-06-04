@@ -32,7 +32,7 @@
 #include "config/default/peripheral/uart/plib_uart3.h"
 
 
-extern QEI_DATA m35_1;
+extern QEI_DATA m35_1, m35_2, *m35_ptr;
 
 /* redirect of printf to uart3 */
 
@@ -49,7 +49,10 @@ int main(void)
 	SYS_Initialize(NULL);
 
 	QEI1_Start();
-	m35_1.update = 0;
+	QEI2_Start();
+	m35_ptr = &m35_1;
+	
+	m35_ptr->update = 0;
 	LATGbits.LATG12 = true;
 	LATGbits.LATG13 = true;
 	LATGbits.LATG14 = true;
@@ -58,18 +61,18 @@ int main(void)
 		SYS_Tasks();
 
 		/* update local value of the encoder position counter */
-		m35_1.pos = POS1CNT;
-		m35_1.vel = VEL1CNT;
+		m35_ptr->pos = POS1CNT;
+		m35_ptr->vel = VEL1CNT;
 
-		if (m35_1.update++ > 20480) {
+		if (m35_ptr->update++ > 20480) {
 			/* flash the board led(s) using the position counter bits */
-			LATGbits.LATG12 = m35_1.pos >> 10;
-			LATGbits.LATG13 = m35_1.pos >> 12;
-			LATGbits.LATG14 = m35_1.pos >> 14;
+			LATGbits.LATG12 = m35_ptr->pos >> 10;
+			LATGbits.LATG13 = m35_ptr->pos >> 12;
+			LATGbits.LATG14 = m35_ptr->pos >> 14;
 			/* send to uart3 the current QEI values */
-			sprintf(strbuf, "c %7i:v %4i\r\n", m35_1.pos, m35_1.vel);
-			UART3_Write((uint8_t*)strbuf, strlen(strbuf));
-			m35_1.update = 0;
+			sprintf(strbuf, "c %7i:v %4i\r\n", m35_ptr->pos, m35_ptr->vel);
+			UART3_Write((uint8_t*) strbuf, strlen(strbuf));
+			m35_ptr->update = 0;
 		}
 	}
 

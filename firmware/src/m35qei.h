@@ -19,6 +19,13 @@ extern "C" {
 	 * QEB1 RPA14
 	 * INDX1 RPB6
 	 * HOME1 RPB9
+	 * 
+	 * QEI #2 pin connections
+	 * 
+	 * QEA2 RPC10
+	 * QEB2 RPC1
+	 * INDX2 RPB1
+	 * HOME2 RPG6
 	 */
 
 	/*
@@ -29,7 +36,6 @@ extern "C" {
 		uint32_t update;
 	} QEI_DATA;
 
-	int32_t m35_init_qei(void);
 
 #ifdef	__cplusplus
 }

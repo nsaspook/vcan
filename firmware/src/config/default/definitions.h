@@ -50,9 +50,11 @@
 #include <stdbool.h>
 #include "peripheral/uart/plib_uart3.h"
 #include "peripheral/qei/plib_qei1.h"
+#include "peripheral/qei/plib_qei2.h"
 #include "peripheral/clk/plib_clk.h"
 #include "peripheral/gpio/plib_gpio.h"
 #include "peripheral/evic/plib_evic.h"
+#include "peripheral/mcpwm/plib_mcpwm.h"
 #include "peripheral/uart/plib_uart6.h"
 
 // DOM-IGNORE-BEGIN

@@ -188,6 +188,10 @@ void SYS_Initialize ( void* data )
 
     QEI1_Initialize();
 
+    QEI2_Initialize();
+
+    MCPWM_Initialize();
+
 	UART6_Initialize();
 
 
