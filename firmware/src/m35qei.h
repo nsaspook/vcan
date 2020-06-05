@@ -33,6 +33,7 @@ extern "C" {
 	 */
 	typedef struct {
 		int32_t pos, vel;
+		volatile uint32_t *pos_ptr, *vel_ptr;
 		uint32_t update;
 	} QEI_DATA;
 
