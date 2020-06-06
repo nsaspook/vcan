@@ -61,6 +61,30 @@
 // *****************************************************************************
 // *****************************************************************************
 
+/*** Macros for QEI1_E0 pin ***/
+#define QEI1_E0_Set()               (LATESET = (1<<8))
+#define QEI1_E0_Clear()             (LATECLR = (1<<8))
+#define QEI1_E0_Toggle()            (LATEINV= (1<<8))
+#define QEI1_E0_Get()               ((PORTE >> 8) & 0x1)
+#define QEI1_E0_OutputEnable()      (TRISECLR = (1<<8))
+#define QEI1_E0_InputEnable()       (TRISESET = (1<<8))
+#define QEI1_E0_PIN                  GPIO_PIN_RE8
+/*** Macros for QEI2_E0 pin ***/
+#define QEI2_E0_Set()               (LATESET = (1<<9))
+#define QEI2_E0_Clear()             (LATECLR = (1<<9))
+#define QEI2_E0_Toggle()            (LATEINV= (1<<9))
+#define QEI2_E0_Get()               ((PORTE >> 9) & 0x1)
+#define QEI2_E0_OutputEnable()      (TRISECLR = (1<<9))
+#define QEI2_E0_InputEnable()       (TRISESET = (1<<9))
+#define QEI2_E0_PIN                  GPIO_PIN_RE9
+/*** Macros for GPIO_RD8 pin ***/
+#define GPIO_RD8_Set()               (LATDSET = (1<<8))
+#define GPIO_RD8_Clear()             (LATDCLR = (1<<8))
+#define GPIO_RD8_Toggle()            (LATDINV= (1<<8))
+#define GPIO_RD8_Get()               ((PORTD >> 8) & 0x1)
+#define GPIO_RD8_OutputEnable()      (TRISDCLR = (1<<8))
+#define GPIO_RD8_InputEnable()       (TRISDSET = (1<<8))
+#define GPIO_RD8_PIN                  GPIO_PIN_RD8
 
 
 // *****************************************************************************

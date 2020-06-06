@@ -5,8 +5,11 @@
         <group>
             <file>file:/root/vcan/firmware/src/m35qei.h</file>
             <file>file:/root/vcan/firmware/src/config/default/peripheral/qei/plib_qei1.h</file>
+            <file>file:/root/vcan/firmware/src/config/default/peripheral/evic/plib_evic.c</file>
             <file>file:/root/vcan/firmware/src/m35qei.c</file>
+            <file>file:/root/vcan/firmware/src/config/default/exceptions.c</file>
             <file>file:/root/vcan/firmware/src/main.c</file>
+            <file>file:/root/vcan/firmware/src/config/default/interrupts.c</file>
             <file>file:/root/vcan/firmware/src/config/default/peripheral/qei/plib_qei1.c</file>
         </group>
     </open-files>

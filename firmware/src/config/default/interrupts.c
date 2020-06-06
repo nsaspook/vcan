@@ -68,6 +68,10 @@ void UART6_TX_InterruptHandler( void );
 
 
 /* All the handlers are defined here.  Each will call its PLIB-specific function. */
+void __ISR(_EXTERNAL_0_VECTOR, ipl1AUTO) EXTERNAL_0_Handler (void)
+{
+}
+
 void __ISR(_UART3_FAULT_VECTOR, ipl1AUTO) UART3_FAULT_Handler (void)
 {
     UART3_FAULT_InterruptHandler();
