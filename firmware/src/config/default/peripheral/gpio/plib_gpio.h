@@ -85,6 +85,78 @@
 #define QEI2_E0_OutputEnable()      (TRISECLR = (1<<9))
 #define QEI2_E0_InputEnable()       (TRISESET = (1<<9))
 #define QEI2_E0_PIN                  GPIO_PIN_RE9
+/*** Macros for U1FS pin ***/
+#define U1FS_Set()               (LATESET = (1<<12))
+#define U1FS_Clear()             (LATECLR = (1<<12))
+#define U1FS_Toggle()            (LATEINV= (1<<12))
+#define U1FS_Get()               ((PORTE >> 12) & 0x1)
+#define U1FS_OutputEnable()      (TRISECLR = (1<<12))
+#define U1FS_InputEnable()       (TRISESET = (1<<12))
+#define U1FS_PIN                  GPIO_PIN_RE12
+/*** Macros for U2FS pin ***/
+#define U2FS_Set()               (LATESET = (1<<13))
+#define U2FS_Clear()             (LATECLR = (1<<13))
+#define U2FS_Toggle()            (LATEINV= (1<<13))
+#define U2FS_Get()               ((PORTE >> 13) & 0x1)
+#define U2FS_OutputEnable()      (TRISECLR = (1<<13))
+#define U2FS_InputEnable()       (TRISESET = (1<<13))
+#define U2FS_PIN                  GPIO_PIN_RE13
+/*** Macros for IN1 pin ***/
+#define IN1_Set()               (LATDSET = (1<<14))
+#define IN1_Clear()             (LATDCLR = (1<<14))
+#define IN1_Toggle()            (LATDINV= (1<<14))
+#define IN1_Get()               ((PORTD >> 14) & 0x1)
+#define IN1_OutputEnable()      (TRISDCLR = (1<<14))
+#define IN1_InputEnable()       (TRISDSET = (1<<14))
+#define IN1_PIN                  GPIO_PIN_RD14
+/*** Macros for IN2 pin ***/
+#define IN2_Set()               (LATDSET = (1<<15))
+#define IN2_Clear()             (LATDCLR = (1<<15))
+#define IN2_Toggle()            (LATDINV= (1<<15))
+#define IN2_Get()               ((PORTD >> 15) & 0x1)
+#define IN2_OutputEnable()      (TRISDCLR = (1<<15))
+#define IN2_InputEnable()       (TRISDSET = (1<<15))
+#define IN2_PIN                  GPIO_PIN_RD15
+/*** Macros for IN3 pin ***/
+#define IN3_Set()               (LATASET = (1<<8))
+#define IN3_Clear()             (LATACLR = (1<<8))
+#define IN3_Toggle()            (LATAINV= (1<<8))
+#define IN3_Get()               ((PORTA >> 8) & 0x1)
+#define IN3_OutputEnable()      (TRISACLR = (1<<8))
+#define IN3_InputEnable()       (TRISASET = (1<<8))
+#define IN3_PIN                  GPIO_PIN_RA8
+/*** Macros for IN4 pin ***/
+#define IN4_Set()               (LATBSET = (1<<4))
+#define IN4_Clear()             (LATBCLR = (1<<4))
+#define IN4_Toggle()            (LATBINV= (1<<4))
+#define IN4_Get()               ((PORTB >> 4) & 0x1)
+#define IN4_OutputEnable()      (TRISBCLR = (1<<4))
+#define IN4_InputEnable()       (TRISBSET = (1<<4))
+#define IN4_PIN                  GPIO_PIN_RB4
+/*** Macros for U1_EN pin ***/
+#define U1_EN_Set()               (LATESET = (1<<0))
+#define U1_EN_Clear()             (LATECLR = (1<<0))
+#define U1_EN_Toggle()            (LATEINV= (1<<0))
+#define U1_EN_Get()               ((PORTE >> 0) & 0x1)
+#define U1_EN_OutputEnable()      (TRISECLR = (1<<0))
+#define U1_EN_InputEnable()       (TRISESET = (1<<0))
+#define U1_EN_PIN                  GPIO_PIN_RE0
+/*** Macros for U2_EN pin ***/
+#define U2_EN_Set()               (LATESET = (1<<1))
+#define U2_EN_Clear()             (LATECLR = (1<<1))
+#define U2_EN_Toggle()            (LATEINV= (1<<1))
+#define U2_EN_Get()               ((PORTE >> 1) & 0x1)
+#define U2_EN_OutputEnable()      (TRISECLR = (1<<1))
+#define U2_EN_InputEnable()       (TRISESET = (1<<1))
+#define U2_EN_PIN                  GPIO_PIN_RE1
+/*** Macros for IN5 pin ***/
+#define IN5_Set()               (LATFSET = (1<<5))
+#define IN5_Clear()             (LATFCLR = (1<<5))
+#define IN5_Toggle()            (LATFINV= (1<<5))
+#define IN5_Get()               ((PORTF >> 5) & 0x1)
+#define IN5_OutputEnable()      (TRISFCLR = (1<<5))
+#define IN5_InputEnable()       (TRISFSET = (1<<5))
+#define IN5_PIN                  GPIO_PIN_RF5
 /*** Macros for GPIO_RD8 pin ***/
 #define GPIO_RD8_Set()               (LATDSET = (1<<8))
 #define GPIO_RD8_Clear()             (LATDCLR = (1<<8))
@@ -93,6 +165,14 @@
 #define GPIO_RD8_OutputEnable()      (TRISDCLR = (1<<8))
 #define GPIO_RD8_InputEnable()       (TRISDSET = (1<<8))
 #define GPIO_RD8_PIN                  GPIO_PIN_RD8
+/*** Macros for DERE pin ***/
+#define DERE_Set()               (LATBSET = (1<<8))
+#define DERE_Clear()             (LATBCLR = (1<<8))
+#define DERE_Toggle()            (LATBINV= (1<<8))
+#define DERE_Get()               ((PORTB >> 8) & 0x1)
+#define DERE_OutputEnable()      (TRISBCLR = (1<<8))
+#define DERE_InputEnable()       (TRISBSET = (1<<8))
+#define DERE_PIN                  GPIO_PIN_RB8
 
 
 // *****************************************************************************

@@ -38,7 +38,7 @@
 <layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
@@ -63,6 +63,11 @@
 <wire x1="100" y1="0" x2="100" y2="80" width="0" layer="20"/>
 <wire x1="100" y1="80" x2="0" y2="80" width="0" layer="20"/>
 <wire x1="0" y1="80" x2="0" y2="0" width="0" layer="20"/>
+<hole x="3.81" y="76.2" drill="1"/>
+<hole x="96.52" y="76.2" drill="1"/>
+<hole x="96.52" y="3.81" drill="1"/>
+<hole x="3.81" y="3.81" drill="1"/>
+<hole x="55.88" y="45.72" drill="1"/>
 </plain>
 <libraries>
 <library name="rcl" urn="urn:adsk.eagle:library:334">
@@ -1147,6 +1152,22 @@ MELF 0.10 W</description>
 <rectangle x1="0.6858" y1="-0.7112" x2="1.0414" y2="0.7112" layer="51"/>
 <rectangle x1="-0.1999" y1="-0.5999" x2="0.1999" y2="0.5999" layer="35"/>
 </package>
+<package name="R0805" urn="urn:adsk.eagle:footprint:23045/1" library_version="11">
+<description>&lt;b&gt;RESISTOR&lt;/b&gt;&lt;p&gt;</description>
+<wire x1="-0.41" y1="0.635" x2="0.41" y2="0.635" width="0.1524" layer="51"/>
+<wire x1="-0.41" y1="-0.635" x2="0.41" y2="-0.635" width="0.1524" layer="51"/>
+<wire x1="-1.973" y1="0.983" x2="1.973" y2="0.983" width="0.0508" layer="39"/>
+<wire x1="1.973" y1="0.983" x2="1.973" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="1.973" y1="-0.983" x2="-1.973" y2="-0.983" width="0.0508" layer="39"/>
+<wire x1="-1.973" y1="-0.983" x2="-1.973" y2="0.983" width="0.0508" layer="39"/>
+<smd name="1" x="-0.95" y="0" dx="1.3" dy="1.5" layer="1"/>
+<smd name="2" x="0.95" y="0" dx="1.3" dy="1.5" layer="1"/>
+<text x="-0.635" y="1.27" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.635" y="-2.54" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="0.4064" y1="-0.6985" x2="1.0564" y2="0.7015" layer="51"/>
+<rectangle x1="-1.0668" y1="-0.6985" x2="-0.4168" y2="0.7015" layer="51"/>
+<rectangle x1="-0.1999" y1="-0.5001" x2="0.1999" y2="0.5001" layer="35"/>
+</package>
 </packages>
 <packages3d>
 <package3d name="C0805" urn="urn:adsk.eagle:package:23617/2" type="model" library_version="11">
@@ -1160,6 +1181,12 @@ MELF 0.10 W</description>
 MELF 0.10 W</description>
 <packageinstances>
 <packageinstance name="M0805"/>
+</packageinstances>
+</package3d>
+<package3d name="R0805" urn="urn:adsk.eagle:package:23553/2" type="model" library_version="11">
+<description>RESISTOR</description>
+<packageinstances>
+<packageinstance name="R0805"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -2068,12 +2095,12 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <classes>
 <class number="0" name="default" width="0" drill="0">
 </class>
-<class number="1" name="icurrent" width="0.2159" drill="0">
+<class number="1" name="icurrent" width="0.1778" drill="0">
 </class>
 <class number="2" name="mcurrent" width="0.3048" drill="0">
 </class>
 </classes>
-<designrules name="default">
+<designrules name="default *">
 <description language="de">&lt;b&gt;EAGLE Design Rules&lt;/b&gt;
 &lt;p&gt;
 Die Standard-Design-Rules sind so gewählt, dass sie für 
@@ -2164,7 +2191,7 @@ design rules under a new name.</description>
 <pass name="Default">
 <param name="RoutingGrid" value="50mil"/>
 <param name="AutoGrid" value="1"/>
-<param name="Efforts" value="2"/>
+<param name="Efforts" value="0"/>
 <param name="TopRouterVariant" value="1"/>
 <param name="tpViaShape" value="round"/>
 <param name="PrefDir.1" value="a"/>
@@ -2349,14 +2376,14 @@ design rules under a new name.</description>
 <attribute name="NAME" x="91.44" y="20.32" size="1.27" layer="25" align="center"/>
 <attribute name="VALUE" x="93.98" y="13.97" size="1.27" layer="27" align="center"/>
 </element>
-<element name="IC4" library="maxim" library_urn="urn:adsk.eagle:library:269" package="SO20L" package3d_urn="urn:adsk.eagle:package:17520/2" value="MAX203ECWP" x="60.96" y="39.37" smashed="yes" rot="R270">
-<attribute name="MF" value="" x="54.61" y="-17.78" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MPN" value="MAX203ECWP+G36" x="54.61" y="-17.78" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="NAME" x="57.404" y="46.228" size="1.27" layer="25" ratio="10"/>
-<attribute name="OC_FARNELL" value="1224204" x="54.61" y="-17.78" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="OC_NEWARK" value="89K3435" x="54.61" y="-17.78" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="POPULARITY" value="0" x="54.61" y="-17.78" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="60.198" y="44.196" size="1.27" layer="27" ratio="10" rot="R270"/>
+<element name="IC4" library="maxim" library_urn="urn:adsk.eagle:library:269" package="SO20L" package3d_urn="urn:adsk.eagle:package:17520/2" value="MAX203ECWP" x="66.04" y="29.21" smashed="yes">
+<attribute name="MF" value="" x="123.19" y="22.86" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="MAX203ECWP+G36" x="123.19" y="22.86" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="59.182" y="25.654" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="OC_FARNELL" value="1224204" x="123.19" y="22.86" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="89K3435" x="123.19" y="22.86" size="1.778" layer="27" display="off"/>
+<attribute name="POPULARITY" value="0" x="123.19" y="22.86" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="61.214" y="28.448" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="L1" library="inductor-neosid" library_urn="urn:adsk.eagle:library:241" package="SM-1206" package3d_urn="urn:adsk.eagle:package:14693/2" value="1000" x="34.29" y="12.7" smashed="yes" rot="R180">
 <attribute name="MF" value="" x="-16.51" y="71.12" size="1.778" layer="27" rot="R180" display="off"/>
@@ -2415,15 +2442,15 @@ design rules under a new name.</description>
 <attribute name="RS_PRICE-STOCK" value="" x="68.58" y="-26.67" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="22.453009375" y="5.0367" size="1.27" layer="27" align="center"/>
 </element>
-<element name="S3" library="JS202011SCQN_fixed" package="SW_JS202011SCQN" value="JS202011SCQN" x="43.18" y="6.35" smashed="yes">
-<attribute name="AVAILABILITY" value="Unavailable" x="87.63" y="-1.27" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" JS Series DPDT On-On Gull Wing Surface Mount Subminiature Slide Switch " x="87.63" y="-1.27" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="C&amp;K" x="87.63" y="-1.27" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="JS202011SCQN" x="87.63" y="-1.27" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="39.173009375" y="11.35873125" size="1.01776875" layer="25"/>
-<attribute name="PACKAGE" value="None" x="87.63" y="-1.27" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="87.63" y="-1.27" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="39.175009375" y="0.342509375" size="1.01726875" layer="27"/>
+<element name="S3" library="JS202011SCQN_fixed" package="SW_JS202011SCQN" value="JS202011SCQN" x="11.43" y="74.93" smashed="yes">
+<attribute name="AVAILABILITY" value="Unavailable" x="55.88" y="67.31" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" JS Series DPDT On-On Gull Wing Surface Mount Subminiature Slide Switch " x="55.88" y="67.31" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="C&amp;K" x="55.88" y="67.31" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="JS202011SCQN" x="55.88" y="67.31" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="7.423009375" y="79.93873125" size="1.01776875" layer="25"/>
+<attribute name="PACKAGE" value="None" x="55.88" y="67.31" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="55.88" y="67.31" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="7.425009375" y="68.922509375" size="1.01726875" layer="27"/>
 </element>
 <element name="SV2" library="con-lstb" library_urn="urn:adsk.eagle:library:162" package="MA06-1" package3d_urn="urn:adsk.eagle:package:8340/1" value="ICSP2" x="6.35" y="13.97" smashed="yes" rot="R90">
 <attribute name="MF" value="" x="50.8" y="69.85" size="1.778" layer="27" rot="R90" display="off"/>
@@ -2446,25 +2473,25 @@ design rules under a new name.</description>
 <attribute name="TP_SIGNAL_NAME" value="" x="5.715" y="26.035" size="1" layer="37"/>
 <attribute name="VALUE" x="5.715" y="27.178" size="0.0254" layer="27"/>
 </element>
-<element name="U$1" library="MAX6818" package="SSOP20" value="MAX6818" x="44.45" y="39.37" smashed="yes" rot="R90">
-<attribute name="AVAILABILITY" value="Unavailable" x="78.74" y="58.42" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="DESCRIPTION" value=" " x="78.74" y="58.42" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="MF" value="Maxim Integrated" x="78.74" y="58.42" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="MP" value="MAX6818" x="78.74" y="58.42" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="NAME" x="47.05526875" y="35.15531875" size="1.27263125" layer="25" rot="R180"/>
-<attribute name="PACKAGE" value="None" x="78.74" y="58.42" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="PRICE" value="None" x="78.74" y="58.42" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="47.052059375" y="44.88058125" size="1.27105" layer="27" rot="R180"/>
+<element name="U$1" library="MAX6818" package="SSOP20" value="MAX6818" x="62.23" y="15.24" smashed="yes">
+<attribute name="AVAILABILITY" value="Unavailable" x="81.28" y="-19.05" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" " x="81.28" y="-19.05" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Maxim Integrated" x="81.28" y="-19.05" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="MAX6818" x="81.28" y="-19.05" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="58.01531875" y="12.63473125" size="1.27263125" layer="25" rot="R90"/>
+<attribute name="PACKAGE" value="None" x="81.28" y="-19.05" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="81.28" y="-19.05" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="67.74058125" y="12.637940625" size="1.27105" layer="27" rot="R90"/>
 </element>
-<element name="U$2" library="IRLML2502TRPBF" package="SOT23" value="IRLML2502TRPBF" x="53.34" y="6.35" smashed="yes">
-<attribute name="DESCRIPTION" value=" Single N-Channel 20 V 0.08 Ohm 12 nC 1.25 W Silicon SMT Mosfet - SOT-23 " x="99.06" y="-38.1" size="1.778" layer="27" display="off"/>
-<attribute name="DIGI-KEY_PART_NUMBER" value="IRLML2502TRPBFCT-ND" x="99.06" y="-38.1" size="1.778" layer="27" display="off"/>
-<attribute name="DIGI-KEY_PURCHASE_URL" value="https://www.digikey.com/product-detail/en/infineon-technologies/IRLML2502TRPBF/IRLML2502TRPBFCT-ND/812502?utm_source=snapeda&amp;utm_medium=aggregator&amp;utm_campaign=symbol" x="99.06" y="-38.1" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Infineon" x="99.06" y="-38.1" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="IRLML2502TRPBF" x="99.06" y="-38.1" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="51.428440625" y="8.261559375" size="1.27436875" layer="25"/>
-<attribute name="PACKAGE" value="SOT-23-3 Infineon" x="99.06" y="-38.1" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="51.42896875" y="3.16495" size="1.27401875" layer="27"/>
+<element name="U$2" library="IRLML2502TRPBF" package="SOT23" value="IRLML2502TRPBF" x="21.59" y="72.39" smashed="yes">
+<attribute name="DESCRIPTION" value=" Single N-Channel 20 V 0.08 Ohm 12 nC 1.25 W Silicon SMT Mosfet - SOT-23 " x="67.31" y="27.94" size="1.778" layer="27" display="off"/>
+<attribute name="DIGI-KEY_PART_NUMBER" value="IRLML2502TRPBFCT-ND" x="67.31" y="27.94" size="1.778" layer="27" display="off"/>
+<attribute name="DIGI-KEY_PURCHASE_URL" value="https://www.digikey.com/product-detail/en/infineon-technologies/IRLML2502TRPBF/IRLML2502TRPBFCT-ND/812502?utm_source=snapeda&amp;utm_medium=aggregator&amp;utm_campaign=symbol" x="67.31" y="27.94" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Infineon" x="67.31" y="27.94" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="IRLML2502TRPBF" x="67.31" y="27.94" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="19.678440625" y="74.301559375" size="1.27436875" layer="25"/>
+<attribute name="PACKAGE" value="SOT-23-3 Infineon" x="67.31" y="27.94" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="19.67896875" y="69.20495" size="1.27401875" layer="27"/>
 </element>
 <element name="C5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1" x="12.7" y="22.86" smashed="yes" rot="R180">
 <attribute name="NAME" x="13.97" y="21.59" size="1.27" layer="25" rot="R180"/>
@@ -2490,17 +2517,17 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="C" x="29.21" y="8.89" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="27.94" y="6.35" size="1.27" layer="27"/>
 </element>
-<element name="IC6" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="44.45" smashed="yes">
-<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="44.45" size="1.778" layer="27" display="off"/>
-<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="44.45" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="44.45" size="1.778" layer="27" display="off"/>
-<attribute name="HEIGHT" value="1.1mm" x="15.24" y="44.45" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="44.45" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="44.45" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="44.45" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="44.45" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="19.05" y="44.45" size="1.27" layer="25" align="center"/>
-<attribute name="VALUE" x="15.24" y="43.18" size="1.27" layer="27" align="center"/>
+<element name="IC6" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="49.53" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="49.53" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="49.53" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="49.53" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="1.1mm" x="15.24" y="49.53" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="49.53" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="49.53" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="49.53" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="49.53" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="19.05" y="49.53" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="15.24" y="48.26" size="1.27" layer="27" align="center"/>
 </element>
 <element name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="1k" x="15.24" y="34.29" smashed="yes" rot="R270">
 <attribute name="NAME" x="12.7" y="34.29" size="1.27" layer="25" rot="R270"/>
@@ -2508,29 +2535,29 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="R" x="15.24" y="34.29" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="12.7" y="35.56" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="IC7" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="50.8" smashed="yes">
-<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="50.8" size="1.778" layer="27" display="off"/>
-<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="50.8" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="50.8" size="1.778" layer="27" display="off"/>
-<attribute name="HEIGHT" value="1.1mm" x="15.24" y="50.8" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="50.8" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="50.8" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="50.8" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="50.8" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="19.05" y="50.8" size="1.27" layer="25" align="center"/>
-<attribute name="VALUE" x="19.05" y="49.53" size="1.27" layer="27" align="center"/>
+<element name="IC7" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="52.07" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="52.07" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="52.07" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="52.07" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="1.1mm" x="15.24" y="52.07" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="52.07" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="52.07" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="52.07" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="52.07" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="19.05" y="52.07" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="19.05" y="50.8" size="1.27" layer="27" align="center"/>
 </element>
-<element name="IC8" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="39.37" smashed="yes">
-<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="39.37" size="1.778" layer="27" display="off"/>
-<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="39.37" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="39.37" size="1.778" layer="27" display="off"/>
-<attribute name="HEIGHT" value="1.1mm" x="15.24" y="39.37" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="39.37" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="39.37" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="39.37" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="39.37" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="21.59" y="40.64" size="1.27" layer="25" align="center"/>
-<attribute name="VALUE" x="19.05" y="38.1" size="1.27" layer="27" align="center"/>
+<element name="IC8" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="46.99" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="46.99" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="46.99" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="46.99" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="1.1mm" x="15.24" y="46.99" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="46.99" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="46.99" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="46.99" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="46.99" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="21.59" y="48.26" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="19.05" y="45.72" size="1.27" layer="27" align="center"/>
 </element>
 <element name="X1" library="con-molex" library_urn="urn:adsk.eagle:library:165" package="22-23-2101" package3d_urn="urn:adsk.eagle:package:8078641/1" value="22-23-2101" x="6.35" y="55.88" smashed="yes" rot="R90">
 <attribute name="MF" value="MOLEX" x="6.35" y="55.88" size="1.778" layer="27" rot="R90" display="off"/>
@@ -2541,63 +2568,63 @@ design rules under a new name.</description>
 <attribute name="POPULARITY" value="0" x="6.35" y="55.88" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="11.43" y="43.18" size="1.016" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="U1" library="PMIC-MC33932VW_SOP44_" package="SOP44-0.65-15.8X10.9MM" value="PMIC-MC33932VW(SOP44)" x="85.09" y="41.91" smashed="yes" rot="R270">
-<attribute name="AVAILABILITY" value="Unavailable" x="85.09" y="41.91" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="DESCRIPTION" value=" Motor Driver CMOS Parallel 44-HSOP " x="85.09" y="41.91" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="DIGIKEY-PURCHASE-URL" value="https://snapeda.com/shop?store=DigiKey&amp;id=525358" x="85.09" y="41.91" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MF" value="NXP USA" x="85.09" y="41.91" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MP" value="MC33932VW" x="85.09" y="41.91" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="NAME" x="83.1848" y="50.165859375" size="0.889090625" layer="25" ratio="11"/>
-<attribute name="PACKAGE" value="HSOP-44 NXP Semiconductors" x="85.09" y="41.91" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="PRICE" value="None" x="85.09" y="41.91" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="82.548190625" y="33.01365" size="0.635453125" layer="27" ratio="10"/>
+<element name="U1" library="PMIC-MC33932VW_SOP44_" package="SOP44-0.65-15.8X10.9MM" value="PMIC-MC33932VW(SOP44)" x="85.09" y="41.91" smashed="yes">
+<attribute name="AVAILABILITY" value="Unavailable" x="85.09" y="41.91" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Motor Driver CMOS Parallel 44-HSOP " x="85.09" y="41.91" size="1.778" layer="27" display="off"/>
+<attribute name="DIGIKEY-PURCHASE-URL" value="https://snapeda.com/shop?store=DigiKey&amp;id=525358" x="85.09" y="41.91" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="NXP USA" x="85.09" y="41.91" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="MC33932VW" x="85.09" y="41.91" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="76.834140625" y="40.0048" size="0.889090625" layer="25" ratio="11" rot="R90"/>
+<attribute name="PACKAGE" value="HSOP-44 NXP Semiconductors" x="85.09" y="41.91" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="85.09" y="41.91" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="93.98635" y="39.368190625" size="0.635453125" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="U2" library="PMIC-MC33932VW_SOP44_" package="SOP44-0.65-15.8X10.9MM" value="PMIC-MC33932VW(SOP44)" x="85.09" y="64.77" smashed="yes" rot="R270">
-<attribute name="AVAILABILITY" value="Unavailable" x="85.09" y="64.77" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="DESCRIPTION" value=" Motor Driver CMOS Parallel 44-HSOP " x="85.09" y="64.77" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="DIGIKEY-PURCHASE-URL" value="https://snapeda.com/shop?store=DigiKey&amp;id=525358" x="85.09" y="64.77" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MF" value="NXP USA" x="85.09" y="64.77" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MP" value="MC33932VW" x="85.09" y="64.77" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="NAME" x="83.1848" y="73.025859375" size="0.889090625" layer="25" ratio="11"/>
-<attribute name="PACKAGE" value="HSOP-44 NXP Semiconductors" x="85.09" y="64.77" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="PRICE" value="None" x="85.09" y="64.77" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="82.548190625" y="55.87365" size="0.635453125" layer="27" ratio="10"/>
+<element name="U2" library="PMIC-MC33932VW_SOP44_" package="SOP44-0.65-15.8X10.9MM" value="PMIC-MC33932VW(SOP44)" x="85.09" y="64.77" smashed="yes">
+<attribute name="AVAILABILITY" value="Unavailable" x="85.09" y="64.77" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Motor Driver CMOS Parallel 44-HSOP " x="85.09" y="64.77" size="1.778" layer="27" display="off"/>
+<attribute name="DIGIKEY-PURCHASE-URL" value="https://snapeda.com/shop?store=DigiKey&amp;id=525358" x="85.09" y="64.77" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="NXP USA" x="85.09" y="64.77" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="MC33932VW" x="85.09" y="64.77" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="76.834140625" y="62.8648" size="0.889090625" layer="25" ratio="11" rot="R90"/>
+<attribute name="PACKAGE" value="HSOP-44 NXP Semiconductors" x="85.09" y="64.77" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="85.09" y="64.77" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="93.98635" y="62.228190625" size="0.635453125" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="IC3" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="55.88" smashed="yes">
-<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="55.88" size="1.778" layer="27" display="off"/>
-<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="55.88" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="55.88" size="1.778" layer="27" display="off"/>
-<attribute name="HEIGHT" value="1.1mm" x="15.24" y="55.88" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="55.88" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="55.88" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="55.88" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="55.88" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="19.05" y="55.88" size="1.27" layer="25" align="center"/>
-<attribute name="VALUE" x="16.51" y="53.34" size="1.27" layer="27" align="center"/>
+<element name="IC3" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="54.61" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="54.61" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="54.61" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="54.61" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="1.1mm" x="15.24" y="54.61" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="54.61" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="54.61" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="54.61" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="54.61" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="19.05" y="54.61" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="16.51" y="52.07" size="1.27" layer="27" align="center"/>
 </element>
-<element name="IC5" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="60.96" smashed="yes">
-<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="60.96" size="1.778" layer="27" display="off"/>
-<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="60.96" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="60.96" size="1.778" layer="27" display="off"/>
-<attribute name="HEIGHT" value="1.1mm" x="15.24" y="60.96" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="60.96" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="60.96" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="60.96" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="60.96" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="20.32" y="60.96" size="1.27" layer="25" align="center"/>
-<attribute name="VALUE" x="16.51" y="58.42" size="1.27" layer="27" align="center"/>
+<element name="IC5" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="57.15" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="57.15" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="57.15" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="57.15" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="1.1mm" x="15.24" y="57.15" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="57.15" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="57.15" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="57.15" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="57.15" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="20.32" y="57.15" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="16.51" y="54.61" size="1.27" layer="27" align="center"/>
 </element>
-<element name="IC9" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="66.04" smashed="yes">
-<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="66.04" size="1.778" layer="27" display="off"/>
-<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="66.04" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="66.04" size="1.778" layer="27" display="off"/>
-<attribute name="HEIGHT" value="1.1mm" x="15.24" y="66.04" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="66.04" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="66.04" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="66.04" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="66.04" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="19.05" y="66.04" size="1.27" layer="25" align="center"/>
-<attribute name="VALUE" x="15.24" y="64.77" size="1.27" layer="27" align="center"/>
+<element name="IC9" library="TXB0101DCKR" package="SOT65P210X110-6N" value="TXB0101DCKR" x="15.24" y="59.69" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="59.69" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/txb0101dckr/texas-instruments" x="15.24" y="59.69" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="Texas Instruments TXB0101DCKR, Voltage Level Translator, 3-State, 1.2  3.6 V, 1.65  5.5 V, 6-Pin SC-70" x="15.24" y="59.69" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="1.1mm" x="15.24" y="59.69" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="Texas Instruments" x="15.24" y="59.69" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="TXB0101DCKR" x="15.24" y="59.69" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="595-TXB0101DCKR" x="15.24" y="59.69" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXB0101DCKR?qs=dqESbKqT1ja7in%2FiCwfNsg%3D%3D" x="15.24" y="59.69" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="19.05" y="59.69" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="15.24" y="58.42" size="1.27" layer="27" align="center"/>
 </element>
 <element name="C14" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1" x="7.62" y="40.64" smashed="yes" rot="R180">
 <attribute name="NAME" x="8.89" y="39.37" size="1.27" layer="25" rot="R180"/>
@@ -2617,11 +2644,11 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="C" x="21.59" y="64.77" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="VALUE" x="22.86" y="67.31" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="C17" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1" x="21.59" y="59.69" smashed="yes" rot="R180">
-<attribute name="NAME" x="22.86" y="58.42" size="1.27" layer="25" rot="R180"/>
-<attribute name="POPULARITY" value="63" x="21.59" y="59.69" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="SPICEPREFIX" value="C" x="21.59" y="59.69" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="VALUE" x="22.86" y="62.23" size="1.27" layer="27" rot="R180"/>
+<element name="C17" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1" x="21.59" y="62.23" smashed="yes" rot="R180">
+<attribute name="NAME" x="22.86" y="60.96" size="1.27" layer="25" rot="R180"/>
+<attribute name="POPULARITY" value="63" x="21.59" y="62.23" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="21.59" y="62.23" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="22.86" y="64.77" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="J1" library="1-1586043-4" package="TE_1-1586043-4" value="1-1586043-4" x="36.83" y="66.04" smashed="yes" rot="R180">
 <attribute name="MANUFACTURER" value="TE" x="36.83" y="66.04" size="1.778" layer="27" rot="R180" display="off"/>
@@ -2642,21 +2669,72 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="C" x="77.47" y="53.34" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="VALUE" x="78.74" y="55.88" size="1.27" layer="27" rot="R180"/>
 </element>
+<element name="X3" library="con-molex" library_urn="urn:adsk.eagle:library:165" package="22-23-2101" package3d_urn="urn:adsk.eagle:package:8078641/1" value="22-23-2101" x="58.42" y="6.35" smashed="yes">
+<attribute name="MF" value="MOLEX" x="58.42" y="6.35" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="22-23-2101" x="58.42" y="6.35" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="45.72" y="10.16" size="1.016" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="1756828" x="58.42" y="6.35" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="94C0765" x="58.42" y="6.35" size="1.778" layer="27" display="off"/>
+<attribute name="POPULARITY" value="0" x="58.42" y="6.35" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="45.72" y="1.27" size="1.016" layer="27" ratio="10"/>
+</element>
+<element name="C20" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1" x="77.47" y="30.48" smashed="yes" rot="R180">
+<attribute name="NAME" x="78.74" y="29.21" size="1.27" layer="25" rot="R180"/>
+<attribute name="POPULARITY" value="63" x="77.47" y="30.48" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="77.47" y="30.48" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="78.74" y="33.02" size="1.27" layer="27" rot="R180"/>
+</element>
+<element name="C21" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1" x="88.9" y="30.48" smashed="yes" rot="R180">
+<attribute name="NAME" x="90.17" y="29.21" size="1.27" layer="25" rot="R180"/>
+<attribute name="POPULARITY" value="63" x="88.9" y="30.48" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="88.9" y="30.48" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="90.17" y="33.02" size="1.27" layer="27" rot="R180"/>
+</element>
+<element name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="100" x="82.55" y="53.34" smashed="yes" rot="R180">
+<attribute name="NAME" x="83.185" y="52.07" size="1.27" layer="25" rot="R180"/>
+<attribute name="POPULARITY" value="85" x="82.55" y="53.34" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="82.55" y="53.34" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="83.185" y="55.88" size="1.27" layer="27" rot="R180"/>
+</element>
+<element name="R7" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="100" x="92.71" y="74.93" smashed="yes">
+<attribute name="NAME" x="92.075" y="76.2" size="1.27" layer="25"/>
+<attribute name="POPULARITY" value="85" x="92.71" y="74.93" size="1.778" layer="27" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="92.71" y="74.93" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="92.075" y="72.39" size="1.27" layer="27"/>
+</element>
+<element name="R8" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="100" x="92.71" y="50.8" smashed="yes">
+<attribute name="NAME" x="92.075" y="52.07" size="1.27" layer="25"/>
+<attribute name="POPULARITY" value="85" x="92.71" y="50.8" size="1.778" layer="27" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="92.71" y="50.8" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="92.075" y="48.26" size="1.27" layer="27"/>
+</element>
+<element name="R9" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="100" x="82.55" y="30.48" smashed="yes">
+<attribute name="NAME" x="81.915" y="31.75" size="1.27" layer="25"/>
+<attribute name="POPULARITY" value="85" x="82.55" y="30.48" size="1.778" layer="27" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="82.55" y="30.48" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="81.915" y="27.94" size="1.27" layer="27"/>
+</element>
+<element name="R10" library="rcl" library_urn="urn:adsk.eagle:library:334" package="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="1k" x="29.21" y="5.08" smashed="yes">
+<attribute name="NAME" x="27.94" y="6.35" size="1.27" layer="25"/>
+<attribute name="POPULARITY" value="45" x="29.21" y="5.08" size="1.778" layer="27" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="29.21" y="5.08" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="27.94" y="2.54" size="1.27" layer="27"/>
+</element>
 </elements>
 <signals>
 <signal name="GND" class="1">
 <contactref element="IC4" pad="6"/>
 <contactref element="IC4" pad="9"/>
 <contactref element="U$1" pad="GND"/>
-<wire x1="55.9308" y1="34.925" x2="55.9308" y2="38.735" width="0" layer="19" extent="1-1"/>
-<wire x1="48.329" y1="42.295" x2="55.9308" y2="38.735" width="0" layer="19" extent="1-1"/>
+<wire x1="66.675" y1="24.1808" x2="70.485" y2="24.1808" width="0" layer="19" extent="1-1"/>
+<wire x1="65.155" y1="11.361" x2="66.675" y2="24.1808" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VCC" class="1">
 <contactref element="IC4" pad="7"/>
 <contactref element="R6" pad="2"/>
 <contactref element="U$1" pad="VCC"/>
-<wire x1="40.582" y1="36.453" x2="55.9308" y2="37.465" width="0" layer="19" extent="1-1"/>
-<wire x1="80.33" y1="11.43" x2="55.9308" y2="37.465" width="0" layer="19" extent="1-1"/>
+<wire x1="59.313" y1="19.108" x2="67.945" y2="24.1808" width="0" layer="19" extent="1-1"/>
+<wire x1="80.33" y1="11.43" x2="67.945" y2="24.1808" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$1">
 <contactref element="R1" pad="1"/>
@@ -2735,17 +2813,17 @@ design rules under a new name.</description>
 <wire x1="28.89" y1="35.56" x2="28.74" y2="30.868" width="0" layer="19" extent="1-1"/>
 <wire x1="28.26" y1="8.89" x2="27.54" y2="17.392" width="0" layer="19" extent="1-1"/>
 <wire x1="13.65" y1="11.43" x2="13.65" y2="22.86" width="0" layer="19" extent="1-1"/>
-<wire x1="14.29" y1="40.02" x2="15.24" y2="28.26" width="0" layer="19" extent="1-1"/>
-<wire x1="14.29" y1="45.1" x2="14.29" y2="40.02" width="0" layer="19" extent="1-1"/>
-<wire x1="8.57" y1="40.64" x2="14.29" y2="40.02" width="0" layer="19" extent="1-1"/>
-<wire x1="14.29" y1="51.45" x2="14.29" y2="45.1" width="0" layer="19" extent="1-1"/>
-<wire x1="14.29" y1="56.53" x2="14.29" y2="51.45" width="0" layer="19" extent="1-1"/>
-<wire x1="14.29" y1="61.61" x2="14.29" y2="56.53" width="0" layer="19" extent="1-1"/>
-<wire x1="14.29" y1="66.69" x2="14.29" y2="61.61" width="0" layer="19" extent="1-1"/>
-<wire x1="22.54" y1="64.77" x2="14.29" y2="66.69" width="0" layer="19" extent="1-1"/>
+<wire x1="8.57" y1="40.64" x2="15.24" y2="28.26" width="0" layer="19" extent="1-1"/>
+<wire x1="14.29" y1="47.64" x2="8.57" y2="40.64" width="0" layer="19" extent="1-1"/>
+<wire x1="14.29" y1="50.18" x2="14.29" y2="47.64" width="0" layer="19" extent="1-1"/>
+<wire x1="14.29" y1="52.72" x2="14.29" y2="50.18" width="0" layer="19" extent="1-1"/>
+<wire x1="14.29" y1="55.26" x2="14.29" y2="52.72" width="0" layer="19" extent="1-1"/>
+<wire x1="14.29" y1="57.8" x2="14.29" y2="55.26" width="0" layer="19" extent="1-1"/>
+<wire x1="14.29" y1="60.34" x2="14.29" y2="57.8" width="0" layer="19" extent="1-1"/>
+<wire x1="22.54" y1="64.77" x2="14.29" y2="60.34" width="0" layer="19" extent="1-1"/>
 <wire x1="36.83" y1="60.54" x2="22.54" y2="64.77" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="VSS" class="1">
+<signal name="VSS" class="2">
 <contactref element="C1" pad="2"/>
 <contactref element="IC1" pad="65"/>
 <contactref element="IC1" pad="75"/>
@@ -2780,8 +2858,8 @@ design rules under a new name.</description>
 <contactref element="C9" pad="2"/>
 <polygon width="0.1524" layer="1">
 <vertex x="2.54" y="39.37"/>
-<vertex x="63.5" y="39.37"/>
-<vertex x="63.5" y="2.54"/>
+<vertex x="64.77" y="39.37"/>
+<vertex x="64.77" y="2.54"/>
 <vertex x="2.54" y="2.54"/>
 </polygon>
 <contactref element="C13" pad="2"/>
@@ -2799,9 +2877,9 @@ design rules under a new name.</description>
 <vertex x="5.08" y="38.1"/>
 </polygon>
 <polygon width="0.1524" layer="1">
-<vertex x="35.56" y="76.2"/>
-<vertex x="96.52" y="76.2"/>
-<vertex x="96.52" y="2.54"/>
+<vertex x="35.480625" y="77.47"/>
+<vertex x="97.79" y="77.47"/>
+<vertex x="97.79" y="2.54"/>
 <vertex x="59.69" y="2.54"/>
 <vertex x="59.69" y="50.8"/>
 <vertex x="37.1475" y="50.8"/>
@@ -2834,6 +2912,44 @@ design rules under a new name.</description>
 <contactref element="J1" pad="13"/>
 <contactref element="C19" pad="2"/>
 <contactref element="C18" pad="2"/>
+<polygon width="0.1524" layer="1">
+<vertex x="1.27" y="78.74"/>
+<vertex x="1.27" y="38.1"/>
+<vertex x="53.34" y="38.1"/>
+<vertex x="53.34" y="76.2"/>
+<vertex x="22.86" y="76.2"/>
+<vertex x="22.86" y="78.74"/>
+</polygon>
+<contactref element="X3" pad="9"/>
+<contactref element="C20" pad="2"/>
+<contactref element="C21" pad="2"/>
+<contactref element="R4" pad="1"/>
+<contactref element="R7" pad="2"/>
+<contactref element="R9" pad="1"/>
+<contactref element="R8" pad="2"/>
+<contactref element="U1" pad="EH@1"/>
+<contactref element="U1" pad="EH@2"/>
+<contactref element="U1" pad="EH@3"/>
+<contactref element="U2" pad="EH@1"/>
+<contactref element="U2" pad="EH@3"/>
+<contactref element="U2" pad="EH@2"/>
+<contactref element="S1" pad="6"/>
+<polygon width="0.1524" layer="16">
+<vertex x="59.69" y="68.58"/>
+<vertex x="97.79" y="68.58"/>
+<vertex x="97.79" y="38.1"/>
+<vertex x="74.93" y="38.1"/>
+<vertex x="74.93" y="44.45"/>
+<vertex x="93.98" y="44.45"/>
+<vertex x="93.98" y="52.07"/>
+<vertex x="74.93" y="52.07"/>
+<vertex x="74.93" y="54.61"/>
+<vertex x="93.98" y="54.61"/>
+<vertex x="93.98" y="62.23"/>
+<vertex x="64.77" y="62.23"/>
+<vertex x="63.5" y="63.5"/>
+<vertex x="59.69" y="63.5"/>
+</polygon>
 </signal>
 <signal name="+5V" class="1">
 <contactref element="IC2" pad="3"/>
@@ -2850,19 +2966,21 @@ design rules under a new name.</description>
 <contactref element="C15" pad="1"/>
 <contactref element="C17" pad="1"/>
 <contactref element="J1" pad="3"/>
-<wire x1="22.54" y1="59.69" x2="41.02" y2="66.04" width="0" layer="19" extent="1-1"/>
-<wire x1="16.19" y1="61.61" x2="22.54" y2="59.69" width="0" layer="19" extent="1-1"/>
-<wire x1="16.19" y1="66.69" x2="16.19" y2="61.61" width="0" layer="19" extent="1-1"/>
-<wire x1="16.19" y1="56.53" x2="16.19" y2="61.61" width="0" layer="19" extent="1-1"/>
-<wire x1="16.19" y1="51.45" x2="16.19" y2="56.53" width="0" layer="19" extent="1-1"/>
-<wire x1="16.19" y1="45.1" x2="16.19" y2="51.45" width="0" layer="19" extent="1-1"/>
-<wire x1="16.19" y1="40.02" x2="16.19" y2="45.1" width="0" layer="19" extent="1-1"/>
-<wire x1="8.57" y1="35.56" x2="16.19" y2="40.02" width="0" layer="19" extent="1-1"/>
-<wire x1="6.35" y1="62.23" x2="16.19" y2="61.61" width="0" layer="19" extent="1-1"/>
-<wire x1="6.35" y1="59.69" x2="6.35" y2="62.23" width="0" layer="19" extent="1-1"/>
+<contactref element="X3" pad="10"/>
+<wire x1="22.54" y1="62.23" x2="41.02" y2="66.04" width="0" layer="19" extent="1-1"/>
+<wire x1="16.19" y1="60.34" x2="22.54" y2="62.23" width="0" layer="19" extent="1-1"/>
+<wire x1="16.19" y1="57.8" x2="16.19" y2="60.34" width="0" layer="19" extent="1-1"/>
+<wire x1="16.19" y1="55.26" x2="16.19" y2="57.8" width="0" layer="19" extent="1-1"/>
+<wire x1="16.19" y1="52.72" x2="16.19" y2="55.26" width="0" layer="19" extent="1-1"/>
+<wire x1="16.19" y1="50.18" x2="16.19" y2="52.72" width="0" layer="19" extent="1-1"/>
+<wire x1="16.19" y1="47.64" x2="16.19" y2="50.18" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="59.69" x2="16.19" y2="60.34" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="62.23" x2="6.35" y2="59.69" width="0" layer="19" extent="1-1"/>
+<wire x1="8.57" y1="35.56" x2="16.19" y2="47.64" width="0" layer="19" extent="1-1"/>
 <wire x1="80.33" y1="17.78" x2="41.02" y2="66.04" width="0" layer="19" extent="1-1"/>
 <wire x1="79.88" y1="15.24" x2="80.33" y2="17.78" width="0" layer="19" extent="1-1"/>
 <wire x1="88.728" y1="19.685" x2="80.33" y2="17.78" width="0" layer="19" extent="1-1"/>
+<wire x1="69.85" y1="6.35" x2="79.88" y2="15.24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$6">
 <contactref element="IC1" pad="30"/>
@@ -2915,58 +3033,58 @@ design rules under a new name.</description>
 <contactref element="IC9" pad="5"/>
 <contactref element="IC3" pad="5"/>
 <contactref element="IC5" pad="5"/>
-<wire x1="16.19" y1="60.96" x2="16.19" y2="66.04" width="0" layer="19" extent="1-1"/>
-<wire x1="16.19" y1="55.88" x2="16.19" y2="60.96" width="0" layer="19" extent="1-1"/>
-<wire x1="16.19" y1="50.8" x2="16.19" y2="55.88" width="0" layer="19" extent="1-1"/>
-<wire x1="16.19" y1="44.45" x2="16.19" y2="50.8" width="0" layer="19" extent="1-1"/>
-<wire x1="16.19" y1="39.37" x2="16.19" y2="44.45" width="0" layer="19" extent="1-1"/>
-<wire x1="15.24" y1="35.24" x2="16.19" y2="39.37" width="0" layer="19" extent="1-1"/>
+<wire x1="16.19" y1="57.15" x2="16.19" y2="59.69" width="0" layer="19" extent="1-1"/>
+<wire x1="16.19" y1="54.61" x2="16.19" y2="57.15" width="0" layer="19" extent="1-1"/>
+<wire x1="16.19" y1="52.07" x2="16.19" y2="54.61" width="0" layer="19" extent="1-1"/>
+<wire x1="16.19" y1="49.53" x2="16.19" y2="52.07" width="0" layer="19" extent="1-1"/>
+<wire x1="16.19" y1="46.99" x2="16.19" y2="49.53" width="0" layer="19" extent="1-1"/>
+<wire x1="15.24" y1="35.24" x2="16.19" y2="46.99" width="0" layer="19" extent="1-1"/>
 <wire x1="21.202" y1="22.13" x2="15.24" y2="35.24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RPA0">
 <contactref element="IC8" pad="4"/>
 <contactref element="IC1" pad="21"/>
-<wire x1="21.202" y1="20.93" x2="16.19" y2="38.72" width="0" layer="19" extent="1-1"/>
+<wire x1="21.202" y1="20.93" x2="16.19" y2="46.34" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RPA14">
 <contactref element="IC6" pad="4"/>
 <contactref element="IC1" pad="66"/>
-<wire x1="34.678" y1="25.33" x2="16.19" y2="43.8" width="0" layer="19" extent="1-1"/>
+<wire x1="34.678" y1="25.33" x2="16.19" y2="48.88" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RPB6">
 <contactref element="IC7" pad="4"/>
 <contactref element="IC1" pad="70"/>
-<wire x1="34.678" y1="26.93" x2="16.19" y2="50.15" width="0" layer="19" extent="1-1"/>
+<wire x1="34.678" y1="26.93" x2="16.19" y2="51.42" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$10">
 <contactref element="X1" pad="1"/>
 <contactref element="IC8" pad="3"/>
-<wire x1="6.35" y1="44.45" x2="14.29" y2="38.72" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="44.45" x2="14.29" y2="46.34" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$11">
 <contactref element="IC6" pad="3"/>
 <contactref element="X1" pad="2"/>
-<wire x1="6.35" y1="46.99" x2="14.29" y2="43.8" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="46.99" x2="14.29" y2="48.88" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$12">
 <contactref element="IC7" pad="3"/>
 <contactref element="X1" pad="3"/>
-<wire x1="6.35" y1="49.53" x2="14.29" y2="50.15" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="49.53" x2="14.29" y2="51.42" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$5">
 <contactref element="IC3" pad="3"/>
 <contactref element="X1" pad="4"/>
-<wire x1="6.35" y1="52.07" x2="14.29" y2="55.23" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="52.07" x2="14.29" y2="53.96" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$8">
 <contactref element="IC5" pad="3"/>
 <contactref element="X1" pad="5"/>
-<wire x1="6.35" y1="54.61" x2="14.29" y2="60.31" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="54.61" x2="14.29" y2="56.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$15">
 <contactref element="X1" pad="6"/>
 <contactref element="IC9" pad="3"/>
-<wire x1="6.35" y1="57.15" x2="14.29" y2="65.39" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="57.15" x2="14.29" y2="59.04" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+24V" class="2">
 <contactref element="J1" pad="14"/>
@@ -2992,43 +3110,268 @@ design rules under a new name.</description>
 <contactref element="U1" pad="27"/>
 <contactref element="C19" pad="1"/>
 <contactref element="C18" pad="1"/>
-<wire x1="91.84" y1="68.345" x2="91.84" y2="68.995" width="0" layer="19" extent="1-1"/>
-<wire x1="91.84" y1="61.195" x2="91.84" y2="68.345" width="0" layer="19" extent="1-1"/>
-<wire x1="91.84" y1="60.545" x2="91.84" y2="61.195" width="0" layer="19" extent="1-1"/>
-<wire x1="91.84" y1="59.895" x2="91.84" y2="60.545" width="0" layer="19" extent="1-1"/>
-<wire x1="87.95" y1="53.34" x2="91.84" y2="59.895" width="0" layer="19" extent="1-1"/>
-<wire x1="91.84" y1="46.135" x2="87.95" y2="53.34" width="0" layer="19" extent="1-1"/>
-<wire x1="91.84" y1="45.485" x2="91.84" y2="46.135" width="0" layer="19" extent="1-1"/>
-<wire x1="91.84" y1="38.335" x2="91.84" y2="45.485" width="0" layer="19" extent="1-1"/>
-<wire x1="91.84" y1="37.685" x2="91.84" y2="38.335" width="0" layer="19" extent="1-1"/>
-<wire x1="91.84" y1="37.035" x2="91.84" y2="37.685" width="0" layer="19" extent="1-1"/>
-<wire x1="78.42" y1="53.34" x2="87.95" y2="53.34" width="0" layer="19" extent="1-1"/>
-<wire x1="78.34" y1="46.785" x2="78.42" y2="53.34" width="0" layer="19" extent="1-1"/>
-<wire x1="78.34" y1="46.135" x2="78.34" y2="46.785" width="0" layer="19" extent="1-1"/>
-<wire x1="78.34" y1="45.485" x2="78.34" y2="46.135" width="0" layer="19" extent="1-1"/>
-<wire x1="78.34" y1="38.335" x2="78.34" y2="45.485" width="0" layer="19" extent="1-1"/>
-<wire x1="78.34" y1="37.685" x2="78.34" y2="38.335" width="0" layer="19" extent="1-1"/>
-<wire x1="78.34" y1="60.545" x2="78.42" y2="53.34" width="0" layer="19" extent="1-1"/>
-<wire x1="78.34" y1="61.195" x2="78.34" y2="60.545" width="0" layer="19" extent="1-1"/>
-<wire x1="78.34" y1="68.345" x2="78.34" y2="61.195" width="0" layer="19" extent="1-1"/>
-<wire x1="78.34" y1="68.995" x2="78.34" y2="68.345" width="0" layer="19" extent="1-1"/>
-<wire x1="78.34" y1="69.645" x2="78.34" y2="68.995" width="0" layer="19" extent="1-1"/>
-<wire x1="61.97" y1="60.54" x2="78.34" y2="60.545" width="0" layer="19" extent="1-1"/>
+<contactref element="C20" pad="1"/>
+<contactref element="C21" pad="1"/>
+<wire x1="89.315" y1="71.52" x2="89.965" y2="71.52" width="0" layer="19" extent="1-1"/>
+<wire x1="88.665" y1="71.52" x2="89.315" y2="71.52" width="0" layer="19" extent="1-1"/>
+<wire x1="81.515" y1="71.52" x2="88.665" y2="71.52" width="0" layer="19" extent="1-1"/>
+<wire x1="80.865" y1="71.52" x2="81.515" y2="71.52" width="0" layer="19" extent="1-1"/>
+<wire x1="89.315" y1="58.02" x2="89.965" y2="71.52" width="0" layer="19" extent="1-1"/>
+<wire x1="88.665" y1="58.02" x2="89.315" y2="58.02" width="0" layer="19" extent="1-1"/>
+<wire x1="87.95" y1="53.34" x2="88.665" y2="58.02" width="0" layer="19" extent="1-1"/>
+<wire x1="88.665" y1="48.66" x2="87.95" y2="53.34" width="0" layer="19" extent="1-1"/>
+<wire x1="89.315" y1="48.66" x2="88.665" y2="48.66" width="0" layer="19" extent="1-1"/>
+<wire x1="89.965" y1="48.66" x2="89.315" y2="48.66" width="0" layer="19" extent="1-1"/>
+<wire x1="81.515" y1="58.02" x2="88.665" y2="58.02" width="0" layer="19" extent="1-1"/>
+<wire x1="80.865" y1="58.02" x2="81.515" y2="58.02" width="0" layer="19" extent="1-1"/>
+<wire x1="80.215" y1="58.02" x2="80.865" y2="58.02" width="0" layer="19" extent="1-1"/>
+<wire x1="78.42" y1="53.34" x2="80.215" y2="58.02" width="0" layer="19" extent="1-1"/>
+<wire x1="80.865" y1="48.66" x2="78.42" y2="53.34" width="0" layer="19" extent="1-1"/>
+<wire x1="81.515" y1="48.66" x2="80.865" y2="48.66" width="0" layer="19" extent="1-1"/>
+<wire x1="89.315" y1="35.16" x2="88.665" y2="48.66" width="0" layer="19" extent="1-1"/>
+<wire x1="88.665" y1="35.16" x2="89.315" y2="35.16" width="0" layer="19" extent="1-1"/>
+<wire x1="89.85" y1="30.48" x2="89.315" y2="35.16" width="0" layer="19" extent="1-1"/>
+<wire x1="81.515" y1="35.16" x2="88.665" y2="35.16" width="0" layer="19" extent="1-1"/>
+<wire x1="80.865" y1="35.16" x2="81.515" y2="35.16" width="0" layer="19" extent="1-1"/>
+<wire x1="80.215" y1="35.16" x2="80.865" y2="35.16" width="0" layer="19" extent="1-1"/>
+<wire x1="78.42" y1="30.48" x2="80.215" y2="35.16" width="0" layer="19" extent="1-1"/>
+<wire x1="61.97" y1="60.54" x2="78.42" y2="53.34" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RPB1">
 <contactref element="IC3" pad="4"/>
 <contactref element="IC1" pad="25"/>
-<wire x1="21.202" y1="19.33" x2="16.19" y2="55.23" width="0" layer="19" extent="1-1"/>
+<wire x1="21.202" y1="19.33" x2="16.19" y2="53.96" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RPC1">
 <contactref element="IC5" pad="4"/>
 <contactref element="IC1" pad="33"/>
-<wire x1="25.94" y1="17.392" x2="16.19" y2="60.31" width="0" layer="19" extent="1-1"/>
+<wire x1="25.94" y1="17.392" x2="16.19" y2="56.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RPC10">
 <contactref element="IC9" pad="4"/>
 <contactref element="IC1" pad="71"/>
-<wire x1="34.678" y1="27.33" x2="16.19" y2="65.39" width="0" layer="19" extent="1-1"/>
+<wire x1="34.678" y1="27.33" x2="16.19" y2="59.04" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="RPB7">
+<contactref element="U$1" pad="CH_L"/>
+<contactref element="IC1" pad="72"/>
+<wire x1="34.678" y1="27.73" x2="65.155" y2="19.119" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="RD8">
+<contactref element="U$1" pad="EN_L"/>
+<contactref element="IC1" pad="68"/>
+<wire x1="34.678" y1="26.13" x2="59.305" y2="11.361" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$4">
+<contactref element="X3" pad="1"/>
+<contactref element="U$1" pad="IN1"/>
+<wire x1="46.99" y1="6.35" x2="59.955" y2="11.361" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$17">
+<contactref element="X3" pad="2"/>
+<contactref element="U$1" pad="IN2"/>
+<wire x1="49.53" y1="6.35" x2="60.605" y2="11.361" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$18">
+<contactref element="X3" pad="3"/>
+<contactref element="U$1" pad="IN3"/>
+<wire x1="52.07" y1="6.35" x2="61.255" y2="11.361" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$19">
+<contactref element="X3" pad="4"/>
+<contactref element="U$1" pad="IN4"/>
+<wire x1="54.61" y1="6.35" x2="61.905" y2="11.361" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$20">
+<contactref element="X3" pad="5"/>
+<contactref element="U$1" pad="IN5"/>
+<wire x1="57.15" y1="6.35" x2="62.555" y2="11.361" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$21">
+<contactref element="X3" pad="6"/>
+<contactref element="U$1" pad="IN6"/>
+<wire x1="59.69" y1="6.35" x2="63.205" y2="11.361" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$22">
+<contactref element="X3" pad="7"/>
+<contactref element="U$1" pad="IN7"/>
+<wire x1="62.23" y1="6.35" x2="63.855" y2="11.361" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$23">
+<contactref element="X3" pad="8"/>
+<contactref element="U$1" pad="IN8"/>
+<wire x1="64.77" y1="6.35" x2="64.505" y2="11.361" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="U1O1" class="1">
+<contactref element="J1" pad="12"/>
+<contactref element="U1" pad="9"/>
+<contactref element="U1" pad="7"/>
+<contactref element="U1" pad="8"/>
+<wire x1="82.165" y1="35.16" x2="57.78" y2="60.54" width="0" layer="19" extent="1-1"/>
+<wire x1="82.815" y1="35.16" x2="82.165" y2="35.16" width="0" layer="19" extent="1-1"/>
+<wire x1="83.465" y1="35.16" x2="82.815" y2="35.16" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="U1O2" class="1">
+<contactref element="J1" pad="11"/>
+<contactref element="U1" pad="36"/>
+<contactref element="U1" pad="38"/>
+<contactref element="U1" pad="37"/>
+<wire x1="82.815" y1="48.66" x2="83.465" y2="48.66" width="0" layer="19" extent="1-1"/>
+<wire x1="82.165" y1="48.66" x2="82.815" y2="48.66" width="0" layer="19" extent="1-1"/>
+<wire x1="57.78" y1="66.04" x2="82.165" y2="48.66" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="U1O3" class="1">
+<contactref element="J1" pad="10"/>
+<contactref element="U1" pad="29"/>
+<contactref element="U1" pad="31"/>
+<contactref element="U1" pad="30"/>
+<wire x1="87.365" y1="48.66" x2="88.015" y2="48.66" width="0" layer="19" extent="1-1"/>
+<wire x1="86.715" y1="48.66" x2="87.365" y2="48.66" width="0" layer="19" extent="1-1"/>
+<wire x1="53.59" y1="60.54" x2="86.715" y2="48.66" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="U1O4" class="1">
+<contactref element="J1" pad="9"/>
+<contactref element="U1" pad="16"/>
+<contactref element="U1" pad="14"/>
+<contactref element="U1" pad="15"/>
+<wire x1="86.715" y1="35.16" x2="53.59" y2="66.04" width="0" layer="19" extent="1-1"/>
+<wire x1="87.365" y1="35.16" x2="86.715" y2="35.16" width="0" layer="19" extent="1-1"/>
+<wire x1="88.015" y1="35.16" x2="87.365" y2="35.16" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$24">
+<contactref element="U2" pad="9"/>
+<contactref element="U2" pad="7"/>
+<contactref element="U2" pad="8"/>
+<wire x1="82.815" y1="58.02" x2="83.465" y2="58.02" width="0" layer="19" extent="1-1"/>
+<wire x1="82.165" y1="58.02" x2="82.815" y2="58.02" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$25">
+<contactref element="U2" pad="36"/>
+<contactref element="U2" pad="38"/>
+<contactref element="U2" pad="37"/>
+<wire x1="82.815" y1="71.52" x2="83.465" y2="71.52" width="0" layer="19" extent="1-1"/>
+<wire x1="82.165" y1="71.52" x2="82.815" y2="71.52" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$26">
+<contactref element="U2" pad="16"/>
+<contactref element="U2" pad="14"/>
+<contactref element="U2" pad="15"/>
+<wire x1="87.365" y1="58.02" x2="88.015" y2="58.02" width="0" layer="19" extent="1-1"/>
+<wire x1="86.715" y1="58.02" x2="87.365" y2="58.02" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$27">
+<contactref element="U2" pad="29"/>
+<contactref element="U2" pad="31"/>
+<contactref element="U2" pad="30"/>
+<wire x1="87.365" y1="71.52" x2="88.015" y2="71.52" width="0" layer="19" extent="1-1"/>
+<wire x1="86.715" y1="71.52" x2="87.365" y2="71.52" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$28">
+<contactref element="U2" pad="2"/>
+<contactref element="R4" pad="2"/>
+<wire x1="81.6" y1="53.34" x2="78.915" y2="58.02" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$29">
+<contactref element="R7" pad="1"/>
+<contactref element="U2" pad="24"/>
+<wire x1="91.265" y1="71.52" x2="91.76" y2="74.93" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$30">
+<contactref element="U1" pad="2"/>
+<contactref element="R9" pad="2"/>
+<wire x1="83.5" y1="30.48" x2="78.915" y2="35.16" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$31">
+<contactref element="U1" pad="24"/>
+<contactref element="R8" pad="1"/>
+<wire x1="91.265" y1="48.66" x2="91.76" y2="50.8" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="PWM1H">
+<contactref element="IC1" pad="4"/>
+<contactref element="U1" pad="43"/>
+<wire x1="21.202" y1="27.73" x2="78.915" y2="48.66" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="PWM1L">
+<contactref element="IC1" pad="5"/>
+<contactref element="U1" pad="42"/>
+<wire x1="21.202" y1="27.33" x2="79.565" y2="48.66" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="PWM2H">
+<contactref element="IC1" pad="98"/>
+<contactref element="U1" pad="21"/>
+<wire x1="23.94" y1="30.868" x2="91.265" y2="35.16" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="PWM2L">
+<contactref element="IC1" pad="99"/>
+<contactref element="U1" pad="20"/>
+<wire x1="23.54" y1="30.868" x2="90.615" y2="35.16" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$32">
+<contactref element="S1" pad="5"/>
+<contactref element="R10" pad="2"/>
+<wire x1="21.59" y1="11.22" x2="30.16" y2="5.08" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="RPG9">
+<contactref element="R10" pad="1"/>
+<contactref element="IC1" pad="14"/>
+<wire x1="28.26" y1="5.08" x2="21.202" y2="23.73" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$33">
+<via x="67.31" y="64.77" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$34">
+<via x="73.66" y="64.77" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$35">
+<via x="95.25" y="64.77" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$36">
+<via x="85.09" y="53.34" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$37">
+<via x="93.98" y="53.34" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$38">
+<via x="95.25" y="58.42" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$39">
+<via x="95.25" y="48.26" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$40">
+<via x="95.25" y="40.64" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$41">
+<via x="76.2" y="40.64" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$42">
+<via x="74.93" y="53.34" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$43">
+<via x="69.85" y="64.77" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$44">
+<via x="73.66" y="67.31" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$45">
+<via x="69.85" y="66.04" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$46">
+<via x="67.31" y="66.04" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$47">
+<via x="96.52" y="67.31" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$48">
+<via x="96.52" y="58.42" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$49">
+<via x="96.52" y="53.34" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$50">
+<via x="96.52" y="48.26" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$51">
+<via x="96.52" y="40.64" extent="1-16" drill="0.35"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
