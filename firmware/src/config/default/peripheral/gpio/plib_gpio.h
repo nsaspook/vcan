@@ -61,6 +61,14 @@
 // *****************************************************************************
 // *****************************************************************************
 
+/*** Macros for RESET_LED pin ***/
+#define RESET_LED_Set()               (LATGSET = (1<<9))
+#define RESET_LED_Clear()             (LATGCLR = (1<<9))
+#define RESET_LED_Toggle()            (LATGINV= (1<<9))
+#define RESET_LED_Get()               ((PORTG >> 9) & 0x1)
+#define RESET_LED_OutputEnable()      (TRISGCLR = (1<<9))
+#define RESET_LED_InputEnable()       (TRISGSET = (1<<9))
+#define RESET_LED_PIN                  GPIO_PIN_RG9
 /*** Macros for QEI1_E0 pin ***/
 #define QEI1_E0_Set()               (LATESET = (1<<8))
 #define QEI1_E0_Clear()             (LATECLR = (1<<8))
