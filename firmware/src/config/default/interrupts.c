@@ -58,18 +58,38 @@
 // *****************************************************************************
 
 
+void UART2_FAULT_InterruptHandler( void );
+void UART2_RX_InterruptHandler( void );
+void UART2_TX_InterruptHandler( void );
 void UART3_FAULT_InterruptHandler( void );
 void UART3_RX_InterruptHandler( void );
 void UART3_TX_InterruptHandler( void );
 void UART6_FAULT_InterruptHandler( void );
 void UART6_RX_InterruptHandler( void );
 void UART6_TX_InterruptHandler( void );
+void SPI3_RX_InterruptHandler( void );
+void SPI3_TX_InterruptHandler( void );
 
 
 
 /* All the handlers are defined here.  Each will call its PLIB-specific function. */
 void __ISR(_EXTERNAL_0_VECTOR, ipl1AUTO) EXTERNAL_0_Handler (void)
 {
+}
+
+void __ISR(_UART2_FAULT_VECTOR, ipl1AUTO) UART2_FAULT_Handler (void)
+{
+    UART2_FAULT_InterruptHandler();
+}
+
+void __ISR(_UART2_RX_VECTOR, ipl1AUTO) UART2_RX_Handler (void)
+{
+    UART2_RX_InterruptHandler();
+}
+
+void __ISR(_UART2_TX_VECTOR, ipl1AUTO) UART2_TX_Handler (void)
+{
+    UART2_TX_InterruptHandler();
 }
 
 void __ISR(_UART3_FAULT_VECTOR, ipl1AUTO) UART3_FAULT_Handler (void)
@@ -104,6 +124,16 @@ void __ISR(_UART6_TX_VECTOR, ipl1AUTO) UART6_TX_Handler (void)
 
 void __ISR(_QEI1_VECTOR, ipl1AUTO) QEI1_Handler (void)
 {
+}
+
+void __ISR(_SPI3_RX_VECTOR, ipl1AUTO) SPI3_RX_Handler (void)
+{
+    SPI3_RX_InterruptHandler();
+}
+
+void __ISR(_SPI3_TX_VECTOR, ipl1AUTO) SPI3_TX_Handler (void)
+{
+    SPI3_TX_InterruptHandler();
 }
 
 

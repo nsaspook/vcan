@@ -51,6 +51,8 @@
 #include "peripheral/uart/plib_uart3.h"
 #include "peripheral/qei/plib_qei1.h"
 #include "peripheral/qei/plib_qei2.h"
+#include "peripheral/uart/plib_uart2.h"
+#include "peripheral/spi/plib_spi3.h"
 #include "peripheral/clk/plib_clk.h"
 #include "peripheral/gpio/plib_gpio.h"
 #include "peripheral/evic/plib_evic.h"
