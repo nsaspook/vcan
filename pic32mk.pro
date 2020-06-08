@@ -1,25 +1,25 @@
 EAGLE AutoRouter Statistics:
 
-Job           : /fred/qei_test/pic32mk.brd
+Job           : /root/vcan/pic32mk.brd
 
-Start at      : 10:50:33 (6/7/20)
-End at        : 10:59:45 (6/7/20)
-Elapsed time  : 00:09:07
+Start at      : 20:32:44 (6/7/20)
+End at        : 20:43:36 (6/7/20)
+Elapsed time  : 00:10:48
 
-Signals       :    92   RoutingGrid: 3 mil  Layers: 2
-Connections   :   287   predefined:  88 ( 0 Vias )
+Signals       :   101   RoutingGrid: 3 mil  Layers: 2
+Connections   :   306   predefined:  32 ( 0 Vias )
 
-Router memory :   5732928
+Router memory :   5653008
 
-Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4 Optimize5 Optimize6 Optimize7 Optimize8 Optimize9Optimize10Optimize11Optimize12
+Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4
 
-Time per pass     :  00:00:14  00:01:06  00:00:43  00:00:39  00:00:38  00:00:39  00:00:38  00:00:37  00:00:41  00:00:39  00:00:40  00:00:39  00:00:37  00:00:37
-Number of Ripups  :         0        11         0         0         0         0         0         0         0         0         0         0         0         0
-max. Level        :         0         1         0         0         0         0         0         0         0         0         0         0         0         0
-max. Total        :         0        34         0         0         0         0         0         0         0         0         0         0         0         0
+Time per pass     :  00:00:48  00:06:13  00:01:08  00:00:53  00:00:55  00:00:51
+Number of Ripups  :         0        63         0         0         0         0
+max. Level        :         0         2         0         0         0         0
+max. Total        :         0        95         0         0         0         0
 
-Routed            :        75       199       197       198       198       198       198       198       198       199       199       199       199       199
-Vias              :         0       110       108        96        92        92        92        92        92        96        96        95        95        95
-Resolution        :    56.8 %   100.0 %    99.3 %    99.7 %    99.7 %    99.7 %    99.7 %    99.7 %    99.7 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
+Routed            :        94       274       274       274       274       274
+Vias              :         0       184       202       164       155       153
+Resolution        :    41.2 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
-Final             : 89.5% finished. Polygons may have fallen apart.
+Final             : 95.4% finished. Polygons may have fallen apart.
