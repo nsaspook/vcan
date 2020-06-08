@@ -36,11 +36,6 @@ extern "C" {
 		uint32_t update;
 	} QEI_DATA;
 
-	typedef struct qei_ptr_type {
-		volatile uint32_t qeicon, qeiioc, qeistat, poscnt, poshld, velcnt, velhld, inttmr, inthld, indxcnt, indxhld, qeiicc, qeicml;
-	} qei_ptr_type;
-
-
 #ifdef	__cplusplus
 }
 #endif

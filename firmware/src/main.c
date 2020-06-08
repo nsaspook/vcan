@@ -34,7 +34,6 @@
 
 
 extern QEI_DATA m35_1, m35_2, *m35_ptr;
-extern qei_ptr_type *qei_ptr;
 
 /* redirect of printf to uart3 */
 
@@ -71,12 +70,8 @@ int main(void)
 			LATGbits.LATG12 = m35_ptr->pos >> 10;
 			LATGbits.LATG13 = m35_ptr->pos >> 12;
 			LATGbits.LATG14 = m35_ptr->pos >> 14;
-			LATGbits.LATG12 = qei_ptr->poscnt >> 10;
-			LATGbits.LATG13 = qei_ptr->poscnt >> 12;
-			LATGbits.LATG14 = qei_ptr->poscnt >> 14;
 			/* send to uart3 the current QEI values */
 			sprintf(strbuf, "c %7i:v %4i\r\n", m35_ptr->pos, m35_ptr->vel);
-			sprintf(strbuf, "c %7i:v %4i\r\n", qei_ptr->poscnt, qei_ptr->velcnt);
 			UART3_Write((uint8_t*) strbuf, strlen(strbuf));
 			m35_ptr->update = 0;
 		}

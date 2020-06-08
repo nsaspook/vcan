@@ -5,6 +5,5 @@
 #include <stdio.h>
 
 QEI_DATA m35_1, m35_2, *m35_ptr;
-qei_ptr_type *qei_ptr = (void*) &QEI1CON;
 
 
