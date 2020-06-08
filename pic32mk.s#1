@@ -14584,7 +14584,6 @@ Source: www.kingbright.com</description>
 <part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="SUPPLY1" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY2" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
-<part name="P+4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="C10" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1"/>
 <part name="C11" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="22uf"/>
 <part name="VSS25" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
@@ -14713,6 +14712,7 @@ Source: www.kingbright.com</description>
 <part name="+3V2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="C27" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="22uf"/>
 <part name="P+22" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="VDD19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -14876,10 +14876,10 @@ Source: www.kingbright.com</description>
 <attribute name="VALUE" x="-55.88" y="83.82" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="VDD16" gate="G$1" x="-93.98" y="106.68" smashed="yes" rot="R180">
-<attribute name="VALUE" x="-91.44" y="109.22" size="1.778" layer="96" rot="R270"/>
+<attribute name="VALUE" x="-93.98" y="101.6" size="1.778" layer="96"/>
 </instance>
 <instance part="P+2" gate="VCC" x="-76.2" y="132.08" smashed="yes" rot="R180">
-<attribute name="VALUE" x="-63.5" y="132.08" size="1.778" layer="96" rot="R270"/>
+<attribute name="VALUE" x="-73.66" y="132.08" size="1.778" layer="96"/>
 </instance>
 <instance part="+3V1" gate="G$1" x="-121.92" y="109.22" smashed="yes" rot="R90">
 <attribute name="VALUE" x="-116.84" y="106.68" size="1.778" layer="96" rot="R180"/>
@@ -14892,9 +14892,6 @@ Source: www.kingbright.com</description>
 </instance>
 <instance part="SUPPLY2" gate="GND" x="-48.26" y="-185.42" smashed="yes">
 <attribute name="VALUE" x="-50.165" y="-188.595" size="1.778" layer="96"/>
-</instance>
-<instance part="P+4" gate="VCC" x="-48.26" y="-104.14" smashed="yes">
-<attribute name="VALUE" x="-50.8" y="-106.68" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="C10" gate="G$1" x="-86.36" y="106.68" smashed="yes">
 <attribute name="NAME" x="-85.344" y="107.315" size="1.778" layer="95"/>
@@ -15386,6 +15383,9 @@ Source: www.kingbright.com</description>
 <instance part="P+22" gate="VCC" x="-15.24" y="-83.82" smashed="yes">
 <attribute name="VALUE" x="-17.78" y="-83.82" size="1.778" layer="96" rot="R90"/>
 </instance>
+<instance part="VDD19" gate="G$1" x="-48.26" y="-104.14" smashed="yes">
+<attribute name="VALUE" x="-50.8" y="-106.68" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -15530,6 +15530,7 @@ Source: www.kingbright.com</description>
 <junction x="-86.36" y="109.22"/>
 <wire x1="-86.36" y1="109.22" x2="-93.98" y2="109.22" width="0.1524" layer="91"/>
 <wire x1="-93.98" y1="109.22" x2="-96.52" y2="109.22" width="0.1524" layer="91"/>
+<junction x="-96.52" y="109.22"/>
 </segment>
 <segment>
 <pinref part="OS2" gate="A" pin="VDD"/>
@@ -15586,6 +15587,13 @@ Source: www.kingbright.com</description>
 <pinref part="IC9" gate="G$1" pin="VCCA"/>
 <pinref part="VDD14" gate="G$1" pin="VDD"/>
 <junction x="-134.62" y="-104.14"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="VCC"/>
+<wire x1="-48.26" y1="-109.22" x2="-48.26" y2="-106.68" width="0.1524" layer="91"/>
+<junction x="-48.26" y="-109.22"/>
+<pinref part="VDD19" gate="G$1" pin="VDD"/>
+<junction x="-48.26" y="-106.68"/>
 </segment>
 </net>
 <net name="VSS" class="2">
@@ -15728,10 +15736,12 @@ Source: www.kingbright.com</description>
 <segment>
 <pinref part="C10" gate="G$1" pin="2"/>
 <pinref part="VSS25" gate="G$1" pin="VSS"/>
+<junction x="-86.36" y="101.6"/>
 </segment>
 <segment>
 <pinref part="C11" gate="G$1" pin="2"/>
 <pinref part="VSS26" gate="G$1" pin="VSS"/>
+<junction x="-76.2" y="101.6"/>
 </segment>
 <segment>
 <pinref part="SV2" gate="1" pin="2"/>
@@ -16018,6 +16028,8 @@ Source: www.kingbright.com</description>
 <pinref part="F1" gate="G$1" pin="2"/>
 <pinref part="P+3" gate="1" pin="+5V"/>
 <wire x1="-96.52" y1="134.62" x2="-99.06" y2="134.62" width="0.1524" layer="91"/>
+<junction x="-96.52" y="134.62"/>
+<junction x="-99.06" y="134.62"/>
 </segment>
 <segment>
 <pinref part="J1" gate="G$1" pin="3"/>
@@ -16057,24 +16069,21 @@ Source: www.kingbright.com</description>
 <segment>
 <pinref part="F2" gate="G$1" pin="1"/>
 <pinref part="R5" gate="G$1" pin="1"/>
+<junction x="-106.68" y="109.22"/>
 </segment>
 </net>
 <net name="N$9" class="0">
 <segment>
 <pinref part="F1" gate="G$1" pin="1"/>
 <pinref part="R6" gate="G$1" pin="1"/>
+<junction x="-86.36" y="134.62"/>
 </segment>
 </net>
 <net name="VCC" class="0">
 <segment>
 <pinref part="R6" gate="G$1" pin="2"/>
 <pinref part="P+2" gate="VCC" pin="VCC"/>
-</segment>
-<segment>
-<pinref part="U$1" gate="G$1" pin="VCC"/>
-<pinref part="P+4" gate="VCC" pin="VCC"/>
-<wire x1="-48.26" y1="-109.22" x2="-48.26" y2="-106.68" width="0.1524" layer="91"/>
-<junction x="-48.26" y="-109.22"/>
+<junction x="-76.2" y="134.62"/>
 </segment>
 <segment>
 <pinref part="IC6" gate="G$1" pin="VCCB"/>
@@ -16156,6 +16165,8 @@ Source: www.kingbright.com</description>
 <pinref part="F2" gate="G$1" pin="2"/>
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
 <wire x1="-116.84" y1="109.22" x2="-119.38" y2="109.22" width="0.1524" layer="91"/>
+<junction x="-116.84" y="109.22"/>
+<junction x="-119.38" y="109.22"/>
 </segment>
 <segment>
 <pinref part="J1" gate="G$1" pin="2"/>

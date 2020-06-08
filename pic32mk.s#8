@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -12818,9 +12818,9 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <attribute name="NAME" x="208.28" y="3.175" size="1.778" layer="95"/>
 <attribute name="VALUE" x="208.28" y="-38.1" size="1.778" layer="96"/>
 </instance>
-<instance part="U$1" gate="G$1" x="-66.04" y="-99.06" smashed="yes">
-<attribute name="VALUE" x="-73.67086875" y="-86.3419" size="2.54361875" layer="96"/>
-<attribute name="NAME" x="-83.869" y="-63.402" size="1.7829" layer="95"/>
+<instance part="U$1" gate="G$1" x="-58.42" y="-106.68" smashed="yes">
+<attribute name="VALUE" x="-66.05086875" y="-93.9619" size="2.54361875" layer="96"/>
+<attribute name="NAME" x="-76.249" y="-71.022" size="1.7829" layer="95"/>
 </instance>
 <instance part="U$2" gate="G$1" x="-152.4" y="66.04" smashed="yes">
 <attribute name="VALUE" x="-163.861" y="66.04" size="1.78281875" layer="96"/>
@@ -12864,11 +12864,11 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <instance part="SUPPLY1" gate="GND" x="-71.12" y="88.9" smashed="yes">
 <attribute name="VALUE" x="-73.025" y="85.725" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY2" gate="GND" x="-66.04" y="-137.16" smashed="yes">
-<attribute name="VALUE" x="-67.945" y="-140.335" size="1.778" layer="96"/>
+<instance part="SUPPLY2" gate="GND" x="-58.42" y="-149.86" smashed="yes">
+<attribute name="VALUE" x="-60.325" y="-153.035" size="1.778" layer="96"/>
 </instance>
-<instance part="P+4" gate="VCC" x="-66.04" y="-58.42" smashed="yes">
-<attribute name="VALUE" x="-68.58" y="-60.96" size="1.778" layer="96" rot="R90"/>
+<instance part="P+4" gate="VCC" x="-58.42" y="-68.58" smashed="yes">
+<attribute name="VALUE" x="-60.96" y="-71.12" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="C10" gate="G$1" x="-86.36" y="106.68" smashed="yes">
 <attribute name="NAME" x="-85.344" y="107.315" size="1.778" layer="95"/>
@@ -13811,7 +13811,6 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <segment>
 <pinref part="U$1" gate="G$1" pin="VCC"/>
 <pinref part="P+4" gate="VCC" pin="VCC"/>
-<wire x1="-66.04" y1="-63.5" x2="-66.04" y2="-60.96" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+3V3" class="1">
@@ -13833,6 +13832,9 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <segment>
 <pinref part="U$1" gate="G$1" pin="GND"/>
 <pinref part="SUPPLY2" gate="GND" pin="GND"/>
+<wire x1="-58.42" y1="-142.24" x2="-58.42" y2="-147.32" width="0.1524" layer="91"/>
+<junction x="-58.42" y="-142.24"/>
+<junction x="-58.42" y="-147.32"/>
 </segment>
 <segment>
 <pinref part="SUPPLY1" gate="GND" pin="GND"/>
@@ -13915,6 +13917,7 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <wire x1="12.7" y1="2.54" x2="5.08" y2="2.54" width="0.1524" layer="91"/>
 <label x="2.54" y="2.54" size="1.778" layer="95"/>
 <junction x="5.08" y="2.54"/>
+<junction x="12.7" y="2.54"/>
 </segment>
 </net>
 <net name="RPA0" class="0">
@@ -13930,6 +13933,7 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <wire x1="12.7" y1="-5.08" x2="2.54" y2="-5.08" width="0.1524" layer="91"/>
 <label x="2.54" y="-5.08" size="1.778" layer="95"/>
 <junction x="2.54" y="-5.08"/>
+<junction x="12.7" y="-5.08"/>
 </segment>
 </net>
 <net name="RPA14" class="0">
@@ -13945,6 +13949,7 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <wire x1="160.02" y1="22.86" x2="182.88" y2="22.86" width="0.1524" layer="91"/>
 <label x="185.42" y="22.86" size="1.778" layer="95"/>
 <junction x="182.88" y="22.86"/>
+<junction x="160.02" y="22.86"/>
 </segment>
 </net>
 <net name="RPB6" class="0">
@@ -13962,6 +13967,7 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <wire x1="160.02" y1="33.02" x2="185.42" y2="33.02" width="0.1524" layer="91"/>
 <label x="187.96" y="33.02" size="1.778" layer="95"/>
 <junction x="185.42" y="33.02"/>
+<junction x="160.02" y="33.02"/>
 </segment>
 </net>
 <net name="N$10" class="0">
@@ -14137,6 +14143,54 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <junction x="248.92" y="116.84"/>
 <junction x="248.92" y="119.38"/>
 <junction x="259.08" y="119.38"/>
+</segment>
+</net>
+<net name="RPB1" class="0">
+<segment>
+<pinref part="IC3" gate="G$1" pin="B"/>
+<wire x1="-106.68" y1="-73.66" x2="-91.44" y2="-73.66" width="0.1524" layer="91"/>
+<junction x="-106.68" y="-73.66"/>
+<junction x="-91.44" y="-73.66"/>
+<label x="-91.44" y="-73.66" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="PGEC3/OA1OUT/AN3/C1IN4-/C4IN2-/RPB1/CTED1/RB1"/>
+<wire x1="12.7" y1="-15.24" x2="2.54" y2="-15.24" width="0.1524" layer="91"/>
+<label x="2.54" y="-15.24" size="1.778" layer="95"/>
+<junction x="2.54" y="-15.24"/>
+<junction x="12.7" y="-15.24"/>
+</segment>
+</net>
+<net name="RPC1" class="0">
+<segment>
+<pinref part="IC5" gate="G$1" pin="B"/>
+<wire x1="-106.68" y1="-91.44" x2="-91.44" y2="-91.44" width="0.1524" layer="91"/>
+<junction x="-106.68" y="-91.44"/>
+<junction x="-91.44" y="-91.44"/>
+<label x="-91.44" y="-91.44" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="OA3IN-/AN7/CVD7/C3IN1-/C4IN1-/RPC1/RC1"/>
+<wire x1="73.66" y1="-88.9" x2="73.66" y2="-121.92" width="0.1524" layer="91"/>
+<label x="73.66" y="-121.92" size="1.778" layer="95"/>
+<junction x="73.66" y="-88.9"/>
+<junction x="73.66" y="-121.92"/>
+</segment>
+</net>
+<net name="RPC10" class="0">
+<segment>
+<pinref part="IC9" gate="G$1" pin="B"/>
+<wire x1="-106.68" y1="-109.22" x2="-91.44" y2="-109.22" width="0.1524" layer="91"/>
+<junction x="-106.68" y="-109.22"/>
+<junction x="-91.44" y="-109.22"/>
+<label x="-91.44" y="-109.22" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="DAC2/AN48/CVD48/RPC10/PMPA14/PSPCS/RC10"/>
+<wire x1="160.02" y1="35.56" x2="185.42" y2="35.56" width="0.1524" layer="91"/>
+<label x="185.42" y="35.56" size="1.778" layer="95"/>
+<junction x="160.02" y="35.56"/>
+<junction x="185.42" y="35.56"/>
 </segment>
 </net>
 </nets>

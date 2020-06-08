@@ -12689,6 +12689,18 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <part name="P+22" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="C20" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1"/>
 <part name="C21" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1"/>
+<part name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="100"/>
+<part name="R7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="100"/>
+<part name="VSS43" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="VSS44" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="R8" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="100"/>
+<part name="R9" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="100"/>
+<part name="VSS45" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="VSS46" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="VSS47" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="VSS48" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="R10" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="1k"/>
+<part name="VSS49" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -13227,6 +13239,47 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <attribute name="NAME" x="250.825" y="-113.284" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="255.651" y="-113.284" size="1.778" layer="96" rot="R90"/>
 </instance>
+<instance part="R4" gate="G$1" x="182.88" y="-96.52" smashed="yes">
+<attribute name="NAME" x="179.07" y="-95.0214" size="1.778" layer="95"/>
+<attribute name="VALUE" x="179.07" y="-99.822" size="1.778" layer="96"/>
+</instance>
+<instance part="R7" gate="G$1" x="246.38" y="-144.78" smashed="yes">
+<attribute name="NAME" x="242.57" y="-143.2814" size="1.778" layer="95"/>
+<attribute name="VALUE" x="242.57" y="-148.082" size="1.778" layer="96"/>
+</instance>
+<instance part="VSS43" gate="G$1" x="175.26" y="-96.52" smashed="yes" rot="R270">
+<attribute name="VALUE" x="170.18" y="-93.98" size="1.778" layer="96"/>
+</instance>
+<instance part="VSS44" gate="G$1" x="254" y="-144.78" smashed="yes" rot="R90">
+<attribute name="VALUE" x="259.08" y="-147.32" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="R8" gate="G$1" x="261.62" y="78.74" smashed="yes">
+<attribute name="NAME" x="257.81" y="80.2386" size="1.778" layer="95"/>
+<attribute name="VALUE" x="257.81" y="75.438" size="1.778" layer="96"/>
+</instance>
+<instance part="R9" gate="G$1" x="193.04" y="127" smashed="yes">
+<attribute name="NAME" x="189.23" y="128.4986" size="1.778" layer="95"/>
+<attribute name="VALUE" x="189.23" y="123.698" size="1.778" layer="96"/>
+</instance>
+<instance part="VSS45" gate="G$1" x="185.42" y="127" smashed="yes" rot="R270">
+<attribute name="VALUE" x="180.34" y="129.54" size="1.778" layer="96"/>
+</instance>
+<instance part="VSS46" gate="G$1" x="269.24" y="78.74" smashed="yes" rot="R90">
+<attribute name="VALUE" x="274.32" y="76.2" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="VSS47" gate="G$1" x="228.6" y="68.58" smashed="yes">
+<attribute name="VALUE" x="226.06" y="63.5" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="VSS48" gate="G$1" x="213.36" y="-154.94" smashed="yes">
+<attribute name="VALUE" x="210.82" y="-160.02" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R10" gate="G$1" x="-48.26" y="5.08" smashed="yes" rot="R180">
+<attribute name="NAME" x="-44.45" y="3.5814" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-44.45" y="8.382" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="VSS49" gate="G$1" x="-53.34" y="0" smashed="yes">
+<attribute name="VALUE" x="-55.88" y="-5.08" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -13435,7 +13488,7 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <junction x="76.2" y="-137.16"/>
 </segment>
 </net>
-<net name="VSS" class="1">
+<net name="VSS" class="2">
 <segment>
 <pinref part="C1" gate="G$1" pin="2"/>
 <pinref part="VSS1" gate="G$1" pin="VSS"/>
@@ -13767,6 +13820,53 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <wire x1="-121.92" y1="-157.48" x2="-121.92" y2="-165.1" width="0.1524" layer="91"/>
 <junction x="-111.76" y="-157.48"/>
 <junction x="-121.92" y="-165.1"/>
+</segment>
+<segment>
+<pinref part="R4" gate="G$1" pin="1"/>
+<pinref part="VSS43" gate="G$1" pin="VSS"/>
+<junction x="177.8" y="-96.52"/>
+</segment>
+<segment>
+<pinref part="R7" gate="G$1" pin="2"/>
+<pinref part="VSS44" gate="G$1" pin="VSS"/>
+<junction x="251.46" y="-144.78"/>
+</segment>
+<segment>
+<pinref part="R9" gate="G$1" pin="1"/>
+<pinref part="VSS45" gate="G$1" pin="VSS"/>
+<junction x="187.96" y="127"/>
+</segment>
+<segment>
+<pinref part="R8" gate="G$1" pin="2"/>
+<pinref part="VSS46" gate="G$1" pin="VSS"/>
+<junction x="266.7" y="78.74"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="EH@1"/>
+<pinref part="U1" gate="G$1" pin="EH@2"/>
+<wire x1="226.06" y1="71.12" x2="228.6" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="EH@3"/>
+<wire x1="228.6" y1="71.12" x2="231.14" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="VSS47" gate="G$1" pin="VSS"/>
+<junction x="228.6" y="71.12"/>
+<junction x="226.06" y="71.12"/>
+<junction x="231.14" y="71.12"/>
+</segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="EH@1"/>
+<pinref part="U2" gate="G$1" pin="EH@3"/>
+<wire x1="210.82" y1="-152.4" x2="213.36" y2="-152.4" width="0.1524" layer="91"/>
+<pinref part="VSS48" gate="G$1" pin="VSS"/>
+<wire x1="213.36" y1="-152.4" x2="215.9" y2="-152.4" width="0.1524" layer="91"/>
+<junction x="213.36" y="-152.4"/>
+<junction x="210.82" y="-152.4"/>
+<junction x="215.9" y="-152.4"/>
+<pinref part="U2" gate="G$1" pin="EH@2"/>
+</segment>
+<segment>
+<pinref part="S1" gate="G$1" pin="-"/>
+<pinref part="VSS49" gate="G$1" pin="VSS"/>
+<junction x="-53.34" y="2.54"/>
 </segment>
 </net>
 <net name="+5V" class="1">
@@ -14540,6 +14640,127 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <junction x="241.3" y="-129.54"/>
 </segment>
 </net>
+<net name="N$28" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="FBA"/>
+<pinref part="R4" gate="G$1" pin="2"/>
+<wire x1="193.04" y1="-96.52" x2="187.96" y2="-96.52" width="0.1524" layer="91"/>
+<junction x="187.96" y="-96.52"/>
+<junction x="193.04" y="-96.52"/>
+</segment>
+</net>
+<net name="N$29" class="0">
+<segment>
+<pinref part="R7" gate="G$1" pin="1"/>
+<pinref part="U2" gate="G$1" pin="FBB"/>
+<wire x1="241.3" y1="-144.78" x2="233.68" y2="-144.78" width="0.1524" layer="91"/>
+<junction x="233.68" y="-144.78"/>
+<junction x="241.3" y="-144.78"/>
+</segment>
+</net>
+<net name="N$30" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="FBA"/>
+<pinref part="R9" gate="G$1" pin="2"/>
+<wire x1="208.28" y1="127" x2="198.12" y2="127" width="0.1524" layer="91"/>
+<junction x="208.28" y="127"/>
+<junction x="198.12" y="127"/>
+</segment>
+</net>
+<net name="N$31" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="FBB"/>
+<pinref part="R8" gate="G$1" pin="1"/>
+<wire x1="248.92" y1="78.74" x2="256.54" y2="78.74" width="0.1524" layer="91"/>
+<junction x="248.92" y="78.74"/>
+<junction x="256.54" y="78.74"/>
+</segment>
+</net>
+<net name="PWM1H" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="RPB14/PWM1H/VBUSON1/PMPD6/RB14"/>
+<wire x1="12.7" y1="38.1" x2="2.54" y2="38.1" width="0.1524" layer="91"/>
+<junction x="12.7" y="38.1"/>
+<junction x="2.54" y="38.1"/>
+<label x="2.54" y="38.1" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="IN1"/>
+<wire x1="248.92" y1="127" x2="259.08" y2="127" width="0.1524" layer="91"/>
+<junction x="248.92" y="127"/>
+<junction x="259.08" y="127"/>
+<label x="261.62" y="127" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="PWM1L" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="RPB15/PWM7H/PWM1L/PMPD7/RB15"/>
+<wire x1="12.7" y1="35.56" x2="2.54" y2="35.56" width="0.1524" layer="91"/>
+<junction x="12.7" y="35.56"/>
+<junction x="2.54" y="35.56"/>
+<label x="2.54" y="35.56" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="IN2"/>
+<wire x1="248.92" y1="124.46" x2="259.08" y2="124.46" width="0.1524" layer="91"/>
+<junction x="248.92" y="124.46"/>
+<junction x="259.08" y="124.46"/>
+<label x="261.62" y="124.46" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="PWM2H" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="RPB12/PWM2H/PMPD2/RB12"/>
+<wire x1="60.96" y1="104.14" x2="60.96" y2="111.76" width="0.1524" layer="91"/>
+<junction x="60.96" y="104.14"/>
+<junction x="60.96" y="111.76"/>
+<label x="60.96" y="114.3" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="IN3"/>
+<wire x1="208.28" y1="78.74" x2="198.12" y2="78.74" width="0.1524" layer="91"/>
+<junction x="208.28" y="78.74"/>
+<junction x="198.12" y="78.74"/>
+<label x="187.96" y="78.74" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="PWM2L" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="RPB13/PWM8H/PWM2L/CTPLS/PMPD3/RB13"/>
+<wire x1="58.42" y1="104.14" x2="58.42" y2="111.76" width="0.1524" layer="91"/>
+<junction x="58.42" y="104.14"/>
+<junction x="58.42" y="111.76"/>
+<label x="58.42" y="114.3" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="IN4"/>
+<wire x1="208.28" y1="81.28" x2="198.12" y2="81.28" width="0.1524" layer="91"/>
+<junction x="208.28" y="81.28"/>
+<junction x="198.12" y="81.28"/>
+<label x="187.96" y="81.28" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$32" class="0">
+<segment>
+<pinref part="S1" gate="G$1" pin="+"/>
+<pinref part="R10" gate="G$1" pin="2"/>
+<junction x="-53.34" y="5.08"/>
+</segment>
+</net>
+<net name="RPG9" class="0">
+<segment>
+<pinref part="R10" gate="G$1" pin="1"/>
+<junction x="-43.18" y="5.08"/>
+<label x="-43.18" y="5.08" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="AN16/CVD16/RPG9/PMPA2/RG9"/>
+<wire x1="12.7" y1="12.7" x2="2.54" y2="12.7" width="0.1524" layer="91"/>
+<junction x="12.7" y="12.7"/>
+<junction x="2.54" y="12.7"/>
+<label x="2.54" y="12.7" size="1.778" layer="95"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
@@ -14567,10 +14788,6 @@ Source: http://www.freescale.com/files/shared/doc/package_info/98ARH98330A.pdf</
 <approved hash="202,1,248.92,76.2,U1,D3,,,,"/>
 <approved hash="202,1,208.28,124.46,U1,EN/!D2,,,,"/>
 <approved hash="202,1,248.92,81.28,U1,EN/!D4,,,,"/>
-<approved hash="202,1,248.92,127,U1,IN1,,,,"/>
-<approved hash="202,1,248.92,124.46,U1,IN2,,,,"/>
-<approved hash="202,1,208.28,78.74,U1,IN3,,,,"/>
-<approved hash="202,1,208.28,81.28,U1,IN4,,,,"/>
 <approved hash="104,1,208.28,106.68,U1,PGNDA,VSS,,,"/>
 <approved hash="104,1,208.28,104.14,U1,PGNDA,VSS,,,"/>
 <approved hash="104,1,248.92,104.14,U1,PGNDA,VSS,,,"/>
