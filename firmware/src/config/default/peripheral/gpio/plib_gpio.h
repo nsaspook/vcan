@@ -61,6 +61,22 @@
 // *****************************************************************************
 // *****************************************************************************
 
+/*** Macros for SPI_EN0 pin ***/
+#define SPI_EN0_Set()               (LATDSET = (1<<1))
+#define SPI_EN0_Clear()             (LATDCLR = (1<<1))
+#define SPI_EN0_Toggle()            (LATDINV= (1<<1))
+#define SPI_EN0_Get()               ((PORTD >> 1) & 0x1)
+#define SPI_EN0_OutputEnable()      (TRISDCLR = (1<<1))
+#define SPI_EN0_InputEnable()       (TRISDSET = (1<<1))
+#define SPI_EN0_PIN                  GPIO_PIN_RD1
+/*** Macros for SPI_EN1 pin ***/
+#define SPI_EN1_Set()               (LATDSET = (1<<2))
+#define SPI_EN1_Clear()             (LATDCLR = (1<<2))
+#define SPI_EN1_Toggle()            (LATDINV= (1<<2))
+#define SPI_EN1_Get()               ((PORTD >> 2) & 0x1)
+#define SPI_EN1_OutputEnable()      (TRISDCLR = (1<<2))
+#define SPI_EN1_InputEnable()       (TRISDSET = (1<<2))
+#define SPI_EN1_PIN                  GPIO_PIN_RD2
 /*** Macros for RESET_LED pin ***/
 #define RESET_LED_Set()               (LATGSET = (1<<9))
 #define RESET_LED_Clear()             (LATGCLR = (1<<9))
@@ -173,6 +189,70 @@
 #define DERE_OutputEnable()      (TRISBCLR = (1<<8))
 #define DERE_InputEnable()       (TRISBSET = (1<<8))
 #define DERE_PIN                  GPIO_PIN_RB8
+/*** Macros for DO1 pin ***/
+#define DO1_Set()               (LATDSET = (1<<12))
+#define DO1_Clear()             (LATDCLR = (1<<12))
+#define DO1_Toggle()            (LATDINV= (1<<12))
+#define DO1_Get()               ((PORTD >> 12) & 0x1)
+#define DO1_OutputEnable()      (TRISDCLR = (1<<12))
+#define DO1_InputEnable()       (TRISDSET = (1<<12))
+#define DO1_PIN                  GPIO_PIN_RD12
+/*** Macros for DO2 pin ***/
+#define DO2_Set()               (LATDSET = (1<<13))
+#define DO2_Clear()             (LATDCLR = (1<<13))
+#define DO2_Toggle()            (LATDINV= (1<<13))
+#define DO2_Get()               ((PORTD >> 13) & 0x1)
+#define DO2_OutputEnable()      (TRISDCLR = (1<<13))
+#define DO2_InputEnable()       (TRISDSET = (1<<13))
+#define DO2_PIN                  GPIO_PIN_RD13
+/*** Macros for DO3 pin ***/
+#define DO3_Set()               (LATCSET = (1<<8))
+#define DO3_Clear()             (LATCCLR = (1<<8))
+#define DO3_Toggle()            (LATCINV= (1<<8))
+#define DO3_Get()               ((PORTC >> 8) & 0x1)
+#define DO3_OutputEnable()      (TRISCCLR = (1<<8))
+#define DO3_InputEnable()       (TRISCSET = (1<<8))
+#define DO3_PIN                  GPIO_PIN_RC8
+/*** Macros for DO4 pin ***/
+#define DO4_Set()               (LATDSET = (1<<5))
+#define DO4_Clear()             (LATDCLR = (1<<5))
+#define DO4_Toggle()            (LATDINV= (1<<5))
+#define DO4_Get()               ((PORTD >> 5) & 0x1)
+#define DO4_OutputEnable()      (TRISDCLR = (1<<5))
+#define DO4_InputEnable()       (TRISDSET = (1<<5))
+#define DO4_PIN                  GPIO_PIN_RD5
+/*** Macros for DO5 pin ***/
+#define DO5_Set()               (LATDSET = (1<<6))
+#define DO5_Clear()             (LATDCLR = (1<<6))
+#define DO5_Toggle()            (LATDINV= (1<<6))
+#define DO5_Get()               ((PORTD >> 6) & 0x1)
+#define DO5_OutputEnable()      (TRISDCLR = (1<<6))
+#define DO5_InputEnable()       (TRISDSET = (1<<6))
+#define DO5_PIN                  GPIO_PIN_RD6
+/*** Macros for DO6 pin ***/
+#define DO6_Set()               (LATCSET = (1<<9))
+#define DO6_Clear()             (LATCCLR = (1<<9))
+#define DO6_Toggle()            (LATCINV= (1<<9))
+#define DO6_Get()               ((PORTC >> 9) & 0x1)
+#define DO6_OutputEnable()      (TRISCCLR = (1<<9))
+#define DO6_InputEnable()       (TRISCSET = (1<<9))
+#define DO6_PIN                  GPIO_PIN_RC9
+/*** Macros for DO7 pin ***/
+#define DO7_Set()               (LATFSET = (1<<6))
+#define DO7_Clear()             (LATFCLR = (1<<6))
+#define DO7_Toggle()            (LATFINV= (1<<6))
+#define DO7_Get()               ((PORTF >> 6) & 0x1)
+#define DO7_OutputEnable()      (TRISFCLR = (1<<6))
+#define DO7_InputEnable()       (TRISFSET = (1<<6))
+#define DO7_PIN                  GPIO_PIN_RF6
+/*** Macros for DO8 pin ***/
+#define DO8_Set()               (LATFSET = (1<<7))
+#define DO8_Clear()             (LATFCLR = (1<<7))
+#define DO8_Toggle()            (LATFINV= (1<<7))
+#define DO8_Get()               ((PORTF >> 7) & 0x1)
+#define DO8_OutputEnable()      (TRISFCLR = (1<<7))
+#define DO8_InputEnable()       (TRISFSET = (1<<7))
+#define DO8_PIN                  GPIO_PIN_RF7
 
 
 // *****************************************************************************
