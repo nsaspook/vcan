@@ -18161,6 +18161,54 @@ Source: www.kingbright.com</description>
 <label x="-154.94" y="30.48" size="1.778" layer="95"/>
 </segment>
 </net>
+<net name="IN8" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="RPF0/PWM11H/PMPD11/RF0"/>
+<wire x1="88.9" y1="104.14" x2="88.9" y2="109.22" width="0.1524" layer="91"/>
+<junction x="88.9" y="104.14"/>
+<junction x="88.9" y="109.22"/>
+<label x="88.9" y="109.22" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="OUT8"/>
+<wire x1="-25.4" y1="-170.18" x2="-2.54" y2="-170.18" width="0.1524" layer="91"/>
+<junction x="-25.4" y="-170.18"/>
+<junction x="-2.54" y="-170.18"/>
+<label x="0" y="-170.18" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="IN7" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="PGED2/RPB5/USBID1/RB5(6)"/>
+<wire x1="160.02" y1="30.48" x2="185.42" y2="30.48" width="0.1524" layer="91"/>
+<junction x="160.02" y="30.48"/>
+<junction x="185.42" y="30.48"/>
+<label x="185.42" y="30.48" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="OUT7"/>
+<wire x1="-25.4" y1="-165.1" x2="-5.08" y2="-165.1" width="0.1524" layer="91"/>
+<junction x="-25.4" y="-165.1"/>
+<junction x="-5.08" y="-165.1"/>
+<label x="0" y="-165.1" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="IN6" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="OSCO/CLKO/RPC15/RC15"/>
+<wire x1="160.02" y1="17.78" x2="185.42" y2="17.78" width="0.1524" layer="91"/>
+<junction x="160.02" y="17.78"/>
+<junction x="185.42" y="17.78"/>
+<label x="185.42" y="17.78" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="OUT6"/>
+<wire x1="-25.4" y1="-160.02" x2="-5.08" y2="-160.02" width="0.1524" layer="91"/>
+<junction x="-25.4" y="-160.02"/>
+<junction x="-5.08" y="-160.02"/>
+<label x="0" y="-160.02" size="1.778" layer="95"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>

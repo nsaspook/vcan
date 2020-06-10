@@ -2973,7 +2973,9 @@ design rules under a new name.</description>
 <via x="66.7512" y="21.5646" extent="1-16" drill="0.35"/>
 <via x="69.9516" y="22.6314" extent="1-16" drill="0.35"/>
 <contactref element="U3" pad="9"/>
-<wire x1="21.59" y1="67.7164" x2="47.375" y2="11.361" width="0" layer="19" extent="1-1"/>
+<contactref element="DO" pad="9"/>
+<wire x1="47.375" y1="11.361" x2="21.59" y2="67.7164" width="0" layer="19" extent="1-1"/>
+<wire x1="22.86" y1="-6.35" x2="47.375" y2="11.361" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VCC">
 <contactref element="IC4" pad="7"/>
@@ -3904,6 +3906,10 @@ design rules under a new name.</description>
 <wire x1="88.6206" y1="48.5394" x2="88.6206" y2="48.006" width="0.3048" layer="1"/>
 <wire x1="81.6102" y1="48.5394" x2="81.515" y2="48.66" width="0.3048" layer="1"/>
 <wire x1="88.6206" y1="48.5394" x2="88.665" y2="48.66" width="0.3048" layer="1"/>
+<contactref element="U3" pad="10"/>
+<contactref element="DO" pad="10"/>
+<wire x1="21.59" y1="77.0636" x2="61.97" y2="60.54" width="0" layer="19" extent="1-1"/>
+<wire x1="25.4" y1="-6.35" x2="78.42" y2="30.48" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RPB1">
 <contactref element="IC3" pad="4"/>

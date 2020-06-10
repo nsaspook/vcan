@@ -15594,12 +15594,14 @@ Source: www.kingbright.com</description>
 <wire x1="106.68" y1="-99.06" x2="99.06" y2="-99.06" width="0.1524" layer="91"/>
 <junction x="99.06" y="-99.06"/>
 <junction x="106.68" y="-99.06"/>
+<junction x="106.68" y="-106.68"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="VDD_3"/>
 <wire x1="83.82" y1="-88.9" x2="83.82" y2="-106.68" width="0.1524" layer="91"/>
 <pinref part="VDD4" gate="G$1" pin="VDD"/>
 <junction x="83.82" y="-88.9"/>
+<junction x="83.82" y="-106.68"/>
 </segment>
 <segment>
 <pinref part="OS1" gate="A" pin="VDD"/>
@@ -15741,6 +15743,7 @@ Source: www.kingbright.com</description>
 <pinref part="IC1" gate="G$1" pin="AVSS"/>
 <wire x1="68.58" y1="-88.9" x2="68.58" y2="-106.68" width="0.1524" layer="91"/>
 <junction x="68.58" y="-88.9"/>
+<junction x="68.58" y="-106.68"/>
 </segment>
 <segment>
 <pinref part="VSS34" gate="G$1" pin="VSS"/>
@@ -15752,12 +15755,14 @@ Source: www.kingbright.com</description>
 <wire x1="91.44" y1="-99.06" x2="81.28" y2="-99.06" width="0.1524" layer="91"/>
 <junction x="81.28" y="-99.06"/>
 <junction x="91.44" y="-99.06"/>
+<junction x="81.28" y="-106.68"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="VSS_3"/>
 <wire x1="104.14" y1="-88.9" x2="104.14" y2="-106.68" width="0.1524" layer="91"/>
 <pinref part="VSS3" gate="G$1" pin="VSS"/>
 <junction x="104.14" y="-88.9"/>
+<junction x="104.14" y="-106.68"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="VSS_1"/>
@@ -16429,14 +16434,7 @@ Source: www.kingbright.com</description>
 <junction x="12.7" y="2.54"/>
 </segment>
 </net>
-<net name="RPA0" class="0">
-<segment>
-<pinref part="IC8" gate="G$1" pin="B"/>
-<wire x1="-60.96" y1="-50.8" x2="-48.26" y2="-50.8" width="0.1524" layer="91"/>
-<label x="-50.8" y="-50.8" size="1.778" layer="95"/>
-<junction x="-60.96" y="-50.8"/>
-<junction x="-48.26" y="-50.8"/>
-</segment>
+<net name="SDO3" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="AN9/CVD9/RPA11/USBOEN1/RA11"/>
 <wire x1="12.7" y1="-5.08" x2="2.54" y2="-5.08" width="0.1524" layer="91"/>
@@ -17713,6 +17711,81 @@ Source: www.kingbright.com</description>
 <pinref part="U3" gate="A" pin="COM"/>
 <junction x="-93.98" y="25.4"/>
 <pinref part="R14" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="U2RX" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="AN10/CVD10/RPA12/USBOEN2/RA12"/>
+<wire x1="12.7" y1="-2.54" x2="2.54" y2="-2.54" width="0.1524" layer="91"/>
+<junction x="2.54" y="-2.54"/>
+<junction x="12.7" y="-2.54"/>
+<label x="2.54" y="-2.54" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC4" gate="G$1" pin="R2OUT"/>
+<wire x1="203.2" y1="-33.02" x2="190.5" y2="-33.02" width="0.1524" layer="91"/>
+<junction x="190.5" y="-33.02"/>
+<junction x="203.2" y="-33.02"/>
+<label x="182.88" y="-33.02" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="U2TX" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="AN15/CVD15/RPE15/FLT8/PMPA0/PSPA0/RE15"/>
+<wire x1="101.6" y1="-88.9" x2="101.6" y2="-116.84" width="0.1524" layer="91"/>
+<junction x="101.6" y="-88.9"/>
+<junction x="101.6" y="-116.84"/>
+<label x="101.6" y="-116.84" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC4" gate="G$1" pin="T2IN"/>
+<wire x1="203.2" y1="-27.94" x2="190.5" y2="-27.94" width="0.1524" layer="91"/>
+<junction x="190.5" y="-27.94"/>
+<junction x="203.2" y="-27.94"/>
+<label x="182.88" y="-27.94" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="SCK3" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="RPD3/PWM12H/PWM6L/RD3"/>
+<wire x1="12.7" y1="27.94" x2="2.54" y2="27.94" width="0.1524" layer="91"/>
+<junction x="12.7" y="27.94"/>
+<junction x="2.54" y="27.94"/>
+<label x="2.54" y="27.94" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="RPA0" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="OA2OUT/AN0/C2IN4-/C4IN3-/RPA0/RA0"/>
+<wire x1="12.7" y1="-7.62" x2="2.54" y2="-7.62" width="0.1524" layer="91"/>
+<junction x="2.54" y="-7.62"/>
+<junction x="12.7" y="-7.62"/>
+<label x="2.54" y="-7.62" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC8" gate="G$1" pin="B"/>
+<wire x1="-60.96" y1="-50.8" x2="-48.26" y2="-50.8" width="0.1524" layer="91"/>
+<label x="-50.8" y="-50.8" size="1.778" layer="95"/>
+<junction x="-60.96" y="-50.8"/>
+<junction x="-48.26" y="-50.8"/>
+</segment>
+</net>
+<net name="SDI3" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="OA3OUT/AN6/CVD6/C3IN4-/C4IN1+/C4IN4-/RPC0/RC0"/>
+<wire x1="71.12" y1="-88.9" x2="71.12" y2="-101.6" width="0.1524" layer="91"/>
+<junction x="71.12" y="-88.9"/>
+<junction x="71.12" y="-101.6"/>
+<label x="71.12" y="-101.6" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="AN23" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="AN23/CVD23/PMPA23/RG15"/>
+<wire x1="12.7" y1="45.72" x2="2.54" y2="45.72" width="0.1524" layer="91"/>
+<junction x="12.7" y="45.72"/>
+<junction x="2.54" y="45.72"/>
+<label x="2.54" y="45.72" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
