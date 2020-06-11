@@ -141,22 +141,6 @@
 #define GPIO_RB3_OutputEnable()      (TRISBCLR = (1<<3))
 #define GPIO_RB3_InputEnable()       (TRISBSET = (1<<3))
 #define GPIO_RB3_PIN                  GPIO_PIN_RB3
-/*** Macros for GPIO_RF9 pin ***/
-#define GPIO_RF9_Set()               (LATFSET = (1<<9))
-#define GPIO_RF9_Clear()             (LATFCLR = (1<<9))
-#define GPIO_RF9_Toggle()            (LATFINV= (1<<9))
-#define GPIO_RF9_Get()               ((PORTF >> 9) & 0x1)
-#define GPIO_RF9_OutputEnable()      (TRISFCLR = (1<<9))
-#define GPIO_RF9_InputEnable()       (TRISFSET = (1<<9))
-#define GPIO_RF9_PIN                  GPIO_PIN_RF9
-/*** Macros for GPIO_RF10 pin ***/
-#define GPIO_RF10_Set()               (LATFSET = (1<<10))
-#define GPIO_RF10_Clear()             (LATFCLR = (1<<10))
-#define GPIO_RF10_Toggle()            (LATFINV= (1<<10))
-#define GPIO_RF10_Get()               ((PORTF >> 10) & 0x1)
-#define GPIO_RF10_OutputEnable()      (TRISFCLR = (1<<10))
-#define GPIO_RF10_InputEnable()       (TRISFSET = (1<<10))
-#define GPIO_RF10_PIN                  GPIO_PIN_RF10
 /*** Macros for GPIO_RC2 pin ***/
 #define GPIO_RC2_Set()               (LATCSET = (1<<2))
 #define GPIO_RC2_Clear()             (LATCCLR = (1<<2))

@@ -240,42 +240,42 @@
         </String>
         <String dnOrder="47" id="BSP_PIN_28_DIR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="Out"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="48" id="BSP_PIN_28_FUNCTION_NAME">
           <Values dnOrder="0">
-            <User dnOrder="0" value="GPIO_RF9"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="49" id="BSP_PIN_28_FUNCTION_TYPE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="GPIO"/>
+            <User dnOrder="0" value="VREF-"/>
           </Values>
         </String>
         <String dnOrder="50" id="BSP_PIN_28_MODE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="DIGITAL"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="51" id="BSP_PIN_29_DIR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="Out"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="52" id="BSP_PIN_29_FUNCTION_NAME">
           <Values dnOrder="0">
-            <User dnOrder="0" value="GPIO_RF10"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="53" id="BSP_PIN_29_FUNCTION_TYPE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="GPIO"/>
+            <User dnOrder="0" value="VREF+"/>
           </Values>
         </String>
         <String dnOrder="54" id="BSP_PIN_29_MODE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="DIGITAL"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="55" id="BSP_PIN_32_FUNCTION_TYPE">
@@ -2403,12 +2403,12 @@
         </Hex>
         <Hex dnOrder="479" id="SYS_PORT_F_ANSEL">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="13856"/>
+            <Dynamic dnOrder="0" id="core" value="12320"/>
           </Values>
         </Hex>
         <Hex dnOrder="480" id="SYS_PORT_F_TRIS">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="1730"/>
+            <Dynamic dnOrder="0" id="core" value="194"/>
           </Values>
         </Hex>
         <Hex dnOrder="481" id="SYS_PORT_G_ANSEL">

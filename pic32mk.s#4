@@ -11874,6 +11874,26 @@ Source: &lt;a href="http://www.ti.com/lit/gpn/txb0101"&gt; Datasheet &lt;/a&gt;<
 <text x="-6.35" y="3.81" size="1.016" layer="25" ratio="10">&gt;NAME</text>
 <text x="-6.35" y="-5.08" size="1.016" layer="27" ratio="10">&gt;VALUE</text>
 </package>
+<package name="22-23-2081" urn="urn:adsk.eagle:footprint:8078265/1" library_version="5">
+<description>&lt;b&gt;KK® 254 Solid Header, Vertical, with Friction Lock, 8 Circuits, Tin (Sn) Plating&lt;/b&gt;&lt;p&gt;&lt;a href =http://www.molex.com/pdm_docs/sd/022232081_sd.pdf&gt;Datasheet &lt;/a&gt;</description>
+<wire x1="-10.16" y1="3.175" x2="10.16" y2="3.175" width="0.254" layer="21"/>
+<wire x1="10.16" y1="3.175" x2="10.16" y2="1.27" width="0.254" layer="21"/>
+<wire x1="10.16" y1="1.27" x2="10.16" y2="-3.175" width="0.254" layer="21"/>
+<wire x1="10.16" y1="-3.175" x2="-10.16" y2="-3.175" width="0.254" layer="21"/>
+<wire x1="-10.16" y1="-3.175" x2="-10.16" y2="1.27" width="0.254" layer="21"/>
+<wire x1="-10.16" y1="1.27" x2="-10.16" y2="3.175" width="0.254" layer="21"/>
+<wire x1="-10.16" y1="1.27" x2="10.16" y2="1.27" width="0.254" layer="21"/>
+<pad name="1" x="-8.89" y="0" drill="1" shape="long" rot="R90"/>
+<pad name="2" x="-6.35" y="0" drill="1" shape="long" rot="R90"/>
+<pad name="3" x="-3.81" y="0" drill="1" shape="long" rot="R90"/>
+<pad name="4" x="-1.27" y="0" drill="1" shape="long" rot="R90"/>
+<pad name="5" x="1.27" y="0" drill="1" shape="long" rot="R90"/>
+<pad name="6" x="3.81" y="0" drill="1" shape="long" rot="R90"/>
+<pad name="7" x="6.35" y="0" drill="1" shape="long" rot="R90"/>
+<pad name="8" x="8.89" y="0" drill="1" shape="long" rot="R90"/>
+<text x="-10.16" y="3.81" size="1.016" layer="25" ratio="10">&gt;NAME</text>
+<text x="-10.16" y="-5.08" size="1.016" layer="27" ratio="10">&gt;VALUE</text>
+</package>
 </packages>
 <packages3d>
 <package3d name="22-23-2101" urn="urn:adsk.eagle:package:8078641/1" type="box" library_version="5">
@@ -11886,6 +11906,12 @@ Source: &lt;a href="http://www.ti.com/lit/gpn/txb0101"&gt; Datasheet &lt;/a&gt;<
 <description>&lt;b&gt;KK® 254 Solid Header, Vertical, with Friction Lock, 5 Circuits, Tin (Sn) Plating&lt;/b&gt;&lt;p&gt;&lt;a href =http://www.molex.com/pdm_docs/sd/022232051_sd.pdf&gt;Datasheet &lt;/a&gt;</description>
 <packageinstances>
 <packageinstance name="22-23-2051"/>
+</packageinstances>
+</package3d>
+<package3d name="22-23-2081" urn="urn:adsk.eagle:package:8078639/1" type="box" library_version="5">
+<description>&lt;b&gt;KK® 254 Solid Header, Vertical, with Friction Lock, 8 Circuits, Tin (Sn) Plating&lt;/b&gt;&lt;p&gt;&lt;a href =http://www.molex.com/pdm_docs/sd/022232081_sd.pdf&gt;Datasheet &lt;/a&gt;</description>
+<packageinstances>
+<packageinstance name="22-23-2081"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -11974,6 +12000,45 @@ Source: &lt;a href="http://www.ti.com/lit/gpn/txb0101"&gt; Datasheet &lt;/a&gt;<
 <attribute name="OC_FARNELL" value="1462952" constant="no"/>
 <attribute name="OC_NEWARK" value="38C9178" constant="no"/>
 <attribute name="POPULARITY" value="4" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="22-23-2081" urn="urn:adsk.eagle:component:8078932/3" prefix="X" library_version="5">
+<description>.100" (2.54mm) Center Header - 8 Pin</description>
+<gates>
+<gate name="-1" symbol="MV" x="0" y="7.62" addlevel="always" swaplevel="1"/>
+<gate name="-2" symbol="M" x="0" y="5.08" addlevel="always" swaplevel="1"/>
+<gate name="-3" symbol="M" x="0" y="2.54" addlevel="always" swaplevel="1"/>
+<gate name="-4" symbol="M" x="0" y="0" addlevel="always" swaplevel="1"/>
+<gate name="-5" symbol="M" x="0" y="-2.54" addlevel="always" swaplevel="1"/>
+<gate name="-6" symbol="M" x="0" y="-5.08" addlevel="always" swaplevel="1"/>
+<gate name="-7" symbol="M" x="0" y="-7.62" addlevel="always" swaplevel="1"/>
+<gate name="-8" symbol="M" x="0" y="-10.16" addlevel="always" swaplevel="1"/>
+</gates>
+<devices>
+<device name="" package="22-23-2081">
+<connects>
+<connect gate="-1" pin="S" pad="1"/>
+<connect gate="-2" pin="S" pad="2"/>
+<connect gate="-3" pin="S" pad="3"/>
+<connect gate="-4" pin="S" pad="4"/>
+<connect gate="-5" pin="S" pad="5"/>
+<connect gate="-6" pin="S" pad="6"/>
+<connect gate="-7" pin="S" pad="7"/>
+<connect gate="-8" pin="S" pad="8"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:8078639/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="MF" value="MOLEX" constant="no"/>
+<attribute name="MPN" value="22-23-2081" constant="no"/>
+<attribute name="OC_FARNELL" value="1756826" constant="no"/>
+<attribute name="OC_NEWARK" value="01C7592" constant="no"/>
+<attribute name="POPULARITY" value="0" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -14769,6 +14834,10 @@ Source: www.kingbright.com</description>
 <part name="TP7" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
 <part name="P+28" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="R14" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="0"/>
+<part name="SPI" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-23-2101" device="" package3d_urn="urn:adsk.eagle:package:8078641/1"/>
+<part name="P+29" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="VSS57" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="X2" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-23-2081" device="" package3d_urn="urn:adsk.eagle:package:8078639/1"/>
 </parts>
 <sheets>
 <sheet>
@@ -15508,6 +15577,68 @@ Source: www.kingbright.com</description>
 <attribute name="NAME" x="-92.71" y="26.8986" size="1.778" layer="95"/>
 <attribute name="VALUE" x="-92.71" y="22.098" size="1.778" layer="96"/>
 </instance>
+<instance part="SPI" gate="-1" x="-101.6" y="86.36" smashed="yes">
+<attribute name="NAME" x="-99.06" y="85.598" size="1.524" layer="95"/>
+<attribute name="VALUE" x="-102.362" y="87.757" size="1.778" layer="96"/>
+</instance>
+<instance part="SPI" gate="-2" x="-101.6" y="83.82" smashed="yes">
+<attribute name="NAME" x="-99.06" y="83.058" size="1.524" layer="95"/>
+</instance>
+<instance part="SPI" gate="-3" x="-101.6" y="81.28" smashed="yes">
+<attribute name="NAME" x="-99.06" y="80.518" size="1.524" layer="95"/>
+</instance>
+<instance part="SPI" gate="-4" x="-101.6" y="78.74" smashed="yes">
+<attribute name="NAME" x="-99.06" y="77.978" size="1.524" layer="95"/>
+</instance>
+<instance part="SPI" gate="-5" x="-101.6" y="76.2" smashed="yes">
+<attribute name="NAME" x="-99.06" y="75.438" size="1.524" layer="95"/>
+</instance>
+<instance part="SPI" gate="-6" x="-101.6" y="73.66" smashed="yes">
+<attribute name="NAME" x="-99.06" y="72.898" size="1.524" layer="95"/>
+</instance>
+<instance part="SPI" gate="-7" x="-101.6" y="71.12" smashed="yes">
+<attribute name="NAME" x="-99.06" y="70.358" size="1.524" layer="95"/>
+</instance>
+<instance part="SPI" gate="-8" x="-101.6" y="68.58" smashed="yes">
+<attribute name="NAME" x="-99.06" y="67.818" size="1.524" layer="95"/>
+</instance>
+<instance part="SPI" gate="-9" x="-101.6" y="66.04" smashed="yes">
+<attribute name="NAME" x="-99.06" y="65.278" size="1.524" layer="95"/>
+</instance>
+<instance part="SPI" gate="-10" x="-101.6" y="63.5" smashed="yes">
+<attribute name="NAME" x="-99.06" y="62.738" size="1.524" layer="95"/>
+</instance>
+<instance part="P+29" gate="VCC" x="-116.84" y="71.12" smashed="yes" rot="R90">
+<attribute name="VALUE" x="-116.84" y="68.58" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="VSS57" gate="G$1" x="-114.3" y="66.04" smashed="yes">
+<attribute name="VALUE" x="-116.84" y="60.96" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="X2" gate="-1" x="276.86" y="-7.62" smashed="yes">
+<attribute name="NAME" x="279.4" y="-8.382" size="1.524" layer="95"/>
+<attribute name="VALUE" x="276.098" y="-6.223" size="1.778" layer="96"/>
+</instance>
+<instance part="X2" gate="-2" x="276.86" y="-10.16" smashed="yes">
+<attribute name="NAME" x="279.4" y="-10.922" size="1.524" layer="95"/>
+</instance>
+<instance part="X2" gate="-3" x="276.86" y="-12.7" smashed="yes">
+<attribute name="NAME" x="279.4" y="-13.462" size="1.524" layer="95"/>
+</instance>
+<instance part="X2" gate="-4" x="276.86" y="-15.24" smashed="yes">
+<attribute name="NAME" x="279.4" y="-16.002" size="1.524" layer="95"/>
+</instance>
+<instance part="X2" gate="-5" x="276.86" y="-17.78" smashed="yes">
+<attribute name="NAME" x="279.4" y="-18.542" size="1.524" layer="95"/>
+</instance>
+<instance part="X2" gate="-6" x="276.86" y="-20.32" smashed="yes">
+<attribute name="NAME" x="279.4" y="-21.082" size="1.524" layer="95"/>
+</instance>
+<instance part="X2" gate="-7" x="276.86" y="-22.86" smashed="yes">
+<attribute name="NAME" x="279.4" y="-23.622" size="1.524" layer="95"/>
+</instance>
+<instance part="X2" gate="-8" x="276.86" y="-25.4" smashed="yes">
+<attribute name="NAME" x="279.4" y="-26.162" size="1.524" layer="95"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -16161,6 +16292,13 @@ Source: www.kingbright.com</description>
 <pinref part="VSS56" gate="G$1" pin="VSS"/>
 <junction x="256.54" y="-43.18"/>
 </segment>
+<segment>
+<pinref part="SPI" gate="-8" pin="S"/>
+<wire x1="-104.14" y1="68.58" x2="-114.3" y2="68.58" width="0.1524" layer="91"/>
+<junction x="-104.14" y="68.58"/>
+<pinref part="VSS57" gate="G$1" pin="VSS"/>
+<junction x="-114.3" y="68.58"/>
+</segment>
 </net>
 <net name="+5V" class="0">
 <segment>
@@ -16303,6 +16441,13 @@ Source: www.kingbright.com</description>
 <pinref part="P+28" gate="VCC" pin="VCC"/>
 <junction x="256.54" y="-53.34"/>
 </segment>
+<segment>
+<pinref part="SPI" gate="-7" pin="S"/>
+<wire x1="-104.14" y1="71.12" x2="-114.3" y2="71.12" width="0.1524" layer="91"/>
+<junction x="-104.14" y="71.12"/>
+<pinref part="P+29" gate="VCC" pin="VCC"/>
+<junction x="-114.3" y="71.12"/>
+</segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
@@ -16441,6 +16586,13 @@ Source: www.kingbright.com</description>
 <label x="2.54" y="-5.08" size="1.778" layer="95"/>
 <junction x="2.54" y="-5.08"/>
 <junction x="12.7" y="-5.08"/>
+</segment>
+<segment>
+<pinref part="SPI" gate="-2" pin="S"/>
+<wire x1="-104.14" y1="83.82" x2="-114.3" y2="83.82" width="0.1524" layer="91"/>
+<junction x="-104.14" y="83.82"/>
+<junction x="-114.3" y="83.82"/>
+<label x="-121.92" y="83.82" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="RPA14" class="0">
@@ -17753,6 +17905,13 @@ Source: www.kingbright.com</description>
 <junction x="2.54" y="27.94"/>
 <label x="2.54" y="27.94" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="SPI" gate="-3" pin="S"/>
+<wire x1="-104.14" y1="81.28" x2="-114.3" y2="81.28" width="0.1524" layer="91"/>
+<junction x="-104.14" y="81.28"/>
+<junction x="-114.3" y="81.28"/>
+<label x="-121.92" y="81.28" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="RPA0" class="0">
 <segment>
@@ -17778,6 +17937,13 @@ Source: www.kingbright.com</description>
 <junction x="71.12" y="-101.6"/>
 <label x="71.12" y="-101.6" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="SPI" gate="-1" pin="S"/>
+<wire x1="-104.14" y1="86.36" x2="-114.3" y2="86.36" width="0.1524" layer="91"/>
+<junction x="-104.14" y="86.36"/>
+<junction x="-114.3" y="86.36"/>
+<label x="-121.92" y="86.36" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="AN23" class="0">
 <segment>
@@ -17788,10 +17954,45 @@ Source: www.kingbright.com</description>
 <label x="2.54" y="45.72" size="1.778" layer="95"/>
 </segment>
 </net>
+<net name="SPI_EN0" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="PWM11H/PWM5L/RD1"/>
+<wire x1="12.7" y1="33.02" x2="2.54" y2="33.02" width="0.1524" layer="91"/>
+<junction x="12.7" y="33.02"/>
+<junction x="2.54" y="33.02"/>
+<label x="2.54" y="33.02" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="SPI" gate="-4" pin="S"/>
+<wire x1="-104.14" y1="78.74" x2="-114.3" y2="78.74" width="0.1524" layer="91"/>
+<junction x="-104.14" y="78.74"/>
+<junction x="-114.3" y="78.74"/>
+<label x="-127" y="78.74" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="SPI_EN1" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="PWM5H/RD2"/>
+<wire x1="12.7" y1="30.48" x2="2.54" y2="30.48" width="0.1524" layer="91"/>
+<junction x="12.7" y="30.48"/>
+<junction x="2.54" y="30.48"/>
+<label x="2.54" y="30.48" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="SPI" gate="-5" pin="S"/>
+<wire x1="-104.14" y1="76.2" x2="-114.3" y2="76.2" width="0.1524" layer="91"/>
+<junction x="-104.14" y="76.2"/>
+<junction x="-114.3" y="76.2"/>
+<label x="-127" y="76.2" size="1.778" layer="95"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
 <errors>
+<approved hash="101,1,-104.14,73.66,SPI-6,S,,,,"/>
+<approved hash="101,1,-104.14,66.04,SPI-9,S,,,,"/>
+<approved hash="101,1,-104.14,63.5,SPI-10,S,,,,"/>
 <approved hash="102,1,-53.34,91.44,VSS,GND,,,,"/>
 <approved hash="201,1,-53.34,91.44,VSS,VSS\, GND,,,,"/>
 <approved hash="104,1,203.2,-53.34,IC2,GND_1,VSS,,,"/>
@@ -17804,7 +18005,6 @@ Source: www.kingbright.com</description>
 <approved hash="104,1,233.68,-63.5,IC2,GND_5,VSS,,,"/>
 <approved hash="104,1,233.68,-68.58,IC2,GND_4,VSS,,,"/>
 <approved hash="104,1,233.68,-71.12,IC2,GND_3,VSS,,,"/>
-<approved hash="202,1,203.2,-27.94,IC4,T2IN,,,,"/>
 <approved hash="202,1,233.68,-33.02,IC4,R2IN,,,,"/>
 <approved hash="104,1,208.28,106.68,U1,PGNDA,VSS,,,"/>
 <approved hash="104,1,208.28,104.14,U1,PGNDA,VSS,,,"/>
@@ -17830,6 +18030,7 @@ Source: www.kingbright.com</description>
 <approved hash="202,1,-129.54,35.56,U3,6B,,,,"/>
 <approved hash="202,1,-129.54,33.02,U3,7B,,,,"/>
 <approved hash="202,1,-129.54,30.48,U3,8B,,,,"/>
+<approved hash="106,1,12.7,45.72,AN23,,,,,"/>
 <approved hash="209,1,233.68,-30.48,N$45,,,,,"/>
 <approved hash="209,1,256.54,-30.48,N$45,,,,,"/>
 </errors>

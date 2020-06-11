@@ -67,8 +67,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/gpio/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/gpio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">CF9E6C8F6BD8F369EC44DB4FBFDE790F</GeneratedChecksum>
-          <UserChecksum dnOrder="6">CF9E6C8F6BD8F369EC44DB4FBFDE790F</UserChecksum>
+          <GeneratedChecksum dnOrder="5">39A12BBD2E14CA4EE8631D07A2690B66</GeneratedChecksum>
+          <UserChecksum dnOrder="6">39A12BBD2E14CA4EE8631D07A2690B66</UserChecksum>
         </File>
         <File dnOrder="7">
           <Type dnOrder="0">SOURCE</Type>
@@ -184,8 +184,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/gpio/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/gpio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">E806B34BF28A188EF5FE1090ED43A1C2</GeneratedChecksum>
-          <UserChecksum dnOrder="6">E806B34BF28A188EF5FE1090ED43A1C2</UserChecksum>
+          <GeneratedChecksum dnOrder="5">3107846A812BB5713E9D588C3F807A91</GeneratedChecksum>
+          <UserChecksum dnOrder="6">3107846A812BB5713E9D588C3F807A91</UserChecksum>
         </File>
         <File dnOrder="20">
           <Type dnOrder="0">HEADER</Type>
@@ -309,7 +309,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="5" key="PackageFilter" value="cryptoauthlib_apps;csp;gfx_apps;net;crypto;motor_control;touch;x2c;aws_cloud;core;expresslogic_threadx;gfx;bootloader;wireless;aerospace;usb;bsp;audio;micrium_ucos3;bt;cryptoauthlib;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="usb;cryptoauthlib;aws_cloud;wireless;crypto;gfx_apps;gfx;x2c;micrium_ucos3;audio;core;cryptoauthlib_apps;expresslogic_threadx;motor_control;csp;bt;touch;net;bootloader;bsp;aerospace;"/>
       <Setting dnOrder="6" key="TRUSTZONE" value="false"/>
     </Settings>
   </Configurator>
