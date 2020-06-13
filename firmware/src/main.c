@@ -27,15 +27,12 @@
 #include <stdlib.h>                     // Defines EXIT_FAILURE
 #include <stdio.h>
 #include <string.h>
-#include <proc/p32mk1024mcf100.h>
-#include "definitions.h"                // SYS function prototypes
+#include "tests.h"
 #include "m35qei.h"
-#include "config/default/peripheral/uart/plib_uart3.h"
+
 
 
 extern QEI_DATA m35_1, m35_2, *m35_ptr;
-
-/* redirect of printf to uart3 */
 
 // *****************************************************************************
 // *****************************************************************************
@@ -74,6 +71,8 @@ int main(void)
 			sprintf(strbuf, "c %7i:v %4i\r\n", m35_ptr->pos, m35_ptr->vel);
 			UART3_Write((uint8_t*) strbuf, strlen(strbuf));
 			m35_ptr->update = 0;
+		} else {
+			run_tests(1000); // port diagnostics
 		}
 	}
 
