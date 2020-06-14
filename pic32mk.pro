@@ -2,24 +2,24 @@ EAGLE AutoRouter Statistics:
 
 Job           : /root/vcan/pic32mk.brd
 
-Start at      : 22:32:02 (6/11/20)
-End at        : 23:07:31 (6/11/20)
-Elapsed time  : 00:35:26
+Start at      : 17:52:43 (6/13/20)
+End at        : 18:32:07 (6/13/20)
+Elapsed time  : 00:39:22
 
 Signals       :   142   RoutingGrid: 3 mil  Layers: 2
 Connections   :   375   predefined:  0 ( 0 Vias )
 
-Router memory :   6826400
+Router memory :   6702200
 
 Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4 Optimize5 Optimize6 Optimize7 Optimize8 Optimize9Optimize10Optimize11Optimize12
 
-Time per pass     :  00:00:25  00:16:40  00:01:52  00:01:48  00:01:44  00:01:40  00:01:43  00:01:30  00:01:15  00:01:19  00:01:06  00:01:22  00:01:32  00:01:30
-Number of Ripups  :         0       238         0         0         0         0         0         0         0         0         0         0         0         0
+Time per pass     :  00:00:29  00:18:34  00:02:03  00:02:13  00:02:19  00:01:48  00:01:46  00:01:38  00:01:35  00:01:17  00:01:40  00:01:12  00:01:36  00:01:12
+Number of Ripups  :         0       282         0         0         0         0         0         0         0         0         0         0         0         0
 max. Level        :         0         5         0         0         0         0         0         0         0         0         0         0         0         0
-max. Total        :         0       135         0         0         0         0         0         0         0         0         0         0         0         0
+max. Total        :         0       111         0         0         0         0         0         0         0         0         0         0         0         0
 
-Routed            :       105       373       372       373       373       373       374       374       374       371       371       371       371       371
-Vias              :         0       536       456       392       354       362       359       351       331       304       289       281       280       280
-Resolution        :    28.0 %    99.5 %    99.2 %    99.5 %    99.5 %    99.5 %    99.7 %    99.7 %    99.7 %    98.9 %    98.9 %    98.9 %    98.9 %    98.9 %
+Routed            :        94       374       368       371       373       373       372       372       373       374       374       374       374       374
+Vias              :         0       609       547       484       455       439       413       411       409       403       399       388       389       385
+Resolution        :    25.1 %    99.7 %    98.1 %    98.9 %    99.5 %    99.5 %    99.2 %    99.2 %    99.5 %    99.7 %    99.7 %    99.7 %    99.7 %    99.7 %
 
-Final             : 98.9% finished
+Final             : 99.7% finished
