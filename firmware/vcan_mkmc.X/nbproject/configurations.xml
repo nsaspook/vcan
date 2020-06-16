@@ -94,8 +94,8 @@
         </logicalFolder>
       </logicalFolder>
       <itemPath>../src/m35qei.c</itemPath>
-      <itemPath>../src/main.c</itemPath>
       <itemPath>../src/tests.c</itemPath>
+      <itemPath>../src/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

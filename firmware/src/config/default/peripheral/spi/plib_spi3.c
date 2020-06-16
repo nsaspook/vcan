@@ -51,12 +51,12 @@
 SPI_OBJECT spi3Obj;
 
 #define SPI3_CON_MSTEN                      (1 << _SPI3CON_MSTEN_POSITION)
-#define SPI3_CON_CKP                        (0 << _SPI3CON_CKP_POSITION)
-#define SPI3_CON_CKE                        (1 << _SPI3CON_CKE_POSITION)
+#define SPI3_CON_CKP                        (1 << _SPI3CON_CKP_POSITION)
+#define SPI3_CON_CKE                        (0 << _SPI3CON_CKE_POSITION)
 #define SPI3_CON_MODE_32_MODE_16            (0 << _SPI3CON_MODE16_POSITION)
 #define SPI3_CON_ENHBUF                     (1 << _SPI3CON_ENHBUF_POSITION)
 #define SPI3_CON_MCLKSEL                    (0 << _SPI3CON_MCLKSEL_POSITION)
-#define SPI3_CON_MSSEN                      (1 << _SPI3CON_MSSEN_POSITION)
+#define SPI3_CON_MSSEN                      (0 << _SPI3CON_MSSEN_POSITION)
 #define SPI3_CON_SMP                        (0 << _SPI3CON_SMP_POSITION)
 
 void SPI3_Initialize ( void )
@@ -81,18 +81,18 @@ void SPI3_Initialize ( void )
     IFS6CLR = 0x10000000;
 
     /* BAUD Rate register Setup */
-    SPI3BRG = 2;
+    SPI3BRG = 31;
 
     /* CLear the Overflow */
     SPI3STATCLR = _SPI3STAT_SPIROV_MASK;
 
     /*
     MSTEN = 1
-    CKP = 0
-    CKE = 1
+    CKP = 1
+    CKE = 0
     MODE<32,16> = 0
     ENHBUF = 1
-    MSSEN = 1
+    MSSEN = 0
     MCLKSEL = 0
     */
     SPI3CONSET = (SPI3_CON_MSSEN | SPI3_CON_MCLKSEL | SPI3_CON_ENHBUF | SPI3_CON_MODE_32_MODE_16 | SPI3_CON_CKE | SPI3_CON_CKP | SPI3_CON_MSTEN | SPI3_CON_SMP);

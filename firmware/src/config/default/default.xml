@@ -3675,11 +3675,38 @@
     </UniqueComponent>
     <UniqueComponent dnOrder="5" id="spi3">
       <Symbols dnOrder="0">
-        <Integer dnOrder="0" id="SPI_BRG_VALUE">
+        <Integer dnOrder="0" id="SPI_BAUD_RATE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="spi3" value="2"/>
+            <User dnOrder="0" value="95000"/>
           </Values>
         </Integer>
+        <Integer dnOrder="1" id="SPI_BRG_VALUE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0" id="spi3" value="31"/>
+          </Values>
+        </Integer>
+        <Comment dnOrder="2" id="SPI_CLOCK_MODE_COMMENT">
+          <Attributes dnOrder="0">
+            <String dnOrder="0" id="text">
+              <Value dnOrder="0">***SPI&amp;#160;Mode&amp;#160;3&amp;#160;is&amp;#160;Selected***</Value>
+            </String>
+          </Attributes>
+        </Comment>
+        <KeyValueSet dnOrder="3" id="SPI_SPICON_CLK_PH">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="1"/>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="4" id="SPI_SPICON_CLK_POL">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="0"/>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="5" id="SPI_SPICON_MSSEN">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="1"/>
+          </Values>
+        </KeyValueSet>
       </Symbols>
     </UniqueComponent>
     <UniqueComponent dnOrder="6" id="uart2">
@@ -3846,8 +3873,7 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
-    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
+    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="core" x="198" y="49"/>
         <ElementPosition dnOrder="1" id="dfp" x="20" y="20"/>
@@ -3860,5 +3886,6 @@
         <ElementPosition dnOrder="8" id="uart6" x="163" y="307"/>
       </ElementPositions>
     </ComponentGraph>
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>
