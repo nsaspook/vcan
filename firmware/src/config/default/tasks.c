@@ -1,21 +1,22 @@
 /*******************************************************************************
- System Interrupts File
-
-  Company:
-    Microchip Technology Inc.
+ System Tasks File
 
   File Name:
-    interrupt.c
+    tasks.c
 
   Summary:
-    Interrupt vectors mapping
+    This file contains source code necessary to maintain system's polled tasks.
 
   Description:
-    This file maps all the interrupt vectors to their corresponding
-    implementations. If a particular module interrupt is used, then its ISR
-    definition can be found in corresponding PLIB source file. If a module
-    interrupt is not used, then its ISR implementation is mapped to dummy
-    handler.
+    This file contains source code necessary to maintain system's polled tasks.
+    It implements the "SYS_Tasks" function that calls the individual "Tasks"
+    functions for all polled MPLAB Harmony modules in the system.
+
+  Remarks:
+    This file requires access to the systemObjects global data structure that
+    contains the object handles to all MPLAB Harmony module objects executing
+    polled in the system.  These handles are passed into the individual module
+    "Tasks" functions to identify the instance of the module to maintain.
  *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
@@ -52,100 +53,44 @@
 #include "configuration.h"
 #include "definitions.h"
 
+
+
+
 // *****************************************************************************
 // *****************************************************************************
-// Section: System Interrupt Vector Functions
+// Section: System "Tasks" Routine
 // *****************************************************************************
 // *****************************************************************************
 
+/*******************************************************************************
+  Function:
+    void SYS_Tasks ( void )
 
-void CORE_TIMER_InterruptHandler( void );
-void UART2_FAULT_InterruptHandler( void );
-void UART2_RX_InterruptHandler( void );
-void UART2_TX_InterruptHandler( void );
-void UART3_FAULT_InterruptHandler( void );
-void UART3_RX_InterruptHandler( void );
-void UART3_TX_InterruptHandler( void );
-void UART6_FAULT_InterruptHandler( void );
-void UART6_RX_InterruptHandler( void );
-void UART6_TX_InterruptHandler( void );
-void SPI3_RX_InterruptHandler( void );
-void SPI3_TX_InterruptHandler( void );
-
-
-
-/* All the handlers are defined here.  Each will call its PLIB-specific function. */
-void __ISR(_CORE_TIMER_VECTOR, ipl1AUTO) CORE_TIMER_Handler (void)
+  Remarks:
+    See prototype in system/common/sys_module.h.
+*/
+void SYS_Tasks ( void )
 {
-    CORE_TIMER_InterruptHandler();
+    /* Maintain system services */
+    
+
+
+    /* Maintain Device Drivers */
+    
+
+    /* Maintain Middleware & Other Libraries */
+    
+
+    /* Maintain the application's state machine. */
+        /* Call Application task APP. */
+    APP_Tasks();
+
+
+
+
 }
-
-void __ISR(_EXTERNAL_0_VECTOR, ipl1AUTO) EXTERNAL_0_Handler (void)
-{
-}
-
-void __ISR(_UART2_FAULT_VECTOR, ipl1AUTO) UART2_FAULT_Handler (void)
-{
-    UART2_FAULT_InterruptHandler();
-}
-
-void __ISR(_UART2_RX_VECTOR, ipl1AUTO) UART2_RX_Handler (void)
-{
-    UART2_RX_InterruptHandler();
-}
-
-void __ISR(_UART2_TX_VECTOR, ipl1AUTO) UART2_TX_Handler (void)
-{
-    UART2_TX_InterruptHandler();
-}
-
-void __ISR(_UART3_FAULT_VECTOR, ipl1AUTO) UART3_FAULT_Handler (void)
-{
-    UART3_FAULT_InterruptHandler();
-}
-
-void __ISR(_UART3_RX_VECTOR, ipl1AUTO) UART3_RX_Handler (void)
-{
-    UART3_RX_InterruptHandler();
-}
-
-void __ISR(_UART3_TX_VECTOR, ipl1AUTO) UART3_TX_Handler (void)
-{
-    UART3_TX_InterruptHandler();
-}
-
-void __ISR(_UART6_FAULT_VECTOR, ipl1AUTO) UART6_FAULT_Handler (void)
-{
-    UART6_FAULT_InterruptHandler();
-}
-
-void __ISR(_UART6_RX_VECTOR, ipl1AUTO) UART6_RX_Handler (void)
-{
-    UART6_RX_InterruptHandler();
-}
-
-void __ISR(_UART6_TX_VECTOR, ipl1AUTO) UART6_TX_Handler (void)
-{
-    UART6_TX_InterruptHandler();
-}
-
-void __ISR(_QEI1_VECTOR, ipl1AUTO) QEI1_Handler (void)
-{
-}
-
-void __ISR(_SPI3_RX_VECTOR, ipl1AUTO) SPI3_RX_Handler (void)
-{
-    SPI3_RX_InterruptHandler();
-}
-
-void __ISR(_SPI3_TX_VECTOR, ipl1AUTO) SPI3_TX_Handler (void)
-{
-    SPI3_TX_InterruptHandler();
-}
-
-
-
 
 /*******************************************************************************
  End of File
-*/
+ */
+

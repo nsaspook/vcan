@@ -1,20 +1,21 @@
 /*******************************************************************************
-  UART2 PLIB
+  Interrupt System Service
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    plib_uart2.h
+    sys_int.c
 
   Summary:
-    UART2 PLIB Header File
+    Interrupt System Service APIs.
 
   Description:
-    None
-
+    This file contains functions related to the Interrupt System Service for PIC32
+    devices.
 *******************************************************************************/
 
+// DOM-IGNORE-BEGIN
 /*******************************************************************************
 * Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
 *
@@ -37,78 +38,71 @@
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
-
-#ifndef PLIB_UART2_H
-#define PLIB_UART2_H
-
-#include <stddef.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include "device.h"
-#include "plib_uart_common.h"
-
-// DOM-IGNORE-BEGIN
-#ifdef __cplusplus  // Provide C++ Compatibility
-
-    extern "C" {
-
-#endif
 // DOM-IGNORE-END
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Interface
+// Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
 
-#define UART2_FrequencyGet()    (uint32_t)(6000000UL)
+#include "system/int/sys_int.h"
 
-/****************************** UART2 API *********************************/
+// *****************************************************************************
+// *****************************************************************************
+// Section: Function Definitions
+// *****************************************************************************
+// *****************************************************************************
 
-void UART2_Initialize( void );
+void SYS_INT_Enable( void )
+{
+    __builtin_enable_interrupts();
+}
 
-bool UART2_SerialSetup( UART_SERIAL_SETUP *setup, uint32_t srcClkFreq );
+bool SYS_INT_Disable( void )
+{
+    uint32_t processorStatus;
 
-UART_ERROR UART2_ErrorGet( void );
+    /* Save the processor status and then Disable the global interrupt */
+    processorStatus = ( uint32_t )__builtin_disable_interrupts();
 
-bool UART2_AutoBaudQuery( void );
+    /* return the interrupt status */
+    return (bool)(processorStatus & 0x01);
+}
 
-void UART2_AutoBaudSet( bool enable );
-
-size_t UART2_Write(uint8_t* pWrBuffer, const size_t size );
-
-size_t UART2_WriteCountGet(void);
-
-size_t UART2_WriteFreeBufferCountGet(void);
-
-size_t UART2_WriteBufferSizeGet(void);
-
-bool UART2_WriteNotificationEnable(bool isEnabled, bool isPersistent);
-
-void UART2_WriteThresholdSet(uint32_t nBytesThreshold);
-
-void UART2_WriteCallbackRegister( UART_RING_BUFFER_CALLBACK callback, uintptr_t context);
-
-size_t UART2_Read(uint8_t* pRdBuffer, const size_t size);
-
-size_t UART2_ReadCountGet(void);
-
-size_t UART2_ReadFreeBufferCountGet(void);
-
-size_t UART2_ReadBufferSizeGet(void);
-
-bool UART2_ReadNotificationEnable(bool isEnabled, bool isPersistent);
-
-void UART2_ReadThresholdSet(uint32_t nBytesThreshold);
-
-void UART2_ReadCallbackRegister( UART_RING_BUFFER_CALLBACK callback, uintptr_t context);
-
-// DOM-IGNORE-BEGIN
-#ifdef __cplusplus  // Provide C++ Compatibility
-
+void SYS_INT_Restore( bool state )
+{
+    if (state)
+    {
+        /* restore the state of CP0 Status register before the disable occurred */
+        __builtin_enable_interrupts();
     }
+}
 
-#endif
-// DOM-IGNORE-END
+bool SYS_INT_SourceDisable( INT_SOURCE source )
+{
+    bool intSrcStatus;
+    bool interruptStatus;
 
-#endif // PLIB_UART2_H
+    /* Save the interrupt status and then Disable the global interrupt */
+    interruptStatus = (bool)(( uint32_t )__builtin_disable_interrupts() & 0x01);
+
+    /* get the interrupt status of this source before disable is called */
+    intSrcStatus = SYS_INT_SourceIsEnabled(source);
+
+    /* disable the interrupts */
+    EVIC_SourceDisable(source);
+
+    SYS_INT_Restore(interruptStatus);
+
+    /* return the source status */
+    return intSrcStatus;
+}
+
+void SYS_INT_SourceRestore( INT_SOURCE source, bool status )
+{
+    if( status )
+    {
+        SYS_INT_SourceEnable( source );
+    }
+}

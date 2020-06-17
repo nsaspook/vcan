@@ -1,21 +1,24 @@
 /*******************************************************************************
-  Interface definition of Core Timer PLIB.
+  Interrupt System Service Mapping File
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    plib_coretimer.h
+    sys_int_mapping.h
 
   Summary:
-    Interface definition of the Core Timer Plib .
+    Interrupt System Service mapping file.
 
   Description:
-    This file defines the interface for the Core Timer Plib.
+    This header file contains the mapping of the APIs defined in the API header
+    to either the function implementations or macro implementation or the
+    specific variant implementation.
 *******************************************************************************/
 
-/*******************************************************************************
-* Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
+//DOM-IGNORE-BEGIN
+/******************************************************************************
+* Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -36,42 +39,22 @@
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
+//DOM-IGNORE-END
 
-#ifndef PLIB_CORETIMER_H    // Guards against multiple inclusion
-#define PLIB_CORETIMER_H
+#ifndef SYS_INT_MAPPING_H
+#define SYS_INT_MAPPING_H
 
-#include <stdint.h>
-#include <stdbool.h>
+// *****************************************************************************
+// *****************************************************************************
+// Section: Interrupt System Service Mapping
+// *****************************************************************************
+// *****************************************************************************
 
-#ifdef __cplusplus // Provide C++ Compatibility
-	extern "C" {
-#endif
+#define SYS_INT_IsEnabled()                 ((bool)(_CP0_GET_STATUS() & 0x01))
+#define SYS_INT_SourceEnable( source )      EVIC_SourceEnable( source )
+#define SYS_INT_SourceIsEnabled( source )   EVIC_SourceIsEnabled( source )
+#define SYS_INT_SourceStatusGet( source )   EVIC_SourceStatusGet( source )
+#define SYS_INT_SourceStatusSet( source )   EVIC_SourceStatusSet( source )
+#define SYS_INT_SourceStatusClear( source ) EVIC_SourceStatusClear( source )
 
-#define CORE_TIMER_FREQUENCY    6000000
-
-
-typedef void (*CORETIMER_CALLBACK)(uint32_t status, uintptr_t context);
-
-typedef struct
-{
-    CORETIMER_CALLBACK  callback;
-    uintptr_t           context;
-} CORETIMER_OBJECT ;
-
-void CORETIMER_Initialize( void );
-void CORETIMER_CallbackSet ( CORETIMER_CALLBACK callback, uintptr_t context );
-uint32_t CORETIMER_FrequencyGet ( void );
-void CORETIMER_Start();
-void CORETIMER_Stop();
-uint32_t CORETIMER_CounterGet();
-void CORETIMER_CompareSet(uint32_t compare);
-
-void CORETIMER_DelayMs ( uint32_t delay_ms);
-void CORETIMER_DelayUs ( uint32_t delay_us);
-
-
-#ifdef __cplusplus // Provide C++ Compatibility
- }
-#endif
-
-#endif
+#endif // SYS_INT_MAPPING_H
