@@ -1,30 +1,23 @@
 /*******************************************************************************
-  SYS CLK Static Functions for Clock System Service
+  ADCHS Peripheral Library Interface Header File
 
-  Company:
+  Company
     Microchip Technology Inc.
 
-  File Name:
-    plib_clk.c
+  File Name
+    plib_adchs.h
 
-  Summary:
-    SYS CLK static function implementations for the Clock System Service.
+  Summary
+    ADCHS peripheral library interface.
 
-  Description:
-    The Clock System Service provides a simple interface to manage the
-    oscillators on Microchip microcontrollers. This file defines the static
-    implementation for the Clock System Service.
-
-  Remarks:
-    Static functions incorporate all system clock configuration settings as
-    determined by the user via the Microchip Harmony Configurator GUI.
-    It provides static version of the routines, eliminating the need for an
-    object ID or object handle.
-
-    Static single-open interfaces also eliminate the need for the open handle.
+  Description
+    This file defines the interface to the ADCHS peripheral library.  This
+    library provides access to and control of the associated peripheral
+    instance.
 
 *******************************************************************************/
 
+// DOM-IGNORE-BEGIN
 /*******************************************************************************
 * Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
 *
@@ -47,76 +40,82 @@
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
+// DOM-IGNORE-END
+
+#ifndef PLIB_ADCHS_H    // Guards against multiple inclusion
+#define PLIB_ADCHS_H
+
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Include Files
+// Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
 
-#include "device.h"
-#include "plib_clk.h"
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: File Scope Functions
-// *****************************************************************************
-// *****************************************************************************
-
-// *****************************************************************************
-/* Function:
-    void CLK_Initialize( void )
-
-  Summary:
-    Initializes hardware and internal data structure of the System Clock.
-
-  Description:
-    This function initializes the hardware and internal data structure of System
-    Clock Service.
-
-  Remarks:
-    This is configuration values for the static version of the Clock System
-    Service module is determined by the user via the MHC GUI.
-
-    The objective is to eliminate the user's need to be knowledgeable in the
-    function of the 'configuration bits' to configure the system oscillators.
+/*  This section lists the other files that are included in this file.
 */
 
-void CLK_Initialize( void )
-{
-    bool int_flag = false;
+#include "plib_adchs_common.h"
 
-    int_flag = (bool)__builtin_disable_interrupts();
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
 
-    /* unlock system for clock configuration */
-    SYSKEY = 0x00000000;
-    SYSKEY = 0xAA996655;
-    SYSKEY = 0x556699AA;
+extern "C" {
 
-    if (int_flag)
-    {
-        __builtin_mtc0(12, 0,(__builtin_mfc0(12, 0) | 0x0001)); /* enable interrupts */
-    }
+#endif
 
- 
-      
+// DOM-IGNORE-END
 
-    /* Peripheral Module Disable Configuration */
-    PMD1 = 0x100370;
-    PMD2 = 0x17001f;
-    PMD3 = 0xffffffff;
-    PMD4 = 0xff001ff;
-    PMD5 = 0xf30f3b19;
-    PMD6 = 0xc0d0000;
-    PMD7 = 0x0;
+// *****************************************************************************
+// *****************************************************************************
+// Section: Data Types
+// *****************************************************************************
+// *****************************************************************************
+/*  The following data type definitions are used by the functions in this
+    interface and should be considered part it.
+*/
+#define CHANNEL_1 (1U)
 
-    /* Lock system since done with clock configuration */
-    int_flag = (bool)__builtin_disable_interrupts();
 
-    SYSKEY = 0x33333333;
+// *****************************************************************************
+// *****************************************************************************
+// Section: Interface Routines
+// *****************************************************************************
+// *****************************************************************************
+/* The following functions make up the methods (set of possible operations) of
+   this interface.
+*/
 
-    if (int_flag) /* if interrupts originally were enabled, re-enable them */
-    {
-        __builtin_mtc0(12, 0,(__builtin_mfc0(12, 0) | 0x0001));
-    }
+void ADCHS_Initialize (void);
+
+void ADCHS_ModulesEnable (ADCHS_MODULE_MASK modulesMask);
+void ADCHS_ModulesDisable (ADCHS_MODULE_MASK modulesMask);
+
+void ADCHS_GlobalEdgeConversionStart(void);
+void ADCHS_GlobalLevelConversionStart(void);
+void ADCHS_ChannelConversionStart(ADCHS_CHANNEL_NUM channel);
+
+void ADCHS_ChannelResultInterruptEnable (ADCHS_CHANNEL_NUM channel);
+void ADCHS_ChannelResultInterruptDisable (ADCHS_CHANNEL_NUM channel);
+void ADCHS_ChannelEarlyInterruptEnable (ADCHS_CHANNEL_NUM channel);
+void ADCHS_ChannelEarlyInterruptDisable (ADCHS_CHANNEL_NUM channel);
+
+bool ADCHS_ChannelResultIsReady(ADCHS_CHANNEL_NUM channel);
+uint16_t ADCHS_ChannelResultGet(ADCHS_CHANNEL_NUM channel);
+
+
+
+// *****************************************************************************
+
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
+
 }
+#endif
+// DOM-IGNORE-END
+
+#endif //PLIB_ADCHS_H
+
+/**
+ End of File
+*/

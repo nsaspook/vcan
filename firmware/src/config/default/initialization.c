@@ -256,6 +256,8 @@ void SYS_Initialize ( void* data )
 
     QEI1_Initialize();
 
+    ADCHS_Initialize();
+
     QEI2_Initialize();
 
 	UART2_Initialize();

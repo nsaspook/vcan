@@ -57,6 +57,7 @@
 #include "peripheral/coretimer/plib_coretimer.h"
 #include "peripheral/uart/plib_uart3.h"
 #include "peripheral/qei/plib_qei1.h"
+#include "peripheral/adchs/plib_adchs.h"
 #include "peripheral/qei/plib_qei2.h"
 #include "peripheral/uart/plib_uart2.h"
 #include "peripheral/mcpwm/plib_mcpwm.h"
