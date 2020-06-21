@@ -254,9 +254,9 @@ void SYS_Initialize ( void* data )
     CORETIMER_Initialize();
 	UART3_Initialize();
 
-    QEI1_Initialize();
-
     ADCHS_Initialize();
+
+    QEI1_Initialize();
 
     QEI2_Initialize();
 
