@@ -64,7 +64,7 @@ void ADCHS_Initialize()
 
     ADCCON1 = 0x600000;
     ADCCON2 = 0x10000;
-    ADCCON3 = 0x1002000;
+    ADCCON3 = 0x1000000;
 
     ADCTRGMODE = 0x0;
 
@@ -84,8 +84,8 @@ void ADCHS_Initialize()
     ADCIMCON4 = 0x0; 
 
     /* Input scan */
-    ADCCSS1 = 0x804002;
-    ADCCSS2 = 0x30; 
+    ADCCSS1 = 0x0;
+    ADCCSS2 = 0x0; 
 
     /* Turn ON ADC */
     ADCCON1bits.ON = 1;

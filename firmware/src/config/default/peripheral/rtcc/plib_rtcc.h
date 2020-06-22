@@ -1,26 +1,25 @@
 /*******************************************************************************
-  System Configuration Header
+  Real Time Counter (RTCC) PLIB
+
+  Company:
+    Microchip Technology Inc.
 
   File Name:
-    configuration.h
+    plib_rtcc.h
 
   Summary:
-    Build-time configuration header for the system defined by this project.
+    RTCC PLIB Header file
 
   Description:
-    An MPLAB Project may have multiple configurations.  This file defines the
-    build-time options for a single configuration.
-
-  Remarks:
-    This configuration header must not define any prototypes or data
-    definitions (or include any files that do).  It only provides macro
-    definitions for build-time configuration options
+    This file defines the interface to the RTC peripheral library. This
+    library provides access to and control of the associated peripheral
+    instance.
 
 *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
 /*******************************************************************************
-* Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
+* Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -43,90 +42,85 @@
 *******************************************************************************/
 // DOM-IGNORE-END
 
-#ifndef CONFIGURATION_H
-#define CONFIGURATION_H
+#ifndef PLIB_RTCC_H
+#define PLIB_RTCC_H
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-/*  This section Includes other configuration headers necessary to completely
-    define this configuration.
-*/
 
-#include "user.h"
-#include "toolchain_specifics.h"
+#include <stddef.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include "device.h"
+#include <time.h>
 
 // DOM-IGNORE-BEGIN
-#ifdef __cplusplus  // Provide C++ Compatibility
+#ifdef __cplusplus // Provide C++ Compatibility
 
-extern "C" {
+    extern "C" {
 
 #endif
 // DOM-IGNORE-END
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: System Configuration
+// Section: Data Types
 // *****************************************************************************
 // *****************************************************************************
 
+typedef enum
+{
+    RTCC_ALARM_MASK_HALF_SECOND = 0x00,   // Every half-second
+    RTCC_ALARM_MASK_SECOND = 0x01,        // Every second
+    RTCC_ALARM_MASK_10_SECONDS = 0x02,    // Every 10 seconds
+    RTCC_ALARM_MASK_SS = 0x03,            // Every minute
+    RTCC_ALARM_MASK_10_MINUTES = 0x04,    // Every 10 minutes
+    RTCC_ALARM_MASK_HOUR = 0x05,          // Every hour
+    RTCC_ALARM_MASK_HHMISS = 0x06,        // Once a day
+    RTCC_ALARM_MASK_WEEK = 0x07,          // Once a week
+    RTCC_ALARM_MASK_MONTH = 0x08,         // Once a month
+    RTCC_ALARM_MASK_YEAR = 0x09,          // Once a year
+    RTCC_ALARM_MASK_OFF = 0xFF            // Disabled
 
+} RTCC_ALARM_MASK;
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: System Service Configuration
-// *****************************************************************************
-// *****************************************************************************
+typedef enum
+{
+    RTCC_INT_ALARM = 0x40000000
 
-#define SYS_DEBUG_ENABLE
-#define SYS_DEBUG_GLOBAL_ERROR_LEVEL       SYS_ERROR_DEBUG
-#define SYS_DEBUG_BUFFER_DMA_READY
-#define SYS_DEBUG_USE_CONSOLE
+} RTCC_INT_MASK;
 
-
-#define SYS_CONSOLE_DEVICE_MAX_INSTANCES   			1
-#define SYS_CONSOLE_UART_MAX_INSTANCES 	   			1
-#define SYS_CONSOLE_USB_CDC_MAX_INSTANCES 	   		0
-#define SYS_CONSOLE_PRINT_BUFFER_SIZE        		200
-
-
-#define SYS_CONSOLE_INDEX_0                       0
-
-
-
-
-
+typedef void (*RTCC_CALLBACK)( uintptr_t context );
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Driver Configuration
+// Section: Interface Routines
 // *****************************************************************************
 // *****************************************************************************
 
+void RTCC_Initialize( void );
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Middleware & Other Library Configuration
-// *****************************************************************************
-// *****************************************************************************
+bool RTCC_TimeSet( struct tm *Time );
 
+void RTCC_TimeGet(struct tm  *Time );
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Application Configuration
-// *****************************************************************************
-// *****************************************************************************
+bool RTCC_AlarmSet( struct tm *alarmTime, RTCC_ALARM_MASK alarmFreq );
 
+void RTCC_CallbackRegister( RTCC_CALLBACK callback, uintptr_t context );
 
-//DOM-IGNORE-BEGIN
-#ifdef __cplusplus
-}
+void RTCC_InterruptEnable( RTCC_INT_MASK interrupt );
+
+void RTCC_InterruptDisable( RTCC_INT_MASK interrupt );
+
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
+
+    }
+
 #endif
-//DOM-IGNORE-END
+// DOM-IGNORE-END
 
-#endif // CONFIGURATION_H
-/*******************************************************************************
- End of File
-*/
+#endif // PLIB_RTCC_H

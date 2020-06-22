@@ -30,8 +30,12 @@ bool spi_tests(void)
 
 bool uart_tests(void)
 {
-	// uart 2 is the debug terminal
-	SYS_DEBUG_MESSAGE(SYS_ERROR_DEBUG, "\r\n You are reading a debug message !!");
+	static uint8_t i = 0;
+
+	if (!++i) {
+		// uart 2 is the debug terminal
+		SYS_DEBUG_MESSAGE(SYS_ERROR_DEBUG, "\r\n You are reading a debug message !!");
+	}
 
 	while (UART3_WriteFreeBufferCountGet() < 10);
 	UART3_Write((uint8_t*) " Tests 3", 8);

@@ -52,9 +52,7 @@
 #include "peripheral/clk/plib_clk.h"
 #include "peripheral/gpio/plib_gpio.h"
 #include "peripheral/evic/plib_evic.h"
-#include "system/time/sys_time.h"
 #include "peripheral/uart/plib_uart6.h"
-#include "peripheral/coretimer/plib_coretimer.h"
 #include "peripheral/uart/plib_uart3.h"
 #include "peripheral/adchs/plib_adchs.h"
 #include "peripheral/qei/plib_qei1.h"
@@ -63,6 +61,7 @@
 #include "peripheral/mcpwm/plib_mcpwm.h"
 #include "system/console/sys_console.h"
 #include "system/console/src/sys_console_uart_definitions.h"
+#include "peripheral/rtcc/plib_rtcc.h"
 #include "system/int/sys_int.h"
 #include "osal/osal.h"
 #include "system/debug/sys_debug.h"
@@ -190,7 +189,6 @@ typedef struct
 {
     SYS_MODULE_OBJ  sysDebug;
 
-    SYS_MODULE_OBJ  sysTime;
     SYS_MODULE_OBJ  sysConsole0;
 
 
