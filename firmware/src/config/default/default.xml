@@ -4566,195 +4566,7 @@
       </Symbols>
     </UniqueComponent>
     <UniqueComponent dnOrder="2" id="dfp"/>
-    <UniqueComponent dnOrder="3" id="HarmonyCore">
-      <Symbols dnOrder="0">
-        <File dnOrder="0" id="APP0_C">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="1" id="APP0_H">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="2" id="CONFIGURATION_H">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="3" id="DRIVER_COMMON">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="4" id="DRIVER_ROOT">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <Boolean dnOrder="5" id="ENABLE_APP_FILE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="HarmonyCore" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="6" id="ENABLE_DRV_COMMON">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="sys_debug" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="7" id="ENABLE_OSAL">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="HarmonyCore" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="8" id="ENABLE_SYS_CACHE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="HarmonyCore" value="false"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="9" id="ENABLE_SYS_COMMON">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="sys_debug" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="10" id="ENABLE_SYS_INT">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="HarmonyCore" value="true"/>
-          </Values>
-        </Boolean>
-        <File dnOrder="11" id="GEN_APP_TASKS">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <Menu dnOrder="12" id="GEN_APP_TASK_MENU">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </Menu>
-        <File dnOrder="13" id="INT_DEF">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="14" id="INT_HEADER">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="15" id="INT_MAPPING">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="16" id="INT_SOURCE">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="17" id="OSAL_DEFINITIONS_H">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="18" id="OSAL_H">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="19" id="OSAL_IMPL_BASIC_H">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="20" id="OSAL_SYSDEF_H">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="21" id="SYSTEM_COMMON">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="22" id="SYSTEM_MODULE">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="23" id="SYSTEM_ROOT">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="24" id="SYS_DEBUG_DEF_HEADER">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="25" id="SYS_DEBUG_HEADER">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="26" id="TASKS_C">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="27" id="USER_H">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-      </Symbols>
-    </UniqueComponent>
-    <UniqueComponent dnOrder="4" id="mcpwm">
+    <UniqueComponent dnOrder="3" id="mcpwm">
       <Symbols dnOrder="0">
         <String dnOrder="0" id="INTR_PWM_FAULT">
           <Values dnOrder="0">
@@ -5160,7 +4972,7 @@
         </String>
       </Symbols>
     </UniqueComponent>
-    <UniqueComponent dnOrder="5" id="qei1">
+    <UniqueComponent dnOrder="4" id="qei1">
       <Symbols dnOrder="0">
         <String dnOrder="0" id="ENCODER_POS_GET_API">
           <Values dnOrder="0">
@@ -5214,7 +5026,7 @@
         </Hex>
       </Symbols>
     </UniqueComponent>
-    <UniqueComponent dnOrder="6" id="qei2">
+    <UniqueComponent dnOrder="5" id="qei2">
       <Symbols dnOrder="0">
         <String dnOrder="0" id="ENCODER_POS_GET_API">
           <Values dnOrder="0">
@@ -5253,7 +5065,7 @@
         </Boolean>
       </Symbols>
     </UniqueComponent>
-    <UniqueComponent dnOrder="7" id="rtcc">
+    <UniqueComponent dnOrder="6" id="rtcc">
       <Symbols dnOrder="0">
         <KeyValueSet dnOrder="0" id="RTCC_CLOCK_SOURCE">
           <Values dnOrder="0">
@@ -5267,7 +5079,7 @@
         </Boolean>
       </Symbols>
     </UniqueComponent>
-    <UniqueComponent dnOrder="8" id="spi3">
+    <UniqueComponent dnOrder="7" id="spi3">
       <Symbols dnOrder="0">
         <Integer dnOrder="0" id="SPI_BAUD_RATE">
           <Values dnOrder="0">
@@ -5303,124 +5115,7 @@
         </KeyValueSet>
       </Symbols>
     </UniqueComponent>
-    <GeneratorComponent dnOrder="9" id="sys_console">
-      <Symbols dnOrder="0">
-        <Integer dnOrder="0" id="SYS_CONSOLE_UART_CONNECTION_COUNTER">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="sys_console" value="1"/>
-          </Values>
-        </Integer>
-      </Symbols>
-      <Instances dnOrder="1">
-        <InstanceComponent dnOrder="0" id="sys_console" instance="0">
-          <Symbols dnOrder="0">
-            <Comment dnOrder="0" id="SYS_CONSOLE_BUFFER_CONFIG_COMMENT">
-              <Attributes dnOrder="0">
-                <Boolean dnOrder="0" id="visible">
-                  <Value dnOrder="0">true</Value>
-                </Boolean>
-              </Attributes>
-            </Comment>
-            <String dnOrder="1" id="SYS_CONSOLE_DEVICE">
-              <Values dnOrder="0">
-                <Dynamic dnOrder="0" id="sys_console_0" value="UART2"/>
-              </Values>
-            </String>
-            <String dnOrder="2" id="SYS_CONSOLE_DEVICE_SET">
-              <Values dnOrder="0">
-                <Dynamic dnOrder="0" id="sys_console_0" value="UART"/>
-              </Values>
-            </String>
-            <Integer dnOrder="3" id="SYS_CONSOLE_DEVICE_UART_INDEX">
-              <Values dnOrder="0">
-                <Dynamic dnOrder="0" id="sys_console" value="0"/>
-              </Values>
-            </Integer>
-            <File dnOrder="4" id="SYS_CONSOLE_UART_DEFINITIONS_HEADER">
-              <Attributes dnOrder="0">
-                <Boolean dnOrder="0" id="enabled">
-                  <Value dnOrder="0">true</Value>
-                </Boolean>
-              </Attributes>
-            </File>
-            <File dnOrder="5" id="SYS_CONSOLE_UART_HEADER">
-              <Attributes dnOrder="0">
-                <Boolean dnOrder="0" id="enabled">
-                  <Value dnOrder="0">true</Value>
-                </Boolean>
-              </Attributes>
-            </File>
-            <File dnOrder="6" id="SYS_CONSOLE_UART_SOURCE">
-              <Attributes dnOrder="0">
-                <Boolean dnOrder="0" id="enabled">
-                  <Value dnOrder="0">true</Value>
-                </Boolean>
-              </Attributes>
-            </File>
-            <File dnOrder="7" id="SYS_CONSOLE_USB_CDC_SOURCE">
-              <Attributes dnOrder="0">
-                <Boolean dnOrder="0" id="enabled">
-                  <Value dnOrder="0">false</Value>
-                </Boolean>
-              </Attributes>
-            </File>
-            <File dnOrder="8" id="SYS_CONSOLE_USB_DEFINITIONS_HEADER">
-              <Attributes dnOrder="0">
-                <Boolean dnOrder="0" id="enabled">
-                  <Value dnOrder="0">false</Value>
-                </Boolean>
-              </Attributes>
-            </File>
-            <File dnOrder="9" id="SYS_CONSOLE_USB_HEADER">
-              <Attributes dnOrder="0">
-                <Boolean dnOrder="0" id="enabled">
-                  <Value dnOrder="0">false</Value>
-                </Boolean>
-              </Attributes>
-            </File>
-          </Symbols>
-          <Attachments dnOrder="1">
-            <DirectDependency dnOrder="0" id="sys_console_UART_dependency">
-              <Attributes dnOrder="0">
-                <String dnOrder="0" id="targetComponentID">
-                  <Value dnOrder="0">uart2</Value>
-                </String>
-                <String dnOrder="1" id="targetAttachmentID">
-                  <Value dnOrder="0">UART2_UART</Value>
-                </String>
-              </Attributes>
-            </DirectDependency>
-          </Attachments>
-        </InstanceComponent>
-      </Instances>
-    </GeneratorComponent>
-    <UniqueComponent dnOrder="10" id="sys_debug">
-      <Symbols dnOrder="0">
-        <String dnOrder="0" id="SYS_CONSOLE_DEVICE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="sys_debug" value="SYS_CONSOLE_0"/>
-          </Values>
-        </String>
-        <String dnOrder="1" id="SYS_CONSOLE_INDEX">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="sys_debug" value="0"/>
-          </Values>
-        </String>
-      </Symbols>
-      <Attachments dnOrder="1">
-        <DirectDependency dnOrder="0" id="sys_debug_SYS_CONSOLE_dependency">
-          <Attributes dnOrder="0">
-            <String dnOrder="0" id="targetComponentID">
-              <Value dnOrder="0">sys_console_0</Value>
-            </String>
-            <String dnOrder="1" id="targetAttachmentID">
-              <Value dnOrder="0">sys_console</Value>
-            </String>
-          </Attributes>
-        </DirectDependency>
-      </Attachments>
-    </UniqueComponent>
-    <UniqueComponent dnOrder="11" id="uart2">
+    <UniqueComponent dnOrder="8" id="uart2">
       <Symbols dnOrder="0">
         <Integer dnOrder="0" id="BRG_VALUE">
           <Values dnOrder="0">
@@ -5447,11 +5142,12 @@
         <Boolean dnOrder="4" id="UART_RING_BUFFER_ENABLE">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="readOnly">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="uart2" value="true"/>
+            <Dynamic dnOrder="0" id="uart2" value="false"/>
+            <User dnOrder="1" value="true"/>
           </Values>
         </Boolean>
         <Integer dnOrder="5" id="UART_RX_RING_BUFFER_SIZE">
@@ -5488,20 +5184,8 @@
           </Attributes>
         </Boolean>
       </Symbols>
-      <Attachments dnOrder="1">
-        <DirectCapability dnOrder="0" id="UART2_UART">
-          <Attributes dnOrder="0">
-            <String dnOrder="0" id="targetComponentID">
-              <Value dnOrder="0">sys_console_0</Value>
-            </String>
-            <String dnOrder="1" id="targetAttachmentID">
-              <Value dnOrder="0">sys_console_UART_dependency</Value>
-            </String>
-          </Attributes>
-        </DirectCapability>
-      </Attachments>
     </UniqueComponent>
-    <UniqueComponent dnOrder="12" id="uart3">
+    <UniqueComponent dnOrder="9" id="uart3">
       <Symbols dnOrder="0">
         <Integer dnOrder="0" id="BAUD_RATE">
           <Values dnOrder="0">
@@ -5575,7 +5259,7 @@
         </Boolean>
       </Symbols>
     </UniqueComponent>
-    <UniqueComponent dnOrder="13" id="uart6">
+    <UniqueComponent dnOrder="10" id="uart6">
       <Symbols dnOrder="0">
         <Integer dnOrder="0" id="BRG_VALUE">
           <Values dnOrder="0">
@@ -5641,24 +5325,21 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
+    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
-        <ElementPosition dnOrder="0" id="HarmonyCore" x="319" y="296"/>
-        <ElementPosition dnOrder="1" id="adchs" x="3" y="485"/>
-        <ElementPosition dnOrder="2" id="core" x="198" y="49"/>
-        <ElementPosition dnOrder="3" id="dfp" x="20" y="20"/>
-        <ElementPosition dnOrder="4" id="mcpwm" x="167" y="81"/>
-        <ElementPosition dnOrder="5" id="qei1" x="35" y="80"/>
-        <ElementPosition dnOrder="6" id="qei2" x="33" y="144"/>
-        <ElementPosition dnOrder="7" id="rtcc" x="300" y="20"/>
-        <ElementPosition dnOrder="8" id="spi3" x="29" y="235"/>
-        <ElementPosition dnOrder="9" id="sys_console" x="147" y="388"/>
-        <ElementPosition dnOrder="10" id="sys_debug" x="326" y="458"/>
-        <ElementPosition dnOrder="11" id="uart2" x="19" y="316"/>
-        <ElementPosition dnOrder="12" id="uart3" x="162" y="232"/>
-        <ElementPosition dnOrder="13" id="uart6" x="163" y="307"/>
+        <ElementPosition dnOrder="0" id="adchs" x="3" y="485"/>
+        <ElementPosition dnOrder="1" id="core" x="198" y="49"/>
+        <ElementPosition dnOrder="2" id="dfp" x="20" y="20"/>
+        <ElementPosition dnOrder="3" id="mcpwm" x="167" y="81"/>
+        <ElementPosition dnOrder="4" id="qei1" x="35" y="80"/>
+        <ElementPosition dnOrder="5" id="qei2" x="33" y="144"/>
+        <ElementPosition dnOrder="6" id="rtcc" x="300" y="20"/>
+        <ElementPosition dnOrder="7" id="spi3" x="29" y="235"/>
+        <ElementPosition dnOrder="8" id="uart2" x="19" y="316"/>
+        <ElementPosition dnOrder="9" id="uart3" x="162" y="232"/>
+        <ElementPosition dnOrder="10" id="uart6" x="163" y="307"/>
       </ElementPositions>
     </ComponentGraph>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>

@@ -72,7 +72,7 @@ int main(void)
 			UART3_Write((uint8_t*) strbuf, strlen(strbuf));
 			m35_ptr->update = 0;
 		} else {
-			run_tests(1000); // port diagnostics
+			//run_tests(100000); // port diagnostics
 		}
 	}
 
