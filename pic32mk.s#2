@@ -15394,7 +15394,8 @@ Source: www.kingbright.com</description>
 <variantdefs>
 </variantdefs>
 <classes>
-<class number="0" name="default" width="0" drill="0">
+<class number="0" name="default" width="0.127" drill="0.127">
+<clearance class="0" value="0.127"/>
 </class>
 <class number="1" name="icurrent" width="0.1778" drill="0">
 </class>
@@ -16740,7 +16741,7 @@ Source: www.kingbright.com</description>
 <pinref part="VDD20" gate="G$1" pin="VDD"/>
 </segment>
 </net>
-<net name="VSS" class="2">
+<net name="VSS" class="0">
 <segment>
 <pinref part="C1" gate="G$1" pin="2"/>
 <pinref part="VSS1" gate="G$1" pin="VSS"/>
