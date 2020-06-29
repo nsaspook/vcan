@@ -16015,9 +16015,9 @@ Source: www.kingbright.com</description>
 <attribute name="NAME" x="-86.995" y="-6.604" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="-82.169" y="-6.604" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="C15" gate="G$1" x="-63.5" y="-7.62" smashed="yes" rot="R270">
-<attribute name="NAME" x="-62.865" y="-8.636" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="-67.691" y="-8.636" size="1.778" layer="96" rot="R270"/>
+<instance part="C15" gate="G$1" x="-55.88" y="-7.62" smashed="yes" rot="R270">
+<attribute name="NAME" x="-55.245" y="-8.636" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="-60.071" y="-8.636" size="1.778" layer="96" rot="R270"/>
 </instance>
 <instance part="VSS36" gate="G$1" x="-73.66" y="-10.16" smashed="yes">
 <attribute name="VALUE" x="-76.2" y="-15.24" size="1.778" layer="96" rot="R90"/>
@@ -17032,10 +17032,10 @@ Source: www.kingbright.com</description>
 <pinref part="C15" gate="G$1" pin="2"/>
 <wire x1="-81.28" y1="-7.62" x2="-73.66" y2="-7.62" width="0.1524" layer="91"/>
 <pinref part="VSS36" gate="G$1" pin="VSS"/>
-<wire x1="-73.66" y1="-7.62" x2="-68.58" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="-73.66" y1="-7.62" x2="-60.96" y2="-7.62" width="0.1524" layer="91"/>
 <junction x="-73.66" y="-7.62"/>
 <junction x="-81.28" y="-7.62"/>
-<junction x="-68.58" y="-7.62"/>
+<junction x="-60.96" y="-7.62"/>
 </segment>
 <segment>
 <pinref part="C16" gate="G$1" pin="2"/>
@@ -17341,8 +17341,8 @@ Source: www.kingbright.com</description>
 <segment>
 <pinref part="IC7" gate="G$1" pin="VCCB"/>
 <pinref part="C15" gate="G$1" pin="1"/>
-<wire x1="-58.42" y1="-15.24" x2="-60.96" y2="-7.62" width="0.1524" layer="91"/>
-<junction x="-60.96" y="-7.62"/>
+<wire x1="-58.42" y1="-15.24" x2="-53.34" y2="-7.62" width="0.1524" layer="91"/>
+<junction x="-53.34" y="-7.62"/>
 <wire x1="-58.42" y1="-15.24" x2="-60.96" y2="-15.24" width="0.1524" layer="91"/>
 <pinref part="P+6" gate="VCC" pin="VCC"/>
 <junction x="-58.42" y="-15.24"/>

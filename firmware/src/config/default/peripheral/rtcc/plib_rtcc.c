@@ -111,7 +111,7 @@ void RTCC_Initialize( void )
 
     RTCALRMbits.ARPT = 0;
 
-    RTCALRMbits.AMASK = 1;
+    RTCALRMbits.AMASK = 9;
 
     RTCCONCLR = _RTCCON_RTCOE_MASK;  /* Enable RTCC output */
 

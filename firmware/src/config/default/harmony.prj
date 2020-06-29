@@ -112,8 +112,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/rtcc/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/rtcc/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">0E21D7113E3A5F053199297897BDD24A</GeneratedChecksum>
-          <UserChecksum dnOrder="6">0E21D7113E3A5F053199297897BDD24A</UserChecksum>
+          <GeneratedChecksum dnOrder="5">1F80AFFD0051A40CE0F3BEDD05934154</GeneratedChecksum>
+          <UserChecksum dnOrder="6">1F80AFFD0051A40CE0F3BEDD05934154</UserChecksum>
         </File>
         <File dnOrder="12">
           <Type dnOrder="0">SOURCE</Type>
@@ -354,7 +354,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="5" key="PackageFilter" value="usb;cryptoauthlib;aws_cloud;wireless;crypto;gfx_apps;gfx;x2c;micrium_ucos3;audio;core;cryptoauthlib_apps;expresslogic_threadx;motor_control;csp;bt;touch;net;bootloader;bsp;aerospace;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="expresslogic_threadx;bootloader;csp;gfx_apps;gfx;cryptoauthlib;wireless;cryptoauthlib_apps;usb;crypto;motor_control;audio;net;aerospace;x2c;touch;aws_cloud;bt;micrium_ucos3;core;bsp;"/>
       <Setting dnOrder="6" key="TRUSTZONE" value="false"/>
     </Settings>
   </Configurator>

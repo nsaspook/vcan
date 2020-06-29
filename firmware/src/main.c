@@ -44,8 +44,8 @@ void reset_led_blink(uintptr_t);
 
 int main(void)
 {
-	char strbuf[80];
-	char buffer[24];
+	//	char strbuf[80];
+	char buffer[40];
 
 	//	struct tm Time = {0};
 #ifdef BOARD_TESTS
@@ -63,17 +63,16 @@ int main(void)
 	LATGbits.LATG12 = true;
 	LATGbits.LATG13 = true;
 	LATGbits.LATG14 = true;
-	RTCC_CallbackRegister(reset_led_blink, 1);
+	//	RTCC_CallbackRegister(reset_led_blink, 1);
 	//	RTCC_TimeGet(&Time);
 	//	RTCC_AlarmSet(&Time, RTCC_ALARM_MASK_SS);
-	RTCC_InterruptEnable(RTCC_ALARM_MASK_SS);
+	//	RTCC_InterruptEnable(RTCC_ALARM_MASK_SS);
 
 	init_display();
 	eaDogM_CursorOff();
 
 	sprintf(buffer, " VCAN Testing ");
 	eaDogM_WriteStringAtPos(0, 0, buffer);
-	eaDogM_WriteStringAtPos(1, 0, buffer);
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -81,11 +80,14 @@ int main(void)
 
 		/* update local value of the encoder position counter */
 #ifndef BOARD_TESTS
-		m35_ptr->pos = POS1CNT;
-		m35_ptr->vel = VEL1CNT;
+		m35_1.pos = POS1CNT;
+		m35_1.vel = VEL1CNT;
+		m35_2.pos = POS2CNT;
+		m35_2.vel = VEL2CNT;
 #endif
 
 		if (m35_ptr->update++ > 20480) {
+			m35_ptr->update = 0;
 #ifdef BOARD_TESTS
 			if (++i > 8) {
 				i = 0;
@@ -95,19 +97,22 @@ int main(void)
 
 			/* flash the board led(s) using the position counter bits */
 #ifdef QEI_SLOW
-			LATGbits.LATG12 = m35_ptr->pos >> 3;
-			LATGbits.LATG13 = m35_ptr->pos >> 5;
-			LATGbits.LATG14 = m35_ptr->pos >> 7;
+			LATGbits.LATG12 = m35_1.pos >> 3;
+			LATGbits.LATG13 = m35_1.pos >> 5;
+			LATGbits.LATG14 = m35_2.pos >> 12;
 #else
 			LATGbits.LATG12 = m35_ptr->pos >> 10;
 			LATGbits.LATG13 = m35_ptr->pos >> 12;
 			LATGbits.LATG14 = m35_ptr->pos >> 14;
 #endif
 
-			/* send to uart3 the current QEI values */
-			sprintf(strbuf, "c %7i:v %4i\r\n", m35_ptr->pos, m35_ptr->vel);
-			UART3_Write((uint8_t*) strbuf, strlen(strbuf));
-			m35_ptr->update = 0;
+			/* format and send data to LCD screen */
+			sprintf(buffer, "c %7i:%i  ", m35_ptr->pos, m35_ptr->vel);
+			eaDogM_WriteStringAtPos(1, 0, buffer);
+			m35_ptr = &m35_2;
+			sprintf(buffer, "c %7i:%i  ", m35_ptr->pos, m35_ptr->vel);
+			eaDogM_WriteStringAtPos(2, 0, buffer);
+			m35_ptr = &m35_1;
 		} else {
 			//run_tests(100000); // port diagnostics
 		}
