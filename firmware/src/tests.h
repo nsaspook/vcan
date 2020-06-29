@@ -11,6 +11,9 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+	
+//#define BOARD_TESTS
+#define QEI_SLOW
 
 #include "config/default/definitions.h"                 // SYS function prototypes
 #include <proc/p32mk1024mcf100.h>

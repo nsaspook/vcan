@@ -94,17 +94,17 @@ void RTCC_Initialize( void )
     while(RTCCONbits.RTCCLKON);  /* clock disabled? */
 
     /* initialize the time, date and alarm */
-    RTCTIME = 0x23595000;   /* Set RTCC time */
+    RTCTIME = 0x00000000;   /* Set RTCC time */
 
-    RTCDATE = 0x18123100;  /* Set RTCC date */
+    RTCDATE = 0x00010100;  /* Set RTCC date */
 
     RTCALRMCLR = _RTCALRM_ALRMEN_MASK;  /* Disable alarm */
 
     while(RTCALRMbits.ALRMSYNC);  /* Wait for disable */
 
-    ALRMTIME = 0x23595500;   /* Set alarm time */
+    ALRMTIME = 0x00000100;   /* Set alarm time */
 
-    ALRMDATE = 0x00123100;   /* Set alarm date */
+    ALRMDATE = 0x00010100;   /* Set alarm date */
 
     /* repeat forever or 0-255 times */
     RTCALRMCLR = _RTCALRM_CHIME_MASK;  /* Set alarm to repeat finite number of times */
