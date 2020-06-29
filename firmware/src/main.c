@@ -30,6 +30,7 @@
 #include "tests.h"
 #include "m35qei.h"
 #include "config/default/peripheral/rtcc/plib_rtcc.h"
+#include "eadog.h"
 
 
 extern QEI_DATA m35_1, m35_2, *m35_ptr;
@@ -44,6 +45,8 @@ void reset_led_blink(uintptr_t);
 int main(void)
 {
 	char strbuf[80];
+	char buffer[24];
+
 	//	struct tm Time = {0};
 #ifdef BOARD_TESTS
 	int i = 0;
@@ -65,6 +68,13 @@ int main(void)
 	//	RTCC_AlarmSet(&Time, RTCC_ALARM_MASK_SS);
 	RTCC_InterruptEnable(RTCC_ALARM_MASK_SS);
 
+	init_display();
+	eaDogM_CursorOff();
+
+	sprintf(buffer, " VCAN Testing ");
+	eaDogM_WriteStringAtPos(0, 0, buffer);
+	eaDogM_WriteStringAtPos(1, 0, buffer);
+
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
@@ -82,7 +92,7 @@ int main(void)
 				m35_ptr->pos += 1 << 10;
 			}
 #endif
-			
+
 			/* flash the board led(s) using the position counter bits */
 #ifdef QEI_SLOW
 			LATGbits.LATG12 = m35_ptr->pos >> 3;
