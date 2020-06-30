@@ -73,6 +73,9 @@ int main(void)
 
 	sprintf(buffer, " VCAN Testing ");
 	eaDogM_WriteStringAtPos(0, 0, buffer);
+	MCPWM_Start();
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, 225);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 1900);
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
