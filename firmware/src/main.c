@@ -33,7 +33,13 @@
 #include "eadog.h"
 
 
-extern QEI_DATA m35_1, m35_2, *m35_ptr;
+QEI_DATA m35_1,
+	m35_2 = {
+	.hb1h = 1000,
+	.hb1l = 1000,
+},
+*m35_ptr;
+
 void reset_led_blink(uintptr_t);
 
 // *****************************************************************************
@@ -74,8 +80,15 @@ int main(void)
 	sprintf(buffer, " VCAN Testing ");
 	eaDogM_WriteStringAtPos(0, 0, buffer);
 	MCPWM_Start();
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, 225);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 1900);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.hb1h);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.hb1l);
+	//	MCPWM_ChannelPinsOwnershipDisable(MCPWM_CH_1);
+	//	MCPWM_Stop();
+	//	TRISBbits.TRISB14=0;
+	//	TRISBbits.TRISB15=0;
+	//	LATBbits.LATB14=0;
+	//	LATBbits.LATB15=1;
+
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -116,6 +129,11 @@ int main(void)
 			sprintf(buffer, "c %7i:%i  ", m35_ptr->pos, m35_ptr->vel);
 			eaDogM_WriteStringAtPos(2, 0, buffer);
 			m35_ptr = &m35_1;
+
+			m35_2.hb1h = 1000 - (m35_1.pos >> 2);
+			m35_2.hb1l = 1000 + (m35_1.pos >> 2);
+			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.hb1h);
+			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.hb1l);
 		} else {
 			//run_tests(100000); // port diagnostics
 		}

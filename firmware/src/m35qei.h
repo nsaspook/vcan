@@ -33,7 +33,7 @@ extern "C" {
 	 */
 	typedef struct {
 		int32_t pos, vel;
-		uint32_t update;
+		uint32_t update, hb1h, hb1l;
 	} QEI_DATA;
 
 #ifdef	__cplusplus

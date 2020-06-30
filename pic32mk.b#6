@@ -68,7 +68,7 @@
 <hole x="102.87" y="-2.54" drill="2.3476"/>
 <hole x="1.27" y="-1.27" drill="2.3476"/>
 <hole x="45.72" y="38.1" drill="2.3476"/>
-<text x="73.66" y="-1.27" size="1.778" layer="1" font="vector" ratio="15">fgb@mchp vcan 1.01</text>
+<text x="73.66" y="-1.27" size="1.778" layer="1" font="vector" ratio="15">fgb@mchp vcan 1.02</text>
 </plain>
 <libraries>
 <library name="rcl" urn="urn:adsk.eagle:library:334">

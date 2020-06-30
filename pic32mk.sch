@@ -15639,6 +15639,7 @@ Source: www.kingbright.com</description>
 <part name="VDD10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 <part name="P+6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="VDD9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
+<part name="VDD24" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -16521,6 +16522,9 @@ Source: www.kingbright.com</description>
 <instance part="VDD9" gate="G$1" x="-53.34" y="-5.08" smashed="yes">
 <attribute name="VALUE" x="-55.88" y="-7.62" size="1.778" layer="96" rot="R90"/>
 </instance>
+<instance part="VDD24" gate="G$1" x="-104.14" y="60.96" smashed="yes" rot="R180">
+<attribute name="VALUE" x="-104.14" y="55.88" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -16757,6 +16761,11 @@ Source: www.kingbright.com</description>
 <wire x1="-58.42" y1="-15.24" x2="-60.96" y2="-15.24" width="0.1524" layer="91"/>
 <pinref part="VDD9" gate="G$1" pin="VDD"/>
 <junction x="-60.96" y="-15.24"/>
+</segment>
+<segment>
+<pinref part="SPI" gate="-10" pin="S"/>
+<pinref part="VDD24" gate="G$1" pin="VDD"/>
+<junction x="-104.14" y="63.5"/>
 </segment>
 </net>
 <net name="VSS" class="0">
@@ -19235,6 +19244,11 @@ Source: www.kingbright.com</description>
 <label x="137.16" y="-162.56" size="1.778" layer="95"/>
 <junction x="114.3" y="-162.56"/>
 </segment>
+<segment>
+<pinref part="SPI" gate="-6" pin="S"/>
+<junction x="-104.14" y="73.66"/>
+<label x="-111.76" y="73.66" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="RC11" class="0">
 <segment>
@@ -19250,6 +19264,11 @@ Source: www.kingbright.com</description>
 <junction x="132.08" y="-160.02"/>
 <label x="137.16" y="-160.02" size="1.778" layer="95"/>
 <junction x="114.3" y="-160.02"/>
+</segment>
+<segment>
+<pinref part="SPI" gate="-9" pin="S"/>
+<junction x="-104.14" y="66.04"/>
+<label x="-111.76" y="66.04" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="RG11" class="0">
@@ -19567,9 +19586,6 @@ Source: www.kingbright.com</description>
 </sheet>
 </sheets>
 <errors>
-<approved hash="101,1,-104.14,73.66,SPI-6,S,,,,"/>
-<approved hash="101,1,-104.14,66.04,SPI-9,S,,,,"/>
-<approved hash="101,1,-104.14,63.5,SPI-10,S,,,,"/>
 <approved hash="102,1,-53.34,91.44,VSS,GND,,,,"/>
 <approved hash="201,1,-53.34,91.44,VSS,VSS\, GND,,,,"/>
 <approved hash="104,1,203.2,-53.34,IC2,GND_1,VSS,,,"/>

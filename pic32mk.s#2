@@ -15645,6 +15645,12 @@ Source: www.kingbright.com</description>
 <plain>
 <text x="-12.7" y="-109.22" size="1.778" layer="91">change to VDD from VSS</text>
 <text x="-12.7" y="-86.36" size="1.778" layer="91">change to VSS from orig VCC</text>
+<text x="-132.08" y="-40.64" size="1.778" layer="91">A</text>
+<text x="-132.08" y="-50.8" size="1.778" layer="91">B</text>
+<text x="-132.08" y="-35.56" size="1.778" layer="91">Index</text>
+<text x="-137.16" y="-33.02" size="1.778" layer="91">Index</text>
+<text x="-137.16" y="-30.48" size="1.778" layer="91">A</text>
+<text x="-137.16" y="-27.94" size="1.778" layer="91">B</text>
 </plain>
 <instances>
 <instance part="IC1" gate="G$1" x="12.7" y="45.72" smashed="yes">
