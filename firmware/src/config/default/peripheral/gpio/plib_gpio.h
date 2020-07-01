@@ -157,14 +157,14 @@
 #define GPIO_RC11_OutputEnable()      (TRISCCLR = (1<<11))
 #define GPIO_RC11_InputEnable()       (TRISCSET = (1<<11))
 #define GPIO_RC11_PIN                  GPIO_PIN_RC11
-/*** Macros for GPIO_RG11 pin ***/
-#define GPIO_RG11_Set()               (LATGSET = (1<<11))
-#define GPIO_RG11_Clear()             (LATGCLR = (1<<11))
-#define GPIO_RG11_Toggle()            (LATGINV= (1<<11))
-#define GPIO_RG11_Get()               ((PORTG >> 11) & 0x1)
-#define GPIO_RG11_OutputEnable()      (TRISGCLR = (1<<11))
-#define GPIO_RG11_InputEnable()       (TRISGSET = (1<<11))
-#define GPIO_RG11_PIN                  GPIO_PIN_RG11
+/*** Macros for DERE pin ***/
+#define DERE_Set()               (LATGSET = (1<<11))
+#define DERE_Clear()             (LATGCLR = (1<<11))
+#define DERE_Toggle()            (LATGINV= (1<<11))
+#define DERE_Get()               ((PORTG >> 11) & 0x1)
+#define DERE_OutputEnable()      (TRISGCLR = (1<<11))
+#define DERE_InputEnable()       (TRISGSET = (1<<11))
+#define DERE_PIN                  GPIO_PIN_RG11
 /*** Macros for U1FS pin ***/
 #define U1FS_Set()               (LATESET = (1<<12))
 #define U1FS_Clear()             (LATECLR = (1<<12))
@@ -261,14 +261,14 @@
 #define IN7_OutputEnable()      (TRISBCLR = (1<<5))
 #define IN7_InputEnable()       (TRISBSET = (1<<5))
 #define IN7_PIN                  GPIO_PIN_RB5
-/*** Macros for DERE pin ***/
-#define DERE_Set()               (LATBSET = (1<<8))
-#define DERE_Clear()             (LATBCLR = (1<<8))
-#define DERE_Toggle()            (LATBINV= (1<<8))
-#define DERE_Get()               ((PORTB >> 8) & 0x1)
-#define DERE_OutputEnable()      (TRISBCLR = (1<<8))
-#define DERE_InputEnable()       (TRISBSET = (1<<8))
-#define DERE_PIN                  GPIO_PIN_RB8
+/*** Macros for GPIO_RC13 pin ***/
+#define GPIO_RC13_Set()               (LATCSET = (1<<13))
+#define GPIO_RC13_Clear()             (LATCCLR = (1<<13))
+#define GPIO_RC13_Toggle()            (LATCINV= (1<<13))
+#define GPIO_RC13_Get()               ((PORTC >> 13) & 0x1)
+#define GPIO_RC13_OutputEnable()      (TRISCCLR = (1<<13))
+#define GPIO_RC13_InputEnable()       (TRISCSET = (1<<13))
+#define GPIO_RC13_PIN                  GPIO_PIN_RC13
 /*** Macros for DO1 pin ***/
 #define DO1_Set()               (LATDSET = (1<<12))
 #define DO1_Clear()             (LATDCLR = (1<<12))

@@ -15479,7 +15479,6 @@ Source: www.kingbright.com</description>
 <part name="VSS25" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 <part name="VSS26" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 <part name="SV2" library="con-lstb" library_urn="urn:adsk.eagle:library:162" deviceset="MA06-1" device="" package3d_urn="urn:adsk.eagle:package:8340/1" value="ICSP2"/>
-<part name="VSS28" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 <part name="OS2" library="IQD-Frequency-Products" library_urn="urn:adsk.eagle:library:90" deviceset="OSC-OE" device="-IQXO-793" package3d_urn="urn:adsk.eagle:package:3371/1"/>
 <part name="C12" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1"/>
 <part name="VDD17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
@@ -15598,7 +15597,6 @@ Source: www.kingbright.com</description>
 <part name="P+8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="+3V2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="C27" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="22uf"/>
-<part name="P+22" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="VDD19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 <part name="U3" library="maxim-10" deviceset="ULN2803ADW" device=""/>
 <part name="SUPPLY3" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
@@ -15639,10 +15637,14 @@ Source: www.kingbright.com</description>
 <part name="VSS67" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 <part name="VDD20" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 <part name="P+33" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="VSS68" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="VDD25" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
+<text x="-12.7" y="-109.22" size="1.778" layer="91">change to VDD from VSS</text>
+<text x="-12.7" y="-86.36" size="1.778" layer="91">change to VSS from orig VCC</text>
 </plain>
 <instances>
 <instance part="IC1" gate="G$1" x="12.7" y="45.72" smashed="yes">
@@ -15828,9 +15830,6 @@ Source: www.kingbright.com</description>
 <instance part="SV2" gate="1" x="-30.48" y="-96.52" smashed="yes">
 <attribute name="VALUE" x="-31.75" y="-109.22" size="1.778" layer="96"/>
 <attribute name="NAME" x="-31.75" y="-88.138" size="1.778" layer="95"/>
-</instance>
-<instance part="VSS28" gate="G$1" x="-15.24" y="-111.76" smashed="yes">
-<attribute name="VALUE" x="-17.78" y="-116.84" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="OS2" gate="A" x="238.76" y="45.72" smashed="yes" rot="R180">
 <attribute name="NAME" x="246.38" y="37.465" size="1.778" layer="95" rot="R180"/>
@@ -16286,9 +16285,6 @@ Source: www.kingbright.com</description>
 <attribute name="NAME" x="59.055" y="-130.556" size="1.778" layer="95" rot="R270"/>
 <attribute name="VALUE" x="54.229" y="-130.556" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="P+22" gate="VCC" x="-15.24" y="-83.82" smashed="yes">
-<attribute name="VALUE" x="-17.78" y="-83.82" size="1.778" layer="96" rot="R90"/>
-</instance>
 <instance part="VDD19" gate="G$1" x="-48.26" y="-104.14" smashed="yes">
 <attribute name="VALUE" x="-50.8" y="-106.68" size="1.778" layer="96" rot="R90"/>
 </instance>
@@ -16462,8 +16458,8 @@ Source: www.kingbright.com</description>
 <instance part="VSS61" gate="G$1" x="35.56" y="-129.54" smashed="yes" rot="R90">
 <attribute name="VALUE" x="40.64" y="-132.08" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="P+32" gate="1" x="27.94" y="-162.56" smashed="yes">
-<attribute name="VALUE" x="25.4" y="-167.64" size="1.778" layer="96" rot="R90"/>
+<instance part="P+32" gate="1" x="33.02" y="-162.56" smashed="yes">
+<attribute name="VALUE" x="30.48" y="-167.64" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="C28" gate="G$1" x="17.78" y="-167.64" smashed="yes">
 <attribute name="NAME" x="18.796" y="-167.005" size="1.778" layer="95"/>
@@ -16512,6 +16508,12 @@ Source: www.kingbright.com</description>
 </instance>
 <instance part="P+33" gate="VCC" x="147.32" y="132.08" smashed="yes" rot="R270">
 <attribute name="VALUE" x="147.32" y="134.62" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="VSS68" gate="G$1" x="-15.24" y="-83.82" smashed="yes" rot="R180">
+<attribute name="VALUE" x="-12.7" y="-78.74" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="VDD25" gate="G$1" x="-15.24" y="-111.76" smashed="yes" rot="R180">
+<attribute name="VALUE" x="-12.7" y="-111.76" size="1.778" layer="96" rot="R270"/>
 </instance>
 </instances>
 <busses>
@@ -16740,6 +16742,14 @@ Source: www.kingbright.com</description>
 <junction x="157.48" y="134.62"/>
 <pinref part="VDD20" gate="G$1" pin="VDD"/>
 </segment>
+<segment>
+<pinref part="SV2" gate="1" pin="2"/>
+<wire x1="-22.86" y1="-101.6" x2="-15.24" y2="-101.6" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="-101.6" x2="-15.24" y2="-109.22" width="0.1524" layer="91"/>
+<junction x="-22.86" y="-101.6"/>
+<pinref part="VDD25" gate="G$1" pin="VDD"/>
+<junction x="-15.24" y="-109.22"/>
+</segment>
 </net>
 <net name="VSS" class="0">
 <segment>
@@ -16896,14 +16906,6 @@ Source: www.kingbright.com</description>
 <pinref part="C11" gate="G$1" pin="2"/>
 <pinref part="VSS26" gate="G$1" pin="VSS"/>
 <junction x="-76.2" y="101.6"/>
-</segment>
-<segment>
-<pinref part="SV2" gate="1" pin="2"/>
-<wire x1="-22.86" y1="-101.6" x2="-15.24" y2="-101.6" width="0.1524" layer="91"/>
-<wire x1="-15.24" y1="-101.6" x2="-15.24" y2="-109.22" width="0.1524" layer="91"/>
-<pinref part="VSS28" gate="G$1" pin="VSS"/>
-<junction x="-15.24" y="-109.22"/>
-<junction x="-22.86" y="-101.6"/>
 </segment>
 <segment>
 <pinref part="OS2" gate="A" pin="VSS"/>
@@ -17251,6 +17253,14 @@ Source: www.kingbright.com</description>
 <junction x="144.78" y="137.16"/>
 <pinref part="VSS67" gate="G$1" pin="VSS"/>
 </segment>
+<segment>
+<pinref part="SV2" gate="1" pin="3"/>
+<wire x1="-22.86" y1="-99.06" x2="-15.24" y2="-99.06" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="-99.06" x2="-15.24" y2="-86.36" width="0.1524" layer="91"/>
+<junction x="-22.86" y="-99.06"/>
+<pinref part="VSS68" gate="G$1" pin="VSS"/>
+<junction x="-15.24" y="-86.36"/>
+</segment>
 </net>
 <net name="+5V" class="0">
 <segment>
@@ -17280,10 +17290,10 @@ Source: www.kingbright.com</description>
 <junction x="20.32" y="-165.1"/>
 <wire x1="20.32" y1="-165.1" x2="22.86" y2="-165.1" width="0.1524" layer="91"/>
 <pinref part="P+32" gate="1" pin="+5V"/>
-<junction x="27.94" y="-165.1"/>
+<junction x="33.02" y="-165.1"/>
 <pinref part="C28" gate="G$1" pin="1"/>
 <pinref part="C29" gate="G$1" pin="1"/>
-<wire x1="22.86" y1="-165.1" x2="27.94" y2="-165.1" width="0.1524" layer="91"/>
+<wire x1="22.86" y1="-165.1" x2="33.02" y2="-165.1" width="0.1524" layer="91"/>
 <junction x="22.86" y="-165.1"/>
 </segment>
 </net>
@@ -17393,14 +17403,6 @@ Source: www.kingbright.com</description>
 <junction x="-111.76" y="-160.02"/>
 <pinref part="P+8" gate="VCC" pin="VCC"/>
 <junction x="-111.76" y="-165.1"/>
-</segment>
-<segment>
-<pinref part="SV2" gate="1" pin="3"/>
-<wire x1="-22.86" y1="-99.06" x2="-15.24" y2="-99.06" width="0.1524" layer="91"/>
-<wire x1="-15.24" y1="-99.06" x2="-15.24" y2="-86.36" width="0.1524" layer="91"/>
-<junction x="-22.86" y="-99.06"/>
-<pinref part="P+22" gate="VCC" pin="VCC"/>
-<junction x="-15.24" y="-86.36"/>
 </segment>
 <segment>
 <pinref part="RS485" gate="-5" pin="S"/>

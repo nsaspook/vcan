@@ -128,17 +128,12 @@ void eaDogM_ClearRow(const uint8_t r)
 void eaDogM_WriteString(char *strPtr)
 {
 	uint8_t i = strlen(strPtr);
-	uint8_t bytesWritten = 0;
 
 	RS_SetHigh();
 	CSB_SetLow();
 	if (i > max_strlen) strPtr[max_strlen] = 0; // buffer overflow check
 
-	while (bytesWritten < i) {
-		wdtdelay(IS_DELAYSHORT); // inter-character spacing for LCD code execute delays
-		SPI1_Exchange8bit(strPtr[bytesWritten]);
-		bytesWritten++;
-	}
+	SPI3_Write(strPtr, i); // use interrupt mode so we don't wait
 }
 
 void eaDogM_WriteStringAtPos(const uint8_t r, const uint8_t c, char *strPtr)

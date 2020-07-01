@@ -116,7 +116,7 @@ void RTCC_Initialize( void )
     RTCCONCLR = _RTCCON_RTCOE_MASK;  /* Enable RTCC output */
 
     /* Set RTCC clock source (LPRC/SOSC) */
-    RTCCONbits.RTCCLKSEL = 1;
+    RTCCONbits.RTCCLKSEL = 0;
 
     /* start the RTC */
     RTCCONSET = _RTCCON_ON_MASK;

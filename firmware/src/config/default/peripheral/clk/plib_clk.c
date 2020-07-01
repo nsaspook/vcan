@@ -99,7 +99,21 @@ void CLK_Initialize( void )
     }
 
  
-      
+        /* Set up Reference Clock 1 */
+    /* REFO1CON register */
+    /* ROSEL =  SPLL */
+    /* DIVSWEN = 1 */
+    /* RODIV = 7 */
+    REFO1CON = 0x70207;
+
+    /* REFO1TRIM register */
+    /* ROTRIM = 256 */
+    REFO1TRIM = 0x80000000;
+
+    /* Enable oscillator (ON bit) */
+    REFO1CONSET = 0x00008000;
+
+  
 
     /* Peripheral Module Disable Configuration */
     PMD1 = 0x100370;

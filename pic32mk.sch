@@ -15737,16 +15737,16 @@ Source: www.kingbright.com</description>
 <attribute name="NAME" x="258.064" y="14.605" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="258.064" y="19.431" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="C3" gate="G$1" x="185.42" y="-60.96" smashed="yes">
-<attribute name="NAME" x="186.436" y="-60.325" size="1.778" layer="95"/>
-<attribute name="VALUE" x="186.436" y="-65.151" size="1.778" layer="96"/>
+<instance part="C3" gate="G$1" x="180.34" y="-60.96" smashed="yes">
+<attribute name="NAME" x="176.276" y="-60.325" size="1.778" layer="95"/>
+<attribute name="VALUE" x="181.356" y="-65.151" size="1.778" layer="96"/>
 </instance>
 <instance part="C4" gate="G$1" x="195.58" y="-53.34" smashed="yes" rot="R180">
 <attribute name="NAME" x="194.564" y="-53.975" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="194.564" y="-49.149" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="VSS12" gate="G$1" x="185.42" y="-68.58" smashed="yes">
-<attribute name="VALUE" x="182.88" y="-73.66" size="1.778" layer="96" rot="R90"/>
+<instance part="VSS12" gate="G$1" x="180.34" y="-68.58" smashed="yes">
+<attribute name="VALUE" x="177.8" y="-73.66" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="VSS13" gate="G$1" x="195.58" y="-45.72" smashed="yes" rot="R180">
 <attribute name="VALUE" x="198.12" y="-40.64" size="1.778" layer="96" rot="R270"/>
@@ -16897,7 +16897,7 @@ Source: www.kingbright.com</description>
 <segment>
 <pinref part="C3" gate="G$1" pin="2"/>
 <pinref part="VSS12" gate="G$1" pin="VSS"/>
-<junction x="185.42" y="-66.04"/>
+<junction x="180.34" y="-66.04"/>
 </segment>
 <segment>
 <pinref part="C4" gate="G$1" pin="2"/>
@@ -17357,11 +17357,11 @@ Source: www.kingbright.com</description>
 </segment>
 <segment>
 <pinref part="IC2" gate="G$1" pin="VIO"/>
-<wire x1="203.2" y1="-58.42" x2="185.42" y2="-58.42" width="0.1524" layer="91"/>
+<wire x1="203.2" y1="-58.42" x2="180.34" y2="-58.42" width="0.1524" layer="91"/>
 <junction x="203.2" y="-58.42"/>
 <pinref part="C3" gate="G$1" pin="1"/>
-<wire x1="185.42" y1="-58.42" x2="175.26" y2="-58.42" width="0.1524" layer="91"/>
-<junction x="185.42" y="-58.42"/>
+<wire x1="180.34" y1="-58.42" x2="175.26" y2="-58.42" width="0.1524" layer="91"/>
+<junction x="180.34" y="-58.42"/>
 <pinref part="P+11" gate="VCC" pin="VCC"/>
 <junction x="175.26" y="-58.42"/>
 </segment>
@@ -17518,18 +17518,6 @@ Source: www.kingbright.com</description>
 <pinref part="IC1" gate="G$1" pin="PGEC1/OA1IN+/AN4/C1IN1+/C1IN3-/C2IN3-/RPB2/RB2"/>
 <wire x1="55.88" y1="-88.9" x2="55.88" y2="-93.98" width="0.1524" layer="91"/>
 <junction x="55.88" y="-88.9"/>
-</segment>
-</net>
-<net name="N$16" class="0">
-<segment>
-<pinref part="OS2" gate="A" pin="OUT"/>
-<wire x1="226.06" y1="43.18" x2="226.06" y2="45.72" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="G$1" pin="SOSCI/RPC13(4)/RC13(4)"/>
-<wire x1="160.02" y1="40.64" x2="218.44" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="218.44" y1="40.64" x2="218.44" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="218.44" y1="43.18" x2="226.06" y2="43.18" width="0.1524" layer="91"/>
-<junction x="160.02" y="40.64"/>
-<junction x="226.06" y="45.72"/>
 </segment>
 </net>
 <net name="RE8" class="0">
@@ -18564,25 +18552,6 @@ Source: www.kingbright.com</description>
 <label x="190.5" y="-71.12" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="DERE" class="0">
-<segment>
-<pinref part="IC2" gate="G$1" pin="!RE"/>
-<pinref part="IC2" gate="G$1" pin="DE"/>
-<wire x1="203.2" y1="-66.04" x2="203.2" y2="-63.5" width="0.1524" layer="91"/>
-<wire x1="203.2" y1="-63.5" x2="195.58" y2="-63.5" width="0.1524" layer="91"/>
-<junction x="195.58" y="-63.5"/>
-<junction x="203.2" y="-63.5"/>
-<junction x="203.2" y="-66.04"/>
-<label x="190.5" y="-66.04" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="IC1" gate="G$1" pin="SOSCO/RPB8(4)/RB8(4)"/>
-<wire x1="160.02" y1="43.18" x2="185.42" y2="43.18" width="0.1524" layer="91"/>
-<junction x="160.02" y="43.18"/>
-<junction x="185.42" y="43.18"/>
-<label x="187.96" y="43.18" size="1.778" layer="95"/>
-</segment>
-</net>
 <net name="IN5" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="AN45/CVD45/RF5"/>
@@ -19286,6 +19255,16 @@ Source: www.kingbright.com</description>
 <junction x="114.3" y="-157.48"/>
 <label x="137.16" y="-157.48" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="IC2" gate="G$1" pin="!RE"/>
+<pinref part="IC2" gate="G$1" pin="DE"/>
+<wire x1="203.2" y1="-66.04" x2="203.2" y2="-63.5" width="0.1524" layer="91"/>
+<junction x="203.2" y="-66.04"/>
+<wire x1="203.2" y1="-66.04" x2="195.58" y2="-66.04" width="0.1524" layer="91"/>
+<junction x="203.2" y="-63.5"/>
+<junction x="195.58" y="-66.04"/>
+<label x="187.96" y="-66.04" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="RF13" class="0">
 <segment>
@@ -19582,6 +19561,26 @@ Source: www.kingbright.com</description>
 <label x="149.86" y="119.38" size="1.778" layer="95"/>
 </segment>
 </net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="SOSCO/RPB8(4)/RB8(4)"/>
+<wire x1="160.02" y1="43.18" x2="220.98" y2="43.18" width="0.1524" layer="91"/>
+<pinref part="OS2" gate="A" pin="OUT"/>
+<wire x1="220.98" y1="43.18" x2="220.98" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="45.72" x2="226.06" y2="45.72" width="0.1524" layer="91"/>
+<junction x="160.02" y="43.18"/>
+<junction x="226.06" y="45.72"/>
+</segment>
+</net>
+<net name="SOSCI" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="SOSCI/RPC13(4)/RC13(4)"/>
+<wire x1="160.02" y1="40.64" x2="185.42" y2="40.64" width="0.1524" layer="91"/>
+<junction x="160.02" y="40.64"/>
+<junction x="185.42" y="40.64"/>
+<label x="185.42" y="40.64" size="1.778" layer="95"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
@@ -19618,6 +19617,7 @@ Source: www.kingbright.com</description>
 <approved hash="104,1,25.4,-129.54,U4,GND_S,VSS,,,"/>
 <approved hash="206,1,20.32,-129.54,REFOUT,,,,,"/>
 <approved hash="206,1,17.78,-129.54,REFOUT,,,,,"/>
+<approved hash="106,1,160.02,40.64,SOSCI,,,,,"/>
 </errors>
 </schematic>
 </drawing>

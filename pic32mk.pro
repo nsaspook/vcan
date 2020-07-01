@@ -1,25 +1,25 @@
 EAGLE AutoRouter Statistics:
 
-Job           : /fred/qei_test/pic32mk.brd
+Job           : /root/vcan/pic32mk.brd
 
-Start at      : 12:24:18 (6/30/20)
-End at        : 12:27:53 (6/30/20)
-Elapsed time  : 00:03:32
+Start at      : 23:51:30 (6/30/20)
+End at        : 16:00:00 (12/31/69)
+Elapsed time  : 00:03:13
 
 Signals       :   138   RoutingGrid: 3 mil  Layers: 2
-Connections   :   382   predefined:  381 ( 449 Vias )
+Connections   :   382   predefined:  381 ( 444 Vias )
 
 Router memory :   6702200
 
-Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4 Optimize5 Optimize6 Optimize7 Optimize8 Optimize9Optimize10Optimize11Optimize12
+Passname          : TopRouter     Route
 
-Time per pass     :  00:02:59  00:00:01  00:00:03  00:00:03  00:00:02  00:00:03  00:00:03  00:00:02  00:00:03  00:00:03  00:00:03  00:00:02  00:00:03  00:00:02
-Number of Ripups  :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
-max. Level        :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
-max. Total        :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
+Time per pass     :  00:03:13  00:00:00
+Number of Ripups  :         0         0
+max. Level        :         0         1
+max. Total        :         0         0
 
-Routed            :         0         1         1         1         1         1         1         1         1         1         1         1         1         1
-Vias              :         0         1         1         1         1         1         1         1         1         1         1         1         1         1
-Resolution        :    99.7 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
+Routed            :         0         0
+Vias              :         0         0
+Resolution        :    99.7 %    99.7 %
 
-Final             : 100.0% finished
+Final             : 99.7% finished

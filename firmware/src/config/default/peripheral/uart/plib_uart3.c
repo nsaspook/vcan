@@ -112,15 +112,15 @@ void UART3_Initialize( void )
     /* WAKE = 0 */
     /* SIDL = 0 */
     /* RUNOVF = 0 */
-    /* CLKSEL = 0 */
+    /* CLKSEL = 3 */
     /* SLPEN = 0 */
-    U3MODE = 0x0;
+    U3MODE = 0x60000;
 
     /* Enable UART3 Receiver, Transmitter and TX Interrupt selection */
     U3STASET = (_U3STA_UTXEN_MASK | _U3STA_URXEN_MASK | _U3STA_UTXISEL0_MASK);
 
     /* BAUD Rate register Setup */
-    U3BRG = 2;
+    U3BRG = 3;
 
     IEC2CLR = _IEC2_U3TXIE_MASK;
 

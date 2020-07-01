@@ -112,15 +112,15 @@ void UART6_Initialize( void )
     /* WAKE = 0 */
     /* SIDL = 0 */
     /* RUNOVF = 0 */
-    /* CLKSEL = 0 */
+    /* CLKSEL = 3 */
     /* SLPEN = 0 */
-    U6MODE = 0x0;
+    U6MODE = 0x60000;
 
     /* Enable UART6 Receiver, Transmitter and TX Interrupt selection */
     U6STASET = (_U6STA_UTXEN_MASK | _U6STA_URXEN_MASK | _U6STA_UTXISEL0_MASK);
 
     /* BAUD Rate register Setup */
-    U6BRG = 2;
+    U6BRG = 3;
 
     IEC5CLR = _IEC5_U6TXIE_MASK;
 

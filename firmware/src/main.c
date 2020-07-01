@@ -115,7 +115,7 @@ int main(void)
 #ifdef QEI_SLOW
 			LATGbits.LATG12 = m35_1.pos >> 3;
 			LATGbits.LATG13 = m35_1.pos >> 5;
-			LATGbits.LATG14 = m35_2.pos >> 12;
+			LATGbits.LATG14 = m35_2.pos >> 6;
 #else
 			LATGbits.LATG12 = m35_ptr->pos >> 10;
 			LATGbits.LATG13 = m35_ptr->pos >> 12;
@@ -134,6 +134,7 @@ int main(void)
 			m35_2.hb1l = 1000 + (m35_1.pos >> 2);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.hb1h);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.hb1l);
+			uart_tests();
 		} else {
 			//run_tests(100000); // port diagnostics
 		}

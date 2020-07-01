@@ -55,7 +55,7 @@ SPI_OBJECT spi3Obj;
 #define SPI3_CON_CKE                        (1 << _SPI3CON_CKE_POSITION)
 #define SPI3_CON_MODE_32_MODE_16            (0 << _SPI3CON_MODE16_POSITION)
 #define SPI3_CON_ENHBUF                     (1 << _SPI3CON_ENHBUF_POSITION)
-#define SPI3_CON_MCLKSEL                    (0 << _SPI3CON_MCLKSEL_POSITION)
+#define SPI3_CON_MCLKSEL                    (1 << _SPI3CON_MCLKSEL_POSITION)
 #define SPI3_CON_MSSEN                      (0 << _SPI3CON_MSSEN_POSITION)
 #define SPI3_CON_SMP                        (0 << _SPI3CON_SMP_POSITION)
 
@@ -93,7 +93,7 @@ void SPI3_Initialize ( void )
     MODE<32,16> = 0
     ENHBUF = 1
     MSSEN = 0
-    MCLKSEL = 0
+    MCLKSEL = 1
     */
     SPI3CONSET = (SPI3_CON_MSSEN | SPI3_CON_MCLKSEL | SPI3_CON_ENHBUF | SPI3_CON_MODE_32_MODE_16 | SPI3_CON_CKE | SPI3_CON_CKP | SPI3_CON_MSTEN | SPI3_CON_SMP);
 
@@ -125,7 +125,7 @@ bool SPI3_TransferSetup (SPI_TRANSFER_SETUP* setup, uint32_t spiSourceClock )
     if(spiSourceClock == 0)
     {
         // Use Master Clock Frequency set in GUI
-        spiSourceClock = 6000000;
+        spiSourceClock = 8000000;
     }
 
     t_brg = (((spiSourceClock / (setup->clockFrequency)) / 2u) - 1u);

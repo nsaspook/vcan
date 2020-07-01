@@ -33,10 +33,10 @@ extern "C" {
 #define LCD_CMD_SET	0x100
 #define LCD_CLEAR_HOME	0x04
 	/*
-	 * for 2MHz SPI clock on PIC18f47K42 64MHz clock from PLL
+	 * for 2MHz SPI clock
 	 */
-#define IS_DELAYSHORT	9
-#define IS_DELAYMED	10
+#define IS_DELAYSHORT	4
+#define IS_DELAYMED	5
 #define IS_DELAYLONG	800
 #define IS_DELAYPOWERUP	350000
 

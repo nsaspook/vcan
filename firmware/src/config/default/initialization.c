@@ -72,7 +72,7 @@
 /*** DEVCFG1 ***/
 #pragma config FNOSC =      POSC
 #pragma config DMTINTV =    WIN_127_128
-#pragma config FSOSCEN =    ON
+#pragma config FSOSCEN =    OFF
 #pragma config IESO =       ON
 #pragma config POSCMOD =    EC
 #pragma config OSCIOFNC =   OFF
