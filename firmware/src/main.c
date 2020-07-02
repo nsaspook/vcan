@@ -79,7 +79,7 @@ int main(void)
 
 	sprintf(buffer, " VCAN Testing ");
 	eaDogM_WriteStringAtPos(0, 0, buffer);
-	MCPWM_Start();
+
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.hb1h);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.hb1l);
 	//	MCPWM_ChannelPinsOwnershipDisable(MCPWM_CH_1);
@@ -88,6 +88,7 @@ int main(void)
 	//	TRISBbits.TRISB15=0;
 	//	LATBbits.LATB14=0;
 	//	LATBbits.LATB15=1;
+	MCPWM_Start();
 
 
 	while (true) {
