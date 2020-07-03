@@ -29,9 +29,6 @@
               <itemPath>../src/config/default/peripheral/qei/plib_qei1.h</itemPath>
               <itemPath>../src/config/default/peripheral/qei/plib_qei2.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f9" displayName="rtcc" projectFiles="true">
-              <itemPath>../src/config/default/peripheral/rtcc/plib_rtcc.h</itemPath>
-            </logicalFolder>
             <logicalFolder name="f4" displayName="spi" projectFiles="true">
               <itemPath>../src/config/default/peripheral/spi/plib_spi_common.h</itemPath>
               <itemPath>../src/config/default/peripheral/spi/plib_spi3.h</itemPath>
@@ -86,9 +83,6 @@
             <logicalFolder name="f3" displayName="qei" projectFiles="true">
               <itemPath>../src/config/default/peripheral/qei/plib_qei1.c</itemPath>
               <itemPath>../src/config/default/peripheral/qei/plib_qei2.c</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f9" displayName="rtcc" projectFiles="true">
-              <itemPath>../src/config/default/peripheral/rtcc/plib_rtcc.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f4" displayName="spi" projectFiles="true">
               <itemPath>../src/config/default/peripheral/spi/plib_spi3.c</itemPath>

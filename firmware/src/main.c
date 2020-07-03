@@ -105,8 +105,14 @@ int main(void)
 	sprintf(buffer, " VCAN Testing ");
 	eaDogM_WriteStringAtPos(0, 0, buffer);
 
+//	CFGCONbits.PWMAPIN1=0;
+//	MCPWM_ChannelPinsOwnershipEnable(MCPWM_CH_1);
+//	MCPWM_ChannelPinsOwnershipDisable(MCPWM_CH_1);
+	
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_2.duty);
 	MCPWM_Start();
 
 	PWM_motor2(M_STOP);
@@ -168,6 +174,8 @@ int main(void)
 
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
+			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_2.duty);
 
 		} else {
 			//run_tests(100000); // port diagnostics
