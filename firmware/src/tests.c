@@ -37,10 +37,8 @@ bool uart_tests(void)
 	while (UART3_WriteFreeBufferCountGet() < 10);
 	UART3_Write((uint8_t*) " Tests 3", 8);
 
-	DERE_Toggle();
 	while (UART6_WriteFreeBufferCountGet() < 10);
 	UART6_Write((uint8_t*) " Tests 6", 8);
-	DERE_Toggle();
 
 	return true;
 }

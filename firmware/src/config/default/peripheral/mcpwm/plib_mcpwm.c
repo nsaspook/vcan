@@ -51,9 +51,9 @@ void MCPWM_Initialize (void)
 {
     /* PTCON register  */
     /*  SEVTPS  = 0 */
-    /*  PCLKDIV = 6 */
+    /*  PCLKDIV = 0 */
     /*  SEIEN   = false */
-    PTCON = 0x60;
+    PTCON = 0x0;
 
     /* STCON register  */
     /*  SEVTPS  = 0 */
@@ -61,65 +61,10 @@ void MCPWM_Initialize (void)
     /*  SSEIEN = false */
     STCON = 0x0;
 
-    PTPER = 1000;
+    PTPER = 0;
     STPER = 2000;
     SEVTCMP = 0;
     SSEVTCMP = 0;
-
-    /*********** Channel 1 Configurations **********/
-    /* PWMCON1 register  */
-    /*  MTBS   = 0 */
-    /*  PTDIR  =  0 */
-    /*  ECAM   =  0 */
-    /*  DTCP   =  0 */
-    /*  DTC    =  2 */
-    /*  ITB    = 1 */
-    /*  PWMHIEN =  false */
-    /*  PWMLIEN = false */
-    /*  TRGIEN = false */
-    /*  CLIEN = false */
-    /*  FLTIEN = false */
-    PWMCON1 = 0x280;
-
-    /* IOCON1 register  */
-    /*  SWAP    = 0*/
-    /*  PMOD    = 0*/
-    /*  POLH    = 1*/
-    /*  POLL    = 1*/
-    /*  FLTDAT  = 0b11 */
-    /*  FLTMOD  = 0 */
-    /*  FLTPOL  = 1  */
-    /*  FLTSRC  = 4  */
-    /*  CLDAT  = 0b11 */
-    /*  CLMOD  = 1 */
-    /*  CLPOL  = 0  */
-    /*  CLSRC  = 15  */
-    IOCON1 = 0x3d24d83c;
-
-    PDC1 = 1000;
-    SDC1 = 500;
-    PHASE1 = 2000;
-
-    /* Dead Time */
-    DTR1 = 75;
-    ALTDTR1 = 75;
-
-    /* Trigger Generator */
-    TRGCON1 = 0x0;
-    TRIG1 = 0;
-    STRIG1 = 0;
-
-    /* leading edge blanking */
-    /* LEBCON1 register  */
-    /*  CLLEBEN    = false  */
-    /*  FLTLEBEN   = false */
-    /*  PLF        = 0  */
-    /*  PLR        = 0  */
-    /*  PHF        = 0  */
-    /*  PHR        = 0  */
-    LEBCON1 = 0x0;
-    LEBDLY1 = 10;
-
 
     /*********** Channel 2 Configurations **********/
     /* PWMCON2 register  */
@@ -127,14 +72,14 @@ void MCPWM_Initialize (void)
     /*  PTDIR  =  0 */
     /*  ECAM   =  0 */
     /*  DTCP   =  0 */
-    /*  DTC    =  2 */
+    /*  DTC    =  3 */
     /*  ITB    = 1 */
     /*  PWMHIEN =  false */
     /*  PWMLIEN = false */
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON2 = 0x280;
+    PWMCON2 = 0x2c0;
 
     /* IOCON2 register  */
     /*  SWAP    = 0*/

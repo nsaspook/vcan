@@ -33,77 +33,41 @@
 #include "eadog.h"
 
 
-QEI_DATA m35_1,
-	m35_2 = {
-	.hb1h = 1000,
-	.hb1l = 1000,
+QEI_DATA m35_1 = {
+	.gain = pos_gain,
+},
+m35_2 = {
+	.duty = 1000,
+	.gain = error_gain,
 },
 *m35_ptr;
 
 void reset_led_blink(uintptr_t);
 
-static void PWMInit(void)
+static void PWM_motor2(M_CTRL mmode)
 {
+	IOCON2bits.OVRDAT = 3;
 
-	//Disable PWM module.
-	PTCON = 0x0;
-	PTCONbits.PTEN = 0;
+	switch (mmode) {
+	case M_PWM:
+		IOCON2bits.OVRENH = 0;
+		IOCON2bits.OVRENL = 0;
+		break;
+	case M_CW:
+		IOCON2bits.OVRENH = 0;
+		IOCON2bits.OVRENL = 1;
+		break;
+	case M_CCW:
+		IOCON2bits.OVRENH = 1;
+		IOCON2bits.OVRENL = 0;
+		break;
+	case M_STOP:
+	default:
+		IOCON2bits.OVRENH = 1;
+		IOCON2bits.OVRENL = 1;
+		break;
+	}
 
-	// Disable PWMx module except PWM5. see DS80000737F.36
-	// To change PMDx registers, CFGCON.PMDLOCK must be cleared before.
-	// To change CFGCON register, an unlock sequence must be executed.
-
-	// Write Unlock Sequence to allow write access to CFGCON register
-	SYSKEY = 0xAA996655; // Write Key1 to SYSKEY
-	SYSKEY = 0x556699AA; // Write Key2 to SYSKEY
-
-	CFGCONbits.PMDLOCK = 0; // Unlock PMDx registers.
-
-
-	// Set PWMxMD bits to disable PWMx.
-	PMD4bits.PWM1MD = 0;
-	PMD4bits.PWM2MD = 0;
-	PMD4bits.PWM3MD = 1;
-	PMD4bits.PWM4MD = 1;
-	PMD4bits.PWM5MD = 1;
-	PMD4bits.PWM6MD = 1;
-	PMD4bits.PWM7MD = 1;
-	PMD4bits.PWM8MD = 1;
-	PMD4bits.PWM9MD = 1;
-	PMD4bits.PWM10MD = 1;
-	PMD4bits.PWM11MD = 1;
-	PMD4bits.PWM12MD = 1;
-
-	SYSKEY = 0xAA996655; // Write Key1 to SYSKEY
-	SYSKEY = 0x556699AA; // Write Key2 to SYSKEY
-
-	CFGCONbits.PMDLOCK = 1;
-
-	PTCONbits.PCLKDIV = 2;
-
-
-	PTPERbits.PTPER = 2000; //master timer period
-
-	PHASE1 = 0;
-
-
-	PDC1bits.PDC = 16;
-
-	// set PWM1 time base as primary master time base
-	PWMCON1 = 0;
-	PWMCON1bits.ITB = 0; //use PTPER or STPER
-	PWMCON1bits.MTBS = 1; //use primary master time base.
-	PWMCON1bits.ECAM = 1; //Edge-Aligned mode
-	PWMCON1bits.DTC = 2; // 2 = Dead time function is disabled
-	PWMCON1bits.PTDIR = 0; //PWM5 timer mode: increase
-
-	IOCON1bits.PMOD = 0; // PWM mode
-	IOCON1bits.FLTMOD = 0; //Fault input is disabled. (must clear this field or PWMx not function)
-	IOCON1bits.PENH = 1; //enable PWM5H pin.
-	IOCON1bits.PENL = 1;
-
-	SYSKEY = 0x0; //Lock Write access to CFGCON register
-	PTCONbits.PTEN = 1; //Enable PWM module.
 }
 
 // *****************************************************************************
@@ -118,9 +82,6 @@ int main(void)
 	char buffer[40];
 
 	//	struct tm Time = {0};
-#ifdef BOARD_TESTS
-	int i = 0;
-#endif
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
@@ -144,61 +105,24 @@ int main(void)
 	sprintf(buffer, " VCAN Testing ");
 	eaDogM_WriteStringAtPos(0, 0, buffer);
 
-
-	//	MCPWM_ChannelPinsOwnershipDisable(MCPWM_CH_1);
-	//	MCPWM_Stop();
-	//	TRISBbits.TRISB14=0;
-	//	TRISBbits.TRISB15=0;
-	//	LATBbits.LATB14=0;
-	//	LATBbits.LATB15=1;
-
-	//	IOCON1bits.PMOD = 0; // PWM mode
-	//	IOCON1bits.FLTMOD = 3; // disable faults
-	//	IOCON1bits.CLMOD = 0; // disable I faults
-	//	IOCON1bits.PENH = 1;
-	//	IOCON1bits.PENL = 1;
-	//	IOCON1bits.POLH = 0;
-	//	IOCON1bits.POLL = 0;
-	//	IOCON1bits.OVRDAT = 1;
-	//	IOCON1bits.OVRENH = 1;
-	//	IOCON1bits.OVRENL = 1;
-
-	//	PTPER = 2000;
-	//	PHASE1 = 1000;
-	//	PDC1 = 1000;
-	//	DTR1 = 25;
-	//	ALTDTR1 = 25;
-	//	PWMCON1=0x00000600;
-	//	IOCON1=0x0003C000;
-	//	PTCON=0;
-	//	PTCON=0x8000;
-
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.hb1h);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.hb1l);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_Start();
 
-	if (false) PWMInit();
+	PWM_motor2(M_STOP);
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
 
-		/* update local value of the encoder position counter */
-#ifndef BOARD_TESTS
-		m35_1.pos = POS1CNT;
-		m35_1.vel = VEL1CNT;
-		m35_2.pos = POS2CNT;
-		m35_2.vel = VEL2CNT;
-#endif
-
 		if (m35_ptr->update++ > 20480) {
 			m35_ptr->update = 0;
-#ifdef BOARD_TESTS
-			if (++i > 8) {
-				i = 0;
-				m35_ptr->pos += 1 << 10;
-			}
-#endif
+
+			/* update local value of the encoder position counters */
+			m35_1.pos = POS1CNT;
+			m35_1.vel = VEL1CNT;
+			m35_2.pos = POS2CNT;
+			m35_2.vel = VEL2CNT;
 
 			/* flash the board led(s) using the position counter bits */
 #ifdef QEI_SLOW
@@ -219,15 +143,32 @@ int main(void)
 			eaDogM_WriteStringAtPos(2, 0, buffer);
 			m35_ptr = &m35_1;
 
-			sprintf(buffer, " %x    ", PWMCON1);
+
+			m35_2.error = (m35_1.pos * m35_1.gain) - m35_2.pos;
+
+			m35_2.duty = pwm_mid_duty - (m35_2.error * m35_2.gain);
+			if (m35_2.duty > pwm_high_duty)
+				m35_2.duty = pwm_high_duty;
+			if (m35_2.duty < pwm_low_duty)
+				m35_2.duty = pwm_low_duty;
+
+			if (abs(m35_2.error) < motor_error_stop) {
+				PWM_motor2(M_STOP);
+			} else {
+				if (abs(m35_2.error) < motor_error_knee)
+					m35_2.duty = m35_2.duty + (m35_2.vel * 4);
+				if (abs(m35_2.error) < motor_error_coast)
+					m35_2.duty = m35_2.duty + (m35_2.vel * 2);
+
+				PWM_motor2(M_PWM);
+			}
+
+			sprintf(buffer, " %i %i        ", m35_2.error, m35_2.duty);
 			eaDogM_WriteStringAtPos(0, 0, buffer);
 
-			m35_2.hb1h = 1000 - (m35_1.pos >> 2);
-			m35_2.hb1l = 1000 + (m35_1.pos >> 2);
-			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.hb1h);
-			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.hb1l);
+			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 
-			uart_tests();
 		} else {
 			//run_tests(100000); // port diagnostics
 		}
