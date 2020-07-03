@@ -165,22 +165,6 @@
 #define DERE_OutputEnable()      (TRISGCLR = (1<<11))
 #define DERE_InputEnable()       (TRISGSET = (1<<11))
 #define DERE_PIN                  GPIO_PIN_RG11
-/*** Macros for U1FS pin ***/
-#define U1FS_Set()               (LATESET = (1<<12))
-#define U1FS_Clear()             (LATECLR = (1<<12))
-#define U1FS_Toggle()            (LATEINV= (1<<12))
-#define U1FS_Get()               ((PORTE >> 12) & 0x1)
-#define U1FS_OutputEnable()      (TRISECLR = (1<<12))
-#define U1FS_InputEnable()       (TRISESET = (1<<12))
-#define U1FS_PIN                  GPIO_PIN_RE12
-/*** Macros for U2FS pin ***/
-#define U2FS_Set()               (LATESET = (1<<13))
-#define U2FS_Clear()             (LATECLR = (1<<13))
-#define U2FS_Toggle()            (LATEINV= (1<<13))
-#define U2FS_Get()               ((PORTE >> 13) & 0x1)
-#define U2FS_OutputEnable()      (TRISECLR = (1<<13))
-#define U2FS_InputEnable()       (TRISESET = (1<<13))
-#define U2FS_PIN                  GPIO_PIN_RE13
 /*** Macros for IN1 pin ***/
 #define IN1_Set()               (LATDSET = (1<<14))
 #define IN1_Clear()             (LATDCLR = (1<<14))
@@ -205,14 +189,6 @@
 #define IN3_OutputEnable()      (TRISACLR = (1<<8))
 #define IN3_InputEnable()       (TRISASET = (1<<8))
 #define IN3_PIN                  GPIO_PIN_RA8
-/*** Macros for IN4 pin ***/
-#define IN4_Set()               (LATBSET = (1<<4))
-#define IN4_Clear()             (LATBCLR = (1<<4))
-#define IN4_Toggle()            (LATBINV= (1<<4))
-#define IN4_Get()               ((PORTB >> 4) & 0x1)
-#define IN4_OutputEnable()      (TRISBCLR = (1<<4))
-#define IN4_InputEnable()       (TRISBSET = (1<<4))
-#define IN4_PIN                  GPIO_PIN_RB4
 /*** Macros for U1_EN pin ***/
 #define U1_EN_Set()               (LATESET = (1<<0))
 #define U1_EN_Clear()             (LATECLR = (1<<0))

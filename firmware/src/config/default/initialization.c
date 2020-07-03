@@ -102,13 +102,13 @@
 
 /*** DEVCFG3 ***/
 #pragma config USERID =     0xffff
-#pragma config FUSBIDIO2 =   ON
-#pragma config FVBUSIO2 =  ON
-#pragma config PGL1WAY =    ON
-#pragma config PMDL1WAY =   ON
-#pragma config IOL1WAY =    ON
-#pragma config FUSBIDIO1 =   ON
-#pragma config FVBUSIO1 =  ON
+#pragma config FUSBIDIO2 =   OFF
+#pragma config FVBUSIO2 =  OFF
+#pragma config PGL1WAY =    OFF
+#pragma config PMDL1WAY =   OFF
+#pragma config IOL1WAY =    OFF
+#pragma config FUSBIDIO1 =   OFF
+#pragma config FVBUSIO1 =  OFF
 #pragma config PWMLOCK =  OFF
 
 /*** BF1SEQ ***/
