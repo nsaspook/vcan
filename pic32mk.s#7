@@ -17262,7 +17262,7 @@ Source: www.kingbright.com</description>
 <junction x="20.32" y="-104.14"/>
 </segment>
 </net>
-<net name="+5V" class="0">
+<net name="+5V" class="2">
 <segment>
 <pinref part="F1" gate="G$1" pin="2"/>
 <pinref part="P+3" gate="1" pin="+5V"/>
@@ -17430,7 +17430,7 @@ Source: www.kingbright.com</description>
 <junction x="-132.08" y="73.66"/>
 </segment>
 </net>
-<net name="+3V3" class="0">
+<net name="+3V3" class="2">
 <segment>
 <pinref part="F2" gate="G$1" pin="2"/>
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
@@ -17452,7 +17452,7 @@ Source: www.kingbright.com</description>
 <junction x="71.12" y="-137.16"/>
 </segment>
 </net>
-<net name="GND" class="0">
+<net name="GND" class="1">
 <segment>
 <pinref part="U$1" gate="G$1" pin="GND"/>
 <pinref part="SUPPLY2" gate="GND" pin="GND"/>

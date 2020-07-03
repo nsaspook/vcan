@@ -113,13 +113,55 @@ void CLK_Initialize( void )
     /* Enable oscillator (ON bit) */
     REFO1CONSET = 0x00008000;
 
+    /* Set up Reference Clock 2 */
+    /* REFO2CON register */
+    /* ROSEL =  SPLL */
+    /* DIVSWEN = 1 */
+    /* RODIV = 7 */
+    REFO2CON = 0x70207;
+
+    /* REFO2TRIM register */
+    /* ROTRIM = 256 */
+    REFO2TRIM = 0x80000000;
+
+    /* Enable oscillator (ON bit) */
+    REFO2CONSET = 0x00008000;
+
+    /* Set up Reference Clock 3 */
+    /* REFO3CON register */
+    /* ROSEL =  SPLL */
+    /* DIVSWEN = 1 */
+    /* RODIV = 7 */
+    REFO3CON = 0x70207;
+
+    /* REFO3TRIM register */
+    /* ROTRIM = 256 */
+    REFO3TRIM = 0x80000000;
+
+    /* Enable oscillator (ON bit) */
+    REFO3CONSET = 0x00008000;
+
+    /* Set up Reference Clock 4 */
+    /* REFO4CON register */
+    /* ROSEL =  SPLL */
+    /* DIVSWEN = 1 */
+    /* RODIV = 7 */
+    REFO4CON = 0x70207;
+
+    /* REFO4TRIM register */
+    /* ROTRIM = 256 */
+    REFO4TRIM = 0x80000000;
+
+    /* Enable oscillator (ON bit) */
+    REFO4CONSET = 0x00008000;
+
   
 
     /* Peripheral Module Disable Configuration */
     PMD1 = 0x100370;
     PMD2 = 0x17001f;
     PMD3 = 0xffffffff;
-    PMD4 = 0xffc01ff;
+    PMD4 = 0xfb001ff;
     PMD5 = 0xf30f3b19;
     PMD6 = 0xc0d0000;
     PMD7 = 0x0;

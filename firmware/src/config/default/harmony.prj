@@ -58,8 +58,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/clk/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/clk/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">6D20C06D324E2E280384C1AF2176B6CB</GeneratedChecksum>
-          <UserChecksum dnOrder="6">6D20C06D324E2E280384C1AF2176B6CB</UserChecksum>
+          <GeneratedChecksum dnOrder="5">00542B3EEB8B79FD3578A6F5B976FDED</GeneratedChecksum>
+          <UserChecksum dnOrder="6">00542B3EEB8B79FD3578A6F5B976FDED</UserChecksum>
         </File>
         <File dnOrder="6">
           <Type dnOrder="0">SOURCE</Type>
@@ -76,8 +76,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/gpio/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/gpio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">905B63FCF96EFF4A1F776689570D9254</GeneratedChecksum>
-          <UserChecksum dnOrder="6">905B63FCF96EFF4A1F776689570D9254</UserChecksum>
+          <GeneratedChecksum dnOrder="5">9D1F766B0392A0C0764CD42B9A2B6AEF</GeneratedChecksum>
+          <UserChecksum dnOrder="6">9D1F766B0392A0C0764CD42B9A2B6AEF</UserChecksum>
         </File>
         <File dnOrder="8">
           <Type dnOrder="0">SOURCE</Type>

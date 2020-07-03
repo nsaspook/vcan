@@ -16749,7 +16749,7 @@ Source: www.kingbright.com</description>
 <junction x="-132.08" y="68.58"/>
 </segment>
 </net>
-<net name="VSS" class="0">
+<net name="VSS" class="1">
 <segment>
 <pinref part="C1" gate="G$1" pin="2"/>
 <pinref part="VSS1" gate="G$1" pin="VSS"/>

@@ -19691,6 +19691,13 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <junction x="195.58" y="-66.04"/>
 <label x="187.96" y="-66.04" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="JP3" gate="A" pin="3"/>
+<wire x1="114.3" y1="-157.48" x2="132.08" y2="-157.48" width="0.1524" layer="91"/>
+<junction x="114.3" y="-157.48"/>
+<junction x="132.08" y="-157.48"/>
+<label x="137.16" y="-157.48" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="RF13" class="0">
 <segment>
