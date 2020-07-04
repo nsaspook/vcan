@@ -229,14 +229,6 @@
 #define GPIO_RD8_OutputEnable()      (TRISDCLR = (1<<8))
 #define GPIO_RD8_InputEnable()       (TRISDSET = (1<<8))
 #define GPIO_RD8_PIN                  GPIO_PIN_RD8
-/*** Macros for IN7 pin ***/
-#define IN7_Set()               (LATBSET = (1<<5))
-#define IN7_Clear()             (LATBCLR = (1<<5))
-#define IN7_Toggle()            (LATBINV= (1<<5))
-#define IN7_Get()               ((PORTB >> 5) & 0x1)
-#define IN7_OutputEnable()      (TRISBCLR = (1<<5))
-#define IN7_InputEnable()       (TRISBSET = (1<<5))
-#define IN7_PIN                  GPIO_PIN_RB5
 /*** Macros for GPIO_RC13 pin ***/
 #define GPIO_RC13_Set()               (LATCSET = (1<<13))
 #define GPIO_RC13_Clear()             (LATCCLR = (1<<13))
@@ -245,6 +237,14 @@
 #define GPIO_RC13_OutputEnable()      (TRISCCLR = (1<<13))
 #define GPIO_RC13_InputEnable()       (TRISCSET = (1<<13))
 #define GPIO_RC13_PIN                  GPIO_PIN_RC13
+/*** Macros for IN7 pin ***/
+#define IN7_Set()               (LATBSET = (1<<9))
+#define IN7_Clear()             (LATBCLR = (1<<9))
+#define IN7_Toggle()            (LATBINV= (1<<9))
+#define IN7_Get()               ((PORTB >> 9) & 0x1)
+#define IN7_OutputEnable()      (TRISBCLR = (1<<9))
+#define IN7_InputEnable()       (TRISBSET = (1<<9))
+#define IN7_PIN                  GPIO_PIN_RB9
 /*** Macros for DO1 pin ***/
 #define DO1_Set()               (LATDSET = (1<<12))
 #define DO1_Clear()             (LATDCLR = (1<<12))

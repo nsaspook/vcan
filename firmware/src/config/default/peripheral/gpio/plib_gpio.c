@@ -90,7 +90,7 @@ void GPIO_Initialize ( void )
     /* PORTG Initialization */
     LATG = 0xa00; /* Initial Latch Value */
     TRISGCLR = 0x7e03; /* Direction Control */
-    ANSELGCLR = 0xe40; /* Digital Mode Enable */
+    ANSELGCLR = 0xec0; /* Digital Mode Enable */
 
 
     /* Unlock system for PPS configuration */
@@ -108,8 +108,8 @@ void GPIO_Initialize ( void )
     INDX2R = 2;
     QEA2R = 9;
     QEB2R = 6;
-    HOME1R = 4;
-    HOME2R = 10;
+    QEA3R = 10;
+    QEB3R = 10;
     SDI3R = 6;
     U2RXR = 8;
 

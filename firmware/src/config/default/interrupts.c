@@ -134,6 +134,10 @@ void __ISR(_QEI2_VECTOR, ipl1AUTO) QEI2_Handler (void)
 {
 }
 
+void __ISR(_QEI3_VECTOR, ipl1AUTO) QEI3_Handler (void)
+{
+}
+
 void __ISR(_SPI3_RX_VECTOR, ipl1AUTO) SPI3_RX_Handler (void)
 {
     SPI3_RX_InterruptHandler();
