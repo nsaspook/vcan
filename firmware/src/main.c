@@ -73,9 +73,8 @@ static void PWM_motor2(M_CTRL mmode)
 
 int main(void)
 {
-	//	char strbuf[80];
 	char buffer[40];
-	int32_t u1ai = 0, u1bi = 0;
+	int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0;
 
 	//	struct tm Time = {0};
 
@@ -106,10 +105,6 @@ int main(void)
 	sprintf(buffer, " VCAN Testing ");
 	eaDogM_WriteStringAtPos(0, 0, buffer);
 
-	//	CFGCONbits.PWMAPIN1=0;
-	//	MCPWM_ChannelPinsOwnershipEnable(MCPWM_CH_1);
-	//	MCPWM_ChannelPinsOwnershipDisable(MCPWM_CH_1);
-
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
@@ -118,8 +113,12 @@ int main(void)
 
 	PWM_motor2(M_STOP);
 
-	ADCHS_ChannelConversionStart(ADCHS_CH36); // JP5 pin 4, AN36, 
-	ADCHS_ChannelConversionStart(ADCHS_CH37); // JP5 pin 5, AN37, 
+	/*
+	 * AN14/pin 6, AN23/pin 7, AN36/pin 4, AN37/pin 5, AN11/pin 2, AN17/pin 11
+	 * set ADC trigger to SCAN and start SCAN trigger
+	 */
+	ADCCON1bits.STRGSRC = 1;
+	ADCCON3bits.GSWTRG = 1;
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -146,10 +145,10 @@ int main(void)
 #endif
 
 			/* format and send data to LCD screen */
-			sprintf(buffer, "c %7i:%i  ", m35_ptr->pos, m35_ptr->vel);
+			sprintf(buffer, "c %7i:%i %i ", m35_ptr->pos, m35_ptr->vel, u1ai);
 			eaDogM_WriteStringAtPos(1, 0, buffer);
 			m35_ptr = &m35_2;
-			sprintf(buffer, "c %7i:%i  ", m35_ptr->pos, m35_ptr->vel);
+			sprintf(buffer, "c %7i:%i %i ", m35_ptr->pos, m35_ptr->vel, u1bi);
 			eaDogM_WriteStringAtPos(2, 0, buffer);
 			m35_ptr = &m35_1;
 
@@ -173,16 +172,24 @@ int main(void)
 				PWM_motor2(M_PWM);
 			}
 
-			if (ADCHS_ChannelResultIsReady(ADCHS_CH37)) {
-				u1ai = ADCHS_ChannelResultGet(ADCHS_CH37); // JP5 pin 5, AN37, 
-				ADCHS_ChannelConversionStart(ADCHS_CH37);
-			}
-			if (ADCHS_ChannelResultIsReady(ADCHS_CH36)) {
-				u1bi = ADCHS_ChannelResultGet(ADCHS_CH36); // JP5 pin 4, AN36, 
-				ADCHS_ChannelConversionStart(ADCHS_CH36);
+			/*
+			 * check for ADC scanning done, a 'end of scan' interrupt ISR could also handle this
+			 */
+			if (ADCCON2bits.EOSRDY) { //  End of Scan Interrupt Status bit
+				/*
+				 * update program variables from the ADC result registers
+				 */
+				u2ai = ADCHS_ChannelResultGet(ADCHS_CH23); // JP5 pin 7, AN23, FBB2/RG15
+				u2bi = ADCHS_ChannelResultGet(ADCHS_CH14); // JP5 pin 6, AN14, FBA2/RE14
+				u1ai = ADCHS_ChannelResultGet(ADCHS_CH37); // JP5 pin 5, AN37, FBA1/RF12
+				u1bi = ADCHS_ChannelResultGet(ADCHS_CH36); // JP5 pin 4, AN36, FBB1/RF13
+				ADCCON3bits.GSWTRG = 1; // re-trigger scan
 			}
 
-			sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u1ai, u1bi);
+			/*
+			 * show some test results on the LCD screen
+			 */
+			sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u2ai, u2bi);
 			eaDogM_WriteStringAtPos(0, 0, buffer);
 
 			/*

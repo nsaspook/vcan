@@ -62,6 +62,9 @@
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="true"/>
+          </Values>
         </Boolean>
         <Boolean dnOrder="9" id="ADCCSS1__CSS12">
           <Attributes dnOrder="0">
@@ -107,6 +110,9 @@
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="true"/>
+          </Values>
         </Boolean>
         <Boolean dnOrder="15" id="ADCCSS1__CSS18">
           <Attributes dnOrder="0">
@@ -334,343 +340,357 @@
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="46" id="ADCGIRQEN1__AGIEN14">
+        <Boolean dnOrder="46" id="ADCGIRQEN1__AGIEN11">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="47" id="ADCGIRQEN1__AGIEN23">
+        <Boolean dnOrder="47" id="ADCGIRQEN1__AGIEN14">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="48" id="ADCGIRQEN2__AGIEN36">
+        <Boolean dnOrder="48" id="ADCGIRQEN1__AGIEN17">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="49" id="ADCGIRQEN2__AGIEN37">
+        <Boolean dnOrder="49" id="ADCGIRQEN1__AGIEN23">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="50" id="ADCHS_0_ENABLE">
+        <Boolean dnOrder="50" id="ADCGIRQEN2__AGIEN36">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </Boolean>
+        <Boolean dnOrder="51" id="ADCGIRQEN2__AGIEN37">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </Boolean>
+        <Boolean dnOrder="52" id="ADCHS_0_ENABLE">
           <Values dnOrder="0">
             <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="51" id="ADCHS_1_ENABLE">
+        <Boolean dnOrder="53" id="ADCHS_1_ENABLE">
           <Values dnOrder="0">
             <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="52" id="ADCHS_5_ENABLE">
+        <Boolean dnOrder="54" id="ADCHS_5_ENABLE">
           <Values dnOrder="0">
             <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="53" id="ADCHS_7_ENABLE">
+        <Boolean dnOrder="55" id="ADCHS_7_ENABLE">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <String dnOrder="54" id="ADCHS_7_NAME">
+        <String dnOrder="56" id="ADCHS_7_NAME">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </String>
-        <Hex dnOrder="55" id="ADCHS_ADCCON1">
+        <Hex dnOrder="57" id="ADCHS_ADCCON1">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="6488064"/>
           </Values>
         </Hex>
-        <Hex dnOrder="56" id="ADCHS_ADCCON2">
+        <Hex dnOrder="58" id="ADCHS_ADCCON2">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="65536"/>
           </Values>
         </Hex>
-        <Hex dnOrder="57" id="ADCHS_ADCCON3">
+        <Hex dnOrder="59" id="ADCHS_ADCCON3">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="16777216"/>
           </Values>
         </Hex>
-        <Hex dnOrder="58" id="ADCHS_ADCCSS1">
+        <Hex dnOrder="60" id="ADCHS_ADCCSS1">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="8404992"/>
+            <Dynamic dnOrder="0" id="adchs" value="8538112"/>
           </Values>
         </Hex>
-        <Hex dnOrder="59" id="ADCHS_ADCCSS2">
+        <Hex dnOrder="61" id="ADCHS_ADCCSS2">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="48"/>
           </Values>
         </Hex>
-        <Hex dnOrder="60" id="ADCHS_ADCGIRQEN1">
+        <Hex dnOrder="62" id="ADCHS_ADCGIRQEN1">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="0"/>
           </Values>
         </Hex>
-        <Hex dnOrder="61" id="ADCHS_ADCGIRQEN2">
+        <Hex dnOrder="63" id="ADCHS_ADCGIRQEN2">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="0"/>
           </Values>
         </Hex>
-        <Hex dnOrder="62" id="ADCHS_ADCIMCON1">
+        <Hex dnOrder="64" id="ADCHS_ADCIMCON1">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="0"/>
           </Values>
         </Hex>
-        <Hex dnOrder="63" id="ADCHS_ADCIMCON2">
+        <Hex dnOrder="65" id="ADCHS_ADCIMCON2">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="0"/>
           </Values>
         </Hex>
-        <Hex dnOrder="64" id="ADCHS_ADCIMCON3">
+        <Hex dnOrder="66" id="ADCHS_ADCIMCON3">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="0"/>
           </Values>
         </Hex>
-        <Hex dnOrder="65" id="ADCHS_ADCTIME0">
+        <Hex dnOrder="67" id="ADCHS_ADCTIME0">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="50331649"/>
           </Values>
         </Hex>
-        <Hex dnOrder="66" id="ADCHS_ADCTIME1">
+        <Hex dnOrder="68" id="ADCHS_ADCTIME1">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="50331649"/>
           </Values>
         </Hex>
-        <Hex dnOrder="67" id="ADCHS_ADCTIME2">
+        <Hex dnOrder="69" id="ADCHS_ADCTIME2">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="50331649"/>
           </Values>
         </Hex>
-        <Hex dnOrder="68" id="ADCHS_ADCTIME3">
+        <Hex dnOrder="70" id="ADCHS_ADCTIME3">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="50331649"/>
           </Values>
         </Hex>
-        <Hex dnOrder="69" id="ADCHS_ADCTIME4">
+        <Hex dnOrder="71" id="ADCHS_ADCTIME4">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="50331649"/>
           </Values>
         </Hex>
-        <Hex dnOrder="70" id="ADCHS_ADCTIME5">
+        <Hex dnOrder="72" id="ADCHS_ADCTIME5">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="50331649"/>
           </Values>
         </Hex>
-        <Hex dnOrder="71" id="ADCHS_ADCTRG1">
+        <Hex dnOrder="73" id="ADCHS_ADCTRG1">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="0"/>
           </Values>
         </Hex>
-        <Hex dnOrder="72" id="ADCHS_ADCTRG2">
+        <Hex dnOrder="74" id="ADCHS_ADCTRG2">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="0"/>
           </Values>
         </Hex>
-        <Hex dnOrder="73" id="ADCHS_ADCTRG3">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="0"/>
-          </Values>
-        </Hex>
-        <Hex dnOrder="74" id="ADCHS_ADCTRG4">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="196608"/>
-          </Values>
-        </Hex>
-        <Hex dnOrder="75" id="ADCHS_ADCTRG5">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="0"/>
-          </Values>
-        </Hex>
-        <Hex dnOrder="76" id="ADCHS_ADCTRG6">
+        <Hex dnOrder="75" id="ADCHS_ADCTRG3">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="50331648"/>
           </Values>
         </Hex>
-        <Hex dnOrder="77" id="ADCHS_ADCTRG7">
+        <Hex dnOrder="76" id="ADCHS_ADCTRG4">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0" id="adchs" value="196608"/>
+          </Values>
+        </Hex>
+        <Hex dnOrder="77" id="ADCHS_ADCTRG5">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0" id="adchs" value="768"/>
+          </Values>
+        </Hex>
+        <Hex dnOrder="78" id="ADCHS_ADCTRG6">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0" id="adchs" value="50331648"/>
+          </Values>
+        </Hex>
+        <Hex dnOrder="79" id="ADCHS_ADCTRG7">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="0"/>
           </Values>
         </Hex>
-        <Hex dnOrder="78" id="ADCHS_ADCTRGMODE">
+        <Hex dnOrder="80" id="ADCHS_ADCTRGMODE">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="0"/>
           </Values>
         </Hex>
-        <Comment dnOrder="79" id="ADCHS_CLASS2_INPUT10">
+        <Comment dnOrder="81" id="ADCHS_CLASS2_INPUT10">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="80" id="ADCHS_CLASS2_INPUT11">
+        <Comment dnOrder="82" id="ADCHS_CLASS2_INPUT11">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="81" id="ADCHS_CLASS2_INPUT12">
+        <Comment dnOrder="83" id="ADCHS_CLASS2_INPUT12">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="82" id="ADCHS_CLASS2_INPUT13">
+        <Comment dnOrder="84" id="ADCHS_CLASS2_INPUT13">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="83" id="ADCHS_CLASS2_INPUT14">
+        <Comment dnOrder="85" id="ADCHS_CLASS2_INPUT14">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="84" id="ADCHS_CLASS2_INPUT15">
+        <Comment dnOrder="86" id="ADCHS_CLASS2_INPUT15">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="85" id="ADCHS_CLASS2_INPUT16">
+        <Comment dnOrder="87" id="ADCHS_CLASS2_INPUT16">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="86" id="ADCHS_CLASS2_INPUT17">
+        <Comment dnOrder="88" id="ADCHS_CLASS2_INPUT17">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="87" id="ADCHS_CLASS2_INPUT18">
+        <Comment dnOrder="89" id="ADCHS_CLASS2_INPUT18">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="88" id="ADCHS_CLASS2_INPUT19">
+        <Comment dnOrder="90" id="ADCHS_CLASS2_INPUT19">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="89" id="ADCHS_CLASS2_INPUT20">
+        <Comment dnOrder="91" id="ADCHS_CLASS2_INPUT20">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="90" id="ADCHS_CLASS2_INPUT21">
+        <Comment dnOrder="92" id="ADCHS_CLASS2_INPUT21">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="91" id="ADCHS_CLASS2_INPUT22">
+        <Comment dnOrder="93" id="ADCHS_CLASS2_INPUT22">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="92" id="ADCHS_CLASS2_INPUT23">
+        <Comment dnOrder="94" id="ADCHS_CLASS2_INPUT23">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="93" id="ADCHS_CLASS2_INPUT24">
+        <Comment dnOrder="95" id="ADCHS_CLASS2_INPUT24">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="94" id="ADCHS_CLASS2_INPUT25">
+        <Comment dnOrder="96" id="ADCHS_CLASS2_INPUT25">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="95" id="ADCHS_CLASS2_INPUT26">
+        <Comment dnOrder="97" id="ADCHS_CLASS2_INPUT26">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="96" id="ADCHS_CLASS2_INPUT27">
+        <Comment dnOrder="98" id="ADCHS_CLASS2_INPUT27">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="97" id="ADCHS_CLASS2_INPUT6">
+        <Comment dnOrder="99" id="ADCHS_CLASS2_INPUT6">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="98" id="ADCHS_CLASS2_INPUT7">
+        <Comment dnOrder="100" id="ADCHS_CLASS2_INPUT7">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="99" id="ADCHS_CLASS2_INPUT8">
+        <Comment dnOrder="101" id="ADCHS_CLASS2_INPUT8">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="100" id="ADCHS_CLASS2_INPUT9">
+        <Comment dnOrder="102" id="ADCHS_CLASS2_INPUT9">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Comment dnOrder="101" id="ADCHS_CLASS3_INPUTS">
+        <Comment dnOrder="103" id="ADCHS_CLASS3_INPUTS">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Comment>
-        <Float dnOrder="102" id="ADCHS_CONV_RATE0">
+        <Float dnOrder="104" id="ADCHS_CONV_RATE0">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -680,7 +700,7 @@
             <Dynamic dnOrder="0" id="adchs" value="187.5"/>
           </Values>
         </Float>
-        <Float dnOrder="103" id="ADCHS_CONV_RATE1">
+        <Float dnOrder="105" id="ADCHS_CONV_RATE1">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -690,7 +710,7 @@
             <Dynamic dnOrder="0" id="adchs" value="187.5"/>
           </Values>
         </Float>
-        <Float dnOrder="104" id="ADCHS_CONV_RATE2">
+        <Float dnOrder="106" id="ADCHS_CONV_RATE2">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -700,7 +720,7 @@
             <Dynamic dnOrder="0" id="adchs" value="187.5"/>
           </Values>
         </Float>
-        <Float dnOrder="105" id="ADCHS_CONV_RATE3">
+        <Float dnOrder="107" id="ADCHS_CONV_RATE3">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -710,7 +730,7 @@
             <Dynamic dnOrder="0" id="adchs" value="187.5"/>
           </Values>
         </Float>
-        <Float dnOrder="106" id="ADCHS_CONV_RATE4">
+        <Float dnOrder="108" id="ADCHS_CONV_RATE4">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -720,7 +740,7 @@
             <Dynamic dnOrder="0" id="adchs" value="187.5"/>
           </Values>
         </Float>
-        <Float dnOrder="107" id="ADCHS_CONV_RATE5">
+        <Float dnOrder="109" id="ADCHS_CONV_RATE5">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -730,27 +750,27 @@
             <Dynamic dnOrder="0" id="adchs" value="187.5"/>
           </Values>
         </Float>
-        <Float dnOrder="108" id="ADCHS_CONV_RATE7">
+        <Float dnOrder="110" id="ADCHS_CONV_RATE7">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="187.5"/>
           </Values>
         </Float>
-        <Hex dnOrder="109" id="ADCHS_IEC0">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="0"/>
-          </Values>
-        </Hex>
-        <Hex dnOrder="110" id="ADCHS_IEC1">
+        <Hex dnOrder="111" id="ADCHS_IEC0">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="0"/>
           </Values>
         </Hex>
-        <Boolean dnOrder="111" id="ADCHS_INTERRUPT">
+        <Hex dnOrder="112" id="ADCHS_IEC1">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0" id="adchs" value="0"/>
+          </Values>
+        </Hex>
+        <Boolean dnOrder="113" id="ADCHS_INTERRUPT">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="false"/>
           </Values>
         </Boolean>
-        <Float dnOrder="112" id="ADCHS_TADC0">
+        <Float dnOrder="114" id="ADCHS_TADC0">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -760,7 +780,7 @@
             <Dynamic dnOrder="0" id="adchs" value="333.33334"/>
           </Values>
         </Float>
-        <Float dnOrder="113" id="ADCHS_TADC1">
+        <Float dnOrder="115" id="ADCHS_TADC1">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -770,7 +790,7 @@
             <Dynamic dnOrder="0" id="adchs" value="333.33334"/>
           </Values>
         </Float>
-        <Float dnOrder="114" id="ADCHS_TADC2">
+        <Float dnOrder="116" id="ADCHS_TADC2">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -780,7 +800,7 @@
             <Dynamic dnOrder="0" id="adchs" value="333.33334"/>
           </Values>
         </Float>
-        <Float dnOrder="115" id="ADCHS_TADC3">
+        <Float dnOrder="117" id="ADCHS_TADC3">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -790,7 +810,7 @@
             <Dynamic dnOrder="0" id="adchs" value="333.33334"/>
           </Values>
         </Float>
-        <Float dnOrder="116" id="ADCHS_TADC4">
+        <Float dnOrder="118" id="ADCHS_TADC4">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -800,7 +820,7 @@
             <Dynamic dnOrder="0" id="adchs" value="333.33334"/>
           </Values>
         </Float>
-        <Float dnOrder="117" id="ADCHS_TADC5">
+        <Float dnOrder="119" id="ADCHS_TADC5">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -810,134 +830,127 @@
             <Dynamic dnOrder="0" id="adchs" value="333.33334"/>
           </Values>
         </Float>
-        <Float dnOrder="118" id="ADCHS_TADC7">
+        <Float dnOrder="120" id="ADCHS_TADC7">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="333.33334"/>
           </Values>
         </Float>
-        <Float dnOrder="119" id="ADCHS_TCLK">
+        <Float dnOrder="121" id="ADCHS_TCLK">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="166.66667"/>
           </Values>
         </Float>
-        <Float dnOrder="120" id="ADCHS_TQ">
+        <Float dnOrder="122" id="ADCHS_TQ">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="333.33334"/>
           </Values>
         </Float>
-        <Boolean dnOrder="121" id="ADCIMCON1__DIFF14">
+        <Boolean dnOrder="123" id="ADCIMCON1__DIFF11">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="122" id="ADCIMCON1__SIGN14">
+        <Boolean dnOrder="124" id="ADCIMCON1__DIFF14">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="123" id="ADCIMCON2__DIFF23">
+        <Boolean dnOrder="125" id="ADCIMCON1__SIGN11">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="124" id="ADCIMCON2__SIGN23">
+        <Boolean dnOrder="126" id="ADCIMCON1__SIGN14">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="125" id="ADCIMCON3__DIFF36">
+        <Boolean dnOrder="127" id="ADCIMCON2__DIFF17">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="126" id="ADCIMCON3__DIFF37">
+        <Boolean dnOrder="128" id="ADCIMCON2__DIFF23">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="127" id="ADCIMCON3__SIGN36">
+        <Boolean dnOrder="129" id="ADCIMCON2__SIGN17">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="128" id="ADCIMCON3__SIGN37">
+        <Boolean dnOrder="130" id="ADCIMCON2__SIGN23">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <KeyValueSet dnOrder="129" id="ADCTRG2__TRGSRC6">
+        <Boolean dnOrder="131" id="ADCIMCON3__DIFF36">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </Boolean>
+        <Boolean dnOrder="132" id="ADCIMCON3__DIFF37">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </Boolean>
+        <Boolean dnOrder="133" id="ADCIMCON3__SIGN36">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </Boolean>
+        <Boolean dnOrder="134" id="ADCIMCON3__SIGN37">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </Boolean>
+        <KeyValueSet dnOrder="135" id="ADCTRG2__TRGSRC6">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
-        <KeyValueSet dnOrder="130" id="ADCTRG2__TRGSRC7">
+        <KeyValueSet dnOrder="136" id="ADCTRG2__TRGSRC7">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
-        <KeyValueSet dnOrder="131" id="ADCTRG3__TRGSRC10">
+        <KeyValueSet dnOrder="137" id="ADCTRG3__TRGSRC10">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
-        <KeyValueSet dnOrder="132" id="ADCTRG3__TRGSRC11">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="133" id="ADCTRG3__TRGSRC8">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="134" id="ADCTRG3__TRGSRC9">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="135" id="ADCTRG4__TRGSRC12">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="136" id="ADCTRG4__TRGSRC13">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="137" id="ADCTRG4__TRGSRC14">
+        <KeyValueSet dnOrder="138" id="ADCTRG3__TRGSRC11">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
@@ -947,63 +960,35 @@
             <User dnOrder="0" value="3"/>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="138" id="ADCTRG4__TRGSRC15">
+        <KeyValueSet dnOrder="139" id="ADCTRG3__TRGSRC8">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
-        <KeyValueSet dnOrder="139" id="ADCTRG5__TRGSRC16">
+        <KeyValueSet dnOrder="140" id="ADCTRG3__TRGSRC9">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
-        <KeyValueSet dnOrder="140" id="ADCTRG5__TRGSRC17">
+        <KeyValueSet dnOrder="141" id="ADCTRG4__TRGSRC12">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
-        <KeyValueSet dnOrder="141" id="ADCTRG5__TRGSRC18">
+        <KeyValueSet dnOrder="142" id="ADCTRG4__TRGSRC13">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
-        <KeyValueSet dnOrder="142" id="ADCTRG5__TRGSRC19">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="143" id="ADCTRG6__TRGSRC20">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="144" id="ADCTRG6__TRGSRC21">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="145" id="ADCTRG6__TRGSRC22">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="146" id="ADCTRG6__TRGSRC23">
+        <KeyValueSet dnOrder="143" id="ADCTRG4__TRGSRC14">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
@@ -1013,100 +998,179 @@
             <User dnOrder="0" value="3"/>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="147" id="ADCTRG7__TRGSRC24">
+        <KeyValueSet dnOrder="144" id="ADCTRG4__TRGSRC15">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
-        <KeyValueSet dnOrder="148" id="ADCTRG7__TRGSRC25">
+        <KeyValueSet dnOrder="145" id="ADCTRG5__TRGSRC16">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
-        <KeyValueSet dnOrder="149" id="ADCTRG7__TRGSRC26">
+        <KeyValueSet dnOrder="146" id="ADCTRG5__TRGSRC17">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="3"/>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="147" id="ADCTRG5__TRGSRC18">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
-        <KeyValueSet dnOrder="150" id="ADCTRG7__TRGSRC27">
+        <KeyValueSet dnOrder="148" id="ADCTRG5__TRGSRC19">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
-        <String dnOrder="151" id="ADC_CALLBACK_API">
+        <KeyValueSet dnOrder="149" id="ADCTRG6__TRGSRC20">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="150" id="ADCTRG6__TRGSRC21">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="151" id="ADCTRG6__TRGSRC22">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="152" id="ADCTRG6__TRGSRC23">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="3"/>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="153" id="ADCTRG7__TRGSRC24">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="154" id="ADCTRG7__TRGSRC25">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="155" id="ADCTRG7__TRGSRC26">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="156" id="ADCTRG7__TRGSRC27">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </KeyValueSet>
+        <String dnOrder="157" id="ADC_CALLBACK_API">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="ADCHS_CallbackRegister"/>
           </Values>
         </String>
-        <String dnOrder="152" id="ADC_CH_PHASE_U">
+        <String dnOrder="158" id="ADC_CH_PHASE_U">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="ADCHS_CH0"/>
           </Values>
         </String>
-        <String dnOrder="153" id="ADC_CH_PHASE_V">
+        <String dnOrder="159" id="ADC_CH_PHASE_V">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="ADCHS_CH4"/>
           </Values>
         </String>
-        <String dnOrder="154" id="ADC_CH_POT">
+        <String dnOrder="160" id="ADC_CH_POT">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="ADCHS_CH15"/>
           </Values>
         </String>
-        <String dnOrder="155" id="ADC_CH_VDC_BUS">
+        <String dnOrder="161" id="ADC_CH_VDC_BUS">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="ADCHS_CH10"/>
           </Values>
         </String>
-        <String dnOrder="156" id="ADC_GET_RESULT_API">
+        <String dnOrder="162" id="ADC_GET_RESULT_API">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="ADCHS_ChannelResultGet"/>
           </Values>
         </String>
-        <String dnOrder="157" id="ADC_IS_RESULT_READY_API">
+        <String dnOrder="163" id="ADC_IS_RESULT_READY_API">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="ADCHS_ChannelResultIsReady"/>
           </Values>
         </String>
-        <String dnOrder="158" id="ADC_START_CONV_API">
+        <String dnOrder="164" id="ADC_START_CONV_API">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="ADCHS_ChannelConversionStart"/>
           </Values>
         </String>
-        <Boolean dnOrder="159" id="AN1">
+        <Boolean dnOrder="165" id="AN1">
           <Values dnOrder="0">
             <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="160" id="AN14">
+        <Boolean dnOrder="166" id="AN11">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="161" id="AN23">
+        <Boolean dnOrder="167" id="AN14">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="162" id="AN36">
+        <Boolean dnOrder="168" id="AN17">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="163" id="AN37">
+        <Boolean dnOrder="169" id="AN23">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <String dnOrder="164" id="INTERRUPT_ADC_RESULT">
+        <Boolean dnOrder="170" id="AN36">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="171" id="AN37">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <String dnOrder="172" id="INTERRUPT_ADC_RESULT">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="adchs" value="INT_SOURCE_ADC_DATA0"/>
           </Values>
@@ -1582,17 +1646,17 @@
         </String>
         <String dnOrder="93" id="BSP_PIN_35_DIR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="Out"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="94" id="BSP_PIN_35_FUNCTION_NAME">
           <Values dnOrder="0">
-            <User dnOrder="0" value="GPIO_RC11"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="95" id="BSP_PIN_35_FUNCTION_TYPE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="GPIO"/>
+            <User dnOrder="0" value="AN11"/>
           </Values>
         </String>
         <String dnOrder="96" id="BSP_PIN_35_LAT">
@@ -1602,7 +1666,7 @@
         </String>
         <String dnOrder="97" id="BSP_PIN_35_MODE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="DIGITAL"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="98" id="BSP_PIN_38_DIR">
@@ -4238,7 +4302,7 @@
         </Hex>
         <Hex dnOrder="608" id="SYS_PORT_C_ANSEL">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="7175"/>
+            <Dynamic dnOrder="0" id="core" value="5127"/>
           </Values>
         </Hex>
         <Hex dnOrder="609" id="SYS_PORT_C_CNPD">
@@ -4253,7 +4317,7 @@
         </Hex>
         <Hex dnOrder="611" id="SYS_PORT_C_TRIS">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="2820"/>
+            <Dynamic dnOrder="0" id="core" value="772"/>
           </Values>
         </Hex>
         <Hex dnOrder="612" id="SYS_PORT_D_ANSEL">
@@ -6640,7 +6704,8 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
+    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="adchs" x="19" y="389"/>
         <ElementPosition dnOrder="1" id="core" x="198" y="49"/>
@@ -6655,6 +6720,5 @@
         <ElementPosition dnOrder="10" id="uart6" x="163" y="307"/>
       </ElementPositions>
     </ComponentGraph>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>

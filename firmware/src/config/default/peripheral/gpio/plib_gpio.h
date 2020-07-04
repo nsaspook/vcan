@@ -149,14 +149,6 @@
 #define GPIO_RC2_OutputEnable()      (TRISCCLR = (1<<2))
 #define GPIO_RC2_InputEnable()       (TRISCSET = (1<<2))
 #define GPIO_RC2_PIN                  GPIO_PIN_RC2
-/*** Macros for GPIO_RC11 pin ***/
-#define GPIO_RC11_Set()               (LATCSET = (1<<11))
-#define GPIO_RC11_Clear()             (LATCCLR = (1<<11))
-#define GPIO_RC11_Toggle()            (LATCINV= (1<<11))
-#define GPIO_RC11_Get()               ((PORTC >> 11) & 0x1)
-#define GPIO_RC11_OutputEnable()      (TRISCCLR = (1<<11))
-#define GPIO_RC11_InputEnable()       (TRISCSET = (1<<11))
-#define GPIO_RC11_PIN                  GPIO_PIN_RC11
 /*** Macros for DERE pin ***/
 #define DERE_Set()               (LATGSET = (1<<11))
 #define DERE_Clear()             (LATGCLR = (1<<11))

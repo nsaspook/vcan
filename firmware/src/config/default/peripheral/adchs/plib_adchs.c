@@ -67,9 +67,9 @@ void ADCHS_Initialize()
 
     ADCTRG1 = 0x0; 
     ADCTRG2 = 0x0; 
-    ADCTRG3 = 0x0; 
+    ADCTRG3 = 0x3000000; 
     ADCTRG4 = 0x30000; 
-    ADCTRG5 = 0x0; 
+    ADCTRG5 = 0x300; 
     ADCTRG6 = 0x3000000; 
     ADCTRG7 = 0x0; 
 
@@ -81,7 +81,7 @@ void ADCHS_Initialize()
     ADCIMCON4 = 0x0; 
 
     /* Input scan */
-    ADCCSS1 = 0x804000;
+    ADCCSS1 = 0x824800;
     ADCCSS2 = 0x30; 
 
     /* Turn ON ADC */
