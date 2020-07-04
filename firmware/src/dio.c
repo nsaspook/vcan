@@ -2,7 +2,7 @@
 
 #define IN4_Get()               ((PORTB >> 4) & 0x1) // FLT15 signal
 
-volatile S_data S;
+static volatile S_data S;
 
 void init_dio(void)
 {

@@ -16022,6 +16022,8 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <text x="-137.16" y="-33.02" size="1.778" layer="91">Index</text>
 <text x="-137.16" y="-30.48" size="1.778" layer="91">A</text>
 <text x="-137.16" y="-27.94" size="1.778" layer="91">B</text>
+<text x="182.88" y="-149.86" size="1.778" layer="91">FLT6</text>
+<text x="200.66" y="73.66" size="1.778" layer="91">FLT5</text>
 </plain>
 <instances>
 <instance part="IC1" gate="G$1" x="12.7" y="45.72" smashed="yes">
@@ -16337,16 +16339,16 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <attribute name="VALUE" x="220.98705" y="-91.4142" size="1.779640625" layer="96"/>
 </instance>
 <instance part="VSS19" gate="G$1" x="182.88" y="-121.92" smashed="yes">
-<attribute name="VALUE" x="180.34" y="-127" size="1.778" layer="96" rot="R90"/>
+<attribute name="VALUE" x="180.34" y="-121.92" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="VSS22" gate="G$1" x="243.84" y="-121.92" smashed="yes">
 <attribute name="VALUE" x="241.3" y="-127" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="VSS23" gate="G$1" x="200.66" y="101.6" smashed="yes">
-<attribute name="VALUE" x="198.12" y="96.52" size="1.778" layer="96" rot="R90"/>
+<attribute name="VALUE" x="198.12" y="101.6" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="VSS27" gate="G$1" x="256.54" y="101.6" smashed="yes">
-<attribute name="VALUE" x="254" y="96.52" size="1.778" layer="96" rot="R90"/>
+<attribute name="VALUE" x="264.16" y="104.14" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="IC3" gate="G$1" x="-134.62" y="-68.58" smashed="yes">
 <attribute name="NAME" x="-110.49" y="-60.96" size="1.778" layer="95" align="center-left"/>
@@ -16440,10 +16442,10 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <attribute name="VALUE" x="165.989" y="-107.696" size="1.778" layer="96" rot="R270"/>
 </instance>
 <instance part="VSS40" gate="G$1" x="162.56" y="-109.22" smashed="yes">
-<attribute name="VALUE" x="160.02" y="-114.3" size="1.778" layer="96" rot="R90"/>
+<attribute name="VALUE" x="160.02" y="-109.22" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="VSS41" gate="G$1" x="259.08" y="-109.22" smashed="yes">
-<attribute name="VALUE" x="256.54" y="-114.3" size="1.778" layer="96" rot="R90"/>
+<instance part="VSS41" gate="G$1" x="261.62" y="-109.22" smashed="yes">
+<attribute name="VALUE" x="261.62" y="-111.76" size="1.778" layer="96"/>
 </instance>
 <instance part="DIN" gate="-1" x="-109.22" y="-137.16" smashed="yes">
 <attribute name="NAME" x="-106.68" y="-137.922" size="1.524" layer="95"/>
@@ -16549,7 +16551,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <attribute name="VALUE" x="267.589" y="120.904" size="1.778" layer="96" rot="R270"/>
 </instance>
 <instance part="P+23" gate="1" x="175.26" y="81.28" smashed="yes" rot="R180">
-<attribute name="VALUE" x="177.8" y="86.36" size="1.778" layer="96" rot="R270"/>
+<attribute name="VALUE" x="167.64" y="83.82" size="1.778" layer="96"/>
 </instance>
 <instance part="P+24" gate="1" x="274.32" y="119.38" smashed="yes" rot="R180">
 <attribute name="VALUE" x="276.86" y="124.46" size="1.778" layer="96" rot="R270"/>
@@ -17508,12 +17510,12 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <segment>
 <pinref part="C18" gate="G$1" pin="2"/>
 <pinref part="VSS41" gate="G$1" pin="VSS"/>
-<wire x1="259.08" y1="-106.68" x2="256.54" y2="-106.68" width="0.1524" layer="91"/>
+<wire x1="261.62" y1="-106.68" x2="256.54" y2="-106.68" width="0.1524" layer="91"/>
 <pinref part="C21" gate="G$1" pin="2"/>
 <wire x1="256.54" y1="-114.3" x2="256.54" y2="-106.68" width="0.1524" layer="91"/>
 <junction x="256.54" y="-114.3"/>
 <junction x="256.54" y="-106.68"/>
-<junction x="259.08" y="-106.68"/>
+<junction x="261.62" y="-106.68"/>
 </segment>
 <segment>
 <pinref part="DIN" gate="-9" pin="S"/>

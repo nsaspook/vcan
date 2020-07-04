@@ -14,8 +14,6 @@ extern "C" {
 
 #include "vcan.h"
 
-#define NUM_SWITCHES	8
-
 	typedef enum {
 		SW_OFF = 0,
 		SW_ON,
@@ -31,7 +29,7 @@ extern "C" {
 		S5,
 		S6,
 		S7,
-		SNULL,
+		NUM_SWITCHES, // one extra to define number of switches
 	} SW_NAMES;
 
 	typedef struct rbutton_type {

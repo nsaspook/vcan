@@ -25,8 +25,6 @@
 #include "vcan.h"
 #include "dio.h"
 
-extern volatile S_data S;
-
 QEI_DATA m35_1 = {
 	.gain = pos_gain,
 },
@@ -40,7 +38,7 @@ void reset_led_blink(uintptr_t);
 
 static void PWM_motor2(M_CTRL mmode)
 {
-	IOCON2bits.OVRDAT = 3;
+	//	IOCON2bits.OVRDAT = 3;
 
 	switch (mmode) {
 	case M_PWM:
@@ -48,15 +46,18 @@ static void PWM_motor2(M_CTRL mmode)
 		IOCON2bits.OVRENL = 0;
 		break;
 	case M_CW:
-		IOCON2bits.OVRENH = 0;
+		IOCON2bits.OVRDAT = 1;
+		IOCON2bits.OVRENH = 1;
 		IOCON2bits.OVRENL = 1;
 		break;
 	case M_CCW:
+		IOCON2bits.OVRDAT = 2;
 		IOCON2bits.OVRENH = 1;
-		IOCON2bits.OVRENL = 0;
+		IOCON2bits.OVRENL = 1;
 		break;
 	case M_STOP:
 	default:
+		IOCON2bits.OVRDAT = 3;
 		IOCON2bits.OVRENH = 1;
 		IOCON2bits.OVRENL = 1;
 		break;
@@ -74,6 +75,7 @@ int main(void)
 {
 	//	char strbuf[80];
 	char buffer[40];
+	int32_t u1ai = 0, u1bi = 0;
 
 	//	struct tm Time = {0};
 
@@ -115,6 +117,9 @@ int main(void)
 	MCPWM_Start();
 
 	PWM_motor2(M_STOP);
+
+	ADCHS_ChannelConversionStart(ADCHS_CH36); // JP5 pin 4, AN36, 
+	ADCHS_ChannelConversionStart(ADCHS_CH37); // JP5 pin 5, AN37, 
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -168,9 +173,31 @@ int main(void)
 				PWM_motor2(M_PWM);
 			}
 
-			sprintf(buffer, " %i %i %i %i      ", m35_2.error, m35_2.duty, get_switch(S1), get_switch(S0));
+			if (ADCHS_ChannelResultIsReady(ADCHS_CH37)) {
+				u1ai = ADCHS_ChannelResultGet(ADCHS_CH37); // JP5 pin 5, AN37, 
+				ADCHS_ChannelConversionStart(ADCHS_CH37);
+			}
+			if (ADCHS_ChannelResultIsReady(ADCHS_CH36)) {
+				u1bi = ADCHS_ChannelResultGet(ADCHS_CH36); // JP5 pin 4, AN36, 
+				ADCHS_ChannelConversionStart(ADCHS_CH36);
+			}
+
+			sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u1ai, u1bi);
 			eaDogM_WriteStringAtPos(0, 0, buffer);
 
+			/*
+			 * test switch interface with motor control
+			 */
+			if (get_switch(S1))
+				PWM_motor2(M_CW);
+
+
+			if (get_switch(S0))
+				PWM_motor2(M_CCW);
+
+			/*
+			 * set channel duty cycle for comp H/L outputs
+			 */
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
