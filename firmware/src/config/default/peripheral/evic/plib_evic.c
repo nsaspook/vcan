@@ -65,8 +65,8 @@ void EVIC_Initialize( void )
     IPC41SET = 0x4 | 0x0;  /* UART6_FAULT:  Priority 1 / Subpriority 0 */
     IPC41SET = 0x400 | 0x0;  /* UART6_RX:  Priority 1 / Subpriority 0 */
     IPC41SET = 0x40000 | 0x0;  /* UART6_TX:  Priority 1 / Subpriority 0 */
-    IPC42SET = 0x400 | 0x0;  /* QEI1:  Priority 1 / Subpriority 0 */
-    IPC42SET = 0x40000 | 0x0;  /* QEI2:  Priority 1 / Subpriority 0 */
+    IPC42SET = 0xc00 | 0x0;  /* QEI1:  Priority 3 / Subpriority 0 */
+    IPC42SET = 0xc0000 | 0x0;  /* QEI2:  Priority 3 / Subpriority 0 */
     IPC47SET = 0x400 | 0x0;  /* QEI3:  Priority 1 / Subpriority 0 */
     IPC54SET = 0x4000000 | 0x0;  /* SPI3_RX:  Priority 1 / Subpriority 0 */
     IPC55SET = 0x4 | 0x0;  /* SPI3_TX:  Priority 1 / Subpriority 0 */

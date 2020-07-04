@@ -51,6 +51,8 @@
 
 #include "definitions.h"
 
+#include "../../dio.h"
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: System Interrupt Vector Functions
@@ -79,6 +81,7 @@ void __ISR(_CORE_TIMER_VECTOR, ipl1AUTO) CORE_TIMER_Handler (void)
 
 void __ISR(_EXTERNAL_0_VECTOR, ipl1AUTO) EXTERNAL_0_Handler (void)
 {
+	update_di();
 }
 
 void __ISR(_UART2_FAULT_VECTOR, ipl1AUTO) UART2_FAULT_Handler (void)
@@ -126,11 +129,11 @@ void __ISR(_UART6_TX_VECTOR, ipl1AUTO) UART6_TX_Handler (void)
     UART6_TX_InterruptHandler();
 }
 
-void __ISR(_QEI1_VECTOR, ipl1AUTO) QEI1_Handler (void)
+void __ISR(_QEI1_VECTOR, ipl3AUTO) QEI1_Handler (void)
 {
 }
 
-void __ISR(_QEI2_VECTOR, ipl1AUTO) QEI2_Handler (void)
+void __ISR(_QEI2_VECTOR, ipl3AUTO) QEI2_Handler (void)
 {
 }
 

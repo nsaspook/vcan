@@ -192,9 +192,9 @@ void SYS_Initialize ( void* data )
 
     QEI2_Initialize();
 
-	UART2_Initialize();
-
     QEI3_Initialize();
+
+	UART2_Initialize();
 
 	SPI3_Initialize();
 

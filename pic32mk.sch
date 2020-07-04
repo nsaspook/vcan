@@ -16449,7 +16449,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <part name="VSS59" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 <part name="P+31" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="JP3" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X16" device="" package3d_urn="urn:adsk.eagle:package:22432/2" value="io pins"/>
-<part name="U4" library="REF3440IDBVR" deviceset="REF3440IDBVR" device=""/>
+<part name="U4" library="REF3440IDBVR" deviceset="REF3440IDBVR" device="" value="REF3425IDBVR"/>
 <part name="VSS61" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 <part name="P+32" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="C28" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="22uf"/>

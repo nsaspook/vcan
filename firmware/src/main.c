@@ -22,16 +22,10 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stddef.h>                     // Defines NULL
-#include <stdbool.h>                    // Defines true
-#include <stdlib.h>                     // Defines EXIT_FAILURE
-#include <stdio.h>
-#include <string.h>
-#include "tests.h"
-#include "m35qei.h"
-#include "config/default/peripheral/rtcc/plib_rtcc.h"
-#include "eadog.h"
+#include "vcan.h"
+#include "dio.h"
 
+extern volatile S_data S;
 
 QEI_DATA m35_1 = {
 	.gain = pos_gain,
@@ -86,6 +80,11 @@ int main(void)
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
 
+	/*
+	 * start the external switch handler
+	 */
+	init_dio();
+
 	QEI1_Start();
 	QEI2_Start();
 	m35_ptr = &m35_1;
@@ -105,10 +104,10 @@ int main(void)
 	sprintf(buffer, " VCAN Testing ");
 	eaDogM_WriteStringAtPos(0, 0, buffer);
 
-//	CFGCONbits.PWMAPIN1=0;
-//	MCPWM_ChannelPinsOwnershipEnable(MCPWM_CH_1);
-//	MCPWM_ChannelPinsOwnershipDisable(MCPWM_CH_1);
-	
+	//	CFGCONbits.PWMAPIN1=0;
+	//	MCPWM_ChannelPinsOwnershipEnable(MCPWM_CH_1);
+	//	MCPWM_ChannelPinsOwnershipDisable(MCPWM_CH_1);
+
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
@@ -169,7 +168,7 @@ int main(void)
 				PWM_motor2(M_PWM);
 			}
 
-			sprintf(buffer, " %i %i        ", m35_2.error, m35_2.duty);
+			sprintf(buffer, " %i %i %i %i      ", m35_2.error, m35_2.duty, get_switch(S1), get_switch(S0));
 			eaDogM_WriteStringAtPos(0, 0, buffer);
 
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);

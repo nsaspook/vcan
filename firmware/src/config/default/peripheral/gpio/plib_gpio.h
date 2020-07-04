@@ -221,14 +221,14 @@
 #define IN6_OutputEnable()      (TRISCCLR = (1<<15))
 #define IN6_InputEnable()       (TRISCSET = (1<<15))
 #define IN6_PIN                  GPIO_PIN_RC15
-/*** Macros for GPIO_RD8 pin ***/
-#define GPIO_RD8_Set()               (LATDSET = (1<<8))
-#define GPIO_RD8_Clear()             (LATDCLR = (1<<8))
-#define GPIO_RD8_Toggle()            (LATDINV= (1<<8))
-#define GPIO_RD8_Get()               ((PORTD >> 8) & 0x1)
-#define GPIO_RD8_OutputEnable()      (TRISDCLR = (1<<8))
-#define GPIO_RD8_InputEnable()       (TRISDSET = (1<<8))
-#define GPIO_RD8_PIN                  GPIO_PIN_RD8
+/*** Macros for MAX_EN1 pin ***/
+#define MAX_EN1_Set()               (LATDSET = (1<<8))
+#define MAX_EN1_Clear()             (LATDCLR = (1<<8))
+#define MAX_EN1_Toggle()            (LATDINV= (1<<8))
+#define MAX_EN1_Get()               ((PORTD >> 8) & 0x1)
+#define MAX_EN1_OutputEnable()      (TRISDCLR = (1<<8))
+#define MAX_EN1_InputEnable()       (TRISDSET = (1<<8))
+#define MAX_EN1_PIN                  GPIO_PIN_RD8
 /*** Macros for GPIO_RC13 pin ***/
 #define GPIO_RC13_Set()               (LATCSET = (1<<13))
 #define GPIO_RC13_Clear()             (LATCCLR = (1<<13))
