@@ -13,6 +13,7 @@ extern "C" {
 #endif
 
 #include "vcan.h"
+#include "filters.h"
 
 	typedef enum {
 		FBA1 = 0,
