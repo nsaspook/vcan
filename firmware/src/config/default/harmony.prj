@@ -49,8 +49,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/adchs/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/adchs/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">DFE7E42BC7943C64345F6FB286567065</GeneratedChecksum>
-          <UserChecksum dnOrder="6">DFE7E42BC7943C64345F6FB286567065</UserChecksum>
+          <GeneratedChecksum dnOrder="5">414D698BBEE646A707B8A6468F57A1CB</GeneratedChecksum>
+          <UserChecksum dnOrder="6">414D698BBEE646A707B8A6468F57A1CB</UserChecksum>
         </File>
         <File dnOrder="5">
           <Type dnOrder="0">SOURCE</Type>
@@ -184,8 +184,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/adchs/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/adchs/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">D3E788D4FA49BC8A0AF84A9363C50ABC</GeneratedChecksum>
-          <UserChecksum dnOrder="6">D3E788D4FA49BC8A0AF84A9363C50ABC</UserChecksum>
+          <GeneratedChecksum dnOrder="5">63C96532813A07F4973AF51CD7DDB31B</GeneratedChecksum>
+          <UserChecksum dnOrder="6">63C96532813A07F4973AF51CD7DDB31B</UserChecksum>
         </File>
         <File dnOrder="20">
           <Type dnOrder="0">HEADER</Type>
