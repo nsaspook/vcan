@@ -57,6 +57,7 @@
       <itemPath>../src/eadog.h</itemPath>
       <itemPath>../src/dio.h</itemPath>
       <itemPath>../src/vcan.h</itemPath>
+      <itemPath>../src/adc_scan.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -109,6 +110,7 @@
       <itemPath>../src/tests.c</itemPath>
       <itemPath>../src/eadog.c</itemPath>
       <itemPath>../src/dio.c</itemPath>
+      <itemPath>../src/adc_scan.c</itemPath>
       <itemPath>../src/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"

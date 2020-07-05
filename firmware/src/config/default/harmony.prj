@@ -31,8 +31,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/</LogicalPath>
           <PhysicalPath dnOrder="4">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">4492A7A2950CCE2991ED60C2EFE7B483</GeneratedChecksum>
-          <UserChecksum dnOrder="6">CA73DAC80FAFE3600C99FC2720C66851</UserChecksum>
+          <GeneratedChecksum dnOrder="5">4494E9C22D0AD9AA325E5AFC6ED188ED</GeneratedChecksum>
+          <UserChecksum dnOrder="6">8CC582DD64B381E33A84F2953F4CE2AA</UserChecksum>
         </File>
         <File dnOrder="3">
           <Type dnOrder="0">SOURCE</Type>
@@ -67,8 +67,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/evic/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/evic/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">BADC74F57203246E7676C48AA7C18A6D</GeneratedChecksum>
-          <UserChecksum dnOrder="6">BADC74F57203246E7676C48AA7C18A6D</UserChecksum>
+          <GeneratedChecksum dnOrder="5">DE5DC43BB88798C083310A3A5BFF8F4C</GeneratedChecksum>
+          <UserChecksum dnOrder="6">DE5DC43BB88798C083310A3A5BFF8F4C</UserChecksum>
         </File>
         <File dnOrder="7">
           <Type dnOrder="0">SOURCE</Type>

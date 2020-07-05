@@ -24,6 +24,7 @@
 
 #include "vcan.h"
 #include "dio.h"
+#include "adc_scan.h"
 
 QEI_DATA m35_1 = {
 	.gain = pos_gain,
@@ -33,6 +34,7 @@ m35_2 = {
 	.gain = error_gain,
 },
 *m35_ptr;
+volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
 
 void reset_led_blink(uintptr_t);
 
@@ -74,7 +76,6 @@ static void PWM_motor2(M_CTRL mmode)
 int main(void)
 {
 	char buffer[40];
-	int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0;
 
 	//	struct tm Time = {0};
 
@@ -114,11 +115,9 @@ int main(void)
 	PWM_motor2(M_STOP);
 
 	/*
-	 * AN14/pin 6, AN23/pin 7, AN36/pin 4, AN37/pin 5, AN11/pin 2, AN17/pin 11
-	 * set ADC trigger to SCAN and start SCAN trigger
+	 * start background ADC conversion scans
 	 */
-	ADCCON1bits.STRGSRC = 1;
-	ADCCON3bits.GSWTRG = 1;
+	init_end_of_adc_scan();
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -170,20 +169,6 @@ int main(void)
 					m35_2.duty = m35_2.duty + (m35_2.vel * 2);
 
 				PWM_motor2(M_PWM);
-			}
-
-			/*
-			 * check for ADC scanning done, a 'end of scan' interrupt ISR could also handle this
-			 */
-			if (ADCCON2bits.EOSRDY) { //  End of Scan Interrupt Status bit
-				/*
-				 * update program variables from the ADC result registers
-				 */
-				u2ai = ADCHS_ChannelResultGet(ADCHS_CH23); // JP5 pin 7, AN23, FBB2/RG15
-				u2bi = ADCHS_ChannelResultGet(ADCHS_CH14); // JP5 pin 6, AN14, FBA2/RE14
-				u1ai = ADCHS_ChannelResultGet(ADCHS_CH37); // JP5 pin 5, AN37, FBA1/RF12
-				u1bi = ADCHS_ChannelResultGet(ADCHS_CH36); // JP5 pin 4, AN36, FBB1/RF13
-				ADCCON3bits.GSWTRG = 1; // re-trigger scan
 			}
 
 			/*

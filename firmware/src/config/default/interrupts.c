@@ -52,6 +52,7 @@
 #include "definitions.h"
 
 #include "../../dio.h"
+#include "../../adc_scan.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -112,6 +113,11 @@ void __ISR(_UART3_RX_VECTOR, ipl1AUTO) UART3_RX_Handler (void)
 void __ISR(_UART3_TX_VECTOR, ipl1AUTO) UART3_TX_Handler (void)
 {
     UART3_TX_InterruptHandler();
+}
+
+void __ISR(_ADC_EOS_VECTOR, ipl1AUTO) ADC_EOS_Handler (void)
+{
+	end_of_adc_scan();
 }
 
 void __ISR(_UART6_FAULT_VECTOR, ipl1AUTO) UART6_FAULT_Handler (void)
