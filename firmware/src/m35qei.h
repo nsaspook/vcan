@@ -12,12 +12,12 @@
 extern "C" {
 #endif
 
-#define error_gain	3
+#define error_gain	1
 #define pos_gain	10
 #define pwm_mid_duty	1000
 #define pwm_high_duty	1999
 #define pwm_low_duty	1
-#define motor_error_stop	5
+#define motor_error_stop	15
 #define motor_error_coast	100
 #define motor_error_knee	200
 

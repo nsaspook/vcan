@@ -30,7 +30,7 @@ QEI_DATA m35_1 = {
 	.gain = pos_gain,
 },
 m35_2 = {
-	.duty = 1000,
+	.duty = 500,
 	.gain = error_gain,
 },
 *m35_ptr;
@@ -38,7 +38,7 @@ volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
 
 void reset_led_blink(uintptr_t);
 
-static void PWM_motor2(M_CTRL mmode)
+void PWM_motor2(M_CTRL mmode)
 {
 	//	IOCON2bits.OVRDAT = 3;
 
@@ -163,10 +163,10 @@ int main(void)
 			if (abs(m35_2.error) < motor_error_stop) {
 				PWM_motor2(M_STOP);
 			} else {
-				if (abs(m35_2.error) < motor_error_knee)
-					m35_2.duty = m35_2.duty + (m35_2.vel * 4);
-				if (abs(m35_2.error) < motor_error_coast)
-					m35_2.duty = m35_2.duty + (m35_2.vel * 2);
+//				if (abs(m35_2.error) < motor_error_knee)
+//					m35_2.duty = m35_2.duty + (m35_2.vel * 4);
+//				if (abs(m35_2.error) < motor_error_coast)
+//					m35_2.duty = m35_2.duty + (m35_2.vel * 2);
 
 				PWM_motor2(M_PWM);
 			}
@@ -181,11 +181,11 @@ int main(void)
 			 * test switch interface with motor control
 			 */
 			if (get_switch(S1))
-				PWM_motor2(M_CW);
+				//PWM_motor2(M_CW);
 
 
 			if (get_switch(S0))
-				PWM_motor2(M_CCW);
+				//PWM_motor2(M_CCW);
 
 			/*
 			 * set channel duty cycle for comp H/L outputs
