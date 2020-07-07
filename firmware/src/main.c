@@ -40,7 +40,7 @@ void reset_led_blink(uintptr_t);
 
 void PWM_motor2(M_CTRL mmode)
 {
-	//	IOCON2bits.OVRDAT = 3;
+	IOCON2bits.OVRDAT = 3;
 
 	switch (mmode) {
 	case M_PWM:
@@ -62,6 +62,35 @@ void PWM_motor2(M_CTRL mmode)
 		IOCON2bits.OVRDAT = 3;
 		IOCON2bits.OVRENH = 1;
 		IOCON2bits.OVRENL = 1;
+		break;
+	}
+
+}
+
+void PWM_motor4(M_CTRL mmode)
+{
+	IOCON2bits.OVRDAT = 3;
+
+	switch (mmode) {
+	case M_PWM:
+		IOCON4bits.OVRENH = 0;
+		IOCON4bits.OVRENL = 0;
+		break;
+	case M_CW:
+		IOCON4bits.OVRDAT = 1;
+		IOCON4bits.OVRENH = 1;
+		IOCON4bits.OVRENL = 1;
+		break;
+	case M_CCW:
+		IOCON4bits.OVRDAT = 2;
+		IOCON4bits.OVRENH = 1;
+		IOCON4bits.OVRENL = 1;
+		break;
+	case M_STOP:
+	default:
+		IOCON4bits.OVRDAT = 0;
+		IOCON4bits.OVRENH = 1;
+		IOCON4bits.OVRENL = 1;
 		break;
 	}
 
@@ -113,6 +142,7 @@ int main(void)
 	MCPWM_Start();
 
 	PWM_motor2(M_STOP);
+	PWM_motor4(M_STOP);
 
 	/*
 	 * start background ADC conversion scans
@@ -155,18 +185,20 @@ int main(void)
 			m35_2.error = (m35_1.pos * m35_1.gain) - m35_2.pos;
 
 			m35_2.duty = pwm_mid_duty - (m35_2.error * m35_2.gain);
-			if (m35_2.duty > pwm_high_duty)
+			if (m35_2.duty > pwm_high_duty) {
 				m35_2.duty = pwm_high_duty;
-			if (m35_2.duty < pwm_low_duty)
+			}
+			if (m35_2.duty < pwm_low_duty) {
 				m35_2.duty = pwm_low_duty;
+			}
 
 			if (abs(m35_2.error) < motor_error_stop) {
 				PWM_motor2(M_STOP);
 			} else {
-//				if (abs(m35_2.error) < motor_error_knee)
-//					m35_2.duty = m35_2.duty + (m35_2.vel * 4);
-//				if (abs(m35_2.error) < motor_error_coast)
-//					m35_2.duty = m35_2.duty + (m35_2.vel * 2);
+				//				if (abs(m35_2.error) < motor_error_knee)
+				//					m35_2.duty = m35_2.duty + (m35_2.vel * 4);
+				//				if (abs(m35_2.error) < motor_error_coast)
+				//					m35_2.duty = m35_2.duty + (m35_2.vel * 2);
 
 				PWM_motor2(M_PWM);
 			}
@@ -180,20 +212,20 @@ int main(void)
 			/*
 			 * test switch interface with motor control
 			 */
-			if (get_switch(S1))
+			if (get_switch(S1)) {
 				//PWM_motor2(M_CW);
+			}
 
 
-			if (get_switch(S0))
+			if (get_switch(S0)) {
 				//PWM_motor2(M_CCW);
+			}
 
 			/*
 			 * set channel duty cycle for comp H/L outputs
 			 */
-//			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, 500);
-			PDC4=500;
-//			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-			PDC2=m35_2.duty;
+			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_2.duty);
 

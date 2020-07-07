@@ -70,7 +70,7 @@ void MCPWM_Initialize (void)
     /* PWMCON1 register  */
     /*  MTBS   = 0 */
     /*  PTDIR  =  0 */
-    /*  ECAM   =  1 */
+    /*  ECAM   =  0 */
     /*  DTCP   =  0 */
     /*  DTC    =  2 */
     /*  ITB    = 1 */
@@ -79,7 +79,7 @@ void MCPWM_Initialize (void)
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON1 = 0x680;
+    PWMCON1 = 0x280;
 
     /* IOCON1 register  */
     /*  SWAP    = 0*/
@@ -96,7 +96,7 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 15  */
     IOCON1 = 0x3c27c03c;
 
-    PDC1 = 1000;
+    PDC1 = 1500;
     SDC1 = 500;
     PHASE1 = 2000;
 
@@ -125,7 +125,7 @@ void MCPWM_Initialize (void)
     /* PWMCON2 register  */
     /*  MTBS   = 0 */
     /*  PTDIR  =  0 */
-    /*  ECAM   =  1 */
+    /*  ECAM   =  0 */
     /*  DTCP   =  0 */
     /*  DTC    =  2 */
     /*  ITB    = 1 */
@@ -134,7 +134,7 @@ void MCPWM_Initialize (void)
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON2 = 0x680;
+    PWMCON2 = 0x280;
 
     /* IOCON2 register  */
     /*  SWAP    = 0*/
@@ -180,7 +180,7 @@ void MCPWM_Initialize (void)
     /* PWMCON3 register  */
     /*  MTBS   = 0 */
     /*  PTDIR  =  0 */
-    /*  ECAM   =  1 */
+    /*  ECAM   =  0 */
     /*  DTCP   =  0 */
     /*  DTC    =  3 */
     /*  ITB    = 1 */
@@ -189,7 +189,7 @@ void MCPWM_Initialize (void)
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON3 = 0x6c0;
+    PWMCON3 = 0x2c0;
 
     /* IOCON3 register  */
     /*  SWAP    = 0*/
@@ -235,7 +235,7 @@ void MCPWM_Initialize (void)
     /* PWMCON4 register  */
     /*  MTBS   = 0 */
     /*  PTDIR  =  0 */
-    /*  ECAM   =  1 */
+    /*  ECAM   =  0 */
     /*  DTCP   =  0 */
     /*  DTC    =  3 */
     /*  ITB    = 1 */
@@ -244,7 +244,7 @@ void MCPWM_Initialize (void)
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON4 = 0x6c0;
+    PWMCON4 = 0x2c0;
 
     /* IOCON4 register  */
     /*  SWAP    = 0*/

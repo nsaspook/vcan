@@ -76,8 +76,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/gpio/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/gpio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">F1B61805B3411E73CB23F6F36B145116</GeneratedChecksum>
-          <UserChecksum dnOrder="6">F1B61805B3411E73CB23F6F36B145116</UserChecksum>
+          <GeneratedChecksum dnOrder="5">6C07F6D3EFBFC43A3C07CC66D6972D19</GeneratedChecksum>
+          <UserChecksum dnOrder="6">6C07F6D3EFBFC43A3C07CC66D6972D19</UserChecksum>
         </File>
         <File dnOrder="8">
           <Type dnOrder="0">SOURCE</Type>
@@ -85,8 +85,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/mcpwm/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/mcpwm/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">6E62A8B4BBDD0B0C0D7615A3EBF59133</GeneratedChecksum>
-          <UserChecksum dnOrder="6">6E62A8B4BBDD0B0C0D7615A3EBF59133</UserChecksum>
+          <GeneratedChecksum dnOrder="5">48796D4CD058B9A2FBA1B56C481EAC3D</GeneratedChecksum>
+          <UserChecksum dnOrder="6">48796D4CD058B9A2FBA1B56C481EAC3D</UserChecksum>
         </File>
         <File dnOrder="9">
           <Type dnOrder="0">SOURCE</Type>
@@ -354,7 +354,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="5" key="PackageFilter" value="expresslogic_threadx;bootloader;csp;gfx_apps;gfx;cryptoauthlib;wireless;cryptoauthlib_apps;usb;crypto;motor_control;audio;net;aerospace;x2c;touch;aws_cloud;bt;micrium_ucos3;core;bsp;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="usb;cryptoauthlib;aws_cloud;wireless;crypto;gfx_apps;gfx;x2c;micrium_ucos3;audio;core;cryptoauthlib_apps;expresslogic_threadx;motor_control;csp;bt;touch;net;bootloader;bsp;aerospace;quick_docs;reference_apps;classb_sam_e5x_d5x;"/>
       <Setting dnOrder="6" key="TRUSTZONE" value="false"/>
     </Settings>
   </Configurator>

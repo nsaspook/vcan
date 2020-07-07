@@ -80,8 +80,9 @@ void update_di(void)
  */
 SW_STATES get_switch(const uint8_t i)
 {
-	if (i >= NUM_SWITCHES)
+	if (i >= NUM_SWITCHES) {
 		return SW_OFF;
+	}
 
 	return S.button[i].sw;
 }
@@ -92,8 +93,9 @@ SW_STATES get_switch(const uint8_t i)
  */
 SW_STATES get_switch_bm(const uint8_t i)
 {
-	if (i >= NUM_SWITCHES)
+	if (i >= NUM_SWITCHES) {
 		return SW_OFF;
+	}
 
 	return(S.sw_bitmap >> i)&0x01;
 }
@@ -106,8 +108,9 @@ rbutton_type get_switch_data(const uint8_t i)
 {
 	static rbutton_type error_button = {.sw = SW_INVALID};
 
-	if (i >= NUM_SWITCHES)
+	if (i >= NUM_SWITCHES) {
 		return error_button;
+	}
 
 	return S.button[i];
 }
@@ -125,8 +128,9 @@ uint8_t check_switches(void)
  */
 void clear_switch(const uint8_t i)
 {
-	if (i >= NUM_SWITCHES)
+	if (i >= NUM_SWITCHES) {
 		return;
+	}
 
 	S.button[i].count = 0;
 	S.sw_bitmap &= ~(1 << i); //clear switch pressed bit
