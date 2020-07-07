@@ -30,7 +30,7 @@ QEI_DATA m35_1 = {
 	.gain = pos_gain,
 },
 m35_2 = {
-	.duty = 500,
+	.duty = 1000,
 	.gain = error_gain,
 },
 *m35_ptr;
@@ -190,8 +190,10 @@ int main(void)
 			/*
 			 * set channel duty cycle for comp H/L outputs
 			 */
-			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
-			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+//			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, 500);
+			PDC4=500;
+//			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+			PDC2=m35_2.duty;
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_2.duty);
 
