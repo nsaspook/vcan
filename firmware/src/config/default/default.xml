@@ -2347,7 +2347,7 @@
         </String>
         <String dnOrder="210" id="BSP_PIN_6_DIR">
           <Values dnOrder="0">
-            <User dnOrder="0" value=""/>
+            <User dnOrder="0" value="Out"/>
           </Values>
         </String>
         <String dnOrder="211" id="BSP_PIN_6_FUNCTION_NAME">
@@ -2362,7 +2362,7 @@
         </String>
         <String dnOrder="213" id="BSP_PIN_6_LAT">
           <Values dnOrder="0">
-            <User dnOrder="0" value=""/>
+            <User dnOrder="0" value="High"/>
           </Values>
         </String>
         <String dnOrder="214" id="BSP_PIN_6_MODE">
@@ -4658,12 +4658,12 @@
         </Hex>
         <Hex dnOrder="656" id="SYS_PORT_D_LAT">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="260"/>
+            <Dynamic dnOrder="0" id="core" value="262"/>
           </Values>
         </Hex>
         <Hex dnOrder="657" id="SYS_PORT_D_TRIS">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="12660"/>
+            <Dynamic dnOrder="0" id="core" value="12662"/>
           </Values>
         </Hex>
         <Hex dnOrder="658" id="SYS_PORT_E_ANSEL">

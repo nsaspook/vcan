@@ -74,8 +74,8 @@ void GPIO_Initialize ( void )
     ANSELCCLR = 0x1407; /* Digital Mode Enable */
 
     /* PORTD Initialization */
-    LATD = 0x104; /* Initial Latch Value */
-    TRISDCLR = 0x3174; /* Direction Control */
+    LATD = 0x106; /* Initial Latch Value */
+    TRISDCLR = 0x3176; /* Direction Control */
     ANSELDCLR = 0xc000; /* Digital Mode Enable */
     CNPUDSET = 0x6; /* Pull-Up Enable */
 

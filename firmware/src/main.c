@@ -155,6 +155,7 @@ int main(void)
 
 		if (m35_ptr->update++ > 20480) {
 			m35_ptr->update = 0;
+			m35_2.update++;
 
 			/* update local value of the encoder position counters */
 			m35_1.pos = POS1CNT;
@@ -173,13 +174,15 @@ int main(void)
 			LATGbits.LATG14 = m35_ptr->pos >> 14;
 #endif
 
-			/* format and send data to LCD screen */
-			sprintf(buffer, "c %7i:%i %i ", m35_ptr->pos, m35_ptr->vel, u1ai);
-			eaDogM_WriteStringAtPos(1, 0, buffer);
-			m35_ptr = &m35_2;
-			sprintf(buffer, "c %7i:%i %i ", m35_ptr->pos, m35_ptr->vel, u1bi);
-			eaDogM_WriteStringAtPos(2, 0, buffer);
-			m35_ptr = &m35_1;
+			if (m35_2.update > update_speed) {
+				/* format and send data to LCD screen */
+				sprintf(buffer, "c %7i:%i      ", m35_ptr->pos, m35_ptr->vel);
+				eaDogM_WriteStringAtPos(1, 0, buffer);
+				m35_ptr = &m35_2;
+				sprintf(buffer, "c %7i:%i      ", m35_ptr->pos, m35_ptr->vel);
+				eaDogM_WriteStringAtPos(2, 0, buffer);
+				m35_ptr = &m35_1;
+			}
 
 
 			m35_2.error = (m35_1.pos * m35_1.gain) - m35_2.pos;
@@ -203,11 +206,14 @@ int main(void)
 				PWM_motor2(M_PWM);
 			}
 
-			/*
-			 * show some test results on the LCD screen
-			 */
-			sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u2ai, u2bi);
-			eaDogM_WriteStringAtPos(0, 0, buffer);
+			if (m35_2.update > update_speed) {
+				/*
+				 * show some test results on the LCD screen
+				 */
+				//sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u1ai, u1bi);
+				sprintf(buffer, "%3i %3i:%3i %3i         ", u1ai, u1bi, u2ai, u2bi);
+				eaDogM_WriteStringAtPos(0, 0, buffer);
+			}
 
 			/*
 			 * test switch interface with motor control
@@ -228,6 +234,10 @@ int main(void)
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_2.duty);
+
+			if (m35_2.update > update_speed) {
+				m35_2.update = 0;
+			}
 
 		} else {
 			//run_tests(100000); // port diagnostics

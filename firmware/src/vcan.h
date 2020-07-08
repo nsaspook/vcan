@@ -26,6 +26,8 @@ extern "C" {
 #include "m35qei.h"
 #include "config/default/peripheral/rtcc/plib_rtcc.h"
 #include "eadog.h"
+	
+#define update_speed 33
 
 #ifdef	__cplusplus
 }

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define max_strlen	20
+#define max_strlen	16
 
 static void send_lcd_cmd_long(uint8_t); // for display init only
 static void send_lcd_data(uint8_t);
@@ -131,8 +131,11 @@ void eaDogM_WriteString(char *strPtr)
 
 	RS_SetHigh();
 	CSB_SetLow();
-	
-	if (i > max_strlen) strPtr[max_strlen] = 0; // buffer overflow check
+
+	if (i > max_strlen) {
+		strPtr[max_strlen] = 0; // buffer overflow check
+		i = max_strlen;
+	}
 
 	SPI3_Write(strPtr, i); // use interrupt mode so we don't wait
 }
