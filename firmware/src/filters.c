@@ -11,15 +11,21 @@ typedef signed short fix16;
 
 //== One-pole (RC) lowpass filter, 16-bit ========================
 // coeff = {b2, -a2} noting that b1=b2 and a1=1
-// history = { last_input, last_output}
-fix16 coeff[2], history[2], output, input;
+// history = { last_input, last_output} for each channel
+fix16 coeff[2], history[8], output, input;
 
-fix16 IIR_butter_1_16(fix16 input, fix16 *coeff, fix16 *history)
+fix16 IIR_butter_1_16(fix16 input, fix16 *coeff, fix16 *history, uint8_t chan)
 {
 	fix16 output;
-	output = multfix16(input + history[0], coeff[0]) + multfix16(history[1], coeff[1]);
-	history[0] = input;
-	history[1] = output;
+
+	if (chan > 3) {
+		return float2fix16(0.0);
+	}
+
+	chan = chan * 2;
+	output = multfix16(input + history[0 + chan], coeff[0]) + multfix16(history[1 + chan], coeff[1]);
+	history[0 + chan] = input;
+	history[1 + chan] = output;
 	return output;
 }
 
@@ -49,6 +55,8 @@ void filters_init(void)
 	coeff[1] = float2fix16(0.9691);
 	history[0] = float2fix16(0.0);
 	history[1] = float2fix16(0.0);
+	history[2] = float2fix16(0.0);
+	history[3] = float2fix16(0.0);
 
 	// second order filter
 	// from butter(2, 0.1 );
@@ -61,9 +69,9 @@ void filters_init(void)
 	history2[3] = float2fix16(0.0);
 }
 
-int32_t lp_filter(int32_t input)
+int32_t lp_filter(int32_t input, uint8_t chan)
 {
-	output = IIR_butter_1_16(input, coeff, history);
+	output = IIR_butter_1_16(input, coeff, history, chan);
 	return output;
 }
 

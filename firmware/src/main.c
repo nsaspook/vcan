@@ -41,11 +41,14 @@ void reset_led_blink(uintptr_t);
 void PWM_motor2(M_CTRL mmode)
 {
 	IOCON2bits.OVRDAT = 3;
+	IOCON1bits.OVRDAT = 3;
 
 	switch (mmode) {
 	case M_PWM:
 		IOCON2bits.OVRENH = 0;
 		IOCON2bits.OVRENL = 0;
+		IOCON1bits.OVRENH = 0;
+		IOCON1bits.OVRENL = 0;
 		break;
 	case M_CW:
 		IOCON2bits.OVRDAT = 1;
@@ -59,9 +62,12 @@ void PWM_motor2(M_CTRL mmode)
 		break;
 	case M_STOP:
 	default:
-		IOCON2bits.OVRDAT = 3;
+		IOCON2bits.OVRDAT = 0;
 		IOCON2bits.OVRENH = 1;
 		IOCON2bits.OVRENL = 1;
+		IOCON1bits.OVRDAT = 0;
+		IOCON1bits.OVRENH = 1;
+		IOCON1bits.OVRENL = 1;
 		break;
 	}
 

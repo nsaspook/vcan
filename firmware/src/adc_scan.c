@@ -22,8 +22,8 @@ void end_of_adc_scan(void)
 		an_data[IVREF] = ADCHS_ChannelResultGet(ADCHS_CH50); // IVREF 1.2V (internal AN50)
 		an_data[VBAT2] = ADCHS_ChannelResultGet(ADCHS_CH52); // VBAT/2 (internal AN52)
 		an_data[TSENSOR] = ADCHS_ChannelResultGet(ADCHS_CH53); //  CTMU Temperature Sensor (internal AN53)
-//		u1bi = lp_filter2(u1bi); // try filter
-		u1bi = lp_filter(u1bi); // try filter
+		u1ai = lp_filter(u1ai, 0); // try filter
+		u1bi = lp_filter(u1bi, 1); // try filter
 	}
 	IFS3CLR = _IFS3_AD1EOSIF_MASK; // Clear the interrupt
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // scan re-trigger

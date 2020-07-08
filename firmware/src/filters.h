@@ -19,7 +19,7 @@ extern "C" {
 #include <math.h>
 
 	void filters_init(void);
-	int32_t lp_filter(int32_t);
+	int32_t lp_filter(int32_t, uint8_t);
 	int32_t lp_filter2(int32_t);
 
 #ifdef	__cplusplus
