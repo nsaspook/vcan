@@ -68,6 +68,9 @@ void PWM_motor2(M_CTRL mmode)
 		IOCON1bits.OVRDAT = 0;
 		IOCON1bits.OVRENH = 1;
 		IOCON1bits.OVRENL = 1;
+		IOCON4bits.OVRDAT = 0;
+		IOCON4bits.OVRENH = 1;
+		IOCON4bits.OVRENL = 1;
 		break;
 	}
 
@@ -148,7 +151,9 @@ int main(void)
 	MCPWM_Start();
 
 	PWM_motor2(M_STOP);
-	PWM_motor4(M_STOP);
+	IOCON4bits.FLTMOD=0;
+//	LATAbits.LATA10=0;
+//	PWM_motor4(M_STOP);
 
 	/*
 	 * start background ADC conversion scans
