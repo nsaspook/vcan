@@ -252,6 +252,7 @@ int main(void)
 
 			if (m35_2.update > update_speed) {
 				m35_2.update = 0;
+				uart_tests();
 			}
 
 		} else {

@@ -59,6 +59,7 @@
 #include "peripheral/gpio/plib_gpio.h"
 #include "peripheral/evic/plib_evic.h"
 #include "peripheral/mcpwm/plib_mcpwm.h"
+#include "peripheral/rtcc/plib_rtcc.h"
 #include "peripheral/uart/plib_uart6.h"
 
 // DOM-IGNORE-BEGIN

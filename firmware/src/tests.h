@@ -17,6 +17,7 @@ extern "C" {
 
 #include "config/default/definitions.h"                 // SYS function prototypes
 #include <proc/p32mk1024mcf100.h>
+#include "eadog.h"
 
 	bool run_tests(uint32_t);
 	bool spi_tests(void);

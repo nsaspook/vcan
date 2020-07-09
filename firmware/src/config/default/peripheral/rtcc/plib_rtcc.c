@@ -94,29 +94,29 @@ void RTCC_Initialize( void )
     while(RTCCONbits.RTCCLKON);  /* clock disabled? */
 
     /* initialize the time, date and alarm */
-    RTCTIME = 0x00000000;   /* Set RTCC time */
+    RTCTIME = 0x23595000;   /* Set RTCC time */
 
-    RTCDATE = 0x00010100;  /* Set RTCC date */
+    RTCDATE = 0x18123100;  /* Set RTCC date */
 
     RTCALRMCLR = _RTCALRM_ALRMEN_MASK;  /* Disable alarm */
 
     while(RTCALRMbits.ALRMSYNC);  /* Wait for disable */
 
-    ALRMTIME = 0x00000100;   /* Set alarm time */
+    ALRMTIME = 0x23595500;   /* Set alarm time */
 
-    ALRMDATE = 0x00010100;   /* Set alarm date */
+    ALRMDATE = 0x00123100;   /* Set alarm date */
 
     /* repeat forever or 0-255 times */
     RTCALRMCLR = _RTCALRM_CHIME_MASK;  /* Set alarm to repeat finite number of times */
 
     RTCALRMbits.ARPT = 0;
 
-    RTCALRMbits.AMASK = 9;
+    RTCALRMbits.AMASK = 1;
 
     RTCCONCLR = _RTCCON_RTCOE_MASK;  /* Enable RTCC output */
 
     /* Set RTCC clock source (LPRC/SOSC) */
-    RTCCONbits.RTCCLKSEL = 0;
+    RTCCONbits.RTCCLKSEL = 1;
 
     /* start the RTC */
     RTCCONSET = _RTCCON_ON_MASK;
@@ -242,7 +242,7 @@ void RTCC_CallbackRegister( RTCC_CALLBACK callback, uintptr_t context )
 void RTCC_InterruptHandler( void )
 {
     /* Clear the status flag */
-    IFS0CLR = 0x40000000;
+    IFS0CLR = _IFS0_RTCCIF_MASK;
 
     if(rtcc.callback != NULL)
     {

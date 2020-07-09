@@ -200,6 +200,7 @@ void SYS_Initialize ( void* data )
 
     MCPWM_Initialize();
 
+    RTCC_Initialize();
 	UART6_Initialize();
 
 

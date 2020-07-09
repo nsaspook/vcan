@@ -30,6 +30,13 @@ bool spi_tests(void)
 
 bool uart_tests(void)
 {
+	DERE_Set(); // set RS485 port to transmit
+	/*
+	 * RS485 port
+	 */
+	while (UART6_WriteFreeBufferCountGet() < 10);
+	UART6_Write((uint8_t*) " Tests 6 1", 10);
+	UART6_Write((uint8_t*) " Tests 6 2", 10);
 
 	while (UART2_WriteFreeBufferCountGet() < 10);
 	UART2_Write((uint8_t*) " Tests 2", 8);
@@ -37,8 +44,10 @@ bool uart_tests(void)
 	while (UART3_WriteFreeBufferCountGet() < 10);
 	UART3_Write((uint8_t*) " Tests 3", 8);
 
-	while (UART6_WriteFreeBufferCountGet() < 10);
-	UART6_Write((uint8_t*) " Tests 6", 8);
+	while (UART2_WriteCountGet() > 0); // wait until bytes are gone in the buffer
+
+	wdtdelay(700); // RS485 switch-back delay
+	DERE_Clear(); // RS485 buss back to receive
 
 	return true;
 }
