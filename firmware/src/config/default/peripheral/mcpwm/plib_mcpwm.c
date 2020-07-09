@@ -252,14 +252,14 @@ void MCPWM_Initialize (void)
     /*  POLH    = 0*/
     /*  POLL    = 0*/
     /*  FLTDAT  = 0b00 */
-    /*  FLTMOD  = 0 */
+    /*  FLTMOD  = 3 */
     /*  FLTPOL  = 0  */
-    /*  FLTSRC  = 15  */
+    /*  FLTSRC  = 5  */
     /*  CLDAT  = 0b00 */
-    /*  CLMOD  = 1 */
+    /*  CLMOD  = 0 */
     /*  CLPOL  = 0  */
     /*  CLSRC  = 15  */
-    IOCON4 = 0x3d78c000;
+    IOCON4 = 0x3c2bc000;
 
     PDC4 = 1000;
     SDC4 = 500;
