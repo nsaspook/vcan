@@ -76,8 +76,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/gpio/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/gpio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">D55DD72F235D65DDC315301CEFDA08CD</GeneratedChecksum>
-          <UserChecksum dnOrder="6">D55DD72F235D65DDC315301CEFDA08CD</UserChecksum>
+          <GeneratedChecksum dnOrder="5">515DC5171A4ACA27303D0EA87F7A1B20</GeneratedChecksum>
+          <UserChecksum dnOrder="6">515DC5171A4ACA27303D0EA87F7A1B20</UserChecksum>
         </File>
         <File dnOrder="8">
           <Type dnOrder="0">SOURCE</Type>
@@ -122,7 +122,7 @@
           <LogicalPath dnOrder="3">config/default/peripheral/rtcc/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/rtcc/</PhysicalPath>
           <GeneratedChecksum dnOrder="5">9C8431102C19F7F2AF49A31A9F37330D</GeneratedChecksum>
-          <UserChecksum dnOrder="6">9C8431102C19F7F2AF49A31A9F37330D</UserChecksum>
+          <UserChecksum dnOrder="6">5718AE9D4FE13BAF4AEE574082CB87C2</UserChecksum>
         </File>
         <File dnOrder="13">
           <Type dnOrder="0">SOURCE</Type>
@@ -229,8 +229,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/gpio/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/gpio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">6271CDA396C9EA890F8A87DCE6C9F6C0</GeneratedChecksum>
-          <UserChecksum dnOrder="6">6271CDA396C9EA890F8A87DCE6C9F6C0</UserChecksum>
+          <GeneratedChecksum dnOrder="5">ABE89594BADDB6891D5188214F3DB797</GeneratedChecksum>
+          <UserChecksum dnOrder="6">ABE89594BADDB6891D5188214F3DB797</UserChecksum>
         </File>
         <File dnOrder="25">
           <Type dnOrder="0">HEADER</Type>

@@ -63,8 +63,8 @@ void GPIO_Initialize ( void )
     ANSELACLR = 0xd911; /* Digital Mode Enable */
 
     /* PORTB Initialization */
-    LATB = 0xc100; /* Initial Latch Value */
-    TRISBCLR = 0xc10c; /* Direction Control */
+    LATB = 0xc101; /* Initial Latch Value */
+    TRISBCLR = 0xc10d; /* Direction Control */
     CNPUBSET = 0x80; /* Pull-Up Enable */
     CNPDBSET = 0x10; /* Pull-Down Enable */
 

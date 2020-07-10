@@ -18,7 +18,9 @@ fix16 IIR_butter_1_16(fix16 input, fix16 *coeff, fix16 *history, uint8_t chan)
 {
 	fix16 output;
 
+	DEBUGB0_Set();
 	if (chan > 3) {
+		DEBUGB0_Clear();
 		return float2fix16(0.0);
 	}
 
@@ -26,6 +28,7 @@ fix16 IIR_butter_1_16(fix16 input, fix16 *coeff, fix16 *history, uint8_t chan)
 	output = multfix16(input + history[0 + chan], coeff[0]) + multfix16(history[1 + chan], coeff[1]);
 	history[0 + chan] = input;
 	history[1 + chan] = output;
+	DEBUGB0_Clear();
 	return output;
 }
 

@@ -117,14 +117,14 @@
 #define QEI2_E0_OutputEnable()      (TRISECLR = (1<<9))
 #define QEI2_E0_InputEnable()       (TRISESET = (1<<9))
 #define QEI2_E0_PIN                  GPIO_PIN_RE9
-/*** Macros for GPIO_RB0 pin ***/
-#define GPIO_RB0_Set()               (LATBSET = (1<<0))
-#define GPIO_RB0_Clear()             (LATBCLR = (1<<0))
-#define GPIO_RB0_Toggle()            (LATBINV= (1<<0))
-#define GPIO_RB0_Get()               ((PORTB >> 0) & 0x1)
-#define GPIO_RB0_OutputEnable()      (TRISBCLR = (1<<0))
-#define GPIO_RB0_InputEnable()       (TRISBSET = (1<<0))
-#define GPIO_RB0_PIN                  GPIO_PIN_RB0
+/*** Macros for DEBUGB0 pin ***/
+#define DEBUGB0_Set()               (LATBSET = (1<<0))
+#define DEBUGB0_Clear()             (LATBCLR = (1<<0))
+#define DEBUGB0_Toggle()            (LATBINV= (1<<0))
+#define DEBUGB0_Get()               ((PORTB >> 0) & 0x1)
+#define DEBUGB0_OutputEnable()      (TRISBCLR = (1<<0))
+#define DEBUGB0_InputEnable()       (TRISBSET = (1<<0))
+#define DEBUGB0_PIN                  GPIO_PIN_RB0
 /*** Macros for GPIO_RB2 pin ***/
 #define GPIO_RB2_Set()               (LATBSET = (1<<2))
 #define GPIO_RB2_Clear()             (LATBCLR = (1<<2))
