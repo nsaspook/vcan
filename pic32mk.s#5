@@ -16503,6 +16503,10 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <part name="QEI3" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-23-2041" device="" package3d_urn="urn:adsk.eagle:package:8078635/1"/>
 <part name="VSS71" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 <part name="VDD27" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
+<part name="C36" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="10uf"/>
+<part name="VSS72" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="C37" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="10uf"/>
+<part name="VSS73" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -17489,6 +17493,20 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <instance part="VDD27" gate="G$1" x="-124.46" y="5.08" smashed="yes">
 <attribute name="VALUE" x="-127" y="2.54" size="1.778" layer="96" rot="R90"/>
 </instance>
+<instance part="C36" gate="G$1" x="71.12" y="-170.18" smashed="yes">
+<attribute name="NAME" x="72.136" y="-169.545" size="1.778" layer="95"/>
+<attribute name="VALUE" x="72.136" y="-174.371" size="1.778" layer="96"/>
+</instance>
+<instance part="VSS72" gate="G$1" x="71.12" y="-177.8" smashed="yes">
+<attribute name="VALUE" x="68.58" y="-182.88" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="C37" gate="G$1" x="-154.94" y="121.92" smashed="yes">
+<attribute name="NAME" x="-153.924" y="122.555" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-153.924" y="117.729" size="1.778" layer="96"/>
+</instance>
+<instance part="VSS73" gate="G$1" x="-154.94" y="114.3" smashed="yes">
+<attribute name="VALUE" x="-157.48" y="109.22" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -18288,6 +18306,16 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <junction x="-139.7" y="5.08"/>
 <pinref part="VSS71" gate="G$1" pin="VSS"/>
 </segment>
+<segment>
+<pinref part="C36" gate="G$1" pin="2"/>
+<pinref part="VSS72" gate="G$1" pin="VSS"/>
+<junction x="71.12" y="-175.26"/>
+</segment>
+<segment>
+<pinref part="C37" gate="G$1" pin="2"/>
+<pinref part="VSS73" gate="G$1" pin="VSS"/>
+<junction x="-154.94" y="116.84"/>
+</segment>
 </net>
 <net name="+5V" class="1">
 <segment>
@@ -18728,10 +18756,13 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <net name="+24V" class="2">
 <segment>
 <pinref part="J1" gate="G$1" pin="14"/>
-<wire x1="76.2" y1="-167.64" x2="63.5" y2="-167.64" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="-167.64" x2="71.12" y2="-167.64" width="0.1524" layer="91"/>
 <pinref part="P+13" gate="1" pin="+24V"/>
 <junction x="63.5" y="-167.64"/>
 <junction x="76.2" y="-167.64"/>
+<pinref part="C36" gate="G$1" pin="1"/>
+<wire x1="71.12" y1="-167.64" x2="63.5" y2="-167.64" width="0.1524" layer="91"/>
+<junction x="71.12" y="-167.64"/>
 </segment>
 <segment>
 <pinref part="U2" gate="G$1" pin="VPWRB@1"/>
@@ -20636,7 +20667,8 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="F3" gate="G$1" pin="2"/>
 <wire x1="-157.48" y1="99.06" x2="-160.02" y2="99.06" width="0.1524" layer="91"/>
 <wire x1="-160.02" y1="99.06" x2="-160.02" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="-160.02" y1="109.22" x2="-160.02" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="-160.02" y1="109.22" x2="-160.02" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="-160.02" y1="124.46" x2="-160.02" y2="134.62" width="0.1524" layer="91"/>
 <wire x1="-160.02" y1="134.62" x2="-154.94" y2="134.62" width="0.1524" layer="91"/>
 <junction x="-157.48" y="99.06"/>
 <pinref part="IC11" gate="A1" pin="VI"/>
@@ -20645,6 +20677,10 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <wire x1="-154.94" y1="109.22" x2="-149.86" y2="109.22" width="0.1524" layer="91"/>
 <junction x="-154.94" y="109.22"/>
 <junction x="-160.02" y="109.22"/>
+<pinref part="C37" gate="G$1" pin="1"/>
+<wire x1="-154.94" y1="124.46" x2="-160.02" y2="124.46" width="0.1524" layer="91"/>
+<junction x="-154.94" y="124.46"/>
+<junction x="-160.02" y="124.46"/>
 </segment>
 </net>
 <net name="USBID1" class="0">
