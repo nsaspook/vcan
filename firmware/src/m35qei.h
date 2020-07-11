@@ -13,10 +13,17 @@ extern "C" {
 #endif
 
 #define error_gain	1
+#define herror_gain	10
+	
 #define pos_gain	10
 #define pwm_mid_duty	1000
 #define pwm_high_duty	1999
 #define pwm_low_duty	1
+
+#define hpwm_mid_duty	18000
+#define hpwm_high_duty	35999
+#define hpwm_low_duty	1
+
 #define motor_error_stop	15
 #define motor_error_coast	100
 #define motor_error_knee	200

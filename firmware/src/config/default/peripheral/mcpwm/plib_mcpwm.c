@@ -61,7 +61,7 @@ void MCPWM_Initialize (void)
     /*  SSEIEN = false */
     STCON = 0x0;
 
-    PTPER = 0;
+    PTPER = 36000;
     STPER = 2000;
     SEVTCMP = 0;
     SSEVTCMP = 0;
@@ -261,9 +261,9 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 15  */
     IOCON4 = 0x3c2bc000;
 
-    PDC4 = 1000;
+    PDC4 = 18000;
     SDC4 = 500;
-    PHASE4 = 2000;
+    PHASE4 = 36000;
 
     /* Dead Time */
     DTR4 = 75;

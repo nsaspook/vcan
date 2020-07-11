@@ -33,6 +33,14 @@ m35_2 = {
 	.duty = 1000,
 	.gain = error_gain,
 },
+m35_3 = {
+	.gain = pos_gain,
+},
+m35_4 = {
+	.duty = 18000,
+	.gain = herror_gain,
+},
+
 *m35_ptr;
 volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
 
@@ -154,7 +162,7 @@ int main(void)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	MCPWM_Start();
 
 	PWM_motor2(M_STOP);
@@ -210,6 +218,14 @@ int main(void)
 				m35_2.duty = pwm_low_duty;
 			}
 
+			m35_4.duty = hpwm_mid_duty - (m35_2.error * m35_4.gain);
+			if (m35_4.duty > hpwm_high_duty) {
+				m35_4.duty = hpwm_high_duty;
+			}
+			if (m35_4.duty < hpwm_low_duty) {
+				m35_4.duty = hpwm_low_duty;
+			}
+
 			if (abs(m35_2.error) < motor_error_stop) {
 				PWM_motor2(M_STOP);
 			} else {
@@ -248,7 +264,7 @@ int main(void)
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
-			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_2.duty);
+			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 
 			if (m35_2.update > update_speed) {
 				m35_2.update = 0;
