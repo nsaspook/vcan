@@ -20312,7 +20312,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="IC1" gate="G$1" pin="AN36/CVD36/RF13"/>
 <wire x1="88.9" y1="-88.9" x2="88.9" y2="-93.98" width="0.1524" layer="91"/>
 <junction x="88.9" y="-93.98"/>
-<label x="88.9" y="-99.06" size="1.778" layer="95" rot="R270"/>
+<label x="88.9" y="-101.6" size="1.778" layer="95" rot="R270"/>
 <junction x="88.9" y="-88.9"/>
 </segment>
 <segment>
@@ -20341,7 +20341,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="IC1" gate="G$1" pin="AN37/CVD37/RF12"/>
 <wire x1="91.44" y1="-88.9" x2="91.44" y2="-93.98" width="0.1524" layer="91"/>
 <junction x="91.44" y="-93.98"/>
-<label x="91.44" y="-99.06" size="1.778" layer="95" rot="R270"/>
+<label x="91.44" y="-101.6" size="1.778" layer="95" rot="R270"/>
 <junction x="91.44" y="-88.9"/>
 </segment>
 <segment>
