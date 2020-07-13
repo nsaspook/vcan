@@ -242,7 +242,7 @@ void RTCC_CallbackRegister( RTCC_CALLBACK callback, uintptr_t context )
 void RTCC_InterruptHandler( void )
 {
     /* Clear the status flag */
-    IFS0CLR = _IFS0_RTCCIF_MASK;
+    IFS0CLR = 0x40000000;
 
     if(rtcc.callback != NULL)
     {

@@ -48,19 +48,20 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
+#include "peripheral/spi/plib_spi3.h"
+#include "peripheral/clk/plib_clk.h"
+#include "peripheral/gpio/plib_gpio.h"
+#include "peripheral/evic/plib_evic.h"
+#include "peripheral/uart/plib_uart6.h"
 #include "peripheral/uart/plib_uart3.h"
+#include "peripheral/tmr/plib_tmr6.h"
 #include "peripheral/adchs/plib_adchs.h"
 #include "peripheral/qei/plib_qei1.h"
 #include "peripheral/qei/plib_qei2.h"
 #include "peripheral/qei/plib_qei3.h"
 #include "peripheral/uart/plib_uart2.h"
-#include "peripheral/spi/plib_spi3.h"
-#include "peripheral/clk/plib_clk.h"
-#include "peripheral/gpio/plib_gpio.h"
-#include "peripheral/evic/plib_evic.h"
 #include "peripheral/mcpwm/plib_mcpwm.h"
 #include "peripheral/rtcc/plib_rtcc.h"
-#include "peripheral/uart/plib_uart6.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

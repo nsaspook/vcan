@@ -25,6 +25,7 @@
 #include "vcan.h"
 #include "dio.h"
 #include "adc_scan.h"
+#include "timers.h"
 
 QEI_DATA m35_1 = {
 	.gain = pos_gain,
@@ -43,8 +44,11 @@ m35_4 = {
 
 *m35_ptr;
 volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
+volatile uint16_t tickCount[TMR_COUNT];
 
-void reset_led_blink(uintptr_t);
+double sine_const[3600];
+
+void sine_table(double *);
 
 void PWM_motor2(M_CTRL mmode)
 {
@@ -80,9 +84,9 @@ void PWM_motor2(M_CTRL mmode)
 		IOCON1bits.OVRDAT = 0;
 		IOCON1bits.OVRENH = 1;
 		IOCON1bits.OVRENL = 1;
-		IOCON4bits.OVRDAT = 0;
-		IOCON4bits.OVRENH = 1;
-		IOCON4bits.OVRENL = 1;
+		//		IOCON4bits.OVRDAT = 0;
+		//		IOCON4bits.OVRENH = 1;
+		//		IOCON4bits.OVRENL = 1;
 		IOCON3bits.OVRDAT = 0;
 		IOCON3bits.OVRENH = 1;
 		IOCON3bits.OVRENL = 1;
@@ -129,6 +133,7 @@ void PWM_motor4(M_CTRL mmode)
 int main(void)
 {
 	char buffer[40];
+	int32_t sine_steps = 0;
 
 	//	struct tm Time = {0};
 
@@ -139,6 +144,8 @@ int main(void)
 	 * start the external switch handler
 	 */
 	init_dio();
+	TMR6_CallbackRegister(timer_ms_tick, 0);
+	TMR6_Start();
 
 	QEI1_Start();
 	QEI2_Start();
@@ -167,10 +174,12 @@ int main(void)
 
 	PWM_motor2(M_STOP);
 
+	sine_table(sine_const);
 	/*
 	 * start background ADC conversion scans
 	 */
 	init_end_of_adc_scan();
+	StartTimer(TMR_BLINK, 1000);
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -219,6 +228,13 @@ int main(void)
 			}
 
 			m35_4.duty = hpwm_mid_duty - (m35_2.error * m35_4.gain);
+
+			m35_4.duty = (int32_t) (18000.0 + (17000.0 * sine_const[sine_steps]));
+
+			if (++sine_steps >= 3600) {
+				sine_steps = 0;
+			}
+
 			if (m35_4.duty > hpwm_high_duty) {
 				m35_4.duty = hpwm_high_duty;
 			}
@@ -264,6 +280,8 @@ int main(void)
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
+
+
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 
 			if (m35_2.update > update_speed) {
@@ -271,6 +289,10 @@ int main(void)
 				uart_tests();
 			}
 
+			if (TimerDone(TMR_BLINK)) {
+				StartTimer(TMR_BLINK, 1000);
+				RESET_LED_Toggle();
+			}
 		} else {
 			//run_tests(100000); // port diagnostics
 		}
@@ -281,11 +303,15 @@ int main(void)
 	return( EXIT_FAILURE);
 }
 
-void reset_led_blink(uintptr_t context)
+void sine_table(double *s_table)
 {
-	RESET_LED_Toggle();
-}
+	int I;
 
+	for (I = 1; I < 3600; I++) {
+		s_table[I] = sin((double) I * 3.1415926535*2.0 / 3600.0);
+	}
+
+}
 /*******************************************************************************
  End of File
  */

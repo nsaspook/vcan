@@ -184,7 +184,13 @@ void SYS_Initialize ( void* data )
 
 	GPIO_Initialize();
 
+	SPI3_Initialize();
+
+	UART6_Initialize();
+
 	UART3_Initialize();
+
+    TMR6_Initialize();
 
     ADCHS_Initialize();
 
@@ -196,13 +202,9 @@ void SYS_Initialize ( void* data )
 
 	UART2_Initialize();
 
-	SPI3_Initialize();
-
     MCPWM_Initialize();
 
     RTCC_Initialize();
-	UART6_Initialize();
-
 
 
 

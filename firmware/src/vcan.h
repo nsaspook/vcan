@@ -20,6 +20,7 @@ extern "C" {
 #include <stdlib.h>                     // Defines EXIT_FAILURE
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include <proc/p32mk1024mcf100.h>
 #include "config/default/definitions.h"                 // SYS function prototypes
 #include "tests.h"
