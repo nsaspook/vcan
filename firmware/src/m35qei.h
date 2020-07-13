@@ -28,6 +28,8 @@ extern "C" {
 #define motor_error_coast	100
 #define motor_error_knee	200
 
+#define motor_speed	10
+#define motor_volts	5000.0
 	/*
 	 * QEI #1 pin connections
 	 * 
@@ -48,7 +50,7 @@ extern "C" {
 	 * encoder device data
 	 */
 	typedef struct {
-		int32_t pos, vel, duty, error, speed, hold, gain;
+		int32_t pos, vel, duty, error, speed, hold, gain, sine_steps;
 		uint32_t update;
 	} QEI_DATA;
 

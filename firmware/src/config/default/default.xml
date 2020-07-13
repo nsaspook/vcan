@@ -5724,7 +5724,7 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="26" id="IOCON2__PMOD">
           <Values dnOrder="0">
-            <User dnOrder="0" value="0"/>
+            <User dnOrder="0" value="1"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="27" id="IOCON2__POLH">
@@ -5739,7 +5739,7 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="29" id="IOCON3__PMOD">
           <Values dnOrder="0">
-            <User dnOrder="0" value="0"/>
+            <User dnOrder="0" value="1"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="30" id="IOCON4__CLDAT_PWMH">
@@ -5789,7 +5789,7 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="39" id="IOCON4__PMOD">
           <Values dnOrder="0">
-            <User dnOrder="0" value="0"/>
+            <User dnOrder="0" value="1"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="40" id="IOCON7__CLDAT_PWMH">
@@ -6001,7 +6001,7 @@
         <Comment dnOrder="78" id="MCPWM_FREQ_CH1">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;6000.0&amp;#160;Hz&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;333.333333333&amp;#160;Hz&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
@@ -6029,14 +6029,14 @@
         <Comment dnOrder="82" id="MCPWM_FREQ_CH2">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;6000.0&amp;#160;Hz&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;333.333333333&amp;#160;Hz&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
         <Comment dnOrder="83" id="MCPWM_FREQ_CH3">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;6000.0&amp;#160;Hz&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;333.333333333&amp;#160;Hz&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
@@ -6104,17 +6104,17 @@
         </Hex>
         <Hex dnOrder="94" id="MCPWM_IOCON2">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="1009762364"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="1009763388"/>
           </Values>
         </Hex>
         <Hex dnOrder="95" id="MCPWM_IOCON3">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="245760"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="246784"/>
           </Values>
         </Hex>
         <Hex dnOrder="96" id="MCPWM_IOCON4">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="1009500160"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="1009501184"/>
           </Values>
         </Hex>
         <Hex dnOrder="97" id="MCPWM_IOCON5">
@@ -6228,7 +6228,7 @@
         </Comment>
         <Integer dnOrder="114" id="MCPWM_PERIOD_CH1">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="2000"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="36000"/>
           </Values>
         </Integer>
         <Integer dnOrder="115" id="MCPWM_PERIOD_CH10">
@@ -6248,12 +6248,12 @@
         </Integer>
         <Integer dnOrder="118" id="MCPWM_PERIOD_CH2">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="2000"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="36000"/>
           </Values>
         </Integer>
         <Integer dnOrder="119" id="MCPWM_PERIOD_CH3">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="2000"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="36000"/>
           </Values>
         </Integer>
         <Integer dnOrder="120" id="MCPWM_PERIOD_CH4">
@@ -6449,31 +6449,31 @@
         <Integer dnOrder="152" id="PDC1__PDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">2000</Value>
+              <Value dnOrder="0">36000</Value>
             </Integer>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="1500"/>
+            <User dnOrder="0" value="18000"/>
           </Values>
         </Integer>
         <Integer dnOrder="153" id="PDC2__PDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">2000</Value>
+              <Value dnOrder="0">36000</Value>
             </Integer>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="1000"/>
+            <User dnOrder="0" value="18000"/>
           </Values>
         </Integer>
         <Integer dnOrder="154" id="PDC3__PDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">2000</Value>
+              <Value dnOrder="0">36000</Value>
             </Integer>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="1000"/>
+            <User dnOrder="0" value="18000"/>
           </Values>
         </Integer>
         <Integer dnOrder="155" id="PDC4__PDC">
@@ -6528,17 +6528,17 @@
         </Integer>
         <Integer dnOrder="162" id="PHASE1__PHASE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="2000"/>
+            <User dnOrder="0" value="36000"/>
           </Values>
         </Integer>
         <Integer dnOrder="163" id="PHASE2__PHASE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="2000"/>
+            <User dnOrder="0" value="36000"/>
           </Values>
         </Integer>
         <Integer dnOrder="164" id="PHASE3__PHASE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="2000"/>
+            <User dnOrder="0" value="36000"/>
           </Values>
         </Integer>
         <Integer dnOrder="165" id="PHASE4__PHASE">
@@ -6759,21 +6759,24 @@
         <Integer dnOrder="206" id="SDC1__SDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">2000</Value>
+              <Value dnOrder="0">36000</Value>
             </Integer>
           </Attributes>
         </Integer>
         <Integer dnOrder="207" id="SDC2__SDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">2000</Value>
+              <Value dnOrder="0">36000</Value>
             </Integer>
+            <Boolean dnOrder="1" id="visible">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
           </Attributes>
         </Integer>
         <Integer dnOrder="208" id="SDC3__SDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">2000</Value>
+              <Value dnOrder="0">36000</Value>
             </Integer>
           </Attributes>
         </Integer>
@@ -7025,17 +7028,27 @@
     </UniqueComponent>
     <UniqueComponent dnOrder="9" id="tmr6">
       <Symbols dnOrder="0">
-        <Long dnOrder="0" id="TIMER_PERIOD">
+        <Integer dnOrder="0" id="TIMER_CLOCK_FREQ">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0" id="tmr6" value="6000000"/>
+          </Values>
+        </Integer>
+        <Long dnOrder="1" id="TIMER_PERIOD">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="tmr6" value="2999"/>
           </Values>
         </Long>
-        <Float dnOrder="1" id="TIMER_TIME_PERIOD_MS">
-          <Values dnOrder="0">
+        <Float dnOrder="2" id="TIMER_TIME_PERIOD_MS">
+          <Attributes dnOrder="0">
+            <Float dnOrder="0" id="max">
+              <Value dnOrder="0">10.9225</Value>
+            </Float>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="0.5"/>
           </Values>
         </Float>
-        <Integer dnOrder="2" id="TIMER_WIDTH">
+        <Integer dnOrder="3" id="TIMER_WIDTH">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="tmr6" value="16"/>
           </Values>

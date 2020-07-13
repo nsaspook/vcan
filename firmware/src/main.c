@@ -28,18 +28,23 @@
 #include "timers.h"
 
 QEI_DATA m35_1 = {
-	.gain = pos_gain,
+	.duty = 18000, // fast motor duty
+	.gain = pos_gain, // input position gain
 },
 m35_2 = {
-	.duty = 1000,
-	.gain = error_gain,
+	.duty = 18000, // slow motor duty
+	.gain = error_gain, // motor position gain
+	.sine_steps = 0,
 },
 m35_3 = {
-	.gain = pos_gain,
+	.duty = 18000,
+	.sine_steps = 1200,
 },
 m35_4 = {
 	.duty = 18000,
-	.gain = herror_gain,
+	.gain = herror_gain, // PWM sine-wave gain
+	.sine_steps = 2400,
+	.speed = motor_speed,
 },
 
 *m35_ptr;
@@ -49,6 +54,7 @@ volatile uint16_t tickCount[TMR_COUNT];
 double sine_const[3600];
 
 void sine_table(double *);
+int32_t phase_duty(QEI_DATA *, float);
 
 void PWM_motor2(M_CTRL mmode)
 {
@@ -78,18 +84,18 @@ void PWM_motor2(M_CTRL mmode)
 		break;
 	case M_STOP:
 	default:
-		IOCON2bits.OVRDAT = 0;
-		IOCON2bits.OVRENH = 1;
-		IOCON2bits.OVRENL = 1;
+		//		IOCON2bits.OVRDAT = 0;
+		//		IOCON2bits.OVRENH = 1;
+		//		IOCON2bits.OVRENL = 1;
 		IOCON1bits.OVRDAT = 0;
 		IOCON1bits.OVRENH = 1;
 		IOCON1bits.OVRENL = 1;
 		//		IOCON4bits.OVRDAT = 0;
 		//		IOCON4bits.OVRENH = 1;
 		//		IOCON4bits.OVRENL = 1;
-		IOCON3bits.OVRDAT = 0;
-		IOCON3bits.OVRENH = 1;
-		IOCON3bits.OVRENL = 1;
+		//		IOCON3bits.OVRDAT = 0;
+		//		IOCON3bits.OVRENH = 1;
+		//		IOCON3bits.OVRENL = 1;
 		break;
 	}
 
@@ -133,7 +139,6 @@ void PWM_motor4(M_CTRL mmode)
 int main(void)
 {
 	char buffer[40];
-	int32_t sine_steps = 0;
 
 	//	struct tm Time = {0};
 
@@ -166,7 +171,7 @@ int main(void)
 	sprintf(buffer, " VCAN Testing ");
 	eaDogM_WriteStringAtPos(0, 0, buffer);
 
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
@@ -219,27 +224,19 @@ int main(void)
 
 			m35_2.error = (m35_1.pos * m35_1.gain) - m35_2.pos;
 
-			m35_2.duty = pwm_mid_duty - (m35_2.error * m35_2.gain);
-			if (m35_2.duty > pwm_high_duty) {
-				m35_2.duty = pwm_high_duty;
+			m35_1.duty = pwm_mid_duty - (m35_2.error * m35_2.gain);
+			if (m35_1.duty > pwm_high_duty) {
+				m35_1.duty = pwm_high_duty;
 			}
-			if (m35_2.duty < pwm_low_duty) {
-				m35_2.duty = pwm_low_duty;
-			}
-
-			m35_4.duty = hpwm_mid_duty - (m35_2.error * m35_4.gain);
-
-			m35_4.duty = (int32_t) (18000.0 + (17000.0 * sine_const[sine_steps]));
-
-			if (++sine_steps >= 3600) {
-				sine_steps = 0;
+			if (m35_1.duty < pwm_low_duty) {
+				m35_1.duty = pwm_low_duty;
 			}
 
-			if (m35_4.duty > hpwm_high_duty) {
-				m35_4.duty = hpwm_high_duty;
-			}
-			if (m35_4.duty < hpwm_low_duty) {
-				m35_4.duty = hpwm_low_duty;
+			if (!m35_4.speed--) {
+				phase_duty(&m35_2, motor_volts);
+				phase_duty(&m35_3, motor_volts);
+				phase_duty(&m35_4, motor_volts);
+				m35_4.speed = motor_speed;
 			}
 
 			if (abs(m35_2.error) < motor_error_stop) {
@@ -277,11 +274,9 @@ int main(void)
 			/*
 			 * set channel duty cycle for comp H/L outputs
 			 */
-			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_4.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
-
-
+			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 
 			if (m35_2.update > update_speed) {
@@ -308,9 +303,28 @@ void sine_table(double *s_table)
 	int I;
 
 	for (I = 1; I < 3600; I++) {
-		s_table[I] = sin((double) I * 3.1415926535*2.0 / 3600.0);
+		s_table[I] = sin((double) I * 3.1415926535 * 2.0 / 3600.0);
 	}
 
+}
+
+int32_t phase_duty(QEI_DATA *phase, float mag)
+{
+	phase->duty = hpwm_mid_duty - (m35_2.error * m35_4.gain);
+
+	phase->duty = (int32_t) (18000.0 + (mag * sine_const[phase->sine_steps]));
+
+	if (++phase->sine_steps >= 3600) {
+		phase->sine_steps = 0;
+	}
+
+	if (phase->duty > hpwm_high_duty) {
+		phase->duty = hpwm_high_duty;
+	}
+	if (phase->duty < hpwm_low_duty) {
+		phase->duty = hpwm_low_duty;
+	}
+	return phase->duty;
 }
 /*******************************************************************************
  End of File
