@@ -84,18 +84,18 @@ void PWM_motor2(M_CTRL mmode)
 		break;
 	case M_STOP:
 	default:
-		//		IOCON2bits.OVRDAT = 0;
-		//		IOCON2bits.OVRENH = 1;
-		//		IOCON2bits.OVRENL = 1;
+		IOCON2bits.OVRDAT = 0;
+		IOCON2bits.OVRENH = 1;
+		IOCON2bits.OVRENL = 1;
 		IOCON1bits.OVRDAT = 0;
 		IOCON1bits.OVRENH = 1;
 		IOCON1bits.OVRENL = 1;
-		//		IOCON4bits.OVRDAT = 0;
-		//		IOCON4bits.OVRENH = 1;
-		//		IOCON4bits.OVRENL = 1;
-		//		IOCON3bits.OVRDAT = 0;
-		//		IOCON3bits.OVRENH = 1;
-		//		IOCON3bits.OVRENL = 1;
+		IOCON4bits.OVRDAT = 0;
+		IOCON4bits.OVRENH = 1;
+		IOCON4bits.OVRENL = 1;
+		IOCON3bits.OVRDAT = 0;
+		IOCON3bits.OVRENH = 1;
+		IOCON3bits.OVRENL = 1;
 		break;
 	}
 
@@ -185,12 +185,15 @@ int main(void)
 	 */
 	init_end_of_adc_scan();
 	StartTimer(TMR_BLINK, 1000);
+	StartTimer(TMR_MOTOR, 10);
+	StartTimer(TMR_DISPLAY, 500);
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
 
-		if (m35_ptr->update++ > 20480) {
+		if (TimerDone(TMR_MOTOR)) {
+			StartTimer(TMR_MOTOR, 10);
 			m35_ptr->update = 0;
 			m35_2.update++;
 
@@ -211,9 +214,9 @@ int main(void)
 			LATGbits.LATG14 = m35_ptr->pos >> 14;
 #endif
 
-			if (m35_2.update > update_speed) {
+			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
-				sprintf(buffer, "c %7i:%i      ", m35_ptr->pos, m35_ptr->vel);
+				sprintf(buffer, "c %7i:%i      ", m35_ptr->pos, m35_2.error);
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_2;
 				sprintf(buffer, "c %7i:%i      ", m35_ptr->pos, m35_ptr->vel);
@@ -242,21 +245,17 @@ int main(void)
 			if (abs(m35_2.error) < motor_error_stop) {
 				PWM_motor2(M_STOP);
 			} else {
-				//				if (abs(m35_2.error) < motor_error_knee)
-				//					m35_2.duty = m35_2.duty + (m35_2.vel * 4);
-				//				if (abs(m35_2.error) < motor_error_coast)
-				//					m35_2.duty = m35_2.duty + (m35_2.vel * 2);
-
 				PWM_motor2(M_PWM);
 			}
 
-			if (m35_2.update > update_speed) {
+			if (TimerDone(TMR_DISPLAY)) {
 				/*
 				 * show some test results on the LCD screen
 				 */
 				//sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u1ai, u1bi);
 				sprintf(buffer, "%3i %3i:%3i %3i         ", u1ai, u1bi, u2ai, u2bi);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
+				StartTimer(TMR_DISPLAY, 500);
 			}
 
 			/*
@@ -278,11 +277,6 @@ int main(void)
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
-
-			if (m35_2.update > update_speed) {
-				m35_2.update = 0;
-				uart_tests();
-			}
 
 			if (TimerDone(TMR_BLINK)) {
 				StartTimer(TMR_BLINK, 1000);

@@ -24,11 +24,11 @@ extern "C" {
 #define hpwm_high_duty	35999
 #define hpwm_low_duty	1
 
-#define motor_error_stop	25
+#define motor_error_stop	500
 #define motor_error_coast	100
 #define motor_error_knee	200
 
-#define motor_speed	10
+#define motor_speed	200
 #define motor_volts	5000.0
 	/*
 	 * QEI #1 pin connections
