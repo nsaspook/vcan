@@ -28,22 +28,22 @@
 #include "timers.h"
 
 QEI_DATA m35_1 = {
-	.duty = 18000, // fast motor duty
+	.duty = hpwm_mid_duty, // fast motor duty
 	.gain = pos_gain, // input position gain
 },
 m35_2 = {
-	.duty = 18000, // slow motor duty
+	.duty = hpwm_mid_duty, // slow motor duty
 	.gain = error_gain, // motor position gain
-	.sine_steps = 0,
+	.sine_steps = sinea,
 },
 m35_3 = {
-	.duty = 18000,
-	.sine_steps = 1200,
+	.duty = hpwm_mid_duty,
+	.sine_steps = sineb,
 },
 m35_4 = {
-	.duty = 18000,
+	.duty = hpwm_mid_duty,
 	.gain = herror_gain, // PWM sine-wave gain
-	.sine_steps = 2400,
+	.sine_steps = sinec,
 	.speed = motor_speed,
 },
 
@@ -54,7 +54,7 @@ volatile uint16_t tickCount[TMR_COUNT];
 double sine_const[3600];
 
 void sine_table(double *);
-int32_t phase_duty(QEI_DATA *, float);
+int32_t phase_duty(QEI_DATA *, double);
 
 void PWM_motor2(M_CTRL mmode)
 {
@@ -156,7 +156,6 @@ int main(void)
 	QEI2_Start();
 	m35_ptr = &m35_1;
 
-	m35_ptr->update = 0;
 	LATGbits.LATG12 = true;
 	LATGbits.LATG13 = true;
 	LATGbits.LATG14 = true;
@@ -171,6 +170,15 @@ int main(void)
 	sprintf(buffer, " VCAN Testing ");
 	eaDogM_WriteStringAtPos(0, 0, buffer);
 
+	sine_table(sine_const);
+	/*
+	 * start background ADC conversion scans
+	 */
+	init_end_of_adc_scan();
+	StartTimer(TMR_BLINK, 1000);
+	StartTimer(TMR_MOTOR, 1);
+	StartTimer(TMR_DISPLAY, 500);
+
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
@@ -179,23 +187,13 @@ int main(void)
 
 	PWM_motor2(M_STOP);
 
-	sine_table(sine_const);
-	/*
-	 * start background ADC conversion scans
-	 */
-	init_end_of_adc_scan();
-	StartTimer(TMR_BLINK, 1000);
-	StartTimer(TMR_MOTOR, 10);
-	StartTimer(TMR_DISPLAY, 500);
-
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
 
 		if (TimerDone(TMR_MOTOR)) {
-			StartTimer(TMR_MOTOR, 10);
-			m35_ptr->update = 0;
-			m35_2.update++;
+			StartTimer(TMR_MOTOR, 2);
+			DEBUGB0_Set();
 
 			/* update local value of the encoder position counters */
 			m35_1.pos = POS1CNT;
@@ -271,7 +269,7 @@ int main(void)
 			}
 
 			/*
-			 * set channel duty cycle for comp H/L outputs
+			 * set channel duty cycle for motor outputs
 			 */
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_4.duty);
 			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
@@ -282,6 +280,7 @@ int main(void)
 				StartTimer(TMR_BLINK, 1000);
 				RESET_LED_Toggle();
 			}
+			DEBUGB0_Clear();
 		} else {
 			//run_tests(100000); // port diagnostics
 		}
@@ -296,19 +295,17 @@ void sine_table(double *s_table)
 {
 	int I;
 
-	for (I = 1; I < 3600; I++) {
-		s_table[I] = sin((double) I * 3.1415926535 * 2.0 / 3600.0);
+	for (I = 1; I < sine_res; I++) {
+		s_table[I] = sin((double) I * 3.1415926535 * 2.0 / (double) sine_res);
 	}
 
 }
 
-int32_t phase_duty(QEI_DATA *phase, float mag)
+int32_t phase_duty(QEI_DATA *phase, double mag)
 {
-	phase->duty = hpwm_mid_duty - (m35_2.error * m35_4.gain);
+	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sine_const[phase->sine_steps]));
 
-	phase->duty = (int32_t) (18000.0 + (mag * sine_const[phase->sine_steps]));
-
-	if (++phase->sine_steps >= 3600) {
+	if (++phase->sine_steps >= sine_res) {
 		phase->sine_steps = 0;
 	}
 
