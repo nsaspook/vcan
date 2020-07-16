@@ -39,16 +39,16 @@ extern "C" {
 #define hpwm_low_duty	100
 #endif
 
-#define motor_error_stop	100
+#define motor_error_stop	50
 #define motor_error_coast	100
 #define motor_error_knee	200
 
-#define motor_speed	3000
+#define motor_speed	3
 
 #ifdef high_pwm
 #define motor_volts	5000.0
 #else
-#define motor_volts	400.0
+#define motor_volts	500
 #endif
 	/*
 	 * QEI #1 pin connections
@@ -70,7 +70,7 @@ extern "C" {
 	 * encoder device data
 	 */
 	typedef struct {
-		int32_t pos, vel, duty, error, speed, hold, gain, sine_steps;
+		int32_t pos, vel, duty, error, speed, hold, gain, sine_steps, current, current_prev;
 	} QEI_DATA;
 
 	typedef enum {

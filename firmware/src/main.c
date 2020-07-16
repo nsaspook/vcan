@@ -32,19 +32,20 @@ QEI_DATA m35_1 = {
 	.gain = pos_gain, // input position gain
 },
 m35_2 = {
-	.duty = hpwm_mid_duty, // slow motor duty
+	.duty = 1200, // slow motor duty
 	.gain = error_gain, // motor position gain
 	.sine_steps = sinea,
 },
 m35_3 = {
-	.duty = hpwm_mid_duty,
+	.duty = 1200,
 	.sine_steps = sineb,
 },
 m35_4 = {
-	.duty = hpwm_mid_duty,
+	.duty = 0,
 	.gain = herror_gain, // PWM sine-wave gain
 	.sine_steps = sinec,
 	.speed = motor_speed,
+	.current = motor_volts,
 },
 
 *m35_ptr;
@@ -180,12 +181,34 @@ int main(void)
 	StartTimer(TMR_DISPLAY, 500);
 
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
+	/*
+	 * move to locked rotor position
+	 */
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	MCPWM_Start();
 
-	PWM_motor2(M_STOP);
+	WaitMs(2000);
+	/*
+	 * zero position counters at locked rotor position
+	 */
+	POS1CNT = 0;
+	POS2CNT = 0;
+	POS3CNT = 0;
+	/*
+	 * setup sine-wave control for zero position
+	 */
+	phase_duty(&m35_2, m35_4.current);
+	phase_duty(&m35_3, m35_4.current);
+	phase_duty(&m35_4, m35_4.current);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
+	WaitMs(1000);
+
+
+	//	PWM_motor2(M_STOP);
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -233,16 +256,53 @@ int main(void)
 				m35_1.duty = pwm_low_duty;
 			}
 
-			if (!m35_4.speed--) {
-				phase_duty(&m35_2, motor_volts);
-				phase_duty(&m35_3, motor_volts);
-				phase_duty(&m35_4, motor_volts);
-				m35_4.speed = motor_speed;
+			/*
+			 * generate a positioning error drive signal
+			 */
+			m35_4.current = abs(m35_2.error)*1;
+
+			/*
+			 * limit motor drive
+			 */
+			if (m35_4.current > (m35_4.current_prev + 1)) {
+				m35_4.current = m35_4.current_prev + 1;
 			}
 
+			if (m35_4.current > motor_volts) {
+				m35_4.current = motor_volts;
+			}
+
+			m35_4.current_prev = m35_4.current;
+
 			if (abs(m35_2.error) < motor_error_stop) {
-				PWM_motor2(M_STOP);
+				m35_4.current = 0;
+				//PWM_motor2(M_STOP);
 			} else {
+				if (abs(m35_2.error) > motor_error_stop * 2) {
+					if (!m35_4.speed--) {
+						phase_duty(&m35_2, m35_4.current);
+						phase_duty(&m35_3, m35_4.current);
+						phase_duty(&m35_4, m35_4.current);
+						m35_4.speed = motor_speed;
+					}
+				}
+				if (m35_2.error > 0) {
+					/*
+					 * set channel duty cycle for motor outputs
+					 */
+					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_4.duty);
+					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
+				} else {
+					/*
+					 * set channel duty cycle for motor outputs
+					 */
+					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_4.duty);
+					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
+					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
+				}
 				PWM_motor2(M_PWM);
 			}
 
@@ -267,14 +327,6 @@ int main(void)
 			if (get_switch(S0)) {
 				//PWM_motor2(M_CCW);
 			}
-
-			/*
-			 * set channel duty cycle for motor outputs
-			 */
-			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_4.duty);
-			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
-			MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 
 			if (TimerDone(TMR_BLINK)) {
 				StartTimer(TMR_BLINK, 1000);
