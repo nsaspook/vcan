@@ -151,9 +151,9 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 15  */
     IOCON2 = 0x3c2fc43c;
 
-    PDC2 = 600;
+    PDC2 = 1024;
     SDC2 = 500;
-    PHASE2 = 1200;
+    PHASE2 = 2048;
 
     /* Dead Time */
     DTR2 = 75;
@@ -206,9 +206,9 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 0  */
     IOCON3 = 0x3c400;
 
-    PDC3 = 600;
+    PDC3 = 1024;
     SDC3 = 500;
-    PHASE3 = 1200;
+    PHASE3 = 2048;
 
     /* Dead Time */
     DTR3 = 75;
@@ -261,9 +261,9 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 15  */
     IOCON4 = 0x3c2bc400;
 
-    PDC4 = 600;
+    PDC4 = 1024;
     SDC4 = 500;
-    PHASE4 = 1200;
+    PHASE4 = 2048;
 
     /* Dead Time */
     DTR4 = 75;

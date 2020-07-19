@@ -13,8 +13,6 @@ extern "C" {
 #endif
 #include "vcan.h"
 
-	//#define high_pwm
-
 #define sine_res	3600
 #define sinea		0
 #define	sineb		1200
@@ -27,33 +25,21 @@ extern "C" {
 #define herror_gain	1
 
 #define pos_gain	10
-#define pwm_mid_duty	1000
-#define pwm_high_duty	1999
-#define pwm_low_duty	1
 
-#ifdef high_pwm
-#define hpwm_mid_duty	18000
-#define hpwm_mid_duty_f	18000.0
-#define hpwm_high_duty	35999
+#define hpwm_mid_duty	1024
+#define hpwm_mid_duty_f	1024.0
+#define hpwm_high_duty	2047
 #define hpwm_low_duty	1
-#else
-#define hpwm_mid_duty	650
-#define hpwm_mid_duty_f	650.0
-#define hpwm_high_duty	1100
-#define hpwm_low_duty	100
-#endif
 
-#define motor_error_stop	50
+#define motor_error_stop	10
 #define motor_error_coast	100
 #define motor_error_knee	200
 
-#define motor_speed	3
+#define motor_speed	30
 
-#ifdef high_pwm
-#define motor_volts	5000.0
-#else
-#define motor_volts	500
-#endif
+
+#define duty_max	2048
+#define motor_volts	900
 
 	/*
 	 * angles to encoder counts
@@ -85,7 +71,7 @@ extern "C" {
 	 */
 	struct QEI_DATA {
 		int32_t pos, vel, duty, error, speed, hold, gain, sine_steps, current, current_prev;
-		int32_t indexcnt, indexvel;
+		int32_t indexcnt, indexvel, ppp;
 		uint32_t pole_pairs, ppr;
 		bool cw, ccw, stopped;
 	};

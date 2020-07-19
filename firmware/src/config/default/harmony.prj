@@ -85,8 +85,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/mcpwm/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/mcpwm/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">5D01C96A38A378F612F5A628FB62D5F6</GeneratedChecksum>
-          <UserChecksum dnOrder="6">5D01C96A38A378F612F5A628FB62D5F6</UserChecksum>
+          <GeneratedChecksum dnOrder="5">430C0EB33C49C1864F8AEDBE5F50EF57</GeneratedChecksum>
+          <UserChecksum dnOrder="6">430C0EB33C49C1864F8AEDBE5F50EF57</UserChecksum>
         </File>
         <File dnOrder="9">
           <Type dnOrder="0">SOURCE</Type>
@@ -103,8 +103,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/qei/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/qei/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">DB9485D34D91FBE9B3BA15868507E193</GeneratedChecksum>
-          <UserChecksum dnOrder="6">DB9485D34D91FBE9B3BA15868507E193</UserChecksum>
+          <GeneratedChecksum dnOrder="5">8EFF28105C302855F17EF4945A2F0BE3</GeneratedChecksum>
+          <UserChecksum dnOrder="6">8EFF28105C302855F17EF4945A2F0BE3</UserChecksum>
         </File>
         <File dnOrder="11">
           <Type dnOrder="0">SOURCE</Type>

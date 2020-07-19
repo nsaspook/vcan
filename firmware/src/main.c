@@ -55,15 +55,15 @@ IC = M * sin (? + 240)
 #include "timers.h"
 
 struct QEI_DATA m35_1 = {
-	.duty = hpwm_mid_duty, // fast motor duty
+	.duty = 0, // fast motor duty
 	.gain = pos_gain, // input position gain
 },
 m35_2 = {
 	.duty = 1200, // slow motor duty
 	.gain = error_gain, // motor position gain
 	.sine_steps = sinea,
-	.pole_pairs=5,
-	.ppr=360000,
+	.pole_pairs = 5,
+	.ppr = 327680,
 },
 m35_3 = {
 	.duty = 1200,
@@ -74,7 +74,7 @@ m35_4 = {
 	.gain = herror_gain, // PWM sine-wave gain
 	.sine_steps = sinec,
 	.speed = motor_speed,
-	.current = motor_volts,
+	.current = 100,
 },
 
 *m35_ptr;
@@ -84,6 +84,17 @@ volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
 volatile uint16_t tickCount[TMR_COUNT];
 
 double sine_const[3600];
+
+const uint8_t step_code[] = {// A,B,C bits in order
+	0b101,
+	0b100,
+	0b110,
+	0b010,
+	0b011,
+	0b001,
+	0b101,
+	0b100,
+};
 
 void sine_table(double *);
 int32_t phase_duty(struct QEI_DATA *, double);
@@ -142,6 +153,7 @@ void PWM_motor2(M_CTRL mmode)
 int main(void)
 {
 	char buffer[40];
+	uint8_t i;
 
 	//	struct tm Time = {0};
 
@@ -177,6 +189,7 @@ int main(void)
 
 	sprintf(buffer, " VCAN Testing ");
 	eaDogM_WriteStringAtPos(0, 0, buffer);
+	WaitMs(500);
 
 	sine_table(sine_const);
 	/*
@@ -195,18 +208,39 @@ int main(void)
 	 * move to locked rotor position
 	 * block-commutated 
 	 */
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
-	MCPWM_Start();
-
+	for (i = 0; i < 8; i++) {
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i] >> 2)&0x1) * duty_max);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i] >> 1)&0x1) * duty_max);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i] >> 0)&0x1) * duty_max);
+		switch (i) {
+		case 0:
+			MCPWM_Start();
+			WaitMs(900);
+			break;
+		case 7:
+			WaitMs(900);
+			sprintf(buffer, "HP %6i:%6i      ", POS2CNT, m35_2.ppr / m35_2.pole_pairs);
+			eaDogM_WriteStringAtPos(2, 0, buffer);
+			m35_2.ppp = POS2CNT;
+			POS2CNT = 0; // reset zero for new home
+			break;
+		case 1:
+			WaitMs(1400);
+			/*
+			 * zero position counters at locked rotor position
+			 */
+			POS1CNT = 0;
+			POS2CNT = 0;
+			POS3CNT = 0;
+		default:
+			sprintf(buffer, "HP %7i      ", POS2CNT);
+			eaDogM_WriteStringAtPos(1, 0, buffer);
+			break;
+		}
+		WaitMs(100);
+	}
 	WaitMs(2000);
-	/*
-	 * zero position counters at locked rotor position
-	 */
-	POS1CNT = 0;
-	POS2CNT = 0;
-	POS3CNT = 0;
+
 	/*
 	 * setup sine-wave control for zero position
 	 * using block-commutated 
@@ -268,22 +302,17 @@ int main(void)
 
 			m35_2.error = (m35_1.pos * m35_1.gain) - m35_2.pos;
 
-			m35_1.duty = pwm_mid_duty - (m35_2.error * m35_2.gain);
-			if (m35_1.duty > pwm_high_duty) {
-				m35_1.duty = pwm_high_duty;
-			}
-			if (m35_1.duty < pwm_low_duty) {
-				m35_1.duty = pwm_low_duty;
-			}
-
 			/*
 			 * generate a positioning error drive signal
 			 */
-			m35_4.current = abs(m35_2.error)*1;
+			m35_4.current = abs(m35_2.error)*4;
 
 			/*
 			 * limit motor drive
 			 */
+			if (m35_4.current > motor_volts) {
+				m35_4.current = motor_volts;
+			}
 			if (m35_4.current > (m35_4.current_prev + 1)) {
 				m35_4.current = m35_4.current_prev + 1;
 			}
@@ -295,8 +324,7 @@ int main(void)
 			m35_4.current_prev = m35_4.current;
 
 			if (abs(m35_2.error) < motor_error_stop) {
-				m35_4.current = 0;
-				//PWM_motor2(M_STOP);
+				m35_4.current = 50;
 			} else {
 				if (abs(m35_2.error) > motor_error_stop * 2) {
 					if (!m35_4.speed--) {
@@ -310,7 +338,6 @@ int main(void)
 					/*
 					 * set channel duty cycle for motor outputs
 					 */
-					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_4.duty);
 					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
@@ -318,7 +345,6 @@ int main(void)
 					/*
 					 * set channel duty cycle for motor outputs
 					 */
-					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_4.duty);
 					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
 					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
@@ -357,10 +383,10 @@ int main(void)
 			//run_tests(100000); // port diagnostics
 			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
-				sprintf(buffer, "c %7i:%i      ", m35_ptr->pos, m35_2.error);
+				sprintf(buffer, "C %7i:%i      ", m35_ptr->pos, m35_2.error);
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_2;
-				sprintf(buffer, "c %7i:%i      ", m35_ptr->pos, m35_ptr->vel);
+				sprintf(buffer, "C %7i:%i      ", m35_ptr->pos, m35_ptr->vel);
 				eaDogM_WriteStringAtPos(2, 0, buffer);
 				m35_ptr = &m35_1;
 				/*
