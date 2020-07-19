@@ -32,6 +32,9 @@ extern "C" {
 		NUM_SWITCHES, // one extra to define number of switches
 	} SW_NAMES;
 
+	/*
+	 * typedefs for internal data types
+	 */
 	typedef struct rbutton_type {
 		SW_STATES sw;
 		uint32_t count;
@@ -47,7 +50,6 @@ extern "C" {
 
 	SW_STATES get_switch(const uint8_t);
 	SW_STATES get_switch_bm(const uint8_t);
-	rbutton_type get_switch_data(uint8_t);
 	uint8_t check_switches(void);
 	void clear_switch(uint8_t);
 

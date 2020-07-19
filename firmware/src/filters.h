@@ -18,9 +18,11 @@ extern "C" {
 
 #include <math.h>
 
+#define NUM_FILTERS	8
+
 	void filters_init(void);
 	int32_t lp_filter(int32_t, uint8_t);
-	int32_t lp_filter2(int32_t);
+	int32_t lp_filter2(int32_t, uint8_t);
 
 #ifdef	__cplusplus
 }

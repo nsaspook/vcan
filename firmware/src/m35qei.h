@@ -11,14 +11,18 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+#include "vcan.h"
 
 	//#define high_pwm
-	
+
 #define sine_res	3600
 #define sinea		0
 #define	sineb		1200
 #define sinec		2400
 
+	/*
+	 * PI limits
+	 */
 #define error_gain	1
 #define herror_gain	1
 
@@ -50,6 +54,16 @@ extern "C" {
 #else
 #define motor_volts	500
 #endif
+
+	/*
+	 * angles to encoder counts
+	 */
+#define a16_0		0x0000
+#define a16_30		0x1555
+#define a16_60		0x2aaa
+#define a16_90		0x4000
+#define a16_120		0x5555
+
 	/*
 	 * QEI #1 pin connections
 	 * 
@@ -69,9 +83,12 @@ extern "C" {
 	/*
 	 * encoder device data
 	 */
-	typedef struct {
+	struct QEI_DATA {
 		int32_t pos, vel, duty, error, speed, hold, gain, sine_steps, current, current_prev;
-	} QEI_DATA;
+		int32_t indexcnt, indexvel;
+		uint32_t pole_pairs, ppr;
+		bool cw, ccw, stopped;
+	};
 
 	typedef enum {
 		M_STOP,
