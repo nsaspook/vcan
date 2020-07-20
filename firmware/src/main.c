@@ -91,7 +91,7 @@ V_STATE vcan_state = V_init;
 volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
 volatile uint16_t tickCount[TMR_COUNT];
 
-double sine_const[3600];
+double sine_const[sine_res + 1];
 
 const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
@@ -106,6 +106,8 @@ const uint8_t step_code[] = {// A,B,C bits in order
 
 void sine_table(double *);
 int32_t phase_duty(struct QEI_DATA *, double);
+void fillTable(void);
+void sin_foo(void);
 
 void PWM_motor2(M_CTRL mmode)
 {
@@ -168,7 +170,9 @@ int main(void)
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
-
+	LATGbits.LATG12 = 1;
+	LATGbits.LATG13 = 1;
+	LATGbits.LATG14 = 1;
 	_CP0_SET_COUNT(0); // Set Core Timer count to 0
 
 	/*
@@ -183,11 +187,9 @@ int main(void)
 
 	QEI1_Start();
 	QEI2_Start();
+	QEI3_Start();
 	m35_ptr = &m35_1;
 
-	LATGbits.LATG12 = true;
-	LATGbits.LATG13 = true;
-	LATGbits.LATG14 = true;
 	//	RTCC_CallbackRegister(reset_led_blink, 1);
 	//	RTCC_TimeGet(&Time);
 	//	RTCC_AlarmSet(&Time, RTCC_ALARM_MASK_SS);
@@ -201,6 +203,7 @@ int main(void)
 	WaitMs(500);
 
 	sine_table(sine_const);
+	fillTable();
 	/*
 	 * start background ADC conversion scans
 	 */
@@ -313,12 +316,12 @@ int main(void)
 
 			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
 
-//			m35_2.error = (int32_t) pi_pos_error;
+			//			m35_2.error = (int32_t) pi_pos_error;
 
 			/*
 			 * generate a positioning error drive signal
 			 */
-//			m35_4.current = abs(m35_2.error);
+			//			m35_4.current = abs(m35_2.error);
 			m35_4.current = abs((int32_t) pi_current_error);
 
 			/*
@@ -423,14 +426,15 @@ void sine_table(double *s_table)
 {
 	int I;
 
-	for (I = 1; I < sine_res; I++) {
-		s_table[I] = sin((double) I * 3.1415926535 * 2.0 / (double) sine_res);
+	s_table[0] = 0.0;
+	for (I = 1; I <= sine_res; I++) {
+		s_table[I] = sin(((double) I * 3.1415926535 * 2.0) / (double) sine_res);
 	}
 
 }
 
 /*
- * micro-stepping  sinusoidal commutation 
+ * micro-stepping  sinusoidal commutation for PWM
  */
 int32_t phase_duty(struct QEI_DATA *phase, double mag)
 {
@@ -452,3 +456,62 @@ int32_t phase_duty(struct QEI_DATA *phase, double mag)
  End of File
  */
 
+/*
+ * https://namoseley.wordpress.com/2015/07/26/sincos-generation-using-table-lookup-and-iterpolation/
+ */
+
+/*Get integer types with well-defined number of bits */
+
+/* Define a table of 256 entries containing a single cycle waveform.
+   The table entries are not shown.
+ */
+float table[256];
+
+/* Fill the table with a single sin(x) cycle */
+void fillTable(void)
+{
+	uint32_t i;
+	for (i = 0; i < 256; i++)
+		table[i] = sin(2.0 * 3.1415927 * (float) i / 256.0);
+}
+
+void sin_foo(void)
+{
+	uint32_t sampleRate = 1000; // sample rate of 1000 samples-per-second
+	uint32_t desiredFreq = 199; // desired generated frequency
+	uint32_t phaseAccumulator = 0; // fixed-point (16.16) phase accumulator
+	fillTable();
+	/* fixed-point (16.16) phase increment */
+	uint32_t phaseIncrement = (256 * 65536 * desiredFreq / sampleRate);
+
+	//while(true)        // loop forever
+	uint32_t i;
+	for (i = 0; i < 65536; i++) {
+		/* Increment the phase accumulator */
+		phaseAccumulator += phaseIncrement;
+		/* Limit the phase accumulator to 24 bits.
+		   The lower 16 bits are the fractional table
+		   index part, while the remaining 8 bits
+		   are the integer index into the waveform
+		   table.
+		 */
+		phaseAccumulator &= (256 * 65536) - 1;
+
+		/* Calculate the table index. */
+		uint32_t index = phaseAccumulator >> 16;
+
+		/* Get the table entry and the one
+		   directly following it.
+		 */
+		float v_sin = table[index];
+		float v_cos = table[(index + 64) & 255];
+		float frac = 2.0f * 3.1415927f * (float) (phaseAccumulator & 65535) / 65536.0f / 256.0f;
+
+		// fractional sin/cos
+		float f_sin = frac;
+		float f_cos = 1.0f - 0.5f * frac*frac;
+
+		float result = v_sin * f_cos + v_cos*f_sin;
+		printf("%f\n", result);
+	}
+}
