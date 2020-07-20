@@ -31,11 +31,11 @@ extern "C" {
 #define hpwm_high_duty	2047
 #define hpwm_low_duty	1
 
-#define motor_error_stop	10
+#define motor_error_stop	2
 #define motor_error_coast	100
 #define motor_error_knee	200
 
-#define motor_speed	30
+#define motor_speed	5
 
 
 #define duty_max	2048

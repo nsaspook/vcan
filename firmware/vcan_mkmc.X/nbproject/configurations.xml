@@ -67,6 +67,7 @@
       <itemPath>../src/adc_scan.h</itemPath>
       <itemPath>../src/filters.h</itemPath>
       <itemPath>../src/timers.h</itemPath>
+      <itemPath>../src/pid.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -128,6 +129,7 @@
       <itemPath>../src/adc_scan.c</itemPath>
       <itemPath>../src/filters.c</itemPath>
       <itemPath>../src/timers.c</itemPath>
+      <itemPath>../src/pid.c</itemPath>
       <itemPath>../src/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -149,7 +151,7 @@
         <targetDevice>PIC32MK1024MCF100</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>ICD4Tool</platformTool>
+        <platformTool>PKOBSKDEPlatformTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>2.41</languageToolchainVersion>
         <platform>2</platform>
@@ -192,7 +194,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP;"/>
+                  value="../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -543,8 +545,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="1d000000-1d0fffff"/>
         <property key="poweroptions.powerenable" value="true"/>
-        <property key="programmerToGoFilePath"
-                  value="/fred/vcan/firmware/vcan_mkmc.X/debug/default/vcan_mkmc_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.ledbrightness" value="5"/>

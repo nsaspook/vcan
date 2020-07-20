@@ -6922,19 +6922,24 @@
             <Dynamic dnOrder="0" id="qei2" value="QEI2_Stop"/>
           </Values>
         </String>
-        <KeyValueSet dnOrder="6" id="QEI2CON__PIMOD">
+        <KeyValueSet dnOrder="6" id="QEI2CON__IMV">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="3"/>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="7" id="QEI2CON__PIMOD">
           <Values dnOrder="0">
             <User dnOrder="0" value="1"/>
           </Values>
         </KeyValueSet>
-        <Boolean dnOrder="7" id="QEI_INDEX_AVAILABLE">
+        <Boolean dnOrder="8" id="QEI_INDEX_AVAILABLE">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Hex dnOrder="8" id="QEI_QEICON">
+        <Hex dnOrder="9" id="QEI_QEICON">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="qei2" value="1024"/>
+            <Dynamic dnOrder="0" id="qei2" value="1792"/>
           </Values>
         </Hex>
       </Symbols>
@@ -7277,8 +7282,7 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
-    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
+    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="adchs" x="19" y="389"/>
         <ElementPosition dnOrder="1" id="core" x="198" y="49"/>
@@ -7295,5 +7299,6 @@
         <ElementPosition dnOrder="12" id="uart6" x="163" y="307"/>
       </ElementPositions>
     </ComponentGraph>
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>

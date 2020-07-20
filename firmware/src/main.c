@@ -36,7 +36,7 @@ TA = IA * Kt * sin ?
 TB = IB * Kt * sin (?+120) (10)
 TC = IC * Kt * sin (? + 240)
 A feedback device such as a quadrature encoder can determine ? in terms of counts;
-a common resolution is 360° (1 revolution) = 4000 counts. The amplifier varies the
+a common resolution is 360? (1 revolution) = 4000 counts. The amplifier varies the
 current in each phase I based on the motor command signal M with respect to ?:
 IA = M * sin ?
 IB = M * sin (?+120) (11)
@@ -53,6 +53,7 @@ IC = M * sin (? + 240)
 #include "dio.h"
 #include "adc_scan.h"
 #include "timers.h"
+#include "pid.h"
 
 struct QEI_DATA m35_1 = {
 	.duty = 0, // fast motor duty
@@ -78,6 +79,13 @@ m35_4 = {
 },
 
 *m35_ptr;
+
+struct SPid current_pi = {
+	.iMax = 200.0,
+	.iMin = -200.0,
+	.pGain = 3.0,
+	.iGain = 0.005,
+};
 
 V_STATE vcan_state = V_init;
 volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
@@ -154,6 +162,7 @@ int main(void)
 {
 	char buffer[40];
 	uint8_t i;
+	double pi_current_error;
 
 	//	struct tm Time = {0};
 
@@ -302,10 +311,15 @@ int main(void)
 
 			m35_2.error = (m35_1.pos * m35_1.gain) - m35_2.pos;
 
+			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
+
+//			m35_2.error = (int32_t) pi_pos_error;
+
 			/*
 			 * generate a positioning error drive signal
 			 */
-			m35_4.current = abs(m35_2.error)*4;
+//			m35_4.current = abs(m35_2.error);
+			m35_4.current = abs((int32_t) pi_current_error);
 
 			/*
 			 * limit motor drive
@@ -324,7 +338,7 @@ int main(void)
 			m35_4.current_prev = m35_4.current;
 
 			if (abs(m35_2.error) < motor_error_stop) {
-				m35_4.current = 50;
+				//m35_4.current = 150;
 			} else {
 				if (abs(m35_2.error) > motor_error_stop * 2) {
 					if (!m35_4.speed--) {

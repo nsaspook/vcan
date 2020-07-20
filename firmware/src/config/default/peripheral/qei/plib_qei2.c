@@ -56,10 +56,10 @@ void QEI2_Initialize (void)
     /*  GATEN  = 0 */
     /*  CNTPOL = 0 */
     /*  INTDIV = 0 */
-    /*  IMV    = 0  */
+    /*  IMV    = 3  */
     /*  PIMOD  = 1  */
     /*  QEISIDL = 0 */
-    QEI2CON = 0x400;
+    QEI2CON = 0x700;
 
     /* QEI2IOC register  */
     /*  QEAPOL    = 0 */
