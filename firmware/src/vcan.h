@@ -16,9 +16,9 @@ extern "C" {
 	 */
 
 #define SYS_FREQ	120000000 // Running at 120MHz
-#define SAMPLERATE	120000
-#define SR120		40000
-#define SR240		80000
+#define SAMPLERATE	36000
+#define SR120		12000
+#define SR240		24000
 #define PHASE_INC	(256 * 65536) / SAMPLERATE
 #define PI		3.1415926535
 

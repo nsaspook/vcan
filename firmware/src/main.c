@@ -271,12 +271,12 @@ int main(void)
 	 * setup sine-wave control for zero position
 	 * using block-commutated 
 	 */
-//	phase_duty(&m35_2, m35_4.current);
-//	phase_duty(&m35_3, m35_4.current);
-//	phase_duty(&m35_4, m35_4.current);
-//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
-//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
+	//	phase_duty(&m35_2, m35_4.current);
+	//	phase_duty(&m35_3, m35_4.current);
+	//	phase_duty(&m35_4, m35_4.current);
+	//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+	//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+	//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	WaitMs(1000);
 
 	vcan_state = V_home;
@@ -425,7 +425,7 @@ int main(void)
 				 */
 				//sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u1ai, u1bi);
 				//				sprintf(buffer, "%3i %3i:%3i %3i         ", u1ai, u1bi, u2ai, u2bi);
-				sprintf(buffer, "%.2f:%.2f:%.2f         ", asin(m35_2.sin)*180.0 / PI*2, asin(m35_3.sin)*180.0 / PI*2, asin(m35_4.sin)*180.0 / PI*2);
+				sprintf(buffer, "%.2f:%.2f:%.2f         ", asin(m35_2.sin)*180.0 / PI * 2, asin(m35_3.sin)*180.0 / PI * 2, asin(m35_4.sin)*180.0 / PI * 2);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
 				StartTimer(TMR_DISPLAY, 250);
 			}
@@ -443,7 +443,7 @@ void sine_table(double *s_table)
 
 	s_table[0] = 0.0;
 	for (I = 1; I <= sine_res; I++) {
-		s_table[I] = sin(((double) I * 3.1415926535 * 2.0) / (double) sine_res);
+		s_table[I] = sin(((double) I * PI * 2.0) / (double) sine_res);
 	}
 
 }
@@ -482,14 +482,14 @@ int32_t phase_duty(struct QEI_DATA *phase, double mag)
 /* Define a table of 256 entries containing a single cycle waveform.
    The table entries are not shown.
  */
-float table[256];
+double table[256];
 
 /* Fill the table with a single sin(x) cycle */
 void fillTable(void)
 {
 	uint32_t i;
 	for (i = 0; i < 256; i++)
-		table[i] = sin(2.0 * 3.1415927 * (float) i / 256.0);
+		table[i] = sin(2.0 * PI * (double) i / 256.0);
 }
 
 /*
@@ -499,9 +499,9 @@ void preset_phase(void)
 {
 	uint32_t i;
 
-	for (i = 0; i < SR120; i++)
+	for (i = 0; i <= SR120; i++)
 		sin_foo(&m35_3);
-	for (i = 0; i < SR240; i++)
+	for (i = 0; i <= SR240; i++)
 		sin_foo(&m35_4);
 }
 
@@ -515,7 +515,7 @@ double sin_foo(struct QEI_DATA *phase)
 	//	uint32_t desiredFreq = 199; // desired generated frequency
 	//	static uint32_t phaseAccumulator = 0; // fixed-point (16.16) phase accumulator
 	/* fixed-point (16.16) phase increment */
-	//	static uint32_t phaseIncrement = (256 * 65536 / 120000);
+	//	static uint32_t phaseIncrement = (256 * 65536 / 36000);
 
 	/* Increment the phase accumulator */
 	phase->phaseAccumulator += phase->phaseIncrement;
@@ -535,7 +535,7 @@ double sin_foo(struct QEI_DATA *phase)
 	 */
 	double v_sin = table[index];
 	double v_cos = table[(index + 64) & 255];
-	double frac = 2.0f * 3.1415926535f * (double) (phase->phaseAccumulator & 65535) / 65536.0f / 256.0f;
+	double frac = 2.0f * PI * (double) (phase->phaseAccumulator & 65535) / 65536.0f / 256.0f;
 
 	// fractional sin/cos
 	double f_sin = frac;
