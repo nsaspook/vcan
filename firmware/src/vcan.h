@@ -15,7 +15,12 @@ extern "C" {
 	 * VCAN project header file
 	 */
 
-#define SYS_FREQ 120000000 // Running at 120MHz
+#define SYS_FREQ	120000000 // Running at 120MHz
+#define SAMPLERATE	120000
+#define SR120		40000
+#define SR240		80000
+#define PHASE_INC	(256 * 65536) / SAMPLERATE
+#define PI		3.1415926535
 
 #include <stddef.h>                     // Defines NULL
 #include <stdbool.h>                    // Defines true

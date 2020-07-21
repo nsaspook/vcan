@@ -31,11 +31,11 @@ extern "C" {
 #define hpwm_high_duty	2047
 #define hpwm_low_duty	1
 
-#define motor_error_stop	2
+#define motor_error_stop	50
 #define motor_error_coast	100
 #define motor_error_knee	200
 
-#define motor_speed	5
+#define motor_speed	1
 
 
 #define duty_max	2048
@@ -72,7 +72,8 @@ extern "C" {
 	struct QEI_DATA {
 		int32_t pos, vel, duty, error, speed, hold, gain, sine_steps, current, current_prev;
 		int32_t indexcnt, indexvel, ppp;
-		uint32_t pole_pairs, ppr;
+		uint32_t pole_pairs, ppr, phaseAccumulator, phaseIncrement, phase_steps;
+		double sin;
 		bool cw, ccw, stopped;
 	};
 

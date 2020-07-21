@@ -65,10 +65,16 @@ m35_2 = {
 	.sine_steps = sinea,
 	.pole_pairs = 5,
 	.ppr = 327680,
+	.phaseIncrement = PHASE_INC,
+	.phase_steps = 0,
+	.phaseAccumulator = 0,
 },
 m35_3 = {
 	.duty = 1200,
 	.sine_steps = sineb,
+	.phaseIncrement = PHASE_INC,
+	.phase_steps = 0,
+	.phaseAccumulator = 0,
 },
 m35_4 = {
 	.duty = 0,
@@ -76,14 +82,17 @@ m35_4 = {
 	.sine_steps = sinec,
 	.speed = motor_speed,
 	.current = 100,
+	.phaseIncrement = PHASE_INC,
+	.phase_steps = 0,
+	.phaseAccumulator = 0,
 },
 
 *m35_ptr;
 
 struct SPid current_pi = {
-	.iMax = 200.0,
-	.iMin = -200.0,
-	.pGain = 3.0,
+	.iMax = 100.0,
+	.iMin = -100.0,
+	.pGain = 2.0,
 	.iGain = 0.005,
 };
 
@@ -107,7 +116,8 @@ const uint8_t step_code[] = {// A,B,C bits in order
 void sine_table(double *);
 int32_t phase_duty(struct QEI_DATA *, double);
 void fillTable(void);
-void sin_foo(void);
+void preset_phase(void);
+double sin_foo(struct QEI_DATA *);
 
 void PWM_motor2(M_CTRL mmode)
 {
@@ -203,7 +213,11 @@ int main(void)
 	WaitMs(500);
 
 	sine_table(sine_const);
+	/*
+	 * sin_foo routines
+	 */
 	fillTable();
+	preset_phase();
 	/*
 	 * start background ADC conversion scans
 	 */
@@ -257,12 +271,12 @@ int main(void)
 	 * setup sine-wave control for zero position
 	 * using block-commutated 
 	 */
-	phase_duty(&m35_2, m35_4.current);
-	phase_duty(&m35_3, m35_4.current);
-	phase_duty(&m35_4, m35_4.current);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
+//	phase_duty(&m35_2, m35_4.current);
+//	phase_duty(&m35_3, m35_4.current);
+//	phase_duty(&m35_4, m35_4.current);
+//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	WaitMs(1000);
 
 	vcan_state = V_home;
@@ -282,7 +296,7 @@ int main(void)
 		}
 
 		if (TimerDone(TMR_MOTOR)) {
-			StartTimer(TMR_MOTOR, 2);
+			StartTimer(TMR_MOTOR, 1);
 			DEBUGB0_Set();
 
 			/* update local values of the encoder status counters */
@@ -341,7 +355,7 @@ int main(void)
 			m35_4.current_prev = m35_4.current;
 
 			if (abs(m35_2.error) < motor_error_stop) {
-				//m35_4.current = 150;
+				m35_4.current = 50;
 			} else {
 				if (abs(m35_2.error) > motor_error_stop * 2) {
 					if (!m35_4.speed--) {
@@ -387,7 +401,7 @@ int main(void)
 #ifdef QEI_SLOW
 			LATGbits.LATG12 = m35_1.pos >> 3;
 			LATGbits.LATG13 = m35_1.pos >> 5;
-			LATGbits.LATG14 = m35_2.pos >> 6;
+			LATGbits.LATG14 = m35_2.pos & 1;
 #else
 			LATGbits.LATG12 = m35_ptr->pos >> 10;
 			LATGbits.LATG13 = m35_ptr->pos >> 12;
@@ -400,19 +414,20 @@ int main(void)
 			//run_tests(100000); // port diagnostics
 			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
-				sprintf(buffer, "C %7i:%i      ", m35_ptr->pos, m35_2.error);
+				sprintf(buffer, "C %5i:%i      ", m35_ptr->pos, m35_2.error);
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_2;
-				sprintf(buffer, "C %7i:%i      ", m35_ptr->pos, m35_ptr->vel);
+				sprintf(buffer, "C %5i:%i:%i      ", m35_ptr->pos, m35_ptr->vel, m35_2.indexcnt >> 10);
 				eaDogM_WriteStringAtPos(2, 0, buffer);
 				m35_ptr = &m35_1;
 				/*
 				 * show some test results on the LCD screen
 				 */
 				//sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u1ai, u1bi);
-				sprintf(buffer, "%3i %3i:%3i %3i         ", u1ai, u1bi, u2ai, u2bi);
+				//				sprintf(buffer, "%3i %3i:%3i %3i         ", u1ai, u1bi, u2ai, u2bi);
+				sprintf(buffer, "%.2f:%.2f:%.2f         ", asin(m35_2.sin)*180.0 / PI*2, asin(m35_3.sin)*180.0 / PI*2, asin(m35_4.sin)*180.0 / PI*2);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
-				StartTimer(TMR_DISPLAY, 500);
+				StartTimer(TMR_DISPLAY, 250);
 			}
 		}
 	}
@@ -438,7 +453,9 @@ void sine_table(double *s_table)
  */
 int32_t phase_duty(struct QEI_DATA *phase, double mag)
 {
-	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sine_const[phase->sine_steps]));
+	//	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sine_const[phase->sine_steps]));
+
+	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sin_foo(phase)));
 
 	if (++phase->sine_steps >= sine_res) {
 		phase->sine_steps = 0;
@@ -475,43 +492,61 @@ void fillTable(void)
 		table[i] = sin(2.0 * 3.1415927 * (float) i / 256.0);
 }
 
-void sin_foo(void)
+/*
+ * add 120 and 240 degree offsets to phase B and C
+ */
+void preset_phase(void)
 {
-	uint32_t sampleRate = 1000; // sample rate of 1000 samples-per-second
-	uint32_t desiredFreq = 199; // desired generated frequency
-	uint32_t phaseAccumulator = 0; // fixed-point (16.16) phase accumulator
-	fillTable();
-	/* fixed-point (16.16) phase increment */
-	uint32_t phaseIncrement = (256 * 65536 * desiredFreq / sampleRate);
-
-	//while(true)        // loop forever
 	uint32_t i;
-	for (i = 0; i < 65536; i++) {
-		/* Increment the phase accumulator */
-		phaseAccumulator += phaseIncrement;
-		/* Limit the phase accumulator to 24 bits.
-		   The lower 16 bits are the fractional table
-		   index part, while the remaining 8 bits
-		   are the integer index into the waveform
-		   table.
-		 */
-		phaseAccumulator &= (256 * 65536) - 1;
 
-		/* Calculate the table index. */
-		uint32_t index = phaseAccumulator >> 16;
+	for (i = 0; i < SR120; i++)
+		sin_foo(&m35_3);
+	for (i = 0; i < SR240; i++)
+		sin_foo(&m35_4);
+}
 
-		/* Get the table entry and the one
-		   directly following it.
-		 */
-		float v_sin = table[index];
-		float v_cos = table[(index + 64) & 255];
-		float frac = 2.0f * 3.1415927f * (float) (phaseAccumulator & 65535) / 65536.0f / 256.0f;
+/*
+ * generate one complete sine-wave cycle at one step per call
+ */
+double sin_foo(struct QEI_DATA *phase)
+{
 
-		// fractional sin/cos
-		float f_sin = frac;
-		float f_cos = 1.0f - 0.5f * frac*frac;
+	//	uint32_t sampleRate = 1000; // sample rate of 1000 samples-per-second
+	//	uint32_t desiredFreq = 199; // desired generated frequency
+	//	static uint32_t phaseAccumulator = 0; // fixed-point (16.16) phase accumulator
+	/* fixed-point (16.16) phase increment */
+	//	static uint32_t phaseIncrement = (256 * 65536 / 120000);
 
-		float result = v_sin * f_cos + v_cos*f_sin;
-		printf("%f\n", result);
+	/* Increment the phase accumulator */
+	phase->phaseAccumulator += phase->phaseIncrement;
+	/* Limit the phase accumulator to 24 bits.
+	   The lower 16 bits are the fractional table
+	   index part, while the remaining 8 bits
+	   are the integer index into the waveform
+	   table.
+	 */
+	phase->phaseAccumulator &= (256 * 65536) - 1;
+
+	/* Calculate the table index. */
+	uint32_t index = phase->phaseAccumulator >> 16;
+
+	/* Get the table entry and the one
+	   directly following it.
+	 */
+	double v_sin = table[index];
+	double v_cos = table[(index + 64) & 255];
+	double frac = 2.0f * 3.1415926535f * (double) (phase->phaseAccumulator & 65535) / 65536.0f / 256.0f;
+
+	// fractional sin/cos
+	double f_sin = frac;
+	double f_cos = 1.0f - 0.5f * frac*frac;
+
+	double result = v_sin * f_cos + v_cos*f_sin;
+
+	if (++phase->phase_steps > SAMPLERATE) {
+		phase->phase_steps = 0;
+		phase->phaseAccumulator = 0;
 	}
+	phase->sin = result;
+	return result;
 }
