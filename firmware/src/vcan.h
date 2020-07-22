@@ -22,6 +22,8 @@ extern "C" {
 #define PHASE_INC	(256 * 65536) / SAMPLERATE
 #define PI		3.1415926535
 
+#define MBIAS		0
+	
 #include <stddef.h>                     // Defines NULL
 #include <stdbool.h>                    // Defines true
 #include <stdlib.h>                     // Defines EXIT_FAILURE

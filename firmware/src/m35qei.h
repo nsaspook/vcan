@@ -31,15 +31,15 @@ extern "C" {
 #define hpwm_high_duty	3599
 #define hpwm_low_duty	1
 
-#define motor_error_stop	50
+#define motor_error_stop	30
 #define motor_error_coast	100
 #define motor_error_knee	200
 
-#define motor_speed	1
+#define motor_speed	10000
 
 
 #define duty_max	3600
-#define motor_volts	900
+#define motor_volts	1600
 
 	/*
 	 * angles to encoder counts

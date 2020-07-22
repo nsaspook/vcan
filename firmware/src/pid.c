@@ -18,7 +18,7 @@ double UpdatePI(struct SPid * pid, double error)
 		pid->iState = pid->iMin;
 	}
 	
-	iTerm = pid->iGain * pid->iState; // calculate the integral term
+	iTerm = (pid->iGain * pid->iState) + MBIAS; // calculate the integral term
 	
 	return pTerm + iTerm;
 }
