@@ -13,10 +13,10 @@ extern "C" {
 #endif
 #include "vcan.h"
 
-#define sine_res	3600
+#define sine_res	360
 #define sinea		0
-#define	sineb		1200
-#define sinec		2400
+#define	sineb		120
+#define sinec		240
 
 	/*
 	 * PI limits
@@ -34,8 +34,6 @@ extern "C" {
 #define motor_error_stop	30
 #define motor_error_coast	100
 #define motor_error_knee	200
-
-#define motor_speed	10000
 
 
 #define duty_max	3600

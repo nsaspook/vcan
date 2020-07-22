@@ -68,6 +68,7 @@
       <itemPath>../src/filters.h</itemPath>
       <itemPath>../src/timers.h</itemPath>
       <itemPath>../src/pid.h</itemPath>
+      <itemPath>../src/freqgen.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -131,6 +132,7 @@
       <itemPath>../src/timers.c</itemPath>
       <itemPath>../src/pid.c</itemPath>
       <itemPath>../src/main.c</itemPath>
+      <itemPath>../src/freqgen.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

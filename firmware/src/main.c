@@ -54,6 +54,7 @@ IC = M * sin (? + 240)
 #include "adc_scan.h"
 #include "timers.h"
 #include "pid.h"
+#include "freqgen.h"
 
 struct QEI_DATA m35_1 = {
 	.duty = 0, // fast motor duty
@@ -100,7 +101,7 @@ V_STATE vcan_state = V_init;
 volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
 volatile uint16_t tickCount[TMR_COUNT];
 
-double sine_const[sine_res + 1];
+volatile int32_t motor_speed = MOTOR_SPEED;
 
 const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
@@ -112,12 +113,6 @@ const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
 	0b100,
 };
-
-void sine_table(double *);
-int32_t phase_duty(struct QEI_DATA *, double);
-void fillTable(void);
-void preset_phase(void);
-double sin_foo(struct QEI_DATA *);
 
 void PWM_motor2(M_CTRL mmode)
 {
@@ -190,7 +185,7 @@ int main(void)
 	 */
 	init_dio();
 	/*
-	 * software timers
+	 * software timers @1ms using 500ns ticks
 	 */
 	TMR6_CallbackRegister(timer_ms_tick, 0);
 	TMR6_Start();
@@ -212,9 +207,12 @@ int main(void)
 	eaDogM_WriteStringAtPos(0, 0, buffer);
 	WaitMs(500);
 
-	sine_table(sine_const);
 	/*
-	 * sin_foo routines
+	 * sine slew speed routines
+	 */
+	sine_table();
+	/*
+	 * sine_foo slow speed routines
 	 */
 	fillTable();
 	preset_phase();
@@ -267,18 +265,6 @@ int main(void)
 	}
 	WaitMs(2000);
 
-	/*
-	 * setup sine-wave control for zero position
-	 * using block-commutated 
-	 */
-	//	phase_duty(&m35_2, m35_4.current);
-	//	phase_duty(&m35_3, m35_4.current);
-	//	phase_duty(&m35_4, m35_4.current);
-	//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-	//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
-	//	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
-	WaitMs(1000);
-
 	vcan_state = V_home;
 
 	while (true) {
@@ -330,12 +316,9 @@ int main(void)
 
 			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
 
-			//			m35_2.error = (int32_t) pi_pos_error;
-
 			/*
 			 * generate a positioning error drive signal
 			 */
-			//			m35_4.current = abs(m35_2.error);
 			m35_4.current = abs((int32_t) pi_current_error);
 
 			/*
@@ -387,12 +370,12 @@ int main(void)
 			 * test switch interface with motor control
 			 */
 			if (get_switch(S1)) {
-				//PWM_motor2(M_CW);
+				// slew speed
 			}
 
 
 			if (get_switch(S0)) {
-				//PWM_motor2(M_CCW);
+				// slow speed
 			}
 
 			DEBUGB0_Clear();
@@ -437,116 +420,3 @@ int main(void)
 	return( EXIT_FAILURE);
 }
 
-void sine_table(double *s_table)
-{
-	int I;
-
-	s_table[0] = 0.0;
-	for (I = 1; I <= sine_res; I++) {
-		s_table[I] = sin(((double) I * PI * 2.0) / (double) sine_res);
-	}
-
-}
-
-/*
- * micro-stepping  sinusoidal commutation for PWM
- */
-int32_t phase_duty(struct QEI_DATA *phase, double mag)
-{
-	//	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sine_const[phase->sine_steps]));
-
-	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sin_foo(phase)));
-
-	if (++phase->sine_steps >= sine_res) {
-		phase->sine_steps = 0;
-	}
-
-	if (phase->duty > hpwm_high_duty) {
-		phase->duty = hpwm_high_duty;
-	}
-	if (phase->duty < hpwm_low_duty) {
-		phase->duty = hpwm_low_duty;
-	}
-	return phase->duty;
-}
-/*******************************************************************************
- End of File
- */
-
-/*
- * https://namoseley.wordpress.com/2015/07/26/sincos-generation-using-table-lookup-and-iterpolation/
- */
-
-/*Get integer types with well-defined number of bits */
-
-/* Define a table of 256 entries containing a single cycle waveform.
-   The table entries are not shown.
- */
-double table[256];
-
-/* Fill the table with a single sin(x) cycle */
-void fillTable(void)
-{
-	uint32_t i;
-	for (i = 0; i < 256; i++)
-		table[i] = sin(2.0 * PI * (double) i / 256.0);
-}
-
-/*
- * add 120 and 240 degree offsets to phase B and C
- */
-void preset_phase(void)
-{
-	uint32_t i;
-
-	for (i = 0; i <= SR120; i++)
-		sin_foo(&m35_3);
-	for (i = 0; i <= SR240; i++)
-		sin_foo(&m35_4);
-}
-
-/*
- * generate one complete sine-wave cycle at one step per call
- */
-double sin_foo(struct QEI_DATA *phase)
-{
-
-	//	uint32_t sampleRate = 1000; // sample rate of 1000 samples-per-second
-	//	uint32_t desiredFreq = 199; // desired generated frequency
-	//	static uint32_t phaseAccumulator = 0; // fixed-point (16.16) phase accumulator
-	/* fixed-point (16.16) phase increment */
-	//	static uint32_t phaseIncrement = (256 * 65536 / 36000);
-
-	/* Increment the phase accumulator */
-	phase->phaseAccumulator += phase->phaseIncrement;
-	/* Limit the phase accumulator to 24 bits.
-	   The lower 16 bits are the fractional table
-	   index part, while the remaining 8 bits
-	   are the integer index into the waveform
-	   table.
-	 */
-	phase->phaseAccumulator &= (256 * 65536) - 1;
-
-	/* Calculate the table index. */
-	uint32_t index = phase->phaseAccumulator >> 16;
-
-	/* Get the table entry and the one
-	   directly following it.
-	 */
-	double v_sin = table[index];
-	double v_cos = table[(index + 64) & 255];
-	double frac = 2.0f * PI * (double) (phase->phaseAccumulator & 65535) / 65536.0f / 256.0f;
-
-	// fractional sin/cos
-	double f_sin = frac;
-	double f_cos = 1.0f - 0.5f * frac*frac;
-
-	double result = v_sin * f_cos + v_cos*f_sin;
-
-	if (++phase->phase_steps > SAMPLERATE) {
-		phase->phase_steps = 0;
-		phase->phaseAccumulator = 0;
-	}
-	phase->sin = result;
-	return result;
-}

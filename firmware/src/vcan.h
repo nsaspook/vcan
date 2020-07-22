@@ -21,6 +21,7 @@ extern "C" {
 #define SR240		24000
 #define PHASE_INC	(256 * 65536) / SAMPLERATE
 #define PI		3.1415926535
+#define MOTOR_SPEED	10000
 
 #define MBIAS		0
 	
