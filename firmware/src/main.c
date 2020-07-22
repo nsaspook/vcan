@@ -81,7 +81,7 @@ m35_4 = {
 	.duty = 0,
 	.gain = herror_gain, // PWM sine-wave gain
 	.sine_steps = sinec,
-	.speed = motor_speed,
+	.speed = MOTOR_SPEED,
 	.current = 100,
 	.phaseIncrement = PHASE_INC,
 	.phase_steps = 0,
@@ -98,6 +98,8 @@ struct SPid current_pi = {
 };
 
 V_STATE vcan_state = V_init;
+M_SPEED m_speed = M_SLEW;
+
 volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
 volatile uint16_t tickCount[TMR_COUNT];
 
@@ -342,9 +344,9 @@ int main(void)
 			} else {
 				if (abs(m35_2.error) > motor_error_stop * 2) {
 					if (!m35_4.speed--) {
-						phase_duty(&m35_2, m35_4.current);
-						phase_duty(&m35_3, m35_4.current);
-						phase_duty(&m35_4, m35_4.current);
+						phase_duty(&m35_2, m35_4.current, m_speed);
+						phase_duty(&m35_3, m35_4.current, m_speed);
+						phase_duty(&m35_4, m35_4.current, m_speed);
 						m35_4.speed = motor_speed;
 					}
 				}
@@ -370,12 +372,17 @@ int main(void)
 			 * test switch interface with motor control
 			 */
 			if (get_switch(S1)) {
+				// set motor_speed variable and phase_duty mode
 				// slew speed
+				m35_4.speed = 1;
+				m_speed = M_SLEW;
 			}
 
 
 			if (get_switch(S0)) {
 				// slow speed
+				m35_4.speed = 1;
+				m_speed = M_SLOW;
 			}
 
 			DEBUGB0_Clear();

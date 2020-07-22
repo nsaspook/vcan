@@ -10,11 +10,9 @@ void sine_table(void)
 {
 	int I;
 
-	sine_const[0] = 0.0;
-	for (I = 1; I <= sine_res; I++) {
+	for (I = 0; I < sine_res; I++) {
 		sine_const[I] = sin(((double) I * PI * 2.0) / (double) sine_res);
 	}
-
 }
 
 /*
@@ -40,17 +38,21 @@ int32_t phase_duty_table(struct QEI_DATA *phase, double mag)
 /*
  * micro-stepping  sinusoidal commutation for PWM using sine_foo
  */
-int32_t phase_duty(struct QEI_DATA *phase, double mag)
+int32_t phase_duty(struct QEI_DATA *phase, double mag, M_SPEED mode)
 {
-	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sine_foo(phase)));
+	if (mode == M_SLEW) {
+		return phase_duty_table(phase, mag);
+	} else {
+		phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sine_foo(phase)));
 
-	if (phase->duty > hpwm_high_duty) {
-		phase->duty = hpwm_high_duty;
+		if (phase->duty > hpwm_high_duty) {
+			phase->duty = hpwm_high_duty;
+		}
+		if (phase->duty < hpwm_low_duty) {
+			phase->duty = hpwm_low_duty;
+		}
+		return phase->duty;
 	}
-	if (phase->duty < hpwm_low_duty) {
-		phase->duty = hpwm_low_duty;
-	}
-	return phase->duty;
 }
 
 /*
@@ -78,9 +80,9 @@ void preset_phase(void)
 {
 	uint32_t i;
 
-	for (i = 0; i <= SR120; i++)
+	for (i = 0; i < SR120; i++)
 		sine_foo(&m35_3);
-	for (i = 0; i <= SR240; i++)
+	for (i = 0; i < SR240; i++)
 		sine_foo(&m35_4);
 }
 
@@ -115,7 +117,7 @@ static double sine_foo(struct QEI_DATA *phase)
 
 	double result = v_sin * f_cos + v_cos*f_sin;
 
-	if (++phase->phase_steps > SAMPLERATE) { // reset per electrical rotation cycle
+	if (++phase->phase_steps >= SAMPLERATE) { // reset per electrical rotation cycle
 		phase->phase_steps = 0;
 		phase->phaseAccumulator = 0;
 	}

@@ -14,7 +14,7 @@ extern "C" {
 #include "vcan.h"
 
 	void sine_table(void);
-	int32_t phase_duty(struct QEI_DATA *, double);
+	int32_t phase_duty(struct QEI_DATA *, double, M_SPEED);
 	int32_t phase_duty_table(struct QEI_DATA *, double);
 	void fillTable(void);
 	void preset_phase(void);
