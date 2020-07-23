@@ -56,6 +56,8 @@ IC = M * sin (? + 240)
 #include "pid.h"
 #include "freqgen.h"
 
+const char *build_date = __DATE__, *build_time = __TIME__;
+
 struct QEI_DATA m35_1 = {
 	.duty = 0, // default motor duty
 	.gain = pos_gain, // input position gain
@@ -205,7 +207,7 @@ int main(void)
 	init_display();
 	eaDogM_CursorOff();
 
-	sprintf(buffer, " VCAN Testing ");
+	sprintf(buffer, "VCAN %s        ", build_date);
 	eaDogM_WriteStringAtPos(0, 0, buffer);
 	WaitMs(500);
 
@@ -240,6 +242,14 @@ int main(void)
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i] >> 0)&0x1) * duty_max);
 		switch (i) {
 		case 0:
+			/*
+			 * testing chop
+			 */
+			AUXCON2 = 0x3;
+			AUXCON3 = 0x3;
+			AUXCON4 = 0x3;
+			CHOPbits.CHOPCLK = 4;
+			CHOPbits.CHPCLKEN = 1;
 			MCPWM_Start();
 			WaitMs(900);
 			break;

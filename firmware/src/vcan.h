@@ -14,7 +14,7 @@ extern "C" {
 	/*
 	 * VCAN project header file
 	 */
-
+	
 #define SYS_FREQ	120000000 // Running at 120MHz
 #define SAMPLERATE	36000
 #define SR120		12000
@@ -73,7 +73,6 @@ extern "C" {
 		V_run,
 		V_abort,
 	} V_STATE;
-
 
 #ifdef	__cplusplus
 }
