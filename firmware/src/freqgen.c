@@ -18,7 +18,7 @@ void sine_table(void)
 /*
  * slew speed sinusoidal commutation for PWM using table
  */
-int32_t phase_duty_table(struct QEI_DATA *phase, double mag)
+int32_t phase_duty_table(struct QEI_DATA * const phase, const double mag)
 {
 	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sine_const[phase->sine_steps]));
 
@@ -38,7 +38,7 @@ int32_t phase_duty_table(struct QEI_DATA *phase, double mag)
 /*
  * micro-stepping  sinusoidal commutation for PWM using sine_foo
  */
-int32_t phase_duty(struct QEI_DATA *phase, double mag, M_SPEED mode)
+int32_t phase_duty(struct QEI_DATA * const phase, const double mag, const M_SPEED mode)
 {
 	if (mode == M_SLEW) {
 		return phase_duty_table(phase, mag);
@@ -89,7 +89,7 @@ void preset_phase(void)
 /*
  * generate one complete sine-wave cycle at one step per call
  */
-static double sine_foo(struct QEI_DATA *phase)
+static double sine_foo(struct QEI_DATA * const phase)
 {
 	/* Increment the phase accumulator */
 	phase->phaseAccumulator += phase->phaseIncrement;

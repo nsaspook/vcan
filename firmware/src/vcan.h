@@ -24,7 +24,16 @@ extern "C" {
 #define MOTOR_SPEED	10000
 
 #define MBIAS		0
-	
+
+#define     M_PI                                     (float)3.14159265358979323846
+#define     M_PI_2                                     (float)1.57079632679489661923
+
+#define     SQRT3                                   ((float)1.732)
+#define     SQRT3_BY2                              (float)(0.866025403788)
+
+#define     ONE_BY_SQRT3                           (float)(0.5773502691)
+#define     TWO_BY_SQRT3                           (float)(1.1547005384)
+
 #include <stddef.h>                     // Defines NULL
 #include <stdbool.h>                    // Defines true
 #include <stdlib.h>                     // Defines EXIT_FAILURE

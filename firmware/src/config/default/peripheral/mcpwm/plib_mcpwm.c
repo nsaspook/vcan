@@ -72,14 +72,14 @@ void MCPWM_Initialize (void)
     /*  PTDIR  =  0 */
     /*  ECAM   =  0 */
     /*  DTCP   =  0 */
-    /*  DTC    =  2 */
+    /*  DTC    =  3 */
     /*  ITB    = 1 */
     /*  PWMHIEN =  false */
     /*  PWMLIEN = false */
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON1 = 0x280;
+    PWMCON1 = 0x2c0;
 
     /* IOCON1 register  */
     /*  SWAP    = 0*/

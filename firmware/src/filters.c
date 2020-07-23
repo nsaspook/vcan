@@ -89,3 +89,49 @@ int32_t lp_filter2(int32_t input, uint8_t chan)
 	output = IIR_butter_lp_2_16(input, coeff2, history2, chan);
 	return output;
 }
+
+/******************************************************************************/
+/* Function name: MCLIB_linearRamp                                            */
+/* Function parameters: None                                                  */
+/* Function return: None                                                      */
+/* Description:  linearly ramps input to final value                          */
+/******************************************************************************/
+void MCLIB_LinearRamp(float * const input, const float stepSize, const float finalValue )
+{
+    if( (*input + stepSize ) < finalValue )
+    {
+        *input += stepSize;
+    }
+    else if( (*input - stepSize ) > finalValue )
+    {
+        *input -= stepSize;
+    }
+    else
+    {
+      *input = finalValue;
+    }
+}
+
+/******************************************************************************/
+/* Function name: MCLIB_ImposeLimits                                          */
+/* Function parameters: None                                                  */
+/* Function return: None                                                      */
+/* Description:  impose lower and upper limits                                */
+/******************************************************************************/
+void MCLIB_ImposeLimits( float * const input, const float lowerLimit, const float upperLimit )
+{
+    if( *input > upperLimit )
+    {
+        *input  = upperLimit;
+    }
+    else if( *input < lowerLimit )
+    {
+        *input  = lowerLimit;
+    }
+    else
+    {
+       /* Do nothing */
+    }
+
+}
+

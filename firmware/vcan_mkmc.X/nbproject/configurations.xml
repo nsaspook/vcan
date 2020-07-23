@@ -14,13 +14,16 @@
             <logicalFolder name="f2" displayName="clk" projectFiles="true">
               <itemPath>../src/config/default/peripheral/clk/plib_clk.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="f9" displayName="eeprom" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/eeprom/plib_eeprom.h</itemPath>
+            </logicalFolder>
             <logicalFolder name="f4" displayName="evic" projectFiles="true">
               <itemPath>../src/config/default/peripheral/evic/plib_evic.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="gpio" projectFiles="true">
               <itemPath>../src/config/default/peripheral/gpio/plib_gpio.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f9" displayName="mcpwm" projectFiles="true">
+            <logicalFolder name="f10" displayName="mcpwm" projectFiles="true">
               <itemPath>../src/config/default/peripheral/mcpwm/plib_mcpwm_common.h</itemPath>
               <itemPath>../src/config/default/peripheral/mcpwm/plib_mcpwm.h</itemPath>
             </logicalFolder>
@@ -30,7 +33,7 @@
               <itemPath>../src/config/default/peripheral/qei/plib_qei2.h</itemPath>
               <itemPath>../src/config/default/peripheral/qei/plib_qei3.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f10" displayName="rtcc" projectFiles="true">
+            <logicalFolder name="f11" displayName="rtcc" projectFiles="true">
               <itemPath>../src/config/default/peripheral/rtcc/plib_rtcc.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="spi" projectFiles="true">
@@ -69,6 +72,8 @@
       <itemPath>../src/timers.h</itemPath>
       <itemPath>../src/pid.h</itemPath>
       <itemPath>../src/freqgen.h</itemPath>
+      <itemPath>../src/mc_picontrol.h</itemPath>
+      <itemPath>../src/mclib.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -86,13 +91,16 @@
             <logicalFolder name="f2" displayName="clk" projectFiles="true">
               <itemPath>../src/config/default/peripheral/clk/plib_clk.c</itemPath>
             </logicalFolder>
+            <logicalFolder name="f9" displayName="eeprom" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/eeprom/plib_eeprom.c</itemPath>
+            </logicalFolder>
             <logicalFolder name="f4" displayName="evic" projectFiles="true">
               <itemPath>../src/config/default/peripheral/evic/plib_evic.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="gpio" projectFiles="true">
               <itemPath>../src/config/default/peripheral/gpio/plib_gpio.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f9" displayName="mcpwm" projectFiles="true">
+            <logicalFolder name="f10" displayName="mcpwm" projectFiles="true">
               <itemPath>../src/config/default/peripheral/mcpwm/plib_mcpwm.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f8" displayName="qei" projectFiles="true">
@@ -100,7 +108,7 @@
               <itemPath>../src/config/default/peripheral/qei/plib_qei2.c</itemPath>
               <itemPath>../src/config/default/peripheral/qei/plib_qei3.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f10" displayName="rtcc" projectFiles="true">
+            <logicalFolder name="f11" displayName="rtcc" projectFiles="true">
               <itemPath>../src/config/default/peripheral/rtcc/plib_rtcc.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="spi" projectFiles="true">
@@ -131,8 +139,10 @@
       <itemPath>../src/filters.c</itemPath>
       <itemPath>../src/timers.c</itemPath>
       <itemPath>../src/pid.c</itemPath>
-      <itemPath>../src/main.c</itemPath>
       <itemPath>../src/freqgen.c</itemPath>
+      <itemPath>../src/main.c</itemPath>
+      <itemPath>../src/mc_picontrol.c</itemPath>
+      <itemPath>../src/mclib.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
