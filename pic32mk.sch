@@ -16307,7 +16307,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <part name="VSS21" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 <part name="VDD15" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 <part name="IC4" library="maxim" library_urn="urn:adsk.eagle:library:269" deviceset="MAX203ECWP" device="" package3d_urn="urn:adsk.eagle:package:17520/2"/>
-<part name="U$1" library="MAX6818" deviceset="MAX6818" device=""/>
+<part name="UICMAX" library="MAX6818" deviceset="MAX6818" device=""/>
 <part name="F1" library="polyfuse-smd_10" deviceset="?" device="1206L" technology="050"/>
 <part name="F2" library="polyfuse-smd_10" deviceset="?" device="1206L" technology="050"/>
 <part name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="M0805" package3d_urn="urn:adsk.eagle:package:23556/2" value="0"/>
@@ -16676,7 +16676,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <attribute name="NAME" x="208.28" y="3.175" size="1.778" layer="95"/>
 <attribute name="VALUE" x="208.28" y="-38.1" size="1.778" layer="96"/>
 </instance>
-<instance part="U$1" gate="G$1" x="-48.26" y="-144.78" smashed="yes">
+<instance part="UICMAX" gate="G$1" x="-48.26" y="-144.78" smashed="yes">
 <attribute name="VALUE" x="-55.89086875" y="-132.0619" size="2.54361875" layer="96"/>
 <attribute name="NAME" x="-66.089" y="-109.122" size="1.7829" layer="95"/>
 </instance>
@@ -17816,7 +17816,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <junction x="193.04" y="12.7"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="VCC"/>
+<pinref part="UICMAX" gate="G$1" pin="VCC"/>
 <wire x1="-48.26" y1="-109.22" x2="-48.26" y2="-106.68" width="0.1524" layer="91"/>
 <junction x="-48.26" y="-109.22"/>
 <pinref part="VDD19" gate="G$1" pin="VDD"/>
@@ -18740,7 +18740,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 </net>
 <net name="GND" class="1">
 <segment>
-<pinref part="U$1" gate="G$1" pin="GND"/>
+<pinref part="UICMAX" gate="G$1" pin="GND"/>
 <pinref part="SUPPLY2" gate="GND" pin="GND"/>
 <wire x1="-48.26" y1="-180.34" x2="-48.26" y2="-182.88" width="0.1524" layer="91"/>
 <junction x="-48.26" y="-180.34"/>
@@ -19203,7 +19203,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 </net>
 <net name="RPB7" class="0">
 <segment>
-<pinref part="U$1" gate="G$1" pin="CH_L"/>
+<pinref part="UICMAX" gate="G$1" pin="CH_L"/>
 <wire x1="-25.4" y1="-124.46" x2="-15.24" y2="-124.46" width="0.1524" layer="91"/>
 <junction x="-25.4" y="-124.46"/>
 <junction x="-15.24" y="-124.46"/>
@@ -19219,7 +19219,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 </net>
 <net name="RD8" class="0">
 <segment>
-<pinref part="U$1" gate="G$1" pin="EN_L"/>
+<pinref part="UICMAX" gate="G$1" pin="EN_L"/>
 <wire x1="-25.4" y1="-119.38" x2="-15.24" y2="-119.38" width="0.1524" layer="91"/>
 <junction x="-25.4" y="-119.38"/>
 <junction x="-15.24" y="-119.38"/>
@@ -19238,7 +19238,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="DIN" gate="-1" pin="S"/>
 <wire x1="-111.76" y1="-137.16" x2="-91.44" y2="-137.16" width="0.1524" layer="91"/>
 <wire x1="-91.44" y1="-137.16" x2="-91.44" y2="-134.62" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="IN1"/>
+<pinref part="UICMAX" gate="G$1" pin="IN1"/>
 <wire x1="-91.44" y1="-134.62" x2="-73.66" y2="-134.62" width="0.1524" layer="91"/>
 <junction x="-111.76" y="-137.16"/>
 <junction x="-73.66" y="-134.62"/>
@@ -19247,7 +19247,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <net name="N$17" class="0">
 <segment>
 <pinref part="DIN" gate="-2" pin="S"/>
-<pinref part="U$1" gate="G$1" pin="IN2"/>
+<pinref part="UICMAX" gate="G$1" pin="IN2"/>
 <wire x1="-111.76" y1="-139.7" x2="-73.66" y2="-139.7" width="0.1524" layer="91"/>
 <junction x="-111.76" y="-139.7"/>
 <junction x="-73.66" y="-139.7"/>
@@ -19257,7 +19257,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <segment>
 <pinref part="DIN" gate="-3" pin="S"/>
 <wire x1="-111.76" y1="-142.24" x2="-73.66" y2="-142.24" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="IN3"/>
+<pinref part="UICMAX" gate="G$1" pin="IN3"/>
 <wire x1="-73.66" y1="-142.24" x2="-73.66" y2="-144.78" width="0.1524" layer="91"/>
 <junction x="-111.76" y="-142.24"/>
 <junction x="-73.66" y="-144.78"/>
@@ -19267,7 +19267,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <segment>
 <pinref part="DIN" gate="-4" pin="S"/>
 <wire x1="-111.76" y1="-144.78" x2="-76.2" y2="-144.78" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="IN4"/>
+<pinref part="UICMAX" gate="G$1" pin="IN4"/>
 <wire x1="-76.2" y1="-144.78" x2="-76.2" y2="-149.86" width="0.1524" layer="91"/>
 <wire x1="-76.2" y1="-149.86" x2="-73.66" y2="-149.86" width="0.1524" layer="91"/>
 <junction x="-111.76" y="-144.78"/>
@@ -19279,7 +19279,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="DIN" gate="-5" pin="S"/>
 <wire x1="-111.76" y1="-147.32" x2="-78.74" y2="-147.32" width="0.1524" layer="91"/>
 <wire x1="-78.74" y1="-147.32" x2="-78.74" y2="-154.94" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="IN5"/>
+<pinref part="UICMAX" gate="G$1" pin="IN5"/>
 <wire x1="-78.74" y1="-154.94" x2="-73.66" y2="-154.94" width="0.1524" layer="91"/>
 <junction x="-111.76" y="-147.32"/>
 <junction x="-73.66" y="-154.94"/>
@@ -19292,7 +19292,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <wire x1="-81.28" y1="-149.86" x2="-81.28" y2="-160.02" width="0.1524" layer="91"/>
 <wire x1="-81.28" y1="-160.02" x2="-73.66" y2="-160.02" width="0.1524" layer="91"/>
 <junction x="-111.76" y="-149.86"/>
-<pinref part="U$1" gate="G$1" pin="IN6"/>
+<pinref part="UICMAX" gate="G$1" pin="IN6"/>
 <junction x="-73.66" y="-160.02"/>
 <wire x1="-73.66" y1="-160.02" x2="-71.12" y2="-160.02" width="0.1524" layer="91"/>
 </segment>
@@ -19302,7 +19302,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="DIN" gate="-7" pin="S"/>
 <wire x1="-111.76" y1="-152.4" x2="-83.82" y2="-152.4" width="0.1524" layer="91"/>
 <wire x1="-83.82" y1="-152.4" x2="-83.82" y2="-165.1" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="IN7"/>
+<pinref part="UICMAX" gate="G$1" pin="IN7"/>
 <wire x1="-83.82" y1="-165.1" x2="-73.66" y2="-165.1" width="0.1524" layer="91"/>
 <junction x="-111.76" y="-152.4"/>
 <junction x="-73.66" y="-165.1"/>
@@ -19313,7 +19313,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="DIN" gate="-8" pin="S"/>
 <wire x1="-111.76" y1="-154.94" x2="-86.36" y2="-154.94" width="0.1524" layer="91"/>
 <wire x1="-86.36" y1="-154.94" x2="-86.36" y2="-170.18" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="IN8"/>
+<pinref part="UICMAX" gate="G$1" pin="IN8"/>
 <wire x1="-86.36" y1="-170.18" x2="-73.66" y2="-170.18" width="0.1524" layer="91"/>
 <junction x="-111.76" y="-154.94"/>
 <junction x="-73.66" y="-170.18"/>
@@ -19868,7 +19868,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <label x="182.88" y="10.16" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="OUT5"/>
+<pinref part="UICMAX" gate="G$1" pin="OUT5"/>
 <wire x1="-25.4" y1="-154.94" x2="-5.08" y2="-154.94" width="0.1524" layer="91"/>
 <junction x="-25.4" y="-154.94"/>
 <junction x="-5.08" y="-154.94"/>
@@ -19884,7 +19884,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <label x="109.22" y="-101.6" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="OUT1"/>
+<pinref part="UICMAX" gate="G$1" pin="OUT1"/>
 <wire x1="-25.4" y1="-134.62" x2="-5.08" y2="-134.62" width="0.1524" layer="91"/>
 <junction x="-25.4" y="-134.62"/>
 <junction x="-5.08" y="-134.62"/>
@@ -19900,7 +19900,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <label x="111.76" y="-99.06" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="OUT2"/>
+<pinref part="UICMAX" gate="G$1" pin="OUT2"/>
 <wire x1="-25.4" y1="-139.7" x2="-5.08" y2="-139.7" width="0.1524" layer="91"/>
 <junction x="-25.4" y="-139.7"/>
 <junction x="-5.08" y="-139.7"/>
@@ -19916,7 +19916,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <label x="114.3" y="-96.52" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="OUT3"/>
+<pinref part="UICMAX" gate="G$1" pin="OUT3"/>
 <wire x1="-25.4" y1="-144.78" x2="-5.08" y2="-144.78" width="0.1524" layer="91"/>
 <junction x="-25.4" y="-144.78"/>
 <junction x="-5.08" y="-144.78"/>
@@ -19932,7 +19932,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <label x="116.84" y="-93.98" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="OUT4"/>
+<pinref part="UICMAX" gate="G$1" pin="OUT4"/>
 <wire x1="-25.4" y1="-149.86" x2="-5.08" y2="-149.86" width="0.1524" layer="91"/>
 <junction x="-25.4" y="-149.86"/>
 <junction x="-5.08" y="-149.86"/>
@@ -20439,7 +20439,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <label x="88.9" y="109.22" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="OUT8"/>
+<pinref part="UICMAX" gate="G$1" pin="OUT8"/>
 <wire x1="-25.4" y1="-170.18" x2="-2.54" y2="-170.18" width="0.1524" layer="91"/>
 <junction x="-25.4" y="-170.18"/>
 <junction x="-2.54" y="-170.18"/>
@@ -20448,7 +20448,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 </net>
 <net name="IN7" class="0">
 <segment>
-<pinref part="U$1" gate="G$1" pin="OUT7"/>
+<pinref part="UICMAX" gate="G$1" pin="OUT7"/>
 <wire x1="-25.4" y1="-165.1" x2="-5.08" y2="-165.1" width="0.1524" layer="91"/>
 <junction x="-25.4" y="-165.1"/>
 <junction x="-5.08" y="-165.1"/>
@@ -20471,7 +20471,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <label x="185.42" y="17.78" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="OUT6"/>
+<pinref part="UICMAX" gate="G$1" pin="OUT6"/>
 <wire x1="-25.4" y1="-160.02" x2="-5.08" y2="-160.02" width="0.1524" layer="91"/>
 <junction x="-25.4" y="-160.02"/>
 <junction x="-5.08" y="-160.02"/>

@@ -82,7 +82,7 @@
 <hole x="102.87" y="-2.54" drill="2.3476"/>
 <hole x="1.27" y="-1.27" drill="2.3476"/>
 <hole x="45.72" y="38.1" drill="2.3476"/>
-<text x="13.97" y="-2.54" size="1.778" layer="1" font="vector" ratio="15">fgb@mchp vcan 1.07</text>
+<text x="13.97" y="-2.54" size="1.778" layer="1" font="vector" ratio="15">fgb@mchp vcan 1.1</text>
 </plain>
 <libraries>
 <library name="rcl" urn="urn:adsk.eagle:library:334">
@@ -7645,6 +7645,7 @@ design rules under a new name.</description>
 </mfgpreviewcolors>
 <errors>
 <approved hash="23,16,238e63b663fc23c4"/>
+<approved hash="23,1,14eb1ed31d8b17b3"/>
 </errors>
 </board>
 </drawing>
