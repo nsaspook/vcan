@@ -57,21 +57,21 @@ IC = M * sin (? + 240)
 #include "freqgen.h"
 
 struct QEI_DATA m35_1 = {
-	.duty = 0, // fast motor duty
+	.duty = 0, // default motor duty
 	.gain = pos_gain, // input position gain
 },
 m35_2 = {
-	.duty = 1200, // slow motor duty
+	.duty = 0, // default motor duty
 	.gain = error_gain, // motor position gain
 	.sine_steps = sinea,
-	.pole_pairs = 5,
-	.ppr = 327680,
+	.pole_pairs = NUM_POLE_PAIRS,
+	.ppr = ENCODER_PULSES_PER_REV,
 	.phaseIncrement = PHASE_INC,
 	.phase_steps = 0,
 	.phaseAccumulator = 0,
 },
 m35_3 = {
-	.duty = 1200,
+	.duty = 0,
 	.sine_steps = sineb,
 	.phaseIncrement = PHASE_INC,
 	.phase_steps = 0,
