@@ -53,6 +53,11 @@ extern "C" {
 #define SPEED_RAMP_INC_SLOW_LOOP                          (float)(RAMP_RAD_PER_SEC_ELEC*SLOW_LOOP_TIME_SEC)
 
 #define SINGLE_ELEC_ROT_RADS_PER_SEC                      ((float)((float)(2.0) * (float)M_PI))
+	
+#define HB_OHMS		100
+#define ADC_STEPS	4096.0 // 12-bit
+#define ADC_REF		2.5
+#define HB_SCALE	420.168
 
 #include <stddef.h>                     // Defines NULL
 #include <stdbool.h>                    // Defines true

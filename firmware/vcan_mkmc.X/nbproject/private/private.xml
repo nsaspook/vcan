@@ -10,13 +10,13 @@
             <file>file:/root/vcan/firmware/src/vcan.h</file>
             <file>file:/root/vcan/firmware/src/filters.c</file>
             <file>file:/root/vcan/firmware/src/mc_picontrol.c</file>
+            <file>file:/root/vcan/firmware/src/adc_scan.h</file>
             <file>file:/root/vcan/firmware/src/filters.h</file>
             <file>file:/root/vcan/firmware/src/m35qei.h</file>
             <file>file:/root/vcan/firmware/src/freqgen.c</file>
             <file>file:/root/vcan/firmware/src/timers.c</file>
             <file>file:/root/vcan/firmware/src/timers.h</file>
             <file>file:/root/vcan/firmware/src/mclib.c</file>
-            <file>file:/root/vcan/firmware/src/m35qei.c</file>
             <file>file:/root/vcan/firmware/src/freqgen.h</file>
         </group>
     </open-files>
