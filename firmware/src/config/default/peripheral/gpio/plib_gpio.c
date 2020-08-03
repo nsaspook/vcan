@@ -69,7 +69,7 @@ void GPIO_Initialize ( void )
     CNPDBSET = 0x10; /* Pull-Down Enable */
 
     /* PORTC Initialization */
-    LATC = 0x2804; /* Initial Latch Value */
+    LATC = 0x2800; /* Initial Latch Value */
     TRISCCLR = 0x304; /* Direction Control */
     ANSELCCLR = 0x1407; /* Digital Mode Enable */
 

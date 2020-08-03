@@ -1867,7 +1867,7 @@
         </String>
         <String dnOrder="114" id="BSP_PIN_34_FUNCTION_NAME">
           <Values dnOrder="0">
-            <User dnOrder="0" value="GPIO_RC2"/>
+            <User dnOrder="0" value="BACKLIGHT"/>
           </Values>
         </String>
         <String dnOrder="115" id="BSP_PIN_34_FUNCTION_TYPE">
@@ -1877,7 +1877,7 @@
         </String>
         <String dnOrder="116" id="BSP_PIN_34_LAT">
           <Values dnOrder="0">
-            <User dnOrder="0" value="High"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="117" id="BSP_PIN_34_MODE">
@@ -4745,7 +4745,7 @@
         </Hex>
         <Hex dnOrder="673" id="SYS_PORT_C_LAT">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="10244"/>
+            <Dynamic dnOrder="0" id="core" value="10240"/>
           </Values>
         </Hex>
         <Hex dnOrder="674" id="SYS_PORT_C_TRIS">
@@ -5621,7 +5621,15 @@
       </Symbols>
     </UniqueComponent>
     <UniqueComponent dnOrder="2" id="dfp"/>
-    <UniqueComponent dnOrder="3" id="eeprom"/>
+    <UniqueComponent dnOrder="3" id="eeprom">
+      <Symbols dnOrder="0">
+        <Integer dnOrder="0" id="EEPROM_CFGCON_EEWS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0" id="eeprom" value="0"/>
+          </Values>
+        </Integer>
+      </Symbols>
+    </UniqueComponent>
     <UniqueComponent dnOrder="4" id="mcpwm">
       <Symbols dnOrder="0">
         <Integer dnOrder="0" id="DTCOMP1__DTCOMP">

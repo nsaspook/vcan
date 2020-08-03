@@ -141,14 +141,14 @@
 #define GPIO_RB3_OutputEnable()      (TRISBCLR = (1<<3))
 #define GPIO_RB3_InputEnable()       (TRISBSET = (1<<3))
 #define GPIO_RB3_PIN                  GPIO_PIN_RB3
-/*** Macros for GPIO_RC2 pin ***/
-#define GPIO_RC2_Set()               (LATCSET = (1<<2))
-#define GPIO_RC2_Clear()             (LATCCLR = (1<<2))
-#define GPIO_RC2_Toggle()            (LATCINV= (1<<2))
-#define GPIO_RC2_Get()               ((PORTC >> 2) & 0x1)
-#define GPIO_RC2_OutputEnable()      (TRISCCLR = (1<<2))
-#define GPIO_RC2_InputEnable()       (TRISCSET = (1<<2))
-#define GPIO_RC2_PIN                  GPIO_PIN_RC2
+/*** Macros for BACKLIGHT pin ***/
+#define BACKLIGHT_Set()               (LATCSET = (1<<2))
+#define BACKLIGHT_Clear()             (LATCCLR = (1<<2))
+#define BACKLIGHT_Toggle()            (LATCINV= (1<<2))
+#define BACKLIGHT_Get()               ((PORTC >> 2) & 0x1)
+#define BACKLIGHT_OutputEnable()      (TRISCCLR = (1<<2))
+#define BACKLIGHT_InputEnable()       (TRISCSET = (1<<2))
+#define BACKLIGHT_PIN                  GPIO_PIN_RC2
 /*** Macros for DERE pin ***/
 #define DERE_Set()               (LATGSET = (1<<11))
 #define DERE_Clear()             (LATGCLR = (1<<11))
