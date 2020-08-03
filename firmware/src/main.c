@@ -237,19 +237,19 @@ int main(void)
 	 * block-commutated 
 	 */
 	for (i = 0; i < 8; i++) {
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i] >> 2)&0x1) * duty_max);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i] >> 1)&0x1) * duty_max);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i] >> 0)&0x1) * duty_max);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i & 0x7] >> 2)&0x1) * duty_max);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i & 0x7] >> 1)&0x1) * duty_max);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i & 0x7] >> 0)&0x1) * duty_max);
 		switch (i) {
 		case 0:
 			/*
 			 * testing chop
 			 */
-			AUXCON2 = 0x3;
-			AUXCON3 = 0x3;
-			AUXCON4 = 0x3;
-			CHOPbits.CHOPCLK = 4;
-			CHOPbits.CHPCLKEN = 1;
+			//			AUXCON2 = 0x3;
+			//			AUXCON3 = 0x3;
+			//			AUXCON4 = 0x3;
+			//			CHOPbits.CHOPCLK = 4;
+			//			CHOPbits.CHPCLKEN = 1;
 			MCPWM_Start();
 			WaitMs(900);
 			break;
