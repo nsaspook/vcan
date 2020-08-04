@@ -106,7 +106,7 @@ void SPI3_Initialize_edogs(void)
 	IFS6CLR = 0x10000000;
 
 	/* BAUD Rate register Setup */
-	SPI3BRG = 1;
+	SPI3BRG = 0;
 
 	/* CLear the Overflow */
 	SPI3STATCLR = _SPI3STAT_SPIROV_MASK;
@@ -157,6 +157,11 @@ void CSB_SetHigh(void)
 void SPI1_Exchange8bit(uint8_t data)
 {
 	SPI3_Write(&data, 1);
+};
+
+void SPI_ExchangeBuffer(uint8_t *data, uint16_t len)
+{
+	SPI3_Write(data, len);
 };
 
 void wdtdelay(const uint32_t delay)

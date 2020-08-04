@@ -511,7 +511,7 @@ void OledUpdate(void)
 {
 	int32_t ipag;
 	uint8_t* pb;
-//	uint8_t TXbuffer[] = {0x22, 0x00, 0x00, 0x10};
+	//	uint8_t TXbuffer[] = {0x22, 0x00, 0x00, 0x10};
 
 	pb = rgbOledBmp;
 
@@ -585,7 +585,13 @@ uint16_t SPI1_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 	LCD_SELECT();
 	LCD_DRAM();
 
+
 	if (bufLen != 0) {
+#ifdef EDOGS
+		SPI_ExchangeBuffer(dataIn, bufLen);
+		bytesWritten = bufLen;
+#endif
+#ifdef EDOGM
 		if (dataIn != NULL) {
 			while (bytesWritten < bufLen) {
 				if (dataOut == NULL) {
@@ -605,6 +611,7 @@ uint16_t SPI1_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 				}
 			}
 		}
+#endif
 	}
 
 	LCD_UNSELECT();

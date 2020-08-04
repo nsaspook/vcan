@@ -226,12 +226,13 @@ int main(void)
 	SPI_EN1_Set();
 	wdtdelay(IS_DELAYPOWERUP); // > 400ms power up delay
 	lcd_init();
-	LCD_SWITCH_ON();
+	OledInit();
 	while (true) {
+		sprintf(buffer,"%i",irow);
 		OledSetCursor(0, 0);
-		OledPutString("K42 DOGS102   ");
+		OledPutString("PIC32MK SPI   ");
 		OledSetCursor(0, 1);
-		OledPutString("Basic DISPLAY ");
+		OledPutString("DISPLAY DRV");
 		OledSetCursor(0, 2);
 		OledPutString(buffer);
 		OledSetCursor(0, 3);
@@ -246,8 +247,8 @@ int main(void)
 		OledPutString("DogS Driver   ");
 		//		OledMoveTo(0, irow & 63);
 		//		OledDrawRect(63, 63);
-		OledMoveTo(0, irow & 63);
-		OledLineTo(63, irow & 63);
+//		OledMoveTo(0, irow & 63);
+//		OledLineTo(63, irow & 63);
 		OledUpdate();
 		irow++;
 	}
