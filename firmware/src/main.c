@@ -60,11 +60,10 @@ const char *build_date = __DATE__, *build_time = __TIME__;
 
 struct QEI_DATA m35_1 = {
 	.duty = 0, // default motor duty
-	.gain = pos_gain, // input position gain
 },
 m35_2 = {
 	.duty = 0, // default motor duty
-	.gain = error_gain, // motor position gain
+	.gain = error_gain, // motor position encoder gain
 	.sine_steps = sinea,
 	.pole_pairs = NUM_POLE_PAIRS,
 	.ppr = ENCODER_PULSES_PER_REV,
@@ -74,6 +73,7 @@ m35_2 = {
 },
 m35_3 = {
 	.duty = 0,
+	.gain = pos_gain, // input position encoder gain
 	.sine_steps = sineb,
 	.phaseIncrement = PHASE_INC,
 	.phase_steps = 0,
@@ -197,7 +197,7 @@ int main(void)
 	QEI1_Start();
 	QEI2_Start();
 	QEI3_Start();
-	m35_ptr = &m35_1;
+	m35_ptr = &m35_3;
 
 	//	RTCC_CallbackRegister(reset_led_blink, 1);
 	//	RTCC_TimeGet(&Time);
@@ -324,7 +324,7 @@ int main(void)
 			QEI2ICC = m35_2.pos;
 			QEI2CMPL = m35_2.pos;
 
-			m35_2.error = (m35_1.pos * m35_1.gain) - m35_2.pos;
+			m35_2.error = (m35_3.pos * m35_3.gain) - m35_2.pos;
 
 			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
 
@@ -399,8 +399,8 @@ int main(void)
 		} else {
 			/* flash the board led(s) using the position counter bits */
 #ifdef QEI_SLOW
-			LATGbits.LATG12 = m35_1.pos >> 3;
-			LATGbits.LATG13 = m35_1.pos >> 5;
+			LATGbits.LATG12 = m35_3.pos >> 3;
+			LATGbits.LATG13 = m35_3.pos >> 5;
 			LATGbits.LATG14 = m35_2.pos & 1;
 #else
 			LATGbits.LATG12 = m35_ptr->pos >> 10;
@@ -419,7 +419,7 @@ int main(void)
 				m35_ptr = &m35_2;
 				sprintf(buffer, "C %5i:%i:%i      ", m35_ptr->pos, m35_ptr->vel, m35_2.indexcnt >> 10);
 				eaDogM_WriteStringAtPos(2, 0, buffer);
-				m35_ptr = &m35_1;
+				m35_ptr = &m35_3;
 				/*
 				 * show some test results on the LCD screen
 				 */
