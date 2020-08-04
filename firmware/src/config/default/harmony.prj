@@ -139,8 +139,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/spi/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/spi/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">2074C44387FA9FFA4920F72199F807DC</GeneratedChecksum>
-          <UserChecksum dnOrder="6">2074C44387FA9FFA4920F72199F807DC</UserChecksum>
+          <GeneratedChecksum dnOrder="5">86F9FAF0D7FE6064B7BCB78155B46050</GeneratedChecksum>
+          <UserChecksum dnOrder="6">86F9FAF0D7FE6064B7BCB78155B46050</UserChecksum>
         </File>
         <File dnOrder="15">
           <Type dnOrder="0">SOURCE</Type>

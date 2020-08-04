@@ -274,7 +274,7 @@ void lcd_set_contrast(uint8_t value)
  * Suitable for all DOGS, DOGM, DOGL and DOGXL displays 
  * in both bottom or top-view orientation.
  */
-void lcd_init()
+void lcd_init(void)
 {
 	//Load settings
 #if DISPLAY_TYPE == 240

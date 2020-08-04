@@ -55,6 +55,11 @@ IC = M * sin (? + 240)
 #include "timers.h"
 #include "pid.h"
 #include "freqgen.h"
+#include "eadog.h"
+#include "dogm-graphic.h"
+#include "OledDriver.h"
+#include "OledChar.h"
+#include "OledGrph.h"
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 
@@ -179,6 +184,13 @@ int main(void)
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
+#ifdef EDOGM
+	SPI3_Initialize_edogm();
+#endif
+#ifdef EDOGS
+	SPI3_Initialize_edogs();
+#endif
+
 	LATGbits.LATG12 = 1;
 	LATGbits.LATG13 = 1;
 	LATGbits.LATG14 = 1;
@@ -204,8 +216,42 @@ int main(void)
 	//	RTCC_AlarmSet(&Time, RTCC_ALARM_MASK_SS);
 	//	RTCC_InterruptEnable(RTCC_ALARM_MASK_SS);
 
+#ifdef EDOGM
 	init_display();
 	eaDogM_CursorOff();
+#endif
+#ifdef EDOGS
+	uint32_t irow = 0;
+	
+	SPI_EN1_Set();
+	wdtdelay(IS_DELAYPOWERUP); // > 400ms power up delay
+	lcd_init();
+	LCD_SWITCH_ON();
+	while (true) {
+		OledSetCursor(0, 0);
+		OledPutString("K42 DOGS102   ");
+		OledSetCursor(0, 1);
+		OledPutString("Basic DISPLAY ");
+		OledSetCursor(0, 2);
+		OledPutString(buffer);
+		OledSetCursor(0, 3);
+		OledPutString("DogS Driver   ");
+		OledSetCursor(0, 4);
+		OledPutString("DogS Driver   ");
+		OledSetCursor(0, 5);
+		OledPutString("DogS Driver   ");
+		OledSetCursor(0, 6);
+		OledPutString("DogS Driver   ");
+		OledSetCursor(0, 7);
+		OledPutString("DogS Driver   ");
+		//		OledMoveTo(0, irow & 63);
+		//		OledDrawRect(63, 63);
+		OledMoveTo(0, irow & 63);
+		OledLineTo(63, irow & 63);
+		OledUpdate();
+		irow++;
+	}
+#endif
 
 	sprintf(buffer, "VCAN %s        ", build_date);
 	eaDogM_WriteStringAtPos(0, 0, buffer);

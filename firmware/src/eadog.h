@@ -24,10 +24,16 @@
 extern "C" {
 #endif
 
+//#define EDOGM
+#define EDOGS
+
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include "tests.h"
+#include "device.h"
+#include "config/default/peripheral/spi/plib_spi_common.h"
+#include "config/default/peripheral/spi/plib_spi3.h"
 
 #define LCD_CMD_MASK	0x01
 #define LCD_CMD_SET	0x100
@@ -62,6 +68,8 @@ extern "C" {
 	void eaDogM_WriteStringAtPos(uint8_t, uint8_t, char *);
 	void eaDogM_WriteIntAtPos(uint8_t, uint8_t, uint8_t);
 	void eaDogM_WriteByteToCGRAM(uint8_t, uint8_t);
+	void SPI3_Initialize_edogm(void);
+	void SPI3_Initialize_edogs(void);
 
 #define eaDogM_Cls()             eaDogM_WriteCommand(EADOGM_CMD_CLR)
 #define eaDogM_CursorOn()        eaDogM_WriteCommand(EADOGM_CMD_CURSOR_ON)

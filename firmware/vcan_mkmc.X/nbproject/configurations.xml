@@ -146,13 +146,13 @@
       <itemPath>../src/freqgen.c</itemPath>
       <itemPath>../src/mc_picontrol.c</itemPath>
       <itemPath>../src/mclib.c</itemPath>
-      <itemPath>../src/main.c</itemPath>
       <itemPath>../src/ChrFont0.c</itemPath>
       <itemPath>../src/FillPat.c</itemPath>
       <itemPath>../src/OledChar.c</itemPath>
       <itemPath>../src/OledDriver.c</itemPath>
       <itemPath>../src/OledGrph.c</itemPath>
       <itemPath>../src/dogm-graphic.c</itemPath>
+      <itemPath>../src/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -173,7 +173,7 @@
         <targetDevice>PIC32MK1024MCF100</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>ICD4Tool</platformTool>
+        <platformTool>pk4hybrid</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>2.41</languageToolchainVersion>
         <platform>2</platform>
@@ -216,7 +216,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP"/>
+                  value="../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP;"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>

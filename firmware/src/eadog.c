@@ -4,10 +4,135 @@
 
 #define max_strlen	16
 
+/* Global object to save SPI Exchange related data */
+extern SPI_OBJECT spi3Obj;
+
+#ifdef EDOGM
+#define SPI3_CON_MSTEN                      (1 << _SPI3CON_MSTEN_POSITION)
+#define SPI3_CON_CKP                        (0 << _SPI3CON_CKP_POSITION)
+#define SPI3_CON_CKE                        (1 << _SPI3CON_CKE_POSITION)
+#define SPI3_CON_MODE_32_MODE_16            (0 << _SPI3CON_MODE16_POSITION)
+#define SPI3_CON_ENHBUF                     (1 << _SPI3CON_ENHBUF_POSITION)
+#define SPI3_CON_MCLKSEL                    (1 << _SPI3CON_MCLKSEL_POSITION)
+#define SPI3_CON_MSSEN                      (0 << _SPI3CON_MSSEN_POSITION)
+#define SPI3_CON_SMP                        (0 << _SPI3CON_SMP_POSITION)
+#endif
+
+#ifdef EDOGS
+#define SPI3_CON_MSTEN                      (1 << _SPI3CON_MSTEN_POSITION)
+#define SPI3_CON_CKP                        (1 << _SPI3CON_CKP_POSITION)
+#define SPI3_CON_CKE                        (0 << _SPI3CON_CKE_POSITION)
+#define SPI3_CON_MODE_32_MODE_16            (0 << _SPI3CON_MODE16_POSITION)
+#define SPI3_CON_ENHBUF                     (1 << _SPI3CON_ENHBUF_POSITION)
+#define SPI3_CON_MCLKSEL                    (1 << _SPI3CON_MCLKSEL_POSITION)
+#define SPI3_CON_MSSEN                      (0 << _SPI3CON_MSSEN_POSITION)
+#define SPI3_CON_SMP                        (0 << _SPI3CON_SMP_POSITION)
+#endif
+
 static void send_lcd_cmd_long(uint8_t); // for display init only
 static void send_lcd_data(uint8_t);
 static void send_lcd_cmd(uint8_t);
 static volatile uint8_t NOPER = 0;
+
+void SPI3_Initialize_edogm(void)
+{
+	uint32_t rdata;
+
+	/* Disable SPI3 Interrupts */
+	IEC6CLR = 0x4000000;
+	IEC6CLR = 0x8000000;
+	IEC6CLR = 0x10000000;
+
+	/* STOP and Reset the SPI */
+	SPI3CON = 0;
+
+	/* Clear the Receiver buffer */
+	rdata = SPI3BUF;
+	rdata = rdata;
+
+	/* Clear SPI3 Interrupt flags */
+	IFS6CLR = 0x4000000;
+	IFS6CLR = 0x8000000;
+	IFS6CLR = 0x10000000;
+
+	/* BAUD Rate register Setup */
+	SPI3BRG = 1;
+
+	/* CLear the Overflow */
+	SPI3STATCLR = _SPI3STAT_SPIROV_MASK;
+
+	/*
+	MSTEN = 1
+	CKP = 0
+	CKE = 1
+	MODE<32,16> = 0
+	ENHBUF = 1
+	MSSEN = 0
+	MCLKSEL = 1
+	 */
+	SPI3CONSET = (SPI3_CON_MSSEN | SPI3_CON_MCLKSEL | SPI3_CON_ENHBUF | SPI3_CON_MODE_32_MODE_16 | SPI3_CON_CKE | SPI3_CON_CKP | SPI3_CON_MSTEN | SPI3_CON_SMP);
+
+	/* Enable transmit interrupt when transmit buffer is completely empty (STXISEL = '01') */
+	/* Enable receive interrupt when the receive buffer is not empty (SRXISEL = '01') */
+	SPI3CONSET = 0x00000005;
+
+	/* Initialize global variables */
+	spi3Obj.transferIsBusy = false;
+	spi3Obj.callback = NULL;
+
+	/* Enable SPI3 */
+	SPI3CONSET = _SPI3CON_ON_MASK;
+}
+
+void SPI3_Initialize_edogs(void)
+{
+	uint32_t rdata;
+
+	/* Disable SPI3 Interrupts */
+	IEC6CLR = 0x4000000;
+	IEC6CLR = 0x8000000;
+	IEC6CLR = 0x10000000;
+
+	/* STOP and Reset the SPI */
+	SPI3CON = 0;
+
+	/* Clear the Receiver buffer */
+	rdata = SPI3BUF;
+	rdata = rdata;
+
+	/* Clear SPI3 Interrupt flags */
+	IFS6CLR = 0x4000000;
+	IFS6CLR = 0x8000000;
+	IFS6CLR = 0x10000000;
+
+	/* BAUD Rate register Setup */
+	SPI3BRG = 1;
+
+	/* CLear the Overflow */
+	SPI3STATCLR = _SPI3STAT_SPIROV_MASK;
+
+	/*
+	MSTEN = 1
+	CKP = 1
+	CKE = 0
+	MODE<32,16> = 0
+	ENHBUF = 1
+	MSSEN = 0
+	MCLKSEL = 1
+	 */
+	SPI3CONSET = (SPI3_CON_MSSEN | SPI3_CON_MCLKSEL | SPI3_CON_ENHBUF | SPI3_CON_MODE_32_MODE_16 | SPI3_CON_CKE | SPI3_CON_CKP | SPI3_CON_MSTEN | SPI3_CON_SMP);
+
+	/* Enable transmit interrupt when transmit buffer is completely empty (STXISEL = '01') */
+	/* Enable receive interrupt when the receive buffer is not empty (SRXISEL = '01') */
+	SPI3CONSET = 0x00000005;
+
+	/* Initialize global variables */
+	spi3Obj.transferIsBusy = false;
+	spi3Obj.callback = NULL;
+
+	/* Enable SPI3 */
+	SPI3CONSET = _SPI3CON_ON_MASK;
+}
 
 void RS_SetLow(void)
 {

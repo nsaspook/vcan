@@ -7062,42 +7062,47 @@
       <Symbols dnOrder="0">
         <Integer dnOrder="0" id="SPI_BAUD_RATE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="2000000"/>
+            <User dnOrder="0" value="4000000"/>
           </Values>
         </Integer>
         <Integer dnOrder="1" id="SPI_BRG_VALUE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="spi3" value="1"/>
+            <Dynamic dnOrder="0" id="spi3" value="0"/>
           </Values>
         </Integer>
         <Comment dnOrder="2" id="SPI_CLOCK_MODE_COMMENT">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">***SPI&amp;#160;Mode&amp;#160;0&amp;#160;is&amp;#160;Selected***</Value>
+              <Value dnOrder="0">***SPI&amp;#160;Mode&amp;#160;3&amp;#160;is&amp;#160;Selected***</Value>
             </String>
           </Attributes>
         </Comment>
-        <Boolean dnOrder="3" id="SPI_INTERRUPT_MODE">
+        <Hex dnOrder="3" id="SPI_DUMMY_DATA">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="255"/>
+          </Values>
+        </Hex>
+        <Boolean dnOrder="4" id="SPI_INTERRUPT_MODE">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <KeyValueSet dnOrder="4" id="SPI_MASTER_CLOCK">
+        <KeyValueSet dnOrder="5" id="SPI_MASTER_CLOCK">
           <Values dnOrder="0">
             <User dnOrder="0" value="0"/>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="5" id="SPI_SPICON_CLK_PH">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="6" id="SPI_SPICON_CLK_POL">
+        <KeyValueSet dnOrder="6" id="SPI_SPICON_CLK_PH">
           <Values dnOrder="0">
             <User dnOrder="0" value="1"/>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="7" id="SPI_SPICON_MSSEN">
+        <KeyValueSet dnOrder="7" id="SPI_SPICON_CLK_POL">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="0"/>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="8" id="SPI_SPICON_MSSEN">
           <Values dnOrder="0">
             <User dnOrder="0" value="1"/>
           </Values>
@@ -7348,7 +7353,8 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
+    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="adchs" x="19" y="389"/>
         <ElementPosition dnOrder="1" id="core" x="198" y="49"/>
@@ -7366,6 +7372,5 @@
         <ElementPosition dnOrder="13" id="uart6" x="163" y="307"/>
       </ElementPositions>
     </ComponentGraph>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>
