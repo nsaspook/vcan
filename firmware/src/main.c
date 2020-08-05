@@ -230,21 +230,21 @@ int main(void)
 	while (true) {
 		sprintf(buffer,"%i",irow);
 		OledSetCursor(0, 0);
-		OledPutString("PIC32MK SPI   ");
+		OledPutString("PIC32MK SPI");
 		OledSetCursor(0, 1);
 		OledPutString("DISPLAY DRV");
 		OledSetCursor(0, 2);
 		OledPutString(buffer);
 		OledSetCursor(0, 3);
-		OledPutString("DogS Driver   ");
+		OledPutString("DogS Driver ");
 		OledSetCursor(0, 4);
-		OledPutString("DogS Driver   ");
+		OledPutString("DogS Driver ");
 		OledSetCursor(0, 5);
-		OledPutString("DogS Driver   ");
+		OledPutString("DogS Driver ");
 		OledSetCursor(0, 6);
-		OledPutString("DogS Driver   ");
+		OledPutString("DogS Driver ");
 		OledSetCursor(0, 7);
-		OledPutString("DogS Driver   ");
+		OledPutString("DogS Driver ");
 		//		OledMoveTo(0, irow & 63);
 		//		OledDrawRect(63, 63);
 //		OledMoveTo(0, irow & 63);

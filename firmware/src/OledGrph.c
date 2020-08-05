@@ -108,8 +108,7 @@ int32_t OledClampYco(int32_t yco);
  **		Set the current graphics drawing position.
  */
 
-void
-OledMoveTo(int32_t xco, int32_t yco)
+void OledMoveTo(int32_t xco, int32_t yco)
 {
 
 	/* Clamp the specified coordinates to the display surface
@@ -148,8 +147,7 @@ OledMoveTo(int32_t xco, int32_t yco)
  **		Fetch the current graphics drawing position
  */
 
-void
-OledGetPos(int32_t * pxco, int32_t * pyco)
+void OledGetPos(int32_t * pxco, int32_t * pyco)
 {
 
 	*pxco = xcoOledCur;
@@ -174,8 +172,7 @@ OledGetPos(int32_t * pxco, int32_t * pyco)
  **		Set the foreground color used for pixel draw operations.
  */
 
-void
-OledSetDrawColor(uint8_t clr)
+void OledSetDrawColor(uint8_t clr)
 {
 
 	clrOledCur = clr & 0x01;
@@ -200,8 +197,7 @@ OledSetDrawColor(uint8_t clr)
  **		standard fill pattern.
  */
 
-uint8_t *
-OledGetStdPattern(int32_t ipat)
+uint8_t * OledGetStdPattern(int32_t ipat)
 {
 
 	return rgbFillPat + 8 * ipat;
@@ -226,8 +222,7 @@ OledGetStdPattern(int32_t ipat)
  **		pattern is an array of 8 bytes.
  */
 
-void
-OledSetFillPattern(uint8_t * pbPat)
+void OledSetFillPattern(uint8_t * pbPat)
 {
 
 	pbOledPatCur = pbPat;
@@ -251,8 +246,7 @@ OledSetFillPattern(uint8_t * pbPat)
  **		Set the specified mode as the current drawing mode.
  */
 
-void
-OledSetDrawMode(int32_t mod)
+void OledSetDrawMode(int32_t mod)
 {
 
 	modOledCur = mod;
@@ -298,8 +292,7 @@ OledSetDrawMode(int32_t mod)
  **		Get the current drawing mode
  */
 
-int
-OledGetDrawMode(void)
+int OledGetDrawMode(void)
 {
 
 	return modOledCur;
@@ -324,8 +317,7 @@ OledGetDrawMode(void)
  **		specified value.
  */
 
-void
-OledDrawPixel(void)
+void OledDrawPixel(void)
 {
 
 	*pbOledCur = (*pfnDoRop)((clrOledCur << bnOledCur), *pbOledCur, (1 << bnOledCur));
@@ -349,8 +341,7 @@ OledDrawPixel(void)
  **		Return the value of the pixel at the current drawing location
  */
 
-uint8_t
-OledGetPixel(void)
+uint8_t OledGetPixel(void)
 {
 
 	return(*pbOledCur & (1 << bnOledCur)) != 0 ? 1 : 0;
@@ -376,8 +367,7 @@ OledGetPixel(void)
  **		position.
  */
 
-void
-OledLineTo(int32_t xco, int32_t yco)
+void OledLineTo(int32_t xco, int32_t yco)
 {
 	int err;
 	int del;
@@ -478,8 +468,7 @@ OledLineTo(int32_t xco, int32_t yco)
  **		the specified location.
  */
 
-void
-OledDrawRect(int32_t xco, int32_t yco)
+void OledDrawRect(int32_t xco, int32_t yco)
 {
 	int xco1;
 	int yco1;
@@ -516,8 +505,7 @@ OledDrawRect(int32_t xco, int32_t yco)
  **		the specified location.
  */
 
-void
-OledFillRect(int32_t xco, int32_t yco)
+void OledFillRect(int32_t xco, int32_t yco)
 {
 	int xcoLeft;
 	int xcoRight;
@@ -621,8 +609,7 @@ OledFillRect(int32_t xco, int32_t yco)
  **		bytes.
  */
 
-void
-OledGetBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
+void OledGetBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
 {
 	int xcoLeft;
 	int xcoRight;
@@ -719,8 +706,7 @@ OledGetBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
  **		buffer at the current location.
  */
 
-void
-OledPutBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
+void OledPutBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
 {
 	int xcoLeft;
 	int xcoRight;
@@ -833,8 +819,7 @@ OledPutBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
  **		cursor position and advance the cursor.
  */
 
-void
-OledDrawChar(char ch)
+void OledDrawChar(char ch)
 {
 	uint8_t * pbFont;
 	//	uint8_t * pbBmp;
@@ -876,8 +861,7 @@ OledDrawChar(char ch)
  **		display and advance the cursor.
  */
 
-void
-OledDrawString(char * sz)
+void OledDrawString(char * sz)
 {
 
 	while (*sz != '\0') {
@@ -902,8 +886,7 @@ OledDrawString(char * sz)
  **
  */
 
-uint8_t
-OledRopSet(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
+uint8_t OledRopSet(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
 {
 
 	return(bDsp & ~mskPix) | (bPix & mskPix);
@@ -924,8 +907,7 @@ OledRopSet(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
  **
  */
 
-uint8_t
-OledRopOr(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
+uint8_t OledRopOr(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
 {
 
 	return bDsp | (bPix & mskPix);
@@ -994,8 +976,7 @@ OledRopXor(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
  **		display.
  */
 
-void
-OledMoveUp()
+void OledMoveUp(void)
 {
 
 	/* Go up one bit position in the current byte.
@@ -1035,8 +1016,7 @@ OledMoveUp()
  **		display.
  */
 
-void
-OledMoveDown()
+void OledMoveDown(void)
 {
 
 	/* Go down one bit position in the current byte.
@@ -1076,8 +1056,7 @@ OledMoveDown()
  **		display.
  */
 
-void
-OledMoveLeft()
+void OledMoveLeft(void)
 {
 
 	/* Are we at the left edge of the display already
@@ -1110,8 +1089,7 @@ OledMoveLeft()
  **		display.
  */
 
-void
-OledMoveRight()
+void OledMoveRight(void)
 {
 
 	/* Are we at the right edge of the display already

@@ -278,14 +278,15 @@ void lcd_init(void)
 {
 	//Load settings
 #if DISPLAY_TYPE == 240
-	//LCD_SYSTEM_RESET;                   // software reset
+	LCD_SYSTEM_RESET;                   // software reset
+	wdtdelay(IS_DELAYLONG);
 	//_delay_ms(5);                      // Gib dem Display ein bisschen Zeit für den Reset
 	LCD_SET_COM_END(127); // set last COM electrode
 	LCD_SET_PARTIAL_DISPLAY(0, 127); // set partial display start and end
 	LCD_SET_POTI(0x8F); // set Contrast to mid range lvl
 	LCD_SET_MAPPING_CTRL(2); // set mapping control to "bottom view"
 	LCD_SET_LINE_RATE(11); // set line rate to 9.4 kilo lines per second
-	LCD_SET_TEMP_COMP(1); // set tmep compensation to -0.10%
+	LCD_SET_TEMP_COMP(1); // set temp compensation to -0.10%
 	LCD_SWITCH_ON(); // set display enable (0xA9)
 	LCD_SET_DISPLAY_PATTERN(1); // set display pattern (0xD1)
 	LCD_SET_RAM_ADDR_CTRL(1); // set auto-increment

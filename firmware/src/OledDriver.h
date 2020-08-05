@@ -41,7 +41,7 @@
 /*					Miscellaneous Declarations					*/
 /* ------------------------------------------------------------ */
 
-#define	cbOledDispMax		1024		//max number of bytes in display buffer
+#define	cbOledDispMax		816		//max number of bytes in display buffer
 
 #define	ccolOledMax		102		//number of display columns
 #define	crowOledMax		64		//number of display rows

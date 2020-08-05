@@ -116,8 +116,7 @@ void OledAdvanceCursor(void);
  **		is clamped to be on the display.
  */
 
-void
-OledSetCursor(int32_t xch, int32_t ych)
+void OledSetCursor(int32_t xch, int32_t ych)
 {
 
 	/* Clamp the specified location to the display surface
@@ -159,8 +158,7 @@ OledSetCursor(int32_t xch, int32_t ych)
  **		Fetch the current cursor position
  */
 
-void
-OledGetCursor(int32_t * pxch, int32_t * pych)
+void OledGetCursor(int32_t * pxch, int32_t * pych)
 {
 
 	*pxch = xchOledCur;
@@ -189,8 +187,7 @@ OledGetCursor(int32_t * pxch, int32_t * pych)
  **		outside this range, the function returns false.
  */
 
-int32_t
-OledDefUserChar(char ch, uint8_t * pbDef)
+int32_t OledDefUserChar(char ch, uint8_t * pbDef)
 {
 	uint8_t * pb;
 	int ib;
@@ -227,8 +224,7 @@ OledDefUserChar(char ch, uint8_t * pbDef)
  **		automatic updating on.
  */
 
-void
-OledSetCharUpdate(int32_t f)
+void OledSetCharUpdate(int32_t f)
 {
 
 	fOledCharUpdate = (f != 0) ? 1 : 0;
@@ -252,8 +248,7 @@ OledSetCharUpdate(int32_t f)
  **		Return the current character update mode.
  */
 
-int32_t
-OledGetCharUpdate(void)
+int32_t OledGetCharUpdate(void)
 {
 
 	return fOledCharUpdate;
@@ -278,8 +273,7 @@ OledGetCharUpdate(void)
  **		cursor position and advance the cursor.
  */
 
-void
-OledPutChar(char ch)
+void OledPutChar(char ch)
 {
 
 	OledDrawGlyph(ch);
@@ -308,8 +302,7 @@ OledPutChar(char ch)
  **		display and advance the cursor.
  */
 
-void
-OledPutString(char * sz)
+void OledPutString(char * sz)
 {
 
 	while (*sz != '\0') {
@@ -344,8 +337,7 @@ OledPutString(char * sz)
  **		current drawing position in the display buffer.
  */
 
-void
-OledDrawGlyph(char ch)
+void OledDrawGlyph(char ch)
 {
 	uint8_t * pbFont;
 	uint8_t * pbBmp;
@@ -388,8 +380,7 @@ OledDrawGlyph(char ch)
  **		end of the display.
  */
 
-void
-OledAdvanceCursor(void)
+void OledAdvanceCursor(void)
 {
 
 	xchOledCur += 1;

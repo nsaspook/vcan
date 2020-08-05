@@ -7062,7 +7062,7 @@
       <Symbols dnOrder="0">
         <Integer dnOrder="0" id="SPI_BAUD_RATE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="4000000"/>
+            <User dnOrder="0" value="8000000"/>
           </Values>
         </Integer>
         <Integer dnOrder="1" id="SPI_BRG_VALUE">

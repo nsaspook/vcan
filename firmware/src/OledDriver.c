@@ -326,10 +326,10 @@ void OledDvrInit(void)
 	pbOledPatCur = rgbFillPat;
 	OledSetDrawMode(modOledSet);
 
-	/* Default the character routines to automatic
-	 ** update the display.
+	/* Default the character routines to manual
+	 ** updates to the display.
 	 */
-	fOledCharUpdate = 1;
+	fOledCharUpdate = 0;
 
 }
 
