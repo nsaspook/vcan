@@ -7,6 +7,7 @@
             <file>file:/fred/vcan/firmware/src/OledDriver.c</file>
             <file>file:/fred/vcan/firmware/src/filters.c</file>
             <file>file:/fred/vcan/firmware/src/timers.c</file>
+            <file>file:/fred/vcan/firmware/src/dogm-graphic.h</file>
             <file>file:/fred/vcan/firmware/src/timers.h</file>
             <file>file:/fred/vcan/firmware/src/config/default/peripheral/spi/plib_spi3.c</file>
             <file>file:/fred/vcan/firmware/src/dio.c</file>

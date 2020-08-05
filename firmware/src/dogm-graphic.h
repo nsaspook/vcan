@@ -18,7 +18,7 @@
 
 
 //Select the display type: DOGS102: 102, DOGM128/DOGL128: 128, DOGM132: 132, DOGXL160: 160, DOGXL240: 240
-#define DISPLAY_TYPE  102
+#define DISPLAY_TYPE  240
 
 //Display Orientation: Normal (0) or upside-down (1)?
 #define ORIENTATION_UPSIDEDOWN 0
