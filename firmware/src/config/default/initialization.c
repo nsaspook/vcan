@@ -70,13 +70,13 @@
 #pragma config EJTAGBEN =   NORMAL
 
 /*** DEVCFG1 ***/
-#pragma config FNOSC =      POSC
+#pragma config FNOSC =      SPLL
 #pragma config DMTINTV =    WIN_127_128
 #pragma config FSOSCEN =    OFF
 #pragma config IESO =       ON
 #pragma config POSCMOD =    EC
 #pragma config OSCIOFNC =   OFF
-#pragma config FCKSM =      CSECME
+#pragma config FCKSM =      CSDCMD
 #pragma config WDTPS =      PS1048576
 #pragma config WDTSPGM =    STOP
 #pragma config FWDTEN =     OFF
@@ -177,7 +177,7 @@ void SYS_Initialize ( void* data )
     __builtin_mtc0(16, 0,(__builtin_mfc0(16, 0) | 0x3));
 
     /* Configure Wait States and Prefetch */
-    CHECONbits.PFMWS = 1;
+    CHECONbits.PFMWS = 3;
     CHECONbits.PREFEN = 1;
 
 

@@ -188,7 +188,7 @@ int main(void)
 	SPI3_Initialize_edogm();
 #endif
 #ifdef EDOGS
-	SPI3_Initialize_edogs();
+//	SPI3_Initialize_edogs();
 #endif
 
 	LATGbits.LATG12 = 1;
@@ -227,6 +227,7 @@ int main(void)
 	wdtdelay(IS_DELAYPOWERUP); // > 400ms power up delay
 	lcd_init();
 	OledInit();
+	OledSetCharUpdate(0); // manual LCD screen updates for speed
 	while (true) {
 		sprintf(buffer,"%i",irow);
 		OledSetCursor(0, 0);

@@ -5,6 +5,7 @@
         <group>
             <file>file:/root/vcan/firmware/src/dogm-graphic.h</file>
             <file>file:/root/vcan/firmware/src/OledDriver.c</file>
+            <file>file:/root/vcan/firmware/src/OledChar.c</file>
             <file>file:/root/vcan/firmware/src/eadog.h</file>
             <file>file:/root/vcan/firmware/src/main.c</file>
             <file>file:/root/vcan/firmware/src/config/default/initialization.c</file>

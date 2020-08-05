@@ -22,8 +22,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/</LogicalPath>
           <PhysicalPath dnOrder="4">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">E0F14EF24CCD32DBBC66B42E6D1FCEEB</GeneratedChecksum>
-          <UserChecksum dnOrder="6">E0F14EF24CCD32DBBC66B42E6D1FCEEB</UserChecksum>
+          <GeneratedChecksum dnOrder="5">FB4D813360D1F7DDDE75654431B34E34</GeneratedChecksum>
+          <UserChecksum dnOrder="6">FB4D813360D1F7DDDE75654431B34E34</UserChecksum>
         </File>
         <File dnOrder="2">
           <Type dnOrder="0">SOURCE</Type>
@@ -58,8 +58,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/clk/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/clk/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">D691E66D6C50EAB45460E00CDC0BDA50</GeneratedChecksum>
-          <UserChecksum dnOrder="6">D691E66D6C50EAB45460E00CDC0BDA50</UserChecksum>
+          <GeneratedChecksum dnOrder="5">37962EAA92B962D18D53173E07A8319A</GeneratedChecksum>
+          <UserChecksum dnOrder="6">37962EAA92B962D18D53173E07A8319A</UserChecksum>
         </File>
         <File dnOrder="6">
           <Type dnOrder="0">SOURCE</Type>
@@ -406,7 +406,7 @@
       </Files>
       <Settings dnOrder="1">
         <Setting append="true" category="C32" delimiter=";" dnOrder="0" key="extra-include-directories" security="NON_SECURE" value="../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP;"/>
-        <Setting category="C32-LD" dnOrder="1" key="heap-size" security="NON_SECURE" value="512"/>
+        <Setting category="C32-LD" dnOrder="1" key="heap-size" security="NON_SECURE" value="1024"/>
         <Setting category="C32-LD" dnOrder="2" key="no-device-startup-code" security="NON_SECURE" value="true"/>
         <Setting append="true" category="C32-LD" delimiter=";" dnOrder="3" key="preprocessor-macros" security="NON_SECURE" value=""/>
       </Settings>

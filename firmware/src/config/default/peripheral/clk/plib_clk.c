@@ -99,7 +99,24 @@ void CLK_Initialize( void )
     }
 
  
-        /* Set up Reference Clock 1 */
+        /* Peripheral Bus 1 is by default enabled, set its divisor */
+    PB1DIVbits.PBDIV = 19;
+    /* Peripheral Bus 2 is by default enabled, set its divisor */
+    PB2DIVbits.PBDIV = 19;
+
+    /* Peripheral Bus 3 is by default enabled, set its divisor */
+    PB3DIVbits.PBDIV = 7;
+
+    /* Peripheral Bus 4 is by default enabled, set its divisor */
+    PB4DIVbits.PBDIV = 19;
+
+    /* Peripheral Bus 5 is by default enabled, set its divisor */
+    PB5DIVbits.PBDIV = 19;
+
+    /* Peripheral Bus 6 is by default enabled, set its divisor */
+    PB6DIVbits.PBDIV = 19;
+
+    /* Set up Reference Clock 1 */
     /* REFO1CON register */
     /* ROSEL =  SPLL */
     /* DIVSWEN = 1 */
