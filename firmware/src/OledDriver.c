@@ -78,20 +78,6 @@ struct oled_init_data {
 	uint8_t d_origin_memory[d_seq_two_width];
 };
 
-static const struct oled_init_data oled_ssd1306 = {
-	.init_delay_msecs = 100,
-	.d_off =
-	{cmdOledDisplayOff},
-	.d_on =
-	{cmdOledDisplayOn},
-	.d_charge_setup =
-	{0x8D, 0x14, 0xD9, 0xF1}, //Send the Set Charge Pump and Set Pre-Charge Period commands
-	.d_origin_memory =
-	{cmdOledSegRemap, cmdOledComDir, cmdOledComConfig, cmdOledComSeqLR, cmdOledDisplayOn},
-};
-
-const struct oled_init_data *oled_ptr = &oled_ssd1306;
-
 /* ------------------------------------------------------------ */
 /*				Global Variables								*/
 /* ------------------------------------------------------------ */
@@ -201,7 +187,6 @@ void OledInit(void)
 	/* Clear the display.
 	 */
 	OledClear();
-
 }
 
 /* ------------------------------------------------------------ */
@@ -223,7 +208,6 @@ void OledInit(void)
 
 void OledTerm(void)
 {
-
 	/* Shut down the OLED display hardware.
 	 */
 	OledDevTerm();
@@ -231,7 +215,6 @@ void OledTerm(void)
 	/* Release the PIC32 peripherals being used.
 	 */
 	OledHostTerm();
-
 }
 
 /* ------------------------------------------------------------ */
@@ -330,7 +313,6 @@ void OledDvrInit(void)
 	 ** updates to the display.
 	 */
 	fOledCharUpdate = 0;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -380,7 +362,6 @@ void OledDevTerm(void)
 	/* Send the Display Off command.
 	 * does nothing
 	 */
-
 }
 
 /* ------------------------------------------------------------ */
@@ -487,7 +468,6 @@ void OledClearBuffer(void)
 	for (ib = 0; ib < cbOledDispMax; ib++) {
 		*pb++ = 0x00;
 	}
-
 }
 
 /* ------------------------------------------------------------ */
@@ -584,8 +564,6 @@ uint16_t SPI1_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 	while (SPI3_IsBusy());
 	LCD_SELECT();
 	LCD_DRAM();
-
-
 	if (bufLen != 0) {
 #ifdef EDOGS
 		SPI_ExchangeBuffer(dataIn, bufLen);
@@ -613,7 +591,6 @@ uint16_t SPI1_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 		}
 #endif
 	}
-
 	LCD_UNSELECT();
 	return bytesWritten;
 #endif

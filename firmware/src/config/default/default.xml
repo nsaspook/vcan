@@ -3123,7 +3123,7 @@
         </Boolean>
         <String dnOrder="364" id="CONFIG_SYS_CLK_PBCLK2_FREQ">
           <Values dnOrder="0">
-            <User dnOrder="0" value="6000000"/>
+            <User dnOrder="0" value="60000000"/>
           </Values>
         </String>
         <String dnOrder="365" id="CONFIG_SYS_CLK_PBCLK3_FREQ">
@@ -3133,17 +3133,17 @@
         </String>
         <String dnOrder="366" id="CONFIG_SYS_CLK_PBCLK4_FREQ">
           <Values dnOrder="0">
-            <User dnOrder="0" value="6000000"/>
+            <User dnOrder="0" value="60000000"/>
           </Values>
         </String>
         <String dnOrder="367" id="CONFIG_SYS_CLK_PBCLK5_FREQ">
           <Values dnOrder="0">
-            <User dnOrder="0" value="6000000"/>
+            <User dnOrder="0" value="60000000"/>
           </Values>
         </String>
         <String dnOrder="368" id="CONFIG_SYS_CLK_PBCLK6_FREQ">
           <Values dnOrder="0">
-            <User dnOrder="0" value="6000000"/>
+            <User dnOrder="0" value="60000000"/>
           </Values>
         </String>
         <String dnOrder="369" id="CONFIG_SYS_CLK_PBCLK7_FREQ">
@@ -3512,7 +3512,7 @@
         </Boolean>
         <Integer dnOrder="425" id="EEPROM_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="6000000"/>
+            <Dynamic dnOrder="0" id="core" value="60000000"/>
           </Values>
         </Integer>
         <Boolean dnOrder="426" id="EVIC_0_ENABLE">
@@ -5325,11 +5325,12 @@
         <Boolean dnOrder="751" id="TMR6_CLOCK_ENABLE">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="tmr6" value="true"/>
+            <User dnOrder="1" value="true"/>
           </Values>
         </Boolean>
         <Integer dnOrder="752" id="TMR6_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="6000000"/>
+            <Dynamic dnOrder="0" id="core" value="60000000"/>
           </Values>
         </Integer>
         <Integer dnOrder="753" id="TMR7_CLOCK_FREQUENCY">
@@ -5731,7 +5732,7 @@
       <Symbols dnOrder="0">
         <Integer dnOrder="0" id="EEPROM_CFGCON_EEWS">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="eeprom" value="0"/>
+            <Dynamic dnOrder="0" id="eeprom" value="2"/>
           </Values>
         </Integer>
       </Symbols>
@@ -7227,29 +7228,80 @@
     </UniqueComponent>
     <UniqueComponent dnOrder="10" id="tmr6">
       <Symbols dnOrder="0">
-        <Integer dnOrder="0" id="TIMER_CLOCK_FREQ">
+        <Hex dnOrder="0" id="TCON_REG_VALUE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tmr6" value="6000000"/>
+            <Dynamic dnOrder="0" id="tmr6" value="8"/>
+          </Values>
+        </Hex>
+        <KeyValueSet dnOrder="1" id="TIMER_32BIT_MODE_SEL">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="0"/>
+          </Values>
+        </KeyValueSet>
+        <Integer dnOrder="2" id="TIMER_CLOCK_FREQ">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0" id="tmr6" value="60000000"/>
           </Values>
         </Integer>
-        <Long dnOrder="1" id="TIMER_PERIOD">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tmr6" value="2999"/>
+        <Integer dnOrder="3" id="TIMER_EXT_CLOCK_FREQ">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </Integer>
+        <Long dnOrder="4" id="TIMER_PERIOD">
+          <Attributes dnOrder="0">
+            <Long dnOrder="0" id="max">
+              <Value dnOrder="0">4294967295</Value>
+            </Long>
+          </Attributes>
+          <Values dnOrder="1">
+            <Dynamic dnOrder="0" id="tmr6" value="29999"/>
           </Values>
         </Long>
-        <Float dnOrder="2" id="TIMER_TIME_PERIOD_MS">
+        <KeyValueSet dnOrder="5" id="TIMER_PRE_SCALER">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="7"/>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="6" id="TIMER_SRC_SEL">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="1"/>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="7" id="TIMER_TGATE">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </KeyValueSet>
+        <Float dnOrder="8" id="TIMER_TIME_PERIOD_MS">
           <Attributes dnOrder="0">
             <Float dnOrder="0" id="max">
-              <Value dnOrder="0">10.9225</Value>
+              <Value dnOrder="0">71582.79</Value>
             </Float>
           </Attributes>
           <Values dnOrder="1">
             <User dnOrder="0" value="0.5"/>
           </Values>
         </Float>
-        <Integer dnOrder="3" id="TIMER_WIDTH">
+        <Integer dnOrder="9" id="TIMER_WIDTH">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tmr6" value="16"/>
+            <Dynamic dnOrder="0" id="tmr6" value="32"/>
+          </Values>
+        </Integer>
+        <Comment dnOrder="10" id="TMR_CLOCK_ENABLE_COMMENT">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </Comment>
+        <Integer dnOrder="11" id="TMR_PRESCALER_VALUE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0" id="tmr6" value="1"/>
           </Values>
         </Integer>
       </Symbols>

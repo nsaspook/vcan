@@ -76,11 +76,11 @@ void TMR6_Start(void);
 
 void TMR6_Stop(void);
 
-void TMR6_PeriodSet(uint16_t);
+void TMR6_PeriodSet(uint32_t);
 
-uint16_t TMR6_PeriodGet(void);
+uint32_t TMR6_PeriodGet(void);
 
-uint16_t TMR6_CounterGet(void);
+uint32_t TMR6_CounterGet(void);
 
 uint32_t TMR6_FrequencyGet(void);
 

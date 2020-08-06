@@ -120,7 +120,7 @@ static void EEPROM_WriteExecute( bool waitForDone )
 void EEPROM_Initialize (void)
 {
     /* Before accessing the Data EEPROM, configure the number of Wait states */
-    CFGCON2bits.EEWS = 0;
+    CFGCON2bits.EEWS = 2;
 
     EECONbits.ON = EEPROM_ENABLE;                       // Turn on the EEPROM
 

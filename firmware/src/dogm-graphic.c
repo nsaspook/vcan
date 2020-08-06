@@ -56,7 +56,6 @@ void CSB_SetLow(void);
 void CSB_SetHigh(void);
 void SPI1_Exchange8bit(uint8_t);
 
-
 /******************************************************************************
  * Changes the internal cursor by s pages
  * s             - number of pages to move
@@ -278,7 +277,7 @@ void lcd_init(void)
 {
 	//Load settings
 #if DISPLAY_TYPE == 240
-	LCD_SYSTEM_RESET;                   // software reset
+	LCD_SYSTEM_RESET; // software reset
 	wdtdelay(IS_DELAYLONG);
 	//_delay_ms(5);                      // Gib dem Display ein bisschen Zeit für den Reset
 	LCD_SET_COM_END(127); // set last COM electrode

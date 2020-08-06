@@ -188,7 +188,7 @@ int main(void)
 	SPI3_Initialize_edogm();
 #endif
 #ifdef EDOGS
-//	SPI3_Initialize_edogs();
+	//	SPI3_Initialize_edogs();
 #endif
 
 	LATGbits.LATG12 = 1;
@@ -205,6 +205,7 @@ int main(void)
 	 */
 	TMR6_CallbackRegister(timer_ms_tick, 0);
 	TMR6_Start();
+	StartTimer(TMR_BLINK, 1000);
 
 	QEI1_Start();
 	QEI2_Start();
@@ -222,14 +223,14 @@ int main(void)
 #endif
 #ifdef EDOGS
 	uint32_t irow = 0;
-	
+
 	SPI_EN1_Set();
 	wdtdelay(IS_DELAYPOWERUP); // > 400ms power up delay
 	lcd_init();
 	OledInit();
 	OledSetCharUpdate(0); // manual LCD screen updates for speed
 	while (true) {
-		sprintf(buffer,"%i",irow);
+		sprintf(buffer, "%i", irow);
 		OledSetCursor(0, 0);
 		OledPutString("PIC32MK SPI");
 		OledSetCursor(0, 1);
@@ -245,13 +246,17 @@ int main(void)
 		OledSetCursor(0, 6);
 		OledPutString("DogS Driver ");
 		OledSetCursor(0, 7);
-		OledPutString("DogS Driver ");
+		OledPutString(buffer);
 		//		OledMoveTo(0, irow & 63);
 		//		OledDrawRect(63, 63);
-//		OledMoveTo(0, irow & 63);
-//		OledLineTo(63, irow & 63);
+		//		OledMoveTo(0, irow & 63);
+		//		OledLineTo(63, irow & 63);
 		OledUpdate();
 		irow++;
+		if (TimerDone(TMR_BLINK)) {
+			StartTimer(TMR_BLINK, 1000);
+			RESET_LED_Toggle();
+		}
 	}
 #endif
 
@@ -272,7 +277,6 @@ int main(void)
 	 * start background ADC conversion scans
 	 */
 	init_end_of_adc_scan();
-	StartTimer(TMR_BLINK, 1000);
 	StartTimer(TMR_MOTOR, 1);
 	StartTimer(TMR_DISPLAY, 500);
 	StartTimer(TMR_VEL, 1000);

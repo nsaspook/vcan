@@ -118,7 +118,6 @@ void OledAdvanceCursor(void);
 
 void OledSetCursor(int32_t xch, int32_t ych)
 {
-
 	/* Clamp the specified location to the display surface
 	 */
 	if (xch >= xchOledMax) {
@@ -137,7 +136,6 @@ void OledSetCursor(int32_t xch, int32_t ych)
 	/* Convert the character location to a frame buffer address.
 	 */
 	OledMoveTo(xch*dxcoOledFontCur, ych * dycoOledFontCur);
-
 }
 
 /* ------------------------------------------------------------ */
@@ -160,10 +158,8 @@ void OledSetCursor(int32_t xch, int32_t ych)
 
 void OledGetCursor(int32_t * pxch, int32_t * pych)
 {
-
 	*pxch = xchOledCur;
 	*pych = ychOledCur;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -190,7 +186,7 @@ void OledGetCursor(int32_t * pxch, int32_t * pych)
 int32_t OledDefUserChar(char ch, uint8_t * pbDef)
 {
 	uint8_t * pb;
-	int ib;
+	int32_t ib;
 
 	if (ch < chOledUserMax) {
 		pb = pbOledFontUser + ch * cbOledChar;
@@ -201,7 +197,6 @@ int32_t OledDefUserChar(char ch, uint8_t * pbDef)
 	} else {
 		return 0;
 	}
-
 }
 
 /* ------------------------------------------------------------ */
@@ -226,9 +221,7 @@ int32_t OledDefUserChar(char ch, uint8_t * pbDef)
 
 void OledSetCharUpdate(int32_t f)
 {
-
 	fOledCharUpdate = (f != 0) ? 1 : 0;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -250,9 +243,7 @@ void OledSetCharUpdate(int32_t f)
 
 int32_t OledGetCharUpdate(void)
 {
-
 	return fOledCharUpdate;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -275,13 +266,11 @@ int32_t OledGetCharUpdate(void)
 
 void OledPutChar(char ch)
 {
-
 	OledDrawGlyph(ch);
 	OledAdvanceCursor();
 	if (fOledCharUpdate) {
 		OledUpdate();
 	}
-
 }
 
 /* ------------------------------------------------------------ */
@@ -304,7 +293,6 @@ void OledPutChar(char ch)
 
 void OledPutString(char * sz)
 {
-
 	while (*sz != '\0') {
 		OledDrawGlyph(*sz);
 		OledAdvanceCursor();
@@ -314,7 +302,6 @@ void OledPutString(char * sz)
 	if (fOledCharUpdate) {
 		OledUpdate();
 	}
-
 }
 
 /* ------------------------------------------------------------ */

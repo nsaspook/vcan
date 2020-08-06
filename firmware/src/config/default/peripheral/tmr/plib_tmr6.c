@@ -65,16 +65,16 @@ void TMR6_Initialize(void)
     SYNC = 0
     TGATE = 0
     TCKPS =0
-    T32   = 0
+    T32   = 1
     TCS = 0
     */
-    T6CONSET = 0x0;
+    T6CONSET = 0x8;
 
     /* Clear counter */
     TMR6 = 0x0;
 
     /*Set period */
-    PR6 = 2999U;
+    PR6 = 29999U;
 
     IEC2SET = _IEC2_T6IE_MASK;
 
@@ -92,25 +92,25 @@ void TMR6_Stop (void)
     T6CONCLR = _T6CON_ON_MASK;
 }
 
-void TMR6_PeriodSet(uint16_t period)
+void TMR6_PeriodSet(uint32_t period)
 {
     PR6  = period;
 }
 
-uint16_t TMR6_PeriodGet(void)
+uint32_t TMR6_PeriodGet(void)
 {
-    return (uint16_t)PR6;
+    return PR6;
 }
 
-uint16_t TMR6_CounterGet(void)
+uint32_t TMR6_CounterGet(void)
 {
-    return (uint16_t)(TMR6);
+    return (TMR6);
 }
 
 
 uint32_t TMR6_FrequencyGet(void)
 {
-    return (6000000);
+    return (60000000);
 }
 
 void TIMER_6_InterruptHandler (void)

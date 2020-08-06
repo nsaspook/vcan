@@ -71,7 +71,7 @@ extern int32_t dycoOledFontCur;
 /* ------------------------------------------------------------ */
 
 uint8_t(*pfnDoRop)(uint8_t bPix, uint8_t bDsp, uint8_t mskPix);
-int modOledCur;
+int32_t modOledCur;
 
 /* ------------------------------------------------------------ */
 /*				Forward Declarations							*/
@@ -110,7 +110,6 @@ int32_t OledClampYco(int32_t yco);
 
 void OledMoveTo(int32_t xco, int32_t yco)
 {
-
 	/* Clamp the specified coordinates to the display surface
 	 */
 	xco = OledClampXco(xco);
@@ -126,7 +125,6 @@ void OledMoveTo(int32_t xco, int32_t yco)
 	 */
 	pbOledCur = &rgbOledBmp[((yco / 8) * ccolOledMax) + xco];
 	bnOledCur = yco & 7;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -149,10 +147,8 @@ void OledMoveTo(int32_t xco, int32_t yco)
 
 void OledGetPos(int32_t * pxco, int32_t * pyco)
 {
-
 	*pxco = xcoOledCur;
 	*pyco = ycoOledCur;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -174,9 +170,7 @@ void OledGetPos(int32_t * pxco, int32_t * pyco)
 
 void OledSetDrawColor(uint8_t clr)
 {
-
 	clrOledCur = clr & 0x01;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -199,9 +193,7 @@ void OledSetDrawColor(uint8_t clr)
 
 uint8_t * OledGetStdPattern(int32_t ipat)
 {
-
 	return rgbFillPat + 8 * ipat;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -224,9 +216,7 @@ uint8_t * OledGetStdPattern(int32_t ipat)
 
 void OledSetFillPattern(uint8_t * pbPat)
 {
-
 	pbOledPatCur = pbPat;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -248,7 +238,6 @@ void OledSetFillPattern(uint8_t * pbPat)
 
 void OledSetDrawMode(int32_t mod)
 {
-
 	modOledCur = mod;
 
 	switch (mod) {
@@ -272,7 +261,6 @@ void OledSetDrawMode(int32_t mod)
 		modOledCur = modOledSet;
 		pfnDoRop = OledRopSet;
 	}
-
 }
 
 /* ------------------------------------------------------------ */
@@ -294,9 +282,7 @@ void OledSetDrawMode(int32_t mod)
 
 int OledGetDrawMode(void)
 {
-
 	return modOledCur;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -319,9 +305,7 @@ int OledGetDrawMode(void)
 
 void OledDrawPixel(void)
 {
-
 	*pbOledCur = (*pfnDoRop)((clrOledCur << bnOledCur), *pbOledCur, (1 << bnOledCur));
-
 }
 
 /* ------------------------------------------------------------ */
@@ -343,9 +327,7 @@ void OledDrawPixel(void)
 
 uint8_t OledGetPixel(void)
 {
-
 	return(*pbOledCur & (1 << bnOledCur)) != 0 ? 1 : 0;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -369,12 +351,12 @@ uint8_t OledGetPixel(void)
 
 void OledLineTo(int32_t xco, int32_t yco)
 {
-	int err;
-	int del;
-	int lim;
-	int cpx;
-	int dxco;
-	int dyco;
+	int32_t err;
+	int32_t del;
+	int32_t lim;
+	int32_t cpx;
+	int32_t dxco;
+	int32_t dyco;
 	void (*pfnMajor)(void);
 	void (*pfnMinor)(void);
 
@@ -446,7 +428,6 @@ void OledLineTo(int32_t xco, int32_t yco)
 	 */
 	xcoOledCur = xco;
 	ycoOledCur = yco;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -470,8 +451,8 @@ void OledLineTo(int32_t xco, int32_t yco)
 
 void OledDrawRect(int32_t xco, int32_t yco)
 {
-	int xco1;
-	int yco1;
+	int32_t xco1;
+	int32_t yco1;
 
 	/* Clamp the point to be on the display.
 	 */
@@ -507,15 +488,14 @@ void OledDrawRect(int32_t xco, int32_t yco)
 
 void OledFillRect(int32_t xco, int32_t yco)
 {
-	int xcoLeft;
-	int xcoRight;
-	int ycoTop;
-	int ycoBottom;
-	int ibPat;
+	int32_t xcoLeft;
+	int32_t xcoRight;
+	int32_t ycoTop;
+	int32_t ycoBottom;
+	int32_t ibPat;
 	uint8_t * pbCur;
 	uint8_t * pbLeft;
-	int xcoCur;
-	//	uint8_t bTmp;
+	int32_t xcoCur;
 	uint8_t mskPat;
 
 	/* Clamp the point to be on the display.
@@ -577,13 +557,10 @@ void OledFillRect(int32_t xco, int32_t yco)
 				ibPat = 0;
 			}
 		}
-
 		/* Advance to the next horizontal stripe.
 		 */
 		ycoTop = 8 * ((ycoTop / 8) + 1);
-
 	}
-
 }
 
 /* ------------------------------------------------------------ */
@@ -611,18 +588,17 @@ void OledFillRect(int32_t xco, int32_t yco)
 
 void OledGetBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
 {
-	int xcoLeft;
-	int xcoRight;
-	int ycoTop;
-	int ycoBottom;
+	int32_t xcoLeft;
+	int32_t xcoRight;
+	int32_t ycoTop;
+	int32_t ycoBottom;
 	uint8_t * pbDspCur;
 	uint8_t * pbDspLeft;
 	uint8_t * pbBmpCur;
 	uint8_t * pbBmpLeft;
-	int xcoCur;
-	int bnAlign;
+	int32_t xcoCur;
+	int32_t bnAlign;
 	uint8_t mskEnd;
-	//	uint8_t bTmp;
 
 	/* Set up the four sides of the source rectangle.
 	 */
@@ -708,23 +684,21 @@ void OledGetBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
 
 void OledPutBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
 {
-	int xcoLeft;
-	int xcoRight;
-	int ycoTop;
-	int ycoBottom;
+	int32_t xcoLeft;
+	int32_t xcoRight;
+	int32_t ycoTop;
+	int32_t ycoBottom;
 	uint8_t * pbDspCur;
 	uint8_t * pbDspLeft;
 	uint8_t * pbBmpCur;
 	uint8_t * pbBmpLeft;
-	int xcoCur;
-	//	uint8_t bDsp;
+	int32_t xcoCur;
 	uint8_t bBmp;
 	uint8_t mskEnd;
 	uint8_t mskUpper;
 	uint8_t mskLower;
-	int bnAlign;
-	int fTop;
-	//	uint8_t bTmp;
+	int32_t bnAlign;
+	int32_t fTop;
 
 	/* Set up the four sides of the destination rectangle.
 	 */
@@ -796,9 +770,7 @@ void OledPutBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
 		pbDspLeft += ccolOledMax;
 		pbBmpLeft += dxco;
 		fTop = 0;
-
 	}
-
 }
 
 /* ------------------------------------------------------------ */
@@ -822,8 +794,6 @@ void OledPutBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
 void OledDrawChar(char ch)
 {
 	uint8_t * pbFont;
-	//	uint8_t * pbBmp;
-	//	int ib;
 
 	if ((ch & 0x80) != 0) {
 		return;
@@ -835,12 +805,9 @@ void OledDrawChar(char ch)
 		pbFont = pbOledFontCur + (ch - chOledUserMax) * cbOledChar;
 	}
 
-	//	pbBmp = pbOledCur;
-
 	OledPutBmp(dxcoOledFontCur, dycoOledFontCur, pbFont);
 
 	xcoOledCur += dxcoOledFontCur;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -863,7 +830,6 @@ void OledDrawChar(char ch)
 
 void OledDrawString(char * sz)
 {
-
 	while (*sz != '\0') {
 		OledDrawChar(*sz);
 		sz += 1;
@@ -888,9 +854,7 @@ void OledDrawString(char * sz)
 
 uint8_t OledRopSet(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
 {
-
 	return(bDsp & ~mskPix) | (bPix & mskPix);
-
 }
 
 /* ------------------------------------------------------------ */
@@ -909,9 +873,7 @@ uint8_t OledRopSet(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
 
 uint8_t OledRopOr(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
 {
-
 	return bDsp | (bPix & mskPix);
-
 }
 
 /* ------------------------------------------------------------ */
@@ -928,12 +890,9 @@ uint8_t OledRopOr(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
  **
  */
 
-uint8_t
-OledRopAnd(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
+uint8_t OledRopAnd(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
 {
-
 	return bDsp & (bPix & mskPix);
-
 }
 
 /* ------------------------------------------------------------ */
@@ -950,12 +909,9 @@ OledRopAnd(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
  **
  */
 
-uint8_t
-OledRopXor(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
+uint8_t OledRopXor(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
 {
-
 	return bDsp ^ (bPix & mskPix);
-
 }
 
 /* ------------------------------------------------------------ */
@@ -978,7 +934,6 @@ OledRopXor(uint8_t bPix, uint8_t bDsp, uint8_t mskPix)
 
 void OledMoveUp(void)
 {
-
 	/* Go up one bit position in the current byte.
 	 */
 	bnOledCur -= 1;
@@ -1018,7 +973,6 @@ void OledMoveUp(void)
 
 void OledMoveDown(void)
 {
-
 	/* Go down one bit position in the current byte.
 	 */
 	bnOledCur += 1;
@@ -1058,7 +1012,6 @@ void OledMoveDown(void)
 
 void OledMoveLeft(void)
 {
-
 	/* Are we at the left edge of the display already
 	 */
 	if (((pbOledCur - rgbOledBmp) & (ccolOledMax - 1)) == 0) {
@@ -1068,7 +1021,6 @@ void OledMoveLeft(void)
 	/* Not at the left edge, so go back one byte.
 	 */
 	pbOledCur -= 1;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -1091,7 +1043,6 @@ void OledMoveLeft(void)
 
 void OledMoveRight(void)
 {
-
 	/* Are we at the right edge of the display already
 	 */
 	if (((pbOledCur - rgbOledBmp) & (ccolOledMax - 1)) == (ccolOledMax - 1)) {
@@ -1101,7 +1052,6 @@ void OledMoveRight(void)
 	/* Not at the right edge, so go forward one byte
 	 */
 	pbOledCur += 1;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -1131,7 +1081,6 @@ int32_t OledClampXco(int32_t xco)
 	}
 
 	return xco;
-
 }
 
 /* ------------------------------------------------------------ */
@@ -1161,7 +1110,6 @@ int32_t OledClampYco(int32_t yco)
 	}
 
 	return yco;
-
 }
 
 /* ------------------------------------------------------------ */
