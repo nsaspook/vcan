@@ -57,26 +57,7 @@
 
 /* ------------------------------------------------------------ */
 
-enum {
-	cmdOledDisplayOn = 0xAF,
-	cmdOledDisplayOff = 0xAE,
-	cmdOledSegRemap = 0xA1, //map column 127 to SEG0
-	cmdOledComDir = 0xC8, //scan from COM[N-1] to COM0
-	cmdOledComConfig = 0xDA, //set COM hardware configuration
-	cmdOledComSeqLR = 0x20 //sequential COM, left/right remap enabled
-};
 
-enum {
-	d_seq_single_width = 1, d_seq_one_width = 4, d_seq_two_width = 5
-}; // command byte-width sizes
-
-struct oled_init_data {
-	uint32_t init_delay_msecs;
-	uint8_t d_off[d_seq_single_width];
-	uint8_t d_on[d_seq_single_width];
-	uint8_t d_charge_setup[d_seq_one_width];
-	uint8_t d_origin_memory[d_seq_two_width];
-};
 
 /* ------------------------------------------------------------ */
 /*				Global Variables								*/
@@ -491,7 +472,6 @@ void OledUpdate(void)
 {
 	int32_t ipag;
 	uint8_t* pb;
-	//	uint8_t TXbuffer[] = {0x22, 0x00, 0x00, 0x10};
 
 	pb = rgbOledBmp;
 
@@ -504,11 +484,7 @@ void OledUpdate(void)
 		 */
 		//set low nibble of column
 		//set high nibble of column
-		//		TXbuffer[1] = ipag;
 		lcd_moveto_xy(ipag, 0);
-		//		DRV_SPI_BufferAddWrite(SPIHandle, (uint8_t *) TXbuffer, sizeof(TXbuffer), 0, 0);
-		//		
-		//		prtDataCmd = 1;
 		/* Copy this memory page of display data.
 		 */
 		OledPutBuffer(ccolOledMax, pb);
