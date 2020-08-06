@@ -49,8 +49,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/adchs/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/adchs/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">414D698BBEE646A707B8A6468F57A1CB</GeneratedChecksum>
-          <UserChecksum dnOrder="6">414D698BBEE646A707B8A6468F57A1CB</UserChecksum>
+          <GeneratedChecksum dnOrder="5">27B8587365155118CFFCF24368A76804</GeneratedChecksum>
+          <UserChecksum dnOrder="6">27B8587365155118CFFCF24368A76804</UserChecksum>
         </File>
         <File dnOrder="5">
           <Type dnOrder="0">SOURCE</Type>
@@ -58,8 +58,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/clk/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/clk/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">FD3774C2B3E7E8BA46FF4E8B1C82FC3F</GeneratedChecksum>
-          <UserChecksum dnOrder="6">FD3774C2B3E7E8BA46FF4E8B1C82FC3F</UserChecksum>
+          <GeneratedChecksum dnOrder="5">BADA955BADEFB86E62EF1440E7128EE5</GeneratedChecksum>
+          <UserChecksum dnOrder="6">BADA955BADEFB86E62EF1440E7128EE5</UserChecksum>
         </File>
         <File dnOrder="6">
           <Type dnOrder="0">SOURCE</Type>
@@ -417,7 +417,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="5" key="PackageFilter" value="usb;cryptoauthlib;aws_cloud;wireless;crypto;gfx_apps;gfx;x2c;micrium_ucos3;audio;core;cryptoauthlib_apps;expresslogic_threadx;motor_control;csp;bt;touch;net;bootloader;bsp;aerospace;quick_docs;reference_apps;classb_sam_e5x_d5x;bootloader_apps_i2c;bootloader_apps_ethernet;bootloader_apps_usb;bootloader_apps_sdcard;bootloader_apps_uart;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="usb;cryptoauthlib;aws_cloud;wireless;crypto;gfx_apps;gfx;x2c;micrium_ucos3;audio;core;cryptoauthlib_apps;expresslogic_threadx;motor_control;csp;bt;touch;net;bootloader;bsp;aerospace;quick_docs;reference_apps;classb_sam_e5x_d5x;bootloader_apps_i2c;bootloader_apps_ethernet;bootloader_apps_usb;bootloader_apps_sdcard;bootloader_apps_uart;ethercat;"/>
       <Setting dnOrder="6" key="TRUSTZONE" value="false"/>
     </Settings>
   </Configurator>
