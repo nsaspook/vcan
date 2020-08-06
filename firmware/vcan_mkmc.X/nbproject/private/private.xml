@@ -13,6 +13,7 @@
             <file>file:/root/vcan/firmware/src/dogm-graphic.c</file>
             <file>file:/root/vcan/firmware/src/eadog.c</file>
             <file>file:/root/vcan/firmware/src/tests.h</file>
+            <file>file:/root/vcan/firmware/src/config/default/peripheral/spi/plib_spi3.c</file>
             <file>file:/root/vcan/firmware/src/OledDriver.h</file>
         </group>
     </open-files>

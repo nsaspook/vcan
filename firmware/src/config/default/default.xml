@@ -3123,7 +3123,7 @@
         </String>
         <String dnOrder="365" id="CONFIG_SYS_CLK_PBCLK3_FREQ">
           <Values dnOrder="0">
-            <User dnOrder="0" value="15000000"/>
+            <User dnOrder="0" value="60000000"/>
           </Values>
         </String>
         <String dnOrder="366" id="CONFIG_SYS_CLK_PBCLK4_FREQ">
@@ -3158,7 +3158,7 @@
         </Integer>
         <Integer dnOrder="372" id="CONFIG_SYS_CLK_PBDIV3">
           <Values dnOrder="0">
-            <User dnOrder="0" value="8"/>
+            <User dnOrder="0" value="2"/>
           </Values>
         </Integer>
         <Integer dnOrder="373" id="CONFIG_SYS_CLK_PBDIV4">
@@ -4447,7 +4447,7 @@
         </String>
         <String dnOrder="611" id="PB3DIV_VALUE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x8007"/>
+            <Dynamic dnOrder="0" id="core" value="0x8001"/>
           </Values>
         </String>
         <String dnOrder="612" id="PB4DIV_VALUE">
@@ -4703,7 +4703,7 @@
         </Boolean>
         <Integer dnOrder="662" id="SPI3_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="8000000"/>
+            <Dynamic dnOrder="0" id="core" value="60000000"/>
           </Values>
         </Integer>
         <Boolean dnOrder="663" id="SPI3_RX_INTERRUPT_ENABLE">
@@ -7168,49 +7168,42 @@
         </Integer>
         <Integer dnOrder="1" id="SPI_BRG_VALUE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="spi3" value="0"/>
+            <Dynamic dnOrder="0" id="spi3" value="3"/>
           </Values>
         </Integer>
-        <Comment dnOrder="2" id="SPI_CLOCK_ENABLE_COMMENT">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </Comment>
-        <Comment dnOrder="3" id="SPI_CLOCK_MODE_COMMENT">
+        <Comment dnOrder="2" id="SPI_CLOCK_MODE_COMMENT">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
               <Value dnOrder="0">***SPI&amp;#160;Mode&amp;#160;3&amp;#160;is&amp;#160;Selected***</Value>
             </String>
           </Attributes>
         </Comment>
-        <Hex dnOrder="4" id="SPI_DUMMY_DATA">
+        <Hex dnOrder="3" id="SPI_DUMMY_DATA">
           <Values dnOrder="0">
             <User dnOrder="0" value="255"/>
           </Values>
         </Hex>
-        <Boolean dnOrder="5" id="SPI_INTERRUPT_MODE">
+        <Boolean dnOrder="4" id="SPI_INTERRUPT_MODE">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <KeyValueSet dnOrder="6" id="SPI_MASTER_CLOCK">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="7" id="SPI_SPICON_CLK_PH">
+        <KeyValueSet dnOrder="5" id="SPI_MASTER_CLOCK">
           <Values dnOrder="0">
             <User dnOrder="0" value="1"/>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="8" id="SPI_SPICON_CLK_POL">
+        <KeyValueSet dnOrder="6" id="SPI_SPICON_CLK_PH">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="1"/>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="7" id="SPI_SPICON_CLK_POL">
           <Values dnOrder="0">
             <User dnOrder="0" value="0"/>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="9" id="SPI_SPICON_MSSEN">
+        <KeyValueSet dnOrder="8" id="SPI_SPICON_MSSEN">
           <Values dnOrder="0">
             <User dnOrder="0" value="1"/>
           </Values>
