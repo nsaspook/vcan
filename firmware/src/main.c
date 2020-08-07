@@ -168,6 +168,11 @@ void PWM_motor2(M_CTRL mmode)
 
 }
 
+void line_rot(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
+{
+	OledMoveTo((int32_t) x1, (int32_t) y1);
+	OledLineTo((int32_t) x2, (int32_t) y2);
+}
 // *****************************************************************************
 // *****************************************************************************
 // Section: Main Entry Point
@@ -179,6 +184,9 @@ int main(void)
 	char buffer[40];
 	uint8_t i;
 	double pi_current_error;
+	int32_t x2 = 50, x1 = 65, y1 = 46, xn1, yn1, xn2, yn2, r;
+	double theta1 = 0.0, theta2 = 120.0, theta3 = 240.0;
+	double ra, si, co;
 
 	//	struct tm Time = {0};
 
@@ -206,6 +214,7 @@ int main(void)
 	TMR6_CallbackRegister(timer_ms_tick, 0);
 	TMR6_Start();
 	StartTimer(TMR_BLINK, 1000);
+	StartTimer(TMR_LCD_UP, 10);
 
 	QEI1_Start();
 	QEI2_Start();
@@ -230,29 +239,75 @@ int main(void)
 	OledInit();
 	OledSetCharUpdate(0); // manual LCD screen updates for speed
 	while (true) {
-		sprintf(buffer, "%i", irow);
-		OledSetCursor(0, 0);
-		OledPutString("PIC32MK SPI");
-		OledSetCursor(0, 1);
-		OledPutString("DISPLAY DRV");
-		OledSetCursor(0, 2);
-		OledPutString(buffer);
-		OledSetCursor(0, 3);
-		OledPutString("DogS Driver ");
-		OledSetCursor(0, 4);
-		OledPutString("DogS Driver ");
-		OledSetCursor(0, 5);
-		OledPutString("DogS Driver ");
-		OledSetCursor(0, 6);
-		OledPutString("DogS Driver ");
-		OledSetCursor(0, 7);
-		OledPutString(buffer);
-		//		OledMoveTo(0, irow & 63);
-		//		OledDrawRect(63, 63);
-		//		OledMoveTo(0, irow & 63);
-		//		OledLineTo(63, irow & 63);
-		OledUpdate();
-		irow++;
+		if (TimerDone(TMR_LCD_UP)) {
+			StartTimer(TMR_LCD_UP, 15);
+			OledClearBuffer();
+			sprintf(buffer, "%i", irow);
+			OledSetCursor(0, 0);
+			//		OledPutString("PIC32MK SPI");
+			//		OledSetCursor(0, 1);
+			//		OledPutString("DISPLAY DRV");
+			//		OledSetCursor(0, 2);
+			//		OledPutString(buffer);
+			//		OledSetCursor(0, 3);
+			//		OledPutString("DogS Driver ");
+			//		OledSetCursor(0, 4);
+			//		OledPutString("DogS Driver ");
+			//		OledSetCursor(0, 5);
+			//		OledPutString("DogS Driver ");
+			//		OledSetCursor(0, 6);
+			//		OledPutString("DogS Driver ");
+			//		OledSetCursor(0, 7);
+			OledPutString(buffer);
+			//		OledMoveTo(0, irow & 63);
+			//		OledDrawRect(63, 63);
+
+			OledSetCursor(0, 1);
+			OledPutString("3PH VECTOR");
+			//Starting point
+			xn1 = x1;
+			yn1 = y1;
+
+			//Convert Degree into radian
+			r = x2 - x1;
+			ra = 0.0175 * theta1;
+			si = sin(ra);
+			co = cos(ra);
+			//second point
+			xn2 = x1 + r * co + 1;
+			yn2 = y1 + r * si + 1;
+
+			line_rot(xn1, yn1, xn2, yn2);
+			ra = 0.0175 * theta2;
+			si = sin(ra);
+			co = cos(ra);
+			//second point
+			xn2 = x1 + r * co + 1;
+			yn2 = y1 + r * si + 1;
+
+			line_rot(xn1, yn1, xn2, yn2);
+			ra = 0.0175 * theta3;
+			si = sin(ra);
+			co = cos(ra);
+			//second point
+			xn2 = x1 + r * co + 1;
+			yn2 = y1 + r * si + 1;
+
+			line_rot(xn1, yn1, xn2, yn2);
+			OledUpdate();
+
+			irow++;
+			theta1 = theta1 + 1.0; // rotate
+			if (theta1 > 360.0)
+				theta1 = 0.0;
+			theta2 = theta2 + 1.0; // rotate
+			if (theta2 > 360.0)
+				theta2 = 0.0;
+			theta3 = theta3 + 1.0; // rotate
+			if (theta3 > 360.0)
+				theta3 = 0.0;
+		}
+
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, 1000);
 			RESET_LED_Toggle();

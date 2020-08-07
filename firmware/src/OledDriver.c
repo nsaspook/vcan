@@ -37,7 +37,7 @@
 /*	01/04/2012(GeneA): Changed use of DelayMs to using standard delay	*/
 /*		function. Removed delay.h					*/
 /*	05/11/2017(FGB): convert XC32 and Harmony 2.0				*/
-/*										*/
+/*	08/01/2020(FGB): convert to Harmony 3.0 for pic32mk			*/
 /************************************************************************/
 
 
