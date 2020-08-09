@@ -297,13 +297,13 @@ int main(void)
 			OledUpdate();
 
 			irow++;
-			theta1 = theta1 + 1.0; // rotate
+			theta1 = theta1 + 1.5; // rotate
 			if (theta1 > 360.0)
 				theta1 = 0.0;
-			theta2 = theta2 + 1.0; // rotate
+			theta2 = theta2 + 1.25; // rotate
 			if (theta2 > 360.0)
 				theta2 = 0.0;
-			theta3 = theta3 + 1.0; // rotate
+			theta3 = theta3 + 2.0; // rotate
 			if (theta3 > 360.0)
 				theta3 = 0.0;
 		}
