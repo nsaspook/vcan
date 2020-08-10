@@ -272,8 +272,13 @@ void eaDogM_WriteString(char *strPtr)
 
 void eaDogM_WriteStringAtPos(const uint8_t r, const uint8_t c, char *strPtr)
 {
+#ifdef EDOGS
+	OledSetCursor(c, r);
+	OledPutString(strPtr);
+#else
 	send_lcd_cmd((EADOGM_CMD_DDRAM_ADDR + (r * EADOGM_COLSPAN) + c));
 	eaDogM_WriteString(strPtr);
+#endif
 }
 
 void eaDogM_WriteIntAtPos(uint8_t r, uint8_t c, uint8_t i)

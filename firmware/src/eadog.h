@@ -26,6 +26,7 @@ extern "C" {
 
 	//#define EDOGM
 #define EDOGS
+//#define EDOGS_DEMO
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -34,6 +35,8 @@ extern "C" {
 #include "device.h"
 #include "config/default/peripheral/spi/plib_spi_common.h"
 #include "config/default/peripheral/spi/plib_spi3.h"
+#include "OledDriver.h"
+#include "OledChar.h"
 
 #define LCD_CMD_MASK	0x01
 #define LCD_CMD_SET	0x100

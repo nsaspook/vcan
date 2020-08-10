@@ -57,7 +57,7 @@ SPI_OBJECT spi3Obj;
 #define SPI3_CON_ENHBUF                     (1 << _SPI3CON_ENHBUF_POSITION)
 #define SPI3_CON_MCLKSEL                    (0 << _SPI3CON_MCLKSEL_POSITION)
 #define SPI3_CON_MSSEN                      (0 << _SPI3CON_MSSEN_POSITION)
-#define SPI3_CON_SMP                        (0 << _SPI3CON_SMP_POSITION)
+#define SPI3_CON_SMP                        (1 << _SPI3CON_SMP_POSITION)
 
 void SPI3_Initialize ( void )
 {

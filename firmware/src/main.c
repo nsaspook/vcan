@@ -181,19 +181,15 @@ void line_rot(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
 
 int main(void)
 {
-	char buffer[40];
+	char buffer[80];
 	uint8_t i;
 	double pi_current_error;
-	int32_t x2 = 50, x1 = 65, y1 = 46, xn1, yn1, xn2, yn2, r;
-	double theta1 = 0.0, theta2 = 120.0, theta3 = 240.0;
-	double ra, si, co;
-
 	//	struct tm Time = {0};
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
 #ifdef EDOGM
-	SPI3_Initialize_edogm();
+	//	SPI3_Initialize_edogm();
 #endif
 #ifdef EDOGS
 	//	SPI3_Initialize_edogs();
@@ -231,13 +227,18 @@ int main(void)
 	eaDogM_CursorOff();
 #endif
 #ifdef EDOGS
-	uint32_t irow = 0;
-
 	SPI_EN1_Set();
 	wdtdelay(IS_DELAYPOWERUP); // > 400ms power up delay
 	lcd_init();
 	OledInit();
 	OledSetCharUpdate(0); // manual LCD screen updates for speed
+#ifdef EDOGS_DEMO
+	uint32_t irow = 0;
+	int32_t x2 = 50, x1 = 65, y1 = 46, xn1, yn1, xn2, yn2, r;
+	double theta1 = 0.0, theta2 = 120.0, theta3 = 240.0;
+	double ra, si, co;
+
+
 	while (true) {
 		if (TimerDone(TMR_LCD_UP)) {
 			StartTimer(TMR_LCD_UP, 15);
@@ -314,9 +315,11 @@ int main(void)
 		}
 	}
 #endif
+#endif
 
 	sprintf(buffer, "VCAN %s        ", build_date);
 	eaDogM_WriteStringAtPos(0, 0, buffer);
+	OledUpdate();
 	WaitMs(500);
 
 	/*
@@ -533,7 +536,8 @@ int main(void)
 				//sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u1ai, u1bi);
 				//				sprintf(buffer, "%3i %3i:%3i %3i         ", u1ai, u1bi, u2ai, u2bi);
 				sprintf(buffer, "%.2f:%.2f:%.2f         ", asin(m35_2.sin)*180.0 / PI * 2, asin(m35_3.sin)*180.0 / PI * 2, asin(m35_4.sin)*180.0 / PI * 2);
-				eaDogM_WriteStringAtPos(0, 0, buffer);
+				eaDogM_WriteStringAtPos(4, 0, buffer);
+				OledUpdate();
 				StartTimer(TMR_DISPLAY, 250);
 			}
 		}

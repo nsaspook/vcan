@@ -470,6 +470,7 @@ void OledClearBuffer(void)
 
 void OledUpdate(void)
 {
+#ifdef EDOGS
 	int32_t ipag;
 	uint8_t* pb;
 
@@ -490,6 +491,7 @@ void OledUpdate(void)
 		OledPutBuffer(ccolOledMax, pb);
 		pb += ccolOledMax;
 	}
+#endif
 }
 
 /* ------------------------------------------------------------ */
