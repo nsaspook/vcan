@@ -26,9 +26,9 @@ extern "C" {
 
 #define pos_gain	10
 
-#define hpwm_mid_duty	1800
-#define hpwm_mid_duty_f	1800.0
-#define hpwm_high_duty	3599
+#define hpwm_mid_duty	4000
+#define hpwm_mid_duty_f	4000.0
+#define hpwm_high_duty	7999
 #define hpwm_low_duty	1
 
 #define motor_error_stop	30
@@ -36,8 +36,8 @@ extern "C" {
 #define motor_error_knee	200
 
 
-#define duty_max	3600
-#define motor_volts	1600
+#define duty_max	7600
+#define motor_volts	3600
 
 	/*
 	 * angles to encoder counts
