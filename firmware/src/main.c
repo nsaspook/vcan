@@ -534,10 +534,12 @@ int main(void)
 				 * show some test results on the LCD screen
 				 */
 				//sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u1ai, u1bi);
-				sprintf(buffer, "%3i:%3i %3i         ", u1bi, u2ai, u2bi);
-				eaDogM_WriteStringAtPos(6, 0, buffer);
-//				sprintf(buffer, "%.2f:%.2f:%.2f         ", asin(m35_2.sin)*180.0 / PI * 2, asin(m35_3.sin)*180.0 / PI * 2, asin(m35_4.sin)*180.0 / PI * 2);
-//				eaDogM_WriteStringAtPos(4, 0, buffer);
+				sprintf(buffer, "%3i%3i%3i         ", u1bi, u2ai, u2bi);
+				eaDogM_WriteStringAtPos(4, 0, buffer);
+				sprintf(buffer, "%3i%3i%3i         ", hb_current(u1bi), hb_current(u2ai), hb_current(u2bi));
+				eaDogM_WriteStringAtPos(5, 0, buffer);
+				//				sprintf(buffer, "%.2f:%.2f:%.2f         ", asin(m35_2.sin)*180.0 / PI * 2, asin(m35_3.sin)*180.0 / PI * 2, asin(m35_4.sin)*180.0 / PI * 2);
+				//				eaDogM_WriteStringAtPos(4, 0, buffer);
 				OledUpdate();
 				StartTimer(TMR_DISPLAY, 250);
 			}

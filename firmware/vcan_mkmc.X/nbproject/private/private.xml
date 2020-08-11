@@ -3,18 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/fred/vcan/firmware/src/pid.h</file>
-            <file>file:/fred/vcan/firmware/src/eadog.h</file>
-            <file>file:/fred/vcan/firmware/src/OledChar.h</file>
-            <file>file:/fred/vcan/firmware/src/vcan.h</file>
-            <file>file:/fred/vcan/firmware/src/dogm-graphic.c</file>
-            <file>file:/fred/vcan/firmware/src/eadog.c</file>
-            <file>file:/fred/vcan/firmware/src/OledDriver.c</file>
-            <file>file:/fred/vcan/firmware/src/filters.c</file>
-            <file>file:/fred/vcan/firmware/src/pid.c</file>
-            <file>file:/fred/vcan/firmware/src/main.c</file>
-            <file>file:/fred/vcan/firmware/src/config/default/peripheral/spi/plib_spi_common.h</file>
-            <file>file:/fred/vcan/firmware/src/dogm-graphic.h</file>
+            <file>file:/root/vcan/firmware/src/OledChar.c</file>
+            <file>file:/root/vcan/firmware/src/adc_scan.c</file>
+            <file>file:/root/vcan/firmware/src/main.c</file>
+            <file>file:/root/vcan/firmware/src/OledGrph.c</file>
+            <file>file:/root/vcan/firmware/src/vcan.h</file>
+            <file>file:/root/vcan/firmware/src/filters.c</file>
+            <file>file:/root/vcan/firmware/src/pid.c</file>
+            <file>file:/root/vcan/firmware/src/adc_scan.h</file>
+            <file>file:/root/vcan/firmware/src/eadog.c</file>
+            <file>file:/root/vcan/firmware/src/OledDriver.h</file>
+            <file>file:/root/vcan/firmware/src/dogm-graphic.h</file>
+            <file>file:/root/vcan/firmware/src/m35qei.h</file>
+            <file>file:/root/vcan/firmware/src/freqgen.c</file>
+            <file>file:/root/vcan/firmware/src/OledDriver.c</file>
+            <file>file:/root/vcan/firmware/src/eadog.h</file>
+            <file>file:/root/vcan/firmware/src/dogm-graphic.c</file>
+            <file>file:/root/vcan/firmware/src/freqgen.h</file>
+            <file>file:/root/vcan/firmware/src/tests.h</file>
         </group>
     </open-files>
 </project-private>

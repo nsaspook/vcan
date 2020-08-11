@@ -52,10 +52,10 @@ void init_end_of_adc_scan(void)
 /*
  * take ADC shunt measurement, convert to milliamps
  */
-double hb_current(const int32_t adc_value)
+int32_t hb_current(const int32_t adc_value)
 {
-	double adc_step = ADC_REF / ADC_STEPS, result;
+	return adc_value*4;
+//	double adc_step = ADC_REF / ADC_STEPS;
 
-	result = ((double) adc_value * adc_step) * HB_SCALE;
-	return result;
+//	return (int32_t) (((double) adc_value * adc_step) * HB_SCALE);
 }
