@@ -216,6 +216,9 @@ int main(void)
 	QEI2_Start();
 	QEI3_Start();
 	m35_ptr = &m35_3;
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
 
 	//	RTCC_CallbackRegister(reset_led_blink, 1);
 	//	RTCC_TimeGet(&Time);
@@ -347,19 +350,11 @@ int main(void)
 	 * block-commutated 
 	 */
 	for (i = 0; i < 8; i++) {
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i & 0x7] >> 2)&0x1) * duty_max);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i & 0x7] >> 1)&0x1) * duty_max);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i & 0x7] >> 0)&0x1) * duty_max);
+		//		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i & 0x7] >> 2)&0x1) * 1);
+		//		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i & 0x7] >> 1)&0x1) * 1);
+		//		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i & 0x7] >> 0)&0x1) * 1);
 		switch (i) {
 		case 0:
-			/*
-			 * testing chop
-			 */
-			//			AUXCON2 = 0x3;
-			//			AUXCON3 = 0x3;
-			//			AUXCON4 = 0x3;
-			//			CHOPbits.CHOPCLK = 4;
-			//			CHOPbits.CHPCLKEN = 1;
 			MCPWM_Start();
 			WaitMs(900);
 			break;
@@ -542,6 +537,8 @@ int main(void)
 				eaDogM_WriteStringAtPos(4, 0, buffer);
 				sprintf(buffer, "%3i %3i %3i         ", hb_current(u1bi), hb_current(u2ai), hb_current(u2bi));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
+				sprintf(buffer, "%3i %3i %3i         ", m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
+				eaDogM_WriteStringAtPos(6, 0, buffer);
 				//				sprintf(buffer, "%.2f:%.2f:%.2f         ", asin(m35_2.sin)*180.0 / PI * 2, asin(m35_3.sin)*180.0 / PI * 2, asin(m35_4.sin)*180.0 / PI * 2);
 				//				eaDogM_WriteStringAtPos(4, 0, buffer);
 				OledUpdate();

@@ -31,8 +31,8 @@ extern "C" {
 
 #define hpwm_mid_duty	duty_max/2
 #define hpwm_mid_duty_f	duty_max/2.0
-#define hpwm_high_duty	duty_max-duty_safe
-#define hpwm_low_duty	duty_safe
+#define hpwm_high_duty	duty_max-1
+#define hpwm_low_duty	1
 
 #define motor_error_stop	5
 #define motor_error_coast	100

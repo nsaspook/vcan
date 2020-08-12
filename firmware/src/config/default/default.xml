@@ -5749,14 +5749,14 @@
         <Integer dnOrder="1" id="DTCOMP3__DTCOMP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </Integer>
         <Integer dnOrder="2" id="DTCOMP4__DTCOMP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </Integer>
@@ -6471,12 +6471,12 @@
         </Hex>
         <Hex dnOrder="132" id="MCPWM_PWMCON3">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="704"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="640"/>
           </Values>
         </Hex>
         <Hex dnOrder="133" id="MCPWM_PWMCON4">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="704"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="640"/>
           </Values>
         </Hex>
         <Hex dnOrder="134" id="MCPWM_PWMCON7">
@@ -6611,7 +6611,7 @@
             </Integer>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="6000"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <Integer dnOrder="154" id="PDC2__PDC">
@@ -6621,7 +6621,7 @@
             </Integer>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="6000"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <Integer dnOrder="155" id="PDC3__PDC">
@@ -6631,7 +6631,7 @@
             </Integer>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="6000"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <Integer dnOrder="156" id="PDC4__PDC">
@@ -6641,7 +6641,7 @@
             </Integer>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="6000"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <Integer dnOrder="157" id="PDC5__PDC">
@@ -6781,13 +6781,13 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="181" id="PWMCON3__DTC">
           <Values dnOrder="0">
-            <User dnOrder="0" value="3"/>
+            <User dnOrder="0" value="2"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="182" id="PWMCON3__DTCP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
@@ -6803,13 +6803,13 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="185" id="PWMCON4__DTC">
           <Values dnOrder="0">
-            <User dnOrder="0" value="3"/>
+            <User dnOrder="0" value="2"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="186" id="PWMCON4__DTCP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
@@ -7505,8 +7505,7 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
-    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
+    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="adchs" x="19" y="389"/>
         <ElementPosition dnOrder="1" id="core" x="198" y="49"/>
@@ -7524,5 +7523,6 @@
         <ElementPosition dnOrder="13" id="uart6" x="163" y="307"/>
       </ElementPositions>
     </ComponentGraph>
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>
