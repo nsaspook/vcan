@@ -57,7 +57,7 @@
         </Long>
         <KeyValueSet dnOrder="7" id="ADCCON3__ADCSEL">
           <Values dnOrder="0">
-            <User dnOrder="0" value="0"/>
+            <User dnOrder="0" value="3"/>
           </Values>
         </KeyValueSet>
         <Long dnOrder="8" id="ADCCON3__CONCLKDIV">
@@ -67,7 +67,7 @@
         </Long>
         <KeyValueSet dnOrder="9" id="ADCCON3__VREFSEL">
           <Values dnOrder="0">
-            <User dnOrder="0" value="3"/>
+            <User dnOrder="0" value="1"/>
           </Values>
         </KeyValueSet>
         <Boolean dnOrder="10" id="ADCCSS1__CSS0">
@@ -501,7 +501,7 @@
         </Hex>
         <Hex dnOrder="69" id="ADCHS_ADCCON3">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="989880320"/>
+            <Dynamic dnOrder="0" id="adchs" value="4211089408"/>
           </Values>
         </Hex>
         <Hex dnOrder="70" id="ADCHS_ADCCSS1">
@@ -777,12 +777,12 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="62.5"/>
+            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
           </Values>
         </Float>
         <Float dnOrder="115" id="ADCHS_CONV_RATE1">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="62.5"/>
+            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
           </Values>
         </Float>
         <Float dnOrder="116" id="ADCHS_CONV_RATE2">
@@ -792,7 +792,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="62.5"/>
+            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
           </Values>
         </Float>
         <Float dnOrder="117" id="ADCHS_CONV_RATE3">
@@ -802,7 +802,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="62.5"/>
+            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
           </Values>
         </Float>
         <Float dnOrder="118" id="ADCHS_CONV_RATE4">
@@ -812,7 +812,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="62.5"/>
+            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
           </Values>
         </Float>
         <Float dnOrder="119" id="ADCHS_CONV_RATE5">
@@ -822,12 +822,12 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="62.5"/>
+            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
           </Values>
         </Float>
         <Float dnOrder="120" id="ADCHS_CONV_RATE7">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="62.5"/>
+            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
           </Values>
         </Float>
         <Hex dnOrder="121" id="ADCHS_IEC0">
@@ -852,12 +852,12 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="1000.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
           </Values>
         </Float>
         <Float dnOrder="125" id="ADCHS_TADC1">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="1000.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
           </Values>
         </Float>
         <Float dnOrder="126" id="ADCHS_TADC2">
@@ -867,7 +867,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="1000.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
           </Values>
         </Float>
         <Float dnOrder="127" id="ADCHS_TADC3">
@@ -877,7 +877,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="1000.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
           </Values>
         </Float>
         <Float dnOrder="128" id="ADCHS_TADC4">
@@ -887,7 +887,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="1000.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
           </Values>
         </Float>
         <Float dnOrder="129" id="ADCHS_TADC5">
@@ -897,22 +897,22 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="1000.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
           </Values>
         </Float>
         <Float dnOrder="130" id="ADCHS_TADC7">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="1000.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
           </Values>
         </Float>
         <Float dnOrder="131" id="ADCHS_TCLK">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="16.666666"/>
+            <Dynamic dnOrder="0" id="adchs" value="8.333333"/>
           </Values>
         </Float>
         <Float dnOrder="132" id="ADCHS_TQ">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="1000.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
           </Values>
         </Float>
         <Boolean dnOrder="133" id="ADCIMCON1__DIFF1">
@@ -1307,7 +1307,7 @@
         </Boolean>
         <Integer dnOrder="1" id="ADCHS_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="60000000"/>
+            <Dynamic dnOrder="0" id="core" value="120000000"/>
           </Values>
         </Integer>
         <Boolean dnOrder="2" id="ADC_DATA11_INTERRUPT_ENABLE">
@@ -6187,21 +6187,21 @@
         <Comment dnOrder="83" id="MCPWM_FREQ_CH2">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;7500.0&amp;#160;Hz&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;10000.0&amp;#160;Hz&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
         <Comment dnOrder="84" id="MCPWM_FREQ_CH3">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;7500.0&amp;#160;Hz&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;10000.0&amp;#160;Hz&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
         <Comment dnOrder="85" id="MCPWM_FREQ_CH4">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;7500.0&amp;#160;Hz&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;PWM&amp;#160;Frequency&amp;#160;is&amp;#160;10000.0&amp;#160;Hz&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
@@ -6406,17 +6406,17 @@
         </Integer>
         <Integer dnOrder="119" id="MCPWM_PERIOD_CH2">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="8000"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="12000"/>
           </Values>
         </Integer>
         <Integer dnOrder="120" id="MCPWM_PERIOD_CH3">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="8000"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="12000"/>
           </Values>
         </Integer>
         <Integer dnOrder="121" id="MCPWM_PERIOD_CH4">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="8000"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="12000"/>
           </Values>
         </Integer>
         <Integer dnOrder="122" id="MCPWM_PERIOD_CH5">
@@ -6466,17 +6466,17 @@
         </Hex>
         <Hex dnOrder="131" id="MCPWM_PWMCON2">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="1664"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="640"/>
           </Values>
         </Hex>
         <Hex dnOrder="132" id="MCPWM_PWMCON3">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="1728"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="704"/>
           </Values>
         </Hex>
         <Hex dnOrder="133" id="MCPWM_PWMCON4">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="1728"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="704"/>
           </Values>
         </Hex>
         <Hex dnOrder="134" id="MCPWM_PWMCON7">
@@ -6617,31 +6617,31 @@
         <Integer dnOrder="154" id="PDC2__PDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">8000</Value>
+              <Value dnOrder="0">12000</Value>
             </Integer>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="4000"/>
+            <User dnOrder="0" value="6000"/>
           </Values>
         </Integer>
         <Integer dnOrder="155" id="PDC3__PDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">8000</Value>
+              <Value dnOrder="0">12000</Value>
             </Integer>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="4000"/>
+            <User dnOrder="0" value="6000"/>
           </Values>
         </Integer>
         <Integer dnOrder="156" id="PDC4__PDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">8000</Value>
+              <Value dnOrder="0">12000</Value>
             </Integer>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="4000"/>
+            <User dnOrder="0" value="6000"/>
           </Values>
         </Integer>
         <Integer dnOrder="157" id="PDC5__PDC">
@@ -6691,17 +6691,17 @@
         </Integer>
         <Integer dnOrder="164" id="PHASE2__PHASE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="8000"/>
+            <User dnOrder="0" value="12000"/>
           </Values>
         </Integer>
         <Integer dnOrder="165" id="PHASE3__PHASE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="8000"/>
+            <User dnOrder="0" value="12000"/>
           </Values>
         </Integer>
         <Integer dnOrder="166" id="PHASE4__PHASE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="8000"/>
+            <User dnOrder="0" value="12000"/>
           </Values>
         </Integer>
         <Integer dnOrder="167" id="PHASE7__PHASE">
@@ -6771,7 +6771,7 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="179" id="PWMCON2__ECAM">
           <Values dnOrder="0">
-            <User dnOrder="0" value="1"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="180" id="PWMCON2__ITB">
@@ -6793,7 +6793,7 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="183" id="PWMCON3__ECAM">
           <Values dnOrder="0">
-            <User dnOrder="0" value="1"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="184" id="PWMCON3__ITB">
@@ -6815,7 +6815,7 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="187" id="PWMCON4__ECAM">
           <Values dnOrder="0">
-            <User dnOrder="0" value="1"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="188" id="PWMCON4__ITB">
@@ -6934,21 +6934,21 @@
         <Integer dnOrder="209" id="SDC2__SDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">8000</Value>
+              <Value dnOrder="0">12000</Value>
             </Integer>
           </Attributes>
         </Integer>
         <Integer dnOrder="210" id="SDC3__SDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">8000</Value>
+              <Value dnOrder="0">12000</Value>
             </Integer>
           </Attributes>
         </Integer>
         <Integer dnOrder="211" id="SDC4__SDC">
           <Attributes dnOrder="0">
             <Integer dnOrder="0" id="max">
-              <Value dnOrder="0">8000</Value>
+              <Value dnOrder="0">12000</Value>
             </Integer>
           </Attributes>
         </Integer>

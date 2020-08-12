@@ -24,20 +24,21 @@ extern "C" {
 #define error_gain	1
 #define herror_gain	1
 
-#define pos_gain	10
+#define pos_gain	1
 
-#define hpwm_mid_duty	4000
-#define hpwm_mid_duty_f	4000.0
-#define hpwm_high_duty	7999
-#define hpwm_low_duty	1
+#define duty_max	12000
+#define	duty_safe	duty_max/8
 
-#define motor_error_stop	30
+#define hpwm_mid_duty	duty_max/2
+#define hpwm_mid_duty_f	duty_max/2.0
+#define hpwm_high_duty	duty_max-duty_safe
+#define hpwm_low_duty	duty_safe
+
+#define motor_error_stop	5
 #define motor_error_coast	100
 #define motor_error_knee	200
 
-
-#define duty_max	7600
-#define motor_volts	3600
+#define motor_volts	duty_max/4 // limits amount of current at max torque
 
 	/*
 	 * angles to encoder counts

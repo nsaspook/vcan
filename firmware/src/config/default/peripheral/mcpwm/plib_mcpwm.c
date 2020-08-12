@@ -125,7 +125,7 @@ void MCPWM_Initialize (void)
     /* PWMCON2 register  */
     /*  MTBS   = 0 */
     /*  PTDIR  =  0 */
-    /*  ECAM   =  1 */
+    /*  ECAM   =  0 */
     /*  DTCP   =  0 */
     /*  DTC    =  2 */
     /*  ITB    = 1 */
@@ -134,7 +134,7 @@ void MCPWM_Initialize (void)
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON2 = 0x680;
+    PWMCON2 = 0x280;
 
     /* IOCON2 register  */
     /*  SWAP    = 0*/
@@ -151,9 +151,9 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 15  */
     IOCON2 = 0x3c2fc43c;
 
-    PDC2 = 4000;
+    PDC2 = 6000;
     SDC2 = 500;
-    PHASE2 = 8000;
+    PHASE2 = 12000;
 
     /* Dead Time */
     DTR2 = 75;
@@ -180,7 +180,7 @@ void MCPWM_Initialize (void)
     /* PWMCON3 register  */
     /*  MTBS   = 0 */
     /*  PTDIR  =  0 */
-    /*  ECAM   =  1 */
+    /*  ECAM   =  0 */
     /*  DTCP   =  0 */
     /*  DTC    =  3 */
     /*  ITB    = 1 */
@@ -189,7 +189,7 @@ void MCPWM_Initialize (void)
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON3 = 0x6c0;
+    PWMCON3 = 0x2c0;
 
     /* IOCON3 register  */
     /*  SWAP    = 0*/
@@ -206,9 +206,9 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 0  */
     IOCON3 = 0x3c400;
 
-    PDC3 = 4000;
+    PDC3 = 6000;
     SDC3 = 500;
-    PHASE3 = 8000;
+    PHASE3 = 12000;
 
     /* Dead Time */
     DTR3 = 75;
@@ -235,7 +235,7 @@ void MCPWM_Initialize (void)
     /* PWMCON4 register  */
     /*  MTBS   = 0 */
     /*  PTDIR  =  0 */
-    /*  ECAM   =  1 */
+    /*  ECAM   =  0 */
     /*  DTCP   =  0 */
     /*  DTC    =  3 */
     /*  ITB    = 1 */
@@ -244,7 +244,7 @@ void MCPWM_Initialize (void)
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON4 = 0x6c0;
+    PWMCON4 = 0x2c0;
 
     /* IOCON4 register  */
     /*  SWAP    = 0*/
@@ -261,9 +261,9 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 15  */
     IOCON4 = 0x3c2bc400;
 
-    PDC4 = 4000;
+    PDC4 = 6000;
     SDC4 = 500;
-    PHASE4 = 8000;
+    PHASE4 = 12000;
 
     /* Dead Time */
     DTR4 = 75;

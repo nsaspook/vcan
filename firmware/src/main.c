@@ -98,10 +98,10 @@ m35_4 = {
 *m35_ptr;
 
 struct SPid current_pi = {
-	.iMax = 100.0,
-	.iMin = -100.0,
-	.pGain = 2.0,
-	.iGain = 0.005,
+	.iMax = 1000.0,
+	.iMin = -1000.0,
+	.pGain = 4.0,
+	.iGain = 0.8,
 };
 
 V_STATE vcan_state = V_init;
@@ -383,8 +383,12 @@ int main(void)
 			eaDogM_WriteStringAtPos(1, 0, buffer);
 			break;
 		}
+		OledUpdate();
 		WaitMs(100);
 	}
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
 	WaitMs(2000);
 
 	vcan_state = V_home;
@@ -462,7 +466,7 @@ int main(void)
 			if (abs(m35_2.error) < motor_error_stop) {
 				m35_4.current = 50;
 			} else {
-				if (abs(m35_2.error) > motor_error_stop * 2) {
+				if (abs(m35_2.error) > motor_error_stop) {
 					if (!m35_4.speed--) {
 						phase_duty(&m35_2, m35_4.current, m_speed);
 						phase_duty(&m35_3, m35_4.current, m_speed);
@@ -527,16 +531,16 @@ int main(void)
 				sprintf(buffer, "C %5i:%i      ", m35_ptr->pos, m35_2.error);
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_2;
-				sprintf(buffer, "C %5i:%i:%i      ", m35_ptr->pos, m35_ptr->vel, m35_2.indexcnt >> 10);
+				sprintf(buffer, "C %4i:%i:%i      ", m35_ptr->pos, m35_ptr->vel, m35_2.indexcnt >> 10);
 				eaDogM_WriteStringAtPos(2, 0, buffer);
 				m35_ptr = &m35_3;
 				/*
 				 * show some test results on the LCD screen
 				 */
 				//sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u1ai, u1bi);
-				sprintf(buffer, "%3i%3i%3i         ", u1bi, u2ai, u2bi);
+				sprintf(buffer, "%3i %3i %3i         ", u1bi, u2ai, u2bi);
 				eaDogM_WriteStringAtPos(4, 0, buffer);
-				sprintf(buffer, "%3i%3i%3i         ", hb_current(u1bi), hb_current(u2ai), hb_current(u2bi));
+				sprintf(buffer, "%3i %3i %3i         ", hb_current(u1bi), hb_current(u2ai), hb_current(u2bi));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
 				//				sprintf(buffer, "%.2f:%.2f:%.2f         ", asin(m35_2.sin)*180.0 / PI * 2, asin(m35_3.sin)*180.0 / PI * 2, asin(m35_4.sin)*180.0 / PI * 2);
 				//				eaDogM_WriteStringAtPos(4, 0, buffer);
