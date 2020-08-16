@@ -15,8 +15,8 @@ extern "C" {
 
 #define sine_res	360
 #define sinea		0
-#define	sineb		120
-#define sinec		240
+#define	sineb		240
+#define sinec		120
 
 	/*
 	 * PI limits

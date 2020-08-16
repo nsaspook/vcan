@@ -11,7 +11,7 @@ void sine_table(void)
 	int I;
 
 	for (I = 0; I < sine_res; I++) {
-		sine_const[I] = sin(((double) I * PI * 2.0) / (double) sine_res);
+		sine_const[I] = sin((PI * 2.0 * (double) I) / (double) sine_res);
 	}
 }
 
@@ -20,11 +20,11 @@ void sine_table(void)
  */
 int32_t phase_duty_table(struct QEI_DATA * const phase, const double mag)
 {
-	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sine_const[phase->sine_steps]));
-
 	if (++phase->sine_steps >= sine_res) {
 		phase->sine_steps = 0;
 	}
+
+	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sine_const[phase->sine_steps]));
 
 	if (phase->duty > hpwm_high_duty) {
 		phase->duty = hpwm_high_duty;

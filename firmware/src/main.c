@@ -24,10 +24,10 @@
 
 /*
  * 26-bit Electrical angles and mechanical angles
- * 
+ *
  * Velocity Calculation from each rising edge of one phase of the Quadrature Encoder
- * 3-phase sinusoidal commutation 
- * 
+ * 3-phase sinusoidal commutation
+ *
  * Sinusoidal Commutation of a Brushless Motor
 To fully optimize the conversion of current into shaft torque, the amplifier needs to vary
 the applied current I based on a precise measurement of ?. The torque equation for the
@@ -47,8 +47,7 @@ IC = M * sin (? + 240)
  */
 
 
-#include <proc/p32mk1024mcf100.h>
-
+#include "m35qei.h"
 #include "vcan.h"
 #include "dio.h"
 #include "adc_scan.h"
@@ -345,9 +344,9 @@ int main(void)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
 	/*
 	 * Bang-Bang initialization
-	 * 
+	 *
 	 * move to locked rotor position
-	 * block-commutated 
+	 * block-commutated
 	 */
 	for (i = 0; i < 8; i++) {
 		//		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i & 0x7] >> 2)&0x1) * 1);

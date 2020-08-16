@@ -1737,7 +1737,7 @@
         </String>
         <String dnOrder="87" id="BSP_PIN_22_PU">
           <Values dnOrder="0">
-            <User dnOrder="0" value="True"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="88" id="BSP_PIN_23_FUNCTION_TYPE">
@@ -1782,12 +1782,12 @@
         </String>
         <String dnOrder="96" id="BSP_PIN_25_PD">
           <Values dnOrder="0">
-            <User dnOrder="0" value=""/>
+            <User dnOrder="0" value="True"/>
           </Values>
         </String>
         <String dnOrder="97" id="BSP_PIN_25_PU">
           <Values dnOrder="0">
-            <User dnOrder="0" value="True"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="98" id="BSP_PIN_26_DIR">
@@ -1892,12 +1892,12 @@
         </String>
         <String dnOrder="118" id="BSP_PIN_33_PD">
           <Values dnOrder="0">
-            <User dnOrder="0" value=""/>
+            <User dnOrder="0" value="True"/>
           </Values>
         </String>
         <String dnOrder="119" id="BSP_PIN_33_PU">
           <Values dnOrder="0">
-            <User dnOrder="0" value="True"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="120" id="BSP_PIN_34_DIR">
@@ -2362,7 +2362,7 @@
         </String>
         <String dnOrder="212" id="BSP_PIN_66_PU">
           <Values dnOrder="0">
-            <User dnOrder="0" value="True"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="213" id="BSP_PIN_67_FUNCTION_TYPE">
@@ -2467,7 +2467,7 @@
         </String>
         <String dnOrder="233" id="BSP_PIN_70_PU">
           <Values dnOrder="0">
-            <User dnOrder="0" value="True"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="234" id="BSP_PIN_71_FUNCTION_TYPE">
@@ -2482,12 +2482,12 @@
         </String>
         <String dnOrder="236" id="BSP_PIN_71_PD">
           <Values dnOrder="0">
-            <User dnOrder="0" value=""/>
+            <User dnOrder="0" value="True"/>
           </Values>
         </String>
         <String dnOrder="237" id="BSP_PIN_71_PU">
           <Values dnOrder="0">
-            <User dnOrder="0" value="True"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="238" id="BSP_PIN_72_FUNCTION_TYPE">
@@ -4838,7 +4838,7 @@
         </Hex>
         <Hex dnOrder="688" id="SYS_PORT_A_CNPU">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="16385"/>
+            <Dynamic dnOrder="0" id="core" value="0"/>
           </Values>
         </Hex>
         <Hex dnOrder="689" id="SYS_PORT_A_LAT">
@@ -4859,12 +4859,12 @@
         </Hex>
         <Hex dnOrder="692" id="SYS_PORT_B_CNPD">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="16"/>
+            <Dynamic dnOrder="0" id="core" value="18"/>
           </Values>
         </Hex>
         <Hex dnOrder="693" id="SYS_PORT_B_CNPU">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="194"/>
+            <Dynamic dnOrder="0" id="core" value="128"/>
           </Values>
         </Hex>
         <Hex dnOrder="694" id="SYS_PORT_B_LAT">
@@ -4884,12 +4884,12 @@
         </Hex>
         <Hex dnOrder="697" id="SYS_PORT_C_CNPD">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0" id="core" value="1026"/>
           </Values>
         </Hex>
         <Hex dnOrder="698" id="SYS_PORT_C_CNPU">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="1026"/>
+            <Dynamic dnOrder="0" id="core" value="0"/>
           </Values>
         </Hex>
         <Hex dnOrder="699" id="SYS_PORT_C_LAT">

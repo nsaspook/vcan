@@ -85,8 +85,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/gpio/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/gpio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">484C85909E53F74A130C9A5BCB5CE8FB</GeneratedChecksum>
-          <UserChecksum dnOrder="6">484C85909E53F74A130C9A5BCB5CE8FB</UserChecksum>
+          <GeneratedChecksum dnOrder="5">8C6E0BF2D1A0FE7FD6B21404B727CAED</GeneratedChecksum>
+          <UserChecksum dnOrder="6">8C6E0BF2D1A0FE7FD6B21404B727CAED</UserChecksum>
         </File>
         <File dnOrder="9">
           <Type dnOrder="0">SOURCE</Type>
