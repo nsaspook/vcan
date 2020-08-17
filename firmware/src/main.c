@@ -97,10 +97,10 @@ m35_4 = {
 *m35_ptr;
 
 struct SPid current_pi = {
-	.iMax = 1000.0,
-	.iMin = -1000.0,
-	.pGain = 4.0,
-	.iGain = 0.8,
+	.iMax = 4000.0,
+	.iMin = -4000.0,
+	.pGain = 2.0,
+	.iGain = 1.0,
 };
 
 V_STATE vcan_state = V_init;
@@ -215,9 +215,9 @@ int main(void)
 	QEI2_Start();
 	QEI3_Start();
 	m35_ptr = &m35_3;
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, duty_max);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, duty_max);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, duty_max);
 
 	//	RTCC_CallbackRegister(reset_led_blink, 1);
 	//	RTCC_TimeGet(&Time);
@@ -343,15 +343,21 @@ int main(void)
 
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
 	/*
+	 * enable motor channels
+	 */
+	U1_EN_Set();
+	U2_EN_Set();
+
+	/*
 	 * Bang-Bang initialization
 	 *
 	 * move to locked rotor position
 	 * block-commutated
 	 */
 	for (i = 0; i < 8; i++) {
-		//		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i & 0x7] >> 2)&0x1) * 1);
-		//		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i & 0x7] >> 1)&0x1) * 1);
-		//		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i & 0x7] >> 0)&0x1) * 1);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i & 0x7] >> 2)&0x1) * hpwm_mid_duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i & 0x7] >> 1)&0x1) * hpwm_mid_duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i & 0x7] >> 0)&0x1) * hpwm_mid_duty);
 		switch (i) {
 		case 0:
 			MCPWM_Start();

@@ -38,7 +38,7 @@ extern "C" {
 #define motor_error_coast	100
 #define motor_error_knee	200
 
-#define motor_volts	duty_max/4 // limits amount of current at max torque
+#define motor_volts	3000 // limits amount of current at max torque
 
 	/*
 	 * angles to encoder counts
