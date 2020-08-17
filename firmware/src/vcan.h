@@ -21,7 +21,7 @@ extern "C" {
 #define SR240		24000
 #define PHASE_INC	(256 * 65536) / SAMPLERATE
 
-#define MOTOR_SPEED	1000
+#define MOTOR_SPEED	1
 #define MBIAS		0
 
 #define ENCODER_PULSES_PER_REV	327680
