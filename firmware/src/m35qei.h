@@ -38,8 +38,8 @@ extern "C" {
 #define motor_error_coast	100
 #define motor_error_knee	200
 
-	//#define motor_volts	3000 // limits amount of current at max torque, TI motor
-#define motor_volts	5000 // limits amount of current at max torque, MCHP motor
+#define motor_volts	3000 // limits amount of current at max torque, TI motor
+	//#define motor_volts	5000 // limits amount of current at max torque, MCHP motor
 
 	/*
 	 * angles to encoder counts

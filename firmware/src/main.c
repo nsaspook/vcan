@@ -46,6 +46,11 @@ IC = M * sin (? + 240)
  * https://www.switchcraft.org/learning/2017/3/15/space-vector-pwm-intro
  */
 
+/*
+ * PIC32MK hardware
+ * timer 2	motor current PID 1.0ms
+ * timer 6	software timer updates 0.5ms
+ */
 
 #include "m35qei.h"
 #include "vcan.h"

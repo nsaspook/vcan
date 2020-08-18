@@ -61,6 +61,7 @@
 #include "peripheral/qei/plib_qei3.h"
 #include "peripheral/uart/plib_uart2.h"
 #include "peripheral/eeprom/plib_eeprom.h"
+#include "peripheral/tmr/plib_tmr2.h"
 #include "peripheral/mcpwm/plib_mcpwm.h"
 #include "peripheral/rtcc/plib_rtcc.h"
 

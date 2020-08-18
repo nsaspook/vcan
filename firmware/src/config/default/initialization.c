@@ -204,6 +204,8 @@ void SYS_Initialize ( void* data )
 
     EEPROM_Initialize();
 
+    TMR2_Initialize();
+
     MCPWM_Initialize();
 
     RTCC_Initialize();
