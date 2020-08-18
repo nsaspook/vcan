@@ -1917,7 +1917,7 @@
         </String>
         <String dnOrder="123" id="BSP_PIN_34_LAT">
           <Values dnOrder="0">
-            <User dnOrder="0" value=""/>
+            <User dnOrder="0" value="High"/>
           </Values>
         </String>
         <String dnOrder="124" id="BSP_PIN_34_MODE">
@@ -4929,7 +4929,7 @@
         </Hex>
         <Hex dnOrder="706" id="SYS_PORT_C_LAT">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="10240"/>
+            <Dynamic dnOrder="0" id="core" value="10244"/>
           </Values>
         </Hex>
         <Hex dnOrder="707" id="SYS_PORT_C_TRIS">

@@ -33,6 +33,7 @@
 /*																		*/
 /************************************************************************/
 #include <stdint.h>
+#include "dogm-graphic.h"
 
 #if !defined(OLEDDRIVER_INC)
 #define	OLEDDRIVER_INC
@@ -40,12 +41,19 @@
 /* ------------------------------------------------------------ */
 /*					Miscellaneous Declarations					*/
 /* ------------------------------------------------------------ */
+#if DISPLAY_TYPE == 240                 // Autor: Robert Steigemann
+#define	cbOledDispMax		30720		//max number of bytes in display buffer
+#define	ccolOledMax		240		//number of display columns
+#define	crowOledMax		128		//number of display rows
+#define	cpagOledMax		16		//number of display memory pages
+#endif
 
+#if DISPLAY_TYPE == 102
 #define	cbOledDispMax		816		//max number of bytes in display buffer
-
 #define	ccolOledMax		102		//number of display columns
 #define	crowOledMax		64		//number of display rows
 #define	cpagOledMax		8		//number of display memory pages
+#endif
 
 #define	cbOledChar		8		//font glyph definitions is 8 bytes long
 #define	chOledUserMax		0x20	//number of character defs in user font table

@@ -122,8 +122,8 @@ void lcd_move_xy(int8_t pages, int16_t columns)
  */
 void lcd_data(uint8_t data)
 {
-	LCD_SELECT();
 	LCD_DRAM();
+	LCD_SELECT();
 	SPI1_Exchange8bit(data);
 	LCD_UNSELECT();
 	lcd_inc_column(1);
@@ -135,8 +135,9 @@ void lcd_data(uint8_t data)
  */
 void lcd_command(uint8_t cmd)
 {
-	LCD_SELECT();
 	LCD_CMD();
+	LCD_SELECT();
+
 	SPI1_Exchange8bit(cmd);
 	LCD_UNSELECT();
 }
@@ -276,10 +277,37 @@ void lcd_set_contrast(uint8_t value)
 void lcd_init(void)
 {
 	//Load settings
+#if DISPLAY_TYPE == 2400
+	BACKLIGHT_Clear();
+	WaitMs(2);
+	BACKLIGHT_Set();
+	WaitMs(150);
+	BACKLIGHT_Clear();
+	WaitMs(2);
+	BACKLIGHT_Set();
+	WaitMs(150);
+	lcd_command(0xF1); //last COM electrode
+	lcd_command(0x7F); //128-1 = 127
+	lcd_command(0xF2); //Display start line
+	lcd_command(0x00); //0
+	lcd_command(0xF3); //Display end line
+	lcd_command(0x7F); //0
+
+	LCD_SET_POTI(0x8F); // set Contrast to mid range lvl
+	LCD_SET_MAPPING_CTRL(2); // set mapping control to "bottom view"
+
+
+	lcd_command(0xA3); //9.4K per second line rate
+	lcd_command(0x25); //Set temp. comp. to -0.1%/?C
+	lcd_command(0xA9); //Enable Display
+	lcd_command(0xD1); //in Black and white mode
+#endif
 #if DISPLAY_TYPE == 240
-	LCD_SYSTEM_RESET; // software reset
-	wdtdelay(IS_DELAYLONG);
-	//_delay_ms(5);                      // Gib dem Display ein bisschen Zeit für den Reset
+//	LCD_SYSTEM_RESET; // software reset
+	BACKLIGHT_Clear();
+	WaitMs(2);
+	BACKLIGHT_Set();
+	WaitMs(150);
 	LCD_SET_COM_END(127); // set last COM electrode
 	LCD_SET_PARTIAL_DISPLAY(0, 127); // set partial display start and end
 	LCD_SET_POTI(0x8F); // set Contrast to mid range lvl

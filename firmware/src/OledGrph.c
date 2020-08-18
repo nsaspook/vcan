@@ -41,7 +41,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
-
+#include "display_type.h"
 #include "OledDriver.h"
 
 /* ------------------------------------------------------------ */

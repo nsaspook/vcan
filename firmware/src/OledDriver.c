@@ -44,7 +44,8 @@
 /* ------------------------------------------------------------ */
 /*				Include File Definitions	*/
 /* ------------------------------------------------------------ */
-
+ 
+#include "display_type.h"
 #include "OledDriver.h"
 #include "OledChar.h"
 #include "OledGrph.h"

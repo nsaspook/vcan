@@ -85,8 +85,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/gpio/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/gpio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">0702ADEE356433BCD6F02F2EEF169DFC</GeneratedChecksum>
-          <UserChecksum dnOrder="6">0702ADEE356433BCD6F02F2EEF169DFC</UserChecksum>
+          <GeneratedChecksum dnOrder="5">00B586104D460CB0F618E8B1302B34E0</GeneratedChecksum>
+          <UserChecksum dnOrder="6">00B586104D460CB0F618E8B1302B34E0</UserChecksum>
         </File>
         <File dnOrder="9">
           <Type dnOrder="0">SOURCE</Type>
@@ -435,7 +435,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="5" key="PackageFilter" value="usb;cryptoauthlib;aws_cloud;wireless;crypto;gfx_apps;gfx;x2c;micrium_ucos3;audio;core;cryptoauthlib_apps;expresslogic_threadx;motor_control;csp;bt;touch;net;bootloader;bsp;aerospace;quick_docs;reference_apps;classb_sam_e5x_d5x;bootloader_apps_i2c;bootloader_apps_ethernet;bootloader_apps_usb;bootloader_apps_sdcard;bootloader_apps_uart;ethercat;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="expresslogic_threadx;bootloader;csp;gfx_apps;gfx;cryptoauthlib;wireless;cryptoauthlib_apps;usb;crypto;motor_control;audio;net;aerospace;x2c;touch;aws_cloud;bt;micrium_ucos3;core;bsp;"/>
       <Setting dnOrder="6" key="TRUSTZONE" value="false"/>
     </Settings>
   </Configurator>
