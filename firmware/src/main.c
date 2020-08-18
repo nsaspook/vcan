@@ -104,8 +104,8 @@ m35_4 = {
 struct SPid current_pi = {
 	.iMax = 4000.0,
 	.iMin = -4000.0,
-	.pGain = 2.0,
-	.iGain = 1.0,
+	.pGain = 2.0, // 2.0
+	.iGain = 0.3, // 1.0
 };
 
 V_STATE vcan_state = V_init;
