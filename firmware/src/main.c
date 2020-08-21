@@ -64,6 +64,7 @@ IC = M * sin (? + 240)
 #include "OledDriver.h"
 #include "OledChar.h"
 #include "OledGrph.h"
+#include "dio.h"
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 
@@ -102,10 +103,10 @@ m35_4 = {
 *m35_ptr;
 
 struct SPid current_pi = {
-	.iMax = 4000.0,
-	.iMin = -4000.0,
+	.iMax = 3000.0,
+	.iMin = -3000.0,
 	.pGain = 2.0, // 2.0
-	.iGain = 0.3, // 1.0
+	.iGain = 0.15, // 1.0
 };
 
 V_STATE vcan_state = V_init;
@@ -126,6 +127,8 @@ const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
 	0b100,
 };
+
+void move_pos_qei(uint32_t, uintptr_t);
 
 void PWM_motor2(M_CTRL mmode)
 {
@@ -177,6 +180,16 @@ void line_rot(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
 	OledMoveTo((int32_t) x1, (int32_t) y1);
 	OledLineTo((int32_t) x2, (int32_t) y2);
 }
+
+/*
+ * input position auto-positioning
+ */
+void move_pos_qei(uint32_t status, uintptr_t context)
+{
+	if (true) {
+		POS3CNT++;
+	}
+}
 // *****************************************************************************
 // *****************************************************************************
 // Section: Main Entry Point
@@ -213,6 +226,8 @@ int main(void)
 	 */
 	TMR6_CallbackRegister(timer_ms_tick, 0);
 	TMR6_Start();
+	TMR3_Stop();
+	TMR3_CallbackRegister(move_pos_qei, 0);
 	StartTimer(TMR_BLINK, 1000);
 	StartTimer(TMR_LCD_UP, 10);
 
@@ -397,6 +412,8 @@ int main(void)
 	WaitMs(2000);
 
 	vcan_state = V_home;
+	TMR3_Start(); // start auto movement functions
+	PWM_motor2(M_PWM);
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -413,7 +430,7 @@ int main(void)
 		}
 
 		if (TimerDone(TMR_MOTOR)) {
-			StartTimer(TMR_MOTOR, 1);
+			StartTimer(TMR_MOTOR, 100);
 			DEBUGB0_Set();
 
 			/* update local values of the encoder status counters */
@@ -450,7 +467,7 @@ int main(void)
 			/*
 			 * generate a positioning error drive signal
 			 */
-			m35_4.current = abs((int32_t) pi_current_error);
+			m35_4.current = abs((int32_t) pi_current_error) + MBIAS;
 
 			/*
 			 * limit motor drive
@@ -459,7 +476,7 @@ int main(void)
 				m35_4.current = motor_volts;
 			}
 			if (m35_4.current > (m35_4.current_prev + 1)) {
-				m35_4.current = m35_4.current_prev + 1;
+				m35_4.current = m35_4.current_prev + 1 + MBIAS;
 			}
 
 			if (m35_4.current > motor_volts) {
@@ -469,32 +486,31 @@ int main(void)
 			m35_4.current_prev = m35_4.current;
 
 			if (abs(m35_2.error) < motor_error_stop) {
-				m35_4.current = 50;
+				m35_4.current = MBIAS;
+			}
+
+			if (abs(m35_2.error) > motor_error_stop) {
+				if (!m35_4.speed--) {
+					phase_duty(&m35_2, m35_4.current, m_speed);
+					phase_duty(&m35_3, m35_4.current, m_speed);
+					phase_duty(&m35_4, m35_4.current, m_speed);
+					m35_4.speed = motor_speed;
+				}
+			}
+			if (m35_2.error > 0) {
+				/*
+				 * set channel duty cycle for motor outputs
+				 */
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 			} else {
-				if (abs(m35_2.error) > motor_error_stop) {
-					if (!m35_4.speed--) {
-						phase_duty(&m35_2, m35_4.current, m_speed);
-						phase_duty(&m35_3, m35_4.current, m_speed);
-						phase_duty(&m35_4, m35_4.current, m_speed);
-						m35_4.speed = motor_speed;
-					}
-				}
-				if (m35_2.error > 0) {
-					/*
-					 * set channel duty cycle for motor outputs
-					 */
-					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
-					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
-				} else {
-					/*
-					 * set channel duty cycle for motor outputs
-					 */
-					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
-					MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
-				}
-				PWM_motor2(M_PWM);
+				/*
+				 * set channel duty cycle for motor outputs
+				 */
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
 			}
 
 			/*
@@ -543,12 +559,14 @@ int main(void)
 				 * show some test results on the LCD screen
 				 */
 				//sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u1ai, u1bi);
-				sprintf(buffer, "%3i %3i %3i         ", u1bi, u2ai, u2bi);
+				sprintf(buffer, "%5i: %4i %4i %4i         ", 0, u1bi, u2ai, u2bi);
 				eaDogM_WriteStringAtPos(4, 0, buffer);
-				sprintf(buffer, "%3i %3i %3i         ", hb_current(u1bi), hb_current(u2ai), hb_current(u2bi));
+				sprintf(buffer, "%5i: %4i %4i %4i         ", 0, hb_current(u1bi), hb_current(u2ai), hb_current(u2bi));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
-				sprintf(buffer, "%3i %3i %3i         ", m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
+				sprintf(buffer, "%5i: %4i %4i %4i    ", motor_speed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
+				sprintf(buffer, "%5i: %4i %4i %4i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty);
+				eaDogM_WriteStringAtPos(7, 0, buffer);
 				//				sprintf(buffer, "%.2f:%.2f:%.2f         ", asin(m35_2.sin)*180.0 / PI * 2, asin(m35_3.sin)*180.0 / PI * 2, asin(m35_4.sin)*180.0 / PI * 2);
 				//				eaDogM_WriteStringAtPos(4, 0, buffer);
 				OledUpdate();

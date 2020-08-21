@@ -21,8 +21,8 @@ extern "C" {
 #define SR240		24000
 #define PHASE_INC	(256 * 65536) / SAMPLERATE
 
-#define MOTOR_SPEED	1000
-#define MBIAS		0
+#define MOTOR_SPEED	10
+#define MBIAS		2000 // flux min for motor stability
 
 #define ENCODER_PULSES_PER_REV	327680
 #define NUM_POLE_PAIRS		4
