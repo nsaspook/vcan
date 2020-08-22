@@ -187,8 +187,8 @@ void line_rot(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
 void move_pos_qei(uint32_t status, uintptr_t context)
 {
 	if (true) {
-//		POS3CNT++;
-		POS3CNT=POS2CNT+100; // movement offset
+		//		POS3CNT++;
+		POS3CNT = POS2CNT + 100; // movement offset
 	}
 }
 // *****************************************************************************
@@ -437,13 +437,13 @@ int main(void)
 			/* update local values of the encoder status counters */
 			m35_1.pos = POS1CNT;
 			m35_1.vel = VEL1HLD;
-			m35_1.indexcnt = INT1HLD;
+			m35_1.indexcnt = INDX1CNT;
 			m35_2.pos = POS2CNT;
 			m35_2.vel = VEL2HLD;
-			m35_2.indexcnt = INT2HLD;
+			m35_2.indexcnt = INDX2CNT;
 			m35_3.pos = POS3CNT;
 			m35_3.vel = VEL3HLD;
-			m35_3.indexcnt = INT3HLD;
+			m35_3.indexcnt = INDX3CNT;
 
 			/*
 			 * direction compare from previous position
@@ -517,18 +517,15 @@ int main(void)
 			/*
 			 * test switch interface with motor control
 			 */
-			if (get_switch(S1)) {
-				// set motor_speed variable and phase_duty mode
-				// slew speed
-				m35_4.speed = 1;
-				m_speed = M_SLEW;
+			if (get_switch(S1)) { // enable motor power
+				U1_EN_Set();
+				U2_EN_Set();
 			}
 
 
-			if (get_switch(S0)) {
-				// slow speed
-				m35_4.speed = 1;
-				m_speed = M_SLOW;
+			if (get_switch(S0)) { // disengage motor power
+				U1_EN_Clear();
+				U2_EN_Clear();
 			}
 
 			DEBUGB0_Clear();
@@ -560,9 +557,9 @@ int main(void)
 				 * show some test results on the LCD screen
 				 */
 				//sprintf(buffer, " %i %i  %i %i    ", m35_2.error, m35_2.duty, u1ai, u1bi);
-				sprintf(buffer, "%5i: %4i %4i %4i         ", 0, u1bi, u2ai, u2bi);
+				sprintf(buffer, "%5i: %4i %4i %4i         ", m35_2.erotations, u1bi, u2ai, u2bi);
 				eaDogM_WriteStringAtPos(4, 0, buffer);
-				sprintf(buffer, "%5i: %4i %4i %4i         ", 0, hb_current(u1bi), hb_current(u2ai), hb_current(u2bi));
+				sprintf(buffer, "%5i: %4i %4i %4i         ", m35_2.indexcnt, hb_current(u1bi), hb_current(u2ai), hb_current(u2bi));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
 				sprintf(buffer, "%5i: %4i %4i %4i    ", motor_speed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
 				eaDogM_WriteStringAtPos(6, 0, buffer);

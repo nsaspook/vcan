@@ -22,6 +22,7 @@ int32_t phase_duty_table(struct QEI_DATA * const phase, const double mag)
 {
 	if (++phase->sine_steps >= sine_res) {
 		phase->sine_steps = 0;
+		phase->erotations++;
 	}
 
 	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sine_const[phase->sine_steps]));
