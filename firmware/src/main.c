@@ -187,7 +187,8 @@ void line_rot(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
 void move_pos_qei(uint32_t status, uintptr_t context)
 {
 	if (true) {
-		POS3CNT++;
+//		POS3CNT++;
+		POS3CNT=POS2CNT+100; // movement offset
 	}
 }
 // *****************************************************************************

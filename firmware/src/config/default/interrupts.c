@@ -84,17 +84,17 @@ void __ISR(_CORE_TIMER_VECTOR, ipl1AUTO) CORE_TIMER_Handler (void)
 {
 }
 
-void __ISR(_EXTERNAL_0_VECTOR, ipl1AUTO) EXTERNAL_0_Handler (void)
+void __ISR(_EXTERNAL_0_VECTOR, ipl3AUTO) EXTERNAL_0_Handler (void)
 {
 	update_di();
 }
 
-void __ISR(_TIMER_2_VECTOR, ipl1AUTO) TIMER_2_Handler (void)
+void __ISR(_TIMER_2_VECTOR, ipl2AUTO) TIMER_2_Handler (void)
 {
     TIMER_2_InterruptHandler();
 }
 
-void __ISR(_TIMER_3_VECTOR, ipl1AUTO) TIMER_3_Handler (void)
+void __ISR(_TIMER_3_VECTOR, ipl5AUTO) TIMER_3_Handler (void)
 {
     TIMER_3_InterruptHandler();
 }
