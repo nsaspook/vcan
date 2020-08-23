@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 #include "vcan.h"
+	
+#define NOINDEX
 
 #define sine_res	360
 #define sinea		0
@@ -38,7 +40,7 @@ extern "C" {
 #define motor_error_coast	100
 #define motor_error_knee	200
 
-#define motor_volts	3000 // limits amount of current at max torque, TI motor
+#define motor_volts	3200 // limits amount of current at max torque, TI motor
 	//#define motor_volts	5000 // limits amount of current at max torque, MCHP motor
 
 	/*

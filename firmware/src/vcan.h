@@ -14,7 +14,7 @@ extern "C" {
 	/*
 	 * VCAN project header file
 	 */
-	
+
 #define SYS_FREQ	120000000 // Running at 120MHz
 #define SAMPLERATE	36000
 #define SR120		12000
@@ -22,10 +22,15 @@ extern "C" {
 #define PHASE_INC	(256 * 65536) / SAMPLERATE
 
 #define MOTOR_SPEED	100
-#define MBIAS		2400 // current drive flux min for motor stability
+#define MOTOR_SLIP	200
+#define MBIAS		2000 // current drive flux min for motor stability
 
-#define ENCODER_PULSES_PER_REV	327680
+//#define ENCODER_PULSES_PER_REV	327680
+//#define NUM_POLE_PAIRS		4
+
+#define ENCODER_PULSES_PER_REV	4000
 #define NUM_POLE_PAIRS		4
+
 #define PWM_FREQUENCY		MOTOR_SPEED
 #define RATED_SPEED_RPM		10
 #define SLOW_LOOP_TIME_SEC	1
@@ -53,7 +58,7 @@ extern "C" {
 #define SPEED_RAMP_INC_SLOW_LOOP                          (float)(RAMP_RAD_PER_SEC_ELEC*SLOW_LOOP_TIME_SEC)
 
 #define SINGLE_ELEC_ROT_RADS_PER_SEC                      ((float)((float)(2.0) * (float)M_PI))
-	
+
 #define HB_OHMS		100
 #define ADC_STEPS	4096.0 // 12-bit
 #define ADC_REF		2.5

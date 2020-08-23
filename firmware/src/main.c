@@ -105,8 +105,8 @@ m35_4 = {
 struct SPid current_pi = {
 	.iMax = 3000.0,
 	.iMin = -3000.0,
-	.pGain = 2.0, // 2.0
-	.iGain = 0.15, // 1.0
+	.pGain = 0.5, // 2.0
+	.iGain = 0.125, // 1.0
 };
 
 V_STATE vcan_state = V_init;
@@ -188,7 +188,7 @@ void move_pos_qei(uint32_t status, uintptr_t context)
 {
 	if (true) {
 		//		POS3CNT++;
-		POS3CNT = POS2CNT + 100; // movement offset
+		POS3CNT = POS2CNT + MOTOR_SLIP; // movement offset
 	}
 }
 // *****************************************************************************
@@ -441,6 +441,11 @@ int main(void)
 			m35_2.pos = POS2CNT;
 			m35_2.vel = VEL2HLD;
 			m35_2.indexcnt = INDX2CNT;
+#ifdef NOINDEX
+			if (POS2CNT) {
+				m35_2.indexcnt = abs(POS2CNT) / ENCODER_PULSES_PER_REV;
+			}
+#endif
 			m35_3.pos = POS3CNT;
 			m35_3.vel = VEL3HLD;
 			m35_3.indexcnt = INDX3CNT;
