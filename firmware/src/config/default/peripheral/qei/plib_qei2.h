@@ -91,6 +91,7 @@ void QEI2_PositionCountSet(uint32_t position_count);
 
 void QEI2_VelocityCountSet(uint32_t velocity_count);
 
+void QEI2_CallbackRegister(QEI_CALLBACK callback, uintptr_t context);
 
 
 // DOM-IGNORE-BEGIN

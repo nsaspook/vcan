@@ -4,7 +4,7 @@
 
 
 project: vcan
-creation_date: 2020-08-21T18:07:08.601-07:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2020-08-22T20:37:17.492-07:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Linux
 mhc_mode: IDE            # [IDE|Standalone|Headless]
 mplabx_version: v5.40        # if MPLAB X plugin only
@@ -21,7 +21,7 @@ modules:
     - {name: "crypto", version: "v3.5.1"}
     - {name: "gfx_apps", version: "v3.6.0"}
     - {name: "gfx", version: "v3.6.0"}
-    - {name: "x2c", version: "v1.1.0"}
+    - {name: "x2c", version: "v1.1.1"}
     - {name: "micrium_ucos3", version: "v3.1.0"}
     - {name: "audio", version: "v3.5.0"}
     - {name: "core", version: "v3.7.2"}

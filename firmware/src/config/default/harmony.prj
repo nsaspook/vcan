@@ -31,8 +31,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/</LogicalPath>
           <PhysicalPath dnOrder="4">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">95808EFD7C629A3EF89D1A418CBACE99</GeneratedChecksum>
-          <UserChecksum dnOrder="6">83D443BAD7AE58E839B0C1EC4C232BCE</UserChecksum>
+          <GeneratedChecksum dnOrder="5">0C363E524E80EE74368FC26AF18BCC9F</GeneratedChecksum>
+          <UserChecksum dnOrder="6">92A706B635537A7F8CCF217ADEDF0329</UserChecksum>
         </File>
         <File dnOrder="3">
           <Type dnOrder="0">SOURCE</Type>
@@ -112,8 +112,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/qei/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/qei/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">0C05618F170F2B2D174B83526F6AC964</GeneratedChecksum>
-          <UserChecksum dnOrder="6">0C05618F170F2B2D174B83526F6AC964</UserChecksum>
+          <GeneratedChecksum dnOrder="5">25250884F5E18A5F45F6FA41391C9DCD</GeneratedChecksum>
+          <UserChecksum dnOrder="6">25250884F5E18A5F45F6FA41391C9DCD</UserChecksum>
         </File>
         <File dnOrder="12">
           <Type dnOrder="0">SOURCE</Type>
@@ -310,8 +310,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/qei/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/qei/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">EF15ACA280CB563E5761F70A42121693</GeneratedChecksum>
-          <UserChecksum dnOrder="6">EF15ACA280CB563E5761F70A42121693</UserChecksum>
+          <GeneratedChecksum dnOrder="5">98094A42B12CC8CDB9D5C23B69E5DDCE</GeneratedChecksum>
+          <UserChecksum dnOrder="6">98094A42B12CC8CDB9D5C23B69E5DDCE</UserChecksum>
         </File>
         <File dnOrder="34">
           <Type dnOrder="0">HEADER</Type>

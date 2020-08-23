@@ -257,7 +257,7 @@ int main(void)
 	OledSetCharUpdate(0); // manual LCD screen updates for speed
 #ifdef EDOGS_DEMO
 	uint32_t irow = 0;
-	int32_t x2 = 50, x1 = 65, y1 = 46, xn1, yn1, xn2, yn2, r;
+	int32_t x2 = 205, x1 = 220, y1 = 100, xn1, yn1, xn2, yn2, r;
 	double theta1 = 0.0, theta2 = 120.0, theta3 = 240.0;
 	double ra, si, co;
 
@@ -267,24 +267,7 @@ int main(void)
 			StartTimer(TMR_LCD_UP, 15);
 			OledClearBuffer();
 			sprintf(buffer, "%i", irow);
-			OledSetCursor(0, 0);
-			//		OledPutString("PIC32MK SPI");
-			//		OledSetCursor(0, 1);
-			//		OledPutString("DISPLAY DRV");
-			//		OledSetCursor(0, 2);
-			//		OledPutString(buffer);
-			//		OledSetCursor(0, 3);
-			//		OledPutString("DogS Driver ");
-			//		OledSetCursor(0, 4);
-			//		OledPutString("DogS Driver ");
-			//		OledSetCursor(0, 5);
-			//		OledPutString("DogS Driver ");
-			//		OledSetCursor(0, 6);
-			//		OledPutString("DogS Driver ");
-			//		OledSetCursor(0, 7);
 			OledPutString(buffer);
-			//		OledMoveTo(0, irow & 63);
-			//		OledDrawRect(63, 63);
 
 			OledSetCursor(0, 1);
 			OledPutString("3PH VECTOR");
