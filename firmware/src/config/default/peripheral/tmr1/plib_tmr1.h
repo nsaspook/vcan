@@ -1,23 +1,23 @@
 /*******************************************************************************
-  Real Time Counter (RTCC) PLIB
+  Data Type definition of Timer PLIB
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    plib_rtcc.h
+    plib_tmr1.h
 
   Summary:
-    RTCC PLIB Header file
+    Data Type definition of the Timer Peripheral Interface Plib.
 
   Description:
-    This file defines the interface to the RTC peripheral library. This
-    library provides access to and control of the associated peripheral
-    instance.
+    This file defines the Data Types for the Timer Plib.
+
+  Remarks:
+    None.
 
 *******************************************************************************/
 
-// DOM-IGNORE-BEGIN
 /*******************************************************************************
 * Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
 *
@@ -40,25 +40,18 @@
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
-// DOM-IGNORE-END
 
-#ifndef PLIB_RTCC_H
-#define PLIB_RTCC_H
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Included Files
-// *****************************************************************************
-// *****************************************************************************
+#ifndef PLIB_TMR1_H
+#define PLIB_TMR1_H
 
 #include <stddef.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include "device.h"
-#include <time.h>
+#include "plib_tmr1_common.h"
+
 
 // DOM-IGNORE-BEGIN
-#ifdef __cplusplus // Provide C++ Compatibility
+#ifdef __cplusplus  // Provide C++ Compatibility
 
     extern "C" {
 
@@ -71,53 +64,38 @@
 // *****************************************************************************
 // *****************************************************************************
 
-typedef enum
-{
-    RTCC_ALARM_MASK_HALF_SECOND = 0x00,   // Every half-second
-    RTCC_ALARM_MASK_SECOND = 0x01,        // Every second
-    RTCC_ALARM_MASK_10_SECONDS = 0x02,    // Every 10 seconds
-    RTCC_ALARM_MASK_SS = 0x03,            // Every minute
-    RTCC_ALARM_MASK_10_MINUTES = 0x04,    // Every 10 minutes
-    RTCC_ALARM_MASK_HOUR = 0x05,          // Every hour
-    RTCC_ALARM_MASK_HHMISS = 0x06,        // Once a day
-    RTCC_ALARM_MASK_WEEK = 0x07,          // Once a week
-    RTCC_ALARM_MASK_MONTH = 0x08,         // Once a month
-    RTCC_ALARM_MASK_YEAR = 0x09,          // Once a year
-    RTCC_ALARM_MASK_OFF = 0xFF            // Disabled
-
-} RTCC_ALARM_MASK;
-
-typedef enum
-{
-    RTCC_INT_ALARM = 0x40000000
-
-} RTCC_INT_MASK;
-
-typedef void (*RTCC_CALLBACK)( uintptr_t context );
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Interface Routines
 // *****************************************************************************
 // *****************************************************************************
 
-void RTCC_Initialize( void );
+// *****************************************************************************
+void TMR1_Initialize(void);
 
-bool RTCC_TimeSet( struct tm *Time );
+void TMR1_Start(void);
 
-void RTCC_TimeGet(struct tm  *Time );
+void TMR1_Stop(void);
 
-bool RTCC_AlarmSet( struct tm *alarmTime, RTCC_ALARM_MASK alarmFreq );
+void TMR1_PeriodSet(uint16_t);
 
-void RTCC_CallbackRegister( RTCC_CALLBACK callback, uintptr_t context );
+uint16_t TMR1_PeriodGet(void);
 
+uint16_t TMR1_CounterGet(void);
+
+uint32_t TMR1_FrequencyGet(void);
+
+void TMR1_InterruptEnable(void);
+
+void TMR1_InterruptDisable(void);
+
+void TMR1_CallbackRegister( TMR1_CALLBACK callback_fn, uintptr_t context );
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
     }
-
 #endif
 // DOM-IGNORE-END
 
-#endif // PLIB_RTCC_H
+#endif /* PLIB_TMR1_H */

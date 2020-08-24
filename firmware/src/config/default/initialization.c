@@ -63,8 +63,8 @@
 #pragma config FSLEEP =     OFF
 #pragma config DBGPER =     PG_ALL
 #pragma config SMCLR =      MCLR_NORM
-#pragma config SOSCGAIN =   GAIN_2X
-#pragma config SOSCBOOST =  ON
+#pragma config SOSCGAIN =   GAIN_1X
+#pragma config SOSCBOOST =  OFF
 #pragma config POSCGAIN =   GAIN_LEVEL_3
 #pragma config POSCBOOST =  ON
 #pragma config EJTAGBEN =   NORMAL
@@ -73,7 +73,7 @@
 #pragma config FNOSC =      SPLL
 #pragma config DMTINTV =    WIN_127_128
 #pragma config FSOSCEN =    OFF
-#pragma config IESO =       ON
+#pragma config IESO =       OFF
 #pragma config POSCMOD =    EC
 #pragma config OSCIOFNC =   OFF
 #pragma config FCKSM =      CSDCMD
@@ -209,6 +209,8 @@ void SYS_Initialize ( void* data )
     TMR3_Initialize();
 
     MCPWM_Initialize();
+
+    TMR1_Initialize();
 
     RTCC_Initialize();
 

@@ -61,9 +61,9 @@
 // *****************************************************************************
 
 
+void TIMER_1_InterruptHandler( void );
 void TIMER_2_InterruptHandler( void );
 void TIMER_3_InterruptHandler( void );
-void RTCC_InterruptHandler( void );
 void UART2_FAULT_InterruptHandler( void );
 void UART2_RX_InterruptHandler( void );
 void UART2_TX_InterruptHandler( void );
@@ -90,6 +90,11 @@ void __ISR(_EXTERNAL_0_VECTOR, ipl3AUTO) EXTERNAL_0_Handler (void)
 	update_di();
 }
 
+void __ISR(_TIMER_1_VECTOR, ipl1AUTO) TIMER_1_Handler (void)
+{
+    TIMER_1_InterruptHandler();
+}
+
 void __ISR(_TIMER_2_VECTOR, ipl2AUTO) TIMER_2_Handler (void)
 {
     TIMER_2_InterruptHandler();
@@ -98,11 +103,6 @@ void __ISR(_TIMER_2_VECTOR, ipl2AUTO) TIMER_2_Handler (void)
 void __ISR(_TIMER_3_VECTOR, ipl5AUTO) TIMER_3_Handler (void)
 {
     TIMER_3_InterruptHandler();
-}
-
-void __ISR(_RTCC_VECTOR, ipl1AUTO) RTCC_Handler (void)
-{
-    RTCC_InterruptHandler();
 }
 
 void __ISR(_UART2_FAULT_VECTOR, ipl1AUTO) UART2_FAULT_Handler (void)

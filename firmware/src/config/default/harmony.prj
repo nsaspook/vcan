@@ -22,8 +22,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/</LogicalPath>
           <PhysicalPath dnOrder="4">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">E4426C27ECA0D4501A185EC0378A7F1C</GeneratedChecksum>
-          <UserChecksum dnOrder="6">E4426C27ECA0D4501A185EC0378A7F1C</UserChecksum>
+          <GeneratedChecksum dnOrder="5">30A31AD40DC6349A753F1F66F89D5E93</GeneratedChecksum>
+          <UserChecksum dnOrder="6">30A31AD40DC6349A753F1F66F89D5E93</UserChecksum>
         </File>
         <File dnOrder="2">
           <Type dnOrder="0">SOURCE</Type>
@@ -31,8 +31,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/</LogicalPath>
           <PhysicalPath dnOrder="4">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">0C363E524E80EE74368FC26AF18BCC9F</GeneratedChecksum>
-          <UserChecksum dnOrder="6">92A706B635537A7F8CCF217ADEDF0329</UserChecksum>
+          <GeneratedChecksum dnOrder="5">2FE7A156B40A8E94A9DA951558017994</GeneratedChecksum>
+          <UserChecksum dnOrder="6">395257276A745B6D440D8BCEC8BA6F2C</UserChecksum>
         </File>
         <File dnOrder="3">
           <Type dnOrder="0">SOURCE</Type>
@@ -58,8 +58,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/clk/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/clk/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">DC7BF2717CBB4BD61E206C1D79427FE0</GeneratedChecksum>
-          <UserChecksum dnOrder="6">DC7BF2717CBB4BD61E206C1D79427FE0</UserChecksum>
+          <GeneratedChecksum dnOrder="5">18FE30B27359B8F5D557667B6C1968B5</GeneratedChecksum>
+          <UserChecksum dnOrder="6">18FE30B27359B8F5D557667B6C1968B5</UserChecksum>
         </File>
         <File dnOrder="6">
           <Type dnOrder="0">SOURCE</Type>
@@ -76,8 +76,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/evic/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/evic/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">080039F80E84C0E65392E02B29D76B1F</GeneratedChecksum>
-          <UserChecksum dnOrder="6">080039F80E84C0E65392E02B29D76B1F</UserChecksum>
+          <GeneratedChecksum dnOrder="5">4D4AF67C693CF18BE45E3DCC2B0EEA4E</GeneratedChecksum>
+          <UserChecksum dnOrder="6">4D4AF67C693CF18BE45E3DCC2B0EEA4E</UserChecksum>
         </File>
         <File dnOrder="8">
           <Type dnOrder="0">SOURCE</Type>
@@ -130,8 +130,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/rtcc/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/rtcc/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">DC16788877B0373C61D796F7EAC00B88</GeneratedChecksum>
-          <UserChecksum dnOrder="6">DC16788877B0373C61D796F7EAC00B88</UserChecksum>
+          <GeneratedChecksum dnOrder="5">181B11524A3E6370E6B9294481D9994D</GeneratedChecksum>
+          <UserChecksum dnOrder="6">181B11524A3E6370E6B9294481D9994D</UserChecksum>
         </File>
         <File dnOrder="14">
           <Type dnOrder="0">SOURCE</Type>
@@ -144,6 +144,15 @@
         </File>
         <File dnOrder="15">
           <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">plib_tmr1.c</Name>
+          <Security dnOrder="2">NON_SECURE</Security>
+          <LogicalPath dnOrder="3">config/default/peripheral/tmr1/</LogicalPath>
+          <PhysicalPath dnOrder="4">/peripheral/tmr1/</PhysicalPath>
+          <GeneratedChecksum dnOrder="5">1A118F9250311206E0189C1FFB94DC0A</GeneratedChecksum>
+          <UserChecksum dnOrder="6">1A118F9250311206E0189C1FFB94DC0A</UserChecksum>
+        </File>
+        <File dnOrder="16">
+          <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_tmr2.c</Name>
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/tmr/</LogicalPath>
@@ -151,7 +160,7 @@
           <GeneratedChecksum dnOrder="5">A54BBEF8B51B2CCA406EDB3117849AEC</GeneratedChecksum>
           <UserChecksum dnOrder="6">A54BBEF8B51B2CCA406EDB3117849AEC</UserChecksum>
         </File>
-        <File dnOrder="16">
+        <File dnOrder="17">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_tmr3.c</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -160,7 +169,7 @@
           <GeneratedChecksum dnOrder="5">8B7DFEDD16D39AA101E99E25B874154A</GeneratedChecksum>
           <UserChecksum dnOrder="6">8B7DFEDD16D39AA101E99E25B874154A</UserChecksum>
         </File>
-        <File dnOrder="17">
+        <File dnOrder="18">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_tmr6.c</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -169,7 +178,7 @@
           <GeneratedChecksum dnOrder="5">C8253EC66B72A8CCFA1FAC95CDF8F7A2</GeneratedChecksum>
           <UserChecksum dnOrder="6">C8253EC66B72A8CCFA1FAC95CDF8F7A2</UserChecksum>
         </File>
-        <File dnOrder="18">
+        <File dnOrder="19">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_uart2.c</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -178,7 +187,7 @@
           <GeneratedChecksum dnOrder="5">4ABC92FC4DD0FEC7EEF25FEA1A5A27C5</GeneratedChecksum>
           <UserChecksum dnOrder="6">4ABC92FC4DD0FEC7EEF25FEA1A5A27C5</UserChecksum>
         </File>
-        <File dnOrder="19">
+        <File dnOrder="20">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_uart3.c</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -187,7 +196,7 @@
           <GeneratedChecksum dnOrder="5">EB665F6F8DDBD22F8C7D594CCB09FC29</GeneratedChecksum>
           <UserChecksum dnOrder="6">EB665F6F8DDBD22F8C7D594CCB09FC29</UserChecksum>
         </File>
-        <File dnOrder="20">
+        <File dnOrder="21">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_uart6.c</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -196,7 +205,7 @@
           <GeneratedChecksum dnOrder="5">8579DF653921E607E89DFC314B0105C1</GeneratedChecksum>
           <UserChecksum dnOrder="6">8579DF653921E607E89DFC314B0105C1</UserChecksum>
         </File>
-        <File dnOrder="21">
+        <File dnOrder="22">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">xc32_monitor.c</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -205,16 +214,16 @@
           <GeneratedChecksum dnOrder="5">A9F55E7CB78F22D9000CA03DC635973C</GeneratedChecksum>
           <UserChecksum dnOrder="6">A9F55E7CB78F22D9000CA03DC635973C</UserChecksum>
         </File>
-        <File dnOrder="22">
+        <File dnOrder="23">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">definitions.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/</LogicalPath>
           <PhysicalPath dnOrder="4">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">3E524D659538E8C65FD1DCAD56DA66C1</GeneratedChecksum>
-          <UserChecksum dnOrder="6">3E524D659538E8C65FD1DCAD56DA66C1</UserChecksum>
+          <GeneratedChecksum dnOrder="5">924AC2B9FD34D7010D58DAE4B7F2997A</GeneratedChecksum>
+          <UserChecksum dnOrder="6">924AC2B9FD34D7010D58DAE4B7F2997A</UserChecksum>
         </File>
-        <File dnOrder="23">
+        <File dnOrder="24">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">device.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -223,7 +232,7 @@
           <GeneratedChecksum dnOrder="5">5D5C52527AB1435153DB9B50ADE6B79D</GeneratedChecksum>
           <UserChecksum dnOrder="6">5D5C52527AB1435153DB9B50ADE6B79D</UserChecksum>
         </File>
-        <File dnOrder="24">
+        <File dnOrder="25">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_adchs.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -232,7 +241,7 @@
           <GeneratedChecksum dnOrder="5">63C96532813A07F4973AF51CD7DDB31B</GeneratedChecksum>
           <UserChecksum dnOrder="6">63C96532813A07F4973AF51CD7DDB31B</UserChecksum>
         </File>
-        <File dnOrder="25">
+        <File dnOrder="26">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_adchs_common.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -241,7 +250,7 @@
           <GeneratedChecksum dnOrder="5">C33A7F48915DF50A82501D3A25FB312C</GeneratedChecksum>
           <UserChecksum dnOrder="6">C33A7F48915DF50A82501D3A25FB312C</UserChecksum>
         </File>
-        <File dnOrder="26">
+        <File dnOrder="27">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_clk.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -250,7 +259,7 @@
           <GeneratedChecksum dnOrder="5">7066CC390335CF75126E2A50C46E3BDD</GeneratedChecksum>
           <UserChecksum dnOrder="6">7066CC390335CF75126E2A50C46E3BDD</UserChecksum>
         </File>
-        <File dnOrder="27">
+        <File dnOrder="28">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_eeprom.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -259,7 +268,7 @@
           <GeneratedChecksum dnOrder="5">B97B50D5217602B30A68AA8AA5D77BFB</GeneratedChecksum>
           <UserChecksum dnOrder="6">B97B50D5217602B30A68AA8AA5D77BFB</UserChecksum>
         </File>
-        <File dnOrder="28">
+        <File dnOrder="29">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_evic.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -268,7 +277,7 @@
           <GeneratedChecksum dnOrder="5">C294667A4B18D04B2D7093AA1D7B35F0</GeneratedChecksum>
           <UserChecksum dnOrder="6">C294667A4B18D04B2D7093AA1D7B35F0</UserChecksum>
         </File>
-        <File dnOrder="29">
+        <File dnOrder="30">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_gpio.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -277,7 +286,7 @@
           <GeneratedChecksum dnOrder="5">D0972BCF4019EAC61116E95234DC353F</GeneratedChecksum>
           <UserChecksum dnOrder="6">D0972BCF4019EAC61116E95234DC353F</UserChecksum>
         </File>
-        <File dnOrder="30">
+        <File dnOrder="31">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_mcpwm.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -286,7 +295,7 @@
           <GeneratedChecksum dnOrder="5">27E3133B231E478BA73BA33157C30342</GeneratedChecksum>
           <UserChecksum dnOrder="6">27E3133B231E478BA73BA33157C30342</UserChecksum>
         </File>
-        <File dnOrder="31">
+        <File dnOrder="32">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_mcpwm_common.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -295,7 +304,7 @@
           <GeneratedChecksum dnOrder="5">8C0682DB8DD38F7C09771C63347D06FF</GeneratedChecksum>
           <UserChecksum dnOrder="6">8C0682DB8DD38F7C09771C63347D06FF</UserChecksum>
         </File>
-        <File dnOrder="32">
+        <File dnOrder="33">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_qei1.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -304,7 +313,7 @@
           <GeneratedChecksum dnOrder="5">3A5142AE8EA755CC7049FB94CCB4D0FC</GeneratedChecksum>
           <UserChecksum dnOrder="6">3A5142AE8EA755CC7049FB94CCB4D0FC</UserChecksum>
         </File>
-        <File dnOrder="33">
+        <File dnOrder="34">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_qei2.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -313,7 +322,7 @@
           <GeneratedChecksum dnOrder="5">98094A42B12CC8CDB9D5C23B69E5DDCE</GeneratedChecksum>
           <UserChecksum dnOrder="6">98094A42B12CC8CDB9D5C23B69E5DDCE</UserChecksum>
         </File>
-        <File dnOrder="34">
+        <File dnOrder="35">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_qei3.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -322,7 +331,7 @@
           <GeneratedChecksum dnOrder="5">E31AD6B32FCBA01CCA4C4704D720CA9A</GeneratedChecksum>
           <UserChecksum dnOrder="6">E31AD6B32FCBA01CCA4C4704D720CA9A</UserChecksum>
         </File>
-        <File dnOrder="35">
+        <File dnOrder="36">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_qei_common.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -331,16 +340,16 @@
           <GeneratedChecksum dnOrder="5">D6A76BFCD1B06AC07959D1D4CB4D2B3E</GeneratedChecksum>
           <UserChecksum dnOrder="6">D6A76BFCD1B06AC07959D1D4CB4D2B3E</UserChecksum>
         </File>
-        <File dnOrder="36">
+        <File dnOrder="37">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_rtcc.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/rtcc/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/rtcc/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">C5CCB53DBC284D1BCEAB7756ED870B04</GeneratedChecksum>
-          <UserChecksum dnOrder="6">C5CCB53DBC284D1BCEAB7756ED870B04</UserChecksum>
+          <GeneratedChecksum dnOrder="5">04D63C46EB8AB3FC57807091FFAFAA82</GeneratedChecksum>
+          <UserChecksum dnOrder="6">04D63C46EB8AB3FC57807091FFAFAA82</UserChecksum>
         </File>
-        <File dnOrder="37">
+        <File dnOrder="38">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_spi3.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -349,7 +358,7 @@
           <GeneratedChecksum dnOrder="5">351D08EEAC373A82B986B7D07BDDAE21</GeneratedChecksum>
           <UserChecksum dnOrder="6">351D08EEAC373A82B986B7D07BDDAE21</UserChecksum>
         </File>
-        <File dnOrder="38">
+        <File dnOrder="39">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_spi_common.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -358,7 +367,25 @@
           <GeneratedChecksum dnOrder="5">4247D7FA1CFBCADA8B8446FDC0E12559</GeneratedChecksum>
           <UserChecksum dnOrder="6">4247D7FA1CFBCADA8B8446FDC0E12559</UserChecksum>
         </File>
-        <File dnOrder="39">
+        <File dnOrder="40">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">plib_tmr1.h</Name>
+          <Security dnOrder="2">NON_SECURE</Security>
+          <LogicalPath dnOrder="3">config/default/peripheral/tmr1/</LogicalPath>
+          <PhysicalPath dnOrder="4">/peripheral/tmr1/</PhysicalPath>
+          <GeneratedChecksum dnOrder="5">32D7539D9231F3C159ABECE91A0281EA</GeneratedChecksum>
+          <UserChecksum dnOrder="6">32D7539D9231F3C159ABECE91A0281EA</UserChecksum>
+        </File>
+        <File dnOrder="41">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">plib_tmr1_common.h</Name>
+          <Security dnOrder="2">NON_SECURE</Security>
+          <LogicalPath dnOrder="3">config/default/peripheral/tmr1/</LogicalPath>
+          <PhysicalPath dnOrder="4">/peripheral/tmr1/</PhysicalPath>
+          <GeneratedChecksum dnOrder="5">69E7C8CDAB1B32838331EE261170CEA4</GeneratedChecksum>
+          <UserChecksum dnOrder="6">69E7C8CDAB1B32838331EE261170CEA4</UserChecksum>
+        </File>
+        <File dnOrder="42">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_tmr2.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -367,7 +394,7 @@
           <GeneratedChecksum dnOrder="5">951CB6B720EFCD3044875413BC7D7773</GeneratedChecksum>
           <UserChecksum dnOrder="6">951CB6B720EFCD3044875413BC7D7773</UserChecksum>
         </File>
-        <File dnOrder="40">
+        <File dnOrder="43">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_tmr3.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -376,7 +403,7 @@
           <GeneratedChecksum dnOrder="5">BF06638282DB46493859AC9C1A145999</GeneratedChecksum>
           <UserChecksum dnOrder="6">BF06638282DB46493859AC9C1A145999</UserChecksum>
         </File>
-        <File dnOrder="41">
+        <File dnOrder="44">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_tmr6.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -385,7 +412,7 @@
           <GeneratedChecksum dnOrder="5">A09FC0AD39BCE4ABC1C19F2BEBC13D19</GeneratedChecksum>
           <UserChecksum dnOrder="6">A09FC0AD39BCE4ABC1C19F2BEBC13D19</UserChecksum>
         </File>
-        <File dnOrder="42">
+        <File dnOrder="45">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_tmr_common.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -394,7 +421,7 @@
           <GeneratedChecksum dnOrder="5">D948F2CE092CAB556EF299D3CCD83A55</GeneratedChecksum>
           <UserChecksum dnOrder="6">D948F2CE092CAB556EF299D3CCD83A55</UserChecksum>
         </File>
-        <File dnOrder="43">
+        <File dnOrder="46">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_uart2.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -403,7 +430,7 @@
           <GeneratedChecksum dnOrder="5">7DD95E2706CA31FB428CEE78814D80D3</GeneratedChecksum>
           <UserChecksum dnOrder="6">7DD95E2706CA31FB428CEE78814D80D3</UserChecksum>
         </File>
-        <File dnOrder="44">
+        <File dnOrder="47">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_uart3.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -412,7 +439,7 @@
           <GeneratedChecksum dnOrder="5">F613C2A88FC64B39872A4104D398E822</GeneratedChecksum>
           <UserChecksum dnOrder="6">F613C2A88FC64B39872A4104D398E822</UserChecksum>
         </File>
-        <File dnOrder="45">
+        <File dnOrder="48">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_uart6.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -421,7 +448,7 @@
           <GeneratedChecksum dnOrder="5">C42383A965CF7982E607C7F76D4CF3B6</GeneratedChecksum>
           <UserChecksum dnOrder="6">C42383A965CF7982E607C7F76D4CF3B6</UserChecksum>
         </File>
-        <File dnOrder="46">
+        <File dnOrder="49">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_uart_common.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -430,7 +457,7 @@
           <GeneratedChecksum dnOrder="5">CB4B34D1ABCE74BF62A89A7FF936BE91</GeneratedChecksum>
           <UserChecksum dnOrder="6">CB4B34D1ABCE74BF62A89A7FF936BE91</UserChecksum>
         </File>
-        <File dnOrder="47">
+        <File dnOrder="50">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">toolchain_specifics.h</Name>
           <Security dnOrder="2">NON_SECURE</Security>
@@ -453,7 +480,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="5" key="PackageFilter" value="ethercat;reference_apps;cryptoauthlib_apps;bootloader_apps_uart;quick_docs;csp;bootloader_apps_ethernet;gfx_apps;net;crypto;motor_control;touch;x2c;aws_cloud;core;expresslogic_threadx;bootloader_apps_i2c;gfx;bootloader;wireless;aerospace;bootloader_apps_sdcard;usb;bsp;audio;micrium_ucos3;classb_sam_e5x_d5x;bt;bootloader_apps_usb;cryptoauthlib;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="usb;cryptoauthlib;aws_cloud;wireless;crypto;gfx_apps;gfx;x2c;micrium_ucos3;audio;core;cryptoauthlib_apps;expresslogic_threadx;motor_control;csp;bt;touch;net;bootloader;bsp;aerospace;quick_docs;reference_apps;classb_sam_e5x_d5x;bootloader_apps_i2c;bootloader_apps_ethernet;bootloader_apps_usb;bootloader_apps_sdcard;bootloader_apps_uart;ethercat;"/>
       <Setting dnOrder="6" key="TRUSTZONE" value="false"/>
     </Settings>
   </Configurator>

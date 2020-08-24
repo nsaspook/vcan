@@ -116,6 +116,9 @@ volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
 volatile uint16_t tickCount[TMR_COUNT];
 
 volatile int32_t motor_speed = MOTOR_SPEED;
+struct tm Time;
+time_t rawtime;
+struct tm * timeinfo;
 
 const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
@@ -259,7 +262,6 @@ int main(void)
 	char buffer[80];
 	uint8_t i;
 	double pi_current_error;
-	struct tm Time = {0};
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
@@ -298,8 +300,10 @@ int main(void)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, duty_max);
 
 	//	RTCC_CallbackRegister(reset_led_blink, 1);
-	RTCC_TimeSet(&Time);
-	RTCC_TimeGet(&Time);
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	RTCC_TimeSet(timeinfo);
+//	RTCC_TimeGet(&Time);
 	//	RTCC_AlarmSet(&Time, RTCC_ALARM_MASK_SS);
 	//	RTCC_InterruptEnable(RTCC_ALARM_MASK_SS);
 
@@ -610,7 +614,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%5i: %4i %4i %4i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
-				RTCC_TimeGet(&Time);
+				//				RTCC_TimeGet(&Time);
 				strftime(buffer, sizeof(buffer), "%w %c", &Time);
 				eaDogM_WriteStringAtPos(12, 0, buffer);
 				OledUpdate();

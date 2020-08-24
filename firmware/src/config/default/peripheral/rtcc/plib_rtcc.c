@@ -59,19 +59,6 @@
 #define decimaltobcd(x)                 (((x / 10) << 4) + ((x - ((x / 10) * 10))))
 #define bcdtodecimal(x)                 ((x & 0xF0) >> 4) * 10 + (x & 0x0F)
 
-/* Real Time Clock System Service Object */
-typedef struct _SYS_RTCC_OBJ_STRUCT
-{
-    /* Call back function for RTCC.*/
-    RTCC_CALLBACK  callback;
-
-    /* Client data (Event Context) that will be passed to callback */
-    uintptr_t context;
-
-} RTCC_OBJECT;
-
-static RTCC_OBJECT rtcc;
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: RTCC Implementation
@@ -120,16 +107,6 @@ void RTCC_Initialize( void )
 
     /* start the RTC */
     RTCCONSET = _RTCCON_ON_MASK;
-}
-
-void RTCC_InterruptEnable( RTCC_INT_MASK interrupt )
-{
-    IEC0SET = interrupt;
-}
-
-void RTCC_InterruptDisable( RTCC_INT_MASK interrupt )
-{
-    IEC0CLR = interrupt;
 }
 
 bool RTCC_TimeSet( struct tm *Time )
@@ -194,8 +171,6 @@ bool RTCC_AlarmSet( struct tm *alarmTime, RTCC_ALARM_MASK alarmFreq )
 {
     uint32_t dataDate, dataTime;
 
-    /* Disable interrupt, if enabled, before setting up alarm */
-    RTCC_InterruptDisable(RTCC_INT_ALARM);
 
     if(RTCC_ALARM_MASK_OFF != alarmFreq)
     {
@@ -227,26 +202,7 @@ bool RTCC_AlarmSet( struct tm *alarmTime, RTCC_ALARM_MASK alarmFreq )
         RTCALRMCLR = _RTCALRM_ALRMEN_MASK;  /* Disable the alarm */
     }
 
-    RTCC_InterruptEnable(RTCC_INT_ALARM);  /* Enable the interrupt to the interrupt controller */
 
     return true;  /* This PLIB has no way of indicating wrong device operation so always return true */
-}
-
-void RTCC_CallbackRegister( RTCC_CALLBACK callback, uintptr_t context )
-{
-    rtcc.callback = callback;
-
-    rtcc.context = context;
-}
-
-void RTCC_InterruptHandler( void )
-{
-    /* Clear the status flag */
-    IFS0CLR = 0x40000000;
-
-    if(rtcc.callback != NULL)
-    {
-        rtcc.callback(rtcc.context);
-    }
 }
 
