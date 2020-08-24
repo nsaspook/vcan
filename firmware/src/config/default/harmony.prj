@@ -130,8 +130,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/rtcc/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/rtcc/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">9C8431102C19F7F2AF49A31A9F37330D</GeneratedChecksum>
-          <UserChecksum dnOrder="6">9C8431102C19F7F2AF49A31A9F37330D</UserChecksum>
+          <GeneratedChecksum dnOrder="5">DC16788877B0373C61D796F7EAC00B88</GeneratedChecksum>
+          <UserChecksum dnOrder="6">DC16788877B0373C61D796F7EAC00B88</UserChecksum>
         </File>
         <File dnOrder="14">
           <Type dnOrder="0">SOURCE</Type>
@@ -453,7 +453,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="5" key="PackageFilter" value="usb;cryptoauthlib;aws_cloud;wireless;crypto;gfx_apps;gfx;x2c;micrium_ucos3;audio;core;cryptoauthlib_apps;expresslogic_threadx;motor_control;csp;bt;touch;net;bootloader;bsp;aerospace;quick_docs;reference_apps;classb_sam_e5x_d5x;bootloader_apps_i2c;bootloader_apps_ethernet;bootloader_apps_usb;bootloader_apps_sdcard;bootloader_apps_uart;ethercat;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="ethercat;reference_apps;cryptoauthlib_apps;bootloader_apps_uart;quick_docs;csp;bootloader_apps_ethernet;gfx_apps;net;crypto;motor_control;touch;x2c;aws_cloud;core;expresslogic_threadx;bootloader_apps_i2c;gfx;bootloader;wireless;aerospace;bootloader_apps_sdcard;usb;bsp;audio;micrium_ucos3;classb_sam_e5x_d5x;bt;bootloader_apps_usb;cryptoauthlib;"/>
       <Setting dnOrder="6" key="TRUSTZONE" value="false"/>
     </Settings>
   </Configurator>

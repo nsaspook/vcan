@@ -7371,6 +7371,11 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
+        <String dnOrder="2" id="RTCTIME_DATE">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="200729"/>
+          </Values>
+        </String>
       </Symbols>
     </UniqueComponent>
     <UniqueComponent dnOrder="9" id="spi3">
@@ -7822,16 +7827,16 @@
         <ElementPosition dnOrder="0" id="adchs" x="19" y="389"/>
         <ElementPosition dnOrder="1" id="core" x="198" y="49"/>
         <ElementPosition dnOrder="2" id="dfp" x="20" y="20"/>
-        <ElementPosition dnOrder="3" id="eeprom" x="284" y="230"/>
+        <ElementPosition dnOrder="3" id="eeprom" x="169" y="394"/>
         <ElementPosition dnOrder="4" id="mcpwm" x="167" y="81"/>
         <ElementPosition dnOrder="5" id="qei1" x="35" y="80"/>
         <ElementPosition dnOrder="6" id="qei2" x="33" y="144"/>
         <ElementPosition dnOrder="7" id="qei3" x="170" y="160"/>
-        <ElementPosition dnOrder="8" id="rtcc" x="290" y="172"/>
+        <ElementPosition dnOrder="8" id="rtcc" x="165" y="454"/>
         <ElementPosition dnOrder="9" id="spi3" x="29" y="235"/>
-        <ElementPosition dnOrder="10" id="tmr2" x="460" y="20"/>
-        <ElementPosition dnOrder="11" id="tmr3" x="600" y="20"/>
-        <ElementPosition dnOrder="12" id="tmr6" x="320" y="20"/>
+        <ElementPosition dnOrder="10" id="tmr2" x="18" y="538"/>
+        <ElementPosition dnOrder="11" id="tmr3" x="19" y="603"/>
+        <ElementPosition dnOrder="12" id="tmr6" x="23" y="461"/>
         <ElementPosition dnOrder="13" id="uart2" x="19" y="316"/>
         <ElementPosition dnOrder="14" id="uart3" x="162" y="232"/>
         <ElementPosition dnOrder="15" id="uart6" x="163" y="307"/>

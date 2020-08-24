@@ -96,7 +96,7 @@ void RTCC_Initialize( void )
     /* initialize the time, date and alarm */
     RTCTIME = 0x23595000;   /* Set RTCC time */
 
-    RTCDATE = 0x18123100;  /* Set RTCC date */
+    RTCDATE = 0x20072900;  /* Set RTCC date */
 
     RTCALRMCLR = _RTCALRM_ALRMEN_MASK;  /* Disable alarm */
 
