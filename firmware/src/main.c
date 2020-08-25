@@ -488,7 +488,7 @@ int main(void)
 		}
 
 		if (TimerDone(TMR_MOTOR)) {
-			StartTimer(TMR_MOTOR, 100);
+			StartTimer(TMR_MOTOR, MOTOR_UPDATES);
 			DEBUGB0_Set();
 
 			/* update local values of the encoder status counters */
