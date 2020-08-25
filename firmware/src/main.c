@@ -120,6 +120,8 @@ time_t rawtime;
 volatile time_t t1_time;
 struct tm * timeinfo;
 
+static uint32_t StartTime, TimeUsed;
+
 const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
 	0b100,
@@ -472,6 +474,7 @@ int main(void)
 	vcan_state = V_home;
 	TMR3_Start(); // start auto movement functions
 	PWM_motor2(M_PWM);
+	StartTime = (uint32_t) _CP0_GET_COUNT();
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -554,6 +557,8 @@ int main(void)
 
 			if (abs(m35_2.error) > motor_error_stop) {
 				if (!m35_4.speed--) {
+					TimeUsed = (uint32_t) _CP0_GET_COUNT() - StartTime;
+					StartTime = (uint32_t) _CP0_GET_COUNT();
 					phase_duty(&m35_2, m35_4.current, m_speed);
 					phase_duty(&m35_3, m35_4.current, m_speed);
 					phase_duty(&m35_4, m35_4.current, m_speed);
@@ -627,6 +632,8 @@ int main(void)
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%5i: %4i %4i %4i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
+				sprintf(buffer, "Drive mHz %u    ", TimeUsed/1200);
+				eaDogM_WriteStringAtPos(8, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);

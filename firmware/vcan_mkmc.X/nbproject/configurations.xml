@@ -185,7 +185,7 @@
         <platform>2</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC32MK-MC_DFP" vendor="Microchip" version="1.4.94"/>
+        <pack name="PIC32MK-MC_DFP" vendor="Microchip" version="1.5.115"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -222,7 +222,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP;"/>
+                  value="../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
