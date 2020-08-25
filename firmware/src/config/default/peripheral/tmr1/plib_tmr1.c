@@ -61,13 +61,13 @@ void TMR1_Initialize(void)
     /*
     SIDL = 0
     TWDIS = 0
-    TECS = 0
+    TECS = 2
     TGATE = 0
     TCKPS = 0
     TSYNC = 0
     TCS = 1
     */
-    T1CONSET = 0x2;
+    T1CONSET = 0x202;
 
     /* Clear counter */
     TMR1 = 0x0;

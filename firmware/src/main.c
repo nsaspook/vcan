@@ -217,7 +217,7 @@ void motor_graph(void)
 {
 	static uint32_t irow = 0;
 	static int32_t x2 = 205, x1 = 220, y1 = 100, xn1, yn1, xn2, yn2, r;
-	static double theta1 = 0.0, theta2 = 120.0, theta3 = 240.0;
+	static double theta1 = sinea, theta2 = sineb, theta3 = sinec;
 	static double ra, si, co;
 
 	//Starting point
@@ -250,19 +250,18 @@ void motor_graph(void)
 	yn2 = y1 + r * si + 1;
 
 	line_rot(xn1, yn1, xn2, yn2);
-	OledUpdate();
 
 	irow++;
-	theta1 = theta1 + 1.5; // rotate
-	if (theta1 > 360.0) {
+	theta1 = theta1 + 1.0; // rotate
+	if (theta1 > sine_res) {
 		theta1 = 0.0;
 	}
-	theta2 = theta2 + 1.25; // rotate
-	if (theta2 > 360.0) {
+	theta2 = theta2 + 1.0; // rotate
+	if (theta2 > sine_res) {
 		theta2 = 0.0;
 	}
-	theta3 = theta3 + 2.0; // rotate
-	if (theta3 > 360.0) {
+	theta3 = theta3 + 1.0; // rotate
+	if (theta3 > sine_res) {
 		theta3 = 0.0;
 	}
 }
@@ -610,6 +609,7 @@ int main(void)
 			//run_tests(100000); // port diagnostics
 			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
+				OledClearBuffer();
 				sprintf(buffer, "C %5i:%i      ", m35_ptr->pos, m35_2.error);
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_2;
@@ -627,12 +627,12 @@ int main(void)
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%5i: %4i %4i %4i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
-				//				RTCC_TimeGet(&Time);
-				rawtime=time(&rawtime);
+				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
-				sprintf(buffer, "%i    ", (int)t1_time);
+				sprintf(buffer, "%i    ", (int) t1_time);
 				eaDogM_WriteStringAtPos(13, 0, buffer);
+				motor_graph();
 				OledUpdate();
 				StartTimer(TMR_DISPLAY, 250);
 			}

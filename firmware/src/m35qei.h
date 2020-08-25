@@ -12,13 +12,13 @@
 extern "C" {
 #endif
 #include "vcan.h"
-	
+
 #define NOINDEX
 
-#define sine_res	360
+#define sine_res	3600
 #define sinea		0
-#define	sineb		120
-#define sinec		240
+#define	sineb		1200
+#define sinec		2400
 
 	/*
 	 * PI limits
