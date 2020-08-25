@@ -116,8 +116,8 @@ volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
 volatile uint16_t tickCount[TMR_COUNT];
 
 volatile int32_t motor_speed = MOTOR_SPEED;
-struct tm Time;
 time_t rawtime;
+volatile time_t t1_time;
 struct tm * timeinfo;
 
 const uint8_t step_code[] = {// A,B,C bits in order
@@ -131,6 +131,7 @@ const uint8_t step_code[] = {// A,B,C bits in order
 	0b100,
 };
 
+void my_time(uint32_t, uintptr_t);
 void move_pos_qei(uint32_t, uintptr_t);
 void motor_graph(void);
 void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
@@ -184,6 +185,21 @@ void line_rot(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
 {
 	OledMoveTo((int32_t) x1, (int32_t) y1);
 	OledLineTo((int32_t) x2, (int32_t) y2);
+}
+
+time_t time(time_t *);
+
+time_t time(time_t * Time)
+{
+	return t1_time;
+}
+
+/*
+ * input position auto-positioning
+ */
+void my_time(uint32_t status, uintptr_t context)
+{
+	t1_time++;
 }
 
 /*
@@ -288,6 +304,8 @@ int main(void)
 	TMR6_Start();
 	TMR3_Stop();
 	TMR3_CallbackRegister(move_pos_qei, 0);
+	TMR1_CallbackRegister(my_time, 0);
+	TMR1_Start();
 	StartTimer(TMR_BLINK, 1000);
 	StartTimer(TMR_LCD_UP, 10);
 
@@ -299,13 +317,8 @@ int main(void)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, duty_max);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, duty_max);
 
-	//	RTCC_CallbackRegister(reset_led_blink, 1);
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
-	RTCC_TimeSet(timeinfo);
-//	RTCC_TimeGet(&Time);
-	//	RTCC_AlarmSet(&Time, RTCC_ALARM_MASK_SS);
-	//	RTCC_InterruptEnable(RTCC_ALARM_MASK_SS);
 
 #ifdef EDOGM
 	init_display();
@@ -615,8 +628,11 @@ int main(void)
 				sprintf(buffer, "%5i: %4i %4i %4i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				//				RTCC_TimeGet(&Time);
-				strftime(buffer, sizeof(buffer), "%w %c", &Time);
+				rawtime=time(&rawtime);
+				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
+				sprintf(buffer, "%i    ", (int)t1_time);
+				eaDogM_WriteStringAtPos(13, 0, buffer);
 				OledUpdate();
 				StartTimer(TMR_DISPLAY, 250);
 			}

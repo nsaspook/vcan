@@ -60,20 +60,20 @@ void TMR1_Initialize(void)
 
     /*
     SIDL = 0
-    TWDIS = 1
+    TWDIS = 0
     TECS = 0
     TGATE = 0
     TCKPS = 0
     TSYNC = 0
     TCS = 1
     */
-    T1CONSET = 0x1002;
+    T1CONSET = 0x2;
 
     /* Clear counter */
     TMR1 = 0x0;
 
     /*Set period */
-    PR1 = 326;
+    PR1 = 32767;
 
     /* Setup TMR1 Interrupt */
     TMR1_InterruptEnable();  /* Enable interrupt on the way out */

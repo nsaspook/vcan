@@ -33,9 +33,6 @@
               <itemPath>../src/config/default/peripheral/qei/plib_qei2.h</itemPath>
               <itemPath>../src/config/default/peripheral/qei/plib_qei3.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f12" displayName="rtcc" projectFiles="true">
-              <itemPath>../src/config/default/peripheral/rtcc/plib_rtcc.h</itemPath>
-            </logicalFolder>
             <logicalFolder name="f1" displayName="spi" projectFiles="true">
               <itemPath>../src/config/default/peripheral/spi/plib_spi_common.h</itemPath>
               <itemPath>../src/config/default/peripheral/spi/plib_spi3.h</itemPath>
@@ -119,9 +116,6 @@
               <itemPath>../src/config/default/peripheral/qei/plib_qei2.c</itemPath>
               <itemPath>../src/config/default/peripheral/qei/plib_qei3.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f12" displayName="rtcc" projectFiles="true">
-              <itemPath>../src/config/default/peripheral/rtcc/plib_rtcc.c</itemPath>
-            </logicalFolder>
             <logicalFolder name="f1" displayName="spi" projectFiles="true">
               <itemPath>../src/config/default/peripheral/spi/plib_spi3.c</itemPath>
             </logicalFolder>
@@ -185,7 +179,7 @@
         <targetDevice>PIC32MK1024MCF100</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>ICD4Tool</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>2.41</languageToolchainVersion>
         <platform>2</platform>
@@ -579,8 +573,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="1d000000-1d0fffff"/>
         <property key="poweroptions.powerenable" value="true"/>
-        <property key="programmerToGoFilePath"
-                  value="/root/vcan/firmware/vcan_mkmc.X/debug/default/vcan_mkmc_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.ledbrightness" value="5"/>
