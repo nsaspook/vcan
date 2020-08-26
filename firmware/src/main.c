@@ -120,7 +120,8 @@ time_t rawtime;
 volatile time_t t1_time;
 struct tm * timeinfo;
 
-static uint32_t StartTime, TimeUsed;
+uint32_t StartTime = 1, TimeUsed = 1;
+double mHz = 0.0;
 
 const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
@@ -492,7 +493,6 @@ int main(void)
 
 		if (TimerDone(TMR_MOTOR)) {
 			StartTimer(TMR_MOTOR, MOTOR_UPDATES);
-			DEBUGB0_Set();
 
 			/* update local values of the encoder status counters */
 			m35_1.pos = POS1CNT;
@@ -557,12 +557,15 @@ int main(void)
 
 			if (abs(m35_2.error) > motor_error_stop) {
 				if (!m35_4.speed--) {
+					//DEBUGB0_Set();
+					DEBUGB0_Toggle();
 					TimeUsed = (uint32_t) _CP0_GET_COUNT() - StartTime;
 					StartTime = (uint32_t) _CP0_GET_COUNT();
 					phase_duty(&m35_2, m35_4.current, m_speed);
 					phase_duty(&m35_3, m35_4.current, m_speed);
 					phase_duty(&m35_4, m35_4.current, m_speed);
 					m35_4.speed = motor_speed;
+					//DEBUGB0_Clear();
 				}
 			}
 			if (m35_2.error > 0) {
@@ -594,8 +597,6 @@ int main(void)
 				U1_EN_Clear();
 				U2_EN_Clear();
 			}
-
-			DEBUGB0_Clear();
 		} else {
 			/* flash the board led(s) using the position counter bits */
 #ifdef QEI_SLOW
@@ -632,7 +633,9 @@ int main(void)
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%5i: %4i %4i %4i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
-				sprintf(buffer, "Drive mHz %u    ", TimeUsed/1200);
+				mHz = (double) TimeUsed / 60.0; // 60MHz core timer clock for ms per sinewave tick
+				mHz = (mHz * (double) sine_res) / 1000.0; // time in ms for a complete wave cycle
+				sprintf(buffer, "Drive mHz %4.5f    ", 1000000.0 / mHz);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
