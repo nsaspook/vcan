@@ -18,9 +18,9 @@ void sine_table(void)
 /*
  * slew speed sinusoidal commutation for PWM using table
  */
-int32_t phase_duty_table(struct QEI_DATA * const phase, const double mag)
+int32_t phase_duty_table(struct QEI_DATA * const phase, const double mag, const uint32_t adj)
 {
-	if (++phase->sine_steps >= sine_res) {
+	if (sine_steps_adj(phase, adj) >= sine_res) {
 		phase->sine_steps = 0;
 		phase->erotations++;
 	}
@@ -37,12 +37,31 @@ int32_t phase_duty_table(struct QEI_DATA * const phase, const double mag)
 }
 
 /*
+ * adjust sine steps on in the postive, adj set to zero holds
+ */
+int32_t sine_steps_adj(struct QEI_DATA * const phase, const uint32_t adj)
+{
+	if (adj > sine_res) {
+		return phase->sine_steps; // do nothing
+	}
+
+	phase->sine_steps = phase->sine_steps + adj;
+
+	//	if (phase->sine_steps > sine_res) {
+	//		phase->sine_steps = (phase->sine_steps + adj) - sine_res;
+	//		return phase->sine_steps;
+	//	}
+
+	return phase->sine_steps;
+}
+
+/*
  * micro-stepping  sinusoidal commutation for PWM using sine_foo
  */
-int32_t phase_duty(struct QEI_DATA * const phase, const double mag, const M_SPEED mode)
+int32_t phase_duty(struct QEI_DATA * const phase, const double mag, const M_SPEED mode, const uint32_t adj)
 {
 	if (mode == M_SLEW) {
-		return phase_duty_table(phase, mag);
+		return phase_duty_table(phase, mag, adj);
 	} else {
 		phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * sine_foo(phase)));
 

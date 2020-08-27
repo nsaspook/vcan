@@ -442,7 +442,7 @@ int main(void)
 		case 0:
 			MCPWM_Start();
 			WaitMs(1400);
-						/*
+			/*
 			 * zero position counters at locked rotor position
 			 */
 			POS1CNT = 0;
@@ -456,7 +456,7 @@ int main(void)
 			m35_2.ppp = POS2CNT;
 			POS2CNT = 0; // reset zero for new home
 			break;
-		case 1:	
+		case 1:
 		default:
 			WaitMs(400);
 			sprintf(buffer, "HP %7i      ", POS2CNT);
@@ -560,9 +560,9 @@ int main(void)
 					DEBUGB0_Toggle();
 					TimeUsed = (uint32_t) _CP0_GET_COUNT() - StartTime;
 					StartTime = (uint32_t) _CP0_GET_COUNT();
-					phase_duty(&m35_2, m35_4.current, m_speed);
-					phase_duty(&m35_3, m35_4.current, m_speed);
-					phase_duty(&m35_4, m35_4.current, m_speed);
+					phase_duty(&m35_2, m35_4.current, m_speed, 1);
+					phase_duty(&m35_3, m35_4.current, m_speed, 1);
+					phase_duty(&m35_4, m35_4.current, m_speed, 1);
 					m35_4.speed = motor_speed;
 					//DEBUGB0_Clear();
 				}
