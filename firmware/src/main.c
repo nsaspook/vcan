@@ -131,7 +131,6 @@ const uint8_t step_code[] = {// A,B,C bits in order
 	0b011,
 	0b001,
 	0b101,
-	0b100,
 };
 
 void my_time(uint32_t, uintptr_t);
@@ -435,31 +434,31 @@ int main(void)
 	 * move to locked rotor position
 	 * block-commutated
 	 */
-	for (i = 0; i < 8; i++) {
+	for (i = 0; i < 7; i++) {
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i & 0x7] >> 2)&0x1) * hpwm_mid_duty);
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i & 0x7] >> 1)&0x1) * hpwm_mid_duty);
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i & 0x7] >> 0)&0x1) * hpwm_mid_duty);
 		switch (i) {
 		case 0:
 			MCPWM_Start();
-			WaitMs(900);
+			WaitMs(1400);
+						/*
+			 * zero position counters at locked rotor position
+			 */
+			POS1CNT = 0;
+			POS2CNT = 0;
+			POS3CNT = 0;
 			break;
-		case 7:
+		case 6:
 			WaitMs(900);
 			sprintf(buffer, "HP %6i:%6i      ", POS2CNT, m35_2.ppr / m35_2.pole_pairs);
 			eaDogM_WriteStringAtPos(2, 0, buffer);
 			m35_2.ppp = POS2CNT;
 			POS2CNT = 0; // reset zero for new home
 			break;
-		case 1:
-			WaitMs(1400);
-			/*
-			 * zero position counters at locked rotor position
-			 */
-			POS1CNT = 0;
-			POS2CNT = 0;
-			POS3CNT = 0;
+		case 1:	
 		default:
+			WaitMs(400);
 			sprintf(buffer, "HP %7i      ", POS2CNT);
 			eaDogM_WriteStringAtPos(1, 0, buffer);
 			break;
@@ -619,7 +618,7 @@ int main(void)
 				sprintf(buffer, "C %5i:%i      ", m35_ptr->pos, m35_2.error);
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_2;
-				sprintf(buffer, "C %4i:%i:%i      ", m35_ptr->pos, m35_ptr->vel, m35_2.indexcnt >> 10);
+				sprintf(buffer, "C %4i:%i:%u:%u      ", POS2CNT, VEL2HLD, INT2HLD, INT2TMR);
 				eaDogM_WriteStringAtPos(2, 0, buffer);
 				m35_ptr = &m35_3;
 				/*
@@ -634,7 +633,7 @@ int main(void)
 				sprintf(buffer, "%5i: %4i %4i %4i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				mHz = (double) TimeUsed / 60.0; // 60MHz core timer clock for ms per sinewave tick
-				mHz = (mHz * (double) sine_res) / 1000.0; // time in ms for a complete wave cycle
+				mHz = ((mHz * (double) sine_res) / 1000.0)* (double) NUM_POLE_PAIRS; // time in ms for a complete wave cycle for each motor pole pair
 				sprintf(buffer, "Drive mHz %4.5f    ", 1000000.0 / mHz);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
 				rawtime = time(&rawtime);

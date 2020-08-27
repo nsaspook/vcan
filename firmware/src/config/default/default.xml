@@ -7315,7 +7315,7 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="7" id="QEI2CON__INTDIV">
           <Values dnOrder="0">
-            <User dnOrder="0" value="0"/>
+            <User dnOrder="0" value="7"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="8" id="QEI2CON__PIMOD">
@@ -7340,7 +7340,7 @@
         </Boolean>
         <Hex dnOrder="12" id="QEI_QEICON">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="qei2" value="0"/>
+            <Dynamic dnOrder="0" id="qei2" value="112"/>
           </Values>
         </Hex>
         <Hex dnOrder="13" id="QEI_QEISTAT">
@@ -7895,8 +7895,7 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
-    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
+    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="adchs" x="19" y="389"/>
         <ElementPosition dnOrder="1" id="core" x="198" y="49"/>
@@ -7916,5 +7915,6 @@
         <ElementPosition dnOrder="15" id="uart6" x="163" y="307"/>
       </ElementPositions>
     </ComponentGraph>
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>
