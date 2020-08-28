@@ -6104,7 +6104,7 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="25" id="IOCON2__PMOD">
           <Values dnOrder="0">
-            <User dnOrder="0" value="1"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="26" id="IOCON2__POLH">
@@ -6119,7 +6119,7 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="28" id="IOCON3__PMOD">
           <Values dnOrder="0">
-            <User dnOrder="0" value="1"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="29" id="IOCON4__CLDAT_PWMH">
@@ -6169,7 +6169,7 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="38" id="IOCON4__PMOD">
           <Values dnOrder="0">
-            <User dnOrder="0" value="1"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="39" id="IOCON7__CLDAT_PWMH">
@@ -6484,17 +6484,17 @@
         </Hex>
         <Hex dnOrder="93" id="MCPWM_IOCON2">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="1009763388"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="1009762364"/>
           </Values>
         </Hex>
         <Hex dnOrder="94" id="MCPWM_IOCON3">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="246784"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="245760"/>
           </Values>
         </Hex>
         <Hex dnOrder="95" id="MCPWM_IOCON4">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="1009501184"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="1009500160"/>
           </Values>
         </Hex>
         <Hex dnOrder="96" id="MCPWM_IOCON5">

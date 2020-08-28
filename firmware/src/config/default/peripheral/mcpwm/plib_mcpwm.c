@@ -138,7 +138,7 @@ void MCPWM_Initialize (void)
 
     /* IOCON2 register  */
     /*  SWAP    = 0*/
-    /*  PMOD    = 1*/
+    /*  PMOD    = 0*/
     /*  POLH    = 0*/
     /*  POLL    = 0*/
     /*  FLTDAT  = 0b11 */
@@ -149,7 +149,7 @@ void MCPWM_Initialize (void)
     /*  CLMOD  = 0 */
     /*  CLPOL  = 0  */
     /*  CLSRC  = 15  */
-    IOCON2 = 0x3c2fc43c;
+    IOCON2 = 0x3c2fc03c;
 
     PDC2 = 0;
     SDC2 = 500;
@@ -193,7 +193,7 @@ void MCPWM_Initialize (void)
 
     /* IOCON3 register  */
     /*  SWAP    = 0*/
-    /*  PMOD    = 1*/
+    /*  PMOD    = 0*/
     /*  POLH    = 0*/
     /*  POLL    = 0*/
     /*  FLTDAT  = 0b00 */
@@ -204,7 +204,7 @@ void MCPWM_Initialize (void)
     /*  CLMOD  = 0 */
     /*  CLPOL  = 0  */
     /*  CLSRC  = 0  */
-    IOCON3 = 0x3c400;
+    IOCON3 = 0x3c000;
 
     PDC3 = 0;
     SDC3 = 500;
@@ -248,7 +248,7 @@ void MCPWM_Initialize (void)
 
     /* IOCON4 register  */
     /*  SWAP    = 0*/
-    /*  PMOD    = 1*/
+    /*  PMOD    = 0*/
     /*  POLH    = 0*/
     /*  POLL    = 0*/
     /*  FLTDAT  = 0b00 */
@@ -259,7 +259,7 @@ void MCPWM_Initialize (void)
     /*  CLMOD  = 0 */
     /*  CLPOL  = 0  */
     /*  CLSRC  = 15  */
-    IOCON4 = 0x3c2bc400;
+    IOCON4 = 0x3c2bc000;
 
     PDC4 = 0;
     SDC4 = 500;

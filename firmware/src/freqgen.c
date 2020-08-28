@@ -11,7 +11,7 @@ void sine_table(void)
 	int I;
 
 	for (I = 0; I < sine_res; I++) {
-		sine_const[I] = sin((PI * 2.0 * (double) I) / (double) sine_res);
+		sine_const[I] = sin((M_PI * 2.0 * (double) I) / (double) sine_res);
 	}
 }
 
@@ -90,7 +90,7 @@ void fillTable(void)
 {
 	uint32_t i;
 	for (i = 0; i < 256; i++)
-		table[i] = sin(2.0 * PI * (double) i / 256.0);
+		table[i] = sin(2.0 * M_PI * (double) i / 256.0);
 }
 
 /*

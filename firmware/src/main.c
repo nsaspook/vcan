@@ -105,15 +105,15 @@ m35_4 = {
 struct SPid current_pi = {
 	.iMax = 3000.0,
 	.iMin = -3000.0,
-	.pGain = 0.5, // 2.0
-	.iGain = 0.125, // 1.0
+	.pGain = 0.5, // 0.5
+	.iGain = 0.125, // 0.125
 };
 
 struct SPid velocity_pi = {
-	.iMax = 500.0,
-	.iMin = -500.0,
-	.pGain = 0.5, // 2.0
-	.iGain = 0.1, // 1.0
+	.iMax = 50.0,
+	.iMin = -50.0,
+	.pGain = 1.25, // 0.5
+	.iGain = 0.5, // 0.125
 };
 
 V_STATE vcan_state = V_init;
@@ -128,7 +128,7 @@ volatile time_t t1_time;
 struct tm * timeinfo;
 
 uint32_t StartTime = 1, TimeUsed = 1;
-double mHz = 0.0, mHz_real = 0.0;
+double mHz = 0.0, mHz_real = 0.0, sr_slip = 0.0, mHz_raw = 0.0, mHz_real_raw = 0.0;
 
 const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
@@ -228,9 +228,9 @@ uint32_t velo_loop(double error)
 {
 	static uint32_t pace = 1, sequence1 = 0, sequence2 = 0;
 
-	if (error > 50.0) {
+	if (error > 20.01) {
 		pace = sequence1++ & 1;
-	} else if (error < -50.0) {
+	} else if (error < -20.01) {
 		pace = sequence2++ & 1;
 		if (pace)
 			pace = 2;
@@ -468,7 +468,7 @@ int main(void)
 		switch (i) {
 		case 0:
 			MCPWM_Start();
-			WaitMs(1400);
+			WaitMs(400);
 			/*
 			 * zero position counters at locked rotor position
 			 */
@@ -485,7 +485,6 @@ int main(void)
 			break;
 		case 1:
 		default:
-			WaitMs(400);
 			sprintf(buffer, "HP %7i      ", POS2CNT);
 			eaDogM_WriteStringAtPos(1, 0, buffer);
 			break;
@@ -641,12 +640,16 @@ int main(void)
 				RESET_LED_Toggle();
 			}
 			mHz = (double) TimeUsed / 60.0; // 60MHz core timer clock for ms per sinewave tick
-			mHz = ((mHz * (double) sine_res) / 1000.0)* (double) NUM_POLE_PAIRS; // time in ms for a complete wave cycle for each motor pole pair
+			mHz_raw = ((mHz * (double) sine_res) / 1000.0)* (double) NUM_POLE_PAIRS; // time in ms for a complete wave cycle for each motor pole pair
+			mHz = 1000000.0 / mHz_raw;
 			mHz_real = (double) INT2HLD;
 			mHz_real = mHz_real / (60.0 / 128.0);
-			mHz_real = ((mHz_real * (double) ENCODER_PULSES_PER_REV) / 1000.0);
-//			MCLIB_LinearRamp(&mHz_real, 0.05, mHz_real);
-			pi_velocity_error = UpdatePI(&velocity_pi, (mHz / 10000.0) - (mHz_real / 10000.0));
+			mHz_real_raw = ((mHz_real * (double) ENCODER_PULSES_PER_REV) / 1000.0);
+			mHz_real = 1000000.0 / mHz_real_raw;
+//			MCLIB_LinearRamp(&mHz_real_raw, 15.0, mHz_real_raw);
+			//			pi_velocity_error = UpdatePI(&velocity_pi, (mHz_raw / 10000.0) - (mHz_real_raw / 10000.0));
+			pi_velocity_error = UpdatePI(&velocity_pi, mHz_real-mHz);
+			sr_slip = (mHz - mHz_real) / mHz;
 
 			//run_tests(100000); // port diagnostics
 			if (TimerDone(TMR_DISPLAY)) {
@@ -669,11 +672,11 @@ int main(void)
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%5i: %4i %4i %4i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
-				sprintf(buffer, "Drive   mHz %4.5f  %f  ", 1000000.0 / mHz, mHz);
+				sprintf(buffer, "Drive   mHz %4.5f  %f  ", mHz, mHz_raw);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
-				sprintf(buffer, "Encoder mHz %4.5f  %f  ", 1000000.0 / mHz_real, mHz_real);
+				sprintf(buffer, "QEI     mHz %4.5f  %f  ", mHz_real, mHz_real_raw);
 				eaDogM_WriteStringAtPos(9, 0, buffer);
-				sprintf(buffer, "Velocity error %4.2f  %u  ", pi_velocity_error, pacing);
+				sprintf(buffer, "Velo Err %4.2f Slip %4.2f  ", pi_velocity_error, sr_slip);
 				eaDogM_WriteStringAtPos(10, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
