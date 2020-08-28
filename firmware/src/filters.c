@@ -96,7 +96,7 @@ int32_t lp_filter2(int32_t input, uint8_t chan)
 /* Function return: None                                                      */
 /* Description:  linearly ramps input to final value                          */
 /******************************************************************************/
-void MCLIB_LinearRamp(float * const input, const float stepSize, const float finalValue )
+void MCLIB_LinearRamp(double * const input, const double stepSize, const double finalValue )
 {
     if( (*input + stepSize ) < finalValue )
     {

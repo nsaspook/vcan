@@ -121,7 +121,7 @@ volatile time_t t1_time;
 struct tm * timeinfo;
 
 uint32_t StartTime = 1, TimeUsed = 1;
-double mHz = 0.0;
+double mHz = 0.0, mHz_real = 0.0;
 
 const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
@@ -566,6 +566,7 @@ int main(void)
 					m35_4.speed = motor_speed;
 					//DEBUGB0_Clear();
 				}
+			} else {
 			}
 			if (m35_2.error > 0) {
 				/*
@@ -634,8 +635,14 @@ int main(void)
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				mHz = (double) TimeUsed / 60.0; // 60MHz core timer clock for ms per sinewave tick
 				mHz = ((mHz * (double) sine_res) / 1000.0)* (double) NUM_POLE_PAIRS; // time in ms for a complete wave cycle for each motor pole pair
-				sprintf(buffer, "Drive mHz %4.5f    ", 1000000.0 / mHz);
+				mHz_real = (double) INT2HLD;
+				mHz_real = mHz_real / (60.0 / 128.0);
+				mHz_real = ((mHz_real * (double) ENCODER_PULSES_PER_REV) / 1000.0);
+				MCLIB_LinearRamp(&mHz_real, 0.05, mHz_real);
+				sprintf(buffer, "Drive   mHz %4.5f    ", 1000000.0 / mHz);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
+				sprintf(buffer, "Encoder mHz %4.5f    ", 1000000.0 / mHz_real);
+				eaDogM_WriteStringAtPos(9, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
