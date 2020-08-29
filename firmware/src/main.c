@@ -511,9 +511,7 @@ int main(void)
 		 */
 		if (TimerDone(TMR_VEL)) {
 			StartTimer(TMR_VEL, 1000);
-			m35_1.vel = VEL1CNT;
-			m35_2.vel = VEL2CNT;
-			m35_3.vel = VEL3CNT;
+
 		}
 
 		if (TimerDone(TMR_MOTOR)) {
@@ -551,7 +549,7 @@ int main(void)
 			QEI2ICC = m35_2.pos;
 			QEI2CMPL = m35_2.pos;
 
-			m35_2.error = (m35_3.pos * m35_3.gain) - m35_2.pos;
+			m35_2.error = lp_filter((m35_3.pos * m35_3.gain) - m35_2.pos, 4);
 
 			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
 
@@ -580,21 +578,24 @@ int main(void)
 				m35_4.current = MBIAS;
 			}
 
-			if (abs(m35_2.error) > motor_error_stop) {
-				if (!m35_4.speed--) {
-					//DEBUGB0_Set();
-					DEBUGB0_Toggle();
-					TimeUsed = (uint32_t) _CP0_GET_COUNT() - StartTime;
-					StartTime = (uint32_t) _CP0_GET_COUNT();
-					pacing = velo_loop(pi_velocity_error);
-					phase_duty(&m35_2, m35_4.current, m_speed, pacing);
-					phase_duty(&m35_3, m35_4.current, m_speed, pacing);
-					phase_duty(&m35_4, m35_4.current, m_speed, pacing);
-					m35_4.speed = motor_speed;
-					//DEBUGB0_Clear();
-				}
-			} else {
+			//			if (abs(m35_2.error) > motor_error_stop) {
+			if (!--m35_4.speed) {
+				//DEBUGB0_Set();
+				DEBUGB0_Toggle();
+				TimeUsed = (uint32_t) _CP0_GET_COUNT() - StartTime;
+				StartTime = (uint32_t) _CP0_GET_COUNT();
+				m35_1.vel = VEL1CNT;
+				m35_2.vel = VEL2CNT;
+				m35_3.vel = VEL3CNT;
+				pacing = velo_loop(pi_velocity_error);
+				phase_duty(&m35_2, m35_4.current, m_speed, pacing);
+				phase_duty(&m35_3, m35_4.current, m_speed, pacing);
+				phase_duty(&m35_4, m35_4.current, m_speed, pacing);
+				m35_4.speed = motor_speed;
+				//DEBUGB0_Clear();
 			}
+			//			} else {
+			//			}
 			if (m35_2.error > 0) {
 				/*
 				 * set channel duty cycle for motor outputs
@@ -646,9 +647,9 @@ int main(void)
 			mHz_real = mHz_real / (60.0 / 128.0);
 			mHz_real_raw = ((mHz_real * (double) ENCODER_PULSES_PER_REV) / 1000.0);
 			mHz_real = 1000000.0 / mHz_real_raw;
-//			MCLIB_LinearRamp(&mHz_real_raw, 15.0, mHz_real_raw);
+			//			MCLIB_LinearRamp(&mHz_real_raw, 15.0, mHz_real_raw);
 			//			pi_velocity_error = UpdatePI(&velocity_pi, (mHz_raw / 10000.0) - (mHz_real_raw / 10000.0));
-			pi_velocity_error = UpdatePI(&velocity_pi, mHz_real-mHz);
+			pi_velocity_error = UpdatePI(&velocity_pi, mHz_real - mHz);
 			sr_slip = (mHz - mHz_real) / mHz;
 
 			//run_tests(100000); // port diagnostics
@@ -685,7 +686,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(13, 0, buffer);
 				motor_graph();
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 250);
+				StartTimer(TMR_DISPLAY, 333);
 			}
 		}
 	}

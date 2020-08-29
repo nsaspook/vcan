@@ -11,6 +11,7 @@
             <file>file:/root/vcan/firmware/src/main.c</file>
             <file>file:/root/vcan/firmware/src/pid.h</file>
             <file>file:/root/vcan/firmware/src/vcan.h</file>
+            <file>file:/root/vcan/firmware/src/filters.c</file>
             <file>file:/root/vcan/firmware/src/freqgen.h</file>
             <file>file:/root/vcan/firmware/src/pid.c</file>
         </group>
