@@ -10784,9 +10784,6 @@ Source: http://onsemi.com .. MBR0520LT1-D.pdf</description>
 </class>
 <class number="1" name="icurrent" width="0.3048" drill="0">
 </class>
-<class number="2" name="led" width="0.508" drill="0">
-<clearance class="2" value="0.4064"/>
-</class>
 </classes>
 <parts>
 <part name="LCD1" library="ea_v66" deviceset="EA_DOGXL240-7" device=""/>
@@ -11329,7 +11326,7 @@ Source: http://onsemi.com .. MBR0520LT1-D.pdf</description>
 <junction x="-2.54" y="-20.32"/>
 </segment>
 </net>
-<net name="N$24" class="2">
+<net name="N$24" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="FB"/>
 <wire x1="22.86" y1="-25.4" x2="22.86" y2="-45.72" width="0.1524" layer="91"/>
@@ -11341,7 +11338,7 @@ Source: http://onsemi.com .. MBR0520LT1-D.pdf</description>
 <junction x="-30.48" y="-45.72"/>
 </segment>
 </net>
-<net name="N$15" class="2">
+<net name="N$15" class="0">
 <segment>
 <pinref part="D1" gate="G$1" pin="C"/>
 <wire x1="-7.62" y1="-20.32" x2="-17.78" y2="-20.32" width="0.1524" layer="91"/>
@@ -11353,26 +11350,22 @@ Source: http://onsemi.com .. MBR0520LT1-D.pdf</description>
 <junction x="-30.48" y="-20.32"/>
 </segment>
 </net>
-<net name="N$25" class="2">
+<net name="N$25" class="0">
 <segment>
 <pinref part="PAD4" gate="P" pin="P"/>
 <wire x1="-30.48" y1="7.62" x2="-20.32" y2="7.62" width="0.1524" layer="91"/>
 <wire x1="-20.32" y1="7.62" x2="-20.32" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="PAD3" gate="P" pin="P"/>
 <wire x1="-20.32" y1="15.24" x2="-30.48" y2="15.24" width="0.1524" layer="91"/>
-<junction x="-30.48" y="15.24"/>
-<junction x="-30.48" y="7.62"/>
 </segment>
 </net>
-<net name="N$26" class="2">
+<net name="N$26" class="0">
 <segment>
 <pinref part="PAD6" gate="P" pin="P"/>
 <wire x1="-30.48" y1="-7.62" x2="-20.32" y2="-7.62" width="0.1524" layer="91"/>
 <wire x1="-20.32" y1="-7.62" x2="-20.32" y2="0" width="0.1524" layer="91"/>
 <pinref part="PAD5" gate="P" pin="P"/>
 <wire x1="-20.32" y1="0" x2="-30.48" y2="0" width="0.1524" layer="91"/>
-<junction x="-30.48" y="0"/>
-<junction x="-30.48" y="-7.62"/>
 </segment>
 </net>
 </nets>
