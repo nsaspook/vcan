@@ -7525,7 +7525,7 @@
       <Symbols dnOrder="0">
         <Hex dnOrder="0" id="TCON_REG_VALUE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tmr1" value="514"/>
+            <Dynamic dnOrder="0" id="tmr1" value="2"/>
           </Values>
         </Hex>
         <Integer dnOrder="1" id="TIMER1_CLOCK_FREQ">
@@ -7550,7 +7550,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="0"/>
+            <User dnOrder="0" value="2"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="5" id="TIMER1_TGATE">
