@@ -665,17 +665,19 @@ int main(void)
 				/*
 				 * show some test results on the LCD screen
 				 */
+				sprintf(buffer, "Phase   L1   L2   L3  ");
+				eaDogM_WriteStringAtPos(3, 0, buffer);
 				sprintf(buffer, "%5i: %4i %4i %4i         ", m35_2.erotations, u1bi, u2ai, u2bi);
 				eaDogM_WriteStringAtPos(4, 0, buffer);
 				sprintf(buffer, "%5i: %4i %4i %4i         ", m35_2.indexcnt, hb_current(u1bi), hb_current(u2ai), hb_current(u2bi));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
-				sprintf(buffer, "%5i: %4i %4i %4i    ", motor_speed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
+				sprintf(buffer, "%5i: %4i %4i %4i  Pace %i", motor_speed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps, pacing);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%5i: %4i %4i %4i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
-				sprintf(buffer, "Drive   mHz %4.5f  %f  ", mHz, mHz_raw);
+				sprintf(buffer, "Drive mHz %4.5f  %f  ", mHz, mHz_raw);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
-				sprintf(buffer, "QEI     mHz %4.5f  %f  ", mHz_real, mHz_real_raw);
+				sprintf(buffer, "QEI   mHz %4.5f  %f  ", mHz_real, mHz_real_raw);
 				eaDogM_WriteStringAtPos(9, 0, buffer);
 				sprintf(buffer, "Velo Err %4.2f Slip %4.2f  ", pi_velocity_error, sr_slip);
 				eaDogM_WriteStringAtPos(10, 0, buffer);
