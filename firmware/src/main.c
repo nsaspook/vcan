@@ -607,9 +607,9 @@ int main(void)
 				/*
 				 * set channel duty cycle for motor outputs
 				 */
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
+				//MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+				//MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
+				//MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
 			}
 
 			/*
