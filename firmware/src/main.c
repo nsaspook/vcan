@@ -80,6 +80,7 @@ m35_2 = {
 	.phaseIncrement = PHASE_INC,
 	.phase_steps = 0,
 	.phaseAccumulator = 0,
+	.set=false,
 },
 m35_3 = {
 	.duty = 0,
@@ -216,18 +217,24 @@ void my_time(uint32_t status, uintptr_t context)
  */
 void move_pos_qei(uint32_t status, uintptr_t context)
 {
+
+#ifdef SLIP_DRIVE
 	if (true) {
-		//		POS3CNT++;
 		POS3CNT = POS2CNT + MOTOR_SLIP; // movement offset
 	}
+#endif
+	return;
 }
 
-uint32_t velo_loop(double);
+uint32_t velo_loop(double, bool);
 
-uint32_t velo_loop(double error)
+uint32_t velo_loop(double error, bool stop)
 {
 	static uint32_t pace = 1, sequence1 = 0, sequence2 = 0;
 
+	if (stop) {
+		return 0;
+	}
 	if (error > 20.01) {
 		pace = sequence1++ & 1;
 	} else if (error < -20.01) {
@@ -576,9 +583,15 @@ int main(void)
 
 			if (abs(m35_2.error) < motor_error_stop) {
 				m35_4.current = MBIAS;
+				m35_2.set=true;
+				U1_EN_Clear();
+				U2_EN_Clear();
+			} else {
+				m35_2.set=false;
+				U1_EN_Set();
+				U2_EN_Set();
 			}
 
-			//			if (abs(m35_2.error) > motor_error_stop) {
 			if (!--m35_4.speed) {
 				//DEBUGB0_Set();
 				DEBUGB0_Toggle();
@@ -587,15 +600,14 @@ int main(void)
 				m35_1.vel = VEL1CNT;
 				m35_2.vel = VEL2CNT;
 				m35_3.vel = VEL3CNT;
-				pacing = velo_loop(pi_velocity_error);
+				pacing = velo_loop(pi_velocity_error, m35_2.set);
 				phase_duty(&m35_2, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_3, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_4, m35_4.current, m_speed, pacing);
 				m35_4.speed = motor_speed;
 				//DEBUGB0_Clear();
 			}
-			//			} else {
-			//			}
+
 			if (m35_2.error > 0) {
 				/*
 				 * set channel duty cycle for motor outputs

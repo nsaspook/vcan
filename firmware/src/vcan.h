@@ -22,16 +22,17 @@ extern "C" {
 #define SR240		24000
 #define PHASE_INC	(256 * 65536) / SAMPLERATE
 
-#define MOTOR_SPEED	100	// sinewave update divider
+#define MOTOR_SPEED	10	// sinewave update divider
 #define MOTOR_UPDATES	1	// main motor loop timer in ms
 
-#define MBIAS		1800 // current drive flux min for motor rotor lock stability
+#define MBIAS		1000 // current drive flux min for motor rotor lock stability
 
 	//#define ENCODER_PULSES_PER_REV	327680
 #define ENCODER_PULSES_PER_REV	4000
 #define NUM_POLES		8
 #define NUM_POLE_PAIRS		NUM_POLES/2
 
+	//#define	SLIP_DRIVE
 #define MOTOR_SLIP	200
 
 #define PWM_FREQUENCY		MOTOR_SPEED

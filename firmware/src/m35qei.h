@@ -36,7 +36,7 @@ extern "C" {
 #define hpwm_high_duty	duty_max-1
 #define hpwm_low_duty	1
 
-#define motor_error_stop	10
+#define motor_error_stop	1
 #define motor_error_coast	100
 #define motor_error_knee	200
 
@@ -76,7 +76,7 @@ extern "C" {
 		int32_t indexcnt, indexvel, ppp;
 		uint32_t pole_pairs, ppr, phaseAccumulator, phaseIncrement, phase_steps, erotations;
 		double sin;
-		bool cw, ccw, stopped;
+		bool cw, ccw, stopped, set;
 	};
 
 	typedef enum {
