@@ -80,7 +80,7 @@ m35_2 = {
 	.phaseIncrement = PHASE_INC,
 	.phase_steps = 0,
 	.phaseAccumulator = 0,
-	.set=false,
+	.set = false,
 },
 m35_3 = {
 	.duty = 0,
@@ -113,8 +113,8 @@ struct SPid current_pi = {
 struct SPid velocity_pi = {
 	.iMax = 50.0,
 	.iMin = -50.0,
-	.pGain = 1.25, // 0.5
-	.iGain = 0.5, // 0.125
+	.pGain = 3.25, // 0.5
+	.iGain = 0.95, // 0.5 slip_drive
 };
 
 V_STATE vcan_state = V_init;
@@ -230,11 +230,15 @@ uint32_t velo_loop(double, bool);
 
 uint32_t velo_loop(double error, bool stop)
 {
-	static uint32_t pace = 1, sequence1 = 0, sequence2 = 0;
+	uint32_t pace = 1;
+
 
 	if (stop) {
 		return 0;
 	}
+	
+#ifdef SLIP_DRIVE
+	static uint32_t sequence1 = 0, sequence2 = 0;
 	if (error > 20.01) {
 		pace = sequence1++ & 1;
 	} else if (error < -20.01) {
@@ -244,6 +248,7 @@ uint32_t velo_loop(double error, bool stop)
 	} else {
 		pace = 1;
 	}
+#endif
 
 	return pace;
 }
@@ -556,7 +561,7 @@ int main(void)
 			QEI2ICC = m35_2.pos;
 			QEI2CMPL = m35_2.pos;
 
-			m35_2.error = lp_filter((m35_3.pos * m35_3.gain) - m35_2.pos, 4);
+			m35_2.error = (m35_3.pos * m35_3.gain) - m35_2.pos, 4;
 
 			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
 
@@ -582,14 +587,14 @@ int main(void)
 			m35_4.current_prev = m35_4.current;
 
 			if (abs(m35_2.error) < motor_error_stop) {
-				m35_4.current = MBIAS;
-				m35_2.set=true;
-				U1_EN_Clear();
-				U2_EN_Clear();
+				m35_4.current = 0;
+				m35_2.set = true;
+//				U1_EN_Clear();
+//				U2_EN_Clear();
 			} else {
-				m35_2.set=false;
-				U1_EN_Set();
-				U2_EN_Set();
+				m35_2.set = false;
+//				U1_EN_Set();
+//				U2_EN_Set();
 			}
 
 			if (!--m35_4.speed) {
@@ -604,6 +609,14 @@ int main(void)
 				phase_duty(&m35_2, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_3, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_4, m35_4.current, m_speed, pacing);
+				if (abs(m35_2.error) > 1000)
+					motor_speed = 6;
+				if (abs(m35_2.error) < 250)
+					motor_speed = 20;
+				if (abs(m35_2.error) < 100)
+					motor_speed = 100;
+				if (abs(m35_2.error) < 50)
+					motor_speed = 1000;
 				m35_4.speed = motor_speed;
 				//DEBUGB0_Clear();
 			}
@@ -619,9 +632,9 @@ int main(void)
 				/*
 				 * set channel duty cycle for motor outputs
 				 */
-				//MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-				//MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
-				//MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
 			}
 
 			/*
