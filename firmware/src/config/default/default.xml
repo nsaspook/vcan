@@ -7976,7 +7976,8 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
+    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="adchs" x="19" y="389"/>
         <ElementPosition dnOrder="1" id="core" x="198" y="49"/>
@@ -7996,6 +7997,5 @@
         <ElementPosition dnOrder="15" id="uart6" x="163" y="307"/>
       </ElementPositions>
     </ComponentGraph>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>

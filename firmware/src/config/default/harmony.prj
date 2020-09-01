@@ -462,7 +462,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="5" key="PackageFilter" value="expresslogic_threadx;bootloader;csp;gfx_apps;gfx;cryptoauthlib;wireless;cryptoauthlib_apps;usb;crypto;motor_control;audio;net;aerospace;x2c;touch;aws_cloud;bt;micrium_ucos3;core;bsp;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="expresslogic_threadx;bootloader;bootloader_apps_ethernet;csp;quick_docs;gfx_apps;gfx;cryptoauthlib;wireless;cryptoauthlib_apps;usb;bootloader_apps_usb;classb_sam_e5x_d5x;crypto;motor_control;audio;net;aerospace;bootloader_apps_sdcard;bootloader_apps_i2c;bootloader_apps_uart;reference_apps;x2c;touch;aws_cloud;bt;micrium_ucos3;core;ethercat;bsp;"/>
       <Setting dnOrder="6" key="TRUSTZONE" value="false"/>
     </Settings>
   </Configurator>
