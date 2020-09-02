@@ -106,8 +106,8 @@ m35_4 = {
 struct SPid current_pi = {
 	.iMax = 3000.0,
 	.iMin = -3000.0,
-	.pGain = 0.5, // 0.5
-	.iGain = 0.125, // 0.125
+	.pGain = 0.9, // 0.5
+	.iGain = 0.425, // 0.125
 };
 
 struct SPid velocity_pi = {
@@ -610,12 +610,12 @@ int main(void)
 				phase_duty(&m35_3, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_4, m35_4.current, m_speed, pacing);
 				if (abs(m35_2.error) > 1000)
-					motor_speed = 6;
-				if (abs(m35_2.error) < 250)
-					motor_speed = 20;
+					motor_speed = 2;
 				if (abs(m35_2.error) < 100)
-					motor_speed = 100;
+					motor_speed = 10;
 				if (abs(m35_2.error) < 50)
+					motor_speed = 50;
+				if (abs(m35_2.error) < 15)
 					motor_speed = 1000;
 				m35_4.speed = motor_speed;
 				//DEBUGB0_Clear();
