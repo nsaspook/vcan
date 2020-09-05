@@ -15,6 +15,7 @@ extern "C" {
 	 * VCAN project header file
 	 */
 #include <math.h>
+#include <stdio.h>
 
 #define SYS_FREQ	120000000 // Running at 120MHz
 #define SAMPLERATE	36000
@@ -25,7 +26,7 @@ extern "C" {
 #define MOTOR_SPEED	100	// sinewave update divider
 #define MOTOR_UPDATES	1	// main motor loop timer in ms
 
-#define MBIAS		1400 // current drive flux min for motor rotor lock stability
+#define MBIAS		1700 // current drive flux min for motor rotor lock stability
 
 	//#define ENCODER_PULSES_PER_REV	327680
 #define ENCODER_PULSES_PER_REV	4000

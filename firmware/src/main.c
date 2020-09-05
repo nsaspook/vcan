@@ -106,7 +106,7 @@ m35_4 = {
 struct SPid current_pi = {
 	.iMax = 3000.0,
 	.iMin = -3000.0,
-	.pGain = 0.9, // 0.5
+	.pGain = 2.0, // 0.5
 	.iGain = 0.425, // 0.125
 };
 
@@ -236,7 +236,7 @@ uint32_t velo_loop(double error, bool stop)
 	if (stop) {
 		return 0;
 	}
-	
+
 #ifdef SLIP_DRIVE
 	static uint32_t sequence1 = 0, sequence2 = 0;
 	if (error > 20.01) {
@@ -529,6 +529,8 @@ int main(void)
 		if (TimerDone(TMR_MOTOR)) {
 			StartTimer(TMR_MOTOR, MOTOR_UPDATES);
 
+			m35_2.cw = false;
+			m35_2.ccw = false;
 			/* update local values of the encoder status counters */
 			m35_1.pos = POS1CNT;
 			m35_1.vel = VEL1HLD;
@@ -548,8 +550,14 @@ int main(void)
 			/*
 			 * direction compare from previous position
 			 */
-			m35_2.cw = QEI2STATbits.PCHEQIRQ;
-			m35_2.ccw = QEI2STATbits.PCLEQIRQ;
+			if (QEI2STATbits.PCHEQIRQ) {
+				m35_2.cw = QEI2STATbits.PCHEQIRQ;
+				QEI2STATbits.PCHEQIRQ = 0;
+			}
+			if (QEI2STATbits.PCLEQIRQ) {
+				m35_2.ccw = QEI2STATbits.PCLEQIRQ;
+				QEI2STATbits.PCLEQIRQ = 0;
+			}
 			if ((m35_2.cw | m35_2.ccw) == 0) {
 				m35_2.stopped = true;
 			} else {
@@ -558,8 +566,8 @@ int main(void)
 			/*
 			 * update compare positions for next motor position sample
 			 */
-			QEI2ICC = m35_2.pos;
-			QEI2CMPL = m35_2.pos;
+			QEI2ICC = POS2CNT;
+			QEI2CMPL = POS2CNT;
 
 			m35_2.error = (m35_3.pos * m35_3.gain) - m35_2.pos, 4;
 
@@ -587,14 +595,14 @@ int main(void)
 			m35_4.current_prev = m35_4.current;
 
 			if (abs(m35_2.error) < motor_error_stop) {
-				m35_4.current = 0;
+				m35_4.current = 150;
 				m35_2.set = true;
-//				U1_EN_Clear();
-//				U2_EN_Clear();
+				//				U1_EN_Clear();
+				//				U2_EN_Clear();
 			} else {
 				m35_2.set = false;
-//				U1_EN_Set();
-//				U2_EN_Set();
+				//				U1_EN_Set();
+				//				U2_EN_Set();
 			}
 
 			if (!--m35_4.speed) {
@@ -606,11 +614,18 @@ int main(void)
 				m35_2.vel = VEL2CNT;
 				m35_3.vel = VEL3CNT;
 				pacing = velo_loop(pi_velocity_error, m35_2.set);
+				if (pacing == 0) {
+					m35_2.stopped = true;
+				} else {
+					m35_2.stopped = false;
+				}
 				phase_duty(&m35_2, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_3, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_4, m35_4.current, m_speed, pacing);
 				if (abs(m35_2.error) > 1000)
 					motor_speed = 2;
+				if (abs(m35_2.error) <= 1000)
+					motor_speed = 4;
 				if (abs(m35_2.error) < 100)
 					motor_speed = 10;
 				if (abs(m35_2.error) < 50)
@@ -622,6 +637,10 @@ int main(void)
 			}
 
 			if (m35_2.error > 0) {
+				if (m35_2.ccw) {
+					m35_2.ccw = false;
+				}
+				m35_2.cw = true;
 				/*
 				 * set channel duty cycle for motor outputs
 				 */
@@ -629,6 +648,10 @@ int main(void)
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 			} else {
+				if (m35_2.cw) {
+					m35_2.cw = false;
+				}
+				m35_2.ccw = true;
 				/*
 				 * set channel duty cycle for motor outputs
 				 */
@@ -681,7 +704,7 @@ int main(void)
 			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
 				OledClearBuffer();
-				sprintf(buffer, "C %5i:%i      ", m35_ptr->pos, m35_2.error);
+				sprintf(buffer, "C %5i:%i     %1i:%1i:%1i:%1i     ", m35_ptr->pos, m35_2.error, m35_2.cw, m35_2.ccw, m35_2.stopped, m35_2.set);
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_2;
 				sprintf(buffer, "C %4i:%i:%u:%u      ", POS2CNT, VEL2HLD, INT2HLD, INT2TMR);
