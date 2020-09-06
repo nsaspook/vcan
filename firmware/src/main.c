@@ -44,6 +44,7 @@ IC = M * sin (? + 240)
  * http://www.galilmc.com/download/application-note/note3414.pdf
  * https://www.motioncontroltips.com/what-is-sinusoidal-commutation-for-dc-motors/
  * https://www.switchcraft.org/learning/2017/3/15/space-vector-pwm-intro
+ * Control of permanent magnet AC servo motors via fuzzy reasoning
  */
 
 /*

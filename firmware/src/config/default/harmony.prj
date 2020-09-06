@@ -112,8 +112,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/qei/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/qei/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">E42D45425050F35AAFE1596D6BD19E1E</GeneratedChecksum>
-          <UserChecksum dnOrder="6">E42D45425050F35AAFE1596D6BD19E1E</UserChecksum>
+          <GeneratedChecksum dnOrder="5">7104384BE1296558C04F642DDB97E46B</GeneratedChecksum>
+          <UserChecksum dnOrder="6">7104384BE1296558C04F642DDB97E46B</UserChecksum>
         </File>
         <File dnOrder="12">
           <Type dnOrder="0">SOURCE</Type>
