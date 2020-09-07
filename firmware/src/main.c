@@ -143,6 +143,7 @@ const uint8_t step_code[] = {// A,B,C bits in order
 };
 
 void my_time(uint32_t, uintptr_t);
+void my_index(uint32_t, uintptr_t);
 void move_pos_qei(uint32_t, uintptr_t);
 void motor_graph(void);
 void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
@@ -211,6 +212,11 @@ time_t time(time_t * Time)
 void my_time(uint32_t status, uintptr_t context)
 {
 	t1_time++;
+}
+
+void my_index(uint32_t status, uintptr_t context)
+{
+	POS2CNT = 0;
 }
 
 /*
@@ -351,6 +357,7 @@ int main(void)
 	StartTimer(TMR_LCD_UP, 10);
 
 	QEI1_Start();
+	QEI2_CallbackRegister(my_index, 0);
 	QEI2_Start();
 	QEI3_Start();
 	m35_ptr = &m35_3;
@@ -623,16 +630,21 @@ int main(void)
 				phase_duty(&m35_2, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_3, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_4, m35_4.current, m_speed, pacing);
-				if (abs(m35_2.error) > 1000)
-					motor_speed = 2;
+				if (abs(m35_2.error) > 1000) {
+					motor_speed = 1;
+					if (TimerDone(TMR_BLINK)) {
+						StartTimer(TMR_BLINK, 250);
+						RESET_LED_Toggle();
+					}
+				}
 				if (abs(m35_2.error) <= 1000)
-					motor_speed = 4;
+					motor_speed = 2;
 				if (abs(m35_2.error) < 100)
 					motor_speed = 10;
 				if (abs(m35_2.error) < 50)
 					motor_speed = 50;
 				if (abs(m35_2.error) < 15)
-					motor_speed = 1000;
+					motor_speed = 500;
 				m35_4.speed = motor_speed;
 				//DEBUGB0_Clear();
 			}

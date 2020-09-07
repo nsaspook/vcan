@@ -57,10 +57,10 @@ void QEI2_Initialize (void)
     /*  GATEN  = 0 */
     /*  CNTPOL = 0 */
     /*  INTDIV = 7 */
-    /*  IMV    = 3  */
-    /*  PIMOD  = 1  */
+    /*  IMV    = 0  */
+    /*  PIMOD  = 0  */
     /*  QEISIDL = 0 */
-    QEI2CON = 0x770;
+    QEI2CON = 0x70;
 
     /* QEI2IOC register  */
     /*  QEAPOL    = 0 */
@@ -70,8 +70,8 @@ void QEI2_Initialize (void)
     /*  SWPAB    = 0  */
     /*  OUTFNC  = 0  */
     /*  QFDIV   = 0   */
-    /*  FLTREN  = 0   */
-    QEI2IOC = 0x0;
+    /*  FLTREN  = 1   */
+    QEI2IOC = 0x4000;
 
     QEI2ICC = 0U;
     QEI2CMPL = 0U;

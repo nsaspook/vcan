@@ -13,7 +13,7 @@ extern "C" {
 #endif
 #include "vcan.h"
 
-#define NOINDEX
+//#define NOINDEX
 
 #define sine_res	3600
 #define sinea		0
