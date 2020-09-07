@@ -143,7 +143,7 @@ const uint8_t step_code[] = {// A,B,C bits in order
 };
 
 void my_time(uint32_t, uintptr_t);
-void my_index(uint32_t, uintptr_t);
+void my_index(GPIO_PIN, uintptr_t);
 void move_pos_qei(uint32_t, uintptr_t);
 void motor_graph(void);
 void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
@@ -214,7 +214,7 @@ void my_time(uint32_t status, uintptr_t context)
 	t1_time++;
 }
 
-void my_index(uint32_t status, uintptr_t context)
+void my_index(GPIO_PIN pin, uintptr_t context)
 {
 	POS2CNT = 0;
 }
@@ -357,7 +357,9 @@ int main(void)
 	StartTimer(TMR_LCD_UP, 10);
 
 	QEI1_Start();
-	QEI2_CallbackRegister(my_index, 0);
+	//	QEI2_CallbackRegister(my_index, 0);
+	GPIO_PinInterruptCallbackRegister(GPIO_PIN_RB1, my_index, 0);
+	GPIO_PortInterruptEnable(GPIO_PORT_B, 0b10);
 	QEI2_Start();
 	QEI3_Start();
 	m35_ptr = &m35_3;
@@ -482,6 +484,7 @@ int main(void)
 	 * block-commutated
 	 */
 	for (i = 0; i < 7; i++) {
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, ((step_code[i & 0x7] >> 2)&0x1) * hpwm_mid_duty);
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i & 0x7] >> 2)&0x1) * hpwm_mid_duty);
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i & 0x7] >> 1)&0x1) * hpwm_mid_duty);
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i & 0x7] >> 0)&0x1) * hpwm_mid_duty);
@@ -512,6 +515,7 @@ int main(void)
 		OledUpdate();
 		WaitMs(100);
 	}
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, 0);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
@@ -556,28 +560,12 @@ int main(void)
 			m35_3.indexcnt = INDX3CNT;
 
 			/*
-			 * direction compare from previous position
-			 */
-			if (QEI2STATbits.PCHEQIRQ) {
-				m35_2.cw = QEI2STATbits.PCHEQIRQ;
-				QEI2STATbits.PCHEQIRQ = 0;
-			}
-			if (QEI2STATbits.PCLEQIRQ) {
-				m35_2.ccw = QEI2STATbits.PCLEQIRQ;
-				QEI2STATbits.PCLEQIRQ = 0;
-			}
-			if ((m35_2.cw | m35_2.ccw) == 0) {
-				m35_2.stopped = true;
-			} else {
-				m35_2.stopped = false;
-			}
-			/*
 			 * update compare positions for next motor position sample
 			 */
 			QEI2ICC = POS2CNT;
 			QEI2CMPL = POS2CNT;
 
-			m35_2.error = (m35_3.pos * m35_3.gain) - m35_2.pos, 4;
+			m35_2.error = (m35_3.pos * m35_3.gain) - m35_2.pos;
 
 			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
 
@@ -603,17 +591,23 @@ int main(void)
 			m35_4.current_prev = m35_4.current;
 
 			if (abs(m35_2.error) < motor_error_stop) {
-				m35_4.current = 150;
 				m35_2.set = true;
-				//				U1_EN_Clear();
-				//				U2_EN_Clear();
 			} else {
 				m35_2.set = false;
-				//				U1_EN_Set();
-				//				U2_EN_Set();
 			}
 
-			if (!--m35_4.speed) {
+			pacing = velo_loop(pi_velocity_error, m35_2.set);
+			if (pacing == 0) {
+				m35_2.stopped = true;
+			} else {
+				m35_2.stopped = false;
+			}
+			if (m35_2.set) {
+				m35_4.speed = 1;
+			}
+
+
+			if (m35_2.set || (!--m35_4.speed)) {
 				//DEBUGB0_Set();
 				DEBUGB0_Toggle();
 				TimeUsed = (uint32_t) _CP0_GET_COUNT() - StartTime;
@@ -621,31 +615,10 @@ int main(void)
 				m35_1.vel = VEL1CNT;
 				m35_2.vel = VEL2CNT;
 				m35_3.vel = VEL3CNT;
-				pacing = velo_loop(pi_velocity_error, m35_2.set);
-				if (pacing == 0) {
-					m35_2.stopped = true;
-				} else {
-					m35_2.stopped = false;
-				}
+
 				phase_duty(&m35_2, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_3, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_4, m35_4.current, m_speed, pacing);
-				if (abs(m35_2.error) > 1000) {
-					motor_speed = 1;
-					if (TimerDone(TMR_BLINK)) {
-						StartTimer(TMR_BLINK, 250);
-						RESET_LED_Toggle();
-					}
-				}
-				if (abs(m35_2.error) <= 1000)
-					motor_speed = 2;
-				if (abs(m35_2.error) < 100)
-					motor_speed = 10;
-				if (abs(m35_2.error) < 50)
-					motor_speed = 50;
-				if (abs(m35_2.error) < 15)
-					motor_speed = 500;
-				m35_4.speed = motor_speed;
 				//DEBUGB0_Clear();
 			}
 
@@ -657,6 +630,7 @@ int main(void)
 				/*
 				 * set channel duty cycle for motor outputs
 				 */
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
@@ -668,11 +642,39 @@ int main(void)
 				/*
 				 * set channel duty cycle for motor outputs
 				 */
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
 			}
 
+			if (m35_2.set || !m35_4.speed) {
+				if (abs(m35_2.error) > ENCODER_PULSES_PER_REV / 4) {
+					motor_speed = 1;
+					if (TimerDone(TMR_BLINK)) {
+						StartTimer(TMR_BLINK, 250);
+						RESET_LED_Toggle();
+					}
+				}
+				if (abs(m35_2.error) <= ENCODER_PULSES_PER_REV / 800)
+					motor_speed = 2;
+				if (abs(m35_2.error) < ENCODER_PULSES_PER_REV / 900)
+					motor_speed = 10;
+				if (abs(m35_2.error) < ENCODER_PULSES_PER_REV / 1000)
+					motor_speed = 50;
+				if (abs(m35_2.error) < ENCODER_PULSES_PER_REV / 1200)
+					motor_speed = 200;
+				if (abs(m35_2.error) < ENCODER_PULSES_PER_REV / 1500)
+					motor_speed = 1000;
+				if (abs(m35_2.error) < ENCODER_PULSES_PER_REV / 2000)
+					motor_speed = 10000;
+
+				if (m35_2.set) {
+					motor_speed = 1;
+				}
+				m35_4.speed = motor_speed;
+			}
+			
 			/*
 			 * test switch interface with motor control
 			 */

@@ -47,7 +47,6 @@
 // *****************************************************************************
 // *****************************************************************************
 
-QEI_CH_OBJECT qei2Obj;
 
 void QEI2_Initialize (void)
 {
@@ -77,15 +76,14 @@ void QEI2_Initialize (void)
     QEI2CMPL = 0U;
 
     /* QEI2STAT register  */
-    /*  IDXIEN    = true */
+    /*  IDXIEN    = false */
     /*  HOMIEN  = false */
     /*  VELOVIEN = false */
     /*  POSOVIEN = false */
     /*  PCIIEN    = false  */
     /*  PCLEQIEN  = false    */
     /*  PCHEQIEN = false     */
-    QEI2STAT = 0x1;
-    IEC5SET = _IEC5_QEI2IE_MASK;
+    QEI2STAT = 0x0;
 
 }
 
@@ -123,19 +121,4 @@ void QEI2_VelocityCountSet(uint32_t velocity_count)
     VEL2CNT = velocity_count;
 }
 
-void QEI2_CallbackRegister(QEI_CALLBACK callback, uintptr_t context)
-{
-    qei2Obj.callback = callback;
 
-    qei2Obj.context = context;
-}
-
-void QEI2_InterruptHandler(void)
-{
-    QEI_STATUS status = (QEI_STATUS)(QEI2STAT & QEI_STATUS_MASK);
-    IFS5CLR = _IFS5_QEI2IF_MASK;
-    if( (qei2Obj.callback != NULL))
-    {
-        qei2Obj.callback(status, qei2Obj.context);
-    }
-}

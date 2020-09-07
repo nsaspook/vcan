@@ -64,6 +64,7 @@
 void TIMER_1_InterruptHandler( void );
 void TIMER_2_InterruptHandler( void );
 void TIMER_3_InterruptHandler( void );
+void CHANGE_NOTICE_B_InterruptHandler( void );
 void UART2_FAULT_InterruptHandler( void );
 void UART2_RX_InterruptHandler( void );
 void UART2_TX_InterruptHandler( void );
@@ -74,7 +75,6 @@ void TIMER_6_InterruptHandler( void );
 void UART6_FAULT_InterruptHandler( void );
 void UART6_RX_InterruptHandler( void );
 void UART6_TX_InterruptHandler( void );
-void QEI2_InterruptHandler( void );
 void SPI3_RX_InterruptHandler( void );
 void SPI3_TX_InterruptHandler( void );
 
@@ -103,6 +103,11 @@ void __ISR(_TIMER_2_VECTOR, ipl2AUTO) TIMER_2_Handler (void)
 void __ISR(_TIMER_3_VECTOR, ipl5AUTO) TIMER_3_Handler (void)
 {
     TIMER_3_InterruptHandler();
+}
+
+void __ISR(_CHANGE_NOTICE_B_VECTOR, ipl1AUTO) CHANGE_NOTICE_B_Handler (void)
+{
+    CHANGE_NOTICE_B_InterruptHandler();
 }
 
 void __ISR(_UART2_FAULT_VECTOR, ipl1AUTO) UART2_FAULT_Handler (void)
@@ -166,7 +171,6 @@ void __ISR(_QEI1_VECTOR, ipl3AUTO) QEI1_Handler (void)
 
 void __ISR(_QEI2_VECTOR, ipl3AUTO) QEI2_Handler (void)
 {
-    QEI2_InterruptHandler();
 }
 
 void __ISR(_QEI3_VECTOR, ipl1AUTO) QEI3_Handler (void)
