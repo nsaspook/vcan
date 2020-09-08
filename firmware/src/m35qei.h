@@ -36,7 +36,7 @@ extern "C" {
 #define hpwm_high_duty	duty_max-1
 #define hpwm_low_duty	1
 
-#define motor_error_stop	10
+#define motor_error_stop	ENCODER_PULSES_PER_REV/2000
 #define motor_error_coast	100
 #define motor_error_knee	200
 
