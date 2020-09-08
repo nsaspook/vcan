@@ -85,8 +85,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/gpio/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/gpio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">629377255ED4B7F77D199932007A6510</GeneratedChecksum>
-          <UserChecksum dnOrder="6">629377255ED4B7F77D199932007A6510</UserChecksum>
+          <GeneratedChecksum dnOrder="5">4F7C412DBE6F2D3C86C0EE60A70ACCEB</GeneratedChecksum>
+          <UserChecksum dnOrder="6">4F7C412DBE6F2D3C86C0EE60A70ACCEB</UserChecksum>
         </File>
         <File dnOrder="9">
           <Type dnOrder="0">SOURCE</Type>
@@ -274,8 +274,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/gpio/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/gpio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">A6276D5DA15421B9D61DA9AD64878116</GeneratedChecksum>
-          <UserChecksum dnOrder="6">A6276D5DA15421B9D61DA9AD64878116</UserChecksum>
+          <GeneratedChecksum dnOrder="5">6681EE0195674BC10476AD17828566E6</GeneratedChecksum>
+          <UserChecksum dnOrder="6">6681EE0195674BC10476AD17828566E6</UserChecksum>
         </File>
         <File dnOrder="30">
           <Type dnOrder="0">HEADER</Type>
@@ -462,7 +462,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="5" key="PackageFilter" value="expresslogic_threadx;bootloader;bootloader_apps_ethernet;csp;quick_docs;gfx_apps;gfx;cryptoauthlib;wireless;cryptoauthlib_apps;usb;bootloader_apps_usb;classb_sam_e5x_d5x;crypto;motor_control;audio;net;aerospace;bootloader_apps_sdcard;bootloader_apps_i2c;bootloader_apps_uart;reference_apps;x2c;touch;aws_cloud;bt;micrium_ucos3;core;ethercat;bsp;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="usb;cryptoauthlib;aws_cloud;wireless;crypto;gfx_apps;gfx;x2c;micrium_ucos3;audio;core;cryptoauthlib_apps;expresslogic_threadx;motor_control;csp;bt;touch;net;bootloader;bsp;aerospace;quick_docs;reference_apps;classb_sam_e5x_d5x;bootloader_apps_i2c;bootloader_apps_ethernet;bootloader_apps_usb;bootloader_apps_sdcard;bootloader_apps_uart;ethercat;"/>
       <Setting dnOrder="6" key="TRUSTZONE" value="false"/>
     </Settings>
   </Configurator>

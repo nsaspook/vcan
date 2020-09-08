@@ -120,7 +120,6 @@ void GPIO_Initialize ( void )
     U6RXR = 13;
     INDX1R = 0;
     U3RXR = 5;
-    INDX2R = 2;
     QEA2R = 9;
     QEB2R = 6;
     QEA3R = 10;

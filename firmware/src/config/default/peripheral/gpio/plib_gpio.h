@@ -125,6 +125,16 @@
 #define DEBUGB0_OutputEnable()      (TRISBCLR = (1<<0))
 #define DEBUGB0_InputEnable()       (TRISBSET = (1<<0))
 #define DEBUGB0_PIN                  GPIO_PIN_RB0
+/*** Macros for qei2_index pin ***/
+#define qei2_index_Set()               (LATBSET = (1<<1))
+#define qei2_index_Clear()             (LATBCLR = (1<<1))
+#define qei2_index_Toggle()            (LATBINV= (1<<1))
+#define qei2_index_Get()               ((PORTB >> 1) & 0x1)
+#define qei2_index_OutputEnable()      (TRISBCLR = (1<<1))
+#define qei2_index_InputEnable()       (TRISBSET = (1<<1))
+#define qei2_index_InterruptEnable()   (CNENBSET = (1<<1))
+#define qei2_index_InterruptDisable()  (CNENBCLR = (1<<1))
+#define qei2_index_PIN                  GPIO_PIN_RB1
 /*** Macros for GPIO_RB2 pin ***/
 #define GPIO_RB2_Set()               (LATBSET = (1<<2))
 #define GPIO_RB2_Clear()             (LATBCLR = (1<<2))
