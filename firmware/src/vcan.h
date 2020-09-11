@@ -27,9 +27,10 @@ extern "C" {
 #define MOTOR_UPDATES	1	// main motor loop timer in ms
 
 #define MBIAS		1700 // current drive flux min for motor rotor lock stability
+#define MIDLE		2000  // motor idle current
 
-#define ENCODER_PULSES_PER_REV	327680
-	//#define ENCODER_PULSES_PER_REV	4000
+	//#define ENCODER_PULSES_PER_REV	327680
+#define ENCODER_PULSES_PER_REV	4000
 #define NUM_POLES		8
 #define NUM_POLE_PAIRS		NUM_POLES/2
 
@@ -65,7 +66,7 @@ extern "C" {
 #define HB_OHMS		100
 #define ADC_STEPS	4096.0 // 12-bit
 #define ADC_REF		2.5
-#define HB_SCALE	420.168
+#define HB_SCALE	4201.68
 
 #include <stddef.h>                     // Defines NULL
 #include <stdbool.h>                    // Defines true

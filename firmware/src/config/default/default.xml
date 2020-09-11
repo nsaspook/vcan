@@ -5209,12 +5209,7 @@
           </Values>
         </Combo>
         <Combo dnOrder="755" id="SYS_PORT_PPS_INPUT_FUNCTION_5">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-          <Values dnOrder="1">
+          <Values dnOrder="0">
             <User dnOrder="0" value="INDX2"/>
           </Values>
         </Combo>
@@ -5334,12 +5329,7 @@
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="768" id="SYS_PORT_PPS_INPUT_PIN_5">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-          <Values dnOrder="1">
+          <Values dnOrder="0">
             <User dnOrder="0" value="32"/>
           </Values>
         </KeyValueSet>
@@ -8069,7 +8059,8 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
+    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="adchs" x="19" y="389"/>
         <ElementPosition dnOrder="1" id="core" x="198" y="49"/>
@@ -8089,6 +8080,5 @@
         <ElementPosition dnOrder="15" id="uart6" x="163" y="307"/>
       </ElementPositions>
     </ComponentGraph>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>

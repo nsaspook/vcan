@@ -259,6 +259,38 @@ uint32_t velo_loop(double error, bool stop)
 
 	return pace;
 }
+void set_motor_speed(const uint32_t);
+
+void set_motor_speed(const uint32_t error_sig)
+{
+	if (error_sig >= (ENCODER_PULSES_PER_REV / 800))
+		motor_speed = 2;
+
+	if (error_sig > (ENCODER_PULSES_PER_REV / 4)) {
+		motor_speed = 1;
+		if (TimerDone(TMR_BLINK)) {
+			StartTimer(TMR_BLINK, 250);
+			RESET_LED_Toggle();
+		}
+	}
+	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
+		motor_speed = 2;
+	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
+		motor_speed = 10;
+	if (error_sig < (ENCODER_PULSES_PER_REV / 1000))
+		motor_speed = 50;
+	if (error_sig < (ENCODER_PULSES_PER_REV / 1200))
+		motor_speed = 200;
+	if (error_sig < (ENCODER_PULSES_PER_REV / 1500))
+		motor_speed = 1000;
+	if (error_sig < (ENCODER_PULSES_PER_REV / 2000))
+		motor_speed = 10000;
+
+	if (m35_2.set) {
+		motor_speed = 1;
+	}
+	m35_4.speed = motor_speed;
+}
 
 void motor_graph(void)
 {
@@ -599,6 +631,7 @@ int main(void)
 			pacing = velo_loop(pi_velocity_error, m35_2.set);
 			if (pacing == 0) {
 				m35_2.stopped = true;
+				m35_4.current = MIDLE;
 			} else {
 				m35_2.stopped = false;
 			}
@@ -649,32 +682,9 @@ int main(void)
 			}
 
 			if (m35_2.set || !m35_4.speed) {
-				if (abs(m35_2.error) > ENCODER_PULSES_PER_REV / 4) {
-					motor_speed = 1;
-					if (TimerDone(TMR_BLINK)) {
-						StartTimer(TMR_BLINK, 250);
-						RESET_LED_Toggle();
-					}
-				}
-				if (abs(m35_2.error) <= ENCODER_PULSES_PER_REV / 800)
-					motor_speed = 2;
-				if (abs(m35_2.error) < ENCODER_PULSES_PER_REV / 900)
-					motor_speed = 10;
-				if (abs(m35_2.error) < ENCODER_PULSES_PER_REV / 1000)
-					motor_speed = 50;
-				if (abs(m35_2.error) < ENCODER_PULSES_PER_REV / 1200)
-					motor_speed = 200;
-				if (abs(m35_2.error) < ENCODER_PULSES_PER_REV / 1500)
-					motor_speed = 1000;
-				if (abs(m35_2.error) < ENCODER_PULSES_PER_REV / 2000)
-					motor_speed = 10000;
-
-				if (m35_2.set) {
-					motor_speed = 1;
-				}
-				m35_4.speed = motor_speed;
+				set_motor_speed(abs(m35_2.error));
 			}
-			
+
 			/*
 			 * test switch interface with motor control
 			 */

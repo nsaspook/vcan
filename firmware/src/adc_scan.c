@@ -54,8 +54,8 @@ void init_end_of_adc_scan(void)
  */
 int32_t hb_current(const int32_t adc_value)
 {
-	return adc_value*4;
-//	double adc_step = ADC_REF / ADC_STEPS;
+//	return adc_value*4;
+	double adc_step = ADC_REF / ADC_STEPS;
 
-//	return (int32_t) (((double) adc_value * adc_step) * HB_SCALE);
+	return (int32_t) (((double) adc_value * adc_step) * HB_SCALE);
 }
