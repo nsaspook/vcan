@@ -27,7 +27,7 @@ extern "C" {
 #define MOTOR_UPDATES	1	// main motor loop timer in ms
 
 #define MBIAS		1700 // current drive flux min for motor rotor lock stability
-#define MIDLE		2000  // motor idle current
+#define MIDLE		2400  // motor idle current
 
 	//#define ENCODER_PULSES_PER_REV	327680
 #define ENCODER_PULSES_PER_REV	4000

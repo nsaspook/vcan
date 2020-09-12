@@ -10,6 +10,7 @@
             <file>file:/root/vcan/firmware/src/filters.c</file>
             <file>file:/root/vcan/firmware/src/pid.c</file>
             <file>file:/root/vcan/firmware/src/config/default/peripheral/qei/plib_qei2.c</file>
+            <file>file:/root/vcan/firmware/src/filters.h</file>
             <file>file:/root/vcan/firmware/src/freqgen.c</file>
             <file>file:/root/vcan/firmware/src/m35qei.h</file>
             <file>file:/root/vcan/firmware/src/timers.c</file>

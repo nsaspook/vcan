@@ -47,6 +47,9 @@
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="0"/>
+          </Values>
         </Long>
         <Long dnOrder="6" id="ADCCON2__SAMC">
           <Attributes dnOrder="0">
@@ -54,6 +57,9 @@
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="15"/>
+          </Values>
         </Long>
         <KeyValueSet dnOrder="7" id="ADCCON3__ADCSEL">
           <Values dnOrder="0">
@@ -62,7 +68,7 @@
         </KeyValueSet>
         <Long dnOrder="8" id="ADCCON3__CONCLKDIV">
           <Values dnOrder="0">
-            <User dnOrder="0" value="60"/>
+            <User dnOrder="0" value="6"/>
           </Values>
         </Long>
         <KeyValueSet dnOrder="9" id="ADCCON3__VREFSEL">
@@ -496,12 +502,12 @@
         </Hex>
         <Hex dnOrder="68" id="ADCHS_ADCCON2">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="65536"/>
+            <Dynamic dnOrder="0" id="adchs" value="983040"/>
           </Values>
         </Hex>
         <Hex dnOrder="69" id="ADCHS_ADCCON3">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="4211089408"/>
+            <Dynamic dnOrder="0" id="adchs" value="3305119744"/>
           </Values>
         </Hex>
         <Hex dnOrder="70" id="ADCHS_ADCCSS1">
@@ -777,12 +783,12 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1250.0"/>
           </Values>
         </Float>
         <Float dnOrder="115" id="ADCHS_CONV_RATE1">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1250.0"/>
           </Values>
         </Float>
         <Float dnOrder="116" id="ADCHS_CONV_RATE2">
@@ -792,7 +798,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1250.0"/>
           </Values>
         </Float>
         <Float dnOrder="117" id="ADCHS_CONV_RATE3">
@@ -802,7 +808,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1250.0"/>
           </Values>
         </Float>
         <Float dnOrder="118" id="ADCHS_CONV_RATE4">
@@ -812,7 +818,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1250.0"/>
           </Values>
         </Float>
         <Float dnOrder="119" id="ADCHS_CONV_RATE5">
@@ -822,12 +828,12 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1250.0"/>
           </Values>
         </Float>
         <Float dnOrder="120" id="ADCHS_CONV_RATE7">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="666.6667"/>
           </Values>
         </Float>
         <Hex dnOrder="121" id="ADCHS_IEC0">
@@ -852,12 +858,12 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="50.0"/>
           </Values>
         </Float>
         <Float dnOrder="125" id="ADCHS_TADC1">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="50.0"/>
           </Values>
         </Float>
         <Float dnOrder="126" id="ADCHS_TADC2">
@@ -867,7 +873,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="50.0"/>
           </Values>
         </Float>
         <Float dnOrder="127" id="ADCHS_TADC3">
@@ -877,7 +883,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="50.0"/>
           </Values>
         </Float>
         <Float dnOrder="128" id="ADCHS_TADC4">
@@ -887,7 +893,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="50.0"/>
           </Values>
         </Float>
         <Float dnOrder="129" id="ADCHS_TADC5">
@@ -897,12 +903,12 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="50.0"/>
           </Values>
         </Float>
         <Float dnOrder="130" id="ADCHS_TADC7">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="50.0"/>
           </Values>
         </Float>
         <Float dnOrder="131" id="ADCHS_TCLK">
@@ -912,7 +918,7 @@
         </Float>
         <Float dnOrder="132" id="ADCHS_TQ">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="500.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="50.0"/>
           </Values>
         </Float>
         <Boolean dnOrder="133" id="ADCIMCON1__DIFF1">
@@ -8059,8 +8065,7 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
-    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
+    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="adchs" x="19" y="389"/>
         <ElementPosition dnOrder="1" id="core" x="198" y="49"/>
@@ -8080,5 +8085,6 @@
         <ElementPosition dnOrder="15" id="uart6" x="163" y="307"/>
       </ElementPositions>
     </ComponentGraph>
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>
