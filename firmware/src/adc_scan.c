@@ -50,12 +50,20 @@ void init_end_of_adc_scan(void)
 }
 
 /*
- * take ADC shunt measurement, convert to milliamps
+ * take ADC shunt measurement of phase current, convert to milliamps of current with possible motor current correction
  */
-int32_t hb_current(const int32_t adc_value)
+int32_t hb_current(const int32_t adc_value, const bool motor)
 {
-//	return adc_value*4;
 	double adc_step = ADC_REF / ADC_STEPS;
 
-	return (int32_t) (((double) adc_value * adc_step) * HB_SCALE);
+	if (motor) {
+		return(int32_t) ((((double) adc_value * adc_step) * HB_SCALE) * MOTOR_CURRENT_SCALE);
+	} else {
+		return(int32_t) ((((double) adc_value * adc_step) * HB_SCALE));
+	}
+}
+
+void start_adc_scan(void)
+{
+	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // scan re-trigger	
 }

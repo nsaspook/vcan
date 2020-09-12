@@ -22,6 +22,7 @@ extern "C" {
 
 	void filters_init(void);
 	int32_t lp_filter(int32_t, uint8_t);
+	double lp_filter_f(double, uint8_t);
 	int32_t lp_filter2(int32_t, uint8_t);
 	void MCLIB_LinearRamp(double * const, const double, const double);
 	void MCLIB_ImposeLimits(float * const, const float, const float);

@@ -67,6 +67,7 @@ extern "C" {
 #define ADC_STEPS	4096.0 // 12-bit
 #define ADC_REF		2.5
 #define HB_SCALE	4201.68
+#define MOTOR_CURRENT_SCALE	1.41 // square root of 2
 
 #include <stddef.h>                     // Defines NULL
 #include <stdbool.h>                    // Defines true

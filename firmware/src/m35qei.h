@@ -13,7 +13,7 @@ extern "C" {
 #endif
 #include "vcan.h"
 
-//#define NOINDEX
+	//#define NOINDEX
 
 #define sine_res	3600
 #define sinea		0
@@ -75,7 +75,7 @@ extern "C" {
 		int32_t pos, vel, duty, error, speed, hold, gain, sine_steps, current, current_prev;
 		int32_t indexcnt, indexvel, ppp;
 		uint32_t pole_pairs, ppr, phaseAccumulator, phaseIncrement, phase_steps, erotations;
-		double sin;
+		double sin, mi1, mi2, mi3;
 		bool cw, ccw, stopped, set;
 	};
 

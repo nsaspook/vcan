@@ -33,7 +33,8 @@ extern "C" {
 
 	void end_of_adc_scan(void);
 	void init_end_of_adc_scan(void);
-	int32_t hb_current(const int32_t);
+	int32_t hb_current(const int32_t, const bool);
+	void start_adc_scan(void);
 
 #ifdef	__cplusplus
 }
