@@ -523,7 +523,7 @@ int main(void)
 		switch (i) {
 		case 0:
 			MCPWM_Start();
-			WaitMs(400);
+			WaitMs(200);
 			/*
 			 * zero position counters at locked rotor position
 			 */
@@ -536,7 +536,7 @@ int main(void)
 			sprintf(buffer, "HP %6i:%6i      ", POS2CNT, m35_2.ppr / m35_2.pole_pairs);
 			eaDogM_WriteStringAtPos(2, 0, buffer);
 			m35_2.ppp = POS2CNT;
-			POS2CNT = 0; // reset zero for new home
+//			POS2CNT = 0; // reset zero for new home
 			break;
 		case 1:
 		default:
@@ -545,7 +545,7 @@ int main(void)
 			break;
 		}
 		OledUpdate();
-		WaitMs(100);
+		WaitMs(10);
 	}
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, 0);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);

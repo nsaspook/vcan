@@ -186,7 +186,7 @@
         <platform>2</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC32MK-MC_DFP" vendor="Microchip" version="1.4.94"/>
+        <pack name="PIC32MK-MC_DFP" vendor="Microchip" version="1.5.115"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -223,7 +223,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP;"/>
+                  value="../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -688,7 +688,6 @@
         <property key="UART5" value="true"/>
         <property key="UART6" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
-        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
@@ -729,7 +728,6 @@
         <property key="ToolFirmwareFilePath"
                   value="/opt/microchip/mplabx/v5.30/mplab_platform/mplablibs/modules/ext/PICKIT3.jar/PK3FW_015602.jam"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
-        <property key="firmware.download.all" value="false"/>
         <property key="memories.configurationmemory" value="true"/>
         <property key="memories.dataflash" value="true"/>
         <property key="memories.eeprom" value="true"/>
