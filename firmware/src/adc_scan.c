@@ -22,6 +22,9 @@ void end_of_adc_scan(void)
 		an_data[IVREF] = ADCHS_ChannelResultGet(ADCHS_CH50); // IVREF 1.2V (internal AN50)
 		an_data[VBAT2] = ADCHS_ChannelResultGet(ADCHS_CH52); // VBAT/2 (internal AN52)
 		an_data[TSENSOR] = ADCHS_ChannelResultGet(ADCHS_CH53); //  CTMU Temperature Sensor (internal AN53)
+		if (!option1_Get()) {
+			u1bi = u1ai;
+		}
 		u1ai = lp_filter(u1ai, 0); // try filter
 		u1bi = lp_filter(u1bi, 1);
 		u2ai = lp_filter(u2ai, 2);

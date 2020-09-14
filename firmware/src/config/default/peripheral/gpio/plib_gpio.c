@@ -98,14 +98,15 @@ void GPIO_Initialize ( void )
 
     /* PORTF Initialization */
     LATF = 0x0; /* Initial Latch Value */
-    TRISFCLR = 0xc2; /* Direction Control */
+    TRISFCLR = 0xc0; /* Direction Control */
     ANSELFCLR = 0x20; /* Digital Mode Enable */
+    CNPUFSET = 0x2; /* Pull-Up Enable */
 
     /* PORTG Initialization */
     LATG = 0xa00; /* Initial Latch Value */
-    TRISGCLR = 0x7e03; /* Direction Control */
+    TRISGCLR = 0x7e01; /* Direction Control */
     ANSELGCLR = 0xec0; /* Digital Mode Enable */
-    CNPUGSET = 0xc0; /* Pull-Up Enable */
+    CNPUGSET = 0xc2; /* Pull-Up Enable */
 
 
     /* Unlock system for PPS configuration */

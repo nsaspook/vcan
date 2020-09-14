@@ -104,6 +104,13 @@ m35_4 = {
 
 *m35_ptr;
 
+struct SPid freq_pi = {
+	.iMax = 10000.0,
+	.iMin = 0.0,
+	.pGain = 5.0, // 0.5
+	.iGain = .025, // 0.125
+};
+
 struct SPid current_pi = {
 	.iMax = 3000.0,
 	.iMin = -3000.0,
@@ -132,7 +139,7 @@ struct tm * timeinfo;
 uint32_t StartTime = 1, TimeUsed = 1;
 double mHz = 0.0, mHz_real = 0.0, sr_slip = 0.0, mHz_raw = 0.0, mHz_real_raw = 0.0;
 
-const uint8_t step_code[] = {// A,B,C bits in order
+const uint8_t step_code[] = {// A,B,C bits in orderUpdatePI
 	0b101,
 	0b100,
 	0b110,
@@ -273,6 +280,8 @@ void set_motor_speed(const uint32_t error_sig)
 			RESET_LED_Toggle();
 		}
 	}
+
+#if ENCODER_PULSES_PER_REV < 8000
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
 		motor_speed = 2;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
@@ -285,6 +294,21 @@ void set_motor_speed(const uint32_t error_sig)
 		motor_speed = 1000;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 2000))
 		motor_speed = 10000;
+#else
+	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
+		motor_speed = 2;
+	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
+		motor_speed = 10;
+	if (error_sig < (ENCODER_PULSES_PER_REV / 1000))
+		motor_speed = 50;
+	if (error_sig < (ENCODER_PULSES_PER_REV / 1200))
+		motor_speed = 200;
+	if (error_sig < (ENCODER_PULSES_PER_REV / 1500))
+		motor_speed = 1000;
+	if (error_sig < 40)
+		motor_speed = 10000;
+#endif
+
 
 	if (m35_2.set) {
 		motor_speed = 1;
@@ -356,7 +380,7 @@ int main(void)
 	char buffer[80];
 	uint8_t i;
 	uint32_t pacing = 1;
-	double pi_current_error = 0.0, pi_velocity_error = 0.0;
+	double pi_current_error = 0.0, pi_velocity_error = 0.0, pi_freq_error = 0.0;
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
@@ -536,7 +560,7 @@ int main(void)
 			sprintf(buffer, "HP %6i:%6i      ", POS2CNT, m35_2.ppr / m35_2.pole_pairs);
 			eaDogM_WriteStringAtPos(2, 0, buffer);
 			m35_2.ppp = POS2CNT;
-//			POS2CNT = 0; // reset zero for new home
+			//			POS2CNT = 0; // reset zero for new home
 			break;
 		case 1:
 		default:
@@ -601,6 +625,7 @@ int main(void)
 			m35_2.error = (m35_3.pos * m35_3.gain) - m35_2.pos;
 
 			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
+			pi_freq_error = UpdatePI(&freq_pi, (double) m35_2.error);
 
 			/*
 			 * generate a positioning error drive signal
@@ -723,13 +748,15 @@ int main(void)
 			mHz_real = 1000000.0 / mHz_real_raw;
 			//			MCLIB_LinearRamp(&mHz_real_raw, 15.0, mHz_real_raw);
 			//			pi_velocity_error = UpdatePI(&velocity_pi, (mHz_raw / 10000.0) - (mHz_real_raw / 10000.0));
-			pi_velocity_error = lp_filter_f(UpdatePI(&velocity_pi, mHz_real - mHz), 4);
-			sr_slip = lp_filter_f((mHz - mHz_real) / mHz, 5);
+			pi_velocity_error = UpdatePI(&velocity_pi, mHz_real - mHz);
+			sr_slip = (mHz - mHz_real) / mHz;
 
 			//run_tests(100000); // port diagnostics
 			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
 				OledClearBuffer();
+				sprintf(buffer, " Options: 1:%d 2:%d   %f", option1_Get(), option2_Get(),pi_freq_error);
+				eaDogM_WriteStringAtPos(0, 0, buffer);
 				sprintf(buffer, "C %5i:%i     %1i:%1i:%1i:%1i     ", m35_ptr->pos, m35_2.error, m35_2.cw, m35_2.ccw, m35_2.stopped, m35_2.set);
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_2;

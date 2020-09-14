@@ -16,6 +16,12 @@ extern "C" {
 	 */
 #include <math.h>
 #include <stdio.h>
+	
+	/*
+	 * jumper pin settings JP4
+	 * RF1	option1		special configurations for board testing
+	 * RG1	option2		motor/encoder configurations
+	 */
 
 #define SYS_FREQ	120000000 // Running at 120MHz
 #define SAMPLERATE	36000
@@ -29,8 +35,8 @@ extern "C" {
 #define MBIAS		1700 // current drive flux min for motor rotor lock stability
 #define MIDLE		2400  // motor idle current
 
-	//#define ENCODER_PULSES_PER_REV	327680
-#define ENCODER_PULSES_PER_REV	4000
+#define ENCODER_PULSES_PER_REV	327680
+	//#define ENCODER_PULSES_PER_REV	4000
 #define NUM_POLES		8
 #define NUM_POLE_PAIRS		NUM_POLES/2
 
@@ -50,7 +56,7 @@ extern "C" {
 #define TWO_BY_SQRT3	(float)(1.1547005384)
 
 #define QEI_VELOCITY_COUNT_PRESCALER             (float)100.0f
-#define ENCODER_PULSES_PER_EREV                  ((uint16_t)((ENCODER_PULSES_PER_REV * 4)/NUM_POLE_PAIRS))
+#define ENCODER_PULSES_PER_EREV                  ((uint32_t)((ENCODER_PULSES_PER_REV)/NUM_POLE_PAIRS))
 #define QEI_COUNT_TO_ELECTRICAL_ANGLE            (float)(2*M_PI/ENCODER_PULSES_PER_EREV)
 #define QEI_VELOCITY_SAMPLE_FREQUENCY            (float)((float)PWM_FREQUENCY / (float)QEI_VELOCITY_COUNT_PRESCALER)
 #define QEI_VELOCITY_COUNT_TO_RAD_PER_SEC        (float)(((float)QEI_VELOCITY_SAMPLE_FREQUENCY * 2.0f * M_PI )/((float)ENCODER_PULSES_PER_EREV ))
