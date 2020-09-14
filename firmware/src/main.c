@@ -107,8 +107,8 @@ m35_4 = {
 struct SPid freq_pi = {
 	.iMax = 10000.0,
 	.iMin = 0.0,
-	.pGain = 5.0, // 0.5
-	.iGain = .025, // 0.125
+	.pGain = 11.0, // 0.5
+	.iGain = 0.99, // 0.125
 };
 
 struct SPid current_pi = {
@@ -266,9 +266,9 @@ uint32_t velo_loop(double error, bool stop)
 
 	return pace;
 }
-void set_motor_speed(const uint32_t);
+void set_motor_speed(const uint32_t, double);
 
-void set_motor_speed(const uint32_t error_sig)
+void set_motor_speed(const uint32_t error_sig, double pi_error)
 {
 	if (error_sig >= (ENCODER_PULSES_PER_REV / 800))
 		motor_speed = 2;
@@ -294,6 +294,7 @@ void set_motor_speed(const uint32_t error_sig)
 		motor_speed = 1000;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 2000))
 		motor_speed = 10000;
+	motor_speed = 10000 - (uint32_t) pi_error;
 #else
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
 		motor_speed = 2;
@@ -625,7 +626,11 @@ int main(void)
 			m35_2.error = (m35_3.pos * m35_3.gain) - m35_2.pos;
 
 			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
-			pi_freq_error = UpdatePI(&freq_pi, (double) m35_2.error);
+			pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
+
+			if (pi_freq_error > 9999.0) {
+				pi_freq_error = 9999.0;
+			}
 
 			/*
 			 * generate a positioning error drive signal
@@ -708,7 +713,7 @@ int main(void)
 			}
 
 			if (m35_2.set || !m35_4.speed) {
-				set_motor_speed(abs(m35_2.error));
+				set_motor_speed(abs(m35_2.error), pi_freq_error);
 			}
 
 			/*
@@ -755,7 +760,7 @@ int main(void)
 			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
 				OledClearBuffer();
-				sprintf(buffer, " Options: 1:%d 2:%d   %f", option1_Get(), option2_Get(),pi_freq_error);
+				sprintf(buffer, " Options: 1:%d 2:%d   %f", option1_Get(), option2_Get(), pi_freq_error);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
 				sprintf(buffer, "C %5i:%i     %1i:%1i:%1i:%1i     ", m35_ptr->pos, m35_2.error, m35_2.cw, m35_2.ccw, m35_2.stopped, m35_2.set);
 				eaDogM_WriteStringAtPos(1, 0, buffer);
