@@ -20,7 +20,7 @@ void sine_table(void)
 		}
 		/*
 		 * compute saddle-back waveform instead of pure sine
-		 * THA sets the harmonic content, 1/6 is the reccomended amount
+		 * THA sets the harmonic content, 1/6 is the recommended amount but we use more here
 		 */
 		sine_const[I] = sine_const[I] + ((sin((M_PI * 2.0 * (double) H) / (double) sine_res)) * THA);
 	}
