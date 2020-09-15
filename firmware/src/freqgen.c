@@ -13,16 +13,16 @@ void sine_table(void)
 
 	for (I = 0; I < sine_res; I++) {
 		sine_const[I] = sin((M_PI * 2.0 * (double) I) / (double) sine_res);
-		H = I * 3;
-		if (H > sine_res * j) {
+		H = I * HARMONIC_NUM; // need third harmonic
+		if (H >= sine_res * j) {
 			H = H - sine_res*j;
 			j++;
 		}
 		/*
 		 * compute saddle-back waveform instead of pure sine
+		 * THA sets the harmonic content, 1/6 is the reccomended amount
 		 */
-		//sine_const_harmonic[I] = sin((M_PI * 2.0 * (double) H) / (double) sine_res);
-		sine_const[I] = sine_const[I] - ((sin((M_PI * 2.0 * (double) H) / (double) sine_res)) * THA);
+		sine_const[I] = sine_const[I] + ((sin((M_PI * 2.0 * (double) H) / (double) sine_res)) * THA);
 	}
 }
 
@@ -36,7 +36,6 @@ int32_t phase_duty_table(struct QEI_DATA * const phase, const double mag, const 
 		phase->erotations++;
 	}
 
-	//phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * ((sine_const[phase->sine_steps])-(sine_const_harmonic[phase->sine_steps]*THA))));
 	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * (sine_const[phase->sine_steps])));
 
 	if (phase->duty > hpwm_high_duty) {

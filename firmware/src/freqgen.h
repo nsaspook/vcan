@@ -16,6 +16,7 @@ extern "C" {
 #define	TABLE_SIZE                              256
 #define	ANGLE_STEP                             (TOTAL_SINE_TABLE_ANGLE/(float)TABLE_SIZE)
 #define	ONE_BY_ANGLE_STEP                      (1/ANGLE_STEP)
+#define HARMONIC_NUM				3
 #define	THA					0.3
 
 
