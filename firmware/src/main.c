@@ -105,7 +105,7 @@ m35_4 = {
 *m35_ptr;
 
 struct SPid freq_pi = {
-	.iMax = 10000.0,
+	.iMax = 2000.0,
 	.iMin = 0.0,
 	.pGain = 11.0, // 0.5
 	.iGain = 0.99, // 0.125
@@ -281,7 +281,9 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 		}
 	}
 
-#if ENCODER_PULSES_PER_REV < 8000
+#if (ENCODER_PULSES_PER_REV < 8000)
+	.pGain = 11.0, // 0.5
+		.iGain = 0.99, // 0.12
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
 		motor_speed = 2;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
@@ -294,8 +296,12 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 		motor_speed = 1000;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 2000))
 		motor_speed = 10000;
-	motor_speed = 10000 - (uint32_t) pi_error;
+	motor_speed = 2000 - (uint32_t) pi_error;
+	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
+		motor_speed = 2;
 #else
+	freq_pi.pGain = 2.0;
+	freq_pi.iGain = 0.125;
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
 		motor_speed = 2;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
@@ -308,6 +314,9 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 		motor_speed = 1000;
 	if (error_sig < 40)
 		motor_speed = 10000;
+	motor_speed = 2000 - (uint32_t) pi_error;
+	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
+		motor_speed = 2;
 #endif
 
 
@@ -628,8 +637,8 @@ int main(void)
 			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
 			pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
 
-			if (pi_freq_error > 9999.0) {
-				pi_freq_error = 9999.0;
+			if (pi_freq_error > 1999.0) {
+				pi_freq_error = 1999.0;
 			}
 
 			/*
