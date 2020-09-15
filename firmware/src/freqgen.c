@@ -1,7 +1,7 @@
 #include "freqgen.h"
 
 static double sine_const[sine_res + 1];
-static double sine_const_harmonic[sine_res + 1];
+//static double sine_const_harmonic[sine_res + 1];
 static double table[256];
 extern struct QEI_DATA m35_1, m35_2, m35_3, m35_4;
 
@@ -18,7 +18,11 @@ void sine_table(void)
 			H = H - sine_res*j;
 			j++;
 		}
-		sine_const_harmonic[I] = sin((M_PI * 2.0 * (double) H) / (double) sine_res);
+		/*
+		 * compute saddle-back waveform instead of pure sine
+		 */
+		//sine_const_harmonic[I] = sin((M_PI * 2.0 * (double) H) / (double) sine_res);
+		sine_const[I] = sine_const[I] - ((sin((M_PI * 2.0 * (double) H) / (double) sine_res)) * THA);
 	}
 }
 
@@ -32,11 +36,8 @@ int32_t phase_duty_table(struct QEI_DATA * const phase, const double mag, const 
 		phase->erotations++;
 	}
 
-	/*
-	 * compute saddle-back waveform instead of pure sine
-	 */
-	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * ((sine_const[phase->sine_steps])-(sine_const_harmonic[phase->sine_steps]*0.3))));
-	//phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * (sine_const_harmonic[phase->sine_steps]*0.966666)));
+	//phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * ((sine_const[phase->sine_steps])-(sine_const_harmonic[phase->sine_steps]*THA))));
+	phase->duty = (int32_t) (hpwm_mid_duty_f + (mag * (sine_const[phase->sine_steps])));
 
 	if (phase->duty > hpwm_high_duty) {
 		phase->duty = hpwm_high_duty;

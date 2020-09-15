@@ -12,10 +12,11 @@
 extern "C" {
 #endif
 #include "vcan.h"
-#define     TOTAL_SINE_TABLE_ANGLE                 (2*(float)M_PI)
-#define     TABLE_SIZE                              256
-#define     ANGLE_STEP                             (TOTAL_SINE_TABLE_ANGLE/(float)TABLE_SIZE)
-#define     ONE_BY_ANGLE_STEP                      (1/ANGLE_STEP)
+#define	TOTAL_SINE_TABLE_ANGLE                 (2*(float)M_PI)
+#define	TABLE_SIZE                              256
+#define	ANGLE_STEP                             (TOTAL_SINE_TABLE_ANGLE/(float)TABLE_SIZE)
+#define	ONE_BY_ANGLE_STEP                      (1/ANGLE_STEP)
+#define	THA					0.3
 
 
 	// *****************************************************************************
