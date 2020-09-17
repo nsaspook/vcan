@@ -49,18 +49,20 @@ IC = M * sin (? + 240)
 
 /*
  * PIC32MK hardware
- * timer 2	motor current PID 1.0ms
+ * timer 1	SOSC	1 second clock
+ * timer 2	motor pwm waveform 1.0ms PRI 7, sub 2
+ * timer 3	QEI slip speed updater 1 second
  * timer 6	software timer updates 0.5ms
  */
 
-#include "m35qei.h"
+#include "m35qei.h" 
 #include "vcan.h"
 #include "dio.h"
 #include "adc_scan.h"
 #include "timers.h"
 #include "pid.h"
 #include "freqgen.h"
-#include "eadog.h"
+#include "eadog.h" 
 #include "dogm-graphic.h"
 #include "OledDriver.h"
 #include "OledChar.h"
@@ -112,10 +114,10 @@ struct SPid freq_pi = {
 };
 
 struct SPid current_pi = {
-	.iMax = 3000.0,
-	.iMin = -3000.0,
-	.pGain = 2.0, // 0.5
-	.iGain = 0.425, // 0.125
+	.iMax = 1500.0,
+	.iMin = -1500.0,
+	.pGain = 4.0, // 2.0
+	.iGain = 0.425, // 0.425
 };
 
 struct SPid velocity_pi = {
@@ -137,7 +139,9 @@ volatile time_t t1_time;
 struct tm * timeinfo;
 
 uint32_t StartTime = 1, TimeUsed = 1;
+uint32_t pacing = 1;
 double mHz = 0.0, mHz_real = 0.0, sr_slip = 0.0, mHz_raw = 0.0, mHz_real_raw = 0.0;
+double pi_current_error = 0.0, pi_velocity_error = 0.0, pi_freq_error = 0.0;
 
 const uint8_t step_code[] = {// A,B,C bits in orderUpdatePI
 	0b101,
@@ -152,6 +156,7 @@ const uint8_t step_code[] = {// A,B,C bits in orderUpdatePI
 void my_time(uint32_t, uintptr_t);
 void my_index(GPIO_PIN, uintptr_t);
 void move_pos_qei(uint32_t, uintptr_t);
+void wave_gen(uint32_t, uintptr_t);
 void motor_graph(void);
 void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
 
@@ -211,6 +216,37 @@ time_t time(time_t *);
 time_t time(time_t * Time)
 {
 	return t1_time;
+}
+
+/*
+ * PWM 1ms waveform interrupt routine
+ */
+void wave_gen(uint32_t status, uintptr_t context)
+{
+#ifdef	SLIP_DRIVE
+	m35_4.speed--;
+	if (m35_4.speed < 1) {
+#else
+	if (m35_2.set || (!--m35_4.speed)) {
+#endif
+		//DEBUGB0_Set();
+		DEBUGB0_Toggle();
+		TimeUsed = (uint32_t) _CP0_GET_COUNT() - StartTime;
+		StartTime = (uint32_t) _CP0_GET_COUNT();
+		m35_1.vel = VEL1CNT;
+		m35_2.vel = VEL2CNT;
+		m35_3.vel = VEL3CNT;
+
+		phase_duty(&m35_2, m35_4.current, m_speed, pacing);
+		phase_duty(&m35_3, m35_4.current, m_speed, pacing);
+		phase_duty(&m35_4, m35_4.current, m_speed, pacing);
+#ifdef	SLIP_DRIVE
+		m35_4.speed = motor_speed;
+#endif
+		//DEBUGB0_Clear();
+	}
+	pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
+	pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
 }
 
 /*
@@ -387,8 +423,6 @@ int main(void)
 {
 	char buffer[80];
 	uint8_t i;
-	uint32_t pacing = 1;
-	double pi_current_error = 0.0, pi_velocity_error = 0.0, pi_freq_error = 0.0;
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
@@ -589,6 +623,11 @@ int main(void)
 	TMR3_Start(); // start auto movement functions
 	PWM_motor2(M_PWM);
 	StartTime = (uint32_t) _CP0_GET_COUNT();
+	/*
+	 * start ISR for PWM waveform generator
+	 */
+	TMR2_CallbackRegister(wave_gen, 0);
+	TMR2_Start();
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -631,8 +670,8 @@ int main(void)
 
 			m35_2.error = (m35_3.pos * m35_3.gain) - m35_2.pos;
 
-			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
-			pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
+//			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
+//			pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
 
 			if (pi_freq_error > 1999.0) {
 				pi_freq_error = 1999.0;
@@ -649,9 +688,9 @@ int main(void)
 			if (m35_4.current > motor_volts) {
 				m35_4.current = motor_volts;
 			}
-			if (m35_4.current > (m35_4.current_prev + 1)) {
-				m35_4.current = m35_4.current_prev + 1 + MBIAS;
-			}
+			//			if (m35_4.current > (m35_4.current_prev + 1)) {
+			//				m35_4.current = m35_4.current_prev + 1 + MBIAS;
+			//			}
 
 			if (m35_4.current > motor_volts) {
 				m35_4.current = motor_volts;
@@ -676,31 +715,6 @@ int main(void)
 #ifndef SLIP_DRIVE
 				m35_4.speed = 1;
 #endif
-			}
-
-
-
-#ifdef	SLIP_DRIVE
-			m35_4.speed--;
-			if (m35_4.speed < 1) {
-#else
-			if (m35_2.set || (!--m35_4.speed)) {
-#endif
-				//DEBUGB0_Set();
-				DEBUGB0_Toggle();
-				TimeUsed = (uint32_t) _CP0_GET_COUNT() - StartTime;
-				StartTime = (uint32_t) _CP0_GET_COUNT();
-				m35_1.vel = VEL1CNT;
-				m35_2.vel = VEL2CNT;
-				m35_3.vel = VEL3CNT;
-
-				phase_duty(&m35_2, m35_4.current, m_speed, pacing);
-				phase_duty(&m35_3, m35_4.current, m_speed, pacing);
-				phase_duty(&m35_4, m35_4.current, m_speed, pacing);
-#ifdef	SLIP_DRIVE
-				m35_4.speed = motor_speed;
-#endif
-				//DEBUGB0_Clear();
 			}
 
 			if (m35_2.error > 0) {

@@ -32,7 +32,7 @@ extern "C" {
 #define MOTOR_SPEED	100	// sinewave update divider
 #define MOTOR_UPDATES	1	// main motor loop timer in ms
 
-#define MBIAS		11500 // current drive flux min for motor rotor lock stability
+#define MBIAS		0 // current drive flux min for motor rotor lock stability
 #define MIDLE		2400  // motor idle current
 
 	//#define ENCODER_PULSES_PER_REV	327680

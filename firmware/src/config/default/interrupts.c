@@ -95,7 +95,7 @@ void __ISR(_TIMER_1_VECTOR, ipl1AUTO) TIMER_1_Handler (void)
     TIMER_1_InterruptHandler();
 }
 
-void __ISR(_TIMER_2_VECTOR, ipl2AUTO) TIMER_2_Handler (void)
+void __ISR(_TIMER_2_VECTOR, ipl7AUTO) TIMER_2_Handler (void)
 {
     TIMER_2_InterruptHandler();
 }
