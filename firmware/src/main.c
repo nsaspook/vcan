@@ -233,9 +233,7 @@ void move_pos_qei(uint32_t status, uintptr_t context)
 {
 
 #ifdef SLIP_DRIVE
-	if (true) {
-		POS3CNT = POS2CNT + MOTOR_SLIP; // movement offset
-	}
+	POS3CNT = POS2CNT + MOTOR_SLIP; // movement offset
 #endif
 	return;
 }
@@ -251,7 +249,7 @@ uint32_t velo_loop(double error, bool stop)
 		return 0;
 	}
 
-#ifdef SLIP_DRIVE
+#ifdef SLIP_DRIVE_S
 	static uint32_t sequence1 = 0, sequence2 = 0;
 	if (error > 20.01) {
 		pace = sequence1++ & 1;
@@ -606,7 +604,6 @@ int main(void)
 
 		if (TimerDone(TMR_MOTOR)) {
 			StartTimer(TMR_MOTOR, MOTOR_UPDATES);
-			//			start_adc_scan();
 
 			m35_2.cw = false;
 			m35_2.ccw = false;
@@ -676,11 +673,19 @@ int main(void)
 				m35_2.stopped = false;
 			}
 			if (m35_2.set) {
+#ifndef SLIP_DRIVE
 				m35_4.speed = 1;
+#endif
 			}
 
 
+
+#ifdef	SLIP_DRIVE
+			m35_4.speed--;
+			if (m35_4.speed < 1) {
+#else
 			if (m35_2.set || (!--m35_4.speed)) {
+#endif
 				//DEBUGB0_Set();
 				DEBUGB0_Toggle();
 				TimeUsed = (uint32_t) _CP0_GET_COUNT() - StartTime;
@@ -692,6 +697,9 @@ int main(void)
 				phase_duty(&m35_2, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_3, m35_4.current, m_speed, pacing);
 				phase_duty(&m35_4, m35_4.current, m_speed, pacing);
+#ifdef	SLIP_DRIVE
+				m35_4.speed = motor_speed;
+#endif
 				//DEBUGB0_Clear();
 			}
 
@@ -722,7 +730,9 @@ int main(void)
 			}
 
 			if (m35_2.set || !m35_4.speed) {
+#ifndef	SLIP_DRIVE
 				set_motor_speed(abs(m35_2.error), pi_freq_error);
+#endif
 			}
 
 			/*
@@ -788,7 +798,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(5, 0, buffer);
 				sprintf(buffer, "%4i:S %4i %4i %4i  Pace %i", motor_speed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps, pacing);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
-				sprintf(buffer, "%4i:D %4i %4i %4i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty);
+				sprintf(buffer, "%4i:D %4i %4i %4i  S %i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty, m35_4.speed);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				sprintf(buffer, "Drive mHz %4.5f  %f  ", mHz, mHz_raw);
 				eaDogM_WriteStringAtPos(8, 0, buffer);

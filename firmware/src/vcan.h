@@ -35,13 +35,13 @@ extern "C" {
 #define MBIAS		11500 // current drive flux min for motor rotor lock stability
 #define MIDLE		2400  // motor idle current
 
-#define ENCODER_PULSES_PER_REV	327680
-	//#define ENCODER_PULSES_PER_REV	4000
+	//#define ENCODER_PULSES_PER_REV	327680
+#define ENCODER_PULSES_PER_REV	4000
 #define NUM_POLES		8
 #define NUM_POLE_PAIRS		NUM_POLES/2
 
-	//#define	SLIP_DRIVE
-#define MOTOR_SLIP	200
+#define	SLIP_DRIVE
+#define MOTOR_SLIP	400
 
 #define PWM_FREQUENCY		MOTOR_SPEED
 #define RATED_SPEED_RPM		10

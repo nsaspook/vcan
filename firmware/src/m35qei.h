@@ -31,8 +31,8 @@ extern "C" {
 #define duty_max	12000
 #define	duty_safe	duty_max/8
 
-#define hpwm_mid_duty	duty_max/2
-#define hpwm_mid_duty_f	duty_max/2.0
+#define hpwm_mid_duty	duty_max/3
+#define hpwm_mid_duty_f	duty_max/3.0
 #define hpwm_high_duty	duty_max-1
 #define hpwm_low_duty	1
 
