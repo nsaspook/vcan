@@ -130,7 +130,7 @@ struct SPid velocity_pi = {
 V_STATE vcan_state = V_init;
 M_SPEED m_speed = M_SLEW;
 
-volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, an_data[NUM_AN];
+volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, u_total = 0, an_data[NUM_AN];
 volatile uint16_t tickCount[TMR_COUNT];
 
 volatile int32_t motor_speed = MOTOR_SPEED;
@@ -670,8 +670,8 @@ int main(void)
 
 			m35_2.error = (m35_3.pos * m35_3.gain) - m35_2.pos;
 
-//			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
-//			pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
+			//			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
+			//			pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
 
 			if (pi_freq_error > 1999.0) {
 				pi_freq_error = 1999.0;
@@ -806,9 +806,9 @@ int main(void)
 				 */
 				sprintf(buffer, "Phase   L1   L2   L3  ");
 				eaDogM_WriteStringAtPos(3, 0, buffer);
-				sprintf(buffer, "%4i:P %4i %4i %4i         ", m35_2.erotations, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false));
+				sprintf(buffer, "%4i:P %4i %4i %4i  %4i      ", m35_2.erotations, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u_total, false));
 				eaDogM_WriteStringAtPos(4, 0, buffer);
-				sprintf(buffer, "%4i:M %4i %4i %4i         ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true));
+				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(u_total, true));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
 				sprintf(buffer, "%4i:S %4i %4i %4i  Pace %i", motor_speed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps, pacing);
 				eaDogM_WriteStringAtPos(6, 0, buffer);

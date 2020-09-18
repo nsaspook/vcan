@@ -41,7 +41,7 @@ extern "C" {
 
 #if ENCODER_PULSES_PER_REV < 8000
 #define motor_error_stop	ENCODER_PULSES_PER_REV/2000
-#define motor_volts	3000 // limits amount of current at max torque, TI motor
+#define motor_volts	2000 // limits amount of current at max torque, TI motor
 #else
 #define motor_error_stop	30
 #define motor_volts	5000 // limits amount of current at max torque, MCHP motor

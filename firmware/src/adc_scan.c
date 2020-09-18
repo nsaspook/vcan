@@ -29,6 +29,7 @@ void end_of_adc_scan(void)
 		u1bi = lp_filter(u1bi, 1);
 		u2ai = lp_filter(u2ai, 2);
 		u2bi = lp_filter(u2bi, 3);
+		u_total = u1bi + u2ai + u2bi;
 	}
 	IFS3CLR = _IFS3_AD1EOSIF_MASK; // Clear the interrupt
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // scan re-trigger
