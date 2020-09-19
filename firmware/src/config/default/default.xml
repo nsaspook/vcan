@@ -6053,28 +6053,28 @@
       <Symbols dnOrder="0">
         <Integer dnOrder="0" id="ALTDTR1__ALTDTR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="120"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <Integer dnOrder="1" id="ALTDTR2__ALTDTR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="120"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <Integer dnOrder="2" id="ALTDTR3__ALTDTR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="120"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <Integer dnOrder="3" id="ALTDTR4__ALTDTR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="120"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <Integer dnOrder="4" id="DTCOMP1__DTCOMP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
@@ -6084,7 +6084,7 @@
         <Integer dnOrder="5" id="DTCOMP2__DTCOMP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
@@ -6094,7 +6094,7 @@
         <Integer dnOrder="6" id="DTCOMP3__DTCOMP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
@@ -6104,7 +6104,7 @@
         <Integer dnOrder="7" id="DTCOMP4__DTCOMP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
@@ -6113,22 +6113,22 @@
         </Integer>
         <Integer dnOrder="8" id="DTR1__DTR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="120"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <Integer dnOrder="9" id="DTR2__DTR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="120"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <Integer dnOrder="10" id="DTR3__DTR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="120"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <Integer dnOrder="11" id="DTR4__DTR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="120"/>
+            <User dnOrder="0" value="0"/>
           </Values>
         </Integer>
         <String dnOrder="12" id="INTR_PWM_FAULT">
@@ -6674,7 +6674,7 @@
         <Comment dnOrder="112" id="MCPWM_LEADING_DEADTIME1">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;Leading&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;1.0&amp;#160;uS&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;Leading&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;0.0&amp;#160;uS&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
@@ -6702,21 +6702,21 @@
         <Comment dnOrder="116" id="MCPWM_LEADING_DEADTIME2">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;Leading&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;1.0&amp;#160;uS&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;Leading&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;0.0&amp;#160;uS&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
         <Comment dnOrder="117" id="MCPWM_LEADING_DEADTIME3">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;Leading&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;1.0&amp;#160;uS&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;Leading&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;0.0&amp;#160;uS&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
         <Comment dnOrder="118" id="MCPWM_LEADING_DEADTIME4">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;Leading&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;1.0&amp;#160;uS&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;Leading&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;0.0&amp;#160;uS&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
@@ -6827,7 +6827,7 @@
         </Hex>
         <Hex dnOrder="138" id="MCPWM_PWMCON1">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="1728"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="1664"/>
           </Values>
         </Hex>
         <Hex dnOrder="139" id="MCPWM_PWMCON10">
@@ -6837,17 +6837,17 @@
         </Hex>
         <Hex dnOrder="140" id="MCPWM_PWMCON2">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="1728"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="1664"/>
           </Values>
         </Hex>
         <Hex dnOrder="141" id="MCPWM_PWMCON3">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="1728"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="1664"/>
           </Values>
         </Hex>
         <Hex dnOrder="142" id="MCPWM_PWMCON4">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="mcpwm" value="1728"/>
+            <Dynamic dnOrder="0" id="mcpwm" value="1664"/>
           </Values>
         </Hex>
         <Hex dnOrder="143" id="MCPWM_PWMCON7">
@@ -6873,7 +6873,7 @@
         <Comment dnOrder="147" id="MCPWM_TRAILING_DEADTIME1">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;Trailing&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;1.0&amp;#160;uS&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;Trailing&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;0.0&amp;#160;uS&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
@@ -6901,21 +6901,21 @@
         <Comment dnOrder="151" id="MCPWM_TRAILING_DEADTIME2">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;Trailing&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;1.0&amp;#160;uS&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;Trailing&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;0.0&amp;#160;uS&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
         <Comment dnOrder="152" id="MCPWM_TRAILING_DEADTIME3">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;Trailing&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;1.0&amp;#160;uS&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;Trailing&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;0.0&amp;#160;uS&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
         <Comment dnOrder="153" id="MCPWM_TRAILING_DEADTIME4">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
-              <Value dnOrder="0">****&amp;#160;Trailing&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;1.0&amp;#160;uS&amp;#160;****</Value>
+              <Value dnOrder="0">****&amp;#160;Trailing&amp;#160;edge&amp;#160;dead&amp;#160;time&amp;#160;is&amp;#160;0.0&amp;#160;uS&amp;#160;****</Value>
             </String>
           </Attributes>
         </Comment>
@@ -7102,13 +7102,13 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="181" id="PWMCON1__DTC">
           <Values dnOrder="0">
-            <User dnOrder="0" value="3"/>
+            <User dnOrder="0" value="2"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="182" id="PWMCON1__DTCP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
@@ -7137,13 +7137,13 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="187" id="PWMCON2__DTC">
           <Values dnOrder="0">
-            <User dnOrder="0" value="3"/>
+            <User dnOrder="0" value="2"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="188" id="PWMCON2__DTCP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
@@ -7159,13 +7159,13 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="191" id="PWMCON3__DTC">
           <Values dnOrder="0">
-            <User dnOrder="0" value="3"/>
+            <User dnOrder="0" value="2"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="192" id="PWMCON3__DTCP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>
@@ -7181,13 +7181,13 @@
         </KeyValueSet>
         <KeyValueSet dnOrder="195" id="PWMCON4__DTC">
           <Values dnOrder="0">
-            <User dnOrder="0" value="3"/>
+            <User dnOrder="0" value="2"/>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="196" id="PWMCON4__DTCP">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </KeyValueSet>

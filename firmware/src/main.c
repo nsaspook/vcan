@@ -114,10 +114,10 @@ struct SPid freq_pi = {
 };
 
 struct SPid current_pi = {
-	.iMax = 1500.0,
-	.iMin = -1500.0,
-	.pGain = 4.0, // 2.0
-	.iGain = 0.425, // 0.425
+	.iMax = 100.0,
+	.iMin = -100.0,
+	.pGain = 0.2, // 2.0
+	.iGain = 0.8, // 0.425
 };
 
 struct SPid velocity_pi = {
@@ -130,7 +130,7 @@ struct SPid velocity_pi = {
 V_STATE vcan_state = V_init;
 M_SPEED m_speed = M_SLEW;
 
-volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, u_total = 0, an_data[NUM_AN];
+volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, u_total = 0, current_error, an_data[NUM_AN];
 volatile uint16_t tickCount[TMR_COUNT];
 
 volatile int32_t motor_speed = MOTOR_SPEED;
@@ -245,8 +245,72 @@ void wave_gen(uint32_t status, uintptr_t context)
 #endif
 		//DEBUGB0_Clear();
 	}
-	pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
+
+	current_error = hb_current(u_total, false) - MPCURRENT;
+	pi_current_error = lp_filter_f(UpdatePI(&current_pi, current_error), 5);
+
+	/*
+	 * generate a current error drive signal
+	 */
+	m35_4.current = MPCURRENT + MPCURRENT - (int32_t) pi_current_error;
+
+	/*
+	 * limit motor drive
+	 */
+	if (m35_4.current > motor_volts) {
+		m35_4.current = motor_volts;
+	}
+	//			if (m35_4.current > (m35_4.current_prev + 1)) {
+	//				m35_4.current = m35_4.current_prev + 1 + MBIAS;
+	//			}
+
+	if (m35_4.current > motor_volts) {
+		m35_4.current = motor_volts;
+	}
+
+	m35_4.current_prev = m35_4.current;
+
 	pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
+
+	m35_2.error = (POS3CNT * m35_3.gain) - POS2CNT;
+
+	if (pi_freq_error > 1999.0) {
+		pi_freq_error = 1999.0;
+	}
+
+
+
+	if (abs(m35_2.error) < motor_error_stop) {
+		m35_2.set = true;
+	} else {
+		m35_2.set = false;
+	}
+
+	if (m35_2.error > 0) {
+		if (m35_2.ccw) {
+			m35_2.ccw = false;
+		}
+		m35_2.cw = true;
+		/*
+		 * set channel duty cycle for motor outputs
+		 */
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
+	} else {
+		if (m35_2.cw) {
+			m35_2.cw = false;
+		}
+		m35_2.ccw = true;
+		/*
+		 * set channel duty cycle for motor outputs
+		 */
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
+	}
 }
 
 /*
@@ -629,6 +693,14 @@ int main(void)
 	TMR2_CallbackRegister(wave_gen, 0);
 	TMR2_Start();
 
+	//Module CTMU
+	PMD1bits.CTMUMD = 0; //Enable CTMU Module
+	CTMUCONbits.TGEN = 0; // TGEN = 0 for enable current through diode
+	CTMUCONbits.EDG1STAT = 1; // EDGESTAT1 = EDGESTAT2  for enable current trough diode
+	CTMUCONbits.EDG2STAT = 1; // EDGESTAT1 = EDGESTAT2  for enable current trough diode
+	CTMUCONbits.IRNG = 0b11; //100xBase current level
+	CTMUCONbits.ON = 1; // CTMU is ON
+
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
@@ -668,41 +740,7 @@ int main(void)
 			QEI2ICC = POS2CNT;
 			QEI2CMPL = POS2CNT;
 
-			m35_2.error = (m35_3.pos * m35_3.gain) - m35_2.pos;
 
-			//			pi_current_error = UpdatePI(&current_pi, (double) m35_2.error);
-			//			pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
-
-			if (pi_freq_error > 1999.0) {
-				pi_freq_error = 1999.0;
-			}
-
-			/*
-			 * generate a positioning error drive signal
-			 */
-			m35_4.current = abs((int32_t) pi_current_error) + MBIAS;
-
-			/*
-			 * limit motor drive
-			 */
-			if (m35_4.current > motor_volts) {
-				m35_4.current = motor_volts;
-			}
-			//			if (m35_4.current > (m35_4.current_prev + 1)) {
-			//				m35_4.current = m35_4.current_prev + 1 + MBIAS;
-			//			}
-
-			if (m35_4.current > motor_volts) {
-				m35_4.current = motor_volts;
-			}
-
-			m35_4.current_prev = m35_4.current;
-
-			if (abs(m35_2.error) < motor_error_stop) {
-				m35_2.set = true;
-			} else {
-				m35_2.set = false;
-			}
 
 			pacing = velo_loop(pi_velocity_error, m35_2.set);
 			if (pacing == 0) {
@@ -717,31 +755,7 @@ int main(void)
 #endif
 			}
 
-			if (m35_2.error > 0) {
-				if (m35_2.ccw) {
-					m35_2.ccw = false;
-				}
-				m35_2.cw = true;
-				/*
-				 * set channel duty cycle for motor outputs
-				 */
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
-			} else {
-				if (m35_2.cw) {
-					m35_2.cw = false;
-				}
-				m35_2.ccw = true;
-				/*
-				 * set channel duty cycle for motor outputs
-				 */
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
-			}
+
 
 			if (m35_2.set || !m35_4.speed) {
 #ifndef	SLIP_DRIVE
@@ -793,7 +807,7 @@ int main(void)
 			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
 				OledClearBuffer();
-				sprintf(buffer, " Options: 1:%d 2:%d   %f", option1_Get(), option2_Get(), pi_freq_error);
+				sprintf(buffer, " Options: 1:%d 2:%d   %4.1f", option1_Get(), option2_Get(), pi_current_error);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
 				sprintf(buffer, "C %5i:%i     %1i:%1i:%1i:%1i     ", m35_ptr->pos, m35_2.error, m35_2.cw, m35_2.ccw, m35_2.stopped, m35_2.set);
 				eaDogM_WriteStringAtPos(1, 0, buffer);
@@ -808,7 +822,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(3, 0, buffer);
 				sprintf(buffer, "%4i:P %4i %4i %4i  %4i      ", m35_2.erotations, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u_total, false));
 				eaDogM_WriteStringAtPos(4, 0, buffer);
-				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(u_total, true));
+				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(current_error, true));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
 				sprintf(buffer, "%4i:S %4i %4i %4i  Pace %i", motor_speed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps, pacing);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
@@ -825,6 +839,8 @@ int main(void)
 				eaDogM_WriteStringAtPos(12, 0, buffer);
 				sprintf(buffer, "%i    ", (int) t1_time);
 				eaDogM_WriteStringAtPos(13, 0, buffer);
+				sprintf(buffer, "%i    ", an_data[TSENSOR]);
+				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph();
 				OledUpdate();
 				StartTimer(TMR_DISPLAY, 333);

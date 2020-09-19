@@ -25,10 +25,10 @@ void end_of_adc_scan(void)
 		if (!option1_Get()) {
 			u1bi = u1ai;
 		}
-		u1ai = lp_filter(u1ai, 0); // try filter
-		u1bi = lp_filter(u1bi, 1);
-		u2ai = lp_filter(u2ai, 2);
-		u2bi = lp_filter(u2bi, 3);
+		u1ai = (int32_t) lp_filter_f((double) u1ai, 0); // try filter
+		u1bi = (int32_t) lp_filter_f((double) u1bi, 1);
+		u2ai = (int32_t) lp_filter_f((double) u2ai, 2);
+		u2bi = (int32_t) lp_filter_f((double) u2bi, 3);
 		u_total = u1bi + u2ai + u2bi;
 	}
 	IFS3CLR = _IFS3_AD1EOSIF_MASK; // Clear the interrupt

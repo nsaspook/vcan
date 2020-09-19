@@ -29,7 +29,7 @@ extern "C" {
 		NUM_AN, // one extra to define number of ADC SOURCES
 	} AN_NAMES;
 
-	extern volatile int32_t u1ai, u1bi, u2ai, u2bi, u_total, an_data[NUM_AN];
+	extern volatile int32_t u1ai, u1bi, u2ai, u2bi, u_total, current_error, an_data[NUM_AN];
 
 	void end_of_adc_scan(void);
 	void init_end_of_adc_scan(void);

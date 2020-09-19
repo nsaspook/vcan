@@ -94,8 +94,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/mcpwm/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/mcpwm/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">7B867C0F98DA6343CC3686EBFA7C3642</GeneratedChecksum>
-          <UserChecksum dnOrder="6">7B867C0F98DA6343CC3686EBFA7C3642</UserChecksum>
+          <GeneratedChecksum dnOrder="5">B9B7AF0FD314216B5F622BD576A44A4A</GeneratedChecksum>
+          <UserChecksum dnOrder="6">B9B7AF0FD314216B5F622BD576A44A4A</UserChecksum>
         </File>
         <File dnOrder="10">
           <Type dnOrder="0">SOURCE</Type>

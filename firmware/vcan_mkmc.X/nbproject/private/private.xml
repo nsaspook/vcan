@@ -10,7 +10,7 @@
             <file>file:/root/vcan/firmware/src/filters.c</file>
             <file>file:/root/vcan/firmware/src/pid.c</file>
             <file>file:/root/vcan/firmware/src/adc_scan.h</file>
-            <file>file:/root/vcan/firmware/src/filters.h</file>
+            <file>file:/opt/microchip/mplabx/v5.40/packs/Microchip/PIC32MK-MC_DFP/1.4.94/include/proc/p32mk1024mcf100.h</file>
             <file>file:/root/vcan/firmware/src/freqgen.c</file>
             <file>file:/root/vcan/firmware/src/m35qei.h</file>
             <file>file:/root/vcan/firmware/src/timers.c</file>

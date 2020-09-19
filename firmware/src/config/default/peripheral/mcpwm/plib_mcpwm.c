@@ -72,14 +72,14 @@ void MCPWM_Initialize (void)
     /*  PTDIR  =  0 */
     /*  ECAM   =  1 */
     /*  DTCP   =  0 */
-    /*  DTC    =  3 */
+    /*  DTC    =  2 */
     /*  ITB    = 1 */
     /*  PWMHIEN =  false */
     /*  PWMLIEN = false */
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON1 = 0x6c0;
+    PWMCON1 = 0x680;
 
     /* IOCON1 register  */
     /*  SWAP    = 0*/
@@ -101,8 +101,8 @@ void MCPWM_Initialize (void)
     PHASE1 = 12000;
 
     /* Dead Time */
-    DTR1 = 120;
-    ALTDTR1 = 120;
+    DTR1 = 0;
+    ALTDTR1 = 0;
 
     /* Trigger Generator */
     TRGCON1 = 0x0;
@@ -127,14 +127,14 @@ void MCPWM_Initialize (void)
     /*  PTDIR  =  0 */
     /*  ECAM   =  1 */
     /*  DTCP   =  0 */
-    /*  DTC    =  3 */
+    /*  DTC    =  2 */
     /*  ITB    = 1 */
     /*  PWMHIEN =  false */
     /*  PWMLIEN = false */
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON2 = 0x6c0;
+    PWMCON2 = 0x680;
 
     /* IOCON2 register  */
     /*  SWAP    = 0*/
@@ -156,8 +156,8 @@ void MCPWM_Initialize (void)
     PHASE2 = 12000;
 
     /* Dead Time */
-    DTR2 = 120;
-    ALTDTR2 = 120;
+    DTR2 = 0;
+    ALTDTR2 = 0;
 
     /* Trigger Generator */
     TRGCON2 = 0x0;
@@ -182,14 +182,14 @@ void MCPWM_Initialize (void)
     /*  PTDIR  =  0 */
     /*  ECAM   =  1 */
     /*  DTCP   =  0 */
-    /*  DTC    =  3 */
+    /*  DTC    =  2 */
     /*  ITB    = 1 */
     /*  PWMHIEN =  false */
     /*  PWMLIEN = false */
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON3 = 0x6c0;
+    PWMCON3 = 0x680;
 
     /* IOCON3 register  */
     /*  SWAP    = 0*/
@@ -211,8 +211,8 @@ void MCPWM_Initialize (void)
     PHASE3 = 12000;
 
     /* Dead Time */
-    DTR3 = 120;
-    ALTDTR3 = 120;
+    DTR3 = 0;
+    ALTDTR3 = 0;
 
     /* Trigger Generator */
     TRGCON3 = 0x0;
@@ -237,14 +237,14 @@ void MCPWM_Initialize (void)
     /*  PTDIR  =  0 */
     /*  ECAM   =  1 */
     /*  DTCP   =  0 */
-    /*  DTC    =  3 */
+    /*  DTC    =  2 */
     /*  ITB    = 1 */
     /*  PWMHIEN =  false */
     /*  PWMLIEN = false */
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON4 = 0x6c0;
+    PWMCON4 = 0x680;
 
     /* IOCON4 register  */
     /*  SWAP    = 0*/
@@ -266,8 +266,8 @@ void MCPWM_Initialize (void)
     PHASE4 = 12000;
 
     /* Dead Time */
-    DTR4 = 120;
-    ALTDTR4 = 120;
+    DTR4 = 0;
+    ALTDTR4 = 0;
 
     /* Trigger Generator */
     TRGCON4 = 0x0;
