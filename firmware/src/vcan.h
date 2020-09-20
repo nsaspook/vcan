@@ -46,7 +46,7 @@ extern "C" {
 
 #define PWM_FREQUENCY		MOTOR_SPEED
 #define RATED_SPEED_RPM		10
-#define SLOW_LOOP_TIME_SEC	1
+#define SLOW_LOOP_TIME_SEC	1	
 
 #define PI		M_PI
 #define PI2		M_PI*2.0
@@ -74,6 +74,10 @@ extern "C" {
 #define HB_OHMS		100
 #define ADC_STEPS	4096.0 // 12-bit
 #define ADC_REF		2.5
+#define MV_STEP		ADC_REF/ADC_STEPS
+#define TEMP_OFFSET_ADC_STEPS	1181.96
+#define TEMP_MV_C		1.56
+
 #define HB_SCALE	4201.68
 #define MOTOR_CURRENT_SCALE	1.41 // square root of 2
 

@@ -839,7 +839,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(12, 0, buffer);
 				sprintf(buffer, "%i    ", (int) t1_time);
 				eaDogM_WriteStringAtPos(13, 0, buffer);
-				sprintf(buffer, "%i    ", an_data[TSENSOR]);
+				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    ", (((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0);
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph();
 				OledUpdate();
