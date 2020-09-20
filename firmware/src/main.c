@@ -116,8 +116,8 @@ struct SPid freq_pi = {
 struct SPid current_pi = {
 	.iMax = 100.0,
 	.iMin = -100.0,
-	.pGain = 0.2, // 2.0
-	.iGain = 0.8, // 0.425
+	.pGain = 0.0, // 0.2
+	.iGain = 0.0, // 0.8
 };
 
 struct SPid velocity_pi = {
