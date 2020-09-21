@@ -114,10 +114,10 @@ struct SPid freq_pi = {
 };
 
 struct SPid current_pi = {
-	.iMax = 100.0,
-	.iMin = -100.0,
-	.pGain = 0.0, // 0.2
-	.iGain = 0.0, // 0.8
+	.iMax = 300.0,
+	.iMin = -300.0,
+	.pGain = 0.1, // 0.2
+	.iGain = 0.1, // 0.8
 };
 
 struct SPid velocity_pi = {
@@ -139,7 +139,7 @@ volatile time_t t1_time;
 struct tm * timeinfo;
 
 uint32_t StartTime = 1, TimeUsed = 1;
-volatile uint32_t pacing = 1, pwm_update = false;
+volatile uint32_t pacing = 1, pwm_update = false, pwm_stop = true;
 double mHz = 0.0, mHz_real = 0.0, sr_slip = 0.0, mHz_raw = 0.0, mHz_real_raw = 0.0;
 double pi_current_error = 0.0, pi_velocity_error = 0.0, pi_freq_error = 0.0;
 
@@ -223,6 +223,9 @@ time_t time(time_t * Time)
  */
 void wave_gen(uint32_t status, uintptr_t context)
 {
+	if (pwm_stop && pwm_update)
+		return;
+
 	pwm_update = true;
 #ifdef	SLIP_DRIVE
 	m35_4.speed--;
@@ -297,8 +300,8 @@ void wave_gen(uint32_t status, uintptr_t context)
 		 */
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
 	} else {
 		if (m35_2.cw) {
 			m35_2.cw = false;
@@ -309,8 +312,8 @@ void wave_gen(uint32_t status, uintptr_t context)
 		 */
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	}
 }
 
@@ -580,10 +583,10 @@ int main(void)
 	 * block-commutated
 	 */
 	for (i = 0; i < 7; i++) {
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, ((step_code[i & 0x7] >> 2)&0x1) * hpwm_mid_duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i & 0x7] >> 2)&0x1) * hpwm_mid_duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i & 0x7] >> 1)&0x1) * hpwm_mid_duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i & 0x7] >> 0)&0x1) * hpwm_mid_duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, ((step_code[i & 0x7] >> 2)&0x1) * MBLOCK);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i & 0x7] >> 2)&0x1) * MBLOCK);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i & 0x7] >> 1)&0x1) * MBLOCK);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i & 0x7] >> 0)&0x1) * MBLOCK);
 		switch (i) {
 		case 0:
 			MCPWM_Start();
@@ -611,10 +614,6 @@ int main(void)
 		OledUpdate();
 		WaitMs(10);
 	}
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, 0);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
 	WaitMs(2000);
 
 	vcan_state = V_home;
@@ -624,6 +623,7 @@ int main(void)
 	/*
 	 * start ISR for PWM waveform generator
 	 */
+	TMR2_Stop();
 	TMR2_CallbackRegister(wave_gen, 0);
 	TMR2_Start();
 
@@ -635,25 +635,26 @@ int main(void)
 	CTMUCONbits.IRNG = 0b11; //100xBase current level
 	CTMUCONbits.ON = 1; // CTMU is ON
 
-	// wait for first 3-phase calculation
+	// wait for first 3-phase calculation then stop, pwm_stop is true
 	while (!pwm_update);
 	// setup motor position values
-	m35_4.current = motor_volts;
+	m35_4.current = MBLOCK;
 	pacing = 1;
 	phase_duty(&m35_2, m35_4.current, m_speed, pacing);
 	phase_duty(&m35_3, m35_4.current, m_speed, pacing);
 	phase_duty(&m35_4, m35_4.current, m_speed, pacing);
 
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, 0);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
 	WaitMs(600);
 	m35_2.sine_zero = POS2CNT;
 	sprintf(buffer, "HP 3-PH %7i  %6i    ", POS2CNT, m35_2.sine_zero - m35_2.ppp);
 	eaDogM_WriteStringAtPos(3, 0, buffer);
 	OledUpdate();
 	WaitMs(3000);
+	pwm_stop = false; // let ISR generate waveforms
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
