@@ -139,11 +139,11 @@ volatile time_t t1_time;
 struct tm * timeinfo;
 
 uint32_t StartTime = 1, TimeUsed = 1;
-uint32_t pacing = 1;
+volatile uint32_t pacing = 1, pwm_update = false;
 double mHz = 0.0, mHz_real = 0.0, sr_slip = 0.0, mHz_raw = 0.0, mHz_real_raw = 0.0;
 double pi_current_error = 0.0, pi_velocity_error = 0.0, pi_freq_error = 0.0;
 
-const uint8_t step_code[] = {// A,B,C bits in orderUpdatePI
+const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
 	0b100,
 	0b110,
@@ -223,6 +223,7 @@ time_t time(time_t * Time)
  */
 void wave_gen(uint32_t status, uintptr_t context)
 {
+	pwm_update = true;
 #ifdef	SLIP_DRIVE
 	m35_4.speed--;
 	if (m35_4.speed < 1) {
@@ -542,74 +543,7 @@ int main(void)
 	lcd_init();
 	OledInit();
 	OledSetCharUpdate(0); // manual LCD screen updates for speed
-#ifdef EDOGS_DEMO
-	uint32_t irow = 0;
-	int32_t x2 = 205, x1 = 220, y1 = 100, xn1, yn1, xn2, yn2, r;
-	double theta1 = 0.0, theta2 = 120.0, theta3 = 240.0;
-	double ra, si, co;
-
-
-	while (true) {
-		if (TimerDone(TMR_LCD_UP)) {
-			StartTimer(TMR_LCD_UP, 15);
-			OledClearBuffer();
-			sprintf(buffer, "%i", irow);
-			OledPutString(buffer);
-
-			OledSetCursor(0, 1);
-			OledPutString("3PH VECTOR");
-			//Starting point
-			xn1 = x1;
-			yn1 = y1;
-
-			//Convert Degree into radian
-			r = x2 - x1;
-			ra = 0.0175 * theta1;
-			si = sin(ra);
-			co = cos(ra);
-			//second point
-			xn2 = x1 + r * co + 1;
-			yn2 = y1 + r * si + 1;
-
-			line_rot(xn1, yn1, xn2, yn2);
-			ra = 0.0175 * theta2;
-			si = sin(ra);
-			co = cos(ra);
-			//second point
-			xn2 = x1 + r * co + 1;
-			yn2 = y1 + r * si + 1;
-
-			line_rot(xn1, yn1, xn2, yn2);
-			ra = 0.0175 * theta3;
-			si = sin(ra);
-			co = cos(ra);
-			//second point
-			xn2 = x1 + r * co + 1;
-			yn2 = y1 + r * si + 1;
-
-			line_rot(xn1, yn1, xn2, yn2);
-			OledUpdate();
-
-			irow++;
-			theta1 = theta1 + 1.5; // rotate
-			if (theta1 > 360.0)
-				theta1 = 0.0;
-			theta2 = theta2 + 1.25; // rotate
-			if (theta2 > 360.0)
-				theta2 = 0.0;
-			theta3 = theta3 + 2.0; // rotate
-			if (theta3 > 360.0)
-				theta3 = 0.0;
-		}
-
-		if (TimerDone(TMR_BLINK)) {
-			StartTimer(TMR_BLINK, 1000);
-			RESET_LED_Toggle();
-		}
-	}
 #endif
-#endif
-
 	sprintf(buffer, "VCAN %s %s       ", build_date, build_time);
 	eaDogM_WriteStringAtPos(0, 0, buffer);
 	OledUpdate();
@@ -700,6 +634,26 @@ int main(void)
 	CTMUCONbits.EDG2STAT = 1; // EDGESTAT1 = EDGESTAT2  for enable current trough diode
 	CTMUCONbits.IRNG = 0b11; //100xBase current level
 	CTMUCONbits.ON = 1; // CTMU is ON
+
+	// wait for first 3-phase calculation
+	while (!pwm_update);
+	// setup motor position values
+	m35_4.current = motor_volts;
+	pacing = 1;
+	phase_duty(&m35_2, m35_4.current, m_speed, pacing);
+	phase_duty(&m35_3, m35_4.current, m_speed, pacing);
+	phase_duty(&m35_4, m35_4.current, m_speed, pacing);
+
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
+	WaitMs(600);
+	m35_2.sine_zero = POS2CNT;
+	sprintf(buffer, "HP 3-PH %7i  %6i    ", POS2CNT, m35_2.sine_zero - m35_2.ppp);
+	eaDogM_WriteStringAtPos(3, 0, buffer);
+	OledUpdate();
+	WaitMs(3000);
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
