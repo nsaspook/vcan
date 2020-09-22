@@ -50,7 +50,7 @@
 #include "OledChar.h"
 #include "OledGrph.h"
 #include "dogm-graphic.h"
-#include "config/default/peripheral/spi/plib_spi3.h"
+//#include "config/default/peripheral/spi/plib_spi3.h"
 #include "tests.h"
 
 /* ------------------------------------------------------------ */

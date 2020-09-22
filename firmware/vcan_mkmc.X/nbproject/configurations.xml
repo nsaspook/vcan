@@ -34,8 +34,10 @@
               <itemPath>../src/config/default/peripheral/qei/plib_qei3.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="spi" projectFiles="true">
-              <itemPath>../src/config/default/peripheral/spi/plib_spi_common.h</itemPath>
-              <itemPath>../src/config/default/peripheral/spi/plib_spi3.h</itemPath>
+              <logicalFolder name="f1" displayName="spi_master" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/spi/spi_master/plib_spi_master_common.h</itemPath>
+                <itemPath>../src/config/default/peripheral/spi/spi_master/plib_spi3_master.h</itemPath>
+              </logicalFolder>
             </logicalFolder>
             <logicalFolder name="f6" displayName="tmr" projectFiles="true">
               <itemPath>../src/config/default/peripheral/tmr/plib_tmr_common.h</itemPath>
@@ -56,13 +58,7 @@
           </logicalFolder>
           <itemPath>../src/config/default/toolchain_specifics.h</itemPath>
           <itemPath>../src/config/default/definitions.h</itemPath>
-        </logicalFolder>
-      </logicalFolder>
-      <logicalFolder name="f2" displayName="packs" projectFiles="true">
-        <logicalFolder name="f1"
-                       displayName="PIC32MK1024MCF100_DFP"
-                       projectFiles="true">
-          <itemPath>../src/packs/PIC32MK1024MCF100_DFP/device.h</itemPath>
+          <itemPath>../src/config/default/device.h</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>../src/m35qei.h</itemPath>
@@ -86,6 +82,11 @@
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="config" projectFiles="true">
+        <logicalFolder name="f1" displayName="default" projectFiles="true">
+          <itemPath>../src/config/default/p32MK1024MCF100.ld</itemPath>
+        </logicalFolder>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -117,7 +118,9 @@
               <itemPath>../src/config/default/peripheral/qei/plib_qei3.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="spi" projectFiles="true">
-              <itemPath>../src/config/default/peripheral/spi/plib_spi3.c</itemPath>
+              <logicalFolder name="f1" displayName="spi_master" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/spi/spi_master/plib_spi3_master.c</itemPath>
+              </logicalFolder>
             </logicalFolder>
             <logicalFolder name="f6" displayName="tmr" projectFiles="true">
               <itemPath>../src/config/default/peripheral/tmr/plib_tmr6.c</itemPath>
@@ -180,7 +183,7 @@
         <targetDevice>PIC32MK1024MCF100</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>ICD4Tool</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>2.41</languageToolchainVersion>
         <platform>2</platform>
@@ -318,7 +321,8 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
-        <property key="extra-include-directories" value=""/>
+        <property key="extra-include-directories"
+                  value="../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP;"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>

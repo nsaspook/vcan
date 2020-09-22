@@ -43,6 +43,8 @@
 #include "device.h"
 #include "plib_evic.h"
 
+
+EXT_INT_PIN_CALLBACK_OBJ extInt0CbObj;
 // *****************************************************************************
 // *****************************************************************************
 // Section: IRQ Implementation
@@ -53,7 +55,7 @@ void EVIC_Initialize( void )
 {
     INTCONSET = _INTCON_MVEC_MASK;
 
-    /* Set up priority / subpriority of enabled interrupts */
+    /* Set up priority and subpriority of enabled interrupts */
     IPC0SET = 0x4 | 0x0;  /* CORE_TIMER:  Priority 1 / Subpriority 0 */
     IPC0SET = 0xc000000 | 0x0;  /* EXTERNAL_0:  Priority 3 / Subpriority 0 */
     IPC1SET = 0x4 | 0x0;  /* TIMER_1:  Priority 1 / Subpriority 0 */
@@ -76,6 +78,13 @@ void EVIC_Initialize( void )
     IPC47SET = 0x400 | 0x0;  /* QEI3:  Priority 1 / Subpriority 0 */
     IPC54SET = 0x4000000 | 0x0;  /* SPI3_RX:  Priority 1 / Subpriority 0 */
     IPC55SET = 0x4 | 0x0;  /* SPI3_TX:  Priority 1 / Subpriority 0 */
+
+    /* Initialize External interrupt 0 callback object */
+    extInt0CbObj.callback = NULL;
+
+
+    /* Configure Shadow Register Set */
+    PRISS = 0x10000000;
 }
 
 void EVIC_SourceEnable( INT_SOURCE source )
@@ -124,3 +133,57 @@ void EVIC_SourceStatusClear( INT_SOURCE source )
     *IFSxCLR = 1 << (source & 0x1f);
 }
 
+void EVIC_ExternalInterruptEnable( EXTERNAL_INT_PIN extIntPin )
+{
+    IEC0SET = extIntPin;
+}
+
+void EVIC_ExternalInterruptDisable( EXTERNAL_INT_PIN extIntPin )
+{
+    IEC0CLR = extIntPin;
+}
+
+bool EVIC_ExternalInterruptCallbackRegister(
+    EXTERNAL_INT_PIN extIntPin,
+    const EXTERNAL_INT_PIN_CALLBACK callback,
+    uintptr_t context
+)
+{
+    bool status = true;
+    switch  (extIntPin)
+        {
+        case EXTERNAL_INT_0:
+            extInt0CbObj.callback = callback;
+            extInt0CbObj.context  = context;
+            break;
+        default:
+            status = false;
+            break;
+        }
+
+    return status;
+}
+
+
+// *****************************************************************************
+/* Function:
+    void EXTERNAL_0_InterruptHandler()
+
+  Summary:
+    Interrupt Handler for External Interrupt pin 0.
+
+  Remarks:
+	It is an internal function called from ISR, user should not call it directly.
+*/
+void EXTERNAL_0_InterruptHandler()
+{
+    IFS0CLR = _IFS0_INT0IF_MASK;
+
+    if(extInt0CbObj.callback != NULL)
+    {
+        extInt0CbObj.callback (EXTERNAL_INT_0, extInt0CbObj.context);
+    }
+}
+
+
+/* End of file */
