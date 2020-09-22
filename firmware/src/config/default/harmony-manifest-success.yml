@@ -4,7 +4,7 @@
 
 
 project: vcan
-creation_date: 2020-09-21T17:16:57.886-07:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2020-09-21T20:05:58.175-07:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Linux
 mhc_mode: IDE            # [IDE|Standalone|Headless]
 mplabx_version: v5.40        # if MPLAB X plugin only

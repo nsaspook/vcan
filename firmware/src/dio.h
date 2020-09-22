@@ -46,7 +46,7 @@ extern "C" {
 	} S_data;
 
 	void init_dio(void);
-	void update_di(void);
+	void update_di(uint32_t, uintptr_t);
 
 	SW_STATES get_switch(const uint8_t);
 	SW_STATES get_switch_bm(const uint8_t);

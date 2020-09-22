@@ -9,21 +9,21 @@ void init_dio(void)
 	MAX_EN1_Set(); // disable MAX output pins
 	INTCONCLR = _INTCON_INT0EP_MASK; //External interrupt on falling edge
 	IFS0CLR = _IFS0_INT0IF_MASK; // Clear the external interrupt flag
-	IEC0SET = _IEC0_INT0IE_MASK; // Enable the external interrupt
+	EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_0,update_di,0);
+	EVIC_ExternalInterruptEnable(EXTERNAL_INT_0);
 	RESET_LED_Clear();
 }
 
 /*
  * update switch data during the MAX6818 external 0 interrupt CN signal
  */
-void update_di(void)
+void update_di(uint32_t a, uintptr_t b)
 {
 	static uint32_t switch_data = 0;
 	uint8_t i = 0, sw_value;
 
 	MAX_EN1_Clear(); // enable MAX output pins and reset MAX cn interrupt pin
 
-	IFS0CLR = _IFS0_INT0IF_MASK; // Clear the interrupt
 	switch_data++;
 	RESET_LED_Toggle();
 	// start reading the various pic port input bits after the max chip is ready

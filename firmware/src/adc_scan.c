@@ -58,7 +58,7 @@ void init_end_of_adc_scan(void)
  */
 int32_t hb_current(const int32_t adc_value, const bool motor)
 {
-	double adc_step = ADC_REF / ADC_STEPS;
+	double adc_step = MV_STEP;
 
 	if (motor) {
 		return(int32_t) ((((double) adc_value * adc_step) * HB_SCALE) * MOTOR_CURRENT_SCALE);

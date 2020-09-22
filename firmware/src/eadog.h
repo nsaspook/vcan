@@ -33,8 +33,6 @@ extern "C" {
 #include <stdio.h>
 #include "tests.h"
 #include "device.h"
-//#include "config/default/peripheral/spi/plib_spi_common.h"
-//#include "config/default/peripheral/spi/plib_spi3.h"
 #include "OledDriver.h"
 #include "OledChar.h"
 

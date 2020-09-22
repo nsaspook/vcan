@@ -29,13 +29,13 @@ extern "C" {
 #define SR240		24000
 #define PHASE_INC	(256 * 65536) / SAMPLERATE
 
-#define MOTOR_SPEED	1000	// sinewave update divider
+#define MOTOR_SPEED	100	// sinewave update divider
 #define MOTOR_UPDATES	1	// main motor loop timer in ms
 
 #define MBIAS		0 // current drive flux min for motor rotor lock stability
 #define MBLOCK		2200
 #define MIDLE		2400  // motor idle current
-#define MPCURRENT	900  // setpoint for motor current
+#define MPCURRENT	800  // setpoint for motor current
 
 #define ENCODER_PULSES_PER_REV	327680
 	//#define ENCODER_PULSES_PER_REV	4000
@@ -73,13 +73,15 @@ extern "C" {
 #define SINGLE_ELEC_ROT_RADS_PER_SEC                      ((float)((float)(2.0) * (float)M_PI))
 
 #define HB_OHMS		100
-#define ADC_STEPS	4096.0 // 12-bit
 #define ADC_REF		2.5
-#define MV_STEP		ADC_REF/ADC_STEPS
+#define ADC_STEPS	4096.0/ADC_REF // 12-bit
+#define ONE_VOLT	1000.0
+#define MV_STEP		(ONE_VOLT/ADC_STEPS)
 #define TEMP_OFFSET_ADC_STEPS	1181.96
 #define TEMP_MV_C		1.56
 
-#define HB_SCALE	4201.68
+	//#define HB_SCALE	4201.68
+#define HB_SCALE	10.0
 #define MOTOR_CURRENT_SCALE	1.41 // square root of 2
 
 #include <stddef.h>                     // Defines NULL
