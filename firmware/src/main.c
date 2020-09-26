@@ -109,8 +109,8 @@ m35_4 = {
 struct SPid freq_pi = {
 	.iMax = 2000.0,
 	.iMin = 0.0,
-	.pGain = 11.0, // 0.5
-	.iGain = 0.99, // 0.125
+	.pGain = 1.0, // 0.5
+	.iGain = 0.1, // 0.125
 };
 
 struct SPid current_pi = {
@@ -231,7 +231,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	m35_4.speed--;
 	if (m35_4.speed < 1) {
 #else
-	if (m35_2.set || (!--m35_4.speed)) {
+	if (m35_2.set || (--m35_4.speed <= 0)) {
 #endif
 		//DEBUGB0_Set();
 		DEBUGB0_Toggle();
@@ -244,9 +244,9 @@ void wave_gen(uint32_t status, uintptr_t context)
 		phase_duty(&m35_2, m35_4.current, m_speed, pacing);
 		phase_duty(&m35_3, m35_4.current, m_speed, pacing);
 		phase_duty(&m35_4, m35_4.current, m_speed, pacing);
-#ifdef	SLIP_DRIVE
+//#ifdef	SLIP_DRIVE
 		m35_4.speed = motor_speed;
-#endif
+//#endif
 		//DEBUGB0_Clear();
 	}
 
@@ -264,9 +264,6 @@ void wave_gen(uint32_t status, uintptr_t context)
 	if (m35_4.current > motor_volts) {
 		m35_4.current = motor_volts;
 	}
-	//			if (m35_4.current > (m35_4.current_prev + 1)) {
-	//				m35_4.current = m35_4.current_prev + 1 + MBIAS;
-	//			}
 
 	if (m35_4.current > motor_volts) {
 		m35_4.current = motor_volts;
@@ -274,14 +271,12 @@ void wave_gen(uint32_t status, uintptr_t context)
 
 	m35_4.current_prev = m35_4.current;
 
-	pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
-
 	m35_2.error = (POS3CNT * m35_3.gain) - POS2CNT;
+	pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
 
 	if (pi_freq_error > 1999.0) {
 		pi_freq_error = 1999.0;
 	}
-
 
 
 	if (abs(m35_2.error) < motor_error_stop) {
@@ -300,8 +295,8 @@ void wave_gen(uint32_t status, uintptr_t context)
 		 */
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	} else {
 		if (m35_2.cw) {
 			m35_2.cw = false;
@@ -312,8 +307,8 @@ void wave_gen(uint32_t status, uintptr_t context)
 		 */
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
 	}
 }
 
@@ -384,8 +379,8 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 	}
 
 #if (ENCODER_PULSES_PER_REV < 8000)
-	freq_pi.pGain = 11.0;
-	freq_pi.iGain = 0.99;
+//	freq_pi.pGain = 11.0;
+//	freq_pi.iGain = 0.99;
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
 		motor_speed = 2;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
@@ -660,14 +655,6 @@ int main(void)
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
 
-		/*
-		 * update slow velocity every second by reading velocity counters
-		 */
-		if (TimerDone(TMR_VEL)) {
-			StartTimer(TMR_VEL, 1000);
-
-		}
-
 		if (TimerDone(TMR_MOTOR)) {
 			StartTimer(TMR_MOTOR, MOTOR_UPDATES);
 
@@ -706,7 +693,7 @@ int main(void)
 			}
 			if (m35_2.set) {
 #ifndef SLIP_DRIVE
-				m35_4.speed = 1;
+//				m35_4.speed = 1;
 #endif
 			}
 

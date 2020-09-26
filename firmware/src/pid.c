@@ -4,7 +4,7 @@
 /*
  * converted to PI for motor control
  */
-double UpdatePI(struct SPid * pid, double error)
+double UpdatePI(struct SPid * const pid, double const error)
 {
 	double pTerm, iTerm;
 
@@ -21,6 +21,12 @@ double UpdatePI(struct SPid * pid, double error)
 	iTerm = (pid->iGain * pid->iState); // calculate the integral term
 	
 	return pTerm + iTerm;
+}
+
+void ResetPI(struct SPid * const pid)
+{
+	pid->dState=0.0; // not used but cleared
+	pid->iState=0.0;
 }
 
 
