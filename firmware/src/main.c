@@ -127,19 +127,23 @@ struct SPid velocity_pi = {
 	.iGain = 0.95, // 0.5 slip_drive
 };
 
-V_STATE vcan_state = V_init;
-M_SPEED m_speed = M_SLEW;
-
 volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, u_total = 0, current_error, an_data[NUM_AN];
 volatile uint16_t tickCount[TMR_COUNT];
 
-volatile int32_t motor_speed = MOTOR_SPEED;
 time_t rawtime;
 volatile time_t t1_time;
 struct tm * timeinfo;
 
-uint32_t StartTime = 1, TimeUsed = 1;
-volatile uint32_t pacing = 1, pwm_update = false, pwm_stop = true;
+volatile struct V_type V = {
+	.StartTime = 1,
+	.TimeUsed = 1,
+	.pacing = 1,
+	.pwm_update = true,
+	.pwm_stop = true,
+	.vcan_state = V_init,
+	.m_speed = M_SLEW,
+	.motor_speed = MOTOR_SPEED,
+};
 double mHz = 0.0, mHz_real = 0.0, sr_slip = 0.0, mHz_raw = 0.0, mHz_real_raw = 0.0;
 double pi_current_error = 0.0, pi_velocity_error = 0.0, pi_freq_error = 0.0;
 
@@ -223,10 +227,10 @@ time_t time(time_t * Time)
  */
 void wave_gen(uint32_t status, uintptr_t context)
 {
-	if (pwm_stop && pwm_update)
+	if (V.pwm_stop && V.pwm_update)
 		return;
 
-	pwm_update = true;
+	V.pwm_update = true;
 #ifdef	SLIP_DRIVE
 	m35_4.speed--;
 	if (m35_4.speed < 1) {
@@ -235,18 +239,18 @@ void wave_gen(uint32_t status, uintptr_t context)
 #endif
 		//DEBUGB0_Set();
 		DEBUGB0_Toggle();
-		TimeUsed = (uint32_t) _CP0_GET_COUNT() - StartTime;
-		StartTime = (uint32_t) _CP0_GET_COUNT();
+		V.TimeUsed = (uint32_t) _CP0_GET_COUNT() - V.StartTime;
+		V.StartTime = (uint32_t) _CP0_GET_COUNT();
 		m35_1.vel = VEL1CNT;
 		m35_2.vel = VEL2CNT;
 		m35_3.vel = VEL3CNT;
 
-		phase_duty(&m35_2, m35_4.current, m_speed, pacing);
-		phase_duty(&m35_3, m35_4.current, m_speed, pacing);
-		phase_duty(&m35_4, m35_4.current, m_speed, pacing);
-//#ifdef	SLIP_DRIVE
-		m35_4.speed = motor_speed;
-//#endif
+		phase_duty(&m35_2, m35_4.current, V.m_speed, V.pacing);
+		phase_duty(&m35_3, m35_4.current, V.m_speed, V.pacing);
+		phase_duty(&m35_4, m35_4.current, V.m_speed, V.pacing);
+		//#ifdef	SLIP_DRIVE
+		m35_4.speed = V.motor_speed;
+		//#endif
 		//DEBUGB0_Clear();
 	}
 
@@ -368,10 +372,10 @@ void set_motor_speed(const uint32_t, double);
 void set_motor_speed(const uint32_t error_sig, double pi_error)
 {
 	if (error_sig >= (ENCODER_PULSES_PER_REV / 800))
-		motor_speed = 2;
+		V.motor_speed = 2;
 
 	if (error_sig > (ENCODER_PULSES_PER_REV / 4)) {
-		motor_speed = 1;
+		V.motor_speed = 1;
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, 250);
 			RESET_LED_Toggle();
@@ -379,23 +383,23 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 	}
 
 #if (ENCODER_PULSES_PER_REV < 8000)
-//	freq_pi.pGain = 11.0;
-//	freq_pi.iGain = 0.99;
+	//	freq_pi.pGain = 11.0;
+	//	freq_pi.iGain = 0.99;
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
-		motor_speed = 2;
+		V.motor_speed = 2;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
-		motor_speed = 10;
+		V.motor_speed = 10;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 1000))
-		motor_speed = 50;
+		V.motor_speed = 50;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 1200))
-		motor_speed = 200;
+		V.motor_speed = 200;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 1500))
-		motor_speed = 1000;
+		V.motor_speed = 1000;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 2000))
-		motor_speed = 10000;
-	motor_speed = 2000 - (uint32_t) pi_error;
+		V.motor_speed = 10000;
+	V.motor_speed = 2000 - (uint32_t) pi_error;
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
-		motor_speed = 2;
+		V.motor_speed = 2;
 #else
 	freq_pi.pGain = 2.0;
 	freq_pi.iGain = 0.125;
@@ -418,9 +422,9 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 
 
 	if (m35_2.set) {
-		motor_speed = 1;
+		V.motor_speed = 1;
 	}
-	m35_4.speed = motor_speed;
+	m35_4.speed = V.motor_speed;
 }
 
 void motor_graph(void)
@@ -489,6 +493,7 @@ int main(void)
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
+
 #ifdef EDOGM
 	//	SPI3_Initialize_edogm();
 #endif
@@ -542,10 +547,22 @@ int main(void)
 	OledInit();
 	OledSetCharUpdate(0); // manual LCD screen updates for speed
 #endif
-	sprintf(buffer, "VCAN %s %s       ", build_date, build_time);
-	eaDogM_WriteStringAtPos(0, 0, buffer);
-	OledUpdate();
-	WaitMs(500);
+	if (OSCCONbits.CF) { // check for sysclock proper operation
+		sprintf(buffer, "VCAN Clock Error       ");
+		eaDogM_WriteStringAtPos(0, 0, buffer);
+		sprintf(buffer, "Clock Status %x      ", CLKSTAT);
+		eaDogM_WriteStringAtPos(1, 0, buffer);
+		OledUpdate();
+		WaitMs(5000);
+	} else {
+		sprintf(buffer, "VCAN %s %s       ", build_date, build_time);
+		eaDogM_WriteStringAtPos(0, 0, buffer);
+		sprintf(buffer, "Clock Status %x      ", CLKSTAT);
+		eaDogM_WriteStringAtPos(1, 0, buffer);
+		OledUpdate();
+		WaitMs(500);
+	}
+
 
 	/*
 	 * sine slew speed routines
@@ -596,14 +613,14 @@ int main(void)
 		case 6:
 			WaitMs(900);
 			sprintf(buffer, "HP %6i:%6i      ", POS2CNT, m35_2.ppr / m35_2.pole_pairs);
-			eaDogM_WriteStringAtPos(2, 0, buffer);
+			eaDogM_WriteStringAtPos(3, 0, buffer);
 			m35_2.ppp = POS2CNT;
 			//			POS2CNT = 0; // reset zero for new home
 			break;
 		case 1:
 		default:
 			sprintf(buffer, "HP %7i      ", POS2CNT);
-			eaDogM_WriteStringAtPos(1, 0, buffer);
+			eaDogM_WriteStringAtPos(2, 0, buffer);
 			break;
 		}
 		OledUpdate();
@@ -611,10 +628,10 @@ int main(void)
 	}
 	WaitMs(2000);
 
-	vcan_state = V_home;
+	V.vcan_state = V_home;
 	TMR3_Start(); // start auto movement functions
 	PWM_motor2(M_PWM);
-	StartTime = (uint32_t) _CP0_GET_COUNT();
+	V.StartTime = (uint32_t) _CP0_GET_COUNT();
 	/*
 	 * start ISR for PWM waveform generator
 	 */
@@ -631,13 +648,13 @@ int main(void)
 	CTMUCONbits.ON = 1; // CTMU is ON
 
 	// wait for first 3-phase calculation then stop, pwm_stop is true
-	while (!pwm_update);
+	while (!V.pwm_update);
 	// setup motor position values
 	m35_4.current = MBLOCK;
-	pacing = 1;
-	phase_duty(&m35_2, m35_4.current, m_speed, pacing);
-	phase_duty(&m35_3, m35_4.current, m_speed, pacing);
-	phase_duty(&m35_4, m35_4.current, m_speed, pacing);
+	V.pacing = 1;
+	phase_duty(&m35_2, m35_4.current, V.m_speed, V.pacing);
+	phase_duty(&m35_3, m35_4.current, V.m_speed, V.pacing);
+	phase_duty(&m35_4, m35_4.current, V.m_speed, V.pacing);
 
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
@@ -646,10 +663,10 @@ int main(void)
 	WaitMs(600);
 	m35_2.sine_zero = POS2CNT;
 	sprintf(buffer, "HP 3-PH %7i  %6i    ", POS2CNT, m35_2.sine_zero - m35_2.ppp);
-	eaDogM_WriteStringAtPos(3, 0, buffer);
+	eaDogM_WriteStringAtPos(4, 0, buffer);
 	OledUpdate();
 	WaitMs(3000);
-	pwm_stop = false; // let ISR generate waveforms
+	V.pwm_stop = false; // let ISR generate waveforms
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -684,8 +701,8 @@ int main(void)
 
 
 
-			pacing = velo_loop(pi_velocity_error, m35_2.set);
-			if (pacing == 0) {
+			V.pacing = velo_loop(pi_velocity_error, m35_2.set);
+			if (V.pacing == 0) {
 				m35_2.stopped = true;
 				m35_4.current = MIDLE;
 			} else {
@@ -693,7 +710,7 @@ int main(void)
 			}
 			if (m35_2.set) {
 #ifndef SLIP_DRIVE
-//				m35_4.speed = 1;
+				//				m35_4.speed = 1;
 #endif
 			}
 
@@ -733,7 +750,7 @@ int main(void)
 				StartTimer(TMR_BLINK, 1000);
 				RESET_LED_Toggle();
 			}
-			mHz = (double) TimeUsed / 60.0; // 60MHz core timer clock for ms per sinewave tick
+			mHz = (double) V.TimeUsed / 60.0; // 60MHz core timer clock for ms per sinewave tick
 			mHz_raw = ((mHz * (double) sine_res) / 1000.0)* (double) NUM_POLE_PAIRS; // time in ms for a complete wave cycle for each motor pole pair
 			mHz = 1000000.0 / mHz_raw;
 			mHz_real = (double) INT2HLD;
@@ -766,7 +783,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(4, 0, buffer);
 				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(current_error, true));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
-				sprintf(buffer, "%4i:S %4i %4i %4i  Pace %i", motor_speed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps, pacing);
+				sprintf(buffer, "%4i:S %4i %4i %4i  Pace %i", V.motor_speed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps, V.pacing);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%4i:D %4i %4i %4i  S %i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty, m35_4.speed);
 				eaDogM_WriteStringAtPos(7, 0, buffer);

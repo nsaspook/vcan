@@ -95,11 +95,6 @@ extern "C" {
 		M_PWM,
 	} M_CTRL;
 
-	typedef enum {
-		M_SLEW,
-		M_SLOW,
-		M_ZERO,
-	} M_SPEED;
 
 #ifdef	__cplusplus
 }

@@ -103,6 +103,20 @@ extern "C" {
 		V_abort,
 	} V_STATE;
 
+	typedef enum {
+		M_SLEW,
+		M_SLOW,
+		M_ZERO,
+	} M_SPEED;
+
+	struct V_type {
+		uint32_t StartTime, TimeUsed;
+		volatile uint32_t pacing, pwm_update, pwm_stop;
+		V_STATE vcan_state;
+		M_SPEED m_speed;
+		int32_t motor_speed;
+	};
+
 #ifdef	__cplusplus
 }
 #endif
