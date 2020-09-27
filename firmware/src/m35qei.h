@@ -82,8 +82,8 @@ extern "C" {
 	 */
 	struct QEI_DATA {
 		int32_t pos, vel, duty, error, speed, hold, gain, sine_steps, current, current_prev;
-		int32_t indexcnt, indexvel, ppp, sine_zero;
-		uint32_t pole_pairs, ppr, phaseAccumulator, phaseIncrement, phase_steps, erotations;
+		int32_t indexcnt, indexvel, ppp, sine_zero, erotations;
+		uint32_t pole_pairs, ppr, phaseAccumulator, phaseIncrement, phase_steps;
 		double sin, mi1, mi2, mi3;
 		bool cw, ccw, stopped, set;
 	};

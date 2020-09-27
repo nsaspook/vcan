@@ -162,6 +162,7 @@ void my_time(uint32_t, uintptr_t);
 void my_index(GPIO_PIN, uintptr_t);
 void move_pos_qei(uint32_t, uintptr_t);
 void set_motor_speed(const uint32_t, double);
+int32_t velo_loop(double, bool);
 void wave_gen(uint32_t, uintptr_t);
 void motor_graph(void);
 void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
@@ -285,37 +286,31 @@ void wave_gen(uint32_t status, uintptr_t context)
 
 
 	if (abs(m35_2.error) < motor_error_stop) {
-//		ResetPI(&freq_pi);
+		//		ResetPI(&freq_pi);
 		m35_2.set = true;
 	} else {
 		m35_2.set = false;
 	}
 
+	V.pacing = velo_loop(pi_velocity_error, m35_2.set);
 	if (m35_2.error > 0) {
 		if (m35_2.ccw) {
 			m35_2.ccw = false;
 		}
 		m35_2.cw = true;
-		/*
-		 * set channel duty cycle for motor outputs
-		 */
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	} else {
 		if (m35_2.cw) {
 			m35_2.cw = false;
 		}
 		m35_2.ccw = true;
-		/*
-		 * set channel duty cycle for motor outputs
-		 */
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
 	}
+	/*
+	 * set channel duty cycle for motor outputs
+	 */
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 }
 
 /*
@@ -343,15 +338,18 @@ void move_pos_qei(uint32_t status, uintptr_t context)
 	return;
 }
 
-uint32_t velo_loop(double, bool);
-
-uint32_t velo_loop(double error, bool stop)
+int32_t velo_loop(double error, bool stop)
 {
-	uint32_t pace = 1;
-
+	int32_t pace = 0;
 
 	if (stop) {
-		return 0;
+		return pace;
+	}
+
+	if (m35_2.error > 0) {
+		pace = 1;
+	} else {
+		pace = -1;
 	}
 
 #ifdef SLIP_DRIVE_S
@@ -366,7 +364,6 @@ uint32_t velo_loop(double error, bool stop)
 		pace = 1;
 	}
 #endif
-
 	return pace;
 }
 
@@ -404,20 +401,19 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 	freq_pi.pGain = 2.0;
 	freq_pi.iGain = 0.125;
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
-		motor_speed = MOTOR_SPEED;
+		V.motor_speed = MOTOR_SPEED;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
-		motor_speed = 10;
+		V.motor_speed = 10;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 1000))
-		motor_speed = 50;
+		V.motor_speed = 50;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 1200))
-		motor_speed = 200;
+		V.motor_speed = 200;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 1500))
-		motor_speed = 1000;
+		V.motor_speed = 1000;
 	if (error_sig < 40)
-		motor_speed = 10000;
-	motor_speed = 2000 - (uint32_t) pi_error;
+		V.motor_speed = 10000;
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
-		motor_speed = 2;
+		V.motor_speed = 2000 - (uint32_t) pi_error;
 #endif
 	m35_4.speed = V.motor_speed;
 }
@@ -694,7 +690,6 @@ int main(void)
 			QEI2ICC = POS2CNT;
 			QEI2CMPL = POS2CNT;
 
-			V.pacing = velo_loop(pi_velocity_error, m35_2.set);
 			if (V.pacing == 0) {
 				m35_2.stopped = true;
 				m35_4.current = MIDLE;
