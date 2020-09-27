@@ -71,7 +71,7 @@ IC = M * sin (? + 240)
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 
-struct QEI_DATA m35_1 = {
+volatile struct QEI_DATA m35_1 = {
 	.duty = 0, // default motor duty
 },
 m35_2 = {
@@ -106,21 +106,21 @@ m35_4 = {
 
 *m35_ptr;
 
-struct SPid freq_pi = {
+volatile struct SPid freq_pi = {
 	.iMax = 2000.0,
 	.iMin = 0.0,
-	.pGain = 1.0, // 0.5
-	.iGain = 0.1, // 0.125
+	.pGain = .9, // 0.5
+	.iGain = 0.05, // 0.125
 };
 
-struct SPid current_pi = {
+volatile struct SPid current_pi = {
 	.iMax = 300.0,
 	.iMin = -300.0,
 	.pGain = 0.1, // 0.2
 	.iGain = 0.1, // 0.8
 };
 
-struct SPid velocity_pi = {
+volatile struct SPid velocity_pi = {
 	.iMax = 50.0,
 	.iMin = -50.0,
 	.pGain = 3.25, // 0.5
@@ -157,9 +157,11 @@ const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
 };
 
+time_t time(time_t *);
 void my_time(uint32_t, uintptr_t);
 void my_index(GPIO_PIN, uintptr_t);
 void move_pos_qei(uint32_t, uintptr_t);
+void set_motor_speed(const uint32_t, double);
 void wave_gen(uint32_t, uintptr_t);
 void motor_graph(void);
 void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
@@ -215,8 +217,6 @@ void line_rot(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
 	OledLineTo((int32_t) x2, (int32_t) y2);
 }
 
-time_t time(time_t *);
-
 time_t time(time_t * Time)
 {
 	return t1_time;
@@ -248,9 +248,10 @@ void wave_gen(uint32_t status, uintptr_t context)
 		phase_duty(&m35_2, m35_4.current, V.m_speed, V.pacing);
 		phase_duty(&m35_3, m35_4.current, V.m_speed, V.pacing);
 		phase_duty(&m35_4, m35_4.current, V.m_speed, V.pacing);
-		//#ifdef	SLIP_DRIVE
+#ifndef	SLIP_DRIVE
+		set_motor_speed(abs(m35_2.error), pi_freq_error);
+#endif
 		m35_4.speed = V.motor_speed;
-		//#endif
 		//DEBUGB0_Clear();
 	}
 
@@ -284,6 +285,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 
 
 	if (abs(m35_2.error) < motor_error_stop) {
+//		ResetPI(&freq_pi);
 		m35_2.set = true;
 	} else {
 		m35_2.set = false;
@@ -367,15 +369,16 @@ uint32_t velo_loop(double error, bool stop)
 
 	return pace;
 }
-void set_motor_speed(const uint32_t, double);
 
 void set_motor_speed(const uint32_t error_sig, double pi_error)
 {
+	V.motor_speed = MOTOR_SPEED;
+
 	if (error_sig >= (ENCODER_PULSES_PER_REV / 800))
-		V.motor_speed = 2;
+		V.motor_speed = MOTOR_SPEED;
 
 	if (error_sig > (ENCODER_PULSES_PER_REV / 4)) {
-		V.motor_speed = 1;
+		V.motor_speed = MOTOR_SPEED;
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, 250);
 			RESET_LED_Toggle();
@@ -383,10 +386,8 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 	}
 
 #if (ENCODER_PULSES_PER_REV < 8000)
-	//	freq_pi.pGain = 11.0;
-	//	freq_pi.iGain = 0.99;
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
-		V.motor_speed = 2;
+		V.motor_speed = MOTOR_SPEED;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
 		V.motor_speed = 10;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 1000))
@@ -397,14 +398,13 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 		V.motor_speed = 1000;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 2000))
 		V.motor_speed = 10000;
-	V.motor_speed = 2000 - (uint32_t) pi_error;
-	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
-		V.motor_speed = 2;
+	if (error_sig < (ENCODER_PULSES_PER_REV / 800))
+		V.motor_speed = 2000 - (uint32_t) pi_error;
 #else
 	freq_pi.pGain = 2.0;
 	freq_pi.iGain = 0.125;
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
-		motor_speed = 2;
+		motor_speed = MOTOR_SPEED;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
 		motor_speed = 10;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 1000))
@@ -419,11 +419,6 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
 		motor_speed = 2;
 #endif
-
-
-	if (m35_2.set) {
-		V.motor_speed = 1;
-	}
 	m35_4.speed = V.motor_speed;
 }
 
@@ -550,14 +545,14 @@ int main(void)
 	if (OSCCONbits.CF) { // check for sysclock proper operation
 		sprintf(buffer, "VCAN Clock Error       ");
 		eaDogM_WriteStringAtPos(0, 0, buffer);
-		sprintf(buffer, "Clock Status %x      ", CLKSTAT);
+		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
 		OledUpdate();
 		WaitMs(5000);
 	} else {
 		sprintf(buffer, "VCAN %s %s       ", build_date, build_time);
 		eaDogM_WriteStringAtPos(0, 0, buffer);
-		sprintf(buffer, "Clock Status %x      ", CLKSTAT);
+		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
 		OledUpdate();
 		WaitMs(500);
@@ -699,8 +694,6 @@ int main(void)
 			QEI2ICC = POS2CNT;
 			QEI2CMPL = POS2CNT;
 
-
-
 			V.pacing = velo_loop(pi_velocity_error, m35_2.set);
 			if (V.pacing == 0) {
 				m35_2.stopped = true;
@@ -713,8 +706,6 @@ int main(void)
 				//				m35_4.speed = 1;
 #endif
 			}
-
-
 
 			if (m35_2.set || !m35_4.speed) {
 #ifndef	SLIP_DRIVE
@@ -729,7 +720,6 @@ int main(void)
 				U1_EN_Set();
 				U2_EN_Set();
 			}
-
 
 			if (get_switch(S0)) { // disengage motor power
 				U1_EN_Clear();
@@ -757,8 +747,6 @@ int main(void)
 			mHz_real = mHz_real / (60.0 / 128.0);
 			mHz_real_raw = ((mHz_real * (double) ENCODER_PULSES_PER_REV) / 1000.0);
 			mHz_real = 1000000.0 / mHz_real_raw;
-			//			MCLIB_LinearRamp(&mHz_real_raw, 15.0, mHz_real_raw);
-			//			pi_velocity_error = UpdatePI(&velocity_pi, (mHz_raw / 10000.0) - (mHz_real_raw / 10000.0));
 			pi_velocity_error = UpdatePI(&velocity_pi, mHz_real - mHz);
 			sr_slip = (mHz - mHz_real) / mHz;
 

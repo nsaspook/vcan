@@ -4,29 +4,29 @@
 /*
  * converted to PI for motor control
  */
-double UpdatePI(struct SPid * const pid, double const error)
+double UpdatePI(volatile struct SPid * const pid, double const error)
 {
 	double pTerm, iTerm;
 
 	pTerm = pid->pGain * error; // calculate the proportional term
 	// calculate the integral state with appropriate limiting
 	pid->iState += error;
-	
+
 	if (pid->iState > pid->iMax) {
 		pid->iState = pid->iMax;
 	} else if (pid->iState < pid->iMin) {
 		pid->iState = pid->iMin;
 	}
-	
+
 	iTerm = (pid->iGain * pid->iState); // calculate the integral term
-	
+
 	return pTerm + iTerm;
 }
 
-void ResetPI(struct SPid * const pid)
+void ResetPI(volatile struct SPid * const pid)
 {
-	pid->dState=0.0; // not used but cleared
-	pid->iState=0.0;
+	pid->dState = 0.0; // not used but cleared
+	pid->iState = 0.0;
 }
 
 

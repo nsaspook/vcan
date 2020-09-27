@@ -5,7 +5,7 @@ static double sine_const[sine_res + 1];
 static double table[256];
 extern struct QEI_DATA m35_1, m35_2, m35_3, m35_4;
 
-static double sine_foo(struct QEI_DATA *);
+static double sine_foo(volatile struct QEI_DATA *);
 
 void sine_table(void)
 {
@@ -29,7 +29,7 @@ void sine_table(void)
 /*
  * slew speed sinusoidal commutation for PWM using table
  */
-int32_t phase_duty_table(struct QEI_DATA * const phase, const double mag, const uint32_t adj)
+int32_t phase_duty_table(volatile struct QEI_DATA * const phase, const double mag, const uint32_t adj)
 {
 	if (sine_steps_adj(phase, adj) >= sine_res) {
 		phase->sine_steps = 0;
@@ -50,7 +50,7 @@ int32_t phase_duty_table(struct QEI_DATA * const phase, const double mag, const 
 /*
  * adjust sine steps on in the postive, adj set to zero holds
  */
-int32_t sine_steps_adj(struct QEI_DATA * const phase, const uint32_t adj)
+int32_t sine_steps_adj(volatile struct QEI_DATA * const phase, const uint32_t adj)
 {
 	if (adj > sine_res) {
 		return phase->sine_steps; // do nothing
@@ -69,7 +69,7 @@ int32_t sine_steps_adj(struct QEI_DATA * const phase, const uint32_t adj)
 /*
  * micro-stepping  sinusoidal commutation for PWM using sine_foo
  */
-int32_t phase_duty(struct QEI_DATA * const phase, const double mag, const M_SPEED mode, const uint32_t adj)
+int32_t phase_duty(volatile struct QEI_DATA * const phase, const double mag, const M_SPEED mode, const uint32_t adj)
 {
 	if (mode == M_SLEW) {
 		return phase_duty_table(phase, mag, adj);
@@ -120,7 +120,7 @@ void preset_phase(void)
 /*
  * generate one complete sine-wave cycle at one step per call
  */
-static double sine_foo(struct QEI_DATA * const phase)
+static double sine_foo(volatile struct QEI_DATA * const phase)
 {
 	/* Increment the phase accumulator */
 	phase->phaseAccumulator += phase->phaseIncrement;

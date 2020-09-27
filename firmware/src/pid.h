@@ -23,8 +23,8 @@ extern "C" {
 		dGain; // derivative gain
 	};
 
-	double UpdatePI(struct SPid * const, const double);
-	void ResetPI(struct SPid * const);
+	double UpdatePI(volatile struct SPid * const, const double);
+	void ResetPI(volatile struct SPid * const);
 
 #ifdef	__cplusplus
 }

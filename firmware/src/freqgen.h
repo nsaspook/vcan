@@ -28,11 +28,11 @@ extern "C" {
 	void MCLIB_SinCosCalc(float const rotor_angle, float* sineAngle, float* cosAngle);
 	void MCLIB_WrapAngle(float * const angle);
 	void sine_table(void);
-	int32_t phase_duty(struct QEI_DATA * const, const double, const M_SPEED,const uint32_t);
-	int32_t phase_duty_table(struct QEI_DATA * const, const double,const uint32_t);
+	int32_t phase_duty(volatile struct QEI_DATA * const, const double, const M_SPEED, const uint32_t);
+	int32_t phase_duty_table(volatile struct QEI_DATA * const, const double, const uint32_t);
 	void fillTable(void);
 	void preset_phase(void);
-	int32_t sine_steps_adj(struct QEI_DATA * const, const uint32_t);
+	int32_t sine_steps_adj(volatile struct QEI_DATA * const, const uint32_t);
 
 #ifdef	__cplusplus
 }
