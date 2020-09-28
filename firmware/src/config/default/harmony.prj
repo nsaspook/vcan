@@ -32,7 +32,7 @@
           <LogicalPath dnOrder="3">config/default/</LogicalPath>
           <PhysicalPath dnOrder="4">/</PhysicalPath>
           <GeneratedChecksum dnOrder="5">410E6B90C337E097C8C082F52C5097F1</GeneratedChecksum>
-          <UserChecksum dnOrder="6">C59D6F4308B356F98422FBFAD5FE8A9B</UserChecksum>
+          <UserChecksum dnOrder="6">0D10A1C929C517296BAF316926889646</UserChecksum>
         </File>
         <File dnOrder="3">
           <Type dnOrder="0">SOURCE</Type>
@@ -474,7 +474,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="5" key="PackageFilter" value="usb;cryptoauthlib;aws_cloud;wireless;crypto;gfx_apps;gfx;x2c;micrium_ucos3;audio;core;cryptoauthlib_apps;expresslogic_threadx;motor_control;csp;bt;touch;net;bootloader;bsp;aerospace;quick_docs;reference_apps;classb_sam_e5x_d5x;bootloader_apps_i2c;bootloader_apps_ethernet;bootloader_apps_usb;bootloader_apps_sdcard;bootloader_apps_uart;ethercat;csp_apps_pic32mk;touch_apps;crypto_apps_speed_test;crypto_apps_large_hash;crypto_apps_encrypt_decrypt;core_apps_sam_rh71;core_apps_sam_l22;core_apps_sam_l21;core_apps_sam_l10_l11;core_apps_sam_g55;core_apps_sam_ha1;core_apps_sam_e70_s70_v70_v71;core_apps_sam_d5x_e5x;core_apps_sam_d21_da1;core_apps_sam_c20_c21;core_apps_sam_d20;core_apps_sam_a5d2;core_apps_sam_9x60;core_apps_pic32mz_w1;core_apps_pic32mx;core_apps_pic32mk;core_apps_pic32mz_da;core_apps_pic32mz_ef;csp_apps_sam_rh71;csp_apps_sam_l22;csp_apps_sam_l21;csp_apps_sam_l10_l11;csp_apps_sam_ha1;csp_apps_sam_g55;csp_apps_sam_e70_s70_v70_v71;csp_apps_sam_d5x_e5x;csp_apps_sam_d21_da1;csp_apps_sam_d20;csp_apps_sam_d11;csp_apps_sam_d10;csp_apps_sam_9x60;csp_apps_sam_c20_c21;csp_apps_pic32mz_w1;csp_apps_pic32mz_ef;csp_apps_pic32mz_da;csp_apps_pic32mx;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="ethercat;crypto_apps_large_hash;reference_apps;cryptoauthlib_apps;crypto_apps_encrypt_decrypt;core_apps_pic32mz_w1;csp_apps_sam_d21_da1;bootloader_apps_uart;quick_docs;csp;bootloader_apps_ethernet;core_apps_sam_l21;csp_apps_sam_e70_s70_v70_v71;csp_apps_pic32mz_w1;gfx_apps;net;core_apps_sam_a5d2;csp_apps_pic32mk;crypto;csp_apps_sam_9x60;core_apps_sam_l10_l11;core_apps_pic32mk;motor_control;touch;core_apps_sam_e70_s70_v70_v71;x2c;csp_apps_sam_l21;aws_cloud;csp_apps_sam_d10;core;expresslogic_threadx;bootloader_apps_i2c;core_apps_sam_rh71;gfx;csp_apps_sam_d5x_e5x;csp_apps_pic32mx;core_apps_sam_d21_da1;csp_apps_pic32mz_ef;bootloader;core_apps_pic32mz_ef;wireless;core_apps_sam_d5x_e5x;core_apps_sam_c20_c21;aerospace;csp_apps_sam_l10_l11;core_apps_sam_9x60;core_apps_sam_g55;csp_apps_sam_c20_c21;bootloader_apps_sdcard;usb;core_apps_sam_l22;touch_apps;bsp;audio;csp_apps_sam_ha1;core_apps_sam_ha1;csp_apps_sam_d20;csp_apps_sam_g55;csp_apps_sam_d11;micrium_ucos3;crypto_apps_speed_test;csp_apps_sam_rh71;classb_sam_e5x_d5x;bt;azure-rtos-threadx;core_apps_pic32mx;bootloader_apps_usb;core_apps_sam_d20;csp_apps_sam_l22;csp_apps_pic32mz_da;cryptoauthlib;core_apps_pic32mz_da;"/>
       <Setting dnOrder="6" key="TRUSTZONE" value="false"/>
     </Settings>
   </Configurator>
