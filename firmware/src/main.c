@@ -284,7 +284,6 @@ void wave_gen(uint32_t status, uintptr_t context)
 		pi_freq_error = 1999.0;
 	}
 
-
 	if (abs(m35_2.error) < motor_error_stop) {
 		//		ResetPI(&freq_pi);
 		m35_2.set = true;
@@ -314,7 +313,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 }
 
 /*
- * input position auto-positioning
+ * SOSC timer1
  */
 void my_time(uint32_t status, uintptr_t context)
 {
