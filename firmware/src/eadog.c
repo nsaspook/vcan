@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define max_strlen	16
-
 /* Global object to save SPI Exchange related data */
 extern SPI_OBJECT spi3Obj;
 

@@ -46,6 +46,7 @@
 #define	ccolOledMax		240		//number of display columns
 #define	crowOledMax		128		//number of display rows
 #define	cpagOledMax		16		//number of display memory pages
+#define STR_BUF_SIZE		160		//number of chars for display strings
 #endif
 
 #if DISPLAY_TYPE == 102
@@ -53,6 +54,7 @@
 #define	ccolOledMax		102		//number of display columns
 #define	crowOledMax		64		//number of display rows
 #define	cpagOledMax		8		//number of display memory pages
+#define STR_BUF_SIZE		20		//number of chars for display strings
 #endif
 
 #define	cbOledChar		8		//font glyph definitions is 8 bytes long

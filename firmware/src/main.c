@@ -478,7 +478,7 @@ void motor_graph(void)
 
 int main(void)
 {
-	char buffer[80];
+	char buffer[STR_BUF_SIZE];
 	uint8_t i;
 
 	/* Initialize all modules */

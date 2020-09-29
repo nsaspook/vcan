@@ -293,6 +293,7 @@ void OledPutChar(char ch)
 
 void OledPutString(char * sz)
 {
+	sz[max_strlen]='\0';
 	while (*sz != '\0') {
 		OledDrawGlyph(*sz);
 		OledAdvanceCursor();

@@ -26,7 +26,7 @@ extern "C" {
 
 	//#define EDOGM
 #define EDOGS
-//#define EDOGS_DEMO
+	//#define EDOGS_DEMO
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -35,6 +35,8 @@ extern "C" {
 #include "device.h"
 #include "OledDriver.h"
 #include "OledChar.h"
+
+#define max_strlen	STR_BUF_SIZE-1
 
 #define LCD_CMD_MASK	0x01
 #define LCD_CMD_SET	0x100
