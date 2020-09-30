@@ -224,22 +224,16 @@ time_t time(time_t * Time)
 }
 
 /*
- * PWM 1ms waveform interrupt routine
+ * PWM 1ms waveform interrupt routine, timer #2
  */
 void wave_gen(uint32_t status, uintptr_t context)
 {
+	DEBUGB0_Set();
 	if (V.pwm_stop && V.pwm_update)
 		return;
 
 	V.pwm_update = true;
-#ifdef	SLIP_DRIVE
-	m35_4.speed--;
-	if (m35_4.speed < 1) {
-#else
 	if ((--m35_2.set) || (--m35_4.speed <= 0)) { // generate drive waveforms at m35_4.speed or bypass using m35_2.set
-#endif
-		//DEBUGB0_Set();
-		DEBUGB0_Toggle();
 		V.TimeUsed = (uint32_t) _CP0_GET_COUNT() - V.StartTime;
 		V.StartTime = (uint32_t) _CP0_GET_COUNT();
 		m35_1.vel = VEL1CNT;
@@ -249,11 +243,8 @@ void wave_gen(uint32_t status, uintptr_t context)
 		phase_duty(&m35_2, m35_4.current, V.m_speed, V.pacing);
 		phase_duty(&m35_3, m35_4.current, V.m_speed, V.pacing);
 		phase_duty(&m35_4, m35_4.current, V.m_speed, V.pacing);
-#ifndef	SLIP_DRIVE
 		set_motor_speed(abs(m35_2.error), pi_freq_error);
-#endif
 		m35_4.speed = V.motor_speed;
-		//DEBUGB0_Clear();
 	}
 
 	current_error = hb_current(u_total, false) - MPCURRENT;
@@ -310,10 +301,11 @@ void wave_gen(uint32_t status, uintptr_t context)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
+	DEBUGB0_Clear();
 }
 
 /*
- * SOSC timer1
+ * SOSC timer #1
  */
 void my_time(uint32_t status, uintptr_t context)
 {
@@ -326,7 +318,7 @@ void my_index(GPIO_PIN pin, uintptr_t context)
 }
 
 /*
- * input position auto-positioning
+ * input position auto-positioning, timer #3
  */
 void move_pos_qei(uint32_t status, uintptr_t context)
 {
@@ -350,19 +342,6 @@ int32_t velo_loop(double error, bool stop)
 	} else {
 		pace = -1;
 	}
-
-#ifdef SLIP_DRIVE_S
-	static uint32_t sequence1 = 0, sequence2 = 0;
-	if (error > 20.01) {
-		pace = sequence1++ & 1;
-	} else if (error < -20.01) {
-		pace = sequence2++ & 1;
-		if (pace)
-			pace = 2;
-	} else {
-		pace = 1;
-	}
-#endif
 	return pace;
 }
 
@@ -697,16 +676,9 @@ int main(void)
 			} else {
 				m35_2.stopped = false;
 			}
-			if (m35_2.set) {
-#ifndef SLIP_DRIVE
-				//				m35_4.speed = MOTOR_SPEED;
-#endif
-			}
 
 			if (m35_2.set || !m35_4.speed) {
-#ifndef	SLIP_DRIVE
 				set_motor_speed(abs(m35_2.error), pi_freq_error);
-#endif
 			}
 
 			/*

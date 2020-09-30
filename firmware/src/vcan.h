@@ -16,7 +16,7 @@ extern "C" {
 	 */
 #include <math.h>
 #include <stdio.h>
-	
+
 	/*
 	 * jumper pin settings JP4
 	 * RF1	option1		special configurations for board testing
@@ -42,8 +42,8 @@ extern "C" {
 #define NUM_POLES		8
 #define NUM_POLE_PAIRS		NUM_POLES/2
 
-	//#define	SLIP_DRIVE
-#define MOTOR_SLIP	4000
+#define	SLIP_DRIVE
+#define MOTOR_SLIP	100
 
 #define PWM_FREQUENCY		MOTOR_SPEED
 #define RATED_SPEED_RPM		10

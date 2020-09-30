@@ -39,11 +39,12 @@ void WaitMs(const uint16_t numMilliseconds)
 	} //Enter idle mode to reduce power while waiting
 } //(timer interrupt will wake part from idle)
 
+/*
+ * timer #6
+ */
 void timer_ms_tick(uint32_t status, uintptr_t context)
 {
 	static uint8_t i;
-	// add your TMR6 interrupt custom code
-	// or set custom function using TMR6_SetInterruptHandler()
 
 	//Decrement each software timer
 	for (i = 0; i < TMR_COUNT; i++) {
