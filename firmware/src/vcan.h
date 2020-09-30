@@ -43,7 +43,7 @@ extern "C" {
 #define NUM_POLE_PAIRS		NUM_POLES/2
 
 #define	SLIP_DRIVE
-#define MOTOR_SLIP	100
+#define MOTOR_SLIP	-67
 
 #define PWM_FREQUENCY		MOTOR_SPEED
 #define RATED_SPEED_RPM		10

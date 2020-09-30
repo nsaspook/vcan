@@ -239,7 +239,9 @@ void wave_gen(uint32_t status, uintptr_t context)
 		m35_1.vel = VEL1CNT;
 		m35_2.vel = VEL2CNT;
 		m35_3.vel = VEL3CNT;
-
+		/*
+		 * load sinewave constants from three-phase 3600 values per cycle lookup tables
+		 */
 		phase_duty(&m35_2, m35_4.current, V.m_speed, V.pacing);
 		phase_duty(&m35_3, m35_4.current, V.m_speed, V.pacing);
 		phase_duty(&m35_4, m35_4.current, V.m_speed, V.pacing);
@@ -249,40 +251,47 @@ void wave_gen(uint32_t status, uintptr_t context)
 
 	current_error = hb_current(u_total, false) - MPCURRENT;
 	pi_current_error = lp_filter_f(UpdatePI(&current_pi, current_error), 5);
-
 	/*
 	 * generate a current error drive signal
 	 */
-	m35_4.current = MPCURRENT + MPCURRENT - (int32_t) pi_current_error;
-
+	m35_4.current = MPCURRENT + (MPCURRENT - (int32_t) pi_current_error);
 	/*
-	 * limit motor drive
+	 * limit motor drive current
 	 */
 	if (m35_4.current > motor_volts) {
 		m35_4.current = motor_volts;
 	}
-
-	if (m35_4.current > motor_volts) {
-		m35_4.current = motor_volts;
-	}
-
 	m35_4.current_prev = m35_4.current;
-
+	/*
+	 * position error from motor encoder vs position setting encoder
+	 */
 	m35_2.error = (POS3CNT * m35_3.gain) - POS2CNT;
+	/*
+	 * generated a motor drive frequency from the position error signal
+	 */
 	pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
-
+	/*
+	 * limit frequency error signal
+	 */
 	if (pi_freq_error > 1999.0) {
 		pi_freq_error = 1999.0;
 	}
-
+	/*
+	 * check for position error dead-band
+	 */
 	if (abs(m35_2.error) < motor_error_stop) {
 		ResetPI(&freq_pi);
 		m35_2.set = 3;
 	} else {
 		m35_2.set = false;
 	}
-
+	/*
+	 * motor stop/start pacing
+	 */
 	V.pacing = velo_loop(pi_velocity_error, m35_2.set);
+	/*
+	 * position housekeeping
+	 */
 	if (m35_2.error > 0) {
 		if (m35_2.ccw) {
 			m35_2.ccw = false;
@@ -294,8 +303,12 @@ void wave_gen(uint32_t status, uintptr_t context)
 		}
 		m35_2.ccw = true;
 	}
+	if (m35_2.error == 0) {
+		m35_2.cw = false;
+		m35_2.ccw = false;
+	}
 	/*
-	 * set channel duty cycle for motor outputs
+	 * set channel duty cycle for motor sinewave outputs at ISR time 1ms intervals
 	 */
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
