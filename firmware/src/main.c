@@ -236,7 +236,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	m35_4.speed--;
 	if (m35_4.speed < 1) {
 #else
-	if (m35_2.set || (--m35_4.speed <= 0)) {
+	if ((--m35_2.set) || (--m35_4.speed <= 0)) { // generate drive waveforms at m35_4.speed or bypass using m35_2.set
 #endif
 		//DEBUGB0_Set();
 		DEBUGB0_Toggle();
@@ -285,8 +285,8 @@ void wave_gen(uint32_t status, uintptr_t context)
 	}
 
 	if (abs(m35_2.error) < motor_error_stop) {
-		//		ResetPI(&freq_pi);
-		m35_2.set = true;
+		ResetPI(&freq_pi);
+		m35_2.set = 3;
 	} else {
 		m35_2.set = false;
 	}
@@ -381,7 +381,9 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 		}
 	}
 
-#if (ENCODER_PULSES_PER_REV < 8000)
+#if (ENCODER_PULSES_PER_REV < 9000)
+	freq_pi.pGain = 1.0;
+	freq_pi.iGain = 3.125;
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
 		V.motor_speed = MOTOR_SPEED;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
@@ -697,7 +699,7 @@ int main(void)
 			}
 			if (m35_2.set) {
 #ifndef SLIP_DRIVE
-				//				m35_4.speed = 1;
+				//				m35_4.speed = MOTOR_SPEED;
 #endif
 			}
 

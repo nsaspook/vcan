@@ -34,8 +34,8 @@ extern "C" {
 #define hpwm_mid_duty	duty_max/2
 #define hpwm_mid_duty_f	duty_max/2.0
 
-//#define hpwm_mid_duty	3000
-//#define hpwm_mid_duty_f	3000.0
+	//#define hpwm_mid_duty	3000
+	//#define hpwm_mid_duty_f	3000.0
 #define hpwm_high_duty	duty_max-1
 #define hpwm_low_duty	1
 
@@ -83,9 +83,9 @@ extern "C" {
 	struct QEI_DATA {
 		int32_t pos, vel, duty, error, speed, hold, gain, sine_steps, current, current_prev;
 		int32_t indexcnt, indexvel, ppp, sine_zero, erotations;
-		uint32_t pole_pairs, ppr, phaseAccumulator, phaseIncrement, phase_steps;
+		uint32_t pole_pairs, ppr, phaseAccumulator, phaseIncrement, phase_steps, set;
 		double sin, mi1, mi2, mi3;
-		bool cw, ccw, stopped, set;
+		bool cw, ccw, stopped, started;
 	};
 
 	typedef enum {
