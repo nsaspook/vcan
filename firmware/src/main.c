@@ -193,6 +193,20 @@ void PWM_motor2(M_CTRL mmode)
 		IOCON2bits.OVRENH = 1;
 		IOCON2bits.OVRENL = 1;
 		break;
+	case M_CAL:
+		IOCON2bits.OVRDAT = 0;
+		IOCON2bits.OVRENH = 1;
+		IOCON2bits.OVRENL = 1;
+		IOCON1bits.OVRDAT = 0;
+		IOCON1bits.OVRENH = 1;
+		IOCON1bits.OVRENL = 1;
+		IOCON4bits.OVRDAT = 2;
+		IOCON4bits.OVRENH = 1;
+		IOCON4bits.OVRENL = 1;
+		IOCON3bits.OVRDAT = 0;
+		IOCON3bits.OVRENH = 0;
+		IOCON3bits.OVRENL = 0;
+		break;
 	case M_STOP:
 	default:
 		IOCON2bits.OVRDAT = 0;
@@ -697,6 +711,25 @@ int main(void)
 			/*
 			 * test switch interface with motor control
 			 */
+			if (get_switch(S2)) { // enable motor current for calibration
+				int i = 40;
+				U1_EN_Clear();
+				U2_EN_Clear();
+				WaitMs(10000);
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 1000);
+				U2_EN_Set();
+				PWM_motor2(M_CAL);
+				do {
+					sprintf(buffer, "%4i:P %4i %4i %4i  %4i      ", i, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u_total, false));
+					eaDogM_WriteStringAtPos(4, 0, buffer);
+					OledUpdate();
+					WaitMs(500);
+				} while (i--);
+				PWM_motor2(M_PWM);
+				U2_EN_Clear();
+			}
+
 			if (get_switch(S1)) { // enable motor power
 				U1_EN_Set();
 				U2_EN_Set();

@@ -93,6 +93,7 @@ extern "C" {
 		M_CW,
 		M_CCW,
 		M_PWM,
+		M_CAL,
 	} M_CTRL;
 
 
