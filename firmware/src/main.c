@@ -200,12 +200,12 @@ void PWM_motor2(M_CTRL mmode)
 		IOCON1bits.OVRDAT = 0;
 		IOCON1bits.OVRENH = 1;
 		IOCON1bits.OVRENL = 1;
-		IOCON4bits.OVRDAT = 2;
+		IOCON4bits.OVRDAT = 2; // connect to motor power
 		IOCON4bits.OVRENH = 1;
 		IOCON4bits.OVRENL = 1;
 		IOCON3bits.OVRDAT = 0;
-		IOCON3bits.OVRENH = 0;
-		IOCON3bits.OVRENL = 0;
+		IOCON3bits.OVRENH = 1;
+		IOCON3bits.OVRENL = 1;
 		break;
 	case M_STOP:
 	default:
