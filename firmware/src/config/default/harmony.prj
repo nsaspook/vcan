@@ -49,8 +49,8 @@
           <Security dnOrder="2">NON_SECURE</Security>
           <LogicalPath dnOrder="3">config/default/peripheral/adchs/</LogicalPath>
           <PhysicalPath dnOrder="4">/peripheral/adchs/</PhysicalPath>
-          <GeneratedChecksum dnOrder="5">C5DFF9A0F1339F8B7EBE616F25F09A85</GeneratedChecksum>
-          <UserChecksum dnOrder="6">C5DFF9A0F1339F8B7EBE616F25F09A85</UserChecksum>
+          <GeneratedChecksum dnOrder="5">FDB6C30FB59D313D88304837D62F10D1</GeneratedChecksum>
+          <UserChecksum dnOrder="6">FDB6C30FB59D313D88304837D62F10D1</UserChecksum>
         </File>
         <File dnOrder="5">
           <Type dnOrder="0">SOURCE</Type>

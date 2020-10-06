@@ -200,10 +200,10 @@ void PWM_motor2(M_CTRL mmode)
 		IOCON1bits.OVRDAT = 0;
 		IOCON1bits.OVRENH = 1;
 		IOCON1bits.OVRENL = 1;
-		IOCON4bits.OVRDAT = 2; // connect to motor power
+		IOCON4bits.OVRDAT = 0; // connect to motor power
 		IOCON4bits.OVRENH = 1;
 		IOCON4bits.OVRENL = 1;
-		IOCON3bits.OVRDAT = 0;
+		IOCON3bits.OVRDAT = 2;
 		IOCON3bits.OVRENH = 1;
 		IOCON3bits.OVRENL = 1;
 		break;
@@ -716,8 +716,8 @@ int main(void)
 				U1_EN_Clear();
 				U2_EN_Clear();
 				WaitMs(10000);
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 1000);
+//				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
+//				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 1000);
 				U2_EN_Set();
 				PWM_motor2(M_CAL);
 				do {

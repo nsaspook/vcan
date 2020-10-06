@@ -63,7 +63,7 @@
         </Long>
         <KeyValueSet dnOrder="7" id="ADCCON3__ADCSEL">
           <Values dnOrder="0">
-            <User dnOrder="0" value="3"/>
+            <User dnOrder="0" value="2"/>
           </Values>
         </KeyValueSet>
         <Long dnOrder="8" id="ADCCON3__CONCLKDIV">
@@ -507,7 +507,7 @@
         </Hex>
         <Hex dnOrder="69" id="ADCHS_ADCCON3">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="3305119744"/>
+            <Dynamic dnOrder="0" id="adchs" value="2231377920"/>
           </Values>
         </Hex>
         <Hex dnOrder="70" id="ADCHS_ADCCSS1">
@@ -783,12 +783,12 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="625.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="41.666668"/>
           </Values>
         </Float>
         <Float dnOrder="115" id="ADCHS_CONV_RATE1">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="625.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="41.666668"/>
           </Values>
         </Float>
         <Float dnOrder="116" id="ADCHS_CONV_RATE2">
@@ -798,7 +798,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="625.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="41.666668"/>
           </Values>
         </Float>
         <Float dnOrder="117" id="ADCHS_CONV_RATE3">
@@ -808,7 +808,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="625.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="41.666668"/>
           </Values>
         </Float>
         <Float dnOrder="118" id="ADCHS_CONV_RATE4">
@@ -818,7 +818,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="625.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="41.666668"/>
           </Values>
         </Float>
         <Float dnOrder="119" id="ADCHS_CONV_RATE5">
@@ -828,7 +828,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="625.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="41.666668"/>
           </Values>
         </Float>
         <Float dnOrder="120" id="ADCHS_CONV_RATE7">
@@ -838,7 +838,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="333.33334"/>
+            <Dynamic dnOrder="0" id="adchs" value="22.222221"/>
           </Values>
         </Float>
         <Hex dnOrder="121" id="ADCHS_IEC0">
@@ -863,12 +863,12 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="100.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1500.0"/>
           </Values>
         </Float>
         <Float dnOrder="125" id="ADCHS_TADC1">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="100.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1500.0"/>
           </Values>
         </Float>
         <Float dnOrder="126" id="ADCHS_TADC2">
@@ -878,7 +878,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="100.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1500.0"/>
           </Values>
         </Float>
         <Float dnOrder="127" id="ADCHS_TADC3">
@@ -888,7 +888,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="100.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1500.0"/>
           </Values>
         </Float>
         <Float dnOrder="128" id="ADCHS_TADC4">
@@ -898,7 +898,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="100.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1500.0"/>
           </Values>
         </Float>
         <Float dnOrder="129" id="ADCHS_TADC5">
@@ -908,7 +908,7 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="100.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1500.0"/>
           </Values>
         </Float>
         <Float dnOrder="130" id="ADCHS_TADC7">
@@ -918,17 +918,17 @@
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="adchs" value="100.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="1500.0"/>
           </Values>
         </Float>
         <Float dnOrder="131" id="ADCHS_TCLK">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="8.333333"/>
+            <Dynamic dnOrder="0" id="adchs" value="125.0"/>
           </Values>
         </Float>
         <Float dnOrder="132" id="ADCHS_TQ">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="adchs" value="50.0"/>
+            <Dynamic dnOrder="0" id="adchs" value="750.0"/>
           </Values>
         </Float>
         <Boolean dnOrder="133" id="ADCIMCON1__DIFF1">
@@ -1323,7 +1323,7 @@
         </Boolean>
         <Integer dnOrder="1" id="ADCHS_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="120000000"/>
+            <Dynamic dnOrder="0" id="core" value="8000000"/>
           </Values>
         </Integer>
         <Boolean dnOrder="2" id="ADC_DATA11_INTERRUPT_ENABLE">

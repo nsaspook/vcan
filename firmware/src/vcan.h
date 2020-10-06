@@ -42,8 +42,8 @@ extern "C" {
 #define NUM_POLES		8
 #define NUM_POLE_PAIRS		NUM_POLES/2
 
-//#define	SLIP_DRIVE
-#define MOTOR_SLIP	-67
+#define	SLIP_DRIVE
+#define MOTOR_SLIP	-670
 
 #define PWM_FREQUENCY		MOTOR_SPEED
 #define RATED_SPEED_RPM		10
@@ -80,7 +80,7 @@ extern "C" {
 #define TEMP_OFFSET_ADC_STEPS	1181.96
 #define TEMP_MV_C		1.56
 
-#define HB_SCALE	10.0
+#define HB_SCALE	42.0
 #define MOTOR_CURRENT_SCALE	1.41 // square root of 2
 
 #include <stddef.h>                     // Defines NULL
