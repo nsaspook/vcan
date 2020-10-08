@@ -405,9 +405,9 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 	if (error_sig < (ENCODER_PULSES_PER_REV / 800))
 		V.motor_speed = 2000 - (uint32_t) pi_error;
 #else
-	freq_pi.pGain = 2.0;
-	freq_pi.iGain = 0.125;
-	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
+	freq_pi.pGain = 3.0;
+	freq_pi.iGain = 2.0;
+	if (error_sig > (ENCODER_PULSES_PER_REV / 800))
 		V.motor_speed = MOTOR_SPEED;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
 		V.motor_speed = 10;

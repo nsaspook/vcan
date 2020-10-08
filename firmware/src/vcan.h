@@ -37,12 +37,12 @@ extern "C" {
 #define MIDLE		2400  // motor idle current
 #define MPCURRENT	1200  // setpoint for motor current
 
-	//#define ENCODER_PULSES_PER_REV	327680
-#define ENCODER_PULSES_PER_REV	4000
+#define ENCODER_PULSES_PER_REV	327680
+	//#define ENCODER_PULSES_PER_REV	4000
 #define NUM_POLES		8
 #define NUM_POLE_PAIRS		NUM_POLES/2
 
-#define	SLIP_DRIVE
+//#define	SLIP_DRIVE
 #define MOTOR_SLIP	-670
 
 #define PWM_FREQUENCY		MOTOR_SPEED
