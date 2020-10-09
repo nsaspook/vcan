@@ -117,7 +117,7 @@ volatile struct SPid current_pi = {
 	.iMax = 300.0,
 	.iMin = -300.0,
 	.pGain = 0.1, // 0.2
-	.iGain = 0.1, // 0.8
+	.iGain = 0.01, // 0.8
 };
 
 volatile struct SPid velocity_pi = {
@@ -388,8 +388,8 @@ void set_motor_speed(const uint32_t error_sig, double pi_error)
 	}
 
 #if (ENCODER_PULSES_PER_REV < 9000)
-	freq_pi.pGain = 1.0;
-	freq_pi.iGain = 3.125;
+	freq_pi.pGain = 2.0;
+	freq_pi.iGain = 1.125;
 	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
 		V.motor_speed = MOTOR_SPEED;
 	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
@@ -610,7 +610,7 @@ int main(void)
 			break;
 		case 6:
 			WaitMs(900);
-			sprintf(buffer, "HP %6i:%6i      ", POS2CNT, m35_2.ppr / m35_2.pole_pairs);
+			sprintf(buffer, "HP %6i:%6i CtoMA %4.4f    ", POS2CNT, m35_2.ppr / m35_2.pole_pairs, QEI_PER_MREV);
 			eaDogM_WriteStringAtPos(3, 0, buffer);
 			m35_2.ppp = POS2CNT;
 			//			POS2CNT = 0; // reset zero for new home
@@ -716,8 +716,8 @@ int main(void)
 				U1_EN_Clear();
 				U2_EN_Clear();
 				WaitMs(10000);
-//				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
-//				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 1000);
+				//				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
+				//				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 1000);
 				U2_EN_Set();
 				PWM_motor2(M_CAL);
 				do {

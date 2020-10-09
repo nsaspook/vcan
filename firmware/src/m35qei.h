@@ -34,18 +34,9 @@ extern "C" {
 #define hpwm_mid_duty	duty_max/2
 #define hpwm_mid_duty_f	duty_max/2.0
 
-	//#define hpwm_mid_duty	3000
-	//#define hpwm_mid_duty_f	3000.0
 #define hpwm_high_duty	duty_max-1
 #define hpwm_low_duty	1
 
-#if ENCODER_PULSES_PER_REV < 8000
-#define motor_error_stop	ENCODER_PULSES_PER_REV/2000
-#define motor_volts	2800 // limits amount of current at max torque, TI motor
-#else
-#define motor_error_stop	30
-#define motor_volts	5000 // limits amount of current at max torque, MCHP motor
-#endif
 #define motor_error_coast	100
 #define motor_error_knee	200
 

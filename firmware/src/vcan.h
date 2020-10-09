@@ -31,18 +31,38 @@ extern "C" {
 
 #define MOTOR_SPEED	1	// sinewave update divider
 #define MOTOR_UPDATES	1	// main motor loop timer in ms
+#define HVDC_M			// 24 + volts for motor drive
 
-#define MBIAS		0 // current drive flux min for motor rotor lock stability
-#define MBLOCK		2200
-#define MIDLE		2400  // motor idle current
-#define MPCURRENT	1200  // setpoint for motor current
+	//#define ENCODER_PULSES_PER_REV	327680
+	//#define ENCODER_PULSES_PER_REV	8000
+#define ENCODER_PULSES_PER_REV	4000
 
-#define ENCODER_PULSES_PER_REV	327680
-	//#define ENCODER_PULSES_PER_REV	4000
+#if ENCODER_PULSES_PER_REV < 9000
+#ifdef HVDC_M
+#define MBLOCK			1600
+#define MIDLE			1500  // motor idle current
+#define MPCURRENT		800  // setpoint for motor current
+#define motor_error_stop	ENCODER_PULSES_PER_REV/2000
+#define motor_volts		1800 // limits amount of current at max torque, TI motor and AC servo motor
+#else
+#define MBLOCK			2200
+#define MIDLE			2400  // motor idle current
+#define MPCURRENT		1200  // setpoint for motor current
+#define motor_error_stop	ENCODER_PULSES_PER_REV/2000
+#define motor_volts		2800 // limits amount of current at max torque, TI motor and AC servo motor
+#endif
+#else
+#define MBLOCK			2200
+#define MIDLE			2400  // motor idle current
+#define MPCURRENT		1200  // setpoint for motor current
+#define motor_error_stop	30
+#define motor_volts		5000 // limits amount of current at max torque, MCHP motor with m35
+#endif
+
 #define NUM_POLES		8
 #define NUM_POLE_PAIRS		NUM_POLES/2
 
-//#define	SLIP_DRIVE
+	//#define	SLIP_DRIVE
 #define MOTOR_SLIP	-670
 
 #define PWM_FREQUENCY		MOTOR_SPEED
@@ -63,6 +83,7 @@ extern "C" {
 #define QEI_COUNT_TO_ELECTRICAL_ANGLE            (float)(2*M_PI/ENCODER_PULSES_PER_EREV)
 #define QEI_VELOCITY_SAMPLE_FREQUENCY            (float)((float)PWM_FREQUENCY / (float)QEI_VELOCITY_COUNT_PRESCALER)
 #define QEI_VELOCITY_COUNT_TO_RAD_PER_SEC        (float)(((float)QEI_VELOCITY_SAMPLE_FREQUENCY * 2.0f * M_PI )/((float)ENCODER_PULSES_PER_EREV ))
+#define QEI_PER_MREV				 (double) ((double) ENCODER_PULSES_PER_REV) / 3600.0f
 
 	/*____________________________ Rated speed of the motor in RPM___________________________________________ */
 #define RATED_SPEED_RAD_PER_SEC_ELEC                      (float)(RATED_SPEED_RPM *(2*(float)M_PI/60) * NUM_POLE_PAIRS)
