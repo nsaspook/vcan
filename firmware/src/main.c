@@ -68,8 +68,10 @@ IC = M * sin (? + 240)
 #include "OledChar.h"
 #include "OledGrph.h"
 #include "dio.h"
+#include "scmd.h"
 
 const char *build_date = __DATE__, *build_time = __TIME__;
+extern t_cli_ctx cli_ctx; // command buffer 
 
 volatile struct QEI_DATA m35_1 = {
 	.duty = 0, // default motor duty
@@ -665,6 +667,11 @@ int main(void)
 	OledUpdate();
 	WaitMs(3000);
 	V.pwm_stop = false; // let ISR generate waveforms
+	
+	/*
+	 * init serial command parser
+	 */
+	scmd_init();
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -672,6 +679,10 @@ int main(void)
 
 		if (TimerDone(TMR_MOTOR)) {
 			StartTimer(TMR_MOTOR, MOTOR_UPDATES);
+			/*
+			 * read serial port 3 for command data
+			 */
+			cli_read(&cli_ctx);
 
 			m35_2.cw = false;
 			m35_2.ccw = false;

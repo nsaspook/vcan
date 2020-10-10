@@ -2578,7 +2578,7 @@
         </String>
         <String dnOrder="252" id="BSP_PIN_74_DIR">
           <Values dnOrder="0">
-            <User dnOrder="0" value="Out"/>
+            <User dnOrder="0" value=""/>
           </Values>
         </String>
         <String dnOrder="253" id="BSP_PIN_74_FUNCTION_NAME">
@@ -5076,7 +5076,7 @@
         </Hex>
         <Hex dnOrder="732" id="SYS_PORT_B_TRIS">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="49421"/>
+            <Dynamic dnOrder="0" id="core" value="49165"/>
           </Values>
         </Hex>
         <Hex dnOrder="733" id="SYS_PORT_C_ANSEL">
@@ -8090,7 +8090,8 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
+    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="adchs" x="19" y="389"/>
         <ElementPosition dnOrder="1" id="core" x="198" y="49"/>
@@ -8110,6 +8111,5 @@
         <ElementPosition dnOrder="15" id="uart6" x="163" y="307"/>
       </ElementPositions>
     </ComponentGraph>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>
