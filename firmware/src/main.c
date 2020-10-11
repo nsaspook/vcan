@@ -208,6 +208,7 @@ void PWM_motor2(M_CTRL mmode)
 		IOCON3bits.OVRDAT = 2;
 		IOCON3bits.OVRENH = 1;
 		IOCON3bits.OVRENL = 1;
+
 		break;
 	case M_STOP:
 	default:
@@ -480,6 +481,24 @@ void motor_graph(void)
 	}
 }
 
+void fh_hw(void *a_data)
+{
+	POS3CNT = 1000;
+	UART3_Write((uint8_t*) " hw      ", 8);
+}
+
+void fh_hi(void *a_data)
+{
+	POS3CNT = 3000;
+	UART3_Write((uint8_t*) " hi      ", 8);
+}
+
+void fh_ho(void *a_data)
+{
+	POS3CNT = 0;
+	UART3_Write((uint8_t*) " ho      ", 8);
+}
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Main Entry Point
@@ -667,7 +686,7 @@ int main(void)
 	OledUpdate();
 	WaitMs(3000);
 	V.pwm_stop = false; // let ISR generate waveforms
-	
+
 	/*
 	 * init serial command parser
 	 */

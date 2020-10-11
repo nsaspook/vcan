@@ -54,6 +54,16 @@ extern "C" {
 		E_CMD_EMPTY
 	} t_cmd_status;
 
+	/*
+	 * command execute functions
+	 */
+	void fh_hw(void *a_data);
+	void fh_hi(void *a_data);
+	void fh_ho(void *a_data);
+
+	/*
+	 * command parser functions
+	 */
 	void scmd_init(void);
 	void cli_read(t_cli_ctx *);
 

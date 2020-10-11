@@ -1,55 +1,31 @@
 #include "vcan.h"
 #include "scmd.h"
 
-static void fh_hello(void *a_data);
-static void fh_hi(void *a_data);
-static void fh_ho(void *a_data);
-
 static t_cmd g_cmds[] = {
 
-	{ "hw", fh_hello},
+	{ "hw", fh_hw},
 	{ "hi", fh_hi},
 	{ "ho", fh_ho},
 
-	// null
+	// null command terminator
 	{ 0x00, 0x00}
 };
 
+const char cmdm[] = "\r\n Command processor V0.1\r\n";
 t_cli_ctx cli_ctx; // command buffer 
 extern const char *build_date, *build_time;
 uint8_t res = E_CMD_OK;
 
-static void fh_hello(void *a_data)
-{
-	POS3CNT = 1000;
-	UART3_Write((uint8_t*) " hw      ", 8);
-}
-
-static void fh_hi(void *a_data)
-{
-	POS3CNT = 3000;
-	UART3_Write((uint8_t*) " hi      ", 8);
-}
-
-static void fh_ho(void *a_data)
-{
-	POS3CNT = 0;
-	UART3_Write((uint8_t*) " ho      ", 8);
-}
-
 static void cli_init(t_cli_ctx *a_ctx, t_cmd *a_cmds)
 {
-	char cmdm[] = "\r\n Command processor V0.1\r\n";
-	char buffer[80];
-
 	memset(a_ctx, 0x00, sizeof(t_cli_ctx));
 	a_ctx->cmds = a_cmds;
 	/*
 	 * serial port boot messages
 	 */
 	while (UART3_WriteFreeBufferCountGet() < 10);
-	sprintf(buffer, "\r\n VCAN %s %s\r\n", build_date, build_time);
-	UART3_Write((uint8_t *) buffer, strlen(buffer));
+	sprintf(a_ctx->cmd, "\r\n VCAN %s %s\r\n", build_date, build_time);
+	UART3_Write((uint8_t *) a_ctx->cmd, strlen(a_ctx->cmd));
 	while (UART3_WriteFreeBufferCountGet() < 10);
 	UART3_Write((uint8_t *) cmdm, strlen(cmdm));
 }
@@ -117,10 +93,8 @@ void cli_read(t_cli_ctx *a_ctx)
 	case KEY_CODE_BACKSPACE: // backspace
 	case KEY_CODE_DELETE: // del
 		break;
-
 	case KEY_CODE_ESCAPE: // special characters
 		break;
-
 	case KEY_CODE_ENTER: // new line
 		a_ctx->cmd[POSINC(a_ctx->cpos)] = '\0';
 		CLI_IO_OUTPUT((unsigned char *) "\r\n", 2);
@@ -128,7 +102,6 @@ void cli_read(t_cli_ctx *a_ctx)
 		a_ctx->cpos = 0;
 		memset(a_ctx->cmd, 0x00, CLI_CMD_BUFFER_SIZE);
 		break;
-
 	default:
 		/* echo */
 		if (a_ctx->cpos < (CLI_CMD_BUFFER_SIZE - 1)) {
