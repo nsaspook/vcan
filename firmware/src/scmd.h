@@ -7,6 +7,7 @@
 
 /*
  * adapted from original code link: http://pcarduino.blogspot.com/2014/01/simple-serial-port-command-line.html
+ * refactored and adapted for embedded xc32 apps
  */
 
 #ifndef SCMD_H
@@ -19,7 +20,7 @@ extern "C" {
 	/*
 	 * serial port command parser
 	 */
-#define CLI_CMD_BUFFER_SIZE 256
+#define CLI_CMD_BUFFER_SIZE 128
 
 	typedef struct _t_cmd {
 		const char *cmd;
@@ -27,13 +28,9 @@ extern "C" {
 	} t_cmd;
 
 	typedef struct _t_cli_ctx {
-		// command set
 		t_cmd *cmds;
-
-		// cmd
 		char cmd[CLI_CMD_BUFFER_SIZE];
-		unsigned char cpos;
-
+		uint8_t cpos;
 	} t_cli_ctx;
 
 #define CLI_IO_INPUT(__data) \

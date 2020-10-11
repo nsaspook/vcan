@@ -3,11 +3,13 @@
 
 static void fh_hello(void *a_data);
 static void fh_hi(void *a_data);
+static void fh_ho(void *a_data);
 
 static t_cmd g_cmds[] = {
 
 	{ "hw", fh_hello},
 	{ "hi", fh_hi},
+	{ "ho", fh_ho},
 
 	// null
 	{ 0x00, 0x00}
@@ -15,7 +17,7 @@ static t_cmd g_cmds[] = {
 
 t_cli_ctx cli_ctx; // command buffer 
 extern const char *build_date, *build_time;
-unsigned char res = E_CMD_OK;
+uint8_t res = E_CMD_OK;
 
 static void fh_hello(void *a_data)
 {
@@ -27,6 +29,12 @@ static void fh_hi(void *a_data)
 {
 	POS3CNT = 3000;
 	UART3_Write((uint8_t*) " hi      ", 8);
+}
+
+static void fh_ho(void *a_data)
+{
+	POS3CNT = 0;
+	UART3_Write((uint8_t*) " ho      ", 8);
 }
 
 static void cli_init(t_cli_ctx *a_ctx, t_cmd *a_cmds)
@@ -51,7 +59,7 @@ void scmd_init(void)
 	cli_init(&cli_ctx, g_cmds);
 }
 
-unsigned char linux_getc(unsigned char *a_data)
+uint8_t linux_getc(uint8_t *a_data)
 {
 	if (UART3_ReadCountGet()) {
 		UART3_Read(a_data, 1);
@@ -61,16 +69,16 @@ unsigned char linux_getc(unsigned char *a_data)
 	}
 }
 
-unsigned char linux_putc(unsigned char *data, unsigned char a_len)
+uint8_t linux_putc(uint8_t *data, uint8_t a_len)
 {
 	UART3_Write(data, a_len);
 	return 1;
 }
 
-static unsigned char _cli_interpret_cmd(t_cli_ctx *a_ctx)
+static uint8_t _cli_interpret_cmd(t_cli_ctx *a_ctx)
 {
-	unsigned char i = 0;
-	unsigned char ret = E_CMD_OK;
+	uint8_t i = 0;
+	uint8_t ret = E_CMD_OK;
 
 	if (!strlen(a_ctx->cmd)) {
 		return E_CMD_EMPTY;
@@ -99,7 +107,7 @@ static unsigned char _cli_interpret_cmd(t_cli_ctx *a_ctx)
 
 void cli_read(t_cli_ctx *a_ctx)
 {
-	unsigned char i = 0x00;
+	uint8_t i = 0x00;
 
 	// if no character available - then exit
 	if (!CLI_IO_INPUT(&i)) return;
