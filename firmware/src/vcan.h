@@ -34,8 +34,8 @@ extern "C" {
 #define HVDC_M			// 24 + volts for motor drive
 
 	//#define ENCODER_PULSES_PER_REV	327680
-#define ENCODER_PULSES_PER_REV	8000
-	//#define ENCODER_PULSES_PER_REV	4000
+	//#define ENCODER_PULSES_PER_REV	8000
+#define ENCODER_PULSES_PER_REV	4000
 
 #if ENCODER_PULSES_PER_REV < 9000
 #ifdef HVDC_M
