@@ -483,8 +483,9 @@ void motor_graph(void)
 
 void fh_hw(void *a_data)
 {
+	t_cli_ctx *cmd=a_data;
 	POS3CNT = 1000;
-	UART3_Write((uint8_t*) " hw      ", 8);
+	UART3_Write((uint8_t*) cmd->cmd, strlen(cmd->cmd));
 }
 
 void fh_hi(void *a_data)
@@ -621,7 +622,7 @@ int main(void)
 		switch (i) {
 		case 0:
 			MCPWM_Start();
-			WaitMs(200);
+			WaitMs(600);
 			/*
 			 * zero position counters at locked rotor position
 			 */
@@ -643,7 +644,7 @@ int main(void)
 			break;
 		}
 		OledUpdate();
-		WaitMs(10);
+		WaitMs(200);
 	}
 	WaitMs(2000);
 

@@ -56,6 +56,7 @@ extern "C" {
 
 	/*
 	 * command execute functions
+	 * prototypes
 	 */
 	void fh_hw(void *a_data);
 	void fh_hi(void *a_data);

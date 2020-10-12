@@ -66,7 +66,6 @@ static uint8_t _cli_interpret_cmd(t_cli_ctx *a_ctx)
 
 	while (a_ctx->cmds[i].fh) {
 		if (!strncmp(a_ctx->cmds[i].cmd, a_ctx->cmd, strlen(a_ctx->cmds[i].cmd))) {
-
 			// call the handler
 			a_ctx->cmds[i].fh((void *) a_ctx);
 			break;
