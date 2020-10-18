@@ -62,7 +62,9 @@ public class Cube {
                 double x = -Double.parseDouble(token[1]);
                 double y = -Double.parseDouble(token[2]);
                 double z = -Double.parseDouble(token[3]);
+                /*
                 System.out.println(String.format("w = %+2.3f     x = %+2.3f     y = %+2.3f     z = %+2.3f", w, x, y, z));
+                 */
 
                 Quat4d quaternion = new Quat4d(w, x, y, z);
                 Vector3d vector = new Vector3d(0.0, 0.0, 0.0);
