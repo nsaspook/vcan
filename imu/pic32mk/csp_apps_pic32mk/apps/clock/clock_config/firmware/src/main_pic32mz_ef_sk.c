@@ -70,7 +70,7 @@ char cbuffer[256] = "\r\n parallax LSM9DS1 9-axis IMU ";
 const char imu_missing[] = " MISSING \r\n";
 int gx, gy, gz, ax, ay, az, mx, my, mz;
 
-double g[] = {0.0, 0.0, 0.0}; 
+double g[] = {0.0, 0.0, 0.0}, accel[] = {0.0, 0.0, 0.0};
 
 // *****************************************************************************
 // *****************************************************************************
@@ -110,11 +110,30 @@ int main(void)
 		 */
 		MadgwickAHRSupdate((float) gx*rps, (float) gy*rps, (float) gz*rps, (float) ax, (float) ay, (float) az, (float) mx, (float) my, (float) mz);
 		//MahonyAHRSupdate((float) gx*rps, (float) gy*rps, (float) gz*rps, (float) ax, (float) ay, (float) az, (float) mx, (float) my, (float) mz);
+		/*
+		 * linear acceleration without gravity
+		 * rotate vector to earth
+		 */
+		g[0] = 2.0 * (q1 * q3 - q0 * q2);
+		g[1] = 2.0 * (q0 * q1 + q2 * q3);
+		g[2] = q0 * q0 - q1 * q1 - q2 * q2 + q3 * q3;
+
+		/*
+		 * compensate accelerometer readings with the expected direction of gravity 
+		 * https://diydrones.com/forum/topics/accelerometer-sensor-gravity-compensation
+		 */
+		accel[0] = ((double) ax / 5020.0 - g[0])*9.8;
+		accel[1] = ((double) ay / 5020.0 - g[1])*9.8;
+		accel[2] = ((double) az / 5020.0 - g[2])*9.8;
 		dtog_Clear();
 		//		sprintf(cbuffer, "Gyro %6d %6d %6d Accel %6d %6d %6d Mag %6d %6d %6d \r\n", gx, gy, gz, ax, ay, az, mx, my, mz);
 		//		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
 		sprintf(cbuffer, "%2.7f %2.7f %2.7f %2.7f\n\r", q0, q1, q2, q3);
 		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
+		sprintf(cbuffer, "Linear A acceleration %5.2f %5.2f %5.2f\n\r", accel[0], accel[1], accel[2]);
+		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
+		//		sprintf(cbuffer, "Linear R acceleration %5.2f %5.2f %5.2f: %5.2f %5.2f %5.2f\n\r", (double) ax, (double) ay, (double) az, accel[0], accel[1], accel[2]);
+		//		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
 		LED_Toggle();
 		CORETIMER_DelayMs(100); // 10 Hz updates
 	}
