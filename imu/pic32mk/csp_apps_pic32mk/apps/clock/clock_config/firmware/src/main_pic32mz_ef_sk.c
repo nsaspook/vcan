@@ -70,6 +70,8 @@ char cbuffer[256] = "\r\n parallax LSM9DS1 9-axis IMU ";
 const char imu_missing[] = " MISSING \r\n";
 int gx, gy, gz, ax, ay, az, mx, my, mz;
 
+double g[] = {0.0, 0.0, 0.0}; 
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Main Entry Point

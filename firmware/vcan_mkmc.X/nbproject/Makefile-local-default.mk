@@ -20,18 +20,18 @@ PATH:=/opt/microchip/mplabx/v5.40/mplab_platform/platform/../mplab_ide/modules/.
 # Path to java used to run MPLAB X when this makefile was created
 MP_JAVA_PATH="/opt/microchip/mplabx/v5.40/sys/java/zulu8.36.0.1-ca-fx-jdk8.0.202-linux_x64/jre/bin/"
 OS_CURRENT="$(shell uname -s)"
-MP_CC="/opt/microchip/xc32/v2.50/bin/xc32-gcc"
-MP_CPPC="/opt/microchip/xc32/v2.50/bin/xc32-g++"
+MP_CC="/opt/microchip/xc32/v2.05/bin/xc32-gcc"
+MP_CPPC="/opt/microchip/xc32/v2.05/bin/xc32-g++"
 # MP_BC is not defined
-MP_AS="/opt/microchip/xc32/v2.50/bin/xc32-as"
-MP_LD="/opt/microchip/xc32/v2.50/bin/xc32-ld"
-MP_AR="/opt/microchip/xc32/v2.50/bin/xc32-ar"
+MP_AS="/opt/microchip/xc32/v2.05/bin/xc32-as"
+MP_LD="/opt/microchip/xc32/v2.05/bin/xc32-ld"
+MP_AR="/opt/microchip/xc32/v2.05/bin/xc32-ar"
 DEP_GEN=${MP_JAVA_PATH}java -jar "/opt/microchip/mplabx/v5.40/mplab_platform/platform/../mplab_ide/modules/../../bin/extractobjectdependencies.jar"
-MP_CC_DIR="/opt/microchip/xc32/v2.50/bin"
-MP_CPPC_DIR="/opt/microchip/xc32/v2.50/bin"
+MP_CC_DIR="/opt/microchip/xc32/v2.05/bin"
+MP_CPPC_DIR="/opt/microchip/xc32/v2.05/bin"
 # MP_BC_DIR is not defined
-MP_AS_DIR="/opt/microchip/xc32/v2.50/bin"
-MP_LD_DIR="/opt/microchip/xc32/v2.50/bin"
-MP_AR_DIR="/opt/microchip/xc32/v2.50/bin"
+MP_AS_DIR="/opt/microchip/xc32/v2.05/bin"
+MP_LD_DIR="/opt/microchip/xc32/v2.05/bin"
+MP_AR_DIR="/opt/microchip/xc32/v2.05/bin"
 # MP_BC_DIR is not defined
 DFP_DIR=/root/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.5.115
