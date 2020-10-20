@@ -62,12 +62,15 @@ public class Cube {
                 double x = -Double.parseDouble(token[1]);
                 double y = -Double.parseDouble(token[2]);
                 double z = -Double.parseDouble(token[3]);
+                double ax = Double.parseDouble(token[4]);
+                double ay = Double.parseDouble(token[5]);
+                double az = Double.parseDouble(token[6]);
                 /*
                 System.out.println(String.format("w = %+2.3f     x = %+2.3f     y = %+2.3f     z = %+2.3f", w, x, y, z));
                  */
 
                 Quat4d quaternion = new Quat4d(w, x, y, z);
-                Vector3d vector = new Vector3d(0.0, 0.0, 0.0);
+                Vector3d vector = new Vector3d(az*0.02, ay*0.2, az*0.02);
                 transformGroup.setTransform(new Transform3D(quaternion, vector, 1.0));
 
                 // the inverse cosine of w gives you the pitch *if* you normalize the quaternion with x and z being zero
