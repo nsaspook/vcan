@@ -70,7 +70,7 @@ public class Cube {
                  */
 
                 Quat4d quaternion = new Quat4d(w, x, y, z);
-                Vector3d vector = new Vector3d(az*0.02, ay*0.2, az*0.02);
+                Vector3d vector = new Vector3d((az * 0.02), (ay * 0.02), (az * 0.02));
                 transformGroup.setTransform(new Transform3D(quaternion, vector, 1.0));
 
                 // the inverse cosine of w gives you the pitch *if* you normalize the quaternion with x and z being zero
