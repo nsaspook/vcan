@@ -40,6 +40,7 @@
 
 #include "device.h"
 #include "plib_uart1.h"
+#include "../../bsp/bsp.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -639,6 +640,7 @@ void UART1_TX_InterruptHandler (void)
     uint8_t wrByte;
 
     /* Check if any data is pending for transmission */
+    LED1_Toggle();
     if (UART1_WritePendingBytesGet() > 0)
     {
         /* Keep writing to the TX FIFO as long as there is space */
