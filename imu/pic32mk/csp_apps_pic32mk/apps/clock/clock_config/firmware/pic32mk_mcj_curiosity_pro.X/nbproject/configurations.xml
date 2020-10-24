@@ -50,6 +50,12 @@
       <itemPath>../../../../../../Learn-Folder-Updated-2020.03.02/Learn/Simple Libraries/Utility/libsimpletools/simpletools.h</itemPath>
       <itemPath>MahonyAHRS/MahonyAHRS.h</itemPath>
       <itemPath>MadgwickAHRS/MadgwickAHRS.h</itemPath>
+      <itemPath>../src/quat.h</itemPath>
+      <itemPath>../src/conv.h</itemPath>
+      <itemPath>../src/vec3.h</itemPath>
+      <itemPath>../src/vec.h</itemPath>
+      <itemPath>../src/real.h</itemPath>
+      <itemPath>../src/euler.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -150,6 +156,9 @@
       <itemPath>../../../../../../Learn-Folder-Updated-2020.03.02/Learn/Simple Libraries/Sensor/liblsm9ds1/imu_magAvailable.c</itemPath>
       <itemPath>../../../../../../Learn-Folder-Updated-2020.03.02/Learn/Simple Libraries/Sensor/liblsm9ds1/imu_gryoAvailable.c</itemPath>
       <itemPath>../src/main_pic32mz_ef_sk.c</itemPath>
+      <itemPath>../src/quat.c</itemPath>
+      <itemPath>../src/conv.c</itemPath>
+      <itemPath>../src/vec3.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

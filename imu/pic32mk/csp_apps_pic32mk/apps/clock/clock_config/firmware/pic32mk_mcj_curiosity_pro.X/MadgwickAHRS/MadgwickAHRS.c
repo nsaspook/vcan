@@ -22,7 +22,7 @@
 // Definitions
 
 #define sampleFreq	400.0f		// sample frequency in Hz
-#define betaDef		0.1f		// 2 * proportional gain
+#define betaDef		0.025f		// 2 * proportional gain
 
 //---------------------------------------------------------------------------------------------------
 // Variable definitions
@@ -210,6 +210,7 @@ void MadgwickAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, flo
 	q3 *= recipNorm;
 }
 
+int expensive = 1;
 //---------------------------------------------------------------------------------------------------
 // Fast inverse square-root
 // See: http://en.wikipedia.org/wiki/Fast_inverse_square_root
@@ -217,16 +218,21 @@ void MadgwickAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, flo
 
 float invSqrt(float x)
 {
-	const float x2 = x * 0.5F;
-	const float threehalfs = 1.5F;
+	if (expensive) {
+		/* optimal but expensive method: */
+		return 1.0f / sqrt(x);
+	} else {
+		const float x2 = x * 0.5F;
+		const float threehalfs = 1.5F;
 
-	union {
-		float f;
-		unsigned long i;
-	} conv = {.f = x};
-	conv.i = 0x5f3759df - (conv.i >> 1);
-	conv.f *= (threehalfs - (x2 * conv.f * conv.f));
-	return conv.f;
+		union {
+			float f;
+			unsigned long i;
+		} conv = {.f = x};
+		conv.i = 0x5f3759df - (conv.i >> 1);
+		conv.f *= (threehalfs - (x2 * conv.f * conv.f));
+		return conv.f;
+	}
 }
 
 //====================================================================================================
