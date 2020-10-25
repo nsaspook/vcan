@@ -1,21 +1,21 @@
 /*******************************************************************************
-  Board Support Package Header File.
+  Memory Driver NVM Interface Definition
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    bsp.h
+    drv_memory_nvm.h
 
   Summary:
-    Board Support Package Header File 
+    Memory Driver NVM Interface Definition
 
   Description:
-    This file contains constants, macros, type definitions and function
-    declarations 
+    The Memory Driver provides a interface to access the NVM peripheral on the
+    microcontroller.
 *******************************************************************************/
 
-// DOM-IGNORE-BEGIN
+//DOM-IGNORE-BEGIN
 /*******************************************************************************
 * Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
 *
@@ -38,78 +38,49 @@
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
+//DOM-IGNORE-END
+
+#ifndef _DRV_MEMORY_NVM_H
+#define _DRV_MEMORY_NVM_H
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: File includes
+// *****************************************************************************
+// *****************************************************************************
+
+#include "drv_memory_definitions.h"
+
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
+    extern "C" {
+#endif
+
 // DOM-IGNORE-END
 
-#ifndef _BSP_H
-#define _BSP_H
+DRV_HANDLE DRV_NVM_Open( const SYS_MODULE_INDEX drvIndex, const DRV_IO_INTENT ioIntent );
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Included Files
-// *****************************************************************************
-// *****************************************************************************
+void DRV_NVM_Close( const DRV_HANDLE handle );
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include "device.h"
+SYS_STATUS DRV_NVM_Status( const SYS_MODULE_INDEX drvIndex );
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: BSP Macros
-// *****************************************************************************
-// *****************************************************************************
-/*** LED Macros for LED1 ***/
-#define LED1_Toggle() (LATEINV = (1<<13))
-#define LED1_Get() ((PORTE >> 13) & 0x1)
-#define LED1_On() (LATECLR = (1<<13))
-#define LED1_Off() (LATESET = (1<<13))
+bool DRV_NVM_SectorErase( const DRV_HANDLE handle, uint32_t address );
 
+bool DRV_NVM_Read( const DRV_HANDLE handle, void *rx_data, uint32_t rx_data_length, uint32_t address );
 
+bool DRV_NVM_PageWrite( const DRV_HANDLE handle, void *tx_data, uint32_t address );
 
+void DRV_NVM_EventHandlerSet( const DRV_HANDLE handle, const DRV_MEMORY_EVENT_HANDLER eventHandler, const uintptr_t context );
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Interface Routines
-// *****************************************************************************
-// *****************************************************************************
+MEMORY_DEVICE_TRANSFER_STATUS DRV_NVM_TransferStatusGet( const DRV_HANDLE handle );
 
-// *****************************************************************************
-/* Function:
-    void BSP_Initialize(void)
+bool DRV_NVM_GeometryGet( const DRV_HANDLE handle, MEMORY_DEVICE_GEOMETRY *geometry );
 
-  Summary:
-    Performs the necessary actions to initialize a board
+#ifdef __cplusplus
+}
+#endif
 
-  Description:
-    This function initializes the LED and Switch ports on the board.  This
-    function must be called by the user before using any APIs present on this
-    BSP.
-
-  Precondition:
-    None.
-
-  Parameters:
-    None
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    //Initialize the BSP
-    BSP_Initialize();
-    </code>
-
-  Remarks:
-    None
-*/
-
-void BSP_Initialize(void);
-
-#endif // _BSP_H
-
+#endif // #ifndef _DRV_MEMORY_NVM_H
 /*******************************************************************************
  End of File
 */

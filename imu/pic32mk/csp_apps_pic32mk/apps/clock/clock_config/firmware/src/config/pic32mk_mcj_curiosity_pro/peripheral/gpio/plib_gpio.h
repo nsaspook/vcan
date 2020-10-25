@@ -128,6 +128,15 @@
 #define DBLANK_Get()               ((PORTC >> 10) & 0x1)
 #define DBLANK_PIN                  GPIO_PIN_RC10
 
+/*** Macros for SWITCH pin ***/
+#define SWITCH_Set()               (LATBSET = (1<<8))
+#define SWITCH_Clear()             (LATBCLR = (1<<8))
+#define SWITCH_Toggle()            (LATBINV= (1<<8))
+#define SWITCH_OutputEnable()      (TRISBCLR = (1<<8))
+#define SWITCH_InputEnable()       (TRISBSET = (1<<8))
+#define SWITCH_Get()               ((PORTB >> 8) & 0x1)
+#define SWITCH_PIN                  GPIO_PIN_RB8
+
 /*** Macros for MOSI2 pin ***/
 #define MOSI2_Get()               ((PORTC >> 7) & 0x1)
 #define MOSI2_PIN                  GPIO_PIN_RC7

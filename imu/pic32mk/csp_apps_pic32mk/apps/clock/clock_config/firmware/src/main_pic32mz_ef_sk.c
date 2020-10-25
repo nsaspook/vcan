@@ -60,13 +60,16 @@
 #include <stdbool.h>                    // Defines true
 #include <stdlib.h>                     // Defines EXIT_FAILURE
 #include "definitions.h"                // SYS function prototypes
+#include "imu.h"
 #include "../../../../../../Learn-Folder-Updated-2020.03.02/Learn/Simple Libraries/Sensor/liblsm9ds1/lsm9ds1.h"
 #include "../pic32mk_mcj_curiosity_pro.X/MadgwickAHRS/MadgwickAHRS.h"
 #include "../pic32mk_mcj_curiosity_pro.X/MahonyAHRS/MahonyAHRS.h"
 
-#define rps	0.0174532925f  // degrees per second -> radians per second
+const uint32_t myflash[256] __attribute__((section("myflash"), address(NVM_STARTVADDRESS), space(prog)));
+uint32_t *pmyflash = (uint32_t *) NVM_STARTPADDRESS;
 
 char cbuffer[256] = "\r\n parallax LSM9DS1 9-axis IMU ";
+char tbuf[] = "LSM9DS1";
 const char imu_missing[] = " MISSING \r\n";
 int gx, gy, gz, ax, ay, az, mx, my, mz;
 
@@ -95,8 +98,10 @@ int main(void)
 		// Trouble in River-City, not talking to the IMU
 		UART1_Write((uint8_t *) imu_missing, strlen(imu_missing));
 	} else {
-		imu_calibrateAG();
-		//imu_calibrateMag();
+		if (SWITCH_Get()) {
+			imu_calibrateAG();
+//			imu_calibrateMag();
+		}
 	};
 
 	while (true) {
@@ -143,6 +148,87 @@ int main(void)
 	return( EXIT_FAILURE);
 }
 
+void NVMInitiateOperation(void)
+{
+	unsigned int saved_state;
+	int dma_susp; // storage for current DMA state
+
+	saved_state = __builtin_get_isr_state();
+	__builtin_disable_interrupts();
+	// Disable DMA
+	if (!(dma_susp = DMACONbits.SUSPEND)) {
+		DMACONSET = _DMACON_SUSPEND_MASK; // suspend
+		while ((DMACONbits.DMABUSY)); // wait to be actually suspended
+	}
+	NVMKEY = 0x0;
+	NVMKEY = 0xAA996655;
+	NVMKEY = 0x556699AA;
+	NVMCONSET = 1 << 15; // must be an atomic instruction
+	// Restore DMA
+	if (!dma_susp) {
+		DMACONCLR = _DMACON_SUSPEND_MASK; // resume DMA activity
+	}
+	// Restore Interrupts
+	__builtin_set_isr_state(saved_state); /* Set back to what was before. */
+}
+
+unsigned int NVMWriteWord(void* address, unsigned int data)
+{
+	unsigned int res = 0;
+	// Load data into NVMDATA register
+	NVMDATA0 = data;
+	// Load address to program into NVMADDR register
+	NVMADDR = (unsigned int) address;
+	// Unlock and Write Word
+	// set the operation, assumes WREN = 0
+	NVMCONbits.NVMOP = 0x1; // NVMOP for Word programming
+	// Enable Flash for write operation and set the NVMOP
+	NVMCONbits.WREN = 1;
+	// Start programming
+	NVMInitiateOperation(); // see Example 52-1
+	// Wait for WR bit to clear
+	while (NVMCONbits.WR);
+	// Disable future Flash Write/Erase operations
+	NVMCONbits.WREN = 0;
+	// Check Error Status
+	if (NVMCON & 0x3000) // mask for WRERR and LVDERR
+	{
+		res = 1; // TESTING CLEAR POSSIBLE ERROR set 0
+	}
+	return res;
+}
+
+uint32_t nvram_in(uint8_t adr)
+{
+	return myflash[adr];
+}
+
+uint32_t nvram_out(void *adr, uint32_t data)
+{
+	return NVMWriteWord((void*) adr, data);
+}
+
+bool get_nvram_str(uint8_t adr, char * str)
+{
+	bool done = true;
+	uint8_t sz = 7;
+
+	while (sz--) {
+		str[sz] = (char) nvram_in(adr + sz);
+	}
+	return done;
+}
+
+bool set_nvram_str(uint32_t * adr, char * str)
+{
+	bool done = true;
+	uint8_t sz = 7;
+
+	while (sz--) {
+		done = NVMWriteWord((void *) &adr[sz], (uint32_t) str[sz]);
+	}
+	return done;
+}
 
 /*******************************************************************************
  End of File

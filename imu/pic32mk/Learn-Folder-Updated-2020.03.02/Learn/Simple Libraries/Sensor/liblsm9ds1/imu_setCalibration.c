@@ -15,6 +15,7 @@
 
 
 #include "lsm9ds1.h"
+#include "imu.h"
 //#include "simpletools.h"
 
 //i2c *eeBus;                                   // I2C bus ID
@@ -29,80 +30,82 @@ char __autoCalc;
 void imu_setMagCalibration(int mxBias, int myBias, int mzBias)
 {
 	int k;
-  __mBiasRaw[X_AXIS] = mxBias; 
-  __mBiasRaw[Y_AXIS] = myBias;
-  __mBiasRaw[Z_AXIS] = mzBias;  
+	__mBiasRaw[X_AXIS] = mxBias;
+	__mBiasRaw[Y_AXIS] = myBias;
+	__mBiasRaw[Z_AXIS] = mzBias;
 
-  unsigned char msb, lsb;
-  for(k = 0; k < 3; k++)
-  {
-    msb = (__mBiasRaw[k] & 0xFF00) >> 8;
-    lsb = __mBiasRaw[k] & 0x00FF;
-    imu_SPIwriteByte(__pinM, OFFSET_X_REG_L_M + (2 * k), lsb);
-    imu_SPIwriteByte(__pinM, OFFSET_X_REG_H_M + (2 * k), msb);
-  } 
-  
-  //i2c_out(eeBus, 0b1010000, 63280, 2, "LSM9DS1", 7); 
-  //while (i2c_busy(eeBus, 0b1010000));
-//  char biasBuf[7] = {'m', 0, 0, 0, 0, 0, 0};
-  
-//  for (k = 0; k < 3; k++)
- // {
- //   biasBuf[k * 2 + 1] = (__mBiasRaw[k] >> 8) & 0xFF;
-//    biasBuf[k * 2 + 2] = __mBiasRaw[k] & 0xFF;
- // }
+	unsigned char msb, lsb;
+	for (k = 0; k < 3; k++) {
+		msb = (__mBiasRaw[k] & 0xFF00) >> 8;
+		lsb = __mBiasRaw[k] & 0x00FF;
+		imu_SPIwriteByte(__pinM, OFFSET_X_REG_L_M + (2 * k), lsb);
+		imu_SPIwriteByte(__pinM, OFFSET_X_REG_H_M + (2 * k), msb);
+	}
 
-  //i2c_out(eeBus, 0b1010000, 63287, 2, biasBuf, 7); 
-  //while (i2c_busy(eeBus, 0b1010000)); 
+	//i2c_out(eeBus, 0b1010000, 63280, 2, "LSM9DS1", 7); 
+	set_nvram_str((void*) pmyflash, tbuf);
+	//while (i2c_busy(eeBus, 0b1010000));
+	char biasBuf[7] = {'m', 0, 0, 0, 0, 0, 0};
 
-}  
+	for (k = 0; k < 3; k++) {
+		biasBuf[k * 2 + 1] = (__mBiasRaw[k] >> 8) & 0xFF;
+		biasBuf[k * 2 + 2] = __mBiasRaw[k] & 0xFF;
+	}
+
+	set_nvram_str((void*) &pmyflash[7], biasBuf);
+	//i2c_out(eeBus, 0b1010000, 63287, 2, biasBuf, 7); 
+	//while (i2c_busy(eeBus, 0b1010000)); 
+
+}
 
 void imu_setAccelCalibration(int axBias, int ayBias, int azBias)
 {
-//	int k;
-  __aBiasRaw[X_AXIS] = axBias; 
-  __aBiasRaw[Y_AXIS] = ayBias;
-  __aBiasRaw[Z_AXIS] = azBias;  
+	int k;
+	__aBiasRaw[X_AXIS] = axBias;
+	__aBiasRaw[Y_AXIS] = ayBias;
+	__aBiasRaw[Z_AXIS] = azBias;
 
-  //i2c_out(eeBus, 0b1010000, 63280, 2, "LSM9DS1", 7); 
-  //while (i2c_busy(eeBus, 0b1010000));
- // char biasBuf[7] = {'a', 0, 0, 0, 0, 0, 0};
-  
-//  for (k = 0; k < 3; k++)
- // {
-//    biasBuf[k * 2 + 1] = (__aBiasRaw[k] >> 8) & 0xFF;
-//    biasBuf[k * 2 + 2] = __aBiasRaw[k] & 0xFF;
- // }
+	//i2c_out(eeBus, 0b1010000, 63280, 2, "LSM9DS1", 7); 
+	set_nvram_str((void*) pmyflash, tbuf);
+	//while (i2c_busy(eeBus, 0b1010000));
+	char biasBuf[7] = {'a', 0, 0, 0, 0, 0, 0};
 
-  //i2c_out(eeBus, 0b1010000, 63294, 2, biasBuf, 7); 
-  //while (i2c_busy(eeBus, 0b1010000)); 
+	for (k = 0; k < 3; k++) {
+		biasBuf[k * 2 + 1] = (__aBiasRaw[k] >> 8) & 0xFF;
+		biasBuf[k * 2 + 2] = __aBiasRaw[k] & 0xFF;
+	}
 
-  __autoCalc |= 0b10;
-}  
+	set_nvram_str((void*) &pmyflash[14], biasBuf);
+	//i2c_out(eeBus, 0b1010000, 63294, 2, biasBuf, 7); 
+	//while (i2c_busy(eeBus, 0b1010000)); 
+
+	__autoCalc |= 0b10;
+}
 
 void imu_setGyroCalibration(int gxBias, int gyBias, int gzBias)
 {
-//	int k;
-	
-  __gBiasRaw[X_AXIS] = gxBias; 
-  __gBiasRaw[Y_AXIS] = gyBias;
-  __gBiasRaw[Z_AXIS] = gzBias; 
-  
-  //i2c_out(eeBus, 0b1010000, 63280, 2, "LSM9DS1", 7); 
-  //while (i2c_busy(eeBus, 0b1010000));
-//  char biasBuf[7] = {'g', 0, 0, 0, 0, 0, 0};
-  
-//  for (k = 0; k < 3; k++)
-//  {
- //   biasBuf[k * 2 + 1] = (__gBiasRaw[k] >> 8) & 0xFF;
-//    biasBuf[k * 2 + 2] = __gBiasRaw[k] & 0xFF;
-//  }
+	int k;
 
-  //i2c_out(eeBus, 0b1010000, 63301, 2, biasBuf, 7); 
-  //while (i2c_busy(eeBus, 0b1010000)); 
-  
-  __autoCalc = 0b01;
-}  
+	__gBiasRaw[X_AXIS] = gxBias;
+	__gBiasRaw[Y_AXIS] = gyBias;
+	__gBiasRaw[Z_AXIS] = gzBias;
+
+	//i2c_out(eeBus, 0b1010000, 63280, 2, "LSM9DS1", 7); 
+	set_nvram_str((void*) pmyflash, tbuf);
+	//while (i2c_busy(eeBus, 0b1010000));
+	char biasBuf[7] = {'g', 0, 0, 0, 0, 0, 0};
+
+	for (k = 0; k < 3; k++) {
+		biasBuf[k * 2 + 1] = (__gBiasRaw[k] >> 8) & 0xFF;
+		biasBuf[k * 2 + 2] = __gBiasRaw[k] & 0xFF;
+	}
+
+	set_nvram_str((void*) &pmyflash[21], biasBuf);
+	//i2c_out(eeBus, 0b1010000, 63301, 2, biasBuf, 7); 
+	//while (i2c_busy(eeBus, 0b1010000)); 
+
+	__autoCalc = 0b01;
+}
 
 
 

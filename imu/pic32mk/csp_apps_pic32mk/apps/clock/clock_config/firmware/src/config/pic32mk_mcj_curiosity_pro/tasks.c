@@ -1,19 +1,23 @@
 /*******************************************************************************
-  Board Support Package Header File.
-
-  Company:
-    Microchip Technology Inc.
+ System Tasks File
 
   File Name:
-    bsp.h
+    tasks.c
 
   Summary:
-    Board Support Package Header File 
+    This file contains source code necessary to maintain system's polled tasks.
 
   Description:
-    This file contains constants, macros, type definitions and function
-    declarations 
-*******************************************************************************/
+    This file contains source code necessary to maintain system's polled tasks.
+    It implements the "SYS_Tasks" function that calls the individual "Tasks"
+    functions for all polled MPLAB Harmony modules in the system.
+
+  Remarks:
+    This file requires access to the systemObjects global data structure that
+    contains the object handles to all MPLAB Harmony module objects executing
+    polled in the system.  These handles are passed into the individual module
+    "Tasks" functions to identify the instance of the module to maintain.
+ *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
 /*******************************************************************************
@@ -37,11 +41,8 @@
 * FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-*******************************************************************************/
+ *******************************************************************************/
 // DOM-IGNORE-END
-
-#ifndef _BSP_H
-#define _BSP_H
 
 // *****************************************************************************
 // *****************************************************************************
@@ -49,67 +50,48 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include "device.h"
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: BSP Macros
-// *****************************************************************************
-// *****************************************************************************
-/*** LED Macros for LED1 ***/
-#define LED1_Toggle() (LATEINV = (1<<13))
-#define LED1_Get() ((PORTE >> 13) & 0x1)
-#define LED1_On() (LATECLR = (1<<13))
-#define LED1_Off() (LATESET = (1<<13))
+#include "configuration.h"
+#include "definitions.h"
 
 
 
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Interface Routines
+// Section: System "Tasks" Routine
 // *****************************************************************************
 // *****************************************************************************
 
-// *****************************************************************************
-/* Function:
-    void BSP_Initialize(void)
-
-  Summary:
-    Performs the necessary actions to initialize a board
-
-  Description:
-    This function initializes the LED and Switch ports on the board.  This
-    function must be called by the user before using any APIs present on this
-    BSP.
-
-  Precondition:
-    None.
-
-  Parameters:
-    None
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    //Initialize the BSP
-    BSP_Initialize();
-    </code>
+/*******************************************************************************
+  Function:
+    void SYS_Tasks ( void )
 
   Remarks:
-    None
+    See prototype in system/common/sys_module.h.
 */
+void SYS_Tasks ( void )
+{
+    /* Maintain system services */
+    
 
-void BSP_Initialize(void);
+    /* Maintain Device Drivers */
+    DRV_MEMORY_Tasks(sysObj.drvMemory0);
 
-#endif // _BSP_H
+
+
+    /* Maintain Middleware & Other Libraries */
+    
+
+    /* Maintain the application's state machine. */
+        /* Call Application task APP. */
+    APP_Tasks();
+
+
+
+
+}
 
 /*******************************************************************************
  End of File
-*/
+ */
+

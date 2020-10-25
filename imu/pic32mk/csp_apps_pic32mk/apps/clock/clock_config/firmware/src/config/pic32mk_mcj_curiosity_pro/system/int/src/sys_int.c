@@ -1,23 +1,23 @@
 /*******************************************************************************
-  Board Support Package Header File.
+  Interrupt System Service
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    bsp.h
+    sys_int.c
 
   Summary:
-    Board Support Package Header File 
+    Interrupt System Service APIs.
 
   Description:
-    This file contains constants, macros, type definitions and function
-    declarations 
+    This file contains functions related to the Interrupt System Service for PIC32
+    devices.
 *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
 /*******************************************************************************
-* Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
+* Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -40,76 +40,69 @@
 *******************************************************************************/
 // DOM-IGNORE-END
 
-#ifndef _BSP_H
-#define _BSP_H
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include "device.h"
+#include "system/int/sys_int.h"
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: BSP Macros
-// *****************************************************************************
-// *****************************************************************************
-/*** LED Macros for LED1 ***/
-#define LED1_Toggle() (LATEINV = (1<<13))
-#define LED1_Get() ((PORTE >> 13) & 0x1)
-#define LED1_On() (LATECLR = (1<<13))
-#define LED1_Off() (LATESET = (1<<13))
-
-
-
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Interface Routines
+// Section: Function Definitions
 // *****************************************************************************
 // *****************************************************************************
 
-// *****************************************************************************
-/* Function:
-    void BSP_Initialize(void)
+void SYS_INT_Enable( void )
+{
+    __builtin_enable_interrupts();
+}
 
-  Summary:
-    Performs the necessary actions to initialize a board
+bool SYS_INT_Disable( void )
+{
+    uint32_t processorStatus;
 
-  Description:
-    This function initializes the LED and Switch ports on the board.  This
-    function must be called by the user before using any APIs present on this
-    BSP.
+    /* Save the processor status and then Disable the global interrupt */
+    processorStatus = ( uint32_t )__builtin_disable_interrupts();
 
-  Precondition:
-    None.
+    /* return the interrupt status */
+    return (bool)(processorStatus & 0x01);
+}
 
-  Parameters:
-    None
+void SYS_INT_Restore( bool state )
+{
+    if (state)
+    {
+        /* restore the state of CP0 Status register before the disable occurred */
+        __builtin_enable_interrupts();
+    }
+}
 
-  Returns:
-    None.
+bool SYS_INT_SourceDisable( INT_SOURCE source )
+{
+    bool intSrcStatus;
+    bool interruptStatus;
 
-  Example:
-    <code>
-    //Initialize the BSP
-    BSP_Initialize();
-    </code>
+    /* Save the interrupt status and then Disable the global interrupt */
+    interruptStatus = (bool)(( uint32_t )__builtin_disable_interrupts() & 0x01);
 
-  Remarks:
-    None
-*/
+    /* get the interrupt status of this source before disable is called */
+    intSrcStatus = SYS_INT_SourceIsEnabled(source);
 
-void BSP_Initialize(void);
+    /* disable the interrupts */
+    EVIC_SourceDisable(source);
 
-#endif // _BSP_H
+    SYS_INT_Restore(interruptStatus);
 
-/*******************************************************************************
- End of File
-*/
+    /* return the source status */
+    return intSrcStatus;
+}
+
+void SYS_INT_SourceRestore( INT_SOURCE source, bool status )
+{
+    if( status )
+    {
+        SYS_INT_SourceEnable( source );
+    }
+}

@@ -64,6 +64,7 @@ void GPIO_Initialize ( void )
 
     /* PORTB Initialization */
     ANSELBCLR = 0x4; /* Digital Mode Enable */
+    CNPUBSET = 0x100; /* Pull-Up Enable */
 
     /* PORTC Initialization */
     LATC = 0x406; /* Initial Latch Value */

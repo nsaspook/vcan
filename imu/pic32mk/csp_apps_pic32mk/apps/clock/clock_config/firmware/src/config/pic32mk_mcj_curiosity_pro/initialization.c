@@ -95,7 +95,7 @@
 
 /*** DEVCFG3 ***/
 #pragma config USERID =     0xffff
-#pragma config PGL1WAY =    ON
+#pragma config PGL1WAY =    OFF
 #pragma config PMDL1WAY =   ON
 #pragma config IOL1WAY =    ON
 #pragma config PWMLOCK =  OFF

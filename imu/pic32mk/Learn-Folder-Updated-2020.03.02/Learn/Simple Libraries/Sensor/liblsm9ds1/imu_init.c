@@ -16,6 +16,7 @@
 #include "definitions.h"                // SYS function prototypes
 #include "../../Utility/libsimpletools/simpletools.h"
 #include "lsm9ds1.h"
+#include "imu.h"
 
 //i2c *eeBus;                                   // I2C bus ID
 
@@ -82,6 +83,10 @@ int imu_init(int pinSCL, int pinSDIO, int pinAG, int pinM)
 	char aBiasStored[7] = {0};
 	char gBiasStored[7] = {0};
 	//  i2c_in(eeBus, 0b1010000, 63280, 2, biasStamp, 7);
+	get_nvram_str(0, biasStamp);
+	get_nvram_str(7, mBiasStored);
+	get_nvram_str(14, aBiasStored);
+	get_nvram_str(21, gBiasStored);
 	//  i2c_in(eeBus, 0b1010000, 63287, 2, mBiasStored, 7);
 	//  i2c_in(eeBus, 0b1010000, 63294, 2, aBiasStored, 7);
 	//  i2c_in(eeBus, 0b1010000, 63301, 2, gBiasStored, 7);

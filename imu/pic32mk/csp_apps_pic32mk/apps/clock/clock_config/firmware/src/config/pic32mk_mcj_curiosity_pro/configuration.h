@@ -1,18 +1,21 @@
 /*******************************************************************************
-  Board Support Package Header File.
-
-  Company:
-    Microchip Technology Inc.
+  System Configuration Header
 
   File Name:
-    bsp.h
+    configuration.h
 
   Summary:
-    Board Support Package Header File 
+    Build-time configuration header for the system defined by this project.
 
   Description:
-    This file contains constants, macros, type definitions and function
-    declarations 
+    An MPLAB Project may have multiple configurations.  This file defines the
+    build-time options for a single configuration.
+
+  Remarks:
+    This configuration header must not define any prototypes or data
+    definitions (or include any files that do).  It only provides macro
+    definitions for build-time configuration options
+
 *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
@@ -40,76 +43,85 @@
 *******************************************************************************/
 // DOM-IGNORE-END
 
-#ifndef _BSP_H
-#define _BSP_H
+#ifndef CONFIGURATION_H
+#define CONFIGURATION_H
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include "device.h"
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: BSP Macros
-// *****************************************************************************
-// *****************************************************************************
-/*** LED Macros for LED1 ***/
-#define LED1_Toggle() (LATEINV = (1<<13))
-#define LED1_Get() ((PORTE >> 13) & 0x1)
-#define LED1_On() (LATECLR = (1<<13))
-#define LED1_Off() (LATESET = (1<<13))
-
-
-
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Interface Routines
-// *****************************************************************************
-// *****************************************************************************
-
-// *****************************************************************************
-/* Function:
-    void BSP_Initialize(void)
-
-  Summary:
-    Performs the necessary actions to initialize a board
-
-  Description:
-    This function initializes the LED and Switch ports on the board.  This
-    function must be called by the user before using any APIs present on this
-    BSP.
-
-  Precondition:
-    None.
-
-  Parameters:
-    None
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    //Initialize the BSP
-    BSP_Initialize();
-    </code>
-
-  Remarks:
-    None
+/*  This section Includes other configuration headers necessary to completely
+    define this configuration.
 */
 
-void BSP_Initialize(void);
+#include "user.h"
+#include "toolchain_specifics.h"
 
-#endif // _BSP_H
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
 
+extern "C" {
+
+#endif
+// DOM-IGNORE-END
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: System Configuration
+// *****************************************************************************
+// *****************************************************************************
+
+
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: System Service Configuration
+// *****************************************************************************
+// *****************************************************************************
+
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Driver Configuration
+// *****************************************************************************
+// *****************************************************************************
+/* Memory Driver Global Configuration Options */
+#define DRV_MEMORY_INSTANCES_NUMBER          1
+
+/* Memory Driver Instance 0 Configuration */
+#define DRV_MEMORY_INDEX_0                   0
+#define DRV_MEMORY_CLIENTS_NUMBER_IDX0       1
+#define DRV_MEMORY_BUFFER_QUEUE_SIZE_IDX0    1
+#define DRV_MEMORY_DEVICE_START_ADDRESS      0x9d040000
+#define DRV_MEMORY_DEVICE_MEDIA_SIZE         8UL
+#define DRV_MEMORY_DEVICE_PROGRAM_SIZE       512
+#define DRV_MEMORY_DEVICE_ERASE_SIZE         4096
+
+
+
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Middleware & Other Library Configuration
+// *****************************************************************************
+// *****************************************************************************
+
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Application Configuration
+// *****************************************************************************
+// *****************************************************************************
+
+
+//DOM-IGNORE-BEGIN
+#ifdef __cplusplus
+}
+#endif
+//DOM-IGNORE-END
+
+#endif // CONFIGURATION_H
 /*******************************************************************************
  End of File
 */
