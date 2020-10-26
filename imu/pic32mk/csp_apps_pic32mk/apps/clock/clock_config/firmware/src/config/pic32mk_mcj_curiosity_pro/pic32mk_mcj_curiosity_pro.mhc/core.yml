@@ -822,7 +822,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: 'ON'}
+        attributes: {value: 'OFF'}
   - type: Combo
     attributes: {id: CONFIG_ICESEL}
     children:

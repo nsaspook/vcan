@@ -98,7 +98,7 @@ int main(void)
 		// Trouble in River-City, not talking to the IMU
 		UART1_Write((uint8_t *) imu_missing, strlen(imu_missing));
 	} else {
-		if (SWITCH_Get()) {
+		if (!SWITCH_Get()) {
 			imu_calibrateAG();
 			imu_calibrateMag();
 		}

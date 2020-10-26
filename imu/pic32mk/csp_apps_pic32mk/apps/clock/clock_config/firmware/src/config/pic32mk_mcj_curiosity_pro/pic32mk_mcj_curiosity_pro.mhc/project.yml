@@ -13,13 +13,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: C2B88D9215301ECE3DC36E4B82F2791C
-- generatedChecksum: 887FDEE37D20080D788B218F23350148
+- generatedChecksum: DDE138401289227330CA59578971B0CE
   logicalPath: config/pic32mk_mcj_curiosity_pro
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 887FDEE37D20080D788B218F23350148
+  userChecksum: DDE138401289227330CA59578971B0CE
 - generatedChecksum: 124619B8CFF5D04CF72D4FF7FCBDBE3F
   logicalPath: config/pic32mk_mcj_curiosity_pro
   name: interrupts.c
