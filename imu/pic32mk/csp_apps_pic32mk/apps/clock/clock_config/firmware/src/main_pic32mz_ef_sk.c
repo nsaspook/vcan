@@ -100,7 +100,7 @@ int main(void)
 	} else {
 		if (SWITCH_Get()) {
 			imu_calibrateAG();
-//			imu_calibrateMag();
+			imu_calibrateMag();
 		}
 	};
 
