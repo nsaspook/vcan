@@ -148,7 +148,7 @@ int main(void)
 	return( EXIT_FAILURE);
 }
 
-void NVMInitiateOperation(void)
+static void NVMInitiateOperation(void)
 {
 	unsigned int saved_state;
 	int dma_susp; // storage for current DMA state
@@ -172,7 +172,7 @@ void NVMInitiateOperation(void)
 	__builtin_set_isr_state(saved_state); /* Set back to what was before. */
 }
 
-unsigned int NVMWriteWord(void* address, unsigned int data)
+static unsigned int NVMWriteWord(void* address, unsigned int data)
 {
 	unsigned int res = 0;
 	// Load data into NVMDATA register
@@ -198,15 +198,26 @@ unsigned int NVMWriteWord(void* address, unsigned int data)
 	return res;
 }
 
+/*
+ * read data from the virtual program address of the nvram variable
+ */
 uint32_t nvram_in(uint8_t adr)
 {
 	return myflash[adr];
 }
 
+/*
+ * write data to the physical address of the nvram variable
+ * using the flash unlock sequence
+ */
 uint32_t nvram_out(void *adr, uint32_t data)
 {
 	return NVMWriteWord((void*) adr, data);
 }
+
+/*
+ * a few calibrations data specific sized read/write routine
+ */
 
 bool get_nvram_str(uint8_t adr, char * str)
 {
@@ -225,7 +236,9 @@ bool set_nvram_str(uint32_t * adr, char * str)
 	uint8_t sz = 7;
 
 	while (sz--) {
-		done = NVMWriteWord((void *) &adr[sz], (uint32_t) str[sz]);
+		if ((done = NVMWriteWord((void *) &adr[sz], (uint32_t) str[sz]))) {
+			break; // stop on error
+		}
 	}
 	return done;
 }
