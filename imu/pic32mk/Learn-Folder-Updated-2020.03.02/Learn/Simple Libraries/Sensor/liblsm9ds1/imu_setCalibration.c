@@ -26,6 +26,7 @@ int __aBiasRaw[3];
 int __mBiasRaw[3];
 int __pinM;
 char __autoCalc;
+static char tbuf[] = "LSM9DS1";
 
 void imu_setMagCalibration(int mxBias, int myBias, int mzBias)
 {

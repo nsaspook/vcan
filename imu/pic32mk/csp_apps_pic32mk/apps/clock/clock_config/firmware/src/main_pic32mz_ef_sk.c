@@ -65,11 +65,14 @@
 #include "../pic32mk_mcj_curiosity_pro.X/MadgwickAHRS/MadgwickAHRS.h"
 #include "../pic32mk_mcj_curiosity_pro.X/MahonyAHRS/MahonyAHRS.h"
 
+#define rps	0.0174532925f  // degrees per second -> radians per second
+#define NVM_STARTVADDRESS	0x9d070000  // virtual address
+#define NVM_STARTPADDRESS	0x1d070000  // physical address
+
 const uint32_t myflash[256] __attribute__((section("myflash"), address(NVM_STARTVADDRESS), space(prog)));
 uint32_t *pmyflash = (uint32_t *) NVM_STARTPADDRESS;
 
 char cbuffer[256] = "\r\n parallax LSM9DS1 9-axis IMU ";
-char tbuf[] = "LSM9DS1";
 const char imu_missing[] = " MISSING \r\n";
 int gx, gy, gz, ax, ay, az, mx, my, mz;
 
