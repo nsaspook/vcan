@@ -16,6 +16,10 @@ extern "C" {
 #include <stdlib.h>                     // Defines EXIT_FAILURE
 #include "definitions.h"                // SYS function prototypes
 
+#define NVM_STARTVADDRESS	0x9d070000  // virtual address
+#define NVM_STARTPADDRESS	0x1d070000  // physical address
+
+	extern const uint32_t myflash[256] __attribute__((section("myflash"), address(NVM_STARTVADDRESS), space(prog)));
 	extern uint32_t *pmyflash;
 
 	uint32_t nvram_in(uint8_t);

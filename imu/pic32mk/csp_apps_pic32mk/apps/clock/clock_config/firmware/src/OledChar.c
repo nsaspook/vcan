@@ -47,6 +47,7 @@
 #include "OledDriver.h"
 #include "OledChar.h"
 #include "OledGrph.h"
+#include "eadog.h"
 
 /* ------------------------------------------------------------ */
 /*				Local Type Definitions							*/

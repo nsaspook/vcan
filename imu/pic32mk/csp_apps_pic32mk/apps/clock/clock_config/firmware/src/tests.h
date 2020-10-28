@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-
+#define VERSION "IMU software version 0.1A"
 
 
 #ifdef	__cplusplus

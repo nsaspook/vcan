@@ -31,23 +31,16 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include "display_type.h"
 #include "tests.h"
-#include "device.h"
 #include "OledDriver.h"
 #include "OledChar.h"
-	
+
 #define max_strlen	STR_BUF_SIZE-1
 
 #define LCD_CMD_MASK	0x01
 #define LCD_CMD_SET	0x100
 #define LCD_CLEAR_HOME	0x04
-	/*
-	 * for 2MHz SPI clock
-	 */
-#define IS_DELAYSHORT	4
-#define IS_DELAYMED	5
-#define IS_DELAYLONG	800
-#define IS_DELAYPOWERUP	350000
 
 #define EADOGM_CMD_CLR		1
 #define EADOGM_CMD_CURSOR_ON     0b00001111
@@ -61,7 +54,6 @@ extern "C" {
 #define EADOGM_CMD_SET_TABLE2    0b00101010
 #define EADOGM_COLSPAN		16
 
-	void wdtdelay(uint32_t);
 	void init_display(void);
 	void eaDogM_WriteChr(int8_t);
 	void eaDogM_WriteCommand(uint8_t);
@@ -71,8 +63,6 @@ extern "C" {
 	void eaDogM_WriteStringAtPos(uint8_t, uint8_t, char *);
 	void eaDogM_WriteIntAtPos(uint8_t, uint8_t, uint8_t);
 	void eaDogM_WriteByteToCGRAM(uint8_t, uint8_t);
-	void SPI3_Initialize_edogm(void);
-	void SPI3_Initialize_edogs(void);
 	void SPI_ExchangeBuffer(uint8_t *, uint16_t);
 
 #define eaDogM_Cls()             eaDogM_WriteCommand(EADOGM_CMD_CLR)

@@ -83,7 +83,7 @@ extern "C" {
 #define QEI_COUNT_TO_ELECTRICAL_ANGLE            (float)(2*M_PI/ENCODER_PULSES_PER_EREV)
 #define QEI_VELOCITY_SAMPLE_FREQUENCY            (float)((float)PWM_FREQUENCY / (float)QEI_VELOCITY_COUNT_PRESCALER)
 #define QEI_VELOCITY_COUNT_TO_RAD_PER_SEC        (float)(((float)QEI_VELOCITY_SAMPLE_FREQUENCY * 2.0f * M_PI )/((float)ENCODER_PULSES_PER_EREV ))
-#define QEI_PER_MREV				 (double) ((double) ENCODER_PULSES_PER_REV) / 3600.0f
+#define QEI_PER_MREV				 (double) ((double) ENCODER_PULSES_PER_REV) / (double)3600.0
 
 	/*____________________________ Rated speed of the motor in RPM___________________________________________ */
 #define RATED_SPEED_RAD_PER_SEC_ELEC                      (float)(RATED_SPEED_RPM *(2*(float)M_PI/60) * NUM_POLE_PAIRS)

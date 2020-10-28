@@ -64,14 +64,19 @@
 #include "../../../../../../Learn-Folder-Updated-2020.03.02/Learn/Simple Libraries/Sensor/liblsm9ds1/lsm9ds1.h"
 #include "../pic32mk_mcj_curiosity_pro.X/MadgwickAHRS/MadgwickAHRS.h"
 #include "../pic32mk_mcj_curiosity_pro.X/MahonyAHRS/MahonyAHRS.h"
+#include "display_type.h"
+#include "eadog.h" 
+#include "dogm-graphic.h"
+#include "OledDriver.h"
+#include "OledChar.h"
+#include "OledGrph.h"
 
 #define rps	0.0174532925f  // degrees per second -> radians per second
-#define NVM_STARTVADDRESS	0x9d070000  // virtual address
-#define NVM_STARTPADDRESS	0x1d070000  // physical address
 
-const uint32_t myflash[256] __attribute__((section("myflash"), address(NVM_STARTVADDRESS), space(prog)));
+const uint32_t myflash[256] __attribute__((section("myflash"), address(NVM_STARTVADDRESS), space(prog)));//= {0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x00};
 uint32_t *pmyflash = (uint32_t *) NVM_STARTPADDRESS;
 
+const char *build_date = __DATE__, *build_time = __TIME__;
 char cbuffer[256] = "\r\n parallax LSM9DS1 9-axis IMU ";
 const char imu_missing[] = " MISSING \r\n";
 int gx, gy, gz, ax, ay, az, mx, my, mz;
@@ -86,12 +91,41 @@ double g[] = {0.0, 0.0, 0.0}, accel[] = {0.0, 0.0, 0.0};
 
 int main(void)
 {
+	char buffer[STR_BUF_SIZE];
+
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
 
 
 	/* Start system tick timer */
 	CORETIMER_Start();
+
+	/*
+	 * setup graphics display
+	 */
+#ifdef EDOGS
+	CSB_Set();
+	CORETIMER_DelayMs(500);
+	lcd_init();
+	OledInit();
+	OledSetCharUpdate(0); // manual LCD screen updates for speed
+#endif
+
+	if (OSCCONbits.CF) { // check for sysclock proper operation
+		sprintf(buffer, "IMU Clock Error");
+		eaDogM_WriteStringAtPos(0, 0, buffer);
+		sprintf(buffer, "Clock Status %04x", CLKSTAT);
+		eaDogM_WriteStringAtPos(1, 0, buffer);
+		OledUpdate();
+		CORETIMER_DelayMs(5000);
+	} else {
+		sprintf(buffer, "IMU %s %s", build_date, build_time);
+		eaDogM_WriteStringAtPos(0, 0, buffer);
+		sprintf(buffer, "%s", VERSION);
+		eaDogM_WriteStringAtPos(1, 0, buffer);
+		OledUpdate();
+		CORETIMER_DelayMs(500);
+	}
 	/*
 	 * talk to the parallax LSM9DS1 9-axis IMU
 	 */
@@ -100,10 +134,25 @@ int main(void)
 	if (!imu_init(1, 2, 3, 4)) {
 		// Trouble in River-City, not talking to the IMU
 		UART1_Write((uint8_t *) imu_missing, strlen(imu_missing));
+		sprintf(buffer, "IMU SPI init error.");
+		eaDogM_WriteStringAtPos(2, 0, buffer);
+		OledUpdate();
 	} else {
-		if (!SWITCH_Get()) {
+		sprintf(buffer, "IMU SPI init complete.");
+		eaDogM_WriteStringAtPos(2, 0, buffer);
+		OledUpdate();
+		if (SWITCH_Get()) {
+			sprintf(buffer, "IMU calibration starting.");
+			eaDogM_WriteStringAtPos(3, 0, buffer);
+			OledUpdate();
 			imu_calibrateAG();
-			imu_calibrateMag();
+			sprintf(buffer, "IMU AG done. Starting Mag");
+			eaDogM_WriteStringAtPos(4, 0, buffer);
+			OledUpdate();
+			//			imu_calibrateMag();
+			sprintf(buffer, "IMU Mag cal done. IMU ready.");
+			eaDogM_WriteStringAtPos(5, 0, buffer);
+			OledUpdate();
 		}
 	};
 
@@ -201,12 +250,24 @@ static unsigned int NVMWriteWord(void* address, unsigned int data)
 	return res;
 }
 
+uint32_t VirtToPhys(const void* p)
+{
+	return(uint32_t) p < 0 ? ((int) p & 0x1fffffffL) : (unsigned int) ((unsigned char*) p + 0x40000000L);
+}
+
+uint32_t *datavp;
+
 /*
  * read data from the virtual program address of the nvram variable
  */
 uint32_t nvram_in(uint8_t adr)
 {
+	//	uint32_t mydata;
+	//		mydata= VirtToPhys(&myflash[adr]);
+	//		datavp=(uint32_t*) NVM_STARTVADDRESS;
+	//		return (uint32_t) &datavp;
 	return myflash[adr];
+
 }
 
 /*

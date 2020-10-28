@@ -33,27 +33,6 @@ children:
       - type: User
         attributes: {value: DIGITAL}
   - type: String
-    attributes: {id: BSP_PIN_17_FUNCTION_NAME}
-    children:
-    - type: Values
-      children:
-      - type: User
-        attributes: {value: SCK1}
-  - type: String
-    attributes: {id: BSP_PIN_17_FUNCTION_TYPE}
-    children:
-    - type: Values
-      children:
-      - type: User
-        attributes: {value: SS1 (out)}
-  - type: String
-    attributes: {id: BSP_PIN_17_MODE}
-    children:
-    - type: Values
-      children:
-      - type: User
-        attributes: {value: DIGITAL}
-  - type: String
     attributes: {id: BSP_PIN_1_MODE}
     children:
     - type: Values
@@ -402,7 +381,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: DBLANK}
+        attributes: {value: BACKLIGHT}
   - type: String
     attributes: {id: BSP_PIN_45_FUNCTION_TYPE}
     children:
@@ -431,6 +410,27 @@ children:
       children:
       - type: User
         attributes: {value: 'True'}
+  - type: String
+    attributes: {id: BSP_PIN_46_FUNCTION_NAME}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: SCK1}
+  - type: String
+    attributes: {id: BSP_PIN_46_FUNCTION_TYPE}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: SCK1}
+  - type: String
+    attributes: {id: BSP_PIN_46_MODE}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: DIGITAL}
   - type: String
     attributes: {id: BSP_PIN_48_FUNCTION_NAME}
     children:
@@ -787,7 +787,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: ECC_ENABLE}
+        attributes: {value: ECC_DECC_DISABLE_ECCON_LOCKED}
   - type: Combo
     attributes: {id: CONFIG_FPLLICLK}
     children:
@@ -2163,7 +2163,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '4'}
+        attributes: {id: core, value: '128'}
   - type: Hex
     attributes: {id: SYS_PORT_B_CNPU}
     children:
@@ -2431,7 +2431,7 @@ children:
       - type: Boolean
         attributes: {id: visible}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
     - type: Values
       children:
       - type: User
@@ -2535,7 +2535,7 @@ children:
       - type: Boolean
         attributes: {id: visible}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
     - type: Values
       children:
       - type: User
@@ -2907,7 +2907,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: 'true'}
+        attributes: {value: 'false'}
   - type: Boolean
     attributes: {id: USE_PPS_OUTPUT_5}
     children:

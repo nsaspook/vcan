@@ -172,6 +172,9 @@
       <itemPath>../src/OledDriver.c</itemPath>
       <itemPath>../src/OledGrph.c</itemPath>
       <itemPath>../src/eadog.c</itemPath>
+      <itemPath>../src/display_type.c</itemPath>
+      <itemPath>../src/dogm-graphic.c</itemPath>
+      <itemPath>../src/FillPat.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -233,13 +236,13 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/pic32mk_mcj_curiosity_pro;../src/packs/PIC32MK0512MCJ064_DFP;"/>
+                  value="../src;../src/config/pic32mk_mcj_curiosity_pro;../src/packs/PIC32MK0512MCJ064_DFP"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
         <property key="make-warnings-into-errors" value="true"/>
         <property key="optimization-level" value="-O2"/>
-        <property key="place-data-into-section" value="false"/>
+        <property key="place-data-into-section" value="true"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros" value=""/>
@@ -330,7 +333,7 @@
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/pic32mk_mcj_curiosity_pro;../src/packs/PIC32MK0512MCJ064_DFP;"/>
+                  value="../src;../src/config/pic32mk_mcj_curiosity_pro;../src/packs/PIC32MK0512MCJ064_DFP"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>

@@ -63,7 +63,7 @@ void GPIO_Initialize ( void )
     ANSELACLR = 0xc011; /* Digital Mode Enable */
 
     /* PORTB Initialization */
-    ANSELBCLR = 0x4; /* Digital Mode Enable */
+    ANSELBCLR = 0x80; /* Digital Mode Enable */
     CNPUBSET = 0x100; /* Pull-Up Enable */
 
     /* PORTC Initialization */
@@ -104,7 +104,6 @@ void GPIO_Initialize ( void )
     RPF0R = 4;
     RPC7R = 4;
     RPA0R = 3;
-    RPB2R = 3;
     RPA15R = 12;
     RPE0R = 1;
     RPG9R = 2;

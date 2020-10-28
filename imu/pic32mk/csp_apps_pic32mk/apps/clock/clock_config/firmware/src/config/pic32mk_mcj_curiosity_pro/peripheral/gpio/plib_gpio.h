@@ -66,10 +66,6 @@
 #define MOSI1_Get()               ((PORTA >> 0) & 0x1)
 #define MOSI1_PIN                  GPIO_PIN_RA0
 
-/*** Macros for SCK1 pin ***/
-#define SCK1_Get()               ((PORTB >> 2) & 0x1)
-#define SCK1_PIN                  GPIO_PIN_RB2
-
 /*** Macros for MISO1 pin ***/
 #define MISO1_Get()               ((PORTC >> 0) & 0x1)
 #define MISO1_PIN                  GPIO_PIN_RC0
@@ -119,14 +115,18 @@
 #define csPin_ag_Get()               ((PORTE >> 1) & 0x1)
 #define csPin_ag_PIN                  GPIO_PIN_RE1
 
-/*** Macros for DBLANK pin ***/
-#define DBLANK_Set()               (LATCSET = (1<<10))
-#define DBLANK_Clear()             (LATCCLR = (1<<10))
-#define DBLANK_Toggle()            (LATCINV= (1<<10))
-#define DBLANK_OutputEnable()      (TRISCCLR = (1<<10))
-#define DBLANK_InputEnable()       (TRISCSET = (1<<10))
-#define DBLANK_Get()               ((PORTC >> 10) & 0x1)
-#define DBLANK_PIN                  GPIO_PIN_RC10
+/*** Macros for BACKLIGHT pin ***/
+#define BACKLIGHT_Set()               (LATCSET = (1<<10))
+#define BACKLIGHT_Clear()             (LATCCLR = (1<<10))
+#define BACKLIGHT_Toggle()            (LATCINV= (1<<10))
+#define BACKLIGHT_OutputEnable()      (TRISCCLR = (1<<10))
+#define BACKLIGHT_InputEnable()       (TRISCSET = (1<<10))
+#define BACKLIGHT_Get()               ((PORTC >> 10) & 0x1)
+#define BACKLIGHT_PIN                  GPIO_PIN_RC10
+
+/*** Macros for SCK1 pin ***/
+#define SCK1_Get()               ((PORTB >> 7) & 0x1)
+#define SCK1_PIN                  GPIO_PIN_RB7
 
 /*** Macros for SWITCH pin ***/
 #define SWITCH_Set()               (LATBSET = (1<<8))

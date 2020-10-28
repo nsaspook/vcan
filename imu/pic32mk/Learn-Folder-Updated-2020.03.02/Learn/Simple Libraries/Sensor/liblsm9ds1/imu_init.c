@@ -17,6 +17,7 @@
 #include "../../Utility/libsimpletools/simpletools.h"
 #include "lsm9ds1.h"
 #include "imu.h"
+#include "../../eadog.h"
 
 //i2c *eeBus;                                   // I2C bus ID
 
@@ -25,6 +26,8 @@ char __autoCalc = 0;
 
 int imu_init(int pinSCL, int pinSDIO, int pinAG, int pinM)
 {
+	char buffer[STR_BUF_SIZE];
+
 	__pinAG = pinAG;
 	__pinM = pinM;
 	__pinSDIO = pinSDIO;
@@ -92,6 +95,9 @@ int imu_init(int pinSCL, int pinSDIO, int pinAG, int pinM)
 	//  i2c_in(eeBus, 0b1010000, 63301, 2, gBiasStored, 7);
 
 	if (strcmp(biasStamp, "LSM9DS1") == 0) {
+		sprintf(buffer, "LSM9DS1 header");
+		eaDogM_WriteStringAtPos(8, 0, buffer);
+		OledUpdate();
 		if ((mBiasStored[0] = 'm')) {
 			int mxB = (mBiasStored[1] << 8) | mBiasStored[2];
 			int myB = (mBiasStored[3] << 8) | mBiasStored[4];
@@ -115,6 +121,10 @@ int imu_init(int pinSCL, int pinSDIO, int pinAG, int pinM)
 
 			imu_setGyroCalibration(gxB, gyB, gzB);
 		}
+	} else {
+		sprintf(buffer, "No LSM9DS1 header %s", biasStamp);
+		eaDogM_WriteStringAtPos(8, 0, buffer);
+		OledUpdate();
 	}
 
 
