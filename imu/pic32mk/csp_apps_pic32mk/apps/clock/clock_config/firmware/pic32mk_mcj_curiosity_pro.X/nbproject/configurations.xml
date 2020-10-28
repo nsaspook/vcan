@@ -57,6 +57,13 @@
       <itemPath>../src/real.h</itemPath>
       <itemPath>../src/euler.h</itemPath>
       <itemPath>../src/imu.h</itemPath>
+      <itemPath>../src/OledChar.h</itemPath>
+      <itemPath>../src/OledDriver.h</itemPath>
+      <itemPath>../src/OledGrph.h</itemPath>
+      <itemPath>../src/display_type.h</itemPath>
+      <itemPath>../src/dogm-graphic.h</itemPath>
+      <itemPath>../src/eadog.h</itemPath>
+      <itemPath>../src/tests.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -160,6 +167,11 @@
       <itemPath>../src/quat.c</itemPath>
       <itemPath>../src/conv.c</itemPath>
       <itemPath>../src/vec3.c</itemPath>
+      <itemPath>../src/ChrFont0.c</itemPath>
+      <itemPath>../src/OledChar.c</itemPath>
+      <itemPath>../src/OledDriver.c</itemPath>
+      <itemPath>../src/OledGrph.c</itemPath>
+      <itemPath>../src/eadog.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
