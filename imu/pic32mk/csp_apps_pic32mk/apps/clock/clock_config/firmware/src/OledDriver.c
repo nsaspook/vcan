@@ -100,7 +100,7 @@ uint8_t * pbOledFontUser;
  ** so display data is rendered into this offscreen buffer and then
  ** copied to the display.
  */
-uint8_t rgbOledBmp[cbOledDispMax];
+uint8_t  __attribute__((coherent)) rgbOledBmp[cbOledDispMax];
 
 /* ------------------------------------------------------------ */
 /*				Forward Declarations							*/
@@ -112,14 +112,6 @@ void OledDevInit(void);
 void OledDevTerm(void);
 void OledDvrInit(void);
 void OledPutBuffer(int32_t cb, uint8_t * rgbTx);
-
-uint16_t SPI_to_Buffer(uint8_t *, uint16_t, uint8_t *);
-
-void RS_SetLow(void);
-void RS_SetHigh(void);
-void CSB_SetLow(void);
-void CSB_SetHigh(void);
-void SPI_Exchange8bit(uint8_t);
 
 
 /* ------------------------------------------------------------ */
@@ -160,7 +152,7 @@ void OledInit(void)
 	 * init DMA
 	 */
 #ifdef USE_DMA
-	DMA1_Initialize();
+//	DMAC_Initialize();
 	/*
 	 * set RX for DMA mode
 	 */
@@ -519,66 +511,3 @@ void OledPutBuffer(int32_t cb, uint8_t * rgbTx)
 	SPI_to_Buffer(rgbTx, cb, NULL);
 }
 
-uint16_t SPI_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
-{
-	uint16_t bytesWritten = 0;
-
-#ifdef USE_DMA
-	PWM8_LoadDutyValue(1);
-	while (dma_flag);
-
-	SPI1CON0bits.EN = 0;
-	SPI1CON2 = 0x02; //  Received data is not stored in the FIFO
-	SPI1CON0bits.EN = 1;
-	DMA1CON0bits.EN = 0; /* disable DMA to change source count */
-	DMA1SSA = (uint24_t) & dataIn[0];
-	//	DMA1SSZ = (uint16_t) bufLen;
-	DMA1SSZ = 16;
-	DMA1CON0bits.EN = 1;
-	dma_flag = 1;
-	DMA1CON0bits.DMA1SIRQEN = 1; /* start DMA trigger */
-
-	return bufLen;
-#else
-	while (SPI1_IsBusy());
-	LCD_SELECT();
-	LCD_DRAM();
-	if (bufLen != 0) {
-#ifdef EDOGS
-		SPI_ExchangeBuffer(dataIn, bufLen);
-		bytesWritten = bufLen;
-#endif
-#ifdef EDOGM
-		if (dataIn != NULL) {
-			while (bytesWritten < bufLen) {
-				if (dataOut == NULL) {
-					SPI_Exchange8bit(dataIn[bytesWritten]);
-				} else {
-					SPI_Exchange8bit(dataIn[bytesWritten]);
-				}
-				lcd_inc_column(1);
-				bytesWritten++;
-			}
-		} else {
-			if (dataOut != NULL) {
-				while (bytesWritten < bufLen) {
-					SPI_Exchange8bit(0xff);
-					lcd_inc_column(1);
-					bytesWritten++;
-				}
-			}
-		}
-#endif
-	}
-	LCD_UNSELECT();
-	return bytesWritten;
-#endif
-}
-
-void wait_lcd_done(void)
-{
-#ifdef USE_DMA
-	while (dma_flag);
-#endif
-	while (SPI1_IsBusy());
-}

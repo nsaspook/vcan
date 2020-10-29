@@ -157,7 +157,7 @@ int main(void)
 			sprintf(buffer, "IMU AG done. Starting Mag");
 			eaDogM_WriteStringAtPos(4, 0, buffer);
 			OledUpdate();
-			//			imu_calibrateMag();
+			imu_calibrateMag();
 			sprintf(buffer, "IMU Mag cal done. IMU ready.");
 			eaDogM_WriteStringAtPos(5, 0, buffer);
 			OledUpdate();
@@ -193,10 +193,13 @@ int main(void)
 		dtog_Clear();
 		//		sprintf(cbuffer, "Gyro %6d %6d %6d Accel %6d %6d %6d Mag %6d %6d %6d \r\n", gx, gy, gz, ax, ay, az, mx, my, mz);
 		//		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
-		sprintf(cbuffer, "%2.7f %2.7f %2.7f %2.7f ", q0, q1, q2, q3);
+		sprintf(cbuffer, "%2.4f %2.4f %2.4f %2.4f ", q0, q1, q2, q3);
 		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
+		eaDogM_WriteStringAtPos(12, 0, cbuffer);
 		sprintf(cbuffer, "%3.2f %3.2f %3.2f\n\r", accel[0], accel[1], accel[2]);
 		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
+		eaDogM_WriteStringAtPos(13, 0, cbuffer);
+		OledUpdate();
 		//		sprintf(cbuffer, "Linear R acceleration %5.2f %5.2f %5.2f: %5.2f %5.2f %5.2f\n\r", (double) ax, (double) ay, (double) az, accel[0], accel[1], accel[2]);
 		//		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
 		LED_Toggle();

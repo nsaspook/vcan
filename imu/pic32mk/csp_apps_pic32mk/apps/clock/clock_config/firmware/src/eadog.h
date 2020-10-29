@@ -24,10 +24,6 @@
 extern "C" {
 #endif
 
-	//#define EDOGM
-#define EDOGS
-	//#define EDOGS_DEMO
-
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -63,7 +59,6 @@ extern "C" {
 	void eaDogM_WriteStringAtPos(uint8_t, uint8_t, char *);
 	void eaDogM_WriteIntAtPos(uint8_t, uint8_t, uint8_t);
 	void eaDogM_WriteByteToCGRAM(uint8_t, uint8_t);
-	void SPI_ExchangeBuffer(uint8_t *, uint16_t);
 
 #define eaDogM_Cls()             eaDogM_WriteCommand(EADOGM_CMD_CLR)
 #define eaDogM_CursorOn()        eaDogM_WriteCommand(EADOGM_CMD_CURSOR_ON)

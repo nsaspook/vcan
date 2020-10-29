@@ -7,36 +7,6 @@ static void send_lcd_data(uint8_t);
 static void send_lcd_cmd(uint8_t);
 static volatile uint8_t NOPER = 0;
 
-void RS_SetLow(void)
-{
-	RS_Clear(); // display board SPI_EN0
-};
-
-void RS_SetHigh(void)
-{
-	RS_Set();
-};
-
-void CSB_SetLow(void)
-{
-	CSB_Clear(); // display board SPI_EN1
-};
-
-void CSB_SetHigh(void)
-{
-	CSB_Set();
-};
-
-void SPI_Exchange8bit(uint8_t data)
-{
-	SPI1_Write(&data, 1);
-};
-
-void SPI_ExchangeBuffer(uint8_t *data, uint16_t len)
-{
-	SPI1_Write(data, len);
-};
-
 /*
  * Init the EA DOGM163 in 8-bit serial mode
  */

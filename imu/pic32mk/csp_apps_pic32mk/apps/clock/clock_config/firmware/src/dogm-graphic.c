@@ -50,12 +50,6 @@
 uint8_t lcd_current_page = 0;
 uint8_t lcd_current_column = 0;
 
-void RS_SetLow(void);
-void RS_SetHigh(void);
-void CSB_SetLow(void);
-void CSB_SetHigh(void);
-void SPI_Exchange8bit(uint8_t);
-
 /******************************************************************************
  * Changes the internal cursor by s pages
  * s             - number of pages to move
@@ -304,9 +298,9 @@ void lcd_init(void)
 #endif
 #if DISPLAY_TYPE == 240
 //	LCD_SYSTEM_RESET; // software reset
-	BACKLIGHT_Clear();
+	BACKLIGHT_OFF();
 	CORETIMER_DelayMs(2);
-	BACKLIGHT_Set();
+	BACKLIGHT_ON();
 	CORETIMER_DelayMs(150);
 	LCD_SET_COM_END(127); // set last COM electrode
 	LCD_SET_PARTIAL_DISPLAY(0, 127); // set partial display start and end

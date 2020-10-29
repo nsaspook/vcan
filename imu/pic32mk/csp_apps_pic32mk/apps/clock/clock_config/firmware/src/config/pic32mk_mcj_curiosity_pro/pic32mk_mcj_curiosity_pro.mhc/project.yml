@@ -19,7 +19,7 @@ files:
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 0D8259000E4B01ECC04621817B211E54
+  userChecksum: 053CCD860188A51FC32F1B6EF72A9CF2
 - generatedChecksum: A09337F06294D2834DA05D8C5624A92B
   logicalPath: config/pic32mk_mcj_curiosity_pro
   name: interrupts.c

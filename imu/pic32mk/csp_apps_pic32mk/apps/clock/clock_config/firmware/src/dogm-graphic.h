@@ -12,47 +12,9 @@
  * BEGIN CONFIG BLOCK
  *****************************************************************************/
 
-/*
- * use DMA for disply buffer updates
- */
-//#define USE_DMA
 
 
-//Select the display type: DOGS102: 102, DOGM128/DOGL128: 128, DOGM132: 132, DOGXL160: 160, DOGXL240: 240
-//#define DISPLAY_TYPE  240
 
-//Display Orientation: Normal (0) or upside-down (1)?
-#define ORIENTATION_UPSIDEDOWN 0
-
-//Should chip select (CS) be used?
-#define LCD_USE_CHIPSELECT  1
-
-//Use Backlight?  (0: no backlight, 1: backlight (on when pin is high), 2: backlight (on when pin is low))
-#define LCD_USE_BACKLIGHT   0
-
-//A0 Port (CD on DOGS & DOGXL)
-#define PORT_A0  PORTF_OUT
-#define DDR_A0   PORTF_DIR
-#define PIN_A0   1
-
-//Reset Port
-#define PORT_RST PORTF_OUT
-#define DDR_RST  PORTF_DIR
-#define PIN_RST  0
-
-//Backlight Port
-#if LCD_USE_BACKLIGHT != 0
-#define PORT_LED PORTB
-#define DDR_LED  DDRB
-#define PIN_LED  4
-#endif
-
-//Chip select
-#if LCD_USE_CHIPSELECT == 1
-#define PORT_CS  PORTF_OUT
-#define DDR_CS   PORTF_DIR
-#define PIN_CS   4
-#endif
 
 //SPI routines
 //Define a function that initializes  the SPI interface, see below for an example
@@ -72,14 +34,6 @@ extern void init_spi_lcd(void);
 //Include graphic functions, i.e. lcd_draw_image_P, lcd_draw_image_xy_P, lcd_clear_area ? 
 #define LCD_INCLUDE_GRAPHIC_FUNCTIONS  0
 
-/*Example SPI setup (Atmega162)
- *init spi: msb first, update on falling edge , read on rising edge, 9 MHz
- *void init_spi_lcd() {
- *  SPCR = 0 << SPIE | 1 << SPE | 0 << DORD | 1 << MSTR | 1 << CPOL | 1 << CPHA | 0 << SPR1 | 0 << SPR0;
- *  SPSR = 1 << SPI2X;
- *  SPDR = LCD_NO_OP; //Do not use 0 here, only LCD_NOP is allowed!
- *  }
- */
 /*****************************************************************************
  * END CONFIG BLOCK
  *****************************************************************************/
@@ -490,9 +444,9 @@ void lcd_set_contrast(uint8_t value);
 #define BACKLIGHT_ON()       BACKLIGHT_Set();
 #define BACKLIGHT_OFF()      BACKLIGHT_Clear();
 #elif LCD_USE_BACKLIGHT == 2    //inverted
-#define LCD_SET_OUTPUT_LED() DDR_LED |= _BV(PIN_LED)
-#define BACKLIGHT_ON()       PORT_LED &= ~(1<<PIN_LED)
-#define BACKLIGHT_OFF()      PORT_LED |= (1<<PIN_LED)
+#define LCD_SET_OUTPUT_LED() BACKLIGHT_OutputEnable();
+#define BACKLIGHT_ON()       BACKLIGHT_Clear();
+#define BACKLIGHT_OFF()      BACKLIGHT_Set();
 #else
 #define LCD_SET_OUTPUT_LED() 
 #define BACKLIGHT_ON()   
