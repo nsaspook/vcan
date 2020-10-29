@@ -1,5 +1,5 @@
 #include "eadog.h"
-#include <stdio.h>
+//#include <stdio.h>
 #include <string.h>
 
 static void send_lcd_cmd_long(uint8_t); // for display init only

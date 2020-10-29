@@ -16,10 +16,7 @@
 
 #include "lsm9ds1.h"
 #include "imu.h"
-//#include "simpletools.h"
-
-//i2c *eeBus;                                   // I2C bus ID
-
+#include "../../eadog.h"
 
 int __gBiasRaw[3];
 int __aBiasRaw[3];
@@ -31,6 +28,8 @@ static char tbuf[] = "LSM9DS1";
 void imu_setMagCalibration(int mxBias, int myBias, int mzBias)
 {
 	int k;
+	char buffer[STR_BUF_SIZE];
+
 	__mBiasRaw[X_AXIS] = mxBias;
 	__mBiasRaw[Y_AXIS] = myBias;
 	__mBiasRaw[Z_AXIS] = mzBias;
@@ -43,9 +42,12 @@ void imu_setMagCalibration(int mxBias, int myBias, int mzBias)
 		imu_SPIwriteByte(__pinM, OFFSET_X_REG_H_M + (2 * k), msb);
 	}
 
-	//i2c_out(eeBus, 0b1010000, 63280, 2, "LSM9DS1", 7); 
-	set_nvram_str((void*) pmyflash, tbuf);
-	//while (i2c_busy(eeBus, 0b1010000));
+	if (!set_nvram_str((void*) pmyflash, tbuf)) {
+		sprintf(buffer, "Mag LSM9DS1 write failed");
+		eaDogM_WriteStringAtPos(9, 0, buffer);
+		OledUpdate();
+	};
+
 	char biasBuf[7] = {'m', 0, 0, 0, 0, 0, 0};
 
 	for (k = 0; k < 3; k++) {
@@ -54,21 +56,24 @@ void imu_setMagCalibration(int mxBias, int myBias, int mzBias)
 	}
 
 	set_nvram_str((void*) &pmyflash[7], biasBuf);
-	//i2c_out(eeBus, 0b1010000, 63287, 2, biasBuf, 7); 
-	//while (i2c_busy(eeBus, 0b1010000)); 
 
 }
 
 void imu_setAccelCalibration(int axBias, int ayBias, int azBias)
 {
 	int k;
+	char buffer[STR_BUF_SIZE];
+
 	__aBiasRaw[X_AXIS] = axBias;
 	__aBiasRaw[Y_AXIS] = ayBias;
 	__aBiasRaw[Z_AXIS] = azBias;
 
-	//i2c_out(eeBus, 0b1010000, 63280, 2, "LSM9DS1", 7); 
-	set_nvram_str((void*) pmyflash, tbuf);
-	//while (i2c_busy(eeBus, 0b1010000));
+	if (!set_nvram_str((void*) pmyflash, tbuf)) {
+		sprintf(buffer, "accel LSM9DS1 write failed");
+		eaDogM_WriteStringAtPos(9, 0, buffer);
+		OledUpdate();
+	};
+	
 	char biasBuf[7] = {'a', 0, 0, 0, 0, 0, 0};
 
 	for (k = 0; k < 3; k++) {
@@ -77,8 +82,6 @@ void imu_setAccelCalibration(int axBias, int ayBias, int azBias)
 	}
 
 	set_nvram_str((void*) &pmyflash[14], biasBuf);
-	//i2c_out(eeBus, 0b1010000, 63294, 2, biasBuf, 7); 
-	//while (i2c_busy(eeBus, 0b1010000)); 
 
 	__autoCalc |= 0b10;
 }
@@ -86,14 +89,18 @@ void imu_setAccelCalibration(int axBias, int ayBias, int azBias)
 void imu_setGyroCalibration(int gxBias, int gyBias, int gzBias)
 {
 	int k;
+	char buffer[STR_BUF_SIZE];
 
 	__gBiasRaw[X_AXIS] = gxBias;
 	__gBiasRaw[Y_AXIS] = gyBias;
 	__gBiasRaw[Z_AXIS] = gzBias;
 
-	//i2c_out(eeBus, 0b1010000, 63280, 2, "LSM9DS1", 7); 
-	set_nvram_str((void*) pmyflash, tbuf);
-	//while (i2c_busy(eeBus, 0b1010000));
+	if (!set_nvram_str((void*) pmyflash, tbuf)) {
+		sprintf(buffer, "Gyro LSM9DS1 write failed");
+		eaDogM_WriteStringAtPos(9, 0, buffer);
+		OledUpdate();
+	};
+
 	char biasBuf[7] = {'g', 0, 0, 0, 0, 0, 0};
 
 	for (k = 0; k < 3; k++) {
@@ -102,8 +109,6 @@ void imu_setGyroCalibration(int gxBias, int gyBias, int gzBias)
 	}
 
 	set_nvram_str((void*) &pmyflash[21], biasBuf);
-	//i2c_out(eeBus, 0b1010000, 63301, 2, biasBuf, 7); 
-	//while (i2c_busy(eeBus, 0b1010000)); 
 
 	__autoCalc = 0b01;
 }

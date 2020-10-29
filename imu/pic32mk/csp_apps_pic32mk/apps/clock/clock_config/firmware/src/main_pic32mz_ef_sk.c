@@ -59,7 +59,9 @@
 #include <stddef.h>                     // Defines NULL
 #include <stdbool.h>                    // Defines true
 #include <stdlib.h>                     // Defines EXIT_FAILURE
+#include  <sys/kmem.h>
 #include "definitions.h"                // SYS function prototypes
+#include "config/pic32mk_mcj_curiosity_pro/peripheral/dmac/plib_dmac.h"
 #include "imu.h"
 #include "../../../../../../Learn-Folder-Updated-2020.03.02/Learn/Simple Libraries/Sensor/liblsm9ds1/lsm9ds1.h"
 #include "../pic32mk_mcj_curiosity_pro.X/MadgwickAHRS/MadgwickAHRS.h"
@@ -73,8 +75,11 @@
 
 #define rps	0.0174532925f  // degrees per second -> radians per second
 
-const uint32_t myflash[256] __attribute__((section("myflash"), address(NVM_STARTVADDRESS), space(prog)));//= {0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x00};
-uint32_t *pmyflash = (uint32_t *) NVM_STARTPADDRESS;
+//const uint32_t myflash[256] __attribute__((section("myflash"), space(prog))) = {0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x00};
+const volatile uint32_t myflash[4096] __attribute__((section("myflash"), space(prog), address(NVM_STARTVADDRESS))); // = {0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x00};
+uint32_t *pmyflash;
+volatile uint32_t __attribute__((coherent)) read_buffer[256];
+static void NVMerase_page(void);
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 char cbuffer[256] = "\r\n parallax LSM9DS1 9-axis IMU ";
@@ -95,7 +100,7 @@ int main(void)
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
-
+	pmyflash = (uint32_t *) KVA_TO_PA(myflash);
 
 	/* Start system tick timer */
 	CORETIMER_Start();
@@ -141,7 +146,11 @@ int main(void)
 		sprintf(buffer, "IMU SPI init complete.");
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
-		if (SWITCH_Get()) {
+		if (!SWITCH_Get()) {
+			sprintf(buffer, "Erasing IMU CAL data.     ");
+			eaDogM_WriteStringAtPos(9, 0, buffer);
+			OledUpdate();
+			NVMerase_page(); // erase the calibrations data page
 			sprintf(buffer, "IMU calibration starting.");
 			eaDogM_WriteStringAtPos(3, 0, buffer);
 			OledUpdate();
@@ -224,11 +233,38 @@ static void NVMInitiateOperation(void)
 	__builtin_set_isr_state(saved_state); /* Set back to what was before. */
 }
 
+/*
+ * erase the calibration page data
+ */
+static void NVMerase_page(void)
+{
+	// set destination page address
+	NVMADDR = NVM_STARTPADDRESS; // page physical address
+	// define Flash operation
+	NVMCONbits.NVMOP = 0x4; // NVMOP for Page Erase
+	// Enable Flash Write
+	NVMCONbits.WREN = 1;
+	// commence programming
+	NVMInitiateOperation(); // see Example 52-1
+	// Wait for WR bit to clear
+	while (NVMCONbits.WR);
+	// Disable future Flash Write/Erase operations
+	NVMCONbits.WREN = 0;
+	// Check Error Status
+	if (NVMCON & 0x3000) // mask for WRERR and LVDERR bits
+	{
+		// process errors
+	}
+}
+
 static unsigned int NVMWriteWord(void* address, unsigned int data)
 {
-	unsigned int res = 0;
+	unsigned int res = 1;
 	// Load data into NVMDATA register
 	NVMDATA0 = data;
+	NVMDATA1 = data;
+	NVMDATA2 = data;
+	NVMDATA3 = data;
 	// Load address to program into NVMADDR register
 	NVMADDR = (unsigned int) address;
 	// Unlock and Write Word
@@ -245,29 +281,30 @@ static unsigned int NVMWriteWord(void* address, unsigned int data)
 	// Check Error Status
 	if (NVMCON & 0x3000) // mask for WRERR and LVDERR
 	{
-		res = 1; // TESTING CLEAR POSSIBLE ERROR set 0
+		res = 0; // TESTING CLEAR POSSIBLE ERROR set 0
 	}
 	return res;
 }
 
-uint32_t VirtToPhys(const void* p)
+uint32_t nvram_in_addr(void *adr)
 {
-	return(uint32_t) p < 0 ? ((int) p & 0x1fffffffL) : (unsigned int) ((unsigned char*) p + 0x40000000L);
+	DMAC_ChannelTransfer(DMAC_CHANNEL_0, (void*) adr, 1, (void*) KVA_TO_PA(read_buffer), 1, 1);
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0)) {
+	};
+	//	return myflash[adr];
+	return read_buffer[0];
 }
-
-uint32_t *datavp;
 
 /*
  * read data from the virtual program address of the nvram variable
  */
 uint32_t nvram_in(uint8_t adr)
 {
-	//	uint32_t mydata;
-	//		mydata= VirtToPhys(&myflash[adr]);
-	//		datavp=(uint32_t*) NVM_STARTVADDRESS;
-	//		return (uint32_t) &datavp;
+	DMAC_ChannelTransfer(DMAC_CHANNEL_0, (void*) (pmyflash + adr), 1, (void*) KVA_TO_PA(read_buffer), 1, 1);
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0)) {
+	};
 	return myflash[adr];
-
+	//	return read_buffer[0];
 }
 
 /*
@@ -287,22 +324,30 @@ bool get_nvram_str(uint8_t adr, char * str)
 {
 	bool done = true;
 	uint8_t sz = 7;
+	char buffer[STR_BUF_SIZE];
 
 	while (sz--) {
 		str[sz] = (char) nvram_in(adr + sz);
+		sprintf(buffer, "%d   %X %c           ", sz, (unsigned int) &pmyflash[adr + sz], str[sz]);
+		eaDogM_WriteStringAtPos(10, 0, buffer);
+		OledUpdate();
+		CORETIMER_DelayMs(CAL_DIS_MS);
 	}
 	return done;
 }
 
 bool set_nvram_str(uint32_t * adr, char * str)
 {
-	bool done = true;
+	bool done = false;
 	uint8_t sz = 7;
+	char buffer[STR_BUF_SIZE];
 
 	while (sz--) {
-		if ((done = NVMWriteWord((void *) &adr[sz], (uint32_t) str[sz]))) {
-			break; // stop on error
-		}
+		done += NVMWriteWord(&adr[sz], (uint32_t) str[sz]);
+		sprintf(buffer, "%d %d %X %c %c            ", sz, done, (unsigned int) &adr[sz], str[sz], nvram_in_addr(adr + sz));
+		eaDogM_WriteStringAtPos(11, 0, buffer);
+		OledUpdate();
+		CORETIMER_DelayMs(CAL_DIS_MS);
 	}
 	return done;
 }

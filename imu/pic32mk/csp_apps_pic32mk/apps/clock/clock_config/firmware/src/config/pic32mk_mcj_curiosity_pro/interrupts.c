@@ -67,6 +67,7 @@ void UART1_TX_InterruptHandler( void );
 void UART2_FAULT_InterruptHandler( void );
 void UART2_RX_InterruptHandler( void );
 void UART2_TX_InterruptHandler( void );
+void DMA0_InterruptHandler( void );
 void CAN1_InterruptHandler( void );
 
 
@@ -115,6 +116,11 @@ void __ISR(_UART2_RX_VECTOR, ipl1SRS) UART2_RX_Handler (void)
 void __ISR(_UART2_TX_VECTOR, ipl1SRS) UART2_TX_Handler (void)
 {
     UART2_TX_InterruptHandler();
+}
+
+void __ISR(_DMA0_VECTOR, ipl1SRS) DMA0_Handler (void)
+{
+    DMA0_InterruptHandler();
 }
 
 void __ISR(_CAN1_VECTOR, ipl1SRS) CAN1_Handler (void)

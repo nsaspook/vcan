@@ -13,20 +13,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: C2B88D9215301ECE3DC36E4B82F2791C
-- generatedChecksum: DDE138401289227330CA59578971B0CE
+- generatedChecksum: 0D8259000E4B01ECC04621817B211E54
   logicalPath: config/pic32mk_mcj_curiosity_pro
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: DDE138401289227330CA59578971B0CE
-- generatedChecksum: 124619B8CFF5D04CF72D4FF7FCBDBE3F
+  userChecksum: 0D8259000E4B01ECC04621817B211E54
+- generatedChecksum: A09337F06294D2834DA05D8C5624A92B
   logicalPath: config/pic32mk_mcj_curiosity_pro
   name: interrupts.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 124619B8CFF5D04CF72D4FF7FCBDBE3F
+  userChecksum: A09337F06294D2834DA05D8C5624A92B
 - generatedChecksum: null
   logicalPath: ''
   name: main_pic32mz_ef_sk.c
@@ -55,13 +55,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 1C64A0CC3068C1F1EB55F6817B1579A6
-- generatedChecksum: 6FBEA4662863058117CC7193B690B346
+- generatedChecksum: A1F08453A900DDBE34FB833660FDA752
+  logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/dmac
+  name: plib_dmac.c
+  physicalPath: peripheral/dmac
+  security: NON_SECURE
+  type: SOURCE
+  userChecksum: A1F08453A900DDBE34FB833660FDA752
+- generatedChecksum: FADE19B33A576B31ACE7607BA685B21D
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/evic
   name: plib_evic.c
   physicalPath: peripheral/evic
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 6FBEA4662863058117CC7193B690B346
+  userChecksum: FADE19B33A576B31ACE7607BA685B21D
 - generatedChecksum: EED20BE41A398F114AEBB36264B8E540
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/gpio
   name: plib_gpio.c
@@ -111,13 +118,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 4A0E3363502FD80F44339C0531A9F82D
-- generatedChecksum: E15EF71C7D4ACDB96AB821E3C387D581
+- generatedChecksum: B532784CEFAB62B6A409E805778F8511
   logicalPath: config/pic32mk_mcj_curiosity_pro
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: E15EF71C7D4ACDB96AB821E3C387D581
+  userChecksum: B532784CEFAB62B6A409E805778F8511
 - generatedChecksum: 5D5C52527AB1435153DB9B50ADE6B79D
   logicalPath: config/pic32mk_mcj_curiosity_pro
   name: device.h
@@ -153,6 +160,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 3D6EB2BF99796DE22C8637CC7F213F11
+- generatedChecksum: 010E7C6872724F56A94D25C46D528ECA
+  logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/dmac
+  name: plib_dmac.h
+  physicalPath: peripheral/dmac
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: 010E7C6872724F56A94D25C46D528ECA
 - generatedChecksum: E0246C4E5F9A30264822D2D4992446B1
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/evic
   name: plib_evic.h

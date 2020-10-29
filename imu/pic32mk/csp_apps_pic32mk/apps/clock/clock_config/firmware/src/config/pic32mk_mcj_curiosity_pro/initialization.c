@@ -60,6 +60,7 @@
 #pragma config ICESEL =     ICS_PGx2
 #pragma config TRCEN =      OFF
 #pragma config BOOTISA =    MIPS32
+#pragma config FECCCON = ECC_DECC_DISABLE_ECCON_WRITABLE
 #pragma config FSLEEP =     OFF
 #pragma config DBGPER =     PG_ALL
 #pragma config SMCLR =      MCLR_NORM
@@ -96,8 +97,8 @@
 /*** DEVCFG3 ***/
 #pragma config USERID =     0xffff
 #pragma config PGL1WAY =    OFF
-#pragma config PMDL1WAY =   ON
-#pragma config IOL1WAY =    ON
+#pragma config PMDL1WAY =   OFF
+#pragma config IOL1WAY =    OFF
 #pragma config PWMLOCK =  OFF
 
 /*** BF1SEQ ***/
@@ -179,6 +180,8 @@ void SYS_Initialize ( void* data )
 	UART2_Initialize();
 
     CAN1_Initialize();
+
+    DMAC_Initialize();
 
 	SPI2_Initialize();
 

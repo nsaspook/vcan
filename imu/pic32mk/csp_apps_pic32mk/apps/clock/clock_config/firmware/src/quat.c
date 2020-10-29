@@ -75,7 +75,7 @@ void quat_init_axis_v(quat_t *q, const vec3_t *v, real_t a)
 
 void quat_normalize(quat_t *q)
 {
-   vec_normalize(q);
+//   vec_normalize(q);
 }
 
 

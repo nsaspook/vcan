@@ -117,7 +117,7 @@ extern "C" {
 	//#include <propeller.h>
 	//#include "simpletext.h"
 	//#include <driver.h>
-#include <stdio.h>
+//#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 	//#include <cog.h>

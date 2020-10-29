@@ -260,6 +260,7 @@ void OledSetDrawMode(int32_t mod)
 	default:
 		modOledCur = modOledSet;
 		pfnDoRop = OledRopSet;
+		break;
 	}
 }
 

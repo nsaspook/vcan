@@ -81,10 +81,10 @@ int imu_init(int pinSCL, int pinSDIO, int pinAG, int pinM)
 	imu_setMagScale(12);
 
 	//Look for calibrations in EEPROM
-	char biasStamp[7] = {0};
-	char mBiasStored[7] = {0};
-	char aBiasStored[7] = {0};
-	char gBiasStored[7] = {0};
+	char biasStamp[8] = {0};
+	char mBiasStored[8] = {0};
+	char aBiasStored[8] = {0};
+	char gBiasStored[8] = {0};
 	//  i2c_in(eeBus, 0b1010000, 63280, 2, biasStamp, 7);
 	get_nvram_str(0, biasStamp);
 	get_nvram_str(7, mBiasStored);
@@ -94,8 +94,8 @@ int imu_init(int pinSCL, int pinSDIO, int pinAG, int pinM)
 	//  i2c_in(eeBus, 0b1010000, 63294, 2, aBiasStored, 7);
 	//  i2c_in(eeBus, 0b1010000, 63301, 2, gBiasStored, 7);
 
-	if (strcmp(biasStamp, "LSM9DS1") == 0) {
-		sprintf(buffer, "LSM9DS1 header");
+	if (strncmp(biasStamp, "LSM9DS1", 7) == 0) {
+		sprintf(buffer, "LSM9DS1 cal header found");
 		eaDogM_WriteStringAtPos(8, 0, buffer);
 		OledUpdate();
 		if ((mBiasStored[0] = 'm')) {
@@ -122,7 +122,7 @@ int imu_init(int pinSCL, int pinSDIO, int pinAG, int pinM)
 			imu_setGyroCalibration(gxB, gyB, gzB);
 		}
 	} else {
-		sprintf(buffer, "No LSM9DS1 header %s", biasStamp);
+		sprintf(buffer, "No LSM9DS1 cal header found %s", biasStamp);
 		eaDogM_WriteStringAtPos(8, 0, buffer);
 		OledUpdate();
 	}
