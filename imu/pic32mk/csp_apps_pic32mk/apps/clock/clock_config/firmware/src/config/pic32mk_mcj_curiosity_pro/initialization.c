@@ -60,7 +60,6 @@
 #pragma config ICESEL =     ICS_PGx2
 #pragma config TRCEN =      OFF
 #pragma config BOOTISA =    MIPS32
-#pragma config FECCCON = ECC_DECC_DISABLE_ECCON_WRITABLE
 #pragma config FSLEEP =     OFF
 #pragma config DBGPER =     PG_ALL
 #pragma config SMCLR =      MCLR_NORM

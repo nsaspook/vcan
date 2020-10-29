@@ -59,8 +59,6 @@
 
 
 void CORE_TIMER_InterruptHandler( void );
-void SPI1_RX_InterruptHandler( void );
-void SPI1_TX_InterruptHandler( void );
 void UART1_FAULT_InterruptHandler( void );
 void UART1_RX_InterruptHandler( void );
 void UART1_TX_InterruptHandler( void );
@@ -69,6 +67,7 @@ void UART2_RX_InterruptHandler( void );
 void UART2_TX_InterruptHandler( void );
 void DMA0_InterruptHandler( void );
 void CAN1_InterruptHandler( void );
+void DMA7_InterruptHandler( void );
 
 
 
@@ -76,16 +75,6 @@ void CAN1_InterruptHandler( void );
 void __ISR(_CORE_TIMER_VECTOR, ipl1SRS) CORE_TIMER_Handler (void)
 {
     CORE_TIMER_InterruptHandler();
-}
-
-void __ISR(_SPI1_RX_VECTOR, ipl1SRS) SPI1_RX_Handler (void)
-{
-    SPI1_RX_InterruptHandler();
-}
-
-void __ISR(_SPI1_TX_VECTOR, ipl1SRS) SPI1_TX_Handler (void)
-{
-    SPI1_TX_InterruptHandler();
 }
 
 void __ISR(_UART1_FAULT_VECTOR, ipl1SRS) UART1_FAULT_Handler (void)
@@ -126,6 +115,11 @@ void __ISR(_DMA0_VECTOR, ipl1SRS) DMA0_Handler (void)
 void __ISR(_CAN1_VECTOR, ipl1SRS) CAN1_Handler (void)
 {
     CAN1_InterruptHandler();
+}
+
+void __ISR(_DMA7_VECTOR, ipl1SRS) DMA7_Handler (void)
+{
+    DMA7_InterruptHandler();
 }
 
 

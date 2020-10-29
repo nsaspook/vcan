@@ -16,7 +16,14 @@ extern "C" {
 	 * use DMA for display buffer updates
 	 * currently does not work
 	 */
-	//#define USE_DMA
+//#define USE_DMA
+#ifndef USE_DMA
+	/*
+	 * using the interrupt version of the harmony plib SPI driver, 1/4 pure cpu speed
+	 * undefine USE_INT for the pure cpu version
+	 */
+	//#define USE_INT
+#endif
 
 	//Select the display type: DOGS102: 102, DOGM128/DOGL128: 128, DOGM132: 132, DOGXL160: 160, DOGXL240: 240
 #define DISPLAY_TYPE  240
@@ -32,30 +39,6 @@ extern "C" {
 #define EDOGS
 	//#define EDOGS_DEMO
 
-
-	//A0 Port (CD on DOGS & DOGXL)
-#define PORT_A0  PORTF_OUT
-#define DDR_A0   PORTF_DIR
-#define PIN_A0   1
-
-	//Reset Port
-#define PORT_RST PORTF_OUT
-#define DDR_RST  PORTF_DIR
-#define PIN_RST  0
-
-	//Backlight Port
-#if LCD_USE_BACKLIGHT != 0
-#define PORT_LED PORTB
-#define DDR_LED  DDRB
-#define PIN_LED  4
-#endif
-
-	//Chip select
-#if LCD_USE_CHIPSELECT == 1
-#define PORT_CS  PORTF_OUT
-#define DDR_CS   PORTF_DIR
-#define PIN_CS   4
-#endif
 
 #include "definitions.h"                // SYS function prototypes
 #include "config/pic32mk_mcj_curiosity_pro/peripheral/spi/spi_master/plib_spi1_master.h"

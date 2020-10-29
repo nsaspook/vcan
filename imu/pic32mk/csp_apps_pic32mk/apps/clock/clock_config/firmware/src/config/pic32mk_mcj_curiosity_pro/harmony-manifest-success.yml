@@ -4,7 +4,7 @@
 
 
 project: clock_config
-creation_date: 2020-10-29T00:48:13.455-07:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2020-10-29T14:46:22.753-07:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Linux
 mhc_mode: IDE            # [IDE|Standalone|Headless]
 mplabx_version: v5.45        # if MPLAB X plugin only
