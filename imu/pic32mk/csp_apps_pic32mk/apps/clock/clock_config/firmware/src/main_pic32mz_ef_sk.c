@@ -75,10 +75,9 @@
 
 #define rps	0.0174532925f  // degrees per second -> radians per second
 
-//const uint32_t myflash[256] __attribute__((section("myflash"), space(prog))) = {0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x00};
 const volatile uint32_t myflash[4096] __attribute__((section("myflash"), space(prog), address(NVM_STARTVADDRESS))); // = {0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x00};
 uint32_t *pmyflash;
-volatile uint32_t __attribute__((coherent)) read_buffer[256];
+
 static void NVMerase_page(void);
 
 const char *build_date = __DATE__, *build_time = __TIME__;
@@ -286,25 +285,12 @@ static unsigned int NVMWriteWord(void* address, unsigned int data)
 	return res;
 }
 
-uint32_t nvram_in_addr(void *adr)
-{
-	DMAC_ChannelTransfer(DMAC_CHANNEL_0, (void*) adr, 1, (void*) KVA_TO_PA(read_buffer), 1, 1);
-	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0)) {
-	};
-	//	return myflash[adr];
-	return read_buffer[0];
-}
-
 /*
  * read data from the virtual program address of the nvram variable
  */
 uint32_t nvram_in(uint8_t adr)
 {
-	DMAC_ChannelTransfer(DMAC_CHANNEL_0, (void*) (pmyflash + adr), 1, (void*) KVA_TO_PA(read_buffer), 1, 1);
-	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0)) {
-	};
 	return myflash[adr];
-	//	return read_buffer[0];
 }
 
 /*
@@ -344,7 +330,7 @@ bool set_nvram_str(uint32_t * adr, char * str)
 
 	while (sz--) {
 		done += NVMWriteWord(&adr[sz], (uint32_t) str[sz]);
-		sprintf(buffer, "%d %d %X %c %c            ", sz, done, (unsigned int) &adr[sz], str[sz], nvram_in_addr(adr + sz));
+		sprintf(buffer, "%d %d %X %c             ", sz, done, (unsigned int) &adr[sz], str[sz]);
 		eaDogM_WriteStringAtPos(11, 0, buffer);
 		OledUpdate();
 		CORETIMER_DelayMs(CAL_DIS_MS);
