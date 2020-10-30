@@ -154,11 +154,11 @@ int main(void)
 			sprintf(buffer, "IMU calibration starting.");
 			eaDogM_WriteStringAtPos(3, 0, buffer);
 			OledUpdate();
-			imu_calibrateAG();
+			imu_calibrateAG(); // write new cal data
 			sprintf(buffer, "IMU AG done. Starting Mag");
 			eaDogM_WriteStringAtPos(4, 0, buffer);
 			OledUpdate();
-			imu_calibrateMag();
+			imu_calibrateMag(); // write new cal data
 			sprintf(buffer, "IMU Mag cal done. IMU ready.");
 			eaDogM_WriteStringAtPos(5, 0, buffer);
 			OledUpdate();
@@ -307,7 +307,7 @@ uint32_t nvram_out(void *adr, uint32_t data)
 }
 
 /*
- * a few calibrations data specific sized read/write routine
+ * a few calibrations data specific sized read/write routines
  */
 
 bool get_nvram_str(uint8_t adr, char * str)

@@ -1,10 +1,6 @@
 #include "display_type.h"
 #include "dogm-graphic.h"
 
-//#ifdef USE_DMA
-//static uint8_t __attribute__((coherent)) cbuf[16];
-//#endif
-
 void RS_SetLow(void)
 {
 	wait_lcd_done();
@@ -65,7 +61,7 @@ uint16_t SPI_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 #ifdef USE_DMA
 	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
 	DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, SPI1DmaChannelHandler, 0);
-	SPI1CONbits.STXISEL = 1;
+	SPI1CONbits.STXISEL = 1; // set to 0 for byte gaps
 	SPI1CONbits.ENHBUF = 1; // enable FIFO
 	bytesWritten = bufLen;
 	LCD_SELECT();
