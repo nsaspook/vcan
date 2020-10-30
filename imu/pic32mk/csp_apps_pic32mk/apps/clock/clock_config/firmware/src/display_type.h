@@ -14,9 +14,9 @@ extern "C" {
 
 	/*
 	 * use DMA for display buffer updates
-	 * currently does not work
+	 * configure SPI for no interrupts. DMA triggers on the SPITX flag bit
 	 */
-//#define USE_DMA
+#define USE_DMA
 #ifndef USE_DMA
 	/*
 	 * using the interrupt version of the harmony plib SPI driver, 1/4 pure cpu speed

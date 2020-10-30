@@ -14,7 +14,6 @@
 
 
 
-//#include <propeller.h>
 #include "lsm9ds1.h"
 
 
@@ -25,7 +24,6 @@ char __autoCalc;
 
 void imu_calibrateAG()
 {  
-//  unsigned char data[6] = {0, 0, 0, 0, 0, 0};
   unsigned char samples = 0;
   int ii;
   int ax, ay, az, gx, gy, gz;

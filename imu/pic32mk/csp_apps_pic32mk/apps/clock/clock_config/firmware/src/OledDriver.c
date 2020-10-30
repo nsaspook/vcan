@@ -99,6 +99,7 @@ uint8_t * pbOledFontUser;
  ** It isn't possible to read back frome the OLED display device,
  ** so display data is rendered into this offscreen buffer and then
  ** copied to the display.
+ * must be in uncached memory for pic32 DMA so use __attribute__((coherent))
  */
 uint8_t  __attribute__((coherent)) rgbOledBmp[cbOledDispMax];
 

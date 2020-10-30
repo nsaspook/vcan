@@ -20,13 +20,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 0D8259000E4B01ECC04621817B211E54
-- generatedChecksum: 0AE5E89B6B575F921B0AB5FECFD33572
+- generatedChecksum: FC8388168F43644412D63D31114E10DE
   logicalPath: config/pic32mk_mcj_curiosity_pro
   name: interrupts.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 0AE5E89B6B575F921B0AB5FECFD33572
+  userChecksum: FC8388168F43644412D63D31114E10DE
 - generatedChecksum: null
   logicalPath: ''
   name: main_pic32mz_ef_sk.c
@@ -55,20 +55,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 1C64A0CC3068C1F1EB55F6817B1579A6
-- generatedChecksum: 84E5739CAAA5D719888CDB09D3723A43
+- generatedChecksum: 75EEAC733206C93280AA592F652A9DF7
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/dmac
   name: plib_dmac.c
   physicalPath: peripheral/dmac
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 84E5739CAAA5D719888CDB09D3723A43
-- generatedChecksum: 4CF506F5F70FEF3F534064176062D91C
+  userChecksum: 75EEAC733206C93280AA592F652A9DF7
+- generatedChecksum: C10592CEA892C6CE6308BA0CD5FCF272
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/evic
   name: plib_evic.c
   physicalPath: peripheral/evic
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 4CF506F5F70FEF3F534064176062D91C
+  userChecksum: C10592CEA892C6CE6308BA0CD5FCF272
 - generatedChecksum: EED20BE41A398F114AEBB36264B8E540
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/gpio
   name: plib_gpio.c
