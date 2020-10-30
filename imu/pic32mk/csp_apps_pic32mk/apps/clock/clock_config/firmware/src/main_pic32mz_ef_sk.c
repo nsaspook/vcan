@@ -73,6 +73,7 @@
 #include "OledDriver.h"
 #include "OledChar.h"
 #include "OledGrph.h"
+#include "gfx.h"
 
 #define rps	0.0174532925f  // degrees per second -> radians per second
 
@@ -166,7 +167,6 @@ int main(void)
 	};
 
 	while (true) {
-		dtog_Set();
 		if (imu_gyroAvailable()) imu_readGyro(&gx, &gy, &gz);
 		if (imu_accelAvailable()) imu_readAccel(&ax, &ay, &az);
 		if (imu_magAvailable()) imu_readMag(&mx, &my, &mz);
@@ -191,18 +191,22 @@ int main(void)
 		accel[0] = ((double) ax / 5020.0 - g[0])*9.8;
 		accel[1] = ((double) ay / 5020.0 - g[1])*9.8;
 		accel[2] = ((double) az / 5020.0 - g[2])*9.8;
-		dtog_Clear();
-		//		sprintf(cbuffer, "Gyro %6d %6d %6d Accel %6d %6d %6d Mag %6d %6d %6d \r\n", gx, gy, gz, ax, ay, az, mx, my, mz);
-		//		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
+
+		dtog_Set();
+		OledClearBuffer();
+		sprintf(cbuffer, "G%4d %4d %4d A %4d %4d %4d M %4d %4d %4d", gx, gy, gz, ax, ay, az, mx, my, mz);
+		eaDogM_WriteStringAtPos(10, 0, cbuffer);
 		sprintf(cbuffer, "%2.4f %2.4f %2.4f %2.4f ", q0, q1, q2, q3);
 		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
 		eaDogM_WriteStringAtPos(12, 0, cbuffer);
 		sprintf(cbuffer, "%3.2f %3.2f %3.2f\n\r", accel[0], accel[1], accel[2]);
 		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
 		eaDogM_WriteStringAtPos(13, 0, cbuffer);
+		sprintf(cbuffer, "LA %4.4f %4.4f %4.4f", accel[0], accel[1], accel[2]);
+		eaDogM_WriteStringAtPos(14, 0, cbuffer);
+		vector_graph();
 		OledUpdate();
-		//		sprintf(cbuffer, "Linear R acceleration %5.2f %5.2f %5.2f: %5.2f %5.2f %5.2f\n\r", (double) ax, (double) ay, (double) az, accel[0], accel[1], accel[2]);
-		//		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
+		dtog_Clear();
 		LED_Toggle();
 		CORETIMER_DelayMs(100); // 10 Hz updates
 	}

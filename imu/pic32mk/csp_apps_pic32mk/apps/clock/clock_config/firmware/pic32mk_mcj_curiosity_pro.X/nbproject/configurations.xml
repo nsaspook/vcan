@@ -67,6 +67,7 @@
       <itemPath>../src/dogm-graphic.h</itemPath>
       <itemPath>../src/eadog.h</itemPath>
       <itemPath>../src/tests.h</itemPath>
+      <itemPath>../src/gfx.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -181,6 +182,7 @@
       <itemPath>../src/display_type.c</itemPath>
       <itemPath>../src/dogm-graphic.c</itemPath>
       <itemPath>../src/FillPat.c</itemPath>
+      <itemPath>../src/gfx.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
