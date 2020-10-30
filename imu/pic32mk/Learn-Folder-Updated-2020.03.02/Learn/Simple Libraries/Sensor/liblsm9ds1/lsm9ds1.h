@@ -10,6 +10,7 @@
  *
  * @brief This Propeller C library was created for the Parallax 9-axis IMU Sensor, based
  * on the STMicroelectronics LSM9DS1 inertial motion sensor chip.
+ * fgb mod for pic32mk with flash NVRAM
  */
 
 
@@ -122,6 +123,7 @@ extern "C" {                                                 // Compile for C
 #define  FAHRENHEIT         1
 #define  KELVIN             2
 
+#define A_HIRES		0x80
 
 /**
  * @brief Initializes the LSM9DS1 IMU module.
@@ -129,7 +131,8 @@ extern "C" {                                                 // Compile for C
  * @details This function initializes the LSM9DS1 IMU module.  It sets
  * the chip to 3-wire SPI mode and starts up the accelerometer, 
  * gyroscope, and magnetometer. It also looks for calibration (bias) data
- * stored in addresses 63280-63307 of EEPROM and applies them if found.
+ * 
+ * fgb mod for calibration (bias) data in NVRAM myflash variable
  *
  * @note Defaults the Accelerometer scale to +/-8g, the Gryoscope 
  * scale to +/- 500 DPS, and the Magnetometer scale to +/-12 gauss.
@@ -155,7 +158,7 @@ int imu_init(int pinSCL, int pinSDIO, int pinAG, int pinM);
  * them, scales them to  gs and deg/s, respectively, and then passes the biases to variables in the library
  * for subtraction from all subsequent data.  Results in a more accurate measurement in general and can
  * remove errors due to imprecise or varying initial placement.  The biases are also stored in addresses
- * 63280-63307 of EEPROM.
+ * NVRAM myflash variable
  *
  * @note Accel/Gyro Calibration values are NOT stored in the LSM9DS1.  They can be retireved and set using other
  * functions in this library.
@@ -172,7 +175,7 @@ void imu_calibrateAG( void );
  * remove errors due to imprecise or varying initial placement.  The calibration 
  * collects measurements for ~30 seconds (1200 samples) and uses that data to determine
  * the biases for each axis of the magnetometer.  The biases are also stored in addresses
- * 63280-63307 of EEPROM.
+ * NVRAM myflash variable
  *
  * @note Mag Calibration values ARE stored in the LSM9DS1 and variables that can be retireved and set using other
  * functions in this library.

@@ -60,6 +60,7 @@
 #include <stddef.h>                     // Defines NULL
 #include <stdbool.h>                    // Defines true
 #include <stdlib.h>                     // Defines EXIT_FAILURE
+#include <limits.h>
 #include  <sys/kmem.h>
 #include "definitions.h"                // SYS function prototypes
 #include "config/pic32mk_mcj_curiosity_pro/peripheral/dmac/plib_dmac.h"
@@ -164,6 +165,7 @@ int main(void)
 			eaDogM_WriteStringAtPos(5, 0, buffer);
 			OledUpdate();
 		}
+		
 	};
 
 	while (true) {
@@ -188,9 +190,9 @@ int main(void)
 		 * compensate accelerometer readings with the expected direction of gravity 
 		 * https://diydrones.com/forum/topics/accelerometer-sensor-gravity-compensation
 		 */
-		accel[0] = ((double) ax / 5020.0 - g[0])*9.8;
-		accel[1] = ((double) ay / 5020.0 - g[1])*9.8;
-		accel[2] = ((double) az / 5020.0 - g[2])*9.8;
+		accel[0] = ((double) ax / SHRT_MAX - g[0])*9.8;
+		accel[1] = ((double) ay / SHRT_MAX - g[1])*9.8;
+		accel[2] = ((double) az / SHRT_MAX - g[2])*9.8;
 
 		dtog_Set();
 		OledClearBuffer();
@@ -201,8 +203,9 @@ int main(void)
 		eaDogM_WriteStringAtPos(12, 0, cbuffer);
 		sprintf(cbuffer, "%3.2f %3.2f %3.2f\n\r", accel[0], accel[1], accel[2]);
 		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
-		eaDogM_WriteStringAtPos(13, 0, cbuffer);
 		sprintf(cbuffer, "LA %4.4f %4.4f %4.4f", accel[0], accel[1], accel[2]);
+		eaDogM_WriteStringAtPos(13, 0, cbuffer);
+		sprintf(cbuffer, "GR %4.4f %4.4f %4.4f", g[0], g[1], g[2]);
 		eaDogM_WriteStringAtPos(14, 0, cbuffer);
 		vector_graph();
 		OledUpdate();

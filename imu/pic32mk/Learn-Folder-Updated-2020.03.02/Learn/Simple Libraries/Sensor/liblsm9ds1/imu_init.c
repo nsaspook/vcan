@@ -19,8 +19,6 @@
 #include "imu.h"
 #include "../../eadog.h"
 
-//i2c *eeBus;                                   // I2C bus ID
-
 int __pinAG, __pinM, __pinSDIO, __pinSCL;
 char __autoCalc = 0;
 
@@ -76,23 +74,19 @@ int imu_init(int pinSCL, int pinSDIO, int pinAG, int pinM)
 	imu_SPIwriteByte(__pinM, CTRL_REG5_M, 0x00);
 
 	//Set Scales
-	imu_setGyroScale(500);
-	imu_setAccelScale(8);
-	imu_setMagScale(12);
+	imu_setGyroScale(500); // 500
+	imu_setAccelScale(4);  // 8
+	imu_setMagScale(12);   // 12
 
-	//Look for calibrations in EEPROM
+	//Look for calibrations in NVRAM
 	char biasStamp[8] = {0};
 	char mBiasStored[8] = {0};
 	char aBiasStored[8] = {0};
 	char gBiasStored[8] = {0};
-	//  i2c_in(eeBus, 0b1010000, 63280, 2, biasStamp, 7);
 	get_nvram_str(0, biasStamp);
 	get_nvram_str(7, mBiasStored);
 	get_nvram_str(14, aBiasStored);
 	get_nvram_str(21, gBiasStored);
-	//  i2c_in(eeBus, 0b1010000, 63287, 2, mBiasStored, 7);
-	//  i2c_in(eeBus, 0b1010000, 63294, 2, aBiasStored, 7);
-	//  i2c_in(eeBus, 0b1010000, 63301, 2, gBiasStored, 7);
 
 	if (strncmp(biasStamp, "LSM9DS1", 7) == 0) {
 		sprintf(buffer, "LSM9DS1 cal header found");
