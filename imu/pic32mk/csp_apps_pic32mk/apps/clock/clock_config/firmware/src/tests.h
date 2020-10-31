@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-#define VERSION "IMU software version 0.1A"
+	static const char VERSION[] = "IMU software version 0.2A";
 
 
 #ifdef	__cplusplus

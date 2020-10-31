@@ -16,10 +16,10 @@ extern "C" {
 #include "OledGrph.h"
 #include "../pic32mk_mcj_curiosity_pro.X/MadgwickAHRS/MadgwickAHRS.h"
 
-#define sine_res	3600
-#define sinea		0.0
-#define	sineb		1200.0
-#define sinec		2400.0
+	static const double sine_res = 3600.0;
+	static const double sinea = 0.0;
+	static const double sineb = 1200.0;
+	static const double sinec = 2400.0;
 
 	void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
 	void vector_graph(void);

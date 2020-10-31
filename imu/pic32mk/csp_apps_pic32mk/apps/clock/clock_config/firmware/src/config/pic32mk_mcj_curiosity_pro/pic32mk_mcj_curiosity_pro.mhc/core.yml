@@ -1139,14 +1139,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0'}
+        attributes: {id: core, value: '1'}
   - type: Hex
     attributes: {id: DCH7_ECON_VALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0'}
+        attributes: {id: core, value: '9488'}
   - type: Boolean
     attributes: {id: DMA0_INTERRUPT_ENABLE}
     children:
@@ -1351,6 +1351,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: CORE_TIMER_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_0_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '2'}
+  - type: Hex
+    attributes: {id: EVIC_0_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '8'}
   - type: Boolean
     attributes: {id: EVIC_167_ENABLE}
     children:
@@ -1372,6 +1386,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: CAN1_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_167_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '4'}
+  - type: Hex
+    attributes: {id: EVIC_167_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '268435456'}
   - type: Boolean
     attributes: {id: EVIC_185_ENABLE}
     children:
@@ -1589,6 +1617,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: UART1_RX_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_39_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: Hex
+    attributes: {id: EVIC_39_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '67108864'}
   - type: Boolean
     attributes: {id: EVIC_40_ENABLE}
     children:
@@ -1610,6 +1652,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: UART1_TX_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_40_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '3'}
+  - type: Hex
+    attributes: {id: EVIC_40_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '12'}
   - type: Boolean
     attributes: {id: EVIC_4_ENABLE_GENERATE}
     children:
@@ -1792,6 +1848,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: UART2_TX_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_58_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '3'}
+  - type: Hex
+    attributes: {id: EVIC_58_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '786432'}
   - type: Boolean
     attributes: {id: EVIC_59_ENABLE}
     children:
@@ -1960,6 +2030,8 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'true'}
+      - type: User
+        attributes: {value: 'true'}
   - type: Boolean
     attributes: {id: FLASH_CONTROL_INTERRUPT_ENABLE_UPDATE}
     children:

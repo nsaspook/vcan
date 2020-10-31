@@ -114,22 +114,10 @@
 extern "C" {
 #endif
 
-	//#include <propeller.h>
-	//#include "simpletext.h"
-	//#include <driver.h>
-//#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-	//#include <cog.h>
 #include <ctype.h>
-	//#include <unistd.h>
-	//#include <sys/stat.h>
-	//#include <dirent.h>
-	//#include <sys/sd.h>
 #include <math.h>
-	//#include "simplei2c.h"
-
-
 
 	/**
 	 * @brief Propeller system clock ticks in 1 millisecond (ms).

@@ -75,19 +75,12 @@
 #include "OledChar.h"
 #include "OledGrph.h"
 #include "gfx.h"
+#include "magic.h"
 
-#define rps	0.0174532925f  // degrees per second -> radians per second
-
-const volatile uint32_t myflash[4096] __attribute__((section("myflash"), space(prog), address(NVM_STARTVADDRESS))); // = {0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x00};
 uint32_t *pmyflash;
-
 static void NVMerase_page(void);
-
-const char *build_date = __DATE__, *build_time = __TIME__;
 char cbuffer[256] = "\r\n parallax LSM9DS1 9-axis IMU ";
-const char imu_missing[] = " MISSING \r\n";
 int gx, gy, gz, ax, ay, az, mx, my, mz;
-
 double g[] = {0.0, 0.0, 0.0}, accel[] = {0.0, 0.0, 0.0};
 
 // *****************************************************************************
@@ -131,7 +124,6 @@ int main(void)
 		sprintf(buffer, "%s", VERSION);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
 		OledUpdate();
-		CORETIMER_DelayMs(500);
 	}
 	/*
 	 * talk to the parallax LSM9DS1 9-axis IMU
@@ -165,8 +157,9 @@ int main(void)
 			eaDogM_WriteStringAtPos(5, 0, buffer);
 			OledUpdate();
 		}
-		
+
 	};
+	CORETIMER_DelayMs(500);
 
 	while (true) {
 		if (imu_gyroAvailable()) imu_readGyro(&gx, &gy, &gz);

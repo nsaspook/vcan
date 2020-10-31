@@ -13,8 +13,6 @@
  */
 
 
-
-//#include "simpletools.h"
 #include "lsm9ds1.h"
 #include "config/pic32mk_mcj_curiosity_pro/peripheral/gpio/plib_gpio.h"
 #include "config/pic32mk_mcj_curiosity_pro/peripheral/spi/spi_master/plib_spi2_master.h"
@@ -33,14 +31,14 @@ void imu_SPIwriteByte(unsigned char csPin, unsigned char subAddress, unsigned ch
 		csPin_m_Clear();
 	else
 		csPin_ag_Clear();
-	
+
 	SPI2_Write(&tmp, 1);
 	SPI2_Write(&data, 1);
-	if (csPin == __pinM) 
+	if (csPin == __pinM)
 		csPin_m_Set();
 	else
 		csPin_ag_Set();
-	
+
 }
 
 

@@ -1,11 +1,9 @@
 #include "eadog.h"
-//#include <stdio.h>
 #include <string.h>
 
 static void send_lcd_cmd_long(uint8_t); // for display init only
 static void send_lcd_data(uint8_t);
 static void send_lcd_cmd(uint8_t);
-static volatile uint8_t NOPER = 0;
 
 /*
  * Init the EA DOGM163 in 8-bit serial mode

@@ -32,7 +32,8 @@ extern "C" {
 #include "OledDriver.h"
 #include "OledChar.h"
 
-#define max_strlen	STR_BUF_SIZE-1
+	static const uint8_t max_strlen = STR_BUF_SIZE - 1;
+	static const uint8_t EADOGM_COLSPAN = 16;
 
 #define LCD_CMD_MASK	0x01
 #define LCD_CMD_SET	0x100
@@ -48,7 +49,6 @@ extern "C" {
 #define EADOGM_CMD_SELECT_R0     0b00011000
 #define EADOGM_CMD_SELECT_R1     0b00010000
 #define EADOGM_CMD_SET_TABLE2    0b00101010
-#define EADOGM_COLSPAN		16
 
 	void init_display(void);
 	void eaDogM_WriteChr(int8_t);

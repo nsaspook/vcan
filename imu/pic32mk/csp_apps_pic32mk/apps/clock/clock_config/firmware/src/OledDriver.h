@@ -59,7 +59,7 @@
 
 #define	cbOledChar		8		//font glyph definitions is 8 bytes long
 #define	chOledUserMax		0x20	//number of character defs in user font table
-#define	cbOledFontUser		(chOledUserMax*cbOledChar)
+#define	cbOledFontUser		(chOledUserMax*cbOledChar) // used for array size
 
 /* Graphics drawing modes.
  */

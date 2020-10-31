@@ -71,7 +71,7 @@ void CAN1_InterruptHandler( void );
 
 
 /* All the handlers are defined here.  Each will call its PLIB-specific function. */
-void __ISR(_CORE_TIMER_VECTOR, ipl1SRS) CORE_TIMER_Handler (void)
+void __ISR(_CORE_TIMER_VECTOR, ipl2SRS) CORE_TIMER_Handler (void)
 {
     CORE_TIMER_InterruptHandler();
 }
@@ -86,7 +86,7 @@ void __ISR(_UART1_RX_VECTOR, ipl1SRS) UART1_RX_Handler (void)
     UART1_RX_InterruptHandler();
 }
 
-void __ISR(_UART1_TX_VECTOR, ipl1SRS) UART1_TX_Handler (void)
+void __ISR(_UART1_TX_VECTOR, ipl3SRS) UART1_TX_Handler (void)
 {
     UART1_TX_InterruptHandler();
 }
@@ -101,7 +101,7 @@ void __ISR(_UART2_RX_VECTOR, ipl1SRS) UART2_RX_Handler (void)
     UART2_RX_InterruptHandler();
 }
 
-void __ISR(_UART2_TX_VECTOR, ipl1SRS) UART2_TX_Handler (void)
+void __ISR(_UART2_TX_VECTOR, ipl3SRS) UART2_TX_Handler (void)
 {
     UART2_TX_InterruptHandler();
 }
@@ -111,7 +111,7 @@ void __ISR(_DMA0_VECTOR, ipl6SRS) DMA0_Handler (void)
     DMA0_InterruptHandler();
 }
 
-void __ISR(_CAN1_VECTOR, ipl1SRS) CAN1_Handler (void)
+void __ISR(_CAN1_VECTOR, ipl4SRS) CAN1_Handler (void)
 {
     CAN1_InterruptHandler();
 }

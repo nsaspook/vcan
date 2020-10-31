@@ -12,8 +12,6 @@
  * on the STMicroelectronics LSM9DS1 inertial motion sensor chip.
  */
 
-
-//#include "simpletools.h"
 #include "lsm9ds1.h"
 #include "config/pic32mk_mcj_curiosity_pro/peripheral/gpio/plib_gpio.h"
 #include "config/pic32mk_mcj_curiosity_pro/peripheral/spi/spi_master/plib_spi2_master.h"

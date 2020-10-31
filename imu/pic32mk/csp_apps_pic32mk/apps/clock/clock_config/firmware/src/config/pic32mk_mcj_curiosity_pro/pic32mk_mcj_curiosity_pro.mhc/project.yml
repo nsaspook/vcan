@@ -20,13 +20,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 0D8259000E4B01ECC04621817B211E54
-- generatedChecksum: FC8388168F43644412D63D31114E10DE
+- generatedChecksum: 697D5A081B3B8A9B03590B7D9F924D51
   logicalPath: config/pic32mk_mcj_curiosity_pro
   name: interrupts.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: FC8388168F43644412D63D31114E10DE
+  userChecksum: 697D5A081B3B8A9B03590B7D9F924D51
 - generatedChecksum: null
   logicalPath: ''
   name: main_pic32mz_ef_sk.c
@@ -62,13 +62,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 75EEAC733206C93280AA592F652A9DF7
-- generatedChecksum: C10592CEA892C6CE6308BA0CD5FCF272
+- generatedChecksum: 4006514C3315F8BC1517E3C0C9581943
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/evic
   name: plib_evic.c
   physicalPath: peripheral/evic
   security: NON_SECURE
   type: SOURCE
-  userChecksum: C10592CEA892C6CE6308BA0CD5FCF272
+  userChecksum: 4006514C3315F8BC1517E3C0C9581943
 - generatedChecksum: EED20BE41A398F114AEBB36264B8E540
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/gpio
   name: plib_gpio.c

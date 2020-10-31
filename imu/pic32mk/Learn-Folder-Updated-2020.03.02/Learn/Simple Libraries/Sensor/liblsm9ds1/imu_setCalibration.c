@@ -16,6 +16,7 @@
 
 #include "lsm9ds1.h"
 #include "imu.h"
+#include "../../nvram_page.h"
 #include "../../eadog.h"
 
 int __gBiasRaw[3];
