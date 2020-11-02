@@ -13,6 +13,13 @@ void vector_graph(void)
 	static double theta1 = sinea, theta2 = sineb, theta3 = sinec;
 	static double ra, si, co;
 
+	OledMoveTo(60, 0);
+	OledLineTo(180, 0);
+	OledLineTo(180, 70);
+	OledMoveTo(60, 0);
+	OledLineTo(60, 70);
+	OledLineTo(180, 70);
+	
 	//Starting point
 	xn1 = x1;
 	yn1 = y1;
