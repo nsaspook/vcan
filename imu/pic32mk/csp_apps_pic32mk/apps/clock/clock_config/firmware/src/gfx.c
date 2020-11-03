@@ -13,19 +13,21 @@ void vector_graph(void)
 	static double theta1 = sinea, theta2 = sineb, theta3 = sinec;
 	static double ra, si, co;
 
-	OledMoveTo(60, 0);
-	OledLineTo(180, 0);
-	OledLineTo(180, 70);
-	OledMoveTo(60, 0);
-	OledLineTo(60, 70);
-	OledLineTo(180, 70);
+	double t1 = 50.0 * q1, t2 = 20.0 * q2, t3 = 20.0 * q3, t4 = 10.0 * q0;
 
-	OledMoveTo(80, 20);
-	OledLineTo(160, 20);
-	OledLineTo(160, 50);
-	OledMoveTo(80, 20);
-	OledLineTo(80, 50);
-	OledLineTo(160, 50);
+	OledMoveTo(60 + t1, 0 + t4);
+	OledLineTo(180 - t1, 0 + t4);
+	OledLineTo(180 - t1, 70 - t4);
+	OledMoveTo(60 + t1, 0 + t4);
+	OledLineTo(60 + t1, 70 - t4);
+	OledLineTo(180 - t1, 70 - t4);
+
+	OledMoveTo(80 + t3, 20 + t2);
+	OledLineTo(160 - t3, 20 + t2);
+	OledLineTo(160 - t3, 50 - t2);
+	OledMoveTo(80 + t3, 20 + t2);
+	OledLineTo(80 + t3, 50 - t2);
+	OledLineTo(160 - t3, 50 - t2);
 
 	//Starting point
 	xn1 = x1;
