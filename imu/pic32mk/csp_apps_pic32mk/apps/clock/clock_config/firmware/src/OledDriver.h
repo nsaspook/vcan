@@ -43,8 +43,8 @@
 /* ------------------------------------------------------------ */
 #if DISPLAY_TYPE == 240                 // Autor: Robert Steigemann
 #define	cbOledDispMax		3840		//max number of bytes in display buffer
-#define	ccolOledMax		240		//number of display columns
-#define	crowOledMax		128		//number of display rows
+#define	ccolOledMax		240l		//number of display columns
+#define	crowOledMax		128l		//number of display rows
 #define	cpagOledMax		16		//number of display memory pages
 #define STR_BUF_SIZE		160		//number of chars for display strings
 #endif

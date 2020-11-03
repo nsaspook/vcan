@@ -9,7 +9,7 @@ void line_rot(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
 void vector_graph(void)
 {
 	static uint32_t irow = 0;
-	static int32_t x2 = 100, x1 = 130, y1 = 35, xn1, yn1, xn2, yn2, r;
+	static int32_t x2 = 90, x1 = 120, y1 = 35, xn1, yn1, xn2, yn2, r;
 	static double theta1 = sinea, theta2 = sineb, theta3 = sinec;
 	static double ra, si, co;
 
@@ -19,7 +19,14 @@ void vector_graph(void)
 	OledMoveTo(60, 0);
 	OledLineTo(60, 70);
 	OledLineTo(180, 70);
-	
+
+	OledMoveTo(80, 20);
+	OledLineTo(160, 20);
+	OledLineTo(160, 50);
+	OledMoveTo(80, 20);
+	OledLineTo(80, 50);
+	OledLineTo(160, 50);
+
 	//Starting point
 	xn1 = x1;
 	yn1 = y1;
