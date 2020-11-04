@@ -21,8 +21,8 @@
 //---------------------------------------------------------------------------------------------------
 // Definitions
 
-static const double sampleFreq = 400.0f; // sample frequency in Hz
-#define betaDef		0.025f		// 2 * proportional gain
+static const double sampleFreq = 800.0f; // sample frequency in Hz
+#define betaDef		0.05f		// 2 * proportional gain
 
 //---------------------------------------------------------------------------------------------------
 // Variable definitions
