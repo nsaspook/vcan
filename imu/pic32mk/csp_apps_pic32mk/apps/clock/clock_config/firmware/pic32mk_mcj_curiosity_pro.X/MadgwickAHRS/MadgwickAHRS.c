@@ -21,14 +21,15 @@
 //---------------------------------------------------------------------------------------------------
 // Definitions
 
-static const double sampleFreq = 1300.0f; // sample frequency in Hz
-#define betaDef		0.015f		// 2 * proportional gain
+static const double sampleFreq = 1000.0f; // sample frequency in Hz
+#define betaDef		2.01f		// 2 * proportional gain
 
 //---------------------------------------------------------------------------------------------------
 // Variable definitions
 
 volatile float beta = betaDef; // 2 * proportional gain (Kp)
 volatile float q0 = 1.0f, q1 = 0.0f, q2 = 0.0f, q3 = 0.0f; // quaternion of sensor frame relative to auxiliary frame
+volatile float roll, pitch, yaw;
 
 //---------------------------------------------------------------------------------------------------
 // Function declarations
@@ -136,6 +137,7 @@ void MadgwickAHRSupdate(float gx, float gy, float gz, float ax, float ay, float 
 	q1 *= recipNorm;
 	q2 *= recipNorm;
 	q3 *= recipNorm;
+	Madgwick_computeAngles();
 }
 
 //---------------------------------------------------------------------------------------------------
@@ -208,6 +210,7 @@ void MadgwickAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, flo
 	q1 *= recipNorm;
 	q2 *= recipNorm;
 	q3 *= recipNorm;
+	Madgwick_computeAngles();
 }
 
 const int expensive = 0;
@@ -233,6 +236,13 @@ float invSqrt(float x)
 		conv.f *= (threehalfs - (x2 * conv.f * conv.f));
 		return conv.f;
 	}
+}
+
+void Madgwick_computeAngles(void)
+{
+	roll = atan2(q0*q1 + q2*q3, 0.5f - q1*q1 - q2*q2);
+	pitch = asin(-2.0f * (q1*q3 - q0*q2));
+	yaw = atan2(q1*q2 + q0*q3, 0.5f - q2*q2 - q3*q3);
 }
 
 //====================================================================================================
