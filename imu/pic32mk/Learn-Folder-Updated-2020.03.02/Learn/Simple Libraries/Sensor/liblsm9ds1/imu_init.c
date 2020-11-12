@@ -75,7 +75,7 @@ int imu_init(int pinSCL, int pinSDIO, int pinAG, int pinM)
 
 	//Set Scales
 	imu_setGyroScale(500); // 500
-	imu_setAccelScale(4);  // 8
+	imu_setAccelScale(8);  // 8
 	imu_setMagScale(12);   // 12
 
 	//Look for calibrations in NVRAM
