@@ -204,7 +204,7 @@ int main(void)
 		OledUpdate();
 		dtog_Clear();
 		LED_Toggle();
-		CORETIMER_DelayMs(1); // 50 Hz updates
+		CORETIMER_DelayMs(5); // 100 Hz updates, processing takes 5ms
 	}
 
 	/* Execution should not come here during normal operation */
