@@ -82,6 +82,7 @@ static void NVMerase_page(void);
 char cbuffer[256] = "\r\n parallax LSM9DS1 9-axis IMU ";
 int gx, gy, gz, ax, ay, az, mx, my, mz;
 double g[] = {0.0, 0.0, 0.0}, accel[] = {0.0, 0.0, 0.0};
+extern CORETIMER_OBJECT coreTmr;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -202,9 +203,17 @@ int main(void)
 		eaDogM_WriteStringAtPos(14, 0, cbuffer);
 		vector_graph();
 		OledUpdate();
-		dtog_Clear();
 		LED_Toggle();
-		CORETIMER_DelayMs(5); // 100 Hz updates, processing takes 5ms
+		{
+			//	100 Hz updates, processing takes 5ms
+			uint32_t tickStart, delayTicks;
+			tickStart = coreTmr.tickCounter;
+			delayTicks = (1000 * update_delay) / CORE_TIMER_INTERRUPT_PERIOD_IN_US; // Number of tick interrupts to wait for the delay
+			dtog_Clear();
+			while ((coreTmr.tickCounter - tickStart) < delayTicks) {
+				// extra processing loop while waiting for clock time to expire
+			}
+		}
 	}
 
 	/* Execution should not come here during normal operation */
