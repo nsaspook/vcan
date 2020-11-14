@@ -1,5 +1,7 @@
 #include "gfx.h"
 
+int32_t xa, ya, za;
+
 void line_rot(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
 {
 	OledMoveTo((int32_t) x1, (int32_t) y1);
@@ -73,4 +75,59 @@ void vector_graph(void)
 	if (theta3 > sine_res) {
 		theta3 = 0.0;
 	}
+}
+
+/*
+ *
+ * Basic Lorenz Attractor code 
+ * https://www.stsci.edu/~lbradley/seminar/attractors.html
+ */
+void LA_gfx(bool reset, bool redraw, uint32_t turns)
+{
+	static double x = 0.1;
+	static double y = 0;
+	static double z = 0;
+	static double a = 10.0;
+	static double b = 28.0;
+	static double c = 8.0 / 3.0;
+	static double t = 0.01;
+	static uint32_t i = 0;
+
+	//Iterate and update x,y and z locations
+	//based upon the Lorenz equations
+	if (redraw) {
+		i = 0;
+		return;
+	}
+
+	if (reset) {
+		x = 0.1;
+		y = 0;
+		z = 0;
+		a = 10.0;
+		b = 28.0;
+		c = 8.0 / 3.0;
+		t = 0.01;
+		i = 0;
+		return;
+	}
+
+	if (i++ >= turns) {
+		i = turns;
+		dtog_Clear();
+		return;
+	}
+
+	double xt = x + t * a * (y - x);
+	double yt = y + t * (x * (b - z) - y);
+	double zt = z + t * (x * y - c * z);
+	x = xt;
+	y = yt;
+	z = zt;
+	xa = (x * 1.5) + 40;
+	ya = (z * 1.5) + 10; // xz plot
+	//	ya = (y * 1.5) + 40; // xy plot
+	za = z;
+	OledMoveTo(xa, ya);
+	OledLineTo(xa + 1, ya + 1);
 }

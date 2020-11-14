@@ -21,8 +21,11 @@ extern "C" {
 	static const double sineb = 1200.0;
 	static const double sinec = 2400.0;
 
+	extern int32_t xa, ya, za;
+
 	void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
 	void vector_graph(void);
+	void LA_gfx(bool, bool, uint32_t);
 
 #ifdef	__cplusplus
 }

@@ -166,7 +166,6 @@ int main(void)
 		if (imu_gyroAvailable()) imu_readGyro(&gx, &gy, &gz);
 		if (imu_accelAvailable()) imu_readAccel(&ax, &ay, &az);
 		if (imu_magAvailable()) imu_readMag(&mx, &my, &mz);
-		/* Toggle LED after every 1s */
 		/*
 		 * GYRO data must be in radians per second
 		 */
@@ -202,18 +201,23 @@ int main(void)
 		sprintf(cbuffer, "GR %4.4f %4.4f %4.4f", g[0], g[1], g[2]);
 		eaDogM_WriteStringAtPos(14, 0, cbuffer);
 		vector_graph();
-		OledUpdate();
-		LED_Toggle();
 		{
 			//	100 Hz updates, processing takes 5ms
 			uint32_t tickStart, delayTicks;
 			tickStart = coreTmr.tickCounter;
 			delayTicks = (1000 * update_delay) / CORE_TIMER_INTERRUPT_PERIOD_IN_US; // Number of tick interrupts to wait for the delay
-			dtog_Clear();
+			LA_gfx(false, false, 0);
 			while ((coreTmr.tickCounter - tickStart) < delayTicks) {
 				// extra processing loop while waiting for clock time to expire
+				LA_gfx(false, false, 1400);
 			}
 		}
+		sprintf(cbuffer, "SA %d %d %d", xa, ya, za);
+		eaDogM_WriteStringAtPos(15, 0, cbuffer);
+		dtog_Set();
+		OledUpdate();
+		dtog_Clear();
+		LED_Toggle();
 	}
 
 	/* Execution should not come here during normal operation */
