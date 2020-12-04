@@ -10822,6 +10822,10 @@ Source: http://onsemi.com .. MBR0520LT1-D.pdf</description>
 <part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="PAD1" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="led+"/>
 <part name="PAD2" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="led-"/>
+<part name="PAD3" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="c1"/>
+<part name="PAD4" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="a2"/>
+<part name="PAD5" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="c2"/>
+<part name="PAD6" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="a3"/>
 </parts>
 <sheets>
 <sheet>
@@ -10958,6 +10962,22 @@ Source: http://onsemi.com .. MBR0520LT1-D.pdf</description>
 <instance part="PAD2" gate="P" x="-33.02" y="-45.72" smashed="yes">
 <attribute name="NAME" x="-34.163" y="-43.8658" size="1.778" layer="95"/>
 <attribute name="VALUE" x="-34.163" y="-49.022" size="1.778" layer="96"/>
+</instance>
+<instance part="PAD3" gate="P" x="-33.02" y="15.24" smashed="yes">
+<attribute name="NAME" x="-34.163" y="17.0942" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-34.163" y="11.938" size="1.778" layer="96"/>
+</instance>
+<instance part="PAD4" gate="P" x="-33.02" y="7.62" smashed="yes">
+<attribute name="NAME" x="-34.163" y="9.4742" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-34.163" y="4.318" size="1.778" layer="96"/>
+</instance>
+<instance part="PAD5" gate="P" x="-33.02" y="0" smashed="yes">
+<attribute name="NAME" x="-34.163" y="1.8542" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-34.163" y="-3.302" size="1.778" layer="96"/>
+</instance>
+<instance part="PAD6" gate="P" x="-33.02" y="-7.62" smashed="yes">
+<attribute name="NAME" x="-34.163" y="-5.7658" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-34.163" y="-10.922" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -11328,6 +11348,24 @@ Source: http://onsemi.com .. MBR0520LT1-D.pdf</description>
 <junction x="-7.62" y="-20.32"/>
 <pinref part="PAD1" gate="P" pin="P"/>
 <junction x="-30.48" y="-20.32"/>
+</segment>
+</net>
+<net name="N$25" class="0">
+<segment>
+<pinref part="PAD4" gate="P" pin="P"/>
+<wire x1="-30.48" y1="7.62" x2="-20.32" y2="7.62" width="0.1524" layer="91"/>
+<wire x1="-20.32" y1="7.62" x2="-20.32" y2="15.24" width="0.1524" layer="91"/>
+<pinref part="PAD3" gate="P" pin="P"/>
+<wire x1="-20.32" y1="15.24" x2="-30.48" y2="15.24" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$26" class="0">
+<segment>
+<pinref part="PAD6" gate="P" pin="P"/>
+<wire x1="-30.48" y1="-7.62" x2="-20.32" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="-20.32" y1="-7.62" x2="-20.32" y2="0" width="0.1524" layer="91"/>
+<pinref part="PAD5" gate="P" pin="P"/>
+<wire x1="-20.32" y1="0" x2="-30.48" y2="0" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
