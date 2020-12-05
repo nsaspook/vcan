@@ -14,8 +14,8 @@ void sine_table(void)
 	for (I = 0; I < sine_res; I++) {
 		sine_const[I] = sin((M_PI * 2.0 * (double) I) / (double) sine_res);
 		H = I * HARMONIC_NUM; // need third harmonic
-		if (H >= sine_res * j) {
-			H = H - sine_res*j;
+		if (H >= (sine_res * j)) {
+			H = H - (sine_res*j);
 			j++;
 		}
 		/*

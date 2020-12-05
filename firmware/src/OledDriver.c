@@ -65,7 +65,7 @@
 volatile uint8_t dma_flag = 0;
 
 extern uint8_t rgbOledFont0[];
-extern uint8_t rgbOledFontUser[];
+extern uint8_t rgbOledFontUser[cbOledFontUser];
 extern uint8_t rgbFillPat[];
 
 extern int32_t xchOledMax;
