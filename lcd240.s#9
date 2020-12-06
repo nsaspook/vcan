@@ -8356,6 +8356,8 @@ Source: &lt;a href="http://www.onsemi.com/pub/Collateral/CAT4238-D.PDF"&gt; Data
 <part name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="82.5"/>
 <part name="R6" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="82.5"/>
 <part name="IC1" library="CAT4238TD-GT3" deviceset="CAT4238TD-GT3" device=""/>
+<part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="VDD3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -8439,9 +8441,15 @@ Source: &lt;a href="http://www.onsemi.com/pub/Collateral/CAT4238-D.PDF"&gt; Data
 <attribute name="NAME" x="3.81" y="39.1414" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="3.81" y="43.942" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="IC1" gate="G$1" x="60.96" y="2.54" smashed="yes">
-<attribute name="NAME" x="85.09" y="10.16" size="1.778" layer="95" align="center-left"/>
-<attribute name="VALUE" x="85.09" y="7.62" size="1.778" layer="96" align="center-left"/>
+<instance part="IC1" gate="G$1" x="22.86" y="-20.32" smashed="yes">
+<attribute name="NAME" x="46.99" y="-12.7" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="46.99" y="-15.24" size="1.778" layer="96" align="center-left"/>
+</instance>
+<instance part="GND2" gate="1" x="10.16" y="-25.4" smashed="yes">
+<attribute name="VALUE" x="7.62" y="-27.94" size="1.778" layer="96"/>
+</instance>
+<instance part="VDD3" gate="G$1" x="76.2" y="-20.32" smashed="yes">
+<attribute name="VALUE" x="73.66" y="-22.86" size="1.778" layer="96" rot="R90"/>
 </instance>
 </instances>
 <busses>
@@ -8478,6 +8486,11 @@ Source: &lt;a href="http://www.onsemi.com/pub/Collateral/CAT4238-D.PDF"&gt; Data
 <pinref part="VDD4" gate="G$1" pin="VDD"/>
 <junction x="-5.08" y="45.72"/>
 <junction x="10.16" y="45.72"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="VIN"/>
+<wire x1="50.8" y1="-22.86" x2="76.2" y2="-22.86" width="0.1524" layer="91"/>
+<pinref part="VDD3" gate="G$1" pin="VDD"/>
 </segment>
 </net>
 <net name="GND" class="1">
@@ -8518,6 +8531,11 @@ Source: &lt;a href="http://www.onsemi.com/pub/Collateral/CAT4238-D.PDF"&gt; Data
 <junction x="-5.08" y="48.26"/>
 <junction x="20.32" y="48.26"/>
 </segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="GND"/>
+<wire x1="22.86" y1="-22.86" x2="10.16" y2="-22.86" width="0.1524" layer="91"/>
+<pinref part="GND2" gate="1" pin="GND"/>
+</segment>
 </net>
 <net name="N$3" class="0">
 <segment>
@@ -8540,6 +8558,9 @@ Source: &lt;a href="http://www.onsemi.com/pub/Collateral/CAT4238-D.PDF"&gt; Data
 <junction x="-5.08" y="43.18"/>
 <wire x1="-5.08" y1="43.18" x2="27.94" y2="43.18" width="0.1524" layer="91"/>
 <wire x1="27.94" y1="43.18" x2="27.94" y2="25.4" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="!SHDN"/>
+<wire x1="50.8" y1="-20.32" x2="55.88" y2="-20.32" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="-20.32" x2="55.88" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$6" class="0">
@@ -8728,6 +8749,18 @@ Source: &lt;a href="http://www.onsemi.com/pub/Collateral/CAT4238-D.PDF"&gt; Data
 <pinref part="SV1" gate="1" pin="4"/>
 <pinref part="R5" gate="G$1" pin="2"/>
 <junction x="-5.08" y="38.1"/>
+</segment>
+</net>
+<net name="N$23" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="SW"/>
+<wire x1="22.86" y1="-20.32" x2="-2.54" y2="-20.32" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$24" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="FB"/>
+<wire x1="22.86" y1="-25.4" x2="22.86" y2="-45.72" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

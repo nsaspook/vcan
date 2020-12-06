@@ -69,7 +69,7 @@ void GPIO_Initialize ( void )
 
     /* PORTB Initialization */
     LATB = 0xc101; /* Initial Latch Value */
-    TRISBCLR = 0xc10d; /* Direction Control */
+    TRISBCLR = 0xc00d; /* Direction Control */
     CNPUBSET = 0x82; /* Pull-Up Enable */
     CNPDBSET = 0x10; /* Pull-Down Enable */
     /* Change Notice Enable */
