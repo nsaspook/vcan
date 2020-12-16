@@ -10820,8 +10820,8 @@ Source: http://onsemi.com .. MBR0520LT1-D.pdf</description>
 <part name="D1" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="MBR0520LT" device="" package3d_urn="urn:adsk.eagle:package:43420/1"/>
 <part name="C10" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="0.1"/>
 <part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="PAD1" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1"/>
-<part name="PAD2" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1"/>
+<part name="PAD1" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="led+"/>
+<part name="PAD2" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="led-"/>
 </parts>
 <sheets>
 <sheet>
@@ -11315,6 +11315,7 @@ Source: http://onsemi.com .. MBR0520LT1-D.pdf</description>
 <wire x1="22.86" y1="-45.72" x2="-30.48" y2="-45.72" width="0.1524" layer="91"/>
 <junction x="22.86" y="-45.72"/>
 <pinref part="PAD2" gate="P" pin="P"/>
+<junction x="-30.48" y="-45.72"/>
 </segment>
 </net>
 <net name="N$15" class="0">
@@ -11326,6 +11327,7 @@ Source: http://onsemi.com .. MBR0520LT1-D.pdf</description>
 <junction x="-17.78" y="-20.32"/>
 <junction x="-7.62" y="-20.32"/>
 <pinref part="PAD1" gate="P" pin="P"/>
+<junction x="-30.48" y="-20.32"/>
 </segment>
 </net>
 </nets>

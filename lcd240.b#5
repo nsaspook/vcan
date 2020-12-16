@@ -1616,12 +1616,12 @@ design rules under a new name.</description>
 </designrules>
 <autorouter>
 <pass name="Default">
-<param name="RoutingGrid" value="50mil"/>
+<param name="RoutingGrid" value="3mil"/>
 <param name="AutoGrid" value="1"/>
 <param name="Efforts" value="2"/>
 <param name="TopRouterVariant" value="1"/>
 <param name="tpViaShape" value="round"/>
-<param name="PrefDir.1" value="a"/>
+<param name="PrefDir.1" value="*"/>
 <param name="PrefDir.2" value="0"/>
 <param name="PrefDir.3" value="0"/>
 <param name="PrefDir.4" value="0"/>
@@ -1636,8 +1636,8 @@ design rules under a new name.</description>
 <param name="PrefDir.13" value="0"/>
 <param name="PrefDir.14" value="0"/>
 <param name="PrefDir.15" value="0"/>
-<param name="PrefDir.16" value="a"/>
-<param name="cfVia" value="8"/>
+<param name="PrefDir.16" value="*"/>
+<param name="cfVia" value="20"/>
 <param name="cfNonPref" value="5"/>
 <param name="cfChangeDir" value="2"/>
 <param name="cfOrthStep" value="2"/>
@@ -1652,7 +1652,7 @@ design rules under a new name.</description>
 <param name="cfAvoid" value="4"/>
 <param name="cfPolygon" value="10"/>
 <param name="cfBase.1" value="0"/>
-<param name="cfBase.2" value="1"/>
+<param name="cfBase.2" value="0"/>
 <param name="cfBase.3" value="1"/>
 <param name="cfBase.4" value="1"/>
 <param name="cfBase.5" value="1"/>
@@ -1665,7 +1665,7 @@ design rules under a new name.</description>
 <param name="cfBase.12" value="1"/>
 <param name="cfBase.13" value="1"/>
 <param name="cfBase.14" value="1"/>
-<param name="cfBase.15" value="1"/>
+<param name="cfBase.15" value="0"/>
 <param name="cfBase.16" value="0"/>
 <param name="mnVias" value="20"/>
 <param name="mnSegments" value="9999"/>
@@ -1675,8 +1675,12 @@ design rules under a new name.</description>
 <param name="mnRipupTotal" value="100"/>
 </pass>
 <pass name="Follow-me" refer="Default" active="yes">
+<param name="cfVia" value="8"/>
+<param name="cfBase.2" value="1"/>
+<param name="cfBase.15" value="1"/>
 </pass>
 <pass name="Busses" refer="Default" active="yes">
+<param name="cfVia" value="8"/>
 <param name="cfNonPref" value="4"/>
 <param name="cfBusImpact" value="4"/>
 <param name="cfHugging" value="0"/>
@@ -1686,28 +1690,27 @@ design rules under a new name.</description>
 </pass>
 <pass name="Optimize1" refer="Default" active="yes">
 <param name="cfVia" value="99"/>
-<param name="cfExtdStep" value="10"/>
-<param name="cfHugging" value="1"/>
-<param name="mnExtdSteps" value="1"/>
-<param name="mnRipupLevel" value="0"/>
+<param name="cfBase.2" value="1"/>
+<param name="cfBase.15" value="1"/>
 </pass>
 <pass name="Optimize2" refer="Optimize1" active="yes">
-<param name="cfNonPref" value="0"/>
-<param name="cfChangeDir" value="6"/>
-<param name="cfExtdStep" value="0"/>
-<param name="cfBonusStep" value="2"/>
-<param name="cfMalusStep" value="2"/>
-<param name="cfPadImpact" value="2"/>
-<param name="cfSmdImpact" value="2"/>
-<param name="cfHugging" value="0"/>
 </pass>
 <pass name="Optimize3" refer="Optimize2" active="yes">
-<param name="cfChangeDir" value="8"/>
-<param name="cfPadImpact" value="0"/>
-<param name="cfSmdImpact" value="0"/>
 </pass>
 <pass name="Optimize4" refer="Optimize3" active="yes">
-<param name="cfChangeDir" value="25"/>
+</pass>
+<pass name="Optimize5" refer="Optimize4" active="yes">
+<param name="cfBonusStep" value="0"/>
+<param name="cfMalusStep" value="0"/>
+<param name="cfPadImpact" value="0"/>
+<param name="cfSmdImpact" value="0"/>
+<param name="cfHugging" value="0"/>
+</pass>
+<pass name="Optimize6" refer="Optimize5" active="yes">
+</pass>
+<pass name="Optimize7" refer="Optimize6" active="yes">
+</pass>
+<pass name="Optimize8" refer="Optimize7" active="yes">
 </pass>
 </autorouter>
 <elements>
@@ -1853,6 +1856,26 @@ design rules under a new name.</description>
 <attribute name="POPULARITY" value="15" x="82.55" y="13.97" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="82.55" y="14.57" size="0.0254" layer="27"/>
 </element>
+<element name="PAD3" library="wirepad" library_urn="urn:adsk.eagle:library:412" package="1,6/0,8" package3d_urn="urn:adsk.eagle:package:30830/1" value="c1" x="77.47" y="13.97" smashed="yes">
+<attribute name="NAME" x="76.708" y="14.986" size="1.27" layer="25" ratio="10"/>
+<attribute name="POPULARITY" value="15" x="77.47" y="13.97" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="77.47" y="14.57" size="0.0254" layer="27"/>
+</element>
+<element name="PAD4" library="wirepad" library_urn="urn:adsk.eagle:library:412" package="1,6/0,8" package3d_urn="urn:adsk.eagle:package:30830/1" value="a2" x="36.83" y="13.97" smashed="yes">
+<attribute name="NAME" x="36.068" y="14.986" size="1.27" layer="25" ratio="10"/>
+<attribute name="POPULARITY" value="15" x="36.83" y="13.97" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="36.83" y="14.57" size="0.0254" layer="27"/>
+</element>
+<element name="PAD5" library="wirepad" library_urn="urn:adsk.eagle:library:412" package="1,6/0,8" package3d_urn="urn:adsk.eagle:package:30830/1" value="c2" x="80.01" y="13.97" smashed="yes">
+<attribute name="NAME" x="79.248" y="14.986" size="1.27" layer="25" ratio="10"/>
+<attribute name="POPULARITY" value="15" x="80.01" y="13.97" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="80.01" y="14.57" size="0.0254" layer="27"/>
+</element>
+<element name="PAD6" library="wirepad" library_urn="urn:adsk.eagle:library:412" package="1,6/0,8" package3d_urn="urn:adsk.eagle:package:30830/1" value="a3" x="39.37" y="13.97" smashed="yes">
+<attribute name="NAME" x="38.608" y="14.986" size="1.27" layer="25" ratio="10"/>
+<attribute name="POPULARITY" value="15" x="39.37" y="13.97" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="39.37" y="14.57" size="0.0254" layer="27"/>
+</element>
 </elements>
 <signals>
 <signal name="VDD" class="1">
@@ -1868,10 +1891,10 @@ design rules under a new name.</description>
 <wire x1="58.29" y1="88.9" x2="92.71" y2="92.71" width="0" layer="19" extent="1-1"/>
 <wire x1="58.29" y1="83.82" x2="58.29" y2="88.9" width="0" layer="19" extent="1-1"/>
 <wire x1="59.69" y1="80.01" x2="58.29" y2="83.82" width="0" layer="19" extent="1-1"/>
-<wire x1="46.99" y1="80.01" x2="59.69" y2="80.01" width="0" layer="19" extent="1-1"/>
+<wire x1="46.99" y1="80.01" x2="58.29" y2="83.82" width="0" layer="19" extent="1-1"/>
 <wire x1="36.7" y1="10.16" x2="46.99" y2="80.01" width="0" layer="19" extent="1-1"/>
-<wire x1="29.08" y1="10.16" x2="36.7" y2="10.16" width="0" layer="19" extent="1-1"/>
 <wire x1="36.86" y1="6.03" x2="36.7" y2="10.16" width="0" layer="19" extent="1-1"/>
+<wire x1="29.08" y1="10.16" x2="36.7" y2="10.16" width="0" layer="19" extent="1-1"/>
 <wire x1="17.78" y1="10.16" x2="29.08" y2="10.16" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GND" class="1">
@@ -1889,26 +1912,28 @@ design rules under a new name.</description>
 <contactref element="C1" pad="2"/>
 <contactref element="R1" pad="2"/>
 <contactref element="C10" pad="2"/>
+<polygon width="0.1524" layer="16">
+<vertex x="1.27" y="99.06"/>
+<vertex x="118.11" y="99.06"/>
+<vertex x="118.11" y="1.27"/>
+<vertex x="1.27" y="1.27"/>
+</polygon>
 <wire x1="61.09" y1="83.82" x2="61.09" y2="88.9" width="0" layer="19" extent="1-1"/>
-<wire x1="51.94" y1="83.82" x2="61.09" y2="83.82" width="0" layer="19" extent="1-1"/>
-<wire x1="57.15" y1="80.01" x2="51.94" y2="83.82" width="0" layer="19" extent="1-1"/>
-<wire x1="54.61" y1="80.01" x2="57.15" y2="80.01" width="0" layer="19" extent="1-1"/>
-<wire x1="52.07" y1="80.01" x2="54.61" y2="80.01" width="0" layer="19" extent="1-1"/>
-<wire x1="52.39" y1="88.9" x2="52.07" y2="80.01" width="0" layer="19" extent="1-1"/>
-<wire x1="34.29" y1="80.01" x2="52.39" y2="88.9" width="0" layer="19" extent="1-1"/>
-<wire x1="90.17" y1="92.71" x2="61.09" y2="88.9" width="0" layer="19" extent="1-1"/>
-<wire x1="44.32" y1="10.16" x2="34.29" y2="80.01" width="0" layer="19" extent="1-1"/>
-<wire x1="39.5" y1="10.16" x2="44.32" y2="10.16" width="0" layer="19" extent="1-1"/>
-<wire x1="34.26" y1="5.08" x2="39.5" y2="10.16" width="0" layer="19" extent="1-1"/>
-<wire x1="31.88" y1="10.16" x2="39.5" y2="10.16" width="0" layer="19" extent="1-1"/>
+<wire x1="57.15" y1="80.01" x2="61.09" y2="83.82" width="0" layer="19" extent="1-1"/>
+<wire x1="51.94" y1="83.82" x2="52.07" y2="80.01" width="0" layer="19" extent="1-1"/>
+<wire x1="52.39" y1="88.9" x2="51.94" y2="83.82" width="0" layer="19" extent="1-1"/>
+<wire x1="31.88" y1="10.16" x2="34.29" y2="80.01" width="0" layer="19" extent="1-1"/>
+<wire x1="34.26" y1="5.08" x2="31.88" y2="10.16" width="0" layer="19" extent="1-1"/>
+<wire x1="39.5" y1="10.16" x2="34.26" y2="5.08" width="0" layer="19" extent="1-1"/>
+<wire x1="44.32" y1="10.16" x2="39.5" y2="10.16" width="0" layer="19" extent="1-1"/>
 <wire x1="54.29" y1="5.08" x2="44.32" y2="10.16" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$3">
 <contactref element="LCD1" pad="29"/>
 <contactref element="R2" pad="2"/>
 <contactref element="C2" pad="1"/>
+<wire x1="54.74" y1="83.82" x2="54.29" y2="88.9" width="0" layer="19" extent="1-1"/>
 <wire x1="62.23" y1="80.01" x2="54.74" y2="83.82" width="0" layer="19" extent="1-1"/>
-<wire x1="54.29" y1="88.9" x2="54.74" y2="83.82" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$4">
 <contactref element="LCD1" pad="37"/>
@@ -2010,22 +2035,32 @@ design rules under a new name.</description>
 <contactref element="IC1" pad="1"/>
 <contactref element="L1" pad="1"/>
 <contactref element="D1" pad="A"/>
+<wire x1="23.5" y1="5.08" x2="34.26" y2="6.03" width="0" layer="19" extent="1-1"/>
 <wire x1="17.78" y1="5.08" x2="23.5" y2="5.08" width="0" layer="19" extent="1-1"/>
-<wire x1="34.26" y1="6.03" x2="17.78" y2="5.08" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="N$24">
+<signal name="N$24" class="1">
 <contactref element="IC1" pad="3"/>
 <contactref element="R1" pad="1"/>
 <contactref element="PAD2" pad="1"/>
 <wire x1="52.39" y1="5.08" x2="82.55" y2="13.97" width="0" layer="19" extent="1-1"/>
 <wire x1="34.26" y1="4.13" x2="52.39" y2="5.08" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="N$15">
+<signal name="N$15" class="1">
 <contactref element="D1" pad="C"/>
 <contactref element="C10" pad="1"/>
 <contactref element="PAD1" pad="1"/>
-<wire x1="47.12" y1="10.16" x2="34.29" y2="13.97" width="0" layer="19" extent="1-1"/>
-<wire x1="27.3" y1="5.08" x2="47.12" y2="10.16" width="0" layer="19" extent="1-1"/>
+<wire x1="34.29" y1="13.97" x2="47.12" y2="10.16" width="0" layer="19" extent="1-1"/>
+<wire x1="27.3" y1="5.08" x2="34.29" y2="13.97" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$25" class="1">
+<contactref element="PAD4" pad="1"/>
+<contactref element="PAD3" pad="1"/>
+<wire x1="36.83" y1="13.97" x2="77.47" y2="13.97" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$26" class="1">
+<contactref element="PAD6" pad="1"/>
+<contactref element="PAD5" pad="1"/>
+<wire x1="39.37" y1="13.97" x2="80.01" y2="13.97" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
