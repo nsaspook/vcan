@@ -10784,8 +10784,8 @@ Source: http://onsemi.com .. MBR0520LT1-D.pdf</description>
 </class>
 <class number="1" name="icurrent" width="0.3048" drill="0">
 </class>
-<class number="2" name="led" width="0.4064" drill="0">
-<clearance class="2" value="0.3048"/>
+<class number="2" name="led" width="0.508" drill="0">
+<clearance class="2" value="0.4064"/>
 </class>
 </classes>
 <parts>

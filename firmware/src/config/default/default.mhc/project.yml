@@ -69,27 +69,27 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: B9B7AF0FD314216B5F622BD576A44A4A
-- generatedChecksum: CFFAADAC2747A6CC67DAD048B6496E9E
+- generatedChecksum: 4C46D161126F8BA6D8CF6106A90A2B1C
   logicalPath: config/default/peripheral/qei
   name: plib_qei1.c
   physicalPath: peripheral/qei
   security: NON_SECURE
   type: SOURCE
-  userChecksum: CFFAADAC2747A6CC67DAD048B6496E9E
-- generatedChecksum: B69472FCB2F8BF1D3ABA01FC2150067D
+  userChecksum: 4C46D161126F8BA6D8CF6106A90A2B1C
+- generatedChecksum: 73981D918D386639281DDE873D9F8F9B
   logicalPath: config/default/peripheral/qei
   name: plib_qei2.c
   physicalPath: peripheral/qei
   security: NON_SECURE
   type: SOURCE
-  userChecksum: B69472FCB2F8BF1D3ABA01FC2150067D
-- generatedChecksum: 1671609760C1FF6A0EF79CB22322745E
+  userChecksum: 73981D918D386639281DDE873D9F8F9B
+- generatedChecksum: 2ECABC436DDB8F584D914FF4F25D3975
   logicalPath: config/default/peripheral/qei
   name: plib_qei3.c
   physicalPath: peripheral/qei
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 1671609760C1FF6A0EF79CB22322745E
+  userChecksum: 2ECABC436DDB8F584D914FF4F25D3975
 - generatedChecksum: 97CAF0E95F31CC983FB0F8F0525A1E7E
   logicalPath: config/default/peripheral/spi/spi_master
   name: plib_spi3_master.c
@@ -223,27 +223,27 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 8C0682DB8DD38F7C09771C63347D06FF
-- generatedChecksum: 3A5142AE8EA755CC7049FB94CCB4D0FC
+- generatedChecksum: D90CDC0EB371E38671D4FC9ACEB37291
   logicalPath: config/default/peripheral/qei
   name: plib_qei1.h
   physicalPath: peripheral/qei
   security: NON_SECURE
   type: HEADER
-  userChecksum: 3A5142AE8EA755CC7049FB94CCB4D0FC
-- generatedChecksum: EF15ACA280CB563E5761F70A42121693
+  userChecksum: D90CDC0EB371E38671D4FC9ACEB37291
+- generatedChecksum: 4B8232F9FE5AC341D05549F00197BAAE
   logicalPath: config/default/peripheral/qei
   name: plib_qei2.h
   physicalPath: peripheral/qei
   security: NON_SECURE
   type: HEADER
-  userChecksum: EF15ACA280CB563E5761F70A42121693
-- generatedChecksum: E31AD6B32FCBA01CCA4C4704D720CA9A
+  userChecksum: 4B8232F9FE5AC341D05549F00197BAAE
+- generatedChecksum: 7A7274B69FEE50A38D7526A53BDDC270
   logicalPath: config/default/peripheral/qei
   name: plib_qei3.h
   physicalPath: peripheral/qei
   security: NON_SECURE
   type: HEADER
-  userChecksum: E31AD6B32FCBA01CCA4C4704D720CA9A
+  userChecksum: 7A7274B69FEE50A38D7526A53BDDC270
 - generatedChecksum: D6A76BFCD1B06AC07959D1D4CB4D2B3E
   logicalPath: config/default/peripheral/qei
   name: plib_qei_common.h

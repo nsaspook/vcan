@@ -88,19 +88,19 @@ void QEI3_Initialize (void)
 }
 
 
-void QEI3_Start()
+void QEI3_Start(void)
 {
     /* Enable QEI channel */
     QEI3CON |= _QEI3CON_QEIEN_MASK;
 }
 
-void QEI3_Stop()
+void QEI3_Stop(void)
 {
     /* Disable QEI channel */
     QEI3CON &= ~_QEI3CON_QEIEN_MASK;
 }
 
-uint32_t QEI3_PulseIntervalGet()
+uint32_t QEI3_PulseIntervalGet(void)
 {
     return (INT3HLD);
 }

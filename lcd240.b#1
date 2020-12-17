@@ -124,11 +124,11 @@
 <wire x1="119.36" y1="0" x2="119.36" y2="100" width="0" layer="20"/>
 <wire x1="119.36" y1="100" x2="0" y2="100" width="0" layer="20"/>
 <wire x1="0" y1="100" x2="0" y2="0" width="0" layer="20"/>
-<hole x="3.81" y="96.52" drill="1.524"/>
-<hole x="115.57" y="96.52" drill="1.524"/>
-<hole x="115.57" y="3.81" drill="1.524"/>
-<hole x="3.81" y="3.81" drill="1.524"/>
-<hole x="96.52" y="85.09" drill="1.524"/>
+<hole x="6.35" y="93.98" drill="1.524"/>
+<hole x="113.03" y="93.98" drill="1.524"/>
+<hole x="113.03" y="6.35" drill="1.524"/>
+<hole x="6.35" y="6.35" drill="1.524"/>
+<hole x="93.98" y="85.09" drill="1.524"/>
 <text x="113.03" y="15.24" size="2.54" layer="1" font="vector" ratio="16" rot="R90">EA DOGXL240-7 W BL 1.1 FGB</text>
 </plain>
 <libraries>

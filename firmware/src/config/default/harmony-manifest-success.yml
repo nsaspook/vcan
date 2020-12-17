@@ -4,15 +4,15 @@
 
 
 project: vcan
-creation_date: 2020-12-04T20:15:08.765-08:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2020-12-16T14:29:45.421-08:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Linux
 mhc_mode: IDE            # [IDE|Standalone|Headless]
-mhc_version: v3.6.2
+mhc_version: v3.6.5
 mplabx_version: v5.45        # if MPLAB X plugin only
 plugin_version: v3.6.2        # if MPLAB X plugin only
 compiler: XC32 (2.50)
 
 modules:
-    - {name: "csp", version: "v3.8.2"}
+    - {name: "csp", version: "v3.8.3"}
     - {name: "dev_packs", version: "v3.8.0"}
 
