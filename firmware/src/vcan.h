@@ -33,9 +33,9 @@ extern "C" {
 #define MOTOR_UPDATES	1	// main motor loop timer in ms
 #define HVDC_M			// 24 + volts for motor drive
 
-#define ENCODER_PULSES_PER_REV	327680 // m35 encoder
+	//#define ENCODER_PULSES_PER_REV	327680 // m35 encoder
 	//#define ENCODER_PULSES_PER_REV	8000 // AC servo motor encoder
-	//#define ENCODER_PULSES_PER_REV	4000 // HURST BLDC motor encoder
+#define ENCODER_PULSES_PER_REV	4000 // TEKNIC motor encoder, HURST BLDC motor encoder
 
 #if ENCODER_PULSES_PER_REV < 9000
 #ifdef HVDC_M
@@ -62,7 +62,7 @@ extern "C" {
 #define NUM_POLES		8
 #define NUM_POLE_PAIRS		NUM_POLES/2
 
-	//#define	SLIP_DRIVE
+	//	#define	SLIP_DRIVE // motor constant slew at calculated speed
 #define MOTOR_SLIP	-670
 
 #define PWM_FREQUENCY		MOTOR_SPEED
