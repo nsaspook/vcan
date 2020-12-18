@@ -189,6 +189,7 @@ int main(void)
 
 		dtog_Set();
 		OledClearBuffer();
+#ifdef SHOW_STATS
 		sprintf(cbuffer, "G%4d %4d %4d A %4d %4d %4d M %4d %4d %4d", gx, gy, gz, ax, ay, az, mx, my, mz);
 		eaDogM_WriteStringAtPos(10, 0, cbuffer);
 		sprintf(cbuffer, "%2.4f %2.4f %2.4f %2.4f ", q0, q1, q2, q3);
@@ -200,6 +201,7 @@ int main(void)
 		eaDogM_WriteStringAtPos(13, 0, cbuffer);
 		sprintf(cbuffer, "GR %4.4f %4.4f %4.4f", g[0], g[1], g[2]);
 		eaDogM_WriteStringAtPos(14, 0, cbuffer);
+#endif
 		vector_graph();
 		{
 			//	100 Hz updates, processing takes 5ms
@@ -212,8 +214,10 @@ int main(void)
 				LA_gfx(false, false, 1400);
 			}
 		}
+#ifdef SHOW_STATS
 		sprintf(cbuffer, "SA %d %d %d", xa, ya, za);
 		eaDogM_WriteStringAtPos(15, 0, cbuffer);
+#endif
 		dtog_Set();
 		OledUpdate();
 		dtog_Clear();

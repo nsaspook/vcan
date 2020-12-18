@@ -124,9 +124,15 @@ void LA_gfx(bool reset, bool redraw, uint32_t turns)
 	x = xt;
 	y = yt;
 	z = zt;
+#ifdef SHOW_STATS
 	xa = (x * 1.5) + 40;
 	ya = (z * 1.5) + 10; // xz plot
 	//	ya = (y * 1.5) + 40; // xy plot
+#else
+	xa = (x * 2.5) + 120;
+	ya = (z * 1.5) + 50; // xz plot
+	//	ya = (y * 1.5) + 40; // xy plot
+#endif
 	za = z;
 	OledMoveTo(xa, ya);
 	OledLineTo(xa + 1, ya + 1);

@@ -13,6 +13,11 @@ extern "C" {
 #endif
 
 	/*
+	 * display IMU text of calculations
+	 */
+//#define SHOW_STATS
+	
+	/*
 	 * use DMA for display buffer updates
 	 * configure SPI for no interrupts. DMA triggers on the SPITX flag bit
 	 */
