@@ -201,6 +201,11 @@ int main(void)
 		eaDogM_WriteStringAtPos(13, 0, cbuffer);
 		sprintf(cbuffer, "GR %4.4f %4.4f %4.4f", g[0], g[1], g[2]);
 		eaDogM_WriteStringAtPos(14, 0, cbuffer);
+#else
+		sprintf(cbuffer, "%2.4f %2.4f %2.4f %2.4f ", q0, q1, q2, q3);
+		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
+		sprintf(cbuffer, "%3.2f %3.2f %3.2f\n\r", accel[0], accel[1], accel[2]);
+		UART1_Write((uint8_t *) cbuffer, strlen(cbuffer));
 #endif
 		vector_graph();
 		{

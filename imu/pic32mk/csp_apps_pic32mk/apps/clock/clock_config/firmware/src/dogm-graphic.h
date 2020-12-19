@@ -433,20 +433,20 @@ void lcd_set_contrast(uint8_t value);
 #define LCD_CMD()             RS_SetLow();
 
 //Control reset input of LCD
-#define LCD_RESET_OFF()       PORT_RST |= _BV(PIN_RST)
-#define LCD_RESET_ON()        PORT_RST &= ~_BV(PIN_RST)
-#define LCD_SET_OUTPUT_RST()  DDR_RST |= _BV(PIN_RST)
-#define LCD_RESET()           LCD_RESET_ON();  _delay_ms(1); LCD_RESET_OFF();  _delay_ms(10)
+#define LCD_RESET_OFF()       RESET_LCD_Set();
+#define LCD_RESET_ON()        RESET_LCD_Clear();
+#define LCD_SET_OUTPUT_RST()  RESET_LCD_OutputEnable();
+#define LCD_RESET()           LCD_RESET_ON();  _delay_ms(2); LCD_RESET_OFF();  _delay_ms(150)
 
 //Control pin for Backlight
 #if LCD_USE_BACKLIGHT == 1      //normal
-#define LCD_SET_OUTPUT_LED() BACKLIGHT_OutputEnable();
-#define BACKLIGHT_ON()       BACKLIGHT_Set();
-#define BACKLIGHT_OFF()      BACKLIGHT_Clear();
+#define LCD_SET_OUTPUT_LED() BACKLIGHT_PIN_OutputEnable();
+#define BACKLIGHT_ON()       BACKLIGHT_PIN_Set();
+#define BACKLIGHT_OFF()      BACKLIGHT_PIN_Clear();
 #elif LCD_USE_BACKLIGHT == 2    //inverted
-#define LCD_SET_OUTPUT_LED() BACKLIGHT_OutputEnable();
-#define BACKLIGHT_ON()       BACKLIGHT_Clear();
-#define BACKLIGHT_OFF()      BACKLIGHT_Set();
+#define LCD_SET_OUTPUT_LED() BACKLIGHT_PIN_OutputEnable();
+#define BACKLIGHT_ON()       BACKLIGHT_PIN_Clear();
+#define BACKLIGHT_OFF()      BACKLIGHT_PIN_Set();
 #else
 #define LCD_SET_OUTPUT_LED() 
 #define BACKLIGHT_ON()   

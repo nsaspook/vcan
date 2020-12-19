@@ -69,13 +69,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 4006514C3315F8BC1517E3C0C9581943
-- generatedChecksum: EED20BE41A398F114AEBB36264B8E540
+- generatedChecksum: FF6758A986FB63A5249A058FC8D56953
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/gpio
   name: plib_gpio.c
   physicalPath: peripheral/gpio
   security: NON_SECURE
   type: SOURCE
-  userChecksum: EED20BE41A398F114AEBB36264B8E540
+  userChecksum: FF6758A986FB63A5249A058FC8D56953
 - generatedChecksum: F77F169875400BF6334FDF355C337EC9
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/spi/spi_master
   name: plib_spi1_master.c
@@ -174,13 +174,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: E0246C4E5F9A30264822D2D4992446B1
-- generatedChecksum: 6D25EAC59C5ECDCA573A5520C9EA71CA
+- generatedChecksum: 86DD4AE3C8D3D49AD025516F3BE774C2
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/gpio
   name: plib_gpio.h
   physicalPath: peripheral/gpio
   security: NON_SECURE
   type: HEADER
-  userChecksum: 6D25EAC59C5ECDCA573A5520C9EA71CA
+  userChecksum: 86DD4AE3C8D3D49AD025516F3BE774C2
 - generatedChecksum: 2BFA27375C2515B7583152035E1731E4
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/spi/spi_master
   name: plib_spi1_master.h

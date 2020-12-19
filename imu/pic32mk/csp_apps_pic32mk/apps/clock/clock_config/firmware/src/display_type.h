@@ -13,10 +13,25 @@ extern "C" {
 #endif
 
 	/*
+	 * Display hardware PINS
+	 * name			port	motor connector pin
+	 * RS			RC1	14
+	 * CSB			RC2	13
+	 * RESET_LCD		RC10	16
+	 * BACKLIGHT_PIN	RA1	10
+	 * 
+	 * DATA PINS
+	 * 
+	 * MOSI			RA0	12
+	 * MISO			RC0	15
+	 * MSCK			RB7	2
+	 */
+
+	/*
 	 * display IMU text of calculations
 	 */
-//#define SHOW_STATS
-	
+	//#define SHOW_STATS
+
 	/*
 	 * use DMA for display buffer updates
 	 * configure SPI for no interrupts. DMA triggers on the SPITX flag bit

@@ -298,9 +298,9 @@ void lcd_init(void)
 #endif
 #if DISPLAY_TYPE == 240
 //	LCD_SYSTEM_RESET; // software reset
-	BACKLIGHT_OFF();
+	LCD_RESET_ON();
 	CORETIMER_DelayMs(2);
-	BACKLIGHT_ON();
+	LCD_RESET_OFF();
 	CORETIMER_DelayMs(150);
 	LCD_SET_COM_END(127); // set last COM electrode
 	LCD_SET_PARTIAL_DISPLAY(0, 127); // set partial display start and end

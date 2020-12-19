@@ -66,6 +66,15 @@
 #define MOSI1_Get()               ((PORTA >> 0) & 0x1)
 #define MOSI1_PIN                  GPIO_PIN_RA0
 
+/*** Macros for BACKLIGHT_PIN pin ***/
+#define BACKLIGHT_PIN_Set()               (LATASET = (1<<1))
+#define BACKLIGHT_PIN_Clear()             (LATACLR = (1<<1))
+#define BACKLIGHT_PIN_Toggle()            (LATAINV= (1<<1))
+#define BACKLIGHT_PIN_OutputEnable()      (TRISACLR = (1<<1))
+#define BACKLIGHT_PIN_InputEnable()       (TRISASET = (1<<1))
+#define BACKLIGHT_PIN_Get()               ((PORTA >> 1) & 0x1)
+#define BACKLIGHT_PIN_PIN                  GPIO_PIN_RA1
+
 /*** Macros for MISO1 pin ***/
 #define MISO1_Get()               ((PORTC >> 0) & 0x1)
 #define MISO1_PIN                  GPIO_PIN_RC0
@@ -115,14 +124,14 @@
 #define csPin_ag_Get()               ((PORTE >> 1) & 0x1)
 #define csPin_ag_PIN                  GPIO_PIN_RE1
 
-/*** Macros for BACKLIGHT pin ***/
-#define BACKLIGHT_Set()               (LATCSET = (1<<10))
-#define BACKLIGHT_Clear()             (LATCCLR = (1<<10))
-#define BACKLIGHT_Toggle()            (LATCINV= (1<<10))
-#define BACKLIGHT_OutputEnable()      (TRISCCLR = (1<<10))
-#define BACKLIGHT_InputEnable()       (TRISCSET = (1<<10))
-#define BACKLIGHT_Get()               ((PORTC >> 10) & 0x1)
-#define BACKLIGHT_PIN                  GPIO_PIN_RC10
+/*** Macros for RESET_LCD pin ***/
+#define RESET_LCD_Set()               (LATCSET = (1<<10))
+#define RESET_LCD_Clear()             (LATCCLR = (1<<10))
+#define RESET_LCD_Toggle()            (LATCINV= (1<<10))
+#define RESET_LCD_OutputEnable()      (TRISCCLR = (1<<10))
+#define RESET_LCD_InputEnable()       (TRISCSET = (1<<10))
+#define RESET_LCD_Get()               ((PORTC >> 10) & 0x1)
+#define RESET_LCD_PIN                  GPIO_PIN_RC10
 
 /*** Macros for SCK1 pin ***/
 #define SCK1_Get()               ((PORTB >> 7) & 0x1)
