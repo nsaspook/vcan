@@ -62,7 +62,7 @@ children:
       - type: Float
         attributes: {id: max}
         children:
-        - {type: Value, value: '1999.9695'}
+        - {type: Value, value: '2000.0305'}
     - type: Values
       children:
       - type: User

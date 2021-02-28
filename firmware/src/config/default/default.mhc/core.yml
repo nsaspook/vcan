@@ -3722,6 +3722,20 @@ children:
       - type: Dynamic
         attributes: {id: core, value: 'false'}
   - type: Boolean
+    attributes: {id: EVIC_218_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: Boolean
+    attributes: {id: EVIC_218_HANDLER_LOCK}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: Boolean
     attributes: {id: EVIC_219_ENABLE}
     children:
     - type: Values
@@ -5083,6 +5097,27 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '60000000'}
+  - type: Boolean
+    attributes: {id: SPI3_FAULT_INTERRUPT_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: spi3, value: 'false'}
+  - type: Boolean
+    attributes: {id: SPI3_FAULT_INTERRUPT_ENABLE_UPDATE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
+  - type: Boolean
+    attributes: {id: SPI3_FAULT_INTERRUPT_HANDLER_LOCK}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: spi3, value: 'false'}
   - type: Boolean
     attributes: {id: SPI3_RX_INTERRUPT_ENABLE}
     children:

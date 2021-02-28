@@ -59,6 +59,7 @@
           <itemPath>../src/config/default/toolchain_specifics.h</itemPath>
           <itemPath>../src/config/default/definitions.h</itemPath>
           <itemPath>../src/config/default/device.h</itemPath>
+          <itemPath>../src/config/default/interrupts.h</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>../src/m35qei.h</itemPath>
@@ -204,13 +205,13 @@
         <targetDevice>PIC32MK1024MCF100</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>pk4hybrid</platformTool>
+        <platformTool>noID</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>2.50</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC32MK-MC_DFP" vendor="Microchip" version="1.5.115"/>
+        <pack name="PIC32MK-MC_DFP" vendor="Microchip" version="1.6.125"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>

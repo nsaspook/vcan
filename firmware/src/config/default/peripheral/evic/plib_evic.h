@@ -534,9 +534,9 @@ typedef enum
 typedef enum
 {
     EXTERNAL_INT_0 = _IEC0_INT0IE_MASK,
-    
-    
-    
+
+
+
 
 }EXTERNAL_INT_PIN;
 
@@ -561,6 +561,12 @@ bool EVIC_SourceStatusGet( INT_SOURCE source );
 void EVIC_SourceStatusSet( INT_SOURCE source );
 
 void EVIC_SourceStatusClear( INT_SOURCE source );
+
+void EVIC_INT_Enable( void );
+
+bool EVIC_INT_Disable( void );
+
+void EVIC_INT_Restore( bool state );
 
 bool EVIC_ExternalInterruptCallbackRegister(
         EXTERNAL_INT_PIN extIntPin,
