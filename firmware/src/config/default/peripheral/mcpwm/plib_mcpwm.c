@@ -70,7 +70,7 @@ void MCPWM_Initialize (void)
     /* PWMCON1 register  */
     /*  MTBS   = 0 */
     /*  PTDIR  =  0 */
-    /*  ECAM   =  1 */
+    /*  ECAM   =  0 */
     /*  DTCP   =  0 */
     /*  DTC    =  2 */
     /*  ITB    = 1 */
@@ -79,7 +79,7 @@ void MCPWM_Initialize (void)
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON1 = 0x680;
+    PWMCON1 = 0x280;
 
     /* IOCON1 register  */
     /*  SWAP    = 0*/

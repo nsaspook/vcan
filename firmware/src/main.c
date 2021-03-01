@@ -168,6 +168,21 @@ int32_t velo_loop(double, bool);
 void wave_gen(uint32_t, uintptr_t);
 void motor_graph(void);
 void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
+void BDC_motor(uint32_t);
+
+void BDC_motor(uint32_t m_type)
+{
+	TMR2_Stop();
+	TMR3_Stop();
+
+	U1_EN_Set();
+	U2_EN_Set();
+	if (m_type == 1) {
+		while (true) {
+
+		}
+	}
+}
 
 void PWM_motor2(M_CTRL mmode)
 {
@@ -483,7 +498,7 @@ void motor_graph(void)
 
 void fh_hw(void *a_data)
 {
-	t_cli_ctx *cmd=a_data;
+	t_cli_ctx *cmd = a_data;
 	POS3CNT = 1000;
 	UART3_Write((uint8_t*) cmd->cmd, strlen(cmd->cmd));
 }
@@ -602,6 +617,9 @@ int main(void)
 	StartTimer(TMR_VEL, 1000);
 
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
+
+	BDC_motor(1);
+
 	/*
 	 * enable motor channels
 	 */
