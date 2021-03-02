@@ -137,6 +137,9 @@ extern "C" {
 		M_SPEED m_speed;
 		int32_t motor_speed;
 	};
+	
+#define KNOB1_INC	POS3CNT
+#define MOTOR1_INC	POS2CNT
 
 #ifdef	__cplusplus
 }

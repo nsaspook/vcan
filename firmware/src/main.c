@@ -172,11 +172,14 @@ void BDC_motor(uint32_t);
 
 void BDC_motor(uint32_t m_type)
 {
+	char buffer[STR_BUF_SIZE];
+	uint32_t i = 11500;
+
 	TMR2_Stop();
 	TMR3_Stop();
 
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, 6000);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, i);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 6000);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
 	MCPWM_Start();
@@ -184,7 +187,30 @@ void BDC_motor(uint32_t m_type)
 	U2_EN_Set();
 	if (m_type == 1) {
 		while (true) {
+			sprintf(buffer, "POT %7i      ", KNOB1_INC);
+			eaDogM_WriteStringAtPos(5, 0, buffer);
+			sprintf(buffer, "HP  %7i      ", MOTOR1_INC);
+			eaDogM_WriteStringAtPos(6, 0, buffer);
+			sprintf(buffer, "PWM  %7i      ", i);
+			eaDogM_WriteStringAtPos(7, 0, buffer);
 
+			if (TimerDone(TMR_MOTOR)) {
+				StartTimer(TMR_MOTOR, 3000);
+				i += 8000;
+				if (i > 11000) {
+					i = 2000;
+				}
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, i);
+			}
+
+			if (TimerDone(TMR_DISPLAY)) {
+				OledUpdate();
+				StartTimer(TMR_DISPLAY, 333);
+			}
+			if (TimerDone(TMR_BLINK)) {
+				StartTimer(TMR_BLINK, 1000);
+				RESET_LED_Toggle();
+			}
 		}
 	}
 }
