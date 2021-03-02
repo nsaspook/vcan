@@ -171,7 +171,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: IOCON1__POLH}
     children:
@@ -750,7 +750,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '1009239100'}
+        attributes: {id: mcpwm, value: '1009238076'}
   - type: Hex
     attributes: {id: MCPWM_IOCON10}
     children:
@@ -1244,7 +1244,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '0'}
+        attributes: {value: '6000'}
   - type: Integer
     attributes: {id: PDC2__PDC}
     children:

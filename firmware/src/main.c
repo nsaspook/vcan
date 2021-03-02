@@ -175,6 +175,11 @@ void BDC_motor(uint32_t m_type)
 	TMR2_Stop();
 	TMR3_Stop();
 
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, 6000);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
+	MCPWM_Start();
 	U1_EN_Set();
 	U2_EN_Set();
 	if (m_type == 1) {
