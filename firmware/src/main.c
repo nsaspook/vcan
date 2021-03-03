@@ -173,7 +173,7 @@ void BDC_motor(uint32_t);
 void BDC_motor(uint32_t m_type)
 {
 	char buffer[STR_BUF_SIZE];
-	uint32_t i = 11500;
+	uint32_t i = 11500, j=6000;
 
 	TMR2_Stop();
 	TMR3_Stop();
@@ -191,7 +191,7 @@ void BDC_motor(uint32_t m_type)
 			eaDogM_WriteStringAtPos(5, 0, buffer);
 			sprintf(buffer, "HP  %7i      ", MOTOR1_INC);
 			eaDogM_WriteStringAtPos(6, 0, buffer);
-			sprintf(buffer, "PWM  %7i      ", i);
+			sprintf(buffer, "PWM  %7i      ", j);
 			eaDogM_WriteStringAtPos(7, 0, buffer);
 
 			if (TimerDone(TMR_MOTOR)) {
@@ -199,8 +199,11 @@ void BDC_motor(uint32_t m_type)
 				i += 8000;
 				if (i > 11000) {
 					i = 2000;
+					j=7000;
+				} else {
+					j=5000;
 				}
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, i);
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, j);
 			}
 
 			if (TimerDone(TMR_DISPLAY)) {
