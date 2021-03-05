@@ -69,6 +69,7 @@ IC = M * sin (? + 240)
 #include "OledGrph.h"
 #include "dio.h"
 #include "scmd.h"
+#include "peripheral/coretimer/plib_coretimer.h"
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 extern t_cli_ctx cli_ctx; // command buffer 
@@ -158,6 +159,9 @@ const uint8_t step_code[] = {// A,B,C bits in order
 	0b001,
 	0b101,
 };
+int32_t xa, ya, za;
+extern CORETIMER_OBJECT coreTmr;
+const uint32_t update_delay = 5;
 
 time_t time(time_t *);
 void my_time(uint32_t, uintptr_t);
@@ -169,11 +173,12 @@ void wave_gen(uint32_t, uintptr_t);
 void motor_graph(void);
 void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
 void BDC_motor(uint32_t);
+void LA_gfx(bool, bool, uint32_t);
 
 void BDC_motor(uint32_t m_type)
 {
 	char buffer[STR_BUF_SIZE];
-	uint32_t i = 11500, j=6000;
+	uint32_t i = 11500, j = 6000;
 
 	TMR2_Stop();
 	TMR3_Stop();
@@ -188,34 +193,105 @@ void BDC_motor(uint32_t m_type)
 	if (m_type == 1) {
 		while (true) {
 			sprintf(buffer, "POT %7i      ", KNOB1_INC);
-			eaDogM_WriteStringAtPos(5, 0, buffer);
+			eaDogM_WriteStringAtPos(3, 0, buffer);
 			sprintf(buffer, "HP  %7i      ", MOTOR1_INC);
-			eaDogM_WriteStringAtPos(6, 0, buffer);
+			eaDogM_WriteStringAtPos(4, 0, buffer);
 			sprintf(buffer, "PWM  %7i      ", j);
-			eaDogM_WriteStringAtPos(7, 0, buffer);
+			eaDogM_WriteStringAtPos(5, 0, buffer);
 
 			if (TimerDone(TMR_MOTOR)) {
 				StartTimer(TMR_MOTOR, 3000);
 				i += 8000;
 				if (i > 11000) {
 					i = 2000;
-					j=7000;
+					j = 7000;
 				} else {
-					j=5000;
+					j = 5000;
 				}
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, j);
 			}
 
 			if (TimerDone(TMR_DISPLAY)) {
+				//	100 Hz updates, processing takes 5ms
+				uint32_t tickStart, delayTicks;
+				tickStart = coreTmr.tickCounter;
+				delayTicks = (1000 * update_delay) / CORE_TIMER_INTERRUPT_PERIOD_IN_US; // Number of tick interrupts to wait for the delay
+				LA_gfx(false, false, 0);
+				while ((coreTmr.tickCounter - tickStart) < delayTicks) {
+					// extra processing loop while waiting for clock time to expire
+					LA_gfx(false, false, 1400);
+				}
 				OledUpdate();
 				StartTimer(TMR_DISPLAY, 333);
 			}
 			if (TimerDone(TMR_BLINK)) {
 				StartTimer(TMR_BLINK, 1000);
 				RESET_LED_Toggle();
+				OledClearBuffer();
 			}
 		}
 	}
+}
+
+/*
+ *
+ * Basic Lorenz Attractor code 
+ * https://www.stsci.edu/~lbradley/seminar/attractors.html
+ */
+void LA_gfx(bool reset, bool redraw, uint32_t turns)
+{
+	static double x = 0.1;
+	static double y = 0;
+	static double z = 0;
+	static double a = 10.0;
+	static double b = 28.0;
+	static double c = 8.0 / 3.0;
+	static double t = 0.01;
+	static uint32_t i = 0;
+
+	//Iterate and update x,y and z locations
+	//based upon the Lorenz equations
+	if (redraw) {
+		i = 0;
+		return;
+	}
+
+	if (reset) {
+		x = 0.1;
+		y = 0;
+		z = 0;
+		a = 10.0;
+		b = 28.0;
+		c = 8.0 / 3.0;
+		t = 0.01;
+		i = 0;
+		return;
+	}
+
+	if (i++ >= turns) {
+		i = turns;
+		//		dtog_Clear();
+		return;
+	}
+
+	double xt = x + t * a * (y - x);
+	double yt = y + t * (x * (b - z) - y);
+	double zt = z + t * (x * y - c * z);
+	x = xt;
+	y = yt;
+	z = zt;
+#ifdef SHOW_STATS
+	xa = (x * 1.5) + 40;
+	ya = (z * 1.5) + 10; // xz plot
+	//	ya = (y * 1.5) + 40; // xy plot
+#else
+	xa = (x * 2.5) + 120;
+	ya = (z * 1.5) + 50; // xz plot
+	//	ya = (y * 1.5) + 40; // xy plot
+#endif
+	za = z;
+	OledMoveTo(xa, ya);
+	OledLineTo(xa + 1, ya + 1);
 }
 
 void PWM_motor2(M_CTRL mmode)
@@ -652,6 +728,8 @@ int main(void)
 
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
 
+	/* Start system tick timer */
+	CORETIMER_Start();
 	BDC_motor(1);
 
 	/*

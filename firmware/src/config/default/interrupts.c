@@ -61,6 +61,7 @@
 // *****************************************************************************
 
 
+void CORE_TIMER_InterruptHandler( void );
 void EXTERNAL_0_InterruptHandler( void );
 void TIMER_1_InterruptHandler( void );
 void TIMER_2_InterruptHandler( void );
@@ -84,6 +85,7 @@ void SPI3_TX_InterruptHandler( void );
 /* All the handlers are defined here.  Each will call its PLIB-specific function. */
 void __ISR(_CORE_TIMER_VECTOR, ipl1SOFT) CORE_TIMER_Handler (void)
 {
+    CORE_TIMER_InterruptHandler();
 }
 
 void __ISR(_EXTERNAL_0_VECTOR, ipl3SOFT) EXTERNAL_0_Handler (void)

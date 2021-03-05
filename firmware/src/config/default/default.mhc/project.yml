@@ -6,20 +6,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: D36718042D91946B723C803E1BEAF0F3
+- generatedChecksum: 97888BD4E3C5432505AD845C991F6C46
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: D36718042D91946B723C803E1BEAF0F3
-- generatedChecksum: 0873F4BF0B63710DF38E9F0AE7B4AF81
+  userChecksum: 97888BD4E3C5432505AD845C991F6C46
+- generatedChecksum: 084D6BC1E66C222558B7C337F8B8D592
   logicalPath: config/default
   name: interrupts.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 7AAE9CF8BF36D8071018AA555486FA33
+  userChecksum: 4D2F018C2AE6256DBDF7F795868BC376
 - generatedChecksum: null
   logicalPath: ''
   name: main.c
@@ -41,6 +41,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: E7A7CC95533908670EF7D9FEFA62CB4C
+- generatedChecksum: 1C64A0CC3068C1F1EB55F6817B1579A6
+  logicalPath: config/default/peripheral/coretimer
+  name: plib_coretimer.c
+  physicalPath: peripheral/coretimer
+  security: NON_SECURE
+  type: SOURCE
+  userChecksum: 1C64A0CC3068C1F1EB55F6817B1579A6
 - generatedChecksum: F0F77E9605002F86303776FD504751EB
   logicalPath: config/default/peripheral/eeprom
   name: plib_eeprom.c
@@ -153,13 +160,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 7806B30ECAE0D18D08CD583D8775530D
-- generatedChecksum: 6C8F24801D1DBA8066011F07CE3A393A
+- generatedChecksum: 645D99E78F4D8752AD92706F41E2E820
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 6C8F24801D1DBA8066011F07CE3A393A
+  userChecksum: 645D99E78F4D8752AD92706F41E2E820
 - generatedChecksum: E189C26B2269F8DE46033CCD0621958D
   logicalPath: config/default
   name: device.h
@@ -195,6 +202,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 7066CC390335CF75126E2A50C46E3BDD
+- generatedChecksum: 3D6EB2BF99796DE22C8637CC7F213F11
+  logicalPath: config/default/peripheral/coretimer
+  name: plib_coretimer.h
+  physicalPath: peripheral/coretimer
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: 3D6EB2BF99796DE22C8637CC7F213F11
 - generatedChecksum: B97B50D5217602B30A68AA8AA5D77BFB
   logicalPath: config/default/peripheral/eeprom
   name: plib_eeprom.h
