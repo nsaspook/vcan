@@ -44,7 +44,7 @@
 /* ------------------------------------------------------------ */
 /*				Include File Definitions	*/
 /* ------------------------------------------------------------ */
- 
+
 #include "display_type.h"
 #include "OledDriver.h"
 #include "OledChar.h"
@@ -112,13 +112,13 @@ void OledDevTerm(void);
 void OledDvrInit(void);
 void OledPutBuffer(int32_t cb, uint8_t * rgbTx);
 
-uint16_t SPI1_to_Buffer(uint8_t *, uint16_t, uint8_t *);
+uint16_t SPI3_to_Buffer(uint8_t *, uint16_t, uint8_t *);
 
 void RS_SetLow(void);
 void RS_SetHigh(void);
 void CSB_SetLow(void);
 void CSB_SetHigh(void);
-void SPI1_Exchange8bit(uint8_t);
+void SPI3_Exchange8bit(uint8_t);
 
 
 /* ------------------------------------------------------------ */
@@ -515,10 +515,10 @@ void OledUpdate(void)
 
 void OledPutBuffer(int32_t cb, uint8_t * rgbTx)
 {
-	SPI1_to_Buffer(rgbTx, cb, NULL);
+	SPI3_to_Buffer(rgbTx, cb, NULL);
 }
 
-uint16_t SPI1_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
+uint16_t SPI3_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 {
 	uint16_t bytesWritten = 0;
 
@@ -551,9 +551,9 @@ uint16_t SPI1_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 		if (dataIn != NULL) {
 			while (bytesWritten < bufLen) {
 				if (dataOut == NULL) {
-					SPI1_Exchange8bit(dataIn[bytesWritten]);
+					SPI3_Exchange8bit(dataIn[bytesWritten]);
 				} else {
-					SPI1_Exchange8bit(dataIn[bytesWritten]);
+					SPI3_Exchange8bit(dataIn[bytesWritten]);
 				}
 				lcd_inc_column(1);
 				bytesWritten++;
@@ -561,7 +561,7 @@ uint16_t SPI1_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 		} else {
 			if (dataOut != NULL) {
 				while (bytesWritten < bufLen) {
-					SPI1_Exchange8bit(0xff);
+					SPI3_Exchange8bit(0xff);
 					lcd_inc_column(1);
 					bytesWritten++;
 				}

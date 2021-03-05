@@ -365,7 +365,7 @@ void lcd_set_contrast(uint8_t value);
 #define LCD_SET_MAPPING_CTRL(i)       lcd_command(LCD_MAPPING_CTRL | ((i) & 0x7))  
 #define LCD_SET_BOTTOM_VIEW()         lcd_command(LCD_MAPPING_CTRL | 0)  
 #define LCD_SET_TOP_VIEW()            lcd_command(LCD_MAPPING_CTRL | 6)  
-#define LCD_SET_GRAY_SHADE(i)         lcd_command(LCD_GRAY_SHADE | ((i) & 0x3))SPI1_Exchange8bit
+#define LCD_SET_GRAY_SHADE(i)         lcd_command(LCD_GRAY_SHADE | ((i) & 0x3))SPI3_Exchange8bit
 #define LCD_SET_PAGE_ADDR(i)          lcd_command(LCD_PAGE_ADDRESS | ((i) & 0x1F))
 #define LCD_SET_COLUMN_ADDR(col)      lcd_command(LCD_COL_ADDRESS | ((((col)+SHIFT_ADDR)>>4) & 0x0F)); \
                                         lcd_command((((col)+SHIFT_ADDR) & 0x0F))

@@ -70,6 +70,7 @@ IC = M * sin (? + 240)
 #include "dio.h"
 #include "scmd.h"
 #include "peripheral/coretimer/plib_coretimer.h"
+#include "gfx.h"
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 extern t_cli_ctx cli_ctx; // command buffer 
@@ -162,6 +163,7 @@ const uint8_t step_code[] = {// A,B,C bits in order
 int32_t xa, ya, za;
 extern CORETIMER_OBJECT coreTmr;
 const uint32_t update_delay = 5;
+volatile float q0 = 1.0, q1 = 1.0, q2 = 1.0, q3 = 1.0; // quaternion 
 
 time_t time(time_t *);
 void my_time(uint32_t, uintptr_t);
@@ -171,9 +173,7 @@ void set_motor_speed(const uint32_t, double);
 int32_t velo_loop(double, bool);
 void wave_gen(uint32_t, uintptr_t);
 void motor_graph(void);
-void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
 void BDC_motor(uint32_t);
-void LA_gfx(bool, bool, uint32_t);
 
 void BDC_motor(uint32_t m_type)
 {
@@ -192,11 +192,11 @@ void BDC_motor(uint32_t m_type)
 	U2_EN_Set();
 	if (m_type == 1) {
 		while (true) {
-			sprintf(buffer, "POT %7i      ", KNOB1_INC);
+			sprintf(buffer, "POT %5i      ", KNOB1_INC);
 			eaDogM_WriteStringAtPos(3, 0, buffer);
-			sprintf(buffer, "HP  %7i      ", MOTOR1_INC);
+			sprintf(buffer, "HP  %5i      ", MOTOR1_INC);
 			eaDogM_WriteStringAtPos(4, 0, buffer);
-			sprintf(buffer, "PWM  %7i      ", j);
+			sprintf(buffer, "PWM  %5i      ", j);
 			eaDogM_WriteStringAtPos(5, 0, buffer);
 
 			if (TimerDone(TMR_MOTOR)) {
@@ -212,24 +212,96 @@ void BDC_motor(uint32_t m_type)
 			}
 
 			if (TimerDone(TMR_DISPLAY)) {
-				//	100 Hz updates, processing takes 5ms
-				uint32_t tickStart, delayTicks;
-				tickStart = coreTmr.tickCounter;
-				delayTicks = (1000 * update_delay) / CORE_TIMER_INTERRUPT_PERIOD_IN_US; // Number of tick interrupts to wait for the delay
-				LA_gfx(false, false, 0);
-				while ((coreTmr.tickCounter - tickStart) < delayTicks) {
-					// extra processing loop while waiting for clock time to expire
-					LA_gfx(false, false, 1400);
+				vector_graph();
+				{
+					//	100 Hz updates, processing takes 5ms
+					uint32_t tickStart, delayTicks;
+					tickStart = coreTmr.tickCounter;
+					delayTicks = (1000 * update_delay) / CORE_TIMER_INTERRUPT_PERIOD_IN_US; // Number of tick interrupts to wait for the delay
+					LA_gfx(false, false, 0);
+					while ((coreTmr.tickCounter - tickStart) < delayTicks) {
+						// extra processing loop while waiting for clock time to expire
+						LA_gfx(false, false, 700);
+					}
 				}
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 333);
+				StartTimer(TMR_DISPLAY, 100);
 			}
 			if (TimerDone(TMR_BLINK)) {
-				StartTimer(TMR_BLINK, 1000);
+				StartTimer(TMR_BLINK, 500);
 				RESET_LED_Toggle();
 				OledClearBuffer();
 			}
 		}
+	}
+}
+
+void vector_graph(void)
+{
+	static uint32_t irow = 0;
+	static int32_t x2 = 90, x1 = 120, y1 = 35, xn1, yn1, xn2, yn2, r;
+	static double theta1 = sinea, theta2 = sineb, theta3 = sinec;
+	static double ra, si, co;
+
+	//	double t1 = 60.0 * q1, t2 = 50.0 * q2, t3 = 50.0 * q3, t4 = 50.0 * q0;
+
+	//	OledMoveTo(60 + t1, 0 + t4);
+	//	OledLineTo(180 - t1, 0 + t4);
+	//	OledLineTo(180 - t1, 70 - t4);
+	//	OledMoveTo(60 + t1, 0 + t4);
+	//	OledLineTo(60 + t1, 70 - t4);
+	//	OledLineTo(180 - t1, 70 - t4);
+
+	//	OledMoveTo(80 + t3, 20 + t2);
+	//	OledLineTo(160 - t3, 20 + t2);
+	//	OledLineTo(160 - t3, 50 - t2);
+	//	OledMoveTo(80 + t3, 20 + t2);
+	//	OledLineTo(80 + t3, 50 - t2);
+	//	OledLineTo(160 - t3, 50 - t2);
+
+	//Starting point
+	xn1 = x1;
+	yn1 = y1;
+
+	//Convert Degree into radian
+	r = x2 - x1;
+	ra = 0.0175 * theta1;
+	si = sin(ra);
+	co = cos(ra);
+	//second point
+	xn2 = x1 + r * co + 1;
+	yn2 = y1 + r * si + 1;
+
+	line_rot(xn1, yn1, xn2, yn2);
+	ra = 0.0175 * theta2;
+	si = sin(ra);
+	co = cos(ra);
+	//second point
+	xn2 = x1 + r * co + 1;
+	yn2 = y1 + r * si + 1;
+
+	line_rot(xn1, yn1, xn2, yn2);
+	ra = 0.0175 * theta3;
+	si = sin(ra);
+	co = cos(ra);
+	//second point
+	xn2 = x1 + r * co + 1;
+	yn2 = y1 + r * si + 1;
+
+	line_rot(xn1, yn1, xn2, yn2);
+
+	irow++;
+	theta1 = theta1 + q1; // rotate
+	if (theta1 > sine_res) {
+		theta1 = 0.0;
+	}
+	theta2 = theta2 + q2; // rotate
+	if (theta2 > sine_res) {
+		theta2 = 0.0;
+	}
+	theta3 = theta3 + q3; // rotate
+	if (theta3 > sine_res) {
+		theta3 = 0.0;
 	}
 }
 

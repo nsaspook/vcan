@@ -83,6 +83,7 @@
       <itemPath>../src/dogm-graphic.h</itemPath>
       <itemPath>../src/display_type.h</itemPath>
       <itemPath>../src/scmd.h</itemPath>
+      <itemPath>../src/gfx.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

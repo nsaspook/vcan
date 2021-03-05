@@ -152,7 +152,7 @@ void CSB_SetHigh(void)
 	SPI_EN1_Set();
 };
 
-void SPI1_Exchange8bit(uint8_t data)
+void SPI3_Exchange8bit(uint8_t data)
 {
 	SPI3_Write(&data, 1);
 };
@@ -199,7 +199,7 @@ static void send_lcd_data(const uint8_t data)
 	RS_SetHigh();
 	CSB_SetLow();
 	wdtdelay(IS_DELAYSHORT);
-	SPI1_Exchange8bit(data);
+	SPI3_Exchange8bit(data);
 }
 
 /*
@@ -210,7 +210,7 @@ static void send_lcd_cmd(const uint8_t cmd)
 	RS_SetLow();
 	CSB_SetLow();
 	wdtdelay(IS_DELAYMED);
-	SPI1_Exchange8bit(cmd);
+	SPI3_Exchange8bit(cmd);
 	wdtdelay(IS_DELAYMED);
 	RS_SetHigh();
 }
@@ -222,7 +222,7 @@ static void send_lcd_cmd_long(const uint8_t cmd)
 {
 	RS_SetLow();
 	CSB_SetLow();
-	SPI1_Exchange8bit(cmd);
+	SPI3_Exchange8bit(cmd);
 	wdtdelay(IS_DELAYLONG);
 	RS_SetHigh();
 }

@@ -54,7 +54,7 @@ void RS_SetLow(void);
 void RS_SetHigh(void);
 void CSB_SetLow(void);
 void CSB_SetHigh(void);
-void SPI1_Exchange8bit(uint8_t);
+void SPI3_Exchange8bit(uint8_t);
 
 /******************************************************************************
  * Changes the internal cursor by s pages
@@ -124,7 +124,7 @@ void lcd_data(uint8_t data)
 {
 	LCD_DRAM();
 	LCD_SELECT();
-	SPI1_Exchange8bit(data);
+	SPI3_Exchange8bit(data);
 	LCD_UNSELECT();
 	lcd_inc_column(1);
 }
@@ -138,7 +138,7 @@ void lcd_command(uint8_t cmd)
 	LCD_CMD();
 	LCD_SELECT();
 
-	SPI1_Exchange8bit(cmd);
+	SPI3_Exchange8bit(cmd);
 	LCD_UNSELECT();
 }
 
