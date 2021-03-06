@@ -183,6 +183,14 @@ void BDC_motor(uint32_t m_type)
 	TMR2_Stop();
 	TMR3_Stop();
 
+	//Module CTMU
+	PMD1bits.CTMUMD = 0; //Enable CTMU Module
+	CTMUCONbits.TGEN = 0; // TGEN = 0 for enable current through diode
+	CTMUCONbits.EDG1STAT = 1; // EDGESTAT1 = EDGESTAT2  for enable current trough diode
+	CTMUCONbits.EDG2STAT = 1; // EDGESTAT1 = EDGESTAT2  for enable current trough diode
+	CTMUCONbits.IRNG = 0b11; //100xBase current level
+	CTMUCONbits.ON = 1; // CTMU is ON
+
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, i);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 6000);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
@@ -192,12 +200,19 @@ void BDC_motor(uint32_t m_type)
 	U2_EN_Set();
 	if (m_type == 1) {
 		while (true) {
+			sprintf(buffer, "TMP %5i      ", an_data[TSENSOR]);
+			eaDogM_WriteStringAtPos(0, 0, buffer);
+			sprintf(buffer, "IM1 %5i      ", u1ai);
+			eaDogM_WriteStringAtPos(1, 0, buffer);
+			sprintf(buffer, "IM2 %5i      ", u1bi);
+			eaDogM_WriteStringAtPos(2, 0, buffer);
 			sprintf(buffer, "POT %5i      ", KNOB1_INC);
 			eaDogM_WriteStringAtPos(3, 0, buffer);
 			sprintf(buffer, "HP  %5i      ", MOTOR1_INC);
 			eaDogM_WriteStringAtPos(4, 0, buffer);
 			sprintf(buffer, "PWM  %5i      ", j);
 			eaDogM_WriteStringAtPos(5, 0, buffer);
+			start_adc_scan();
 
 			if (TimerDone(TMR_MOTOR)) {
 				StartTimer(TMR_MOTOR, 3000);
@@ -769,6 +784,8 @@ int main(void)
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
+		sprintf(buffer, " Options: 1:%d 2:%d ", option1_Get(), option2_Get());
+		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
 		WaitMs(5000);
 	} else {
@@ -776,6 +793,8 @@ int main(void)
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
+		sprintf(buffer, " Options: 1:%d 2:%d ", option1_Get(), option2_Get());
+		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
 		WaitMs(500);
 	}
@@ -802,7 +821,10 @@ int main(void)
 
 	/* Start system tick timer */
 	CORETIMER_Start();
+
+#ifdef	BDCM
 	BDC_motor(1);
+#endif
 
 	/*
 	 * enable motor channels

@@ -14,8 +14,12 @@ extern "C" {
 	/*
 	 * VCAN project header file
 	 */
+#include <xc.h>
 #include <math.h>
 #include <stdio.h>
+
+	/* Use Brushed DC Motor routines */
+#define BDCM
 
 	/*
 	 * jumper pin settings JP4
@@ -137,7 +141,7 @@ extern "C" {
 		M_SPEED m_speed;
 		int32_t motor_speed;
 	};
-	
+
 #define KNOB1_INC	POS3CNT
 #define MOTOR1_INC	POS2CNT
 
