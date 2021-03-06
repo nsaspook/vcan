@@ -12,9 +12,9 @@
             <itemPath>../src/config/pic32mk_mcj_curiosity_pro/bsp/bsp.h</itemPath>
           </logicalFolder>
           <logicalFolder name="f1" displayName="peripheral" projectFiles="true">
-            <logicalFolder name="f3" displayName="can" projectFiles="true">
-              <itemPath>../src/config/pic32mk_mcj_curiosity_pro/peripheral/can/plib_can_common.h</itemPath>
-              <itemPath>../src/config/pic32mk_mcj_curiosity_pro/peripheral/can/plib_can1.h</itemPath>
+            <logicalFolder name="f3" displayName="canfd" projectFiles="true">
+              <itemPath>../src/config/pic32mk_mcj_curiosity_pro/peripheral/canfd/plib_canfd_common.h</itemPath>
+              <itemPath>../src/config/pic32mk_mcj_curiosity_pro/peripheral/canfd/plib_canfd1.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f4" displayName="clk" projectFiles="true">
               <itemPath>../src/config/pic32mk_mcj_curiosity_pro/peripheral/clk/plib_clk.h</itemPath>
@@ -47,6 +47,7 @@
           <itemPath>../src/config/pic32mk_mcj_curiosity_pro/toolchain_specifics.h</itemPath>
           <itemPath>../src/config/pic32mk_mcj_curiosity_pro/definitions.h</itemPath>
           <itemPath>../src/config/pic32mk_mcj_curiosity_pro/device.h</itemPath>
+          <itemPath>../src/config/pic32mk_mcj_curiosity_pro/interrupts.h</itemPath>
         </logicalFolder>
       </logicalFolder>
       <itemPath>../../../../../../Learn-Folder-Updated-2020.03.02/Learn/Simple Libraries/Sensor/liblsm9ds1/lsm9ds1.h</itemPath>
@@ -115,8 +116,8 @@
             <itemPath>../src/config/pic32mk_mcj_curiosity_pro/bsp/bsp.c</itemPath>
           </logicalFolder>
           <logicalFolder name="f1" displayName="peripheral" projectFiles="true">
-            <logicalFolder name="f3" displayName="can" projectFiles="true">
-              <itemPath>../src/config/pic32mk_mcj_curiosity_pro/peripheral/can/plib_can1.c</itemPath>
+            <logicalFolder name="f3" displayName="canfd" projectFiles="true">
+              <itemPath>../src/config/pic32mk_mcj_curiosity_pro/peripheral/canfd/plib_canfd1.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f4" displayName="clk" projectFiles="true">
               <itemPath>../src/config/pic32mk_mcj_curiosity_pro/peripheral/clk/plib_clk.c</itemPath>

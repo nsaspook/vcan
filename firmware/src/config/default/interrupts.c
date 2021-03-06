@@ -73,6 +73,7 @@ void UART2_TX_InterruptHandler( void );
 void UART3_FAULT_InterruptHandler( void );
 void UART3_RX_InterruptHandler( void );
 void UART3_TX_InterruptHandler( void );
+void DMA0_InterruptHandler( void );
 void TIMER_6_InterruptHandler( void );
 void UART6_FAULT_InterruptHandler( void );
 void UART6_RX_InterruptHandler( void );
@@ -141,6 +142,11 @@ void __ISR(_UART3_RX_VECTOR, ipl1SOFT) UART3_RX_Handler (void)
 void __ISR(_UART3_TX_VECTOR, ipl1SOFT) UART3_TX_Handler (void)
 {
 	UART3_TX_InterruptHandler();
+}
+
+void __ISR(_DMA0_VECTOR, ipl1SOFT) DMA0_Handler (void)
+{
+    DMA0_InterruptHandler();
 }
 
 void __ISR(_TIMER_6_VECTOR, ipl1SOFT) TIMER_6_Handler (void)

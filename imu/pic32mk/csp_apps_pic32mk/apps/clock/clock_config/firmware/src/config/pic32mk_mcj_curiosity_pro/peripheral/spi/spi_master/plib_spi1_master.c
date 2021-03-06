@@ -59,7 +59,7 @@
 
 void SPI1_Initialize ( void )
 {
-    uint32_t rdata;
+    uint32_t rdata = 0U;
 
     /* Disable SPI1 Interrupts */
     IEC1CLR = 0x8;
