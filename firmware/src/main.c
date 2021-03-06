@@ -236,7 +236,7 @@ void BDC_motor(uint32_t m_type)
 					LA_gfx(false, false, 0);
 					while ((coreTmr.tickCounter - tickStart) < delayTicks) {
 						// extra processing loop while waiting for clock time to expire
-						LA_gfx(false, false, 700);
+						LA_gfx(false, false, 400);
 					}
 				}
 				OledUpdate();
@@ -372,8 +372,8 @@ void LA_gfx(bool reset, bool redraw, uint32_t turns)
 	ya = (z * 1.5) + 10; // xz plot
 	//	ya = (y * 1.5) + 40; // xy plot
 #else
-	xa = (x * 2.5) + 120;
-	ya = (z * 1.5) + 50; // xz plot
+	xa = (x * 1.25) + 200;
+	ya = (z * 0.75) + 20; // xz plot
 	//	ya = (y * 1.5) + 40; // xy plot
 #endif
 	za = z;
