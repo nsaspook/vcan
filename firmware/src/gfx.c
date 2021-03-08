@@ -23,7 +23,7 @@ void motor_graph(bool motion, bool reset)
 	if (motion) {
 		steps = 1.0;
 	} else {
-		steps = 0.0;
+		steps = -1.0;
 	}
 
 	//Starting point
@@ -61,15 +61,30 @@ void motor_graph(bool motion, bool reset)
 	theta1 = theta1 + steps; // rotate
 	if (theta1 > sine_res) {
 		theta1 = 0.0;
+	} else {
+		if (theta1 < 0.0) {
+			theta1 = sine_res;
+		}
 	}
+
 	theta2 = theta2 + steps; // rotate
 	if (theta2 > sine_res) {
 		theta2 = 0.0;
+	} else {
+		if (theta2 < 0.0) {
+			theta2 = sine_res;
+		}
 	}
+
 	theta3 = theta3 + steps; // rotate
 	if (theta3 > sine_res) {
 		theta3 = 0.0;
+	} else {
+		if (theta3 < 0.0) {
+			theta3 = sine_res;
+		}
 	}
+
 }
 
 void vector_graph(bool motion, bool reset)
@@ -87,9 +102,9 @@ void vector_graph(bool motion, bool reset)
 	}
 
 	if (motion) {
-		steps = 1.0;
+		steps = 3.0;
 	} else {
-		steps = 0.0;
+		steps = -3.0;
 	}
 	//	double t1 = 60.0 * q1, t2 = 50.0 * q2, t3 = 50.0 * q3, t4 = 50.0 * q0;
 
@@ -142,14 +157,28 @@ void vector_graph(bool motion, bool reset)
 	theta1 = theta1 + steps; // rotate
 	if (theta1 > sine_res) {
 		theta1 = 0.0;
+	} else {
+		if (theta1 < 0.0) {
+			theta1 = sine_res;
+		}
 	}
+
 	theta2 = theta2 + steps; // rotate
 	if (theta2 > sine_res) {
 		theta2 = 0.0;
+	} else {
+		if (theta2 < 0.0) {
+			theta2 = sine_res;
+		}
 	}
+
 	theta3 = theta3 + steps; // rotate
 	if (theta3 > sine_res) {
 		theta3 = 0.0;
+	} else {
+		if (theta3 < 0.0) {
+			theta3 = sine_res;
+		}
 	}
 }
 

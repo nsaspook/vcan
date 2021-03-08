@@ -215,7 +215,7 @@ void BDC_motor(uint32_t m_type)
 			start_adc_scan();
 
 			if (TimerDone(TMR_MOTOR)) {
-				StartTimer(TMR_MOTOR, 3000);
+				StartTimer(TMR_MOTOR, 10000);
 				i += 8000;
 				if (i > 11000) {
 					i = 2000;
