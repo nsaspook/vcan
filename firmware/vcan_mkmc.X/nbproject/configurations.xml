@@ -178,6 +178,7 @@
       <itemPath>../src/dogm-graphic.c</itemPath>
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/scdm.c</itemPath>
+      <itemPath>../src/gfx.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -219,7 +220,7 @@
         <targetDevice>PIC32MK1024MCF100</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>2.50</languageToolchainVersion>
         <platform>2</platform>

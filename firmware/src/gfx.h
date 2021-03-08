@@ -12,14 +12,17 @@
 extern "C" {
 #endif
 
+#include "vcan.h"
 #include <math.h>
 #include "OledGrph.h"
 
 	extern int32_t xa, ya, za;
+	extern volatile float q0, q1, q2, q3; // quaternion 
 
 	void line_rot(uint32_t, uint32_t, uint32_t, uint32_t);
-	void vector_graph(void);
+	void vector_graph(bool motion, bool reset);
 	void LA_gfx(bool, bool, uint32_t);
+	void motor_graph(bool motion, bool reset);
 
 #ifdef	__cplusplus
 }
