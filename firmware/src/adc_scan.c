@@ -12,10 +12,10 @@ void end_of_adc_scan(void)
 		/*
 		 * update program variables from the ADC result registers
 		 */
-//fixme		u2ai = ADCHS_ChannelResultGet(ADCHS_CH23); // JP5 pin 7, AN23, FBB2/RG15
+		u2ai = ADCHS_ChannelResultGet(23U); // JP5 pin 7, AN23, FBB2/RG15
 		u2bi = ADCHS_ChannelResultGet(ADCHS_CH14); // JP5 pin 6, AN14, FBA2/RE14
-//		u1ai = ADCHS_ChannelResultGet(ADCHS_CH37); // JP5 pin 5, AN37, FBA1/RF12
-//		u1bi = ADCHS_ChannelResultGet(ADCHS_CH36); // JP5 pin 4, AN36, FBB1/RF13
+		u1ai = ADCHS_ChannelResultGet(37U); // JP5 pin 5, AN37, FBA1/RF12
+		u1bi = ADCHS_ChannelResultGet(36U); // JP5 pin 4, AN36, FBB1/RF13
 		an_data[ANA1] = ADCHS_ChannelResultGet(ADCHS_CH1); // JP5 pin x, AN1, ANA1/RA1
 		an_data[POT1] = ADCHS_ChannelResultGet(ADCHS_CH11); // JP5 pin x, AN11 POT1/RC11
 		an_data[POT2] = ADCHS_ChannelResultGet(ADCHS_CH17); // JP5 pin x, AN17 POT2/RG8
