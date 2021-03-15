@@ -84,17 +84,17 @@ void SPI3_TX_InterruptHandler( void );
 
 
 /* All the handlers are defined here.  Each will call its PLIB-specific function. */
-void __ISR(_CORE_TIMER_VECTOR, ipl1SOFT) CORE_TIMER_Handler (void)
+void __ISR(_CORE_TIMER_VECTOR, ipl1SRS) CORE_TIMER_Handler (void)
 {
     CORE_TIMER_InterruptHandler();
 }
 
-void __ISR(_EXTERNAL_0_VECTOR, ipl3SOFT) EXTERNAL_0_Handler (void)
+void __ISR(_EXTERNAL_0_VECTOR, ipl3SRS) EXTERNAL_0_Handler (void)
 {
 	EXTERNAL_0_InterruptHandler();
 }
 
-void __ISR(_TIMER_1_VECTOR, ipl1SOFT) TIMER_1_Handler (void)
+void __ISR(_TIMER_1_VECTOR, ipl1SRS) TIMER_1_Handler (void)
 {
 	TIMER_1_InterruptHandler();
 }
@@ -104,94 +104,94 @@ void __ISR(_TIMER_2_VECTOR, ipl7SRS) TIMER_2_Handler (void)
 	TIMER_2_InterruptHandler();
 }
 
-void __ISR(_TIMER_3_VECTOR, ipl5SOFT) TIMER_3_Handler (void)
+void __ISR(_TIMER_3_VECTOR, ipl5SRS) TIMER_3_Handler (void)
 {
 	TIMER_3_InterruptHandler();
 }
 
-void __ISR(_CHANGE_NOTICE_B_VECTOR, ipl1SOFT) CHANGE_NOTICE_B_Handler (void)
+void __ISR(_CHANGE_NOTICE_B_VECTOR, ipl1SRS) CHANGE_NOTICE_B_Handler (void)
 {
 	CHANGE_NOTICE_B_InterruptHandler();
 }
 
-void __ISR(_UART2_FAULT_VECTOR, ipl1SOFT) UART2_FAULT_Handler (void)
+void __ISR(_UART2_FAULT_VECTOR, ipl1SRS) UART2_FAULT_Handler (void)
 {
 	UART2_FAULT_InterruptHandler();
 }
 
-void __ISR(_UART2_RX_VECTOR, ipl1SOFT) UART2_RX_Handler (void)
+void __ISR(_UART2_RX_VECTOR, ipl1SRS) UART2_RX_Handler (void)
 {
 	UART2_RX_InterruptHandler();
 }
 
-void __ISR(_UART2_TX_VECTOR, ipl1SOFT) UART2_TX_Handler (void)
+void __ISR(_UART2_TX_VECTOR, ipl1SRS) UART2_TX_Handler (void)
 {
 	UART2_TX_InterruptHandler();
 }
 
-void __ISR(_UART3_FAULT_VECTOR, ipl1SOFT) UART3_FAULT_Handler (void)
+void __ISR(_UART3_FAULT_VECTOR, ipl1SRS) UART3_FAULT_Handler (void)
 {
 	UART3_FAULT_InterruptHandler();
 }
 
-void __ISR(_UART3_RX_VECTOR, ipl1SOFT) UART3_RX_Handler (void)
+void __ISR(_UART3_RX_VECTOR, ipl1SRS) UART3_RX_Handler (void)
 {
 	UART3_RX_InterruptHandler();
 }
 
-void __ISR(_UART3_TX_VECTOR, ipl1SOFT) UART3_TX_Handler (void)
+void __ISR(_UART3_TX_VECTOR, ipl1SRS) UART3_TX_Handler (void)
 {
 	UART3_TX_InterruptHandler();
 }
 
-void __ISR(_DMA0_VECTOR, ipl1SOFT) DMA0_Handler (void)
+void __ISR(_DMA0_VECTOR, ipl1SRS) DMA0_Handler (void)
 {
     DMA0_InterruptHandler();
 }
 
-void __ISR(_TIMER_6_VECTOR, ipl1SOFT) TIMER_6_Handler (void)
+void __ISR(_TIMER_6_VECTOR, ipl1SRS) TIMER_6_Handler (void)
 {
 	TIMER_6_InterruptHandler();
 }
 
-void __ISR(_ADC_EOS_VECTOR, ipl1SOFT) ADC_EOS_Handler (void)
+void __ISR(_ADC_EOS_VECTOR, ipl1SRS) ADC_EOS_Handler (void)
 {
 	end_of_adc_scan();
 }
 
-void __ISR(_UART6_FAULT_VECTOR, ipl1SOFT) UART6_FAULT_Handler (void)
+void __ISR(_UART6_FAULT_VECTOR, ipl1SRS) UART6_FAULT_Handler (void)
 {
 	UART6_FAULT_InterruptHandler();
 }
 
-void __ISR(_UART6_RX_VECTOR, ipl1SOFT) UART6_RX_Handler (void)
+void __ISR(_UART6_RX_VECTOR, ipl1SRS) UART6_RX_Handler (void)
 {
 	UART6_RX_InterruptHandler();
 }
 
-void __ISR(_UART6_TX_VECTOR, ipl1SOFT) UART6_TX_Handler (void)
+void __ISR(_UART6_TX_VECTOR, ipl1SRS) UART6_TX_Handler (void)
 {
 	UART6_TX_InterruptHandler();
 }
 
-void __ISR(_QEI1_VECTOR, ipl3SOFT) QEI1_Handler (void)
+void __ISR(_QEI1_VECTOR, ipl3SRS) QEI1_Handler (void)
 {
 }
 
-void __ISR(_QEI2_VECTOR, ipl3SOFT) QEI2_Handler (void)
+void __ISR(_QEI2_VECTOR, ipl3SRS) QEI2_Handler (void)
 {
 }
 
-void __ISR(_QEI3_VECTOR, ipl1SOFT) QEI3_Handler (void)
+void __ISR(_QEI3_VECTOR, ipl1SRS) QEI3_Handler (void)
 {
 }
 
-void __ISR(_SPI3_RX_VECTOR, ipl1SOFT) SPI3_RX_Handler (void)
+void __ISR(_SPI3_RX_VECTOR, ipl1SRS) SPI3_RX_Handler (void)
 {
 	SPI3_RX_InterruptHandler();
 }
 
-void __ISR(_SPI3_TX_VECTOR, ipl1SOFT) SPI3_TX_Handler (void)
+void __ISR(_SPI3_TX_VECTOR, ipl1SRS) SPI3_TX_Handler (void)
 {
 	SPI3_TX_InterruptHandler();
 }

@@ -689,9 +689,6 @@ void UART2_FAULT_InterruptHandler (void)
 
 void UART2_RX_InterruptHandler (void)
 {
-    /* Clear UART2 RX Interrupt flag */
-    IFS1CLR = _IFS1_U2RXIF_MASK;
-
     /* Keep reading until there is a character availabe in the RX FIFO */
     while((U2STA & _U2STA_URXDA_MASK) == _U2STA_URXDA_MASK)
     {
@@ -704,6 +701,9 @@ void UART2_RX_InterruptHandler (void)
             /* UART RX buffer is full */
         }
     }
+
+    /* Clear UART2 RX Interrupt flag */
+    IFS1CLR = _IFS1_U2RXIF_MASK;
 }
 
 void UART2_TX_InterruptHandler (void)
@@ -713,9 +713,6 @@ void UART2_TX_InterruptHandler (void)
     /* Check if any data is pending for transmission */
     if (UART2_WritePendingBytesGet() > 0)
     {
-        /* Clear UART2TX Interrupt flag */
-        IFS1CLR = _IFS1_U2TXIF_MASK;
-
         /* Keep writing to the TX FIFO as long as there is space */
         while(!(U2STA & _U2STA_UTXBF_MASK))
         {
@@ -740,6 +737,10 @@ void UART2_TX_InterruptHandler (void)
                 break;
             }
         }
+
+        /* Clear UART2TX Interrupt flag */
+        IFS1CLR = _IFS1_U2TXIF_MASK;
+
     }
     else
     {

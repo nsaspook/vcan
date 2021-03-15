@@ -23,6 +23,9 @@
 // *****************************************************************************
 
 /*
+ * this is the MCM chip version
+ */
+/*
  * 26-bit Electrical angles and mechanical angles
  *
  * Velocity Calculation from each rising edge of one phase of the Quadrature Encoder

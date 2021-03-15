@@ -63,9 +63,9 @@
 #pragma config FSLEEP =     OFF
 #pragma config DBGPER =     PG_ALL
 #pragma config SMCLR =      MCLR_NORM
-#pragma config SOSCGAIN =   GAIN_1X
+#pragma config SOSCGAIN =   G1
 #pragma config SOSCBOOST =  OFF
-#pragma config POSCGAIN =   GAIN_LEVEL_3
+#pragma config POSCGAIN =   G3
 #pragma config POSCBOOST =  ON
 #pragma config EJTAGBEN =   NORMAL
 
@@ -91,12 +91,6 @@
 #pragma config FPLLICLK =   PLL_POSC
 #pragma config FPLLMULT =   MUL_40
 #pragma config FPLLODIV =   DIV_4
-#pragma config VBATBOREN =  ON
-#pragma config DSBOREN =    ON
-#pragma config DSWDTPS =    DSPS32
-#pragma config DSWDTOSC =   LPRC
-#pragma config DSWDTEN =    OFF
-#pragma config FDSEN =      OFF
 #pragma config BORSEL =     HIGH
 #pragma config UPLLEN =     OFF
 

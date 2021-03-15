@@ -85,7 +85,7 @@ void EVIC_Initialize( void )
 
 
     /* Configure Shadow Register Set */
-    PRISS = 0x10000000;
+    PRISS = 0x76543210;
 }
 
 void EVIC_SourceEnable( INT_SOURCE source )

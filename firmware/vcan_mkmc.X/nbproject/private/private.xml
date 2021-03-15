@@ -7,8 +7,10 @@
             <file>file:/fred/vcan/firmware/src/vcan.h</file>
             <file>file:/fred/vcan/firmware/src/config/default/peripheral/mcpwm/plib_mcpwm.c</file>
             <file>file:/fred/vcan/firmware/src/m35qei.h</file>
+            <file>file:/fred/vcan/firmware/src/config/default/peripheral/evic/plib_evic.h</file>
             <file>file:/fred/vcan/firmware/src/main.c</file>
             <file>file:/fred/vcan/firmware/src/gfx.c</file>
+            <file>file:/fred/vcan/firmware/src/adc_scan.c</file>
         </group>
     </open-files>
 </project-private>
