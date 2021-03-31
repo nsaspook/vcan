@@ -186,6 +186,11 @@ void BDC_motor(uint32_t m_type)
 	TMR2_Stop();
 	TMR3_Stop();
 
+	/*
+	 * init serial command parser
+	 */
+	scmd_init();
+
 	//Module CTMU
 	PMD1bits.CTMUMD = 0; //Enable CTMU Module
 	CTMUCONbits.TGEN = 0; // TGEN = 0 for enable current through diode
@@ -203,21 +208,34 @@ void BDC_motor(uint32_t m_type)
 	U2_EN_Set();
 	if (m_type == 1) {
 		while (true) {
-			sprintf(buffer, "TMP %5i      ", an_data[TSENSOR]);
+			sprintf(buffer, "TMP  %5i    ", an_data[TSENSOR]);
 			eaDogM_WriteStringAtPos(0, 0, buffer);
-			sprintf(buffer, "IM1 %5i      ", u1ai);
+			sprintf(buffer, "IM1  %5i    ", u1ai);
 			eaDogM_WriteStringAtPos(1, 0, buffer);
-			sprintf(buffer, "IM2 %5i      ", u1bi);
+			sprintf(buffer, "IM2  %5i    ", u1bi);
 			eaDogM_WriteStringAtPos(2, 0, buffer);
-			sprintf(buffer, "POT %5i      ", KNOB1_INC);
+			sprintf(buffer, "ENC3 %5i   ", KNOB1_INC);
 			eaDogM_WriteStringAtPos(3, 0, buffer);
-			sprintf(buffer, "HP  %5i      ", MOTOR1_INC);
+			sprintf(buffer, "ENC1 %5i   ", MOTOR1_INC);
 			eaDogM_WriteStringAtPos(4, 0, buffer);
-			sprintf(buffer, "PWM  %5i      ", j);
+			sprintf(buffer, "PWM  %5i   ", j);
 			eaDogM_WriteStringAtPos(5, 0, buffer);
+			sprintf(buffer, "IM3  %5i   ", u2ai);
+			eaDogM_WriteStringAtPos(6, 0, buffer);
+			sprintf(buffer, "IM4  %5i   ", u2bi);
+			eaDogM_WriteStringAtPos(7, 0, buffer);
+			sprintf(buffer, "ANA1 %5i   ", an_data[ANA1]);
+			eaDogM_WriteStringAtPos(8, 0, buffer);
+			sprintf(buffer, "POT1 %5i   ", an_data[POT1]);
+			eaDogM_WriteStringAtPos(9, 0, buffer);
+			sprintf(buffer, "POT2 %5i   ", an_data[POT2]);
+			eaDogM_WriteStringAtPos(10, 0, buffer);
+			sprintf(buffer, "IVR  %5i   ", an_data[IVREF]);
+			eaDogM_WriteStringAtPos(11, 0, buffer);
 			start_adc_scan();
 
 			if (TimerDone(TMR_MOTOR)) {
+
 				StartTimer(TMR_MOTOR, 10000);
 				i += 8000;
 				if (i > 11000) {
@@ -232,6 +250,11 @@ void BDC_motor(uint32_t m_type)
 			}
 
 			if (TimerDone(TMR_DISPLAY)) {
+				/*
+				 * read serial port 3 for command data
+				 */
+				cli_read(&cli_ctx);
+
 				vector_graph(gfx_move, gfx_reset);
 				{
 					//	100 Hz updates, processing takes 5ms

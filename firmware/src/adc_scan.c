@@ -20,10 +20,10 @@ void end_of_adc_scan(void)
 		an_data[POT1] = ADCHS_ChannelResultGet(ADCHS_CH11); // JP5 pin x, AN11 POT1/RC11
 		an_data[POT2] = ADCHS_ChannelResultGet(ADCHS_CH17); // JP5 pin x, AN17 POT2/RG8
 		an_data[IVREF] = ADCHS_ChannelResultGet(ADCHS_CH50); // IVREF 1.2V (internal AN50)
-		an_data[VBAT2] = ADCHS_ChannelResultGet(ADCHS_CH52); // VBAT/2 (internal AN52)
+//		an_data[VBAT2] = ADCHS_ChannelResultGet(ADCHS_CH52); // VBAT/2 (internal AN52)
 		an_data[TSENSOR] = ADCHS_ChannelResultGet(ADCHS_CH53); //  CTMU Temperature Sensor (internal AN53)
 		if (!option1_Get()) {
-			u1bi = u1ai;
+//			u1bi = u1ai;
 		}
 		u1ai = (int32_t) lp_filter_f((double) u1ai, 0); // try filter
 		u1bi = (int32_t) lp_filter_f((double) u1bi, 1);
@@ -46,6 +46,9 @@ void init_end_of_adc_scan(void)
 	 * set ADC trigger to SCAN and start SCAN trigger
 	 */
 
+	ADCCSS1bits.CSS23 = 1;
+	ADCCSS2bits.CSS36 = 1;
+	ADCCSS2bits.CSS37 = 1;
 	ADCCON1bits.STRGSRC = 1; // set trigger source 5-bit value
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // use scan trigger
 
