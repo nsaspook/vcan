@@ -66,19 +66,19 @@ void EVIC_Initialize( void )
     IPC14SET = 0x400 | 0x0;  /* UART2_RX:  Priority 1 / Subpriority 0 */
     IPC14SET = 0x40000 | 0x0;  /* UART2_TX:  Priority 1 / Subpriority 0 */
     IPC15SET = 0x40000 | 0x0;  /* UART3_FAULT:  Priority 1 / Subpriority 0 */
-    IPC15SET = 0x4000000 | 0x0;  /* UART3_RX:  Priority 1 / Subpriority 0 */
-    IPC16SET = 0x4 | 0x0;  /* UART3_TX:  Priority 1 / Subpriority 0 */
+    IPC15SET = 0xc000000 | 0x0;  /* UART3_RX:  Priority 3 / Subpriority 0 */
+    IPC16SET = 0xc | 0x0;  /* UART3_TX:  Priority 3 / Subpriority 0 */
     IPC18SET = 0x4 | 0x0;  /* DMA0:  Priority 1 / Subpriority 0 */
     IPC19SET = 0x4 | 0x0;  /* TIMER_6:  Priority 1 / Subpriority 0 */
-    IPC25SET = 0x400 | 0x0;  /* ADC_EOS:  Priority 1 / Subpriority 0 */
+    IPC25SET = 0x800 | 0x0;  /* ADC_EOS:  Priority 2 / Subpriority 0 */
     IPC41SET = 0x4 | 0x0;  /* UART6_FAULT:  Priority 1 / Subpriority 0 */
     IPC41SET = 0x400 | 0x0;  /* UART6_RX:  Priority 1 / Subpriority 0 */
     IPC41SET = 0x40000 | 0x0;  /* UART6_TX:  Priority 1 / Subpriority 0 */
     IPC42SET = 0xc00 | 0x0;  /* QEI1:  Priority 3 / Subpriority 0 */
     IPC42SET = 0xc0000 | 0x0;  /* QEI2:  Priority 3 / Subpriority 0 */
-    IPC47SET = 0x400 | 0x0;  /* QEI3:  Priority 1 / Subpriority 0 */
+    IPC47SET = 0x1000 | 0x0;  /* QEI3:  Priority 4 / Subpriority 0 */
     IPC54SET = 0x4000000 | 0x0;  /* SPI3_RX:  Priority 1 / Subpriority 0 */
-    IPC55SET = 0x4 | 0x0;  /* SPI3_TX:  Priority 1 / Subpriority 0 */
+    IPC55SET = 0x18 | 0x0;  /* SPI3_TX:  Priority 6 / Subpriority 0 */
 
     /* Initialize External interrupt 0 callback object */
     extInt0CbObj.callback = NULL;

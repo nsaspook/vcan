@@ -208,34 +208,9 @@ void BDC_motor(uint32_t m_type)
 	U2_EN_Set();
 	if (m_type == 1) {
 		while (true) {
-			sprintf(buffer, "TMP  %5i    ", an_data[TSENSOR]);
-			eaDogM_WriteStringAtPos(0, 0, buffer);
-			sprintf(buffer, "IM1  %5i    ", u1ai);
-			eaDogM_WriteStringAtPos(1, 0, buffer);
-			sprintf(buffer, "IM2  %5i    ", u1bi);
-			eaDogM_WriteStringAtPos(2, 0, buffer);
-			sprintf(buffer, "ENC3 %5i   ", KNOB1_INC);
-			eaDogM_WriteStringAtPos(3, 0, buffer);
-			sprintf(buffer, "ENC1 %5i   ", MOTOR1_INC);
-			eaDogM_WriteStringAtPos(4, 0, buffer);
-			sprintf(buffer, "PWM  %5i   ", j);
-			eaDogM_WriteStringAtPos(5, 0, buffer);
-			sprintf(buffer, "IM3  %5i   ", u2ai);
-			eaDogM_WriteStringAtPos(6, 0, buffer);
-			sprintf(buffer, "IM4  %5i   ", u2bi);
-			eaDogM_WriteStringAtPos(7, 0, buffer);
-			sprintf(buffer, "ANA1 %5i   ", an_data[ANA1]);
-			eaDogM_WriteStringAtPos(8, 0, buffer);
-			sprintf(buffer, "POT1 %5i   ", an_data[POT1]);
-			eaDogM_WriteStringAtPos(9, 0, buffer);
-			sprintf(buffer, "POT2 %5i   ", an_data[POT2]);
-			eaDogM_WriteStringAtPos(10, 0, buffer);
-			sprintf(buffer, "IVR  %5i   ", an_data[IVREF]);
-			eaDogM_WriteStringAtPos(11, 0, buffer);
-			start_adc_scan();
+
 
 			if (TimerDone(TMR_MOTOR)) {
-
 				StartTimer(TMR_MOTOR, 10000);
 				i += 8000;
 				if (i > 11000) {
@@ -255,6 +230,33 @@ void BDC_motor(uint32_t m_type)
 				 */
 				cli_read(&cli_ctx);
 
+				OledClearBuffer();
+				sprintf(buffer, "TMP  %5i", an_data[TSENSOR]);
+				eaDogM_WriteStringAtPos(0, 0, buffer);
+				sprintf(buffer, "IM1  %5i", u1ai);
+				eaDogM_WriteStringAtPos(1, 0, buffer);
+				sprintf(buffer, "IM2  %5i", u1bi);
+				eaDogM_WriteStringAtPos(2, 0, buffer);
+				sprintf(buffer, "ENC3 %5i", KNOB1_INC);
+				eaDogM_WriteStringAtPos(3, 0, buffer);
+				sprintf(buffer, "ENC1 %5i", MOTOR1_INC);
+				eaDogM_WriteStringAtPos(4, 0, buffer);
+				sprintf(buffer, "PWM  %5i", j);
+				eaDogM_WriteStringAtPos(5, 0, buffer);
+				sprintf(buffer, "IM3  %5i", u2ai);
+				eaDogM_WriteStringAtPos(6, 0, buffer);
+				sprintf(buffer, "IM4  %5i", u2bi);
+				eaDogM_WriteStringAtPos(7, 0, buffer);
+				sprintf(buffer, "ANA1 %5i", an_data[ANA1]);
+				eaDogM_WriteStringAtPos(8, 0, buffer);
+				sprintf(buffer, "POT1 %5i", an_data[POT1]);
+				eaDogM_WriteStringAtPos(9, 0, buffer);
+				sprintf(buffer, "POT2 %5i", an_data[POT2]);
+				eaDogM_WriteStringAtPos(10, 0, buffer);
+				sprintf(buffer, "IVR  %5i", an_data[IVREF]);
+				eaDogM_WriteStringAtPos(11, 0, buffer);
+				start_adc_scan();
+
 				vector_graph(gfx_move, gfx_reset);
 				{
 					//	100 Hz updates, processing takes 5ms
@@ -264,16 +266,16 @@ void BDC_motor(uint32_t m_type)
 					LA_gfx(false, false, 0);
 					while ((coreTmr.tickCounter - tickStart) < delayTicks) {
 						// extra processing loop while waiting for clock time to expire
-						LA_gfx(false, false, 400);
+						LA_gfx(false, false, 500);
 					}
 				}
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 100);
+				StartTimer(TMR_DISPLAY, 50);
 			}
 			if (TimerDone(TMR_BLINK)) {
 				StartTimer(TMR_BLINK, 500);
 				RESET_LED_Toggle();
-				OledClearBuffer();
+				//OledClearBuffer();
 			}
 		}
 	}
@@ -635,7 +637,7 @@ int main(void)
 		sprintf(buffer, " Options: 1:%d 2:%d ", option1_Get(), option2_Get());
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
-		WaitMs(500);
+		WaitMs(1500);
 	}
 
 

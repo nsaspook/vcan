@@ -134,12 +134,12 @@ void __ISR(_UART3_FAULT_VECTOR, ipl1SRS) UART3_FAULT_Handler (void)
 	UART3_FAULT_InterruptHandler();
 }
 
-void __ISR(_UART3_RX_VECTOR, ipl1SRS) UART3_RX_Handler (void)
+void __ISR(_UART3_RX_VECTOR, ipl3SRS) UART3_RX_Handler (void)
 {
 	UART3_RX_InterruptHandler();
 }
 
-void __ISR(_UART3_TX_VECTOR, ipl1SRS) UART3_TX_Handler (void)
+void __ISR(_UART3_TX_VECTOR, ipl3SRS) UART3_TX_Handler (void)
 {
 	UART3_TX_InterruptHandler();
 }
@@ -154,7 +154,7 @@ void __ISR(_TIMER_6_VECTOR, ipl1SRS) TIMER_6_Handler (void)
 	TIMER_6_InterruptHandler();
 }
 
-void __ISR(_ADC_EOS_VECTOR, ipl1SRS) ADC_EOS_Handler (void)
+void __ISR(_ADC_EOS_VECTOR, ipl2SRS) ADC_EOS_Handler (void)
 {
 	end_of_adc_scan();
 }
@@ -182,7 +182,7 @@ void __ISR(_QEI2_VECTOR, ipl3SRS) QEI2_Handler (void)
 {
 }
 
-void __ISR(_QEI3_VECTOR, ipl1SRS) QEI3_Handler (void)
+void __ISR(_QEI3_VECTOR, ipl4SRS) QEI3_Handler (void)
 {
 }
 
@@ -191,7 +191,7 @@ void __ISR(_SPI3_RX_VECTOR, ipl1SRS) SPI3_RX_Handler (void)
 	SPI3_RX_InterruptHandler();
 }
 
-void __ISR(_SPI3_TX_VECTOR, ipl1SRS) SPI3_TX_Handler (void)
+void __ISR(_SPI3_TX_VECTOR, ipl6SRS) SPI3_TX_Handler (void)
 {
 	SPI3_TX_InterruptHandler();
 }

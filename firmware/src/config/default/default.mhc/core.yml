@@ -3330,6 +3330,20 @@ children:
       children:
       - type: User
         attributes: {value: 'true'}
+  - type: Combo
+    attributes: {id: EVIC_101_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '2'}
+  - type: Hex
+    attributes: {id: EVIC_101_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '2048'}
   - type: Boolean
     attributes: {id: EVIC_107_ENABLE}
     children:
@@ -3719,6 +3733,20 @@ children:
       children:
       - type: User
         attributes: {value: 'true'}
+  - type: Combo
+    attributes: {id: EVIC_189_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '4'}
+  - type: Hex
+    attributes: {id: EVIC_189_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '4096'}
   - type: Boolean
     attributes: {id: EVIC_1_ENABLE_GENERATE}
     children:
@@ -3803,6 +3831,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: SPI3_RX_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_219_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: Hex
+    attributes: {id: EVIC_219_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '67108864'}
   - type: Boolean
     attributes: {id: EVIC_220_ENABLE}
     children:
@@ -3824,6 +3866,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: SPI3_TX_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_220_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '6'}
+  - type: Hex
+    attributes: {id: EVIC_220_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '24'}
   - type: Boolean
     attributes: {id: EVIC_230_ENABLE}
     children:
@@ -4211,6 +4267,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: UART3_RX_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_63_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '3'}
+  - type: Hex
+    attributes: {id: EVIC_63_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '201326592'}
   - type: Boolean
     attributes: {id: EVIC_64_ENABLE}
     children:
@@ -4234,6 +4304,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: UART3_TX_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_64_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '3'}
+  - type: Hex
+    attributes: {id: EVIC_64_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '12'}
   - type: Boolean
     attributes: {id: EVIC_72_ENABLE}
     children:
