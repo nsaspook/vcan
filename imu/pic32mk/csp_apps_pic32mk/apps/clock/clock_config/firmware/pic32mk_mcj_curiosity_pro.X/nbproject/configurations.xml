@@ -209,7 +209,7 @@
         <platform>2</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC32MK-MC_DFP" vendor="Microchip" version="1.5.115"/>
+        <pack name="PIC32MK-MC_DFP" vendor="Microchip" version="1.8.132"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
