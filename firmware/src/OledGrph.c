@@ -56,7 +56,9 @@
 extern int32_t xcoOledCur;
 extern int32_t ycoOledCur;
 extern uint8_t * pbOledCur;
-extern uint8_t rgbOledBmp[];
+//extern uint8_t rgbOledBmp[];
+extern uint8_t rgbOledBmp0[];
+extern uint8_t rgbOledBmp1[];
 extern uint8_t rgbFillPat[];
 extern int32_t bnOledCur;
 extern uint8_t clrOledCur;
@@ -65,6 +67,8 @@ extern uint8_t * pbOledFontUser;
 extern uint8_t * pbOledFontCur;
 extern int32_t dxcoOledFontCur;
 extern int32_t dycoOledFontCur;
+
+volatile uint8_t disp_frame;
 
 /* ------------------------------------------------------------ */
 /*				Local Variables									*/
@@ -123,7 +127,11 @@ void OledMoveTo(int32_t xco, int32_t yco)
 	/* Compute the display access parameters corresponding to
 	 ** the specified position.
 	 */
-	pbOledCur = &rgbOledBmp[((yco / 8) * ccolOledMax) + xco];
+	if (disp_frame) {
+		pbOledCur = &rgbOledBmp0[((yco / 8) * ccolOledMax) + xco];
+	} else {
+		pbOledCur = &rgbOledBmp1[((yco / 8) * ccolOledMax) + xco];
+	}
 	bnOledCur = yco & 7;
 }
 
@@ -527,7 +535,11 @@ void OledFillRect(int32_t xco, int32_t yco)
 		/* Compute the address of the left edge of the rectangle for this
 		 ** stripe across the rectangle.
 		 */
-		pbLeft = &rgbOledBmp[((ycoTop / 8) * ccolOledMax) + xcoLeft];
+		if (disp_frame) {
+			pbLeft = &rgbOledBmp0[((ycoTop / 8) * ccolOledMax) + xcoLeft];
+		} else {
+			pbLeft = &rgbOledBmp1[((ycoTop / 8) * ccolOledMax) + xcoLeft];
+		}
 
 		/* Generate a mask to preserve any low bits in the byte that aren't
 		 ** part of the rectangle being filled.
@@ -616,7 +628,11 @@ void OledGetBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
 	}
 
 	bnAlign = ycoTop & 0x07;
-	pbDspLeft = &rgbOledBmp[((ycoTop / 8) * ccolOledMax) + xcoLeft];
+	if (disp_frame) {
+		pbDspLeft = &rgbOledBmp0[((ycoTop / 8) * ccolOledMax) + xcoLeft];
+	} else {
+		pbDspLeft = &rgbOledBmp1[((ycoTop / 8) * ccolOledMax) + xcoLeft];
+	}
 	pbBmpLeft = pbBits;
 
 	while (ycoTop < ycoBottom) {
@@ -718,7 +734,11 @@ void OledPutBmp(int32_t dxco, int32_t dyco, uint8_t * pbBits)
 	bnAlign = ycoTop & 0x07;
 	mskUpper = (1 << bnAlign) - 1;
 	mskLower = ~mskUpper;
-	pbDspLeft = &rgbOledBmp[((ycoTop / 8) * ccolOledMax) + xcoLeft];
+	if (disp_frame) {
+		pbDspLeft = &rgbOledBmp0[((ycoTop / 8) * ccolOledMax) + xcoLeft];
+	} else {
+		pbDspLeft = &rgbOledBmp1[((ycoTop / 8) * ccolOledMax) + xcoLeft];
+	}
 	pbBmpLeft = pbBits;
 	fTop = 1;
 
@@ -948,8 +968,14 @@ void OledMoveUp(void)
 		/* If we have gone off of the top of the display,
 		 ** go back down.
 		 */
-		if (pbOledCur < rgbOledBmp) {
-			pbOledCur += ccolOledMax;
+		if (disp_frame) {
+			if (pbOledCur < rgbOledBmp0) {
+				pbOledCur += ccolOledMax;
+			}
+		} else {
+			if (pbOledCur < rgbOledBmp1) {
+				pbOledCur += ccolOledMax;
+			}
 		}
 	}
 }
@@ -987,8 +1013,14 @@ void OledMoveDown(void)
 		/* If we have gone off the end of the display memory
 		 ** go back up a page.
 		 */
-		if (pbOledCur >= rgbOledBmp + cbOledDispMax) {
-			pbOledCur -= ccolOledMax;
+		if (disp_frame) {
+			if (pbOledCur >= rgbOledBmp0 + cbOledDispMax) {
+				pbOledCur -= ccolOledMax;
+			}
+		} else {
+			if (pbOledCur >= rgbOledBmp1 + cbOledDispMax) {
+				pbOledCur -= ccolOledMax;
+			}
 		}
 	}
 }
@@ -1015,9 +1047,18 @@ void OledMoveLeft(void)
 {
 	/* Are we at the left edge of the display already
 	 */
-	if (((pbOledCur - rgbOledBmp) & ((ccolOledMax<<1) - 1)) == 0) { // check for bad edge limiting
-		return;
+	if (disp_frame) {
+		if (((pbOledCur - rgbOledBmp0) & ((ccolOledMax << 1) - 1)) == 0) { // check for bad edge limiting
+			return;
+		}
+	} else {
+		if (((pbOledCur - rgbOledBmp1) & ((ccolOledMax << 1) - 1)) == 0) { // check for bad edge limiting
+			return;
+		}
 	}
+
+
+
 
 	/* Not at the left edge, so go back one byte.
 	 */
@@ -1046,8 +1087,14 @@ void OledMoveRight(void)
 {
 	/* Are we at the right edge of the display already
 	 */
-	if (((pbOledCur - rgbOledBmp) & (ccolOledMax - 1)) == ((ccolOledMax<<1) - 1)) { // check for bad edge limiting
-		return;
+	if (disp_frame) {
+		if (((pbOledCur - rgbOledBmp0) & (ccolOledMax - 1)) == ((ccolOledMax << 1) - 1)) { // check for bad edge limiting
+			return;
+		}
+	} else {
+		if (((pbOledCur - rgbOledBmp1) & (ccolOledMax - 1)) == ((ccolOledMax << 1) - 1)) { // check for bad edge limiting
+			return;
+		}
 	}
 
 	/* Not at the right edge, so go forward one byte

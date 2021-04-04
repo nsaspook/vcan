@@ -62,7 +62,7 @@
 /* ------------------------------------------------------------ */
 /*				Global Variables								*/
 /* ------------------------------------------------------------ */
-volatile uint8_t dma_flag = 0;
+volatile uint8_t dma_flag = 0, disp_frame = false;
 
 extern uint8_t rgbOledFont0[];
 extern uint8_t rgbOledFontUser[cbOledFontUser];
@@ -99,7 +99,8 @@ uint8_t * pbOledFontUser;
  ** so display data is rendered into this offscreen buffer and then
  ** copied to the display.
  */
-uint8_t rgbOledBmp[cbOledDispMax];
+uint8_t rgbOledBmp0[cbOledDispMax];
+uint8_t rgbOledBmp1[cbOledDispMax];
 
 /* ------------------------------------------------------------ */
 /*				Forward Declarations							*/
@@ -442,7 +443,11 @@ void OledClearBuffer(void)
 	int32_t ib;
 	uint8_t * pb;
 
-	pb = rgbOledBmp;
+	if (disp_frame) {
+		pb = rgbOledBmp0;
+	} else {
+		pb = rgbOledBmp1;
+	}
 
 	/* Fill the memory buffer with 0.
 	 */
@@ -474,7 +479,11 @@ void OledUpdate(void)
 	int32_t ipag;
 	uint8_t* pb;
 
-	pb = rgbOledBmp;
+	if (disp_frame) {
+		pb = rgbOledBmp0;
+	} else {
+		pb = rgbOledBmp1;
+	}
 
 	for (ipag = 0; ipag < cpagOledMax; ipag++) {
 		/* Set the page address
