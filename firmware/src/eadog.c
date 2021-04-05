@@ -154,11 +154,23 @@ void CSB_SetHigh(void)
 
 void SPI3_Exchange8bit(uint8_t data)
 {
+#ifdef USE_INT
+	while (SPI3_IsBusy());
+#endif
+#ifdef USE_DMA
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
+#endif
 	SPI3_Write(&data, 1);
 };
 
 void SPI_ExchangeBuffer(uint8_t *data, uint16_t len)
 {
+#ifdef USE_INT
+	while (SPI3_IsBusy());
+#endif
+#ifdef USE_DMA
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
+#endif
 	SPI3_Write(data, len);
 };
 

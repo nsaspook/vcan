@@ -6,13 +6,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: F86C3C4E365BE0BCBBBCEF099EC48F2F
+- generatedChecksum: 4C140104EB46EDA3DBD5FE778F9FBDD3
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: F86C3C4E365BE0BCBBBCEF099EC48F2F
+  userChecksum: 4C140104EB46EDA3DBD5FE778F9FBDD3
 - generatedChecksum: D669C1E46981D6DCD6146E1E6CBBD0C5
   logicalPath: config/default
   name: interrupts.c
@@ -48,13 +48,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 1C64A0CC3068C1F1EB55F6817B1579A6
-- generatedChecksum: D33E618B4EA3CB0D0FEA9114B2A428CE
+- generatedChecksum: D721DFEC318BB20C44BCAE179EE0B1AB
   logicalPath: config/default/peripheral/dmac
   name: plib_dmac.c
   physicalPath: peripheral/dmac
   security: NON_SECURE
   type: SOURCE
-  userChecksum: D33E618B4EA3CB0D0FEA9114B2A428CE
+  userChecksum: D721DFEC318BB20C44BCAE179EE0B1AB
 - generatedChecksum: F0F77E9605002F86303776FD504751EB
   logicalPath: config/default/peripheral/eeprom
   name: plib_eeprom.c
@@ -167,13 +167,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 7806B30ECAE0D18D08CD583D8775530D
-- generatedChecksum: F50236B70613DF099DB7FD8D8D089CF4
+- generatedChecksum: F69B44A0F3E0169F11241773C604CFF3
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: F50236B70613DF099DB7FD8D8D089CF4
+  userChecksum: F69B44A0F3E0169F11241773C604CFF3
 - generatedChecksum: E189C26B2269F8DE46033CCD0621958D
   logicalPath: config/default
   name: device.h

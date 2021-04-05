@@ -532,21 +532,17 @@ uint16_t SPI3_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 	uint16_t bytesWritten = 0;
 
 #ifdef USE_DMA
-	PWM8_LoadDutyValue(1);
-	while (dma_flag);
-
-	SPI1CON0bits.EN = 0;
-	SPI1CON2 = 0x02; //  Received data is not stored in the FIFO
-	SPI1CON0bits.EN = 1;
-	DMA1CON0bits.EN = 0; /* disable DMA to change source count */
-	DMA1SSA = (uint24_t) & dataIn[0];
-	//	DMA1SSZ = (uint16_t) bufLen;
-	DMA1SSZ = 16;
-	DMA1CON0bits.EN = 1;
-	dma_flag = 1;
-	DMA1CON0bits.DMA1SIRQEN = 1; /* start DMA trigger */
-
-	return bufLen;
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
+	DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, SPI1DmaChannelHandler, 0);
+	SPI1CONbits.STXISEL = 1; // set to 0 for byte gaps
+	SPI1CONbits.ENHBUF = 1; // enable FIFO
+	bytesWritten = bufLen;
+	LCD_SELECT();
+	LCD_DRAM();
+	if (bufLen != 0) {
+		DMAC_ChannelTransfer(DMAC_CHANNEL_0, (const void *) dataIn, (size_t) bufLen, (const void*) &SPI1BUF, (size_t) 1, (size_t) 1);
+	}
+	return bytesWritten;
 #else
 	while (SPI3_IsBusy());
 	LCD_SELECT();
@@ -586,7 +582,7 @@ uint16_t SPI3_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 void wait_lcd_done(void)
 {
 #ifdef USE_DMA
-	while (dma_flag);
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
 #endif
 	while (SPI3_IsBusy());
 }
