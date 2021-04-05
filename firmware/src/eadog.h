@@ -73,7 +73,7 @@ extern "C" {
 	void eaDogM_WriteByteToCGRAM(uint8_t, uint8_t);
 	void SPI3_Initialize_edogm(void);
 	void SPI3_Initialize_edogs(void);
-	void SPI_ExchangeBuffer(uint8_t *, uint16_t);
+	void SPI3_ExchangeBuffer(uint8_t *, uint16_t);
 
 #define eaDogM_Cls()             eaDogM_WriteCommand(EADOGM_CMD_CLR)
 #define eaDogM_CursorOn()        eaDogM_WriteCommand(EADOGM_CMD_CURSOR_ON)

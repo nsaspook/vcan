@@ -163,7 +163,7 @@ void SPI3_Exchange8bit(uint8_t data)
 	SPI3_Write(&data, 1);
 };
 
-void SPI_ExchangeBuffer(uint8_t *data, uint16_t len)
+void SPI3_ExchangeBuffer(uint8_t *data, uint16_t len)
 {
 #ifdef USE_INT
 	while (SPI3_IsBusy());
