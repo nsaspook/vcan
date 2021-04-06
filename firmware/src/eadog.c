@@ -134,45 +134,37 @@ void SPI3_Initialize_edogs(void)
 
 void RS_SetLow(void)
 {
+	wait_lcd_done();
 	SPI_EN0_Clear();
 };
 
 void RS_SetHigh(void)
 {
+	wait_lcd_done();
 	SPI_EN0_Set();
 };
 
 void CSB_SetLow(void)
 {
+	wait_lcd_done();
 	SPI_EN1_Clear();
 };
 
 void CSB_SetHigh(void)
 {
+	wait_lcd_done();
 	SPI_EN1_Set();
 };
 
 void SPI3_Exchange8bit(uint8_t data)
 {
-#ifdef USE_INT
-	while (SPI3_IsBusy());
-#endif
-#ifdef USE_DMA
-	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
-	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_1));
-#endif
+	wait_lcd_done();
 	SPI3_Write(&data, 1);
 };
 
 void SPI3_ExchangeBuffer(uint8_t *data, uint16_t len)
 {
-#ifdef USE_INT
-	while (SPI3_IsBusy());
-#endif
-#ifdef USE_DMA
-	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
-	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_1));
-#endif
+	wait_lcd_done();
 	SPI3_Write(data, len);
 };
 

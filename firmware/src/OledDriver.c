@@ -446,7 +446,7 @@ void OledClear(void)
 void CBDmaChannelHandler(DMAC_TRANSFER_EVENT event, uintptr_t contextHandle)
 {
 	if (event == DMAC_TRANSFER_EVENT_COMPLETE) {
-
+		DEBUGB0_Clear();
 	}
 }
 
@@ -460,8 +460,8 @@ void OledClearBuffer(void)
 		pb = rgbOledBmp1;
 	}
 
-#define USE_DMAok
-#ifdef USE_DMAok
+	DEBUGB0_Set();
+#ifdef USE_DMA
 	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_1)); // wait for possible DMA1 transfer to complete
 	DMAC_ChannelCallbackRegister(DMAC_CHANNEL_1, CBDmaChannelHandler, 0); // end of transfer interrupt function
 	/* setup the source and destination parms */
@@ -562,11 +562,11 @@ uint16_t SPI3_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 {
 	uint16_t bytesWritten = 0;
 
-	DEBUGB0_Set();
 
 #ifdef USE_DMA
 	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
 	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_1));
+	DEBUGB0_Set();
 	DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, SPI3DmaChannelHandler, 0);
 	SPI3CONbits.STXISEL = 1; // set to 0 for byte gaps
 	SPI3CONbits.ENHBUF = 1; // enable FIFO
@@ -584,6 +584,7 @@ uint16_t SPI3_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 	LCD_SELECT();
 	LCD_DRAM();
 	if (bufLen != 0) {
+		DEBUGB0_Set();
 #ifdef EDOGS
 		SPI3_ExchangeBuffer(dataIn, bufLen);
 		bytesWritten = bufLen;

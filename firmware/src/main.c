@@ -230,7 +230,7 @@ void BDC_motor(uint32_t m_type)
 				 */
 				cli_read(&cli_ctx);
 
-				OledClearBuffer();
+//				OledClearBuffer();
 				sprintf(buffer, "TMP  %5i", an_data[TSENSOR]);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
 				sprintf(buffer, "IM1  %5i", u1ai);
@@ -270,12 +270,12 @@ void BDC_motor(uint32_t m_type)
 					}
 				}
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 50);
+				StartTimer(TMR_DISPLAY, 10);
 			}
 			if (TimerDone(TMR_BLINK)) {
-				StartTimer(TMR_BLINK, 500);
+				StartTimer(TMR_BLINK, 100);
 				RESET_LED_Toggle();
-				//OledClearBuffer();
+				OledClearBuffer();
 			}
 		}
 	}
