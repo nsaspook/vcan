@@ -159,6 +159,7 @@ void SPI3_Exchange8bit(uint8_t data)
 #endif
 #ifdef USE_DMA
 	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_1));
 #endif
 	SPI3_Write(&data, 1);
 };
@@ -170,6 +171,7 @@ void SPI3_ExchangeBuffer(uint8_t *data, uint16_t len)
 #endif
 #ifdef USE_DMA
 	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_1));
 #endif
 	SPI3_Write(data, len);
 };

@@ -15,12 +15,16 @@ bool run_tests(uint32_t count)
 
 bool spi_tests(void)
 {
+#ifdef USE_INT
 	while (SPI3_IsBusy());
+#endif
 	SPI_EN0_Clear();
 	SPI3_Write(" Tests 0", 8);
 	SPI_EN0_Set();
 
+#ifdef USE_INT
 	while (SPI3_IsBusy());
+#endif
 	SPI_EN1_Clear();
 	SPI3_Write(" Tests 1", 8);
 	SPI_EN1_Set();

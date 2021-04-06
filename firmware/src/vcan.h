@@ -17,7 +17,7 @@ extern "C" {
 #include <xc.h>
 #include <math.h>
 #include <stdio.h>
-	
+
 #define _PCACHE_VECTOR                           247
 
 	/* Use Brushed DC Motor routines */

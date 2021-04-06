@@ -24,6 +24,9 @@
 extern "C" {
 #endif
 
+//#define USE_DMA // use DMA spi driver
+//#define USE_INT // SPI driver uses interrupts
+	
 	//#define EDOGM
 #define EDOGS
 	//#define EDOGS_DEMO

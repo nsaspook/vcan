@@ -79,8 +79,6 @@ void TIMER_6_InterruptHandler( void );
 void UART6_FAULT_InterruptHandler( void );
 void UART6_RX_InterruptHandler( void );
 void UART6_TX_InterruptHandler( void );
-void SPI3_RX_InterruptHandler( void );
-void SPI3_TX_InterruptHandler( void );
 
 
 
@@ -190,16 +188,6 @@ void __ISR(_QEI2_VECTOR, ipl3SRS) QEI2_Handler (void)
 
 void __ISR(_QEI3_VECTOR, ipl4SRS) QEI3_Handler (void)
 {
-}
-
-void __ISR(_SPI3_RX_VECTOR, ipl1SRS) SPI3_RX_Handler (void)
-{
-	SPI3_RX_InterruptHandler();
-}
-
-void __ISR(_SPI3_TX_VECTOR, ipl6SRS) SPI3_TX_Handler (void)
-{
-	SPI3_TX_InterruptHandler();
 }
 
 
