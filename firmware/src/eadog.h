@@ -25,8 +25,11 @@ extern "C" {
 #endif
 
 #define USE_DMA // use DMA spi driver
-//#define USE_INT // SPI driver uses interrupts
-	
+#ifdef USE_DMA
+#define	DMA_GAP		1	// set to 0 for SPI byte gaps in DMA transmissions
+#endif
+	//#define USE_INT // SPI driver uses interrupts
+
 	//#define EDOGM
 #define EDOGS
 	//#define EDOGS_DEMO
@@ -38,7 +41,7 @@ extern "C" {
 #include "device.h"
 #include "OledDriver.h"
 #include "OledChar.h"
-	
+
 #define max_strlen	STR_BUF_SIZE-1
 
 #define LCD_CMD_MASK	0x01

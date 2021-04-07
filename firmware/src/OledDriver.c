@@ -564,12 +564,11 @@ uint16_t SPI3_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 
 
 #ifdef USE_DMA
-	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
-	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_1));
+	wait_lcd_done();
 	DEBUGB0_Set();
 	DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, SPI3DmaChannelHandler, 0);
-	SPI3CONbits.STXISEL = 1; // set to 0 for byte gaps
-	SPI3CONbits.ENHBUF = 1; // enable FIFO
+	SPI3CONbits.STXISEL = DMA_GAP; // set to 0 for byte gaps
+	SPI3CONbits.ENHBUF = true; // enable FIFO
 	bytesWritten = bufLen;
 	LCD_SELECT();
 	LCD_DRAM();
