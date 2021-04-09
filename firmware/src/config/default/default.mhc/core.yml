@@ -4527,14 +4527,14 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '5'}
+        attributes: {value: '2'}
   - type: Hex
     attributes: {id: EVIC_72_PRIVALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '20'}
+        attributes: {id: core, value: '8'}
   - type: Boolean
     attributes: {id: EVIC_73_ENABLE}
     children:
@@ -4562,14 +4562,14 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '5'}
+        attributes: {value: '2'}
   - type: Hex
     attributes: {id: EVIC_73_PRIVALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '5120'}
+        attributes: {id: core, value: '2048'}
   - type: Combo
     attributes: {id: EVIC_73_SUBPRIORITY}
     children:
@@ -4605,6 +4605,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: DMA2_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_74_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '2'}
+  - type: Hex
+    attributes: {id: EVIC_74_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '524288'}
   - type: Boolean
     attributes: {id: EVIC_76_ENABLE}
     children:
