@@ -654,7 +654,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: High}
+        attributes: {value: ''}
   - type: String
     attributes: {id: BSP_PIN_24_MODE}
     children:
@@ -3105,7 +3105,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '257'}
+        attributes: {id: core, value: '1'}
   - type: Integer
     attributes: {id: DCH0_ECON_SIRQEN_VALUE}
     children:
@@ -3148,13 +3148,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '0'}
+  - type: String
+    attributes: {id: DCH2_CON_CHPRI_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '1'}
   - type: Hex
     attributes: {id: DCH2_CON_VALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0'}
+        attributes: {id: core, value: '1'}
   - type: Integer
     attributes: {id: DCH2_ECON_SIRQEN_VALUE}
     children:
@@ -3259,7 +3266,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: Combo
     attributes: {id: DMAC_0_PRIORITY}
     children:
@@ -3288,6 +3295,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '3'}
+  - type: Combo
+    attributes: {id: DMAC_2_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: CHPRI1}
+  - type: Integer
+    attributes: {id: DMAC_2_PRIORITY_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '1'}
   - type: Boolean
     attributes: {id: DMAC_CHAN0_ENBL}
     children:
@@ -5719,7 +5740,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '49409'}
+        attributes: {id: core, value: '49408'}
   - type: Hex
     attributes: {id: SYS_PORT_B_TRIS}
     children:

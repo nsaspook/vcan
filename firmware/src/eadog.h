@@ -27,6 +27,8 @@ extern "C" {
 #define USE_DMA // use DMA spi driver
 #ifdef USE_DMA
 #define	DMA_GAP		1	// set to 0 for SPI byte gaps in DMA transmissions
+#define DMA_MAGIC	1957
+#define DMA_STATE_M
 #endif
 	//#define USE_INT // SPI driver uses interrupts
 

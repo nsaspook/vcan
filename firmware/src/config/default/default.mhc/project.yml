@@ -48,13 +48,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 1C64A0CC3068C1F1EB55F6817B1579A6
-- generatedChecksum: 6F6F9921635E644B820C13F8AF74FAA3
+- generatedChecksum: BDF7FC688199017615FD09381B39FB07
   logicalPath: config/default/peripheral/dmac
   name: plib_dmac.c
   physicalPath: peripheral/dmac
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 6F6F9921635E644B820C13F8AF74FAA3
+  userChecksum: BDF7FC688199017615FD09381B39FB07
 - generatedChecksum: F0F77E9605002F86303776FD504751EB
   logicalPath: config/default/peripheral/eeprom
   name: plib_eeprom.c
@@ -69,13 +69,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: A929E8F3D6AA89839F90FFE14868B4D9
-- generatedChecksum: 401F7A3007AD2D44CDDF21968285C4BC
+- generatedChecksum: 271D4E1F74E2298FEB0A5587B815095A
   logicalPath: config/default/peripheral/gpio
   name: plib_gpio.c
   physicalPath: peripheral/gpio
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 401F7A3007AD2D44CDDF21968285C4BC
+  userChecksum: 271D4E1F74E2298FEB0A5587B815095A
 - generatedChecksum: 2616C03A2683DC6B721FFF8A6756FD3D
   logicalPath: config/default/peripheral/mcpwm
   name: plib_mcpwm.c

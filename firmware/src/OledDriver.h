@@ -91,7 +91,15 @@
 
 /* ------------------------------------------------------------ */
 /*					Procedure Declarations						*/
+
 /* ------------------------------------------------------------ */
+
+typedef enum {
+	D_init,
+	D_page,
+	D_buffer,
+	D_idle,
+} DMA_RUN_STATE;
 
 void OledInit(void);
 void OledTerm(void);

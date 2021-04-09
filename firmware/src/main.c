@@ -230,7 +230,7 @@ void BDC_motor(uint32_t m_type)
 				 */
 				cli_read(&cli_ctx);
 
-//				OledClearBuffer();
+				//				OledClearBuffer();
 				sprintf(buffer, "TMP  %5i", an_data[TSENSOR]);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
 				sprintf(buffer, "IM1  %5i", u1ai);
@@ -266,11 +266,11 @@ void BDC_motor(uint32_t m_type)
 					LA_gfx(false, false, 0);
 					while ((coreTmr.tickCounter - tickStart) < delayTicks) {
 						// extra processing loop while waiting for clock time to expire
-						LA_gfx(false, false, 500);
+						LA_gfx(false, false, 200);
 					}
 				}
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 10);
+				StartTimer(TMR_DISPLAY, 1);
 			}
 			if (TimerDone(TMR_BLINK)) {
 				StartTimer(TMR_BLINK, 100);
@@ -437,7 +437,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
-	DEBUGB0_Clear();
+//	DEBUGB0_Clear();
 }
 
 /*
@@ -566,6 +566,7 @@ int main(void)
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
+//	DEBUGB0_Clear();
 
 #ifdef EDOGM
 	//	SPI3_Initialize_edogm();
