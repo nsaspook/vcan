@@ -516,7 +516,6 @@ void OledUpdate(void)
 #ifdef DMA_STATE_M
 	wait_lcd_done();
 	SPI3DmaChannelHandler_State(0, DMA_MAGIC); // set DMA state machine init mode to start transfers
-	DEBUGB0_Set(); // back to mainline code, GLCD updates in background using DMA and interrupts
 	return;
 #endif
 #ifdef EDOGS
@@ -559,6 +558,7 @@ void SPI3DmaChannelHandler_State(DMAC_TRANSFER_EVENT event, uintptr_t contextHan
 	static int32_t ipag; // buffer page number
 	static uint8_t* pb; // buffer page address
 
+	DEBUGB0_Set(); // back to mainline code, GLCD updates in background using DMA and interrupts
 	if (contextHandle == DMA_MAGIC) { // reinit state machine for next GLCD update
 		dstate = D_init;
 	}
@@ -590,16 +590,15 @@ void SPI3DmaChannelHandler_State(DMAC_TRANSFER_EVENT event, uintptr_t contextHan
 			pb += ccolOledMax;
 		} else {
 			dstate = D_idle;
-			DEBUGB0_Clear();
 			LCD_UNSELECT(); // all done with the GLCD
 		}
 		break;
 	case D_idle:
 	default:
-		DEBUGB0_Clear();
 		LCD_UNSELECT();
 		break;
 	}
+	DEBUGB0_Clear();
 }
 
 /* ------------------------------------------------------------ */
