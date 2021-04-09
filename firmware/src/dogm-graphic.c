@@ -49,6 +49,7 @@
 
 uint8_t lcd_current_page = 0;
 uint8_t lcd_current_column = 0;
+extern uint8_t __attribute__((coherent)) rgbOledBmp_page[];
 
 void RS_SetLow(void);
 void RS_SetHigh(void);
@@ -96,7 +97,11 @@ uint8_t lcd_inc_column(int16_t s)
  */
 void lcd_moveto_xy(uint8_t page, uint8_t column)
 {
+#ifdef USE_DMA
+	LCD_GOTO_ADDRESS_S(page, column);
+#else
 	LCD_GOTO_ADDRESS(page, column);
+#endif
 	lcd_current_column = column;
 	lcd_current_page = page;
 }
@@ -140,6 +145,16 @@ void lcd_command(uint8_t cmd)
 
 	SPI3_Exchange8bit(cmd);
 	LCD_UNSELECT();
+}
+
+void lcd_command_s(uint8_t cmd)
+{
+	if (rgbOledBmp_page[4] > 3) {
+		rgbOledBmp_page[4] = 0;
+	}
+
+	rgbOledBmp_page[rgbOledBmp_page[4]] = cmd;
+	rgbOledBmp_page[4]++;
 }
 
 
@@ -303,7 +318,7 @@ void lcd_init(void)
 	lcd_command(0xD1); //in Black and white mode
 #endif
 #if DISPLAY_TYPE == 240
-//	LCD_SYSTEM_RESET; // software reset
+	//	LCD_SYSTEM_RESET; // software reset
 	BACKLIGHT_Clear();
 	WaitMs(2);
 	BACKLIGHT_Set();

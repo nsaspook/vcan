@@ -3098,14 +3098,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '3'}
+        attributes: {id: core, value: '1'}
   - type: Hex
     attributes: {id: DCH0_CON_VALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '3'}
+        attributes: {id: core, value: '257'}
   - type: Integer
     attributes: {id: DCH0_ECON_SIRQEN_VALUE}
     children:
@@ -3126,14 +3126,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '2'}
+        attributes: {id: core, value: '3'}
   - type: Hex
     attributes: {id: DCH1_CON_VALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '2'}
+        attributes: {id: core, value: '3'}
   - type: Integer
     attributes: {id: DCH1_ECON_SIRQEN_VALUE}
     children:
@@ -3148,6 +3148,27 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '0'}
+  - type: Hex
+    attributes: {id: DCH2_CON_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '0'}
+  - type: Integer
+    attributes: {id: DCH2_ECON_SIRQEN_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '1'}
+  - type: Hex
+    attributes: {id: DCH2_ECON_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '56336'}
   - type: Boolean
     attributes: {id: DMA0_INTERRUPT_ENABLE}
     children:
@@ -3204,34 +3225,69 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'true'}
+  - type: Boolean
+    attributes: {id: DMA2_INTERRUPT_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
+  - type: Boolean
+    attributes: {id: DMA2_INTERRUPT_ENABLE_UPDATE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: String
+    attributes: {id: DMA2_INTERRUPT_HANDLER}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: DMA2_InterruptHandler}
+  - type: Boolean
+    attributes: {id: DMA2_INTERRUPT_HANDLER_LOCK}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
+  - type: KeyValueSet
+    attributes: {id: DMAC_0_CHAIN_DIRECTION}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
   - type: Combo
     attributes: {id: DMAC_0_PRIORITY}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: CHPRI3}
+        attributes: {value: CHPRI1}
   - type: Integer
     attributes: {id: DMAC_0_PRIORITY_VALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '3'}
+        attributes: {id: core, value: '1'}
   - type: Combo
     attributes: {id: DMAC_1_PRIORITY}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: CHPRI2}
+        attributes: {value: CHPRI3}
   - type: Integer
     attributes: {id: DMAC_1_PRIORITY_VALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '2'}
+        attributes: {id: core, value: '3'}
   - type: Boolean
     attributes: {id: DMAC_CHAN0_ENBL}
     children:
@@ -3243,6 +3299,13 @@ children:
         attributes: {value: 'true'}
   - type: Boolean
     attributes: {id: DMAC_CHAN1_ENBL}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'true'}
+  - type: Boolean
+    attributes: {id: DMAC_CHAN2_ENBL}
     children:
     - type: Values
       children:
@@ -3270,7 +3333,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '2'}
+        attributes: {id: core, value: '3'}
   - type: Boolean
     attributes: {id: DMAC_REQUEST_0_PERID_LOCK}
     children:
@@ -3301,6 +3364,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '0'}
+  - type: Combo
+    attributes: {id: DMAC_REQUEST_2_SOURCE}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: SPI3_TX}
+  - type: Integer
+    attributes: {id: DMAC_REQUEST_2_SOURCE_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '220'}
   - type: File
     attributes: {id: DMAC_SOURCE}
     children:
@@ -4486,6 +4563,27 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '256'}
+  - type: Boolean
+    attributes: {id: EVIC_74_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
+  - type: Boolean
+    attributes: {id: EVIC_74_HANDLER_LOCK}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
+  - type: String
+    attributes: {id: EVIC_74_INTERRUPT_HANDLER}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: DMA2_InterruptHandler}
   - type: Boolean
     attributes: {id: EVIC_76_ENABLE}
     children:

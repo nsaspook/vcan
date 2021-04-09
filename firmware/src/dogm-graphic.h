@@ -98,6 +98,7 @@ void lcd_init(void);
 //write data word or command to the LCD
 void lcd_data(uint8_t data);
 void lcd_command(uint8_t cmd);
+void lcd_command_s(uint8_t cmd);
 uint8_t lcd_inc_column(int16_t);
 
 //Function to read the current position
@@ -317,6 +318,10 @@ void lcd_set_contrast(uint8_t value);
                                         lcd_command(LCD_PAGE_ADDRESS_MSB | (((page)>>4) & 0x0F)); \
                                         lcd_command(LCD_COL_ADDRESS | (((col)>>4) & 0x0F)); \
                                         lcd_command(((col) & 0x0F))
+#define LCD_GOTO_ADDRESS_S(page,col)    lcd_command_s(LCD_PAGE_ADDRESS_LSB | ((page) & 0x0F)); \
+                                        lcd_command_s(LCD_PAGE_ADDRESS_MSB | (((page)>>4) & 0x0F)); \
+                                        lcd_command_s(LCD_COL_ADDRESS | (((col)>>4) & 0x0F)); \
+                                        lcd_command_s(((col) & 0x0F))
 
 #define LCD_NOP()                     lcd_command(LCD_NO_OP)
 #define LCD_SET_BIAS_RATIO(i)         lcd_command(LCD_BIAS_RATIO | ((i) & 0x3))
