@@ -266,11 +266,11 @@ void BDC_motor(uint32_t m_type)
 					LA_gfx(false, false, 0);
 					while ((coreTmr.tickCounter - tickStart) < delayTicks) {
 						// extra processing loop while waiting for clock time to expire
-						LA_gfx(false, false, 200);
+						LA_gfx(false, false, 400);
 					}
 				}
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 1);
+				StartTimer(TMR_DISPLAY, 11);
 			}
 			if (TimerDone(TMR_BLINK)) {
 				StartTimer(TMR_BLINK, 100);
