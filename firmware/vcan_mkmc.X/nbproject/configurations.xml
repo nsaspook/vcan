@@ -39,6 +39,9 @@
               <itemPath>../src/config/default/peripheral/qei/plib_qei2.h</itemPath>
               <itemPath>../src/config/default/peripheral/qei/plib_qei3.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="f14" displayName="rtcc" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/rtcc/plib_rtcc.h</itemPath>
+            </logicalFolder>
             <logicalFolder name="f1" displayName="spi" projectFiles="true">
               <logicalFolder name="f1" displayName="spi_master" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/spi/spi_master/plib_spi_master_common.h</itemPath>
@@ -132,6 +135,9 @@
               <itemPath>../src/config/default/peripheral/qei/plib_qei2.c</itemPath>
               <itemPath>../src/config/default/peripheral/qei/plib_qei3.c</itemPath>
             </logicalFolder>
+            <logicalFolder name="f14" displayName="rtcc" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/rtcc/plib_rtcc.c</itemPath>
+            </logicalFolder>
             <logicalFolder name="f1" displayName="spi" projectFiles="true">
               <logicalFolder name="f1" displayName="spi_master" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/spi/spi_master/plib_spi3_master.c</itemPath>
@@ -193,6 +199,7 @@
         <itemPath>../src/config/default/default.mhc/qei1.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/qei2.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/qei3.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/rtcc.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/spi3.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/tmr1.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/tmr2.yml</itemPath>

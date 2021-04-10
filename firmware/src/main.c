@@ -255,6 +255,10 @@ void BDC_motor(uint32_t m_type)
 				eaDogM_WriteStringAtPos(10, 0, buffer);
 				sprintf(buffer, "IVR  %5i", an_data[IVREF]);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
+				RTCC_TimeGet(timeinfo);
+				timeinfo->tm_year -= 1900; // correct for asctime string conversion adding 1900
+				sprintf(buffer, "Time %s", asctime (timeinfo));
+				eaDogM_WriteStringAtPos(15, 0, buffer);
 				start_adc_scan();
 
 				vector_graph(gfx_move, gfx_reset);
@@ -437,7 +441,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
-//	DEBUGB0_Clear();
+	//	DEBUGB0_Clear();
 }
 
 /*
@@ -566,7 +570,7 @@ int main(void)
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
-//	DEBUGB0_Clear();
+	//	DEBUGB0_Clear();
 
 #ifdef EDOGM
 	//	SPI3_Initialize_edogm();
@@ -609,6 +613,7 @@ int main(void)
 
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
+	RTCC_TimeGet(timeinfo);
 
 #ifdef EDOGM
 	init_display();

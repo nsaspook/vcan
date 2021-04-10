@@ -210,6 +210,7 @@ void SYS_Initialize ( void* data )
 
     TMR1_Initialize();
 
+    RTCC_Initialize();
 
 
 

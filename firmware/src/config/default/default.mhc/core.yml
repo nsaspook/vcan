@@ -4082,21 +4082,21 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: Boolean
     attributes: {id: EVIC_30_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: String
     attributes: {id: EVIC_30_INTERRUPT_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: RTCC_Handler}
+        attributes: {id: core, value: RTCC_InterruptHandler}
   - type: Boolean
     attributes: {id: EVIC_31_ENABLE}
     children:
@@ -5485,20 +5485,48 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '0x70207'}
+  - type: Boolean
+    attributes: {id: RTCC_CLOCK_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: rtcc, value: 'true'}
   - type: Integer
     attributes: {id: RTCC_CLOCK_FREQUENCY}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '60000000'}
+        attributes: {id: core, value: '32768'}
+  - type: Boolean
+    attributes: {id: RTCC_INTERRUPT_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: rtcc, value: 'true'}
   - type: Boolean
     attributes: {id: RTCC_INTERRUPT_ENABLE_UPDATE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
+  - type: String
+    attributes: {id: RTCC_INTERRUPT_HANDLER}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: rtcc, value: RTCC_InterruptHandler}
+  - type: Boolean
+    attributes: {id: RTCC_INTERRUPT_HANDLER_LOCK}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: rtcc, value: 'true'}
   - type: Integer
     attributes: {id: SPI1_CLOCK_FREQUENCY}
     children:
