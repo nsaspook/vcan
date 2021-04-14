@@ -3914,21 +3914,21 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
   - type: Boolean
     attributes: {id: EVIC_173_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
   - type: String
     attributes: {id: EVIC_173_INTERRUPT_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: PWM1_InterruptHandler}
+        attributes: {id: core, value: PWM1_Handler}
   - type: Combo
     attributes: {id: EVIC_173_PRIORITY}
     children:
@@ -5316,28 +5316,28 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: 'true'}
+        attributes: {id: mcpwm, value: 'false'}
   - type: Boolean
     attributes: {id: PWM1_INTERRUPT_ENABLE_UPDATE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: String
     attributes: {id: PWM1_INTERRUPT_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: PWM1_InterruptHandler}
+        attributes: {id: mcpwm, value: PWM1_Handler}
   - type: Boolean
     attributes: {id: PWM1_INTERRUPT_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: 'true'}
+        attributes: {id: mcpwm, value: 'false'}
   - type: Boolean
     attributes: {id: QEI1_CLOCK_ENABLE}
     children:
@@ -5491,7 +5491,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '6000000'}
+        attributes: {id: core, value: '120000000'}
   - type: String
     attributes: {id: REFO3TRIM_VALUE}
     children:

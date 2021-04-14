@@ -196,8 +196,9 @@ void pwm_adc_trigger(uint32_t status, uintptr_t context)
 void BDC_motor(uint32_t m_type)
 {
 	char buffer[STR_BUF_SIZE];
-	uint32_t i = 11500, j = 6000;
+	uint32_t j = 7000;
 	bool gfx_move = false, gfx_reset = false;
+	int32_t m_pos;
 
 	TMR2_Stop();
 	TMR3_Stop();
@@ -215,26 +216,24 @@ void BDC_motor(uint32_t m_type)
 	CTMUCONbits.IRNG = 0b11; //100xBase current level
 	CTMUCONbits.ON = 1; // CTMU is ON
 
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, i);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, j);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
-	MCPWM_CallbackRegister(MCPWM_CH_1, pwm_adc_trigger, 0);
+	//	MCPWM_CallbackRegister(MCPWM_CH_1, pwm_adc_trigger, 0);
 	MCPWM_Start();
 	U1_EN_Set();
 	U2_EN_Set();
 	if (m_type == 1) {
 		while (true) {
-
-
 			if (TimerDone(TMR_MOTOR)) {
-				StartTimer(TMR_MOTOR, 10000);
-				i += 8000;
-				if (i > 11000) {
-					i = 2000;
+				StartTimer(TMR_MOTOR, 1);
+				m_pos=MOTOR1_INC;
+				if (m_pos > 20000) {
 					j = 7000;
 					gfx_move = true;
-				} else {
+				}
+				if (m_pos < (-20000)) {
 					j = 5000;
 					gfx_move = false;
 				}
@@ -276,7 +275,7 @@ void BDC_motor(uint32_t m_type)
 				timeinfo->tm_year -= 1900; // correct for asctime string conversion adding 1900
 				sprintf(buffer, "Time %s", asctime(timeinfo));
 				eaDogM_WriteStringAtPos(15, 0, buffer);
-				//								start_adc_scan();
+				start_adc_scan();
 
 				vector_graph(gfx_move, gfx_reset);
 				{
@@ -291,7 +290,7 @@ void BDC_motor(uint32_t m_type)
 					}
 				}
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 100);
+				StartTimer(TMR_DISPLAY, 11);
 			}
 			if (TimerDone(TMR_BLINK)) {
 				StartTimer(TMR_BLINK, 100);

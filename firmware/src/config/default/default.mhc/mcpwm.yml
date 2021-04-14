@@ -642,7 +642,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '1'}
+        attributes: {id: mcpwm, value: '0'}
   - type: Comment
     attributes: {id: MCPWM_FREQ_CH1}
     children:
@@ -1047,7 +1047,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '1573504'}
+        attributes: {id: mcpwm, value: '640'}
   - type: Hex
     attributes: {id: MCPWM_PWMCON10}
     children:
@@ -1454,14 +1454,14 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: 'true'}
+        attributes: {value: 'false'}
   - type: Boolean
     attributes: {id: PWMCON1__PWMLIEN}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: 'true'}
+        attributes: {value: 'false'}
   - type: KeyValueSet
     attributes: {id: PWMCON2__DTC}
     children:
