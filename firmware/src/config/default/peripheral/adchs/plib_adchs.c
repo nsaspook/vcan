@@ -62,7 +62,7 @@ void ADCHS_Initialize()
     ADC7CFG = DEVADC7;
 
     ADCCON1 = 0x630000;
-    ADCCON2 = 0xf0001;
+    ADCCON2 = 0x50002;
     ADCCON3 = 0x85002000;
 
     ADCTRGMODE = 0x0;

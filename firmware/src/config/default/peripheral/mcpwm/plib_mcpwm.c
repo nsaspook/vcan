@@ -46,6 +46,7 @@
 // Section: MCPWM Implementation
 // *****************************************************************************
 // *****************************************************************************
+MCPWM_CH_OBJECT mcpwmObj[12];
 
 void MCPWM_Initialize (void)
 {
@@ -74,12 +75,12 @@ void MCPWM_Initialize (void)
     /*  DTCP   =  0 */
     /*  DTC    =  2 */
     /*  ITB    = 1 */
-    /*  PWMHIEN =  false */
-    /*  PWMLIEN = false */
+    /*  PWMHIEN =  true */
+    /*  PWMLIEN = true */
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = false */
-    PWMCON1 = 0x280;
+    PWMCON1 = 0x180280;
 
     /* IOCON1 register  */
     /*  SWAP    = 0*/
@@ -120,6 +121,9 @@ void MCPWM_Initialize (void)
     LEBCON1 = 0x0;
     LEBDLY1 = 10;
 
+    /* Enable interrupt */
+    IEC5SET = _IEC5_PWM1IE_MASK;
+    mcpwmObj[0].callback = NULL;
 
     /*********** Channel 2 Configurations **********/
     /* PWMCON2 register  */
@@ -375,4 +379,45 @@ void MCPWM_ChannelPinsOwnershipDisable(MCPWM_CH_NUM channel)
 
 
 
+void PWM1_InterruptHandler(void)
+{
+    MCPWM_CH_STATUS status;
+    status = (MCPWM_CH_STATUS)(PWMCON1 & MCPWM_STATUS_MASK);
+    if (PWMCON1bits.PWMHIEN && PWMCON1bits.PWMHIF)
+    {
+        PWMCON1bits.PWMHIF = 0;
+    }
+    if (PWMCON1bits.PWMLIEN && PWMCON1bits.PWMLIF)
+    {
+        PWMCON1bits.PWMLIF = 0;
+    }
+    if (PWMCON1bits.TRGIEN && PWMCON1bits.TRGIF)
+    {
+        PWMCON1bits.TRGIF = 0;
+    }
+    if (PWMCON1bits.CLIEN && PWMCON1bits.CLIF)
+    {
+        PWMCON1bits.CLIEN = 0;
+        PWMCON1bits.CLIF = 0;
+    }
+    if (PWMCON1bits.FLTIEN && PWMCON1bits.FLTIF)
+    {
+        PWMCON1bits.FLTIEN = 0;
+        PWMCON1bits.FLTIF = 0;
+    }
 
+    IFS5CLR = _IFS5_PWM1IF_MASK;    //Clear IRQ flag
+
+
+    if( (mcpwmObj[0].callback != NULL))
+    {
+        mcpwmObj[0].callback(status, mcpwmObj[0].context);
+    }
+}
+
+
+void MCPWM_CallbackRegister(MCPWM_CH_NUM channel, MCPWM_CH_CALLBACK callback, uintptr_t context)
+{
+    mcpwmObj[channel].callback = callback;
+    mcpwmObj[channel].context = context;
+}

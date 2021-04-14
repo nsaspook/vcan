@@ -176,6 +176,22 @@ void set_motor_speed(const uint32_t, double);
 int32_t velo_loop(double, bool);
 void wave_gen(uint32_t, uintptr_t);
 void BDC_motor(uint32_t);
+void pwm_adc_trigger(uint32_t, uintptr_t);
+
+/*
+ * PWM callback for ADC trigger
+ */
+void pwm_adc_trigger(uint32_t status, uintptr_t context)
+{
+	static uint32_t waiting = 0;
+
+	if (waiting++ == 500) {
+		waiting = 0;
+		if (!(ADCCON2 & _ADCCON2_EOSRDY_MASK)) {
+			start_adc_scan();
+		}
+	}
+}
 
 void BDC_motor(uint32_t m_type)
 {
@@ -200,9 +216,10 @@ void BDC_motor(uint32_t m_type)
 	CTMUCONbits.ON = 1; // CTMU is ON
 
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, i);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 6000);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
+	MCPWM_CallbackRegister(MCPWM_CH_1, pwm_adc_trigger, 0);
 	MCPWM_Start();
 	U1_EN_Set();
 	U2_EN_Set();
@@ -257,9 +274,9 @@ void BDC_motor(uint32_t m_type)
 				eaDogM_WriteStringAtPos(11, 0, buffer);
 				RTCC_TimeGet(timeinfo);
 				timeinfo->tm_year -= 1900; // correct for asctime string conversion adding 1900
-				sprintf(buffer, "Time %s", asctime (timeinfo));
+				sprintf(buffer, "Time %s", asctime(timeinfo));
 				eaDogM_WriteStringAtPos(15, 0, buffer);
-				start_adc_scan();
+				//								start_adc_scan();
 
 				vector_graph(gfx_move, gfx_reset);
 				{
@@ -274,7 +291,7 @@ void BDC_motor(uint32_t m_type)
 					}
 				}
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 11);
+				StartTimer(TMR_DISPLAY, 100);
 			}
 			if (TimerDone(TMR_BLINK)) {
 				StartTimer(TMR_BLINK, 100);

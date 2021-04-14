@@ -48,7 +48,7 @@ void init_end_of_adc_scan(void)
 	ADCCSS1bits.CSS23 = 1;
 	ADCCSS2bits.CSS36 = 1;
 	ADCCSS2bits.CSS37 = 1;
-	ADCCON1bits.STRGSRC = 1; // set trigger source 5-bit value
+	ADCCON1bits.STRGSRC = 1; // set trigger source 5-bit value, Software edge trigger
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // use scan trigger
 
 	IFS3CLR = _IFS3_AD1EOSIF_MASK; // Clear the interrupt

@@ -98,7 +98,7 @@ void RTCC_Initialize( void )
     RTCCONbits.ON = 0;   /* Disable clock to RTCC */
     while(RTCCONbits.RTCCLKON);  /* Wait for clock to stop */
 
-    RTCTIME = 0x23595000;   /* Set RTCC time */
+    RTCTIME = 0x23595900;   /* Set RTCC time */
     RTCDATE = 0x21031006;  /* Set RTCC date */
 
     /* Set alarm to repeat finite number of times */
