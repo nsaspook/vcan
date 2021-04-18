@@ -6,13 +6,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: 4740AACCBC4C1947D22D226FDE20FA79
+- generatedChecksum: 4806D873056EC7B1D9E2C3518DE8FF8F
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 4740AACCBC4C1947D22D226FDE20FA79
+  userChecksum: 4806D873056EC7B1D9E2C3518DE8FF8F
 - generatedChecksum: 990B3D6061DB5AA0C1D09D9AFE6B43EF
   logicalPath: config/default
   name: interrupts.c
@@ -104,13 +104,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 2ECABC436DDB8F584D914FF4F25D3975
-- generatedChecksum: 9C800C2B4D14409948B282CF7A76EF34
+- generatedChecksum: 16DB17D4B29CE2EFCAC92E012A2149DD
   logicalPath: config/default/peripheral/spi/spi_master
   name: plib_spi3_master.c
   physicalPath: peripheral/spi/spi_master
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 9C800C2B4D14409948B282CF7A76EF34
+  userChecksum: 16DB17D4B29CE2EFCAC92E012A2149DD
 - generatedChecksum: 486993F80882C945265A2F5A9E19B298
   logicalPath: config/default/peripheral/tmr1
   name: plib_tmr1.c
@@ -167,13 +167,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 7806B30ECAE0D18D08CD583D8775530D
-- generatedChecksum: F50236B70613DF099DB7FD8D8D089CF4
+- generatedChecksum: C52E35337CA17879AF386D3C0E2D89CB
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: F50236B70613DF099DB7FD8D8D089CF4
+  userChecksum: C52E35337CA17879AF386D3C0E2D89CB
 - generatedChecksum: E189C26B2269F8DE46033CCD0621958D
   logicalPath: config/default
   name: device.h
@@ -377,13 +377,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 2C8543317B3F067432097AB9BD3E8672
-- generatedChecksum: 00B9689A870A0933876F2E53626B8D3B
+- generatedChecksum: 6DE570F802207D507CD7CBFFF6DD97AD
   logicalPath: config/default
   name: p32MK1024MCF100.ld
   physicalPath: ''
   security: NON_SECURE
   type: LINKER
-  userChecksum: 00B9689A870A0933876F2E53626B8D3B
+  userChecksum: 6DE570F802207D507CD7CBFFF6DD97AD
 format_version: v1.0
 libraries: []
 settings:

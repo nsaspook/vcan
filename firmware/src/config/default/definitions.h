@@ -57,16 +57,16 @@
 #include "peripheral/coretimer/plib_coretimer.h"
 #include "peripheral/tmr/plib_tmr6.h"
 #include "peripheral/uart/plib_uart3.h"
-#include "peripheral/adchs/plib_adchs.h"
 #include "peripheral/qei/plib_qei1.h"
+#include "peripheral/adchs/plib_adchs.h"
 #include "peripheral/qei/plib_qei2.h"
 #include "peripheral/qei/plib_qei3.h"
 #include "peripheral/uart/plib_uart2.h"
 #include "peripheral/eeprom/plib_eeprom.h"
 #include "peripheral/tmr/plib_tmr2.h"
 #include "peripheral/tmr/plib_tmr3.h"
-#include "peripheral/mcpwm/plib_mcpwm.h"
 #include "peripheral/tmr1/plib_tmr1.h"
+#include "peripheral/mcpwm/plib_mcpwm.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
