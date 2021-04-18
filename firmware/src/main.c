@@ -228,7 +228,7 @@ void BDC_motor(uint32_t m_type)
 		while (true) {
 			if (TimerDone(TMR_MOTOR)) {
 				StartTimer(TMR_MOTOR, 1);
-				m_pos=MOTOR1_INC;
+				m_pos = MOTOR2_INC;
 				if (m_pos > 20000) {
 					j = 7000;
 					gfx_move = true;
@@ -255,22 +255,24 @@ void BDC_motor(uint32_t m_type)
 				eaDogM_WriteStringAtPos(2, 0, buffer);
 				sprintf(buffer, "ENC3 %5i", KNOB1_INC);
 				eaDogM_WriteStringAtPos(3, 0, buffer);
-				sprintf(buffer, "ENC1 %5i", MOTOR1_INC);
+				sprintf(buffer, "ENC2 %5i", MOTOR2_INC);
 				eaDogM_WriteStringAtPos(4, 0, buffer);
-				sprintf(buffer, "PWM  %5i", j);
+				sprintf(buffer, "ENC1 %5i", MOTOR1_INC);
 				eaDogM_WriteStringAtPos(5, 0, buffer);
-				sprintf(buffer, "IM3  %5i", u2ai);
+				sprintf(buffer, "PWM  %5i", j);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
-				sprintf(buffer, "IM4  %5i", u2bi);
+				sprintf(buffer, "IM3  %5i", u2ai);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
-				sprintf(buffer, "ANA1 %5i", an_data[ANA1]);
+				sprintf(buffer, "IM4  %5i", u2bi);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
-				sprintf(buffer, "POT1 %5i", an_data[POT1]);
+				sprintf(buffer, "ANA1 %5i", an_data[ANA1]);
 				eaDogM_WriteStringAtPos(9, 0, buffer);
-				sprintf(buffer, "POT2 %5i", an_data[POT2]);
+				sprintf(buffer, "POT1 %5i", an_data[POT1]);
 				eaDogM_WriteStringAtPos(10, 0, buffer);
-				sprintf(buffer, "IVR  %5i", an_data[IVREF]);
+				sprintf(buffer, "POT2 %5i", an_data[POT2]);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
+				sprintf(buffer, "IVR  %5i", an_data[IVREF]);
+				eaDogM_WriteStringAtPos(12, 0, buffer);
 				RTCC_TimeGet(timeinfo);
 				timeinfo->tm_year -= 1900; // correct for asctime string conversion adding 1900
 				sprintf(buffer, "Time %s", asctime(timeinfo));

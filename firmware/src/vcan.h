@@ -144,6 +144,7 @@ extern "C" {
 	};
 
 #define KNOB1_INC	POS3CNT
+#define MOTOR2_INC	POS2CNT
 #define MOTOR1_INC	POS1CNT
 
 #ifdef	__cplusplus
