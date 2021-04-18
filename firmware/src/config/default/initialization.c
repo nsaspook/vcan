@@ -190,9 +190,9 @@ void SYS_Initialize ( void* data )
 
 	UART3_Initialize();
 
-    ADCHS_Initialize();
-
     QEI1_Initialize();
+
+    ADCHS_Initialize();
 
     QEI2_Initialize();
 
@@ -206,9 +206,9 @@ void SYS_Initialize ( void* data )
 
     TMR3_Initialize();
 
-    MCPWM_Initialize();
-
     TMR1_Initialize();
+
+    MCPWM_Initialize();
 
     RTCC_Initialize();
 

@@ -6,13 +6,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: 0B3FA7EE8D04E4629F860B8BFE6F8C02
+- generatedChecksum: 278620231636638350BB7FF6570A161F
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 0B3FA7EE8D04E4629F860B8BFE6F8C02
+  userChecksum: 278620231636638350BB7FF6570A161F
 - generatedChecksum: DC0A2EE22B795B07EB9CC58A5EB41D4D
   logicalPath: config/default
   name: interrupts.c
@@ -27,13 +27,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: null
-- generatedChecksum: 4B9D539F4ED39029F9FCA183DDFBB733
+- generatedChecksum: 65AA62002021EA8FAF82322B54BF547F
   logicalPath: config/default/peripheral/adchs
   name: plib_adchs.c
   physicalPath: peripheral/adchs
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 4B9D539F4ED39029F9FCA183DDFBB733
+  userChecksum: 65AA62002021EA8FAF82322B54BF547F
 - generatedChecksum: E7A7CC95533908670EF7D9FEFA62CB4C
   logicalPath: config/default/peripheral/clk
   name: plib_clk.c
@@ -174,13 +174,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 7806B30ECAE0D18D08CD583D8775530D
-- generatedChecksum: 2DC5DBFC3D9C93CCFEC6E8D0C26DC906
+- generatedChecksum: 3289F465078AAAD53BD0CF9C914A6ABE
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 2DC5DBFC3D9C93CCFEC6E8D0C26DC906
+  userChecksum: 3289F465078AAAD53BD0CF9C914A6ABE
 - generatedChecksum: E189C26B2269F8DE46033CCD0621958D
   logicalPath: config/default
   name: device.h
