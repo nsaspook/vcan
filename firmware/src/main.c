@@ -134,6 +134,13 @@ volatile struct SPid velocity_pi = {
 	.iGain = 0.95, // 0.5 slip_drive
 };
 
+volatile struct SPid dcbm_pi = {
+	.iMax = 3000.0,
+	.iMin = -3000.0,
+	.pGain = 0.25,
+	.iGain = 0.25,
+};
+
 volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, u_total = 0, current_error, an_data[NUM_AN];
 volatile uint16_t tickCount[TMR_COUNT];
 
@@ -198,7 +205,7 @@ void BDC_motor(uint32_t m_type)
 	char buffer[STR_BUF_SIZE];
 	uint32_t j = 7000;
 	bool gfx_move = false, gfx_reset = false;
-	int32_t m_pos;
+	int32_t m_pos, m_error=0, m_set = 20000;
 
 	TMR2_Stop();
 	TMR3_Stop();
@@ -229,12 +236,14 @@ void BDC_motor(uint32_t m_type)
 			if (TimerDone(TMR_MOTOR)) {
 				StartTimer(TMR_MOTOR, 1);
 				m_pos = MOTOR2_INC;
+				m_error = m_set - m_pos;
+				j = (uint32_t)(6000.0 - UpdatePI(&dcbm_pi, (double) m_error));
 				if (m_pos > 20000) {
-					j = 7000;
+					//					j = 7000;
 					gfx_move = true;
 				}
 				if (m_pos < (-20000)) {
-					j = 5000;
+					//					j = 5000;
 					gfx_move = false;
 				}
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, j);
@@ -273,6 +282,8 @@ void BDC_motor(uint32_t m_type)
 				eaDogM_WriteStringAtPos(11, 0, buffer);
 				sprintf(buffer, "IVR  %5i", an_data[IVREF]);
 				eaDogM_WriteStringAtPos(12, 0, buffer);
+				sprintf(buffer, "ERR  %5i, PWM %5i", m_error,j);
+				eaDogM_WriteStringAtPos(13, 0, buffer);
 				RTCC_TimeGet(timeinfo);
 				timeinfo->tm_year -= 1900; // correct for asctime string conversion adding 1900
 				sprintf(buffer, "Time %s", asctime(timeinfo));
