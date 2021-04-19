@@ -135,10 +135,10 @@ volatile struct SPid velocity_pi = {
 };
 
 volatile struct SPid dcbm_pi = {
-	.iMax = 3000.0,
-	.iMin = -3000.0,
-	.pGain = 0.25,
-	.iGain = 0.25,
+	.iMax = 70.0,
+	.iMin = -70.0,
+	.pGain = 0.2,
+	.iGain = 0.75,
 };
 
 volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, u_total = 0, current_error, an_data[NUM_AN];
@@ -203,9 +203,9 @@ void pwm_adc_trigger(uint32_t status, uintptr_t context)
 void BDC_motor(uint32_t m_type)
 {
 	char buffer[STR_BUF_SIZE];
-	uint32_t j = 7000;
+	int32_t j = 7000;
 	bool gfx_move = false, gfx_reset = false;
-	int32_t m_pos, m_error=0, m_set = 20000;
+	int32_t m_pos, m_error = 0, m_set = 20000, bm_pid = 0;
 
 	TMR2_Stop();
 	TMR3_Stop();
@@ -235,14 +235,23 @@ void BDC_motor(uint32_t m_type)
 		while (true) {
 			if (TimerDone(TMR_MOTOR)) {
 				StartTimer(TMR_MOTOR, 1);
-				m_pos = MOTOR2_INC;
+				m_pos = MOTOR1_INC;
 				m_error = m_set - m_pos;
-				j = (uint32_t)(6000.0 - UpdatePI(&dcbm_pi, (double) m_error));
-				if (m_pos > 20000) {
+				bm_pid = (int32_t) UpdatePI(&dcbm_pi, (double) m_error);
+				j = 6000 - bm_pid;
+
+				if (j < 3000)
+					j = 3000;
+				if (j > 9000)
+					j = 9000;
+
+				if (m_pos >= (19700)) {
+					m_set = -20000;
 					//					j = 7000;
 					gfx_move = true;
 				}
-				if (m_pos < (-20000)) {
+				if (m_pos <= (-19700)) {
+					m_set = 20000;
 					//					j = 5000;
 					gfx_move = false;
 				}
@@ -282,7 +291,7 @@ void BDC_motor(uint32_t m_type)
 				eaDogM_WriteStringAtPos(11, 0, buffer);
 				sprintf(buffer, "IVR  %5i", an_data[IVREF]);
 				eaDogM_WriteStringAtPos(12, 0, buffer);
-				sprintf(buffer, "ERR  %5i, PWM %5i", m_error,j);
+				sprintf(buffer, "ERR %5i,PWM %5i,PID %5i", m_error, j, bm_pid);
 				eaDogM_WriteStringAtPos(13, 0, buffer);
 				RTCC_TimeGet(timeinfo);
 				timeinfo->tm_year -= 1900; // correct for asctime string conversion adding 1900
