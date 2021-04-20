@@ -215,9 +215,16 @@ int32_t pwm_limit(const int32_t d_cycle)
 void BDC_motor(uint32_t m_type)
 {
 	char buffer[STR_BUF_SIZE];
-	int32_t j = 7000;
-	bool gfx_move = false, gfx_reset = false, end_lock = false, end_max = false;
-	int32_t m_pos, m_error = 0, m_set = 20000, bm_pid = 0, m_end = -300000;
+	bool gfx_move = false, gfx_reset = false;
+	struct DC_type dcm = {
+		.j = 7000,
+		.end_lock = false,
+		.end_max = false,
+		.m_error = 0,
+		.m_set = 20000,
+		.bm_pid = 0,
+		.m_end = -300000,
+	};
 
 	TMR2_Stop();
 	TMR3_Stop();
@@ -235,7 +242,7 @@ void BDC_motor(uint32_t m_type)
 	CTMUCONbits.IRNG = 0b11; //100xBase current level
 	CTMUCONbits.ON = 1; // CTMU is ON
 
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, j);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, dcm.j);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 0);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
@@ -247,39 +254,39 @@ void BDC_motor(uint32_t m_type)
 		while (true) {
 			if (TimerDone(TMR_MOTOR)) {
 				StartTimer(TMR_MOTOR, 1);
-				if (u1ai > 320) {
-					if ((j > 8000)) {
-						m_set = 300000;
-						if (!end_lock) {
-							MOTOR2_INC = 0;
-							end_lock = true;
+				if (u1ai > 300) {
+					if ((dcm.j > 8000)) {
+						dcm.m_set = 300000;
+						if (!dcm.end_lock) {
+							MOTOR1_INC = 0;
+							dcm.end_lock = true;
 						}
 					} else {
-						if ((j < 4000)) {
-							m_set = 10000;
-							if (end_lock) {
-								if (!end_max) {
-									m_end = 280000;
-									end_max = true;
+						if ((dcm.j < 4000)) {
+							dcm.m_set = 10000;
+							if (dcm.end_lock) {
+								if (!dcm.end_max) {
+									dcm.m_end = 280000;
+									dcm.end_max = true;
 								}
 							}
 						}
 					}
 				}
-				m_pos = MOTOR2_INC;
-				m_error = m_set - m_pos;
-				bm_pid = (int32_t) UpdatePI(&dcbm_pi, (double) m_error);
-				j = pwm_limit(6000 - bm_pid);
+				dcm.m_pos = MOTOR1_INC;
+				dcm.m_error = dcm.m_set - dcm.m_pos;
+				dcm.bm_pid = (int32_t) UpdatePI(&dcbm_pi, (double) dcm.m_error);
+				dcm.j = pwm_limit(6000 - dcm.bm_pid);
 
-				if ((m_error > -10) && (m_error < 0)) {
-					m_set = 5000;
+				if ((dcm.m_error > -10) && (dcm.m_error < 0)) {
+					dcm.m_set = 5000;
 					gfx_move = true;
 				}
-				if ((m_error < 10) && (m_error > 0)) {
-					m_set = m_end-10000;
+				if ((dcm.m_error < 10) && (dcm.m_error > 0)) {
+					dcm.m_set = dcm.m_end - 10000;
 					gfx_move = false;
 				}
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, j);
+				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, dcm.j);
 			}
 
 			if (TimerDone(TMR_DISPLAY)) {
@@ -301,7 +308,7 @@ void BDC_motor(uint32_t m_type)
 				eaDogM_WriteStringAtPos(4, 0, buffer);
 				sprintf(buffer, "ENC1 %5i", MOTOR1_INC);
 				eaDogM_WriteStringAtPos(5, 0, buffer);
-				sprintf(buffer, "PWM  %5i", j);
+				sprintf(buffer, "PWM  %5i", dcm.j);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "IM3  %5i", u2ai);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
@@ -313,9 +320,9 @@ void BDC_motor(uint32_t m_type)
 				eaDogM_WriteStringAtPos(10, 0, buffer);
 				sprintf(buffer, "POT2 %5i", an_data[POT2]);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
-				sprintf(buffer, "IVR  %5i", an_data[IVREF]);
+				sprintf(buffer, "SET  %5i, %5i", dcm.m_pos, dcm.m_set);
 				eaDogM_WriteStringAtPos(12, 0, buffer);
-				sprintf(buffer, "ERR %5i,PWM %5i,PID %5i", m_error, j, bm_pid);
+				sprintf(buffer, "ERR %5i,PWM %5i,PID %5i", dcm.m_error, dcm.j, dcm.bm_pid);
 				eaDogM_WriteStringAtPos(13, 0, buffer);
 				RTCC_TimeGet(timeinfo);
 				timeinfo->tm_year -= 1900; // correct for asctime string conversion adding 1900

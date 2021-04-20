@@ -143,6 +143,12 @@ extern "C" {
 		int32_t motor_speed;
 	};
 
+	struct DC_type {
+		int32_t j;
+		bool end_lock, end_max;
+		int32_t m_pos, m_error, m_set, bm_pid, m_end;
+	};
+
 #define KNOB1_INC	POS3CNT
 #define MOTOR2_INC	POS2CNT
 #define MOTOR1_INC	POS1CNT
