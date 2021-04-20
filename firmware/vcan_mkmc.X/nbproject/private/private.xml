@@ -3,17 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/root/vcan/firmware/src/timers.c</file>
-            <file>file:/root/vcan/firmware/src/OledDriver.c</file>
-            <file>file:/root/vcan/firmware/src/dio.c</file>
-            <file>file:/root/vcan/firmware/src/scdm.c</file>
-            <file>file:/root/vcan/firmware/src/adc_scan.c</file>
-            <file>file:/root/vcan/firmware/src/main.c</file>
-            <file>file:/root/vcan/firmware/src/vcan.h</file>
-            <file>file:/root/vcan/firmware/src/pid.c</file>
-            <file>file:/root/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.8.132/include/proc/p32mk1024mcm100.h</file>
-            <file>file:/root/vcan/firmware/src/gfx.c</file>
-            <file>file:/root/vcan/firmware/src/config/default/peripheral/mcpwm/plib_mcpwm.c</file>
+            <file>file:/fred/vcan/firmware/src/vcan.h</file>
+            <file>file:/fred/vcan/firmware/src/pid.c</file>
+            <file>file:/fred/vcan/firmware/src/main.c</file>
         </group>
     </open-files>
 </project-private>

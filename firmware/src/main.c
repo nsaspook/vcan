@@ -135,10 +135,10 @@ volatile struct SPid velocity_pi = {
 };
 
 volatile struct SPid dcbm_pi = {
-	.iMax = 70.0,
-	.iMin = -70.0,
-	.pGain = 0.2,
-	.iGain = 0.75,
+	.iMax = 570.0,
+	.iMin = -570.0,
+	.pGain = 0.3,
+	.iGain = 2.75,
 };
 
 volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, u_total = 0, current_error, an_data[NUM_AN];
@@ -184,6 +184,7 @@ int32_t velo_loop(double, bool);
 void wave_gen(uint32_t, uintptr_t);
 void BDC_motor(uint32_t);
 void pwm_adc_trigger(uint32_t, uintptr_t);
+int32_t pwm_limit(const int32_t);
 
 /*
  * PWM callback for ADC trigger
@@ -200,12 +201,23 @@ void pwm_adc_trigger(uint32_t status, uintptr_t context)
 	}
 }
 
+int32_t pwm_limit(const int32_t d_cycle)
+{
+	int32_t j = d_cycle;
+
+	if (j < 2000)
+		j = 2000;
+	if (j > 10000)
+		j = 10000;
+	return j;
+}
+
 void BDC_motor(uint32_t m_type)
 {
 	char buffer[STR_BUF_SIZE];
 	int32_t j = 7000;
-	bool gfx_move = false, gfx_reset = false;
-	int32_t m_pos, m_error = 0, m_set = 20000, bm_pid = 0;
+	bool gfx_move = false, gfx_reset = false, end_lock = false, end_max = false;
+	int32_t m_pos, m_error = 0, m_set = 20000, bm_pid = 0, m_end = -300000;
 
 	TMR2_Stop();
 	TMR3_Stop();
@@ -235,24 +247,36 @@ void BDC_motor(uint32_t m_type)
 		while (true) {
 			if (TimerDone(TMR_MOTOR)) {
 				StartTimer(TMR_MOTOR, 1);
-				m_pos = MOTOR1_INC;
+				if (u1ai > 320) {
+					if ((j > 8000)) {
+						m_set = 300000;
+						if (!end_lock) {
+							MOTOR2_INC = 0;
+							end_lock = true;
+						}
+					} else {
+						if ((j < 4000)) {
+							m_set = 10000;
+							if (end_lock) {
+								if (!end_max) {
+									m_end = 280000;
+									end_max = true;
+								}
+							}
+						}
+					}
+				}
+				m_pos = MOTOR2_INC;
 				m_error = m_set - m_pos;
 				bm_pid = (int32_t) UpdatePI(&dcbm_pi, (double) m_error);
-				j = 6000 - bm_pid;
+				j = pwm_limit(6000 - bm_pid);
 
-				if (j < 3000)
-					j = 3000;
-				if (j > 9000)
-					j = 9000;
-
-				if (m_pos >= (19700)) {
-					m_set = -20000;
-					//					j = 7000;
+				if ((m_error > -10) && (m_error < 0)) {
+					m_set = 5000;
 					gfx_move = true;
 				}
-				if (m_pos <= (-19700)) {
-					m_set = 20000;
-					//					j = 5000;
+				if ((m_error < 10) && (m_error > 0)) {
+					m_set = m_end-10000;
 					gfx_move = false;
 				}
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, j);
