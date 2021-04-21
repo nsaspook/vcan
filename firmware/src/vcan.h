@@ -153,7 +153,7 @@ extern "C" {
 #define MOTOR2_INC	POS2CNT
 #define MOTOR1_INC	POS1CNT
 
-#define MOTOR_INC	MOTOR2_INC
+#define MOTOR_INC	MOTOR1_INC
 
 #ifdef	__cplusplus
 }
