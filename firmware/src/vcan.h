@@ -144,7 +144,7 @@ extern "C" {
 	};
 
 	struct DC_type {
-		int32_t j;
+		int32_t j, m_type;
 		bool end_lock, end_max;
 		int32_t m_pos, m_error, m_set, bm_pid, m_end;
 	};
@@ -152,6 +152,8 @@ extern "C" {
 #define KNOB1_INC	POS3CNT
 #define MOTOR2_INC	POS2CNT
 #define MOTOR1_INC	POS1CNT
+
+#define MOTOR_INC	MOTOR2_INC
 
 #ifdef	__cplusplus
 }
