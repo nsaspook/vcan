@@ -184,6 +184,7 @@ static struct DC_type DCM = {
 	.bm_pid = 0,
 	.m_end = -300000,
 	.m_type = 1,
+	.m_stopped = false,
 };
 
 time_t time(time_t *);
@@ -195,7 +196,7 @@ int32_t velo_loop(double, bool);
 void wave_gen(uint32_t, uintptr_t);
 void BDC_motor(struct DC_type *);
 void pwm_adc_trigger(uint32_t, uintptr_t);
-int32_t pwm_limit(const int32_t, bool);
+int32_t pwm_limit(const int32_t, bool, struct DC_type *);
 bool BDC_Motor_init(struct DC_type *);
 
 /*
@@ -213,7 +214,7 @@ void pwm_adc_trigger(uint32_t status, uintptr_t context)
 	}
 }
 
-int32_t pwm_limit(const int32_t d_cycle, bool fast)
+int32_t pwm_limit(const int32_t d_cycle, bool fast, struct DC_type *m)
 {
 	int32_t j = d_cycle;
 
@@ -231,32 +232,47 @@ int32_t pwm_limit(const int32_t d_cycle, bool fast)
 			j = 9000;
 		}
 	}
+	if (m->m_stopped) {
+		if (j > 6000) {
+			j = 2900;
+		} else {
+			j = 9100;
+		}
+	}
 	return j;
 }
 
 bool BDC_Motor_init(struct DC_type *m)
 {
 	if (m->m_type == 1) {
+		if (u1ai > 300) {
+			if (!m->m_stopped) {
+				m->m_stopped = true;
+			}
+		} else {
+//			m->m_stopped = false;
+		}
 		if (u1ai > 200) {
 			if ((m->j > 8000)) {
 				m->m_set = 300000;
 				if (!m->end_lock) {
 					MOTOR_INC = 0;
 					m->end_lock = true;
+											m->m_stopped = false;
 				}
 			} else {
 				if ((m->j < 4000)) {
 					m->m_set = 10000;
 					if (m->end_lock) {
 						if (!m->end_max) {
-							m->m_end = 280000;
+							m->m_end = 288000;
 							m->end_max = true;
 						}
 					}
 				}
 			}
 		}
-		return true;
+		return m->m_stopped;
 	}
 	return false;
 }
@@ -299,7 +315,7 @@ void BDC_motor(struct DC_type * dcm)
 				dcm->m_pos = MOTOR_INC;
 				dcm->m_error = dcm->m_set - dcm->m_pos;
 				dcm->bm_pid = (int32_t) UpdatePI(&dcbm_pi, (double) dcm->m_error);
-				dcm->j = pwm_limit(6000 - dcm->bm_pid, dcm->end_lock);
+				dcm->j = pwm_limit(6000 - dcm->bm_pid, dcm->end_lock, dcm);
 
 				if ((dcm->m_error > -10) && (dcm->m_error < 0)) {
 					dcm->m_set = 5000;
