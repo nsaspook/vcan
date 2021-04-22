@@ -176,7 +176,7 @@ const uint32_t update_delay = 5;
 volatile float q0 = 1.0, q1 = 1.0, q2 = 1.0, q3 = 1.0; // quaternion 
 
 static struct DC_type DCM = {
-	.j = 7000,
+	.j = 5000,
 	.end_lock = false,
 	.end_max = false,
 	.m_error = 0,
@@ -245,20 +245,20 @@ int32_t pwm_limit(const int32_t d_cycle, bool fast, struct DC_type *m)
 bool BDC_Motor_init(struct DC_type *m)
 {
 	if (m->m_type == 1) {
-		if (u1ai > 300) {
+		if (u1ai > 300 || (abs(MOTOR_INC) > 500000)) {
 			if (!m->m_stopped) {
 				m->m_stopped = true;
 			}
 		} else {
-//			m->m_stopped = false;
+			//			m->m_stopped = false;
 		}
-		if (u1ai > 200) {
+		if (u1ai > 200 || (abs(MOTOR_INC) > 500000)) {
 			if ((m->j > 8000)) {
 				m->m_set = 300000;
 				if (!m->end_lock) {
 					MOTOR_INC = 0;
 					m->end_lock = true;
-											m->m_stopped = false;
+					m->m_stopped = false;
 				}
 			} else {
 				if ((m->j < 4000)) {
@@ -320,10 +320,12 @@ void BDC_motor(struct DC_type * dcm)
 				if ((dcm->m_error > -10) && (dcm->m_error < 0)) {
 					dcm->m_set = 5000;
 					gfx_move = true;
+					dcm->m_stopped = false;
 				}
 				if ((dcm->m_error < 10) && (dcm->m_error > 0)) {
 					dcm->m_set = dcm->m_end - 10000;
 					gfx_move = false;
+					dcm->m_stopped = false;
 				}
 				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, dcm->j);
 			}
@@ -361,8 +363,10 @@ void BDC_motor(struct DC_type * dcm)
 				eaDogM_WriteStringAtPos(11, 0, buffer);
 				sprintf(buffer, "SET  %5i, %5i", dcm->m_pos, dcm->m_set);
 				eaDogM_WriteStringAtPos(12, 0, buffer);
-				sprintf(buffer, "ERR %5i,PWM %5i,PID %5i", dcm->m_error, dcm->j, dcm->bm_pid);
+				sprintf(buffer, "ERR %5i,PWM %5i", dcm->m_error, dcm->j);
 				eaDogM_WriteStringAtPos(13, 0, buffer);
+				sprintf(buffer, "PID %5i", dcm->bm_pid);
+				eaDogM_WriteStringAtPos(14, 0, buffer);
 				RTCC_TimeGet(timeinfo);
 				timeinfo->tm_year -= 1900; // correct for asctime string conversion adding 1900
 				sprintf(buffer, "Time %s", asctime(timeinfo));
