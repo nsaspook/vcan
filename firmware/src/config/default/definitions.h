@@ -65,8 +65,8 @@
 #include "peripheral/eeprom/plib_eeprom.h"
 #include "peripheral/tmr/plib_tmr2.h"
 #include "peripheral/tmr/plib_tmr3.h"
-#include "peripheral/tmr1/plib_tmr1.h"
 #include "peripheral/mcpwm/plib_mcpwm.h"
+#include "peripheral/tmr1/plib_tmr1.h"
 #include "peripheral/rtcc/plib_rtcc.h"
 
 // DOM-IGNORE-BEGIN

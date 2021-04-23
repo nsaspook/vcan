@@ -193,6 +193,14 @@
 #define FBA1_Get()               ((PORTF >> 12) & 0x1)
 #define FBA1_PIN                  GPIO_PIN_RF12
 
+/*** Macros for FLT5 pin ***/
+#define FLT5_Get()               ((PORTE >> 12) & 0x1)
+#define FLT5_PIN                  GPIO_PIN_RE12
+
+/*** Macros for FLT6 pin ***/
+#define FLT6_Get()               ((PORTE >> 13) & 0x1)
+#define FLT6_PIN                  GPIO_PIN_RE13
+
 /*** Macros for FBA2 pin ***/
 #define FBA2_Get()               ((PORTE >> 14) & 0x1)
 #define FBA2_PIN                  GPIO_PIN_RE14
@@ -223,6 +231,10 @@
 #define IN3_InputEnable()       (TRISASET = (1<<8))
 #define IN3_Get()               ((PORTA >> 8) & 0x1)
 #define IN3_PIN                  GPIO_PIN_RA8
+
+/*** Macros for FLT15 pin ***/
+#define FLT15_Get()               ((PORTB >> 4) & 0x1)
+#define FLT15_PIN                  GPIO_PIN_RB4
 
 /*** Macros for U1_EN pin ***/
 #define U1_EN_Set()               (LATESET = (1<<0))

@@ -1053,7 +1053,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: ''}
+        attributes: {value: FLT5}
   - type: String
     attributes: {id: BSP_PIN_41_FUNCTION_TYPE}
     children:
@@ -1075,6 +1075,13 @@ children:
       children:
       - type: User
         attributes: {value: 'True'}
+  - type: KeyValueSet
+    attributes: {id: BSP_PIN_41_SR}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
   - type: String
     attributes: {id: BSP_PIN_42_DIR}
     children:
@@ -1088,7 +1095,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: ''}
+        attributes: {value: FLT6}
   - type: String
     attributes: {id: BSP_PIN_42_FUNCTION_TYPE}
     children:
@@ -1117,6 +1124,13 @@ children:
       children:
       - type: User
         attributes: {value: 'True'}
+  - type: KeyValueSet
+    attributes: {id: BSP_PIN_42_SR}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
   - type: String
     attributes: {id: BSP_PIN_43_DIR}
     children:
@@ -1270,7 +1284,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: ''}
+        attributes: {value: FLT15}
   - type: String
     attributes: {id: BSP_PIN_50_FUNCTION_TYPE}
     children:
@@ -1287,6 +1301,13 @@ children:
         attributes: {value: DIGITAL}
   - type: String
     attributes: {id: BSP_PIN_50_PD}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: ''}
+  - type: String
+    attributes: {id: BSP_PIN_50_PU}
     children:
     - type: Values
       children:
@@ -5824,14 +5845,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '16'}
+        attributes: {id: core, value: '0'}
   - type: Hex
     attributes: {id: SYS_PORT_B_CNPU}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '130'}
+        attributes: {id: core, value: '146'}
   - type: Boolean
     attributes: {id: SYS_PORT_B_CN_USED}
     children:
@@ -5944,6 +5965,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '768'}
+  - type: Hex
+    attributes: {id: SYS_PORT_E_SRCON0}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '12288'}
+  - type: Hex
+    attributes: {id: SYS_PORT_E_SRCON1}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '0'}
   - type: Hex
     attributes: {id: SYS_PORT_E_TRIS}
     children:

@@ -206,9 +206,9 @@ void SYS_Initialize ( void* data )
 
     TMR3_Initialize();
 
-    TMR1_Initialize();
-
     MCPWM_Initialize();
+
+    TMR1_Initialize();
 
     RTCC_Initialize();
 

@@ -361,7 +361,7 @@ void BDC_motor(struct DC_type * dcm)
 				eaDogM_WriteStringAtPos(10, 0, buffer);
 				sprintf(buffer, "POT2 %5i", an_data[POT2]);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
-				sprintf(buffer, "SET  %5i, %5i", dcm->m_pos, dcm->m_set);
+				sprintf(buffer, "SET  %5i, %5i %i,%i,%i", dcm->m_pos, dcm->m_set,FLT5_Get(),FLT5_Get(),FLT15_Get());
 				eaDogM_WriteStringAtPos(12, 0, buffer);
 				sprintf(buffer, "ERR %5i,PWM %5i", dcm->m_error, dcm->j);
 				eaDogM_WriteStringAtPos(13, 0, buffer);

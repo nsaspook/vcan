@@ -92,9 +92,9 @@ void MCPWM_Initialize (void)
     /*  FLTSRC  = 4  */
     /*  CLDAT  = 0b11 */
     /*  CLMOD  = 0 */
-    /*  CLPOL  = 0  */
-    /*  CLSRC  = 15  */
-    IOCON1 = 0x3c27c03c;
+    /*  CLPOL  = 1  */
+    /*  CLSRC  = 4  */
+    IOCON1 = 0x1227c03c;
 
     PDC1 = 6000;
     SDC1 = 500;

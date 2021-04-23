@@ -70,8 +70,7 @@ void GPIO_Initialize ( void )
     /* PORTB Initialization */
     LATB = 0xc100; /* Initial Latch Value */
     TRISBCLR = 0xc00d; /* Direction Control */
-    CNPUBSET = 0x82; /* Pull-Up Enable */
-    CNPDBSET = 0x10; /* Pull-Down Enable */
+    CNPUBSET = 0x92; /* Pull-Up Enable */
     /* Change Notice Enable */
     CNCONBSET = _CNCONB_ON_MASK;
     PORTB;
@@ -95,6 +94,7 @@ void GPIO_Initialize ( void )
     ANSELECLR = 0xb303; /* Digital Mode Enable */
     CNPUESET = 0x3000; /* Pull-Up Enable */
     CNPDESET = 0x3; /* Pull-Down Enable */
+    SRCON0ESET = 0x3000; /* Slew Rate Control */
 
     /* PORTF Initialization */
     LATF = 0x0; /* Initial Latch Value */
