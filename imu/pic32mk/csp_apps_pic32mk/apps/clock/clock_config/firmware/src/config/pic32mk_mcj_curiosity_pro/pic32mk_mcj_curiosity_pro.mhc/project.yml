@@ -69,20 +69,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 27D95DD428DFEB82E8E68E3D7682A3BE
-- generatedChecksum: FF6758A986FB63A5249A058FC8D56953
+- generatedChecksum: C9B1A4DD0F6B417C21CC1C11B9B999D6
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/gpio
   name: plib_gpio.c
   physicalPath: peripheral/gpio
   security: NON_SECURE
   type: SOURCE
-  userChecksum: FF6758A986FB63A5249A058FC8D56953
-- generatedChecksum: C74D9B3ABB9C0E97EEAC041803224E47
+  userChecksum: C9B1A4DD0F6B417C21CC1C11B9B999D6
+- generatedChecksum: 9CADBF4ECB6F0E67433914D3D5143E5C
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/spi/spi_master
   name: plib_spi1_master.c
   physicalPath: peripheral/spi/spi_master
   security: NON_SECURE
   type: SOURCE
-  userChecksum: C74D9B3ABB9C0E97EEAC041803224E47
+  userChecksum: 9CADBF4ECB6F0E67433914D3D5143E5C
 - generatedChecksum: 61382DAE2B82E5F4D68EDE7917667C81
   logicalPath: config/pic32mk_mcj_curiosity_pro/peripheral/spi/spi_master
   name: plib_spi2_master.c
