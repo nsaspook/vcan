@@ -68,9 +68,9 @@ void QEI2_Initialize (void)
     /*  HOMPOL = 0 */
     /*  SWPAB    = 0  */
     /*  OUTFNC  = 0  */
-    /*  QFDIV   = 0   */
+    /*  QFDIV   = 1   */
     /*  FLTREN  = 1   */
-    QEI2IOC = 0x4000;
+    QEI2IOC = 0x4800;
 
     QEI2ICC = 0U;
     QEI2CMPL = 0U;

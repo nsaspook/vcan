@@ -68,9 +68,9 @@ void QEI3_Initialize (void)
     /*  HOMPOL = 0 */
     /*  SWPAB    = 0  */
     /*  OUTFNC  = 0  */
-    /*  QFDIV   = 0   */
-    /*  FLTREN  = 0   */
-    QEI3IOC = 0x0;
+    /*  QFDIV   = 1   */
+    /*  FLTREN  = 1   */
+    QEI3IOC = 0x4800;
 
     QEI3ICC = 0U;
     QEI3CMPL = 0U;

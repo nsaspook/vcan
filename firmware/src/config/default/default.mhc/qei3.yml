@@ -46,5 +46,26 @@ children:
       children:
       - type: Dynamic
         attributes: {id: qei3, value: QEI3_Stop}
+  - type: KeyValueSet
+    attributes: {id: QEI3IOC__FLTREN}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: KeyValueSet
+    attributes: {id: QEI3IOC__QFDIV}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: Hex
+    attributes: {id: QEI_QEIIOC}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: qei3, value: '18432'}
 - type: ElementPosition
   attributes: {x: '170', y: '160', id: qei3}

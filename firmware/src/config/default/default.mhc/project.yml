@@ -90,20 +90,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 4C46D161126F8BA6D8CF6106A90A2B1C
-- generatedChecksum: 73981D918D386639281DDE873D9F8F9B
+- generatedChecksum: 3BB8854016623FA361C513846D7FBEA2
   logicalPath: config/default/peripheral/qei
   name: plib_qei2.c
   physicalPath: peripheral/qei
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 73981D918D386639281DDE873D9F8F9B
-- generatedChecksum: 2ECABC436DDB8F584D914FF4F25D3975
+  userChecksum: 3BB8854016623FA361C513846D7FBEA2
+- generatedChecksum: F9F3D7B425DA93A90A512440ECD7E7B7
   logicalPath: config/default/peripheral/qei
   name: plib_qei3.c
   physicalPath: peripheral/qei
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 2ECABC436DDB8F584D914FF4F25D3975
+  userChecksum: F9F3D7B425DA93A90A512440ECD7E7B7
 - generatedChecksum: CA5E40130FB73820EEAD91E29A1EF6B3
   logicalPath: config/default/peripheral/rtcc
   name: plib_rtcc.c
