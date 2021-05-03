@@ -183,6 +183,8 @@ void SYS_Initialize ( void* data )
 
     DMAC_Initialize();
 
+	SPI5_Initialize();
+
 	UART6_Initialize();
 
     CORETIMER_Initialize();

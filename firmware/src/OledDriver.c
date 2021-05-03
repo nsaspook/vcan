@@ -525,7 +525,7 @@ void OledUpdate(void)
 	int32_t ipag;
 	uint8_t* pb;
 
-	DEBUGB0_Set();
+	DEBUGD4_Set();
 	if (disp_frame) {
 		pb = rgbOledBmp0;
 	} else {
@@ -548,7 +548,7 @@ void OledUpdate(void)
 		OledPutBuffer(ccolOledMax, pb);
 		pb += ccolOledMax;
 	}
-	DEBUGB0_Clear();
+	DEBUGD4_Clear();
 #endif
 }
 
@@ -563,7 +563,7 @@ void SPI3DmaChannelHandler_State(DMAC_TRANSFER_EVENT event, uintptr_t contextHan
 	static int32_t ipag; // buffer page number
 	static uint8_t* pb; // buffer page address
 
-	DEBUGB0_Set(); // back to mainline code, GLCD updates in background using DMA and interrupts
+	DEBUGD4_Set(); // back to mainline code, GLCD updates in background using DMA and interrupts
 	LCD_UNSELECT();
 	if (contextHandle == DMA_MAGIC) { // re-init state machine for next GLCD update
 		dstate = D_init;
@@ -605,7 +605,7 @@ void SPI3DmaChannelHandler_State(DMAC_TRANSFER_EVENT event, uintptr_t contextHan
 		LCD_UNSELECT();
 		break;
 	}
-	DEBUGB0_Clear();
+	DEBUGD4_Clear();
 }
 
 /* ------------------------------------------------------------ */

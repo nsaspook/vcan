@@ -84,14 +84,14 @@
 #define SPI_EN1_Get()               ((PORTD >> 2) & 0x1)
 #define SPI_EN1_PIN                  GPIO_PIN_RD2
 
-/*** Macros for GPIO_RD4 pin ***/
-#define GPIO_RD4_Set()               (LATDSET = (1<<4))
-#define GPIO_RD4_Clear()             (LATDCLR = (1<<4))
-#define GPIO_RD4_Toggle()            (LATDINV= (1<<4))
-#define GPIO_RD4_OutputEnable()      (TRISDCLR = (1<<4))
-#define GPIO_RD4_InputEnable()       (TRISDSET = (1<<4))
-#define GPIO_RD4_Get()               ((PORTD >> 4) & 0x1)
-#define GPIO_RD4_PIN                  GPIO_PIN_RD4
+/*** Macros for DEBUGD4 pin ***/
+#define DEBUGD4_Set()               (LATDSET = (1<<4))
+#define DEBUGD4_Clear()             (LATDCLR = (1<<4))
+#define DEBUGD4_Toggle()            (LATDINV= (1<<4))
+#define DEBUGD4_OutputEnable()      (TRISDCLR = (1<<4))
+#define DEBUGD4_InputEnable()       (TRISDSET = (1<<4))
+#define DEBUGD4_Get()               ((PORTD >> 4) & 0x1)
+#define DEBUGD4_PIN                  GPIO_PIN_RD4
 
 /*** Macros for RESET_LED pin ***/
 #define RESET_LED_Set()               (LATGSET = (1<<9))
@@ -102,14 +102,14 @@
 #define RESET_LED_Get()               ((PORTG >> 9) & 0x1)
 #define RESET_LED_PIN                  GPIO_PIN_RG9
 
-/*** Macros for GPIO_RG10 pin ***/
-#define GPIO_RG10_Set()               (LATGSET = (1<<10))
-#define GPIO_RG10_Clear()             (LATGCLR = (1<<10))
-#define GPIO_RG10_Toggle()            (LATGINV= (1<<10))
-#define GPIO_RG10_OutputEnable()      (TRISGCLR = (1<<10))
-#define GPIO_RG10_InputEnable()       (TRISGSET = (1<<10))
-#define GPIO_RG10_Get()               ((PORTG >> 10) & 0x1)
-#define GPIO_RG10_PIN                  GPIO_PIN_RG10
+/*** Macros for option1 pin ***/
+#define option1_Set()               (LATGSET = (1<<10))
+#define option1_Clear()             (LATGCLR = (1<<10))
+#define option1_Toggle()            (LATGINV= (1<<10))
+#define option1_OutputEnable()      (TRISGCLR = (1<<10))
+#define option1_InputEnable()       (TRISGSET = (1<<10))
+#define option1_Get()               ((PORTG >> 10) & 0x1)
+#define option1_PIN                  GPIO_PIN_RG10
 
 /*** Macros for QEI1_E0 pin ***/
 #define QEI1_E0_Set()               (LATESET = (1<<8))
@@ -129,14 +129,9 @@
 #define QEI2_E0_Get()               ((PORTE >> 9) & 0x1)
 #define QEI2_E0_PIN                  GPIO_PIN_RE9
 
-/*** Macros for DEBUGB0 pin ***/
-#define DEBUGB0_Set()               (LATBSET = (1<<0))
-#define DEBUGB0_Clear()             (LATBCLR = (1<<0))
-#define DEBUGB0_Toggle()            (LATBINV= (1<<0))
-#define DEBUGB0_OutputEnable()      (TRISBCLR = (1<<0))
-#define DEBUGB0_InputEnable()       (TRISBSET = (1<<0))
-#define DEBUGB0_Get()               ((PORTB >> 0) & 0x1)
-#define DEBUGB0_PIN                  GPIO_PIN_RB0
+/*** Macros for TIC12400_INT pin ***/
+#define TIC12400_INT_Get()               ((PORTB >> 0) & 0x1)
+#define TIC12400_INT_PIN                  GPIO_PIN_RB0
 
 /*** Macros for qei2_index pin ***/
 #define qei2_index_Set()               (LATBSET = (1<<1))
@@ -361,33 +356,6 @@
 #define IN8_InputEnable()       (TRISFSET = (1<<0))
 #define IN8_Get()               ((PORTF >> 0) & 0x1)
 #define IN8_PIN                  GPIO_PIN_RF0
-
-/*** Macros for option1 pin ***/
-#define option1_Set()               (LATFSET = (1<<1))
-#define option1_Clear()             (LATFCLR = (1<<1))
-#define option1_Toggle()            (LATFINV= (1<<1))
-#define option1_OutputEnable()      (TRISFCLR = (1<<1))
-#define option1_InputEnable()       (TRISFSET = (1<<1))
-#define option1_Get()               ((PORTF >> 1) & 0x1)
-#define option1_PIN                  GPIO_PIN_RF1
-
-/*** Macros for option2 pin ***/
-#define option2_Set()               (LATGSET = (1<<1))
-#define option2_Clear()             (LATGCLR = (1<<1))
-#define option2_Toggle()            (LATGINV= (1<<1))
-#define option2_OutputEnable()      (TRISGCLR = (1<<1))
-#define option2_InputEnable()       (TRISGSET = (1<<1))
-#define option2_Get()               ((PORTG >> 1) & 0x1)
-#define option2_PIN                  GPIO_PIN_RG1
-
-/*** Macros for GPIO_RG0 pin ***/
-#define GPIO_RG0_Set()               (LATGSET = (1<<0))
-#define GPIO_RG0_Clear()             (LATGCLR = (1<<0))
-#define GPIO_RG0_Toggle()            (LATGINV= (1<<0))
-#define GPIO_RG0_OutputEnable()      (TRISGCLR = (1<<0))
-#define GPIO_RG0_InputEnable()       (TRISGSET = (1<<0))
-#define GPIO_RG0_Get()               ((PORTG >> 0) & 0x1)
-#define GPIO_RG0_PIN                  GPIO_PIN_RG0
 
 /*** Macros for DO7 pin ***/
 #define DO7_Set()               (LATFSET = (1<<6))

@@ -467,7 +467,7 @@ time_t time(time_t * Time)
  */
 void wave_gen(uint32_t status, uintptr_t context)
 {
-	DEBUGB0_Set();
+	DEBUGD4_Set();
 	if (V.pwm_stop && V.pwm_update)
 		return;
 
@@ -743,7 +743,7 @@ int main(void)
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
-		sprintf(buffer, " Options: 1:%d 2:%d ", option1_Get(), option2_Get());
+		sprintf(buffer, " Options: 1:%d 2:%d ", option1_Get(), option1_Get());
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
 		WaitMs(5000);
@@ -752,7 +752,7 @@ int main(void)
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
-		sprintf(buffer, " Options: 1:%d 2:%d ", option1_Get(), option2_Get());
+		sprintf(buffer, " Options: 1:%d 2:%d ", option1_Get(), option1_Get());
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
 		WaitMs(1500);
@@ -982,7 +982,7 @@ int main(void)
 			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
 				OledClearBuffer();
-				sprintf(buffer, " Options: 1:%d 2:%d   %4.1f", option1_Get(), option2_Get(), pi_current_error);
+				sprintf(buffer, " Options: 1:%d 2:%d   %4.1f", option1_Get(), option1_Get(), pi_current_error);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
 				sprintf(buffer, "C %5i:%i     %1i:%1i:%1i:%1i     ", m35_ptr->pos, m35_2.error, m35_2.cw, m35_2.ccw, m35_2.stopped, m35_2.set);
 				eaDogM_WriteStringAtPos(1, 0, buffer);

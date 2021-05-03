@@ -8587,6 +8587,12 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+24V" device=""/>
 <part name="P+4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+24V" device=""/>
 <part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="C7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1"/>
+<part name="C6" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="10uf"/>
+<part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="GND11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="VDD4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
+<part name="VDD5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -8701,6 +8707,26 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <instance part="GND9" gate="1" x="60.96" y="157.48" smashed="yes" rot="R270">
 <attribute name="VALUE" x="58.42" y="160.02" size="1.778" layer="96" rot="R270"/>
 </instance>
+<instance part="C7" gate="G$1" x="-2.54" y="55.88" smashed="yes">
+<attribute name="NAME" x="-1.524" y="56.515" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-1.524" y="51.689" size="1.778" layer="96"/>
+</instance>
+<instance part="C6" gate="G$1" x="10.16" y="55.88" smashed="yes">
+<attribute name="NAME" x="11.176" y="56.515" size="1.778" layer="95"/>
+<attribute name="VALUE" x="11.176" y="51.689" size="1.778" layer="96"/>
+</instance>
+<instance part="GND10" gate="1" x="-2.54" y="48.26" smashed="yes">
+<attribute name="VALUE" x="-5.08" y="45.72" size="1.778" layer="96"/>
+</instance>
+<instance part="GND11" gate="1" x="10.16" y="48.26" smashed="yes">
+<attribute name="VALUE" x="7.62" y="45.72" size="1.778" layer="96"/>
+</instance>
+<instance part="VDD4" gate="G$1" x="-2.54" y="60.96" smashed="yes">
+<attribute name="VALUE" x="-5.08" y="58.42" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="VDD5" gate="G$1" x="10.16" y="60.96" smashed="yes">
+<attribute name="VALUE" x="7.62" y="58.42" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -8724,6 +8750,14 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <segment>
 <pinref part="R4" gate="G$1" pin="1"/>
 <pinref part="VDD3" gate="G$1" pin="VDD"/>
+</segment>
+<segment>
+<pinref part="C7" gate="G$1" pin="1"/>
+<pinref part="VDD4" gate="G$1" pin="VDD"/>
+</segment>
+<segment>
+<pinref part="C6" gate="G$1" pin="1"/>
+<pinref part="VDD5" gate="G$1" pin="VDD"/>
 </segment>
 </net>
 <net name="GND" class="1">
@@ -8770,6 +8804,14 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <segment>
 <pinref part="X1" gate="-1" pin="S"/>
 <pinref part="GND9" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C7" gate="G$1" pin="2"/>
+<pinref part="GND10" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C6" gate="G$1" pin="2"/>
+<pinref part="GND11" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="N$4" class="0">
