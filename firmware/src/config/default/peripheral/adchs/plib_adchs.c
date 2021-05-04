@@ -83,7 +83,7 @@ void ADCHS_Initialize()
     ADCIMCON4 = 0x0; 
 
     /* Input scan */
-    ADCCSS1 = 0x24802;
+    ADCCSS1 = 0x4802;
     ADCCSS2 = 0x340000; 
 
     /* Turn ON ADC */

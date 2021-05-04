@@ -65,9 +65,6 @@ bool SPI5_Read(void* pReceiveData, size_t rxSize);
 
 bool SPI5_TransferSetup (SPI_TRANSFER_SETUP *setup, uint32_t spiSourceClock);
 
-bool SPI5_IsBusy(void);
-
-void SPI5_CallbackRegister(SPI_CALLBACK callback, uintptr_t context);
 
 /* Provide C++ Compatibility */
 #ifdef __cplusplus

@@ -38,6 +38,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: spi5, value: '4294967295'}
+  - type: Boolean
+    attributes: {id: SPI_INTERRUPT_MODE}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
+  - type: KeyValueSet
+    attributes: {id: SPI_MASTER_CLOCK}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
   - type: KeyValueSet
     attributes: {id: SPI_SPICON_MODE}
     children:

@@ -93,6 +93,15 @@
 #define DEBUGD4_Get()               ((PORTD >> 4) & 0x1)
 #define DEBUGD4_PIN                  GPIO_PIN_RD4
 
+/*** Macros for TIC12400_EN0 pin ***/
+#define TIC12400_EN0_Set()               (LATGSET = (1<<8))
+#define TIC12400_EN0_Clear()             (LATGCLR = (1<<8))
+#define TIC12400_EN0_Toggle()            (LATGINV= (1<<8))
+#define TIC12400_EN0_OutputEnable()      (TRISGCLR = (1<<8))
+#define TIC12400_EN0_InputEnable()       (TRISGSET = (1<<8))
+#define TIC12400_EN0_Get()               ((PORTG >> 8) & 0x1)
+#define TIC12400_EN0_PIN                  GPIO_PIN_RG8
+
 /*** Macros for RESET_LED pin ***/
 #define RESET_LED_Set()               (LATGSET = (1<<9))
 #define RESET_LED_Clear()             (LATGCLR = (1<<9))
@@ -144,23 +153,23 @@
 #define qei2_index_InterruptEnable()   (CNENBSET = (1<<1))
 #define qei2_index_InterruptDisable()  (CNENBCLR = (1<<1))
 
-/*** Macros for GPIO_RB2 pin ***/
-#define GPIO_RB2_Set()               (LATBSET = (1<<2))
-#define GPIO_RB2_Clear()             (LATBCLR = (1<<2))
-#define GPIO_RB2_Toggle()            (LATBINV= (1<<2))
-#define GPIO_RB2_OutputEnable()      (TRISBCLR = (1<<2))
-#define GPIO_RB2_InputEnable()       (TRISBSET = (1<<2))
-#define GPIO_RB2_Get()               ((PORTB >> 2) & 0x1)
-#define GPIO_RB2_PIN                  GPIO_PIN_RB2
+/*** Macros for ICSP5 pin ***/
+#define ICSP5_Set()               (LATBSET = (1<<2))
+#define ICSP5_Clear()             (LATBCLR = (1<<2))
+#define ICSP5_Toggle()            (LATBINV= (1<<2))
+#define ICSP5_OutputEnable()      (TRISBCLR = (1<<2))
+#define ICSP5_InputEnable()       (TRISBSET = (1<<2))
+#define ICSP5_Get()               ((PORTB >> 2) & 0x1)
+#define ICSP5_PIN                  GPIO_PIN_RB2
 
-/*** Macros for GPIO_RB3 pin ***/
-#define GPIO_RB3_Set()               (LATBSET = (1<<3))
-#define GPIO_RB3_Clear()             (LATBCLR = (1<<3))
-#define GPIO_RB3_Toggle()            (LATBINV= (1<<3))
-#define GPIO_RB3_OutputEnable()      (TRISBCLR = (1<<3))
-#define GPIO_RB3_InputEnable()       (TRISBSET = (1<<3))
-#define GPIO_RB3_Get()               ((PORTB >> 3) & 0x1)
-#define GPIO_RB3_PIN                  GPIO_PIN_RB3
+/*** Macros for ICSP4 pin ***/
+#define ICSP4_Set()               (LATBSET = (1<<3))
+#define ICSP4_Clear()             (LATBCLR = (1<<3))
+#define ICSP4_Toggle()            (LATBINV= (1<<3))
+#define ICSP4_OutputEnable()      (TRISBCLR = (1<<3))
+#define ICSP4_InputEnable()       (TRISBSET = (1<<3))
+#define ICSP4_Get()               ((PORTB >> 3) & 0x1)
+#define ICSP4_PIN                  GPIO_PIN_RB3
 
 /*** Macros for BACKLIGHT pin ***/
 #define BACKLIGHT_Set()               (LATCSET = (1<<2))

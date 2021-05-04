@@ -404,12 +404,47 @@ children:
       - type: User
         attributes: {value: 'True'}
   - type: String
+    attributes: {id: BSP_PIN_12_DIR}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: Out}
+  - type: String
+    attributes: {id: BSP_PIN_12_FUNCTION_NAME}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: TIC12400_EN0}
+  - type: String
     attributes: {id: BSP_PIN_12_FUNCTION_TYPE}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: AN17}
+        attributes: {value: GPIO}
+  - type: String
+    attributes: {id: BSP_PIN_12_LAT}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: High}
+  - type: String
+    attributes: {id: BSP_PIN_12_MODE}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: DIGITAL}
+  - type: String
+    attributes: {id: BSP_PIN_12_PU}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'True'}
   - type: String
     attributes: {id: BSP_PIN_13_MODE}
     children:
@@ -738,7 +773,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: GPIO_RB2}
+        attributes: {value: ICSP5}
   - type: String
     attributes: {id: BSP_PIN_26_FUNCTION_TYPE}
     children:
@@ -766,7 +801,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: GPIO_RB3}
+        attributes: {value: ICSP4}
   - type: String
     attributes: {id: BSP_PIN_27_FUNCTION_TYPE}
     children:
@@ -2194,7 +2229,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: ''}
+        attributes: {value: 'True'}
   - type: String
     attributes: {id: BSP_PIN_89_DIR}
     children:
@@ -2229,7 +2264,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: ''}
+        attributes: {value: 'True'}
   - type: String
     attributes: {id: BSP_PIN_8_FUNCTION_TYPE}
     children:
@@ -2279,6 +2314,13 @@ children:
       children:
       - type: User
         attributes: {value: DIGITAL}
+  - type: String
+    attributes: {id: BSP_PIN_90_PU}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'True'}
   - type: String
     attributes: {id: BSP_PIN_91_DIR}
     children:
@@ -4187,42 +4229,42 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
   - type: Boolean
     attributes: {id: EVIC_225_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
   - type: String
     attributes: {id: EVIC_225_INTERRUPT_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: SPI5_RX_InterruptHandler}
+        attributes: {id: core, value: SPI5_RX_Handler}
   - type: Boolean
     attributes: {id: EVIC_226_ENABLE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
   - type: Boolean
     attributes: {id: EVIC_226_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
   - type: String
     attributes: {id: EVIC_226_INTERRUPT_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: SPI5_TX_InterruptHandler}
+        attributes: {id: core, value: SPI5_TX_Handler}
   - type: Boolean
     attributes: {id: EVIC_230_ENABLE}
     children:
@@ -5899,56 +5941,56 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: spi5, value: 'true'}
+        attributes: {id: spi5, value: 'false'}
   - type: Boolean
     attributes: {id: SPI5_RX_INTERRUPT_ENABLE_UPDATE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: String
     attributes: {id: SPI5_RX_INTERRUPT_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: spi5, value: SPI5_RX_InterruptHandler}
+        attributes: {id: spi5, value: SPI5_RX_Handler}
   - type: Boolean
     attributes: {id: SPI5_RX_INTERRUPT_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: spi5, value: 'true'}
+        attributes: {id: spi5, value: 'false'}
   - type: Boolean
     attributes: {id: SPI5_TX_INTERRUPT_ENABLE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: spi5, value: 'true'}
+        attributes: {id: spi5, value: 'false'}
   - type: Boolean
     attributes: {id: SPI5_TX_INTERRUPT_ENABLE_UPDATE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: String
     attributes: {id: SPI5_TX_INTERRUPT_HANDLER}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: spi5, value: SPI5_TX_InterruptHandler}
+        attributes: {id: spi5, value: SPI5_TX_Handler}
   - type: Boolean
     attributes: {id: SPI5_TX_INTERRUPT_HANDLER_LOCK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: spi5, value: 'true'}
+        attributes: {id: spi5, value: 'false'}
   - type: Boolean
     attributes: {id: SPI6_CLOCK_ENABLE}
     children:
@@ -6230,7 +6272,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0'}
+        attributes: {id: core, value: '2'}
   - type: Hex
     attributes: {id: SYS_PORT_F_TRIS}
     children:
@@ -6244,7 +6286,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '3776'}
+        attributes: {id: core, value: '4032'}
   - type: Hex
     attributes: {id: SYS_PORT_G_CNPD}
     children:
@@ -6258,21 +6300,21 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '1216'}
+        attributes: {id: core, value: '1475'}
   - type: Hex
     attributes: {id: SYS_PORT_G_LAT}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '2560'}
+        attributes: {id: core, value: '2816'}
   - type: Hex
     attributes: {id: SYS_PORT_G_TRIS}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '31232'}
+        attributes: {id: core, value: '31488'}
   - type: Combo
     attributes: {id: SYS_PORT_PPS_INPUT_FUNCTION_0}
     children:

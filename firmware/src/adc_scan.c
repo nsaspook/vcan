@@ -18,7 +18,7 @@ void end_of_adc_scan(void)
 		u1bi = ADCHS_ChannelResultGet(36U); // JP5 pin 4, AN36, FBB1/RF13
 		an_data[ANA1] = ADCHS_ChannelResultGet(ADCHS_CH1); // JP5 pin x, AN1, ANA1/RA1
 		an_data[POT1] = ADCHS_ChannelResultGet(ADCHS_CH11); // JP5 pin x, AN11 POT1/RC11
-		an_data[POT2] = ADCHS_ChannelResultGet(ADCHS_CH17); // JP5 pin x, AN17 POT2/RG8
+//		an_data[POT2] = ADCHS_ChannelResultGet(ADCHS_CH17); // JP5 pin x, AN17 POT2/RG8
 		an_data[IVREF] = ADCHS_ChannelResultGet(ADCHS_CH50); // IVREF 1.2V (internal AN50)
 		an_data[TSENSOR] = ADCHS_ChannelResultGet(ADCHS_CH53); //  CTMU Temperature Sensor (internal AN53)
 		if (!option1_Get()) {

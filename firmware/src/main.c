@@ -74,6 +74,7 @@ IC = M * sin (? + 240)
 #include "scmd.h"
 #include "peripheral/coretimer/plib_coretimer.h"
 #include "gfx.h"
+#include "tic12400.h"
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 extern t_cli_ctx cli_ctx; // command buffer 
@@ -361,7 +362,7 @@ void BDC_motor(struct DC_type * dcm)
 				eaDogM_WriteStringAtPos(10, 0, buffer);
 				sprintf(buffer, "POT2 %5i", an_data[POT2]);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
-				sprintf(buffer, "SET  %5i, %5i %i,%i,%i", dcm->m_pos, dcm->m_set,FLT5_Get(),FLT5_Get(),FLT15_Get());
+				sprintf(buffer, "SET  %5i, %5i %i,%i,%i", dcm->m_pos, dcm->m_set, FLT5_Get(), FLT5_Get(), FLT15_Get());
 				eaDogM_WriteStringAtPos(12, 0, buffer);
 				sprintf(buffer, "ERR %5i,PWM %5i", dcm->m_error, dcm->j);
 				eaDogM_WriteStringAtPos(13, 0, buffer);
@@ -390,6 +391,7 @@ void BDC_motor(struct DC_type * dcm)
 			}
 			if (TimerDone(TMR_BLINK)) {
 				StartTimer(TMR_BLINK, 100);
+				tic12400_init();
 				RESET_LED_Toggle();
 				OledClearBuffer();
 			}
