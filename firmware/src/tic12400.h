@@ -11,8 +11,9 @@ typedef struct {
 	uint32_t wr : 1;
 } ticbuf_type;
 
-void tic12400_init(void);
+bool tic12400_init(void);
 uint32_t tic12400_wr(ticbuf_type *);
+uint32_t tic12400_get_sw(void);
 
 /* Provide C++ Compatibility */
 #ifdef __cplusplus

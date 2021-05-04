@@ -30,8 +30,14 @@ ticbuf_type setup5 = {
 	.data = 0x800,
 	.par=1,
 };
+ticbuf_type ticread1 = {
+	.wr=0,
+	.addr = 0x5,
+	.data = 0,
+	.par=1,
+};
 
-void tic12400_init(void)
+bool tic12400_init(void)
 {
 	TIC12400_EN0_Set();
 	
@@ -45,6 +51,7 @@ void tic12400_init(void)
 	//	 TIC12400Q1_Write(1,0x1C,0); //all set to GND
 	//	 TIC12400Q1_Write(1,0x1B, 0xFFFFFF); //All channels are enabled
 	//	 TIC12400Q1_Write(1,0x1A,0x800); //Start conversion
+	return true;
 }
 
 uint32_t tic12400_wr(ticbuf_type * buffer)
@@ -55,4 +62,9 @@ uint32_t tic12400_wr(ticbuf_type * buffer)
 	SPI5_WriteRead(buffer, 4,&rbuffer,4);
 	TIC12400_EN0_Set();
 	return rbuffer;
+}
+
+uint32_t tic12400_get_sw(void)
+{
+	return tic12400_wr(&ticread1);
 }

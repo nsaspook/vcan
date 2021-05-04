@@ -360,7 +360,7 @@ void BDC_motor(struct DC_type * dcm)
 				eaDogM_WriteStringAtPos(9, 0, buffer);
 				sprintf(buffer, "POT1 %5i", an_data[POT1]);
 				eaDogM_WriteStringAtPos(10, 0, buffer);
-				sprintf(buffer, "POT2 %5i", an_data[POT2]);
+				sprintf(buffer, "TIC1 %5i", an_data[POT2]);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
 				sprintf(buffer, "SET  %5i, %5i %i,%i,%i", dcm->m_pos, dcm->m_set, FLT5_Get(), FLT5_Get(), FLT15_Get());
 				eaDogM_WriteStringAtPos(12, 0, buffer);
@@ -394,6 +394,7 @@ void BDC_motor(struct DC_type * dcm)
 				tic12400_init();
 				RESET_LED_Toggle();
 				OledClearBuffer();
+				an_data[POT2] = tic12400_get_sw();
 			}
 		}
 	}
