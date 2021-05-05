@@ -50,7 +50,7 @@
 
 #define SPI5_CON_MSTEN                      (1 << _SPI5CON_MSTEN_POSITION)
 #define SPI5_CON_CKP                        (0 << _SPI5CON_CKP_POSITION)
-#define SPI5_CON_CKE                        (1 << _SPI5CON_CKE_POSITION)
+#define SPI5_CON_CKE                        (0 << _SPI5CON_CKE_POSITION)
 #define SPI5_CON_MODE_32_MODE_16            (3 << _SPI5CON_MODE16_POSITION)
 #define SPI5_CON_ENHBUF                     (1 << _SPI5CON_ENHBUF_POSITION)
 #define SPI5_CON_MCLKSEL                    (0 << _SPI5CON_MCLKSEL_POSITION)
@@ -79,7 +79,7 @@ void SPI5_Initialize ( void )
     IFS7CLR = 0x4;
 
     /* BAUD Rate register Setup */
-    SPI5BRG = 7;
+    SPI5BRG = 9;
 
     /* CLear the Overflow */
     SPI5STATCLR = _SPI5STAT_SPIROV_MASK;
@@ -87,7 +87,7 @@ void SPI5_Initialize ( void )
     /*
     MSTEN = 1
     CKP = 0
-    CKE = 1
+    CKE = 0
     MODE<32,16> = 3
     ENHBUF = 1
     MSSEN = 0

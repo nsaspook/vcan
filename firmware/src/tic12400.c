@@ -92,5 +92,16 @@ uint32_t tic12400_get_sw(void)
 {
 	tic12400_status = tic12400_wr(&ticstat1);
 	tic12400_value = tic12400_wr(&ticread1);
+//	tic12400_value = tic12400_status;
+	if (tic12400_value & (1)) {
+		BSP_LED1_Clear();
+	} else {
+		BSP_LED1_Set();
+	}
+	if (tic12400_value & (1)) {
+		BSP_LED2_Clear();
+	} else {
+		BSP_LED2_Set();
+	}
 	return tic12400_value;
 }
