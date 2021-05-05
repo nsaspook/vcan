@@ -36,6 +36,18 @@ ticbuf_type ticread1 = {
 	.data = 0,
 	.par=1,
 };
+ticbuf_type ticdevid1 = {
+	.wr=0,
+	.addr = 0x1,
+	.data = 0,
+	.par=1,
+};
+ticbuf_type ticstat1 = {
+	.wr=0,
+	.addr = 0x2,
+	.data = 0,
+	.par=1,
+};
 
 bool tic12400_init(void)
 {
@@ -51,6 +63,7 @@ bool tic12400_init(void)
 	//	 TIC12400Q1_Write(1,0x1C,0); //all set to GND
 	//	 TIC12400Q1_Write(1,0x1B, 0xFFFFFF); //All channels are enabled
 	//	 TIC12400Q1_Write(1,0x1A,0x800); //Start conversion
+	tic12400_wr(&ticstat1);
 	return true;
 }
 
@@ -66,5 +79,6 @@ uint32_t tic12400_wr(ticbuf_type * buffer)
 
 uint32_t tic12400_get_sw(void)
 {
+	tic12400_wr(&ticdevid1);
 	return tic12400_wr(&ticread1);
 }
