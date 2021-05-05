@@ -282,6 +282,7 @@ void BDC_motor(struct DC_type * dcm)
 {
 	char buffer[STR_BUF_SIZE];
 	bool gfx_move = false, gfx_reset = false;
+	uint32_t sw_value = 0;
 
 	TMR2_Stop();
 	TMR3_Stop();
@@ -290,6 +291,7 @@ void BDC_motor(struct DC_type * dcm)
 	 * init serial command parser
 	 */
 	scmd_init();
+	tic12400_init();
 
 	//Module CTMU
 	PMD1bits.CTMUMD = 0; //Enable CTMU Module
@@ -307,6 +309,7 @@ void BDC_motor(struct DC_type * dcm)
 	MCPWM_Start();
 	U1_EN_Set();
 	U2_EN_Set();
+
 	if (dcm->m_type == 1) {
 		while (true) {
 			if (TimerDone(TMR_MOTOR)) {
@@ -360,7 +363,7 @@ void BDC_motor(struct DC_type * dcm)
 				eaDogM_WriteStringAtPos(9, 0, buffer);
 				sprintf(buffer, "POT1 %5i", an_data[POT1]);
 				eaDogM_WriteStringAtPos(10, 0, buffer);
-				sprintf(buffer, "TIC1 %5i", an_data[POT2]);
+				sprintf(buffer, "TIC1 %5i", sw_value);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
 				sprintf(buffer, "SET  %5i, %5i %i,%i,%i", dcm->m_pos, dcm->m_set, FLT5_Get(), FLT5_Get(), FLT15_Get());
 				eaDogM_WriteStringAtPos(12, 0, buffer);
@@ -391,10 +394,10 @@ void BDC_motor(struct DC_type * dcm)
 			}
 			if (TimerDone(TMR_BLINK)) {
 				StartTimer(TMR_BLINK, 100);
-				tic12400_init();
+				sw_value = tic12400_get_sw();
 				RESET_LED_Toggle();
 				OledClearBuffer();
-				an_data[POT2] = tic12400_get_sw();
+
 			}
 		}
 	}
