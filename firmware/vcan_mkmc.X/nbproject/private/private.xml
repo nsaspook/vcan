@@ -8,6 +8,7 @@
             <file>file:/root/vcan/firmware/src/OledDriver.c</file>
             <file>file:/root/vcan/firmware/src/adc_scan.c</file>
             <file>file:/root/vcan/firmware/src/tic12400.h</file>
+            <file>file:/root/vcan/firmware/src/config/default/peripheral/spi/spi_master/plib_spi5_master.h</file>
             <file>file:/root/vcan/firmware/src/main.c</file>
             <file>file:/root/vcan/firmware/src/config/default/peripheral/gpio/plib_gpio.h</file>
         </group>

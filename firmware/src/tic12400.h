@@ -3,9 +3,13 @@
 
 #include "vcan.h"
 #include "dio.h"
+#include "timers.h"
 
-#define poll_mask	0b10000000000
+#define por_bit	0x01
 
+/*
+ * TIC12400 command structure
+ */
 typedef struct __attribute__((packed))
 {
 	uint32_t par : 1;
@@ -15,6 +19,9 @@ typedef struct __attribute__((packed))
 }
 ticbuf_type;
 
+/*
+ * TIC12400 response structure
+ */
 typedef struct __attribute__((packed))
 {
 	uint32_t par : 1;
@@ -31,11 +38,11 @@ ticread_type;
 
 void tic12400_reset(void);
 bool tic12400_init(void);
-uint32_t tic12400_wr(ticbuf_type *);
+uint32_t tic12400_wr(const ticbuf_type *, uint16_t);
 uint32_t tic12400_get_sw(void);
 
-extern uint32_t tic12400_status;
-extern uint32_t tic12400_value;
+extern volatile uint32_t tic12400_status;
+extern volatile uint32_t tic12400_value;
 
 extern ticread_type *ticstatus;
 

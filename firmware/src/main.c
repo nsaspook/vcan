@@ -310,7 +310,6 @@ void BDC_motor(struct DC_type * dcm)
 	U1_EN_Set();
 	U2_EN_Set();
 	tic12400_reset();
-	delay_ms(50);
 	tic12400_init();
 
 	if (dcm->m_type == 1) {
