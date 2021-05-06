@@ -285,6 +285,10 @@
 #define MAX_EN1_Get()               ((PORTD >> 8) & 0x1)
 #define MAX_EN1_PIN                  GPIO_PIN_RD8
 
+/*** Macros for MAX6818_INT pin ***/
+#define MAX6818_INT_Get()               ((PORTB >> 7) & 0x1)
+#define MAX6818_INT_PIN                  GPIO_PIN_RB7
+
 /*** Macros for GPIO_RC13 pin ***/
 #define GPIO_RC13_Set()               (LATCSET = (1<<13))
 #define GPIO_RC13_Clear()             (LATCCLR = (1<<13))

@@ -677,6 +677,13 @@ children:
       - type: User
         attributes: {value: AN1}
   - type: String
+    attributes: {id: BSP_PIN_24_CN}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: ''}
+  - type: String
     attributes: {id: BSP_PIN_24_DIR}
     children:
     - type: Values
@@ -712,12 +719,19 @@ children:
       - type: User
         attributes: {value: DIGITAL}
   - type: String
+    attributes: {id: BSP_PIN_24_OD}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: ''}
+  - type: String
     attributes: {id: BSP_PIN_24_PU}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: 'True'}
+        attributes: {value: ''}
   - type: String
     attributes: {id: BSP_PIN_25_CN}
     children:
@@ -1803,6 +1817,13 @@ children:
       children:
       - type: User
         attributes: {value: ''}
+  - type: String
+    attributes: {id: BSP_PIN_72_FUNCTION_NAME}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: MAX6818_INT}
   - type: String
     attributes: {id: BSP_PIN_72_FUNCTION_TYPE}
     children:
@@ -3744,6 +3765,48 @@ children:
       - type: Dynamic
         attributes: {id: core, value: ADC_DATA23_Handler}
   - type: Boolean
+    attributes: {id: EVIC_13_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
+  - type: Combo
+    attributes: {id: EVIC_13_EXT_INT_EDGE_POLARITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: Rising Edge}
+  - type: Boolean
+    attributes: {id: EVIC_13_HANDLER_LOCK}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: String
+    attributes: {id: EVIC_13_INTERRUPT_HANDLER}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: EXTERNAL_2_Handler}
+  - type: Combo
+    attributes: {id: EVIC_13_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '3'}
+  - type: Hex
+    attributes: {id: EVIC_13_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '3072'}
+  - type: Boolean
     attributes: {id: EVIC_142_ENABLE}
     children:
     - type: Values
@@ -4844,6 +4907,48 @@ children:
       - type: Dynamic
         attributes: {id: core, value: TIMER_6_InterruptHandler}
   - type: Boolean
+    attributes: {id: EVIC_8_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'true'}
+  - type: Combo
+    attributes: {id: EVIC_8_EXT_INT_EDGE_POLARITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: Rising Edge}
+  - type: Boolean
+    attributes: {id: EVIC_8_HANDLER_LOCK}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
+  - type: String
+    attributes: {id: EVIC_8_INTERRUPT_HANDLER}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: EXTERNAL_1_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_8_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '4'}
+  - type: Hex
+    attributes: {id: EVIC_8_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '16'}
+  - type: Boolean
     attributes: {id: EVIC_9_ENABLE}
     children:
     - type: Values
@@ -4906,6 +5011,34 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'false'}
+  - type: Boolean
+    attributes: {id: EXTERNAL_1_EXTERNAL_INTERRUPT_UPDATE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
+  - type: Boolean
+    attributes: {id: EXTERNAL_1_INTERRUPT_ENABLE_UPDATE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: Boolean
+    attributes: {id: EXTERNAL_2_EXTERNAL_INTERRUPT_UPDATE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: Boolean
+    attributes: {id: EXTERNAL_2_INTERRUPT_ENABLE_UPDATE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
   - type: Boolean
     attributes: {id: FLASH_CONTROL_INTERRUPT_ENABLE_UPDATE}
     children:
@@ -6074,7 +6207,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '512'}
+        attributes: {id: core, value: '1'}
       - type: User
         attributes: {value: '0'}
   - type: Hex
@@ -6097,7 +6230,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '147'}
+        attributes: {id: core, value: '146'}
   - type: Boolean
     attributes: {id: SYS_PORT_B_CN_USED}
     children:
@@ -6112,6 +6245,13 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '49408'}
+  - type: Hex
+    attributes: {id: SYS_PORT_B_ODC}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '0'}
   - type: Hex
     attributes: {id: SYS_PORT_B_TRIS}
     children:
@@ -6744,6 +6884,19 @@ children:
       children:
       - type: User
         attributes: {value: '56'}
+  - type: KeyValueSet
+    attributes: {id: SYS_PORT_PPS_OUTPUT_FUNCTION_7}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'false'}
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '29'}
   - type: Combo
     attributes: {id: SYS_PORT_PPS_OUTPUT_PIN_0}
     children:
@@ -6835,6 +6988,19 @@ children:
       children:
       - type: User
         attributes: {value: RPG0}
+  - type: Combo
+    attributes: {id: SYS_PORT_PPS_OUTPUT_PIN_7}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'false'}
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: RPB0}
   - type: Boolean
     attributes: {id: TIMER_1_INTERRUPT_ENABLE}
     children:
@@ -7544,6 +7710,13 @@ children:
       children:
       - type: User
         attributes: {value: 'true'}
+  - type: Boolean
+    attributes: {id: USE_PPS_OUTPUT_7}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'false'}
   - type: Setting
     attributes: {id: XC32_HEAP}
     children:

@@ -40,6 +40,7 @@ void tic12400_reset(void);
 bool tic12400_init(void);
 uint32_t tic12400_wr(const ticbuf_type *, uint16_t);
 uint32_t tic12400_get_sw(void);
+void tic12400_interrupt(uint32_t, uintptr_t);
 
 extern volatile uint32_t tic12400_status;
 extern volatile uint32_t tic12400_value;

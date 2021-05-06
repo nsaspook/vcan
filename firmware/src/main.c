@@ -365,7 +365,7 @@ void BDC_motor(struct DC_type * dcm)
 				eaDogM_WriteStringAtPos(9, 0, buffer);
 				sprintf(buffer, "POT1 %5i", an_data[POT1]);
 				eaDogM_WriteStringAtPos(10, 0, buffer);
-				sprintf(buffer, "TIC1 %5u", (uint32_t) sw_value_ptr->data & 0b11111111111111);
+				sprintf(buffer, "TIC1 %5u,%5u", (uint32_t) sw_value_ptr->data & 0b11111111111111,TIC12400_INT_Get());
 				eaDogM_WriteStringAtPos(11, 0, buffer);
 				sprintf(buffer, "SET  %5i, %5i %i,%i,%i", dcm->m_pos, dcm->m_set, FLT5_Get(), FLT5_Get(), FLT15_Get());
 				eaDogM_WriteStringAtPos(12, 0, buffer);

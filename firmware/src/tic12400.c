@@ -141,6 +141,10 @@ bool tic12400_init(void)
 		goto fail;
 	}
 	tic12400_status = tic12400_wr(&ticdevid01, 1); // get device id, 0x01
+	INTCONSET = _INTCON_INT1EP_MASK; //External interrupt on rising edge
+	IFS0CLR = _IFS0_INT1IF_MASK; // Clear the external interrupt flag
+	EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_1, tic12400_interrupt, 0);
+	EVIC_ExternalInterruptEnable(EXTERNAL_INT_1);
 
 fail:
 	return !init_fail; // flip to return true if NO configuration failures
@@ -181,4 +185,9 @@ uint32_t tic12400_get_sw(void)
 		BSP_LED2_Set();
 	}
 	return tic12400_value;
+}
+
+void tic12400_interrupt(uint32_t status, uintptr_t context)
+{
+	RESET_LED_Toggle();
 }

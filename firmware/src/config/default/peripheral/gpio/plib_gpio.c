@@ -70,7 +70,7 @@ void GPIO_Initialize ( void )
     /* PORTB Initialization */
     LATB = 0xc100; /* Initial Latch Value */
     TRISBCLR = 0xc00c; /* Direction Control */
-    CNPUBSET = 0x93; /* Pull-Up Enable */
+    CNPUBSET = 0x92; /* Pull-Up Enable */
     /* Change Notice Enable */
     CNCONBSET = _CNCONB_ON_MASK;
     PORTB;
