@@ -6,11 +6,9 @@
             <file>file:/fred/vcan/firmware/src/tic12400.c</file>
             <file>file:/fred/vcan/firmware/src/vcan.h</file>
             <file>file:/fred/vcan/firmware/src/config/default/peripheral/spi/spi_master/plib_spi5_master.c</file>
-            <file>file:/fred/vcan/firmware/src/eadog.c</file>
+            <file>file:/fred/vcan/firmware/src/pid.c</file>
             <file>file:/fred/vcan/firmware/src/tic12400.h</file>
             <file>file:/fred/vcan/firmware/src/main.c</file>
-            <file>file:/fred/vcan/firmware/src/config/default/peripheral/gpio/plib_gpio.h</file>
-            <file>file:/fred/vcan/firmware/src/config/default/peripheral/spi/spi_master/plib_spi_master_common.h</file>
         </group>
     </open-files>
 </project-private>

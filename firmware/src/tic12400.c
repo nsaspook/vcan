@@ -30,6 +30,12 @@ ticbuf_type setup5 = {
 	.data = 0x800,
 	.par = 0,
 };
+ticbuf_type setup6 = {
+	.wr = 1,
+	.addr = 0x22,
+	.data = 0x2,
+	.par = 0,
+};
 ticbuf_type ticread1 = {
 	.wr = 0,
 	.addr = 0x05,
@@ -63,6 +69,7 @@ bool tic12400_init(void)
 		init_fail = true;
 		goto fail;
 	}
+//	tic12400_wr(&setup6); //set switch interrupts, 0x22
 	tic12400_wr(&setup1); //all set to compare mode, 0x32
 	tic12400_wr(&setup2); //Compare threshold all bits 2V, 0x21
 	tic12400_wr(&setup3); //all set to GND switch type, 0x1c
@@ -72,6 +79,7 @@ bool tic12400_init(void)
 		init_fail = true;
 		goto fail;
 	}
+
 	tic12400_wr(&ticdevid1); // get device id, 0x01
 
 fail:
@@ -92,13 +100,12 @@ uint32_t tic12400_get_sw(void)
 {
 	tic12400_status = tic12400_wr(&ticstat1);
 	tic12400_value = tic12400_wr(&ticread1);
-//	tic12400_value = tic12400_status;
-	if (tic12400_value & (1)) {
+	if (tic12400_value & (0b010)) {
 		BSP_LED1_Clear();
 	} else {
 		BSP_LED1_Set();
 	}
-	if (tic12400_value & (1)) {
+	if (tic12400_value & (0b100000000000000)) {
 		BSP_LED2_Clear();
 	} else {
 		BSP_LED2_Set();
