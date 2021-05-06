@@ -29,9 +29,15 @@ typedef struct __attribute__((packed))
 }
 ticread_type;
 
+void tic12400_reset(void);
 bool tic12400_init(void);
 uint32_t tic12400_wr(ticbuf_type *);
 uint32_t tic12400_get_sw(void);
+
+extern uint32_t tic12400_status;
+extern uint32_t tic12400_value;
+
+extern ticread_type *ticstatus;
 
 /* Provide C++ Compatibility */
 #ifdef __cplusplus
