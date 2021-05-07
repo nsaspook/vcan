@@ -1,7 +1,7 @@
 /*
- * TC12400 driver for PIC32MK
+ * TC12400 driver for PIC32MK v0.1
  * uses SPI5 mode1 at 4MHz no interrupts
- * external interrupt 1 is used to detect chip switch events
+ * external interrupt 2 is used to detect chip switch events
  */
 
 #include "tic12400.h"
@@ -101,6 +101,7 @@ const ticbuf_type ticreset1a = {
 volatile uint32_t tic12400_status = 0;
 volatile uint32_t tic12400_value = 0;
 ticread_type *ticstatus = (ticread_type*) & tic12400_status;
+volatile bool tic12400_init_fail = false, tic12400_event = false; // chip error detection flag
 
 /*
  * software reset of the chip using SPI
@@ -115,15 +116,14 @@ void tic12400_reset(void)
 /*
  * chip detection and configuration for all inputs with interrupts for
  * switch state changes with debounce
+ * returns false on configuration failure
  */
 bool tic12400_init(void)
 {
-	bool init_fail = false; // chip error detection flag
-
 	TIC12400_EN0_Set();
 	tic12400_status = tic12400_wr(&ticstat02, 1); // get status to check for proper operation
 	if ((ticstatus->data > por_bit) || !ticstatus->por) { // check for any high bits beyond POR bits set
-		init_fail = true;
+		tic12400_init_fail = true;
 		goto fail;
 	}
 	tic12400_wr(&setup32, 1); //all set to compare mode, 0x32
@@ -137,15 +137,18 @@ bool tic12400_init(void)
 	tic12400_wr(&setup1a, 2); // set switch debounce 0x1a
 	tic12400_status = tic12400_wr(&setup1a_trigger, 2); // trigger switch detections, 0x1a
 	if (ticstatus->spi_fail) {
-		init_fail = true;
+		tic12400_init_fail = true;
 		goto fail;
 	}
 	tic12400_status = tic12400_wr(&ticdevid01, 1); // get device id, 0x01
+	/*
+	 * configure event handler for tic12400 interrupts
+	 */
 	EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_2, tic12400_interrupt, 0);
 	EVIC_ExternalInterruptEnable(EXTERNAL_INT_2);
 
 fail:
-	return !init_fail; // flip to return true if NO configuration failures
+	return !tic12400_init_fail; // flip to return true if NO configuration failures
 }
 
 /*
@@ -165,28 +168,39 @@ uint32_t tic12400_wr(const ticbuf_type * buffer, uint16_t del)
 }
 
 /*
- * switch reading testing routine
- * toggles debug led and clears interrupt by reading status
+ * switch data reading testing routine
+ * tic12400 value is updated in external interrupt #2 ISR
  */
 uint32_t tic12400_get_sw(void)
 {
-	tic12400_value = tic12400_wr(&ticread05, 0); // read switch
-	tic12400_status = tic12400_wr(&ticstat02, 0); // read status
-	if (tic12400_value & (0b010)) {
+	if (tic12400_init_fail) // Trouble in River City
+		return 0;
+
+	if (tic12400_value & (raw_mask_0)) {
 		BSP_LED1_Clear();
 	} else {
 		BSP_LED1_Set();
 	}
-	if (tic12400_value & (0b100000000000000)) {
+	if (tic12400_value & (raw_mask_11)) {
 		BSP_LED2_Clear();
 	} else {
 		BSP_LED2_Set();
 	}
+	tic12400_event = false;
 	return tic12400_value;
 }
 
+/*
+ * external interrupt 2 ISR
+ * switch SPI status and switch data updates
+ * toggles debug led and clears interrupt by reading status
+ * sets event flag for user application notification
+ */
 void tic12400_interrupt(uint32_t a, uintptr_t b)
 {
+	tic12400_value = tic12400_wr(&ticread05, 0); // read switch
+	tic12400_status = tic12400_wr(&ticstat02, 0); // read status
 	RESET_LED_Toggle();
 	BSP_LED3_Toggle();
+	tic12400_event = true;
 }

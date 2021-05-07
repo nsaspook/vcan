@@ -787,9 +787,10 @@ int main(void)
 	/* Start system tick timer */
 	CORETIMER_Start();
 
-#ifdef	BDCM
 	tic12400_reset();
 	tic12400_init();
+
+#ifdef	BDCM
 	BDC_motor(&DCM);
 #endif
 

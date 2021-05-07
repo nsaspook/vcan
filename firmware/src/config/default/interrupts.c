@@ -105,7 +105,7 @@ void __ISR(_TIMER_2_VECTOR, ipl7SRS) TIMER_2_Handler (void)
 	TIMER_2_InterruptHandler();
 }
 
-void __ISR(_EXTERNAL_2_VECTOR, ipl3SRS) EXTERNAL_2_Handler (void)
+void __ISR(_EXTERNAL_2_VECTOR, ipl2SRS) EXTERNAL_2_Handler (void)
 {
     EXTERNAL_2_InterruptHandler();
 }

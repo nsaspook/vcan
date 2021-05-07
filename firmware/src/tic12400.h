@@ -5,7 +5,14 @@
 #include "dio.h"
 #include "timers.h"
 
+#define TIC12400_DRIVER	"V0.1"
+
 #define por_bit	0x01
+/*
+ * switch bit masks in the raw 32-bit register from the TIC12400
+ */
+#define raw_mask_0	0b010
+#define	raw_mask_11	0b100000000000000
 
 /*
  * TIC12400 command structure
@@ -44,7 +51,7 @@ void tic12400_interrupt(uint32_t, uintptr_t);
 
 extern volatile uint32_t tic12400_status;
 extern volatile uint32_t tic12400_value;
-
+extern volatile bool tic12400_init_fail, tic12400_event;
 extern ticread_type *ticstatus;
 
 /* Provide C++ Compatibility */
