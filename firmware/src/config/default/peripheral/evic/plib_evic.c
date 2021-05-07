@@ -45,7 +45,7 @@
 
 
 EXT_INT_PIN_CALLBACK_OBJ extInt0CbObj;
-EXT_INT_PIN_CALLBACK_OBJ extInt1CbObj;
+EXT_INT_PIN_CALLBACK_OBJ extInt2CbObj;
 // *****************************************************************************
 // *****************************************************************************
 // Section: IRQ Implementation
@@ -60,11 +60,10 @@ void EVIC_Initialize( void )
     IPC0SET = 0x4 | 0x0;  /* CORE_TIMER:  Priority 1 / Subpriority 0 */
     IPC0SET = 0xc000000 | 0x0;  /* EXTERNAL_0:  Priority 3 / Subpriority 0 */
     IPC1SET = 0x4 | 0x0;  /* TIMER_1:  Priority 1 / Subpriority 0 */
-    IPC2SET = 0x10 | 0x0;  /* EXTERNAL_1:  Priority 4 / Subpriority 0 */
     IPC2SET = 0x1c00 | 0x200;  /* TIMER_2:  Priority 7 / Subpriority 2 */
+    IPC3SET = 0xc00 | 0x0;  /* EXTERNAL_2:  Priority 3 / Subpriority 0 */
     IPC3SET = 0x140000 | 0x0;  /* TIMER_3:  Priority 5 / Subpriority 0 */
     IPC7SET = 0x40000 | 0x0;  /* RTCC:  Priority 1 / Subpriority 0 */
-    IPC11SET = 0x400 | 0x0;  /* CHANGE_NOTICE_B:  Priority 1 / Subpriority 0 */
     IPC14SET = 0x4 | 0x0;  /* UART2_FAULT:  Priority 1 / Subpriority 0 */
     IPC14SET = 0x400 | 0x0;  /* UART2_RX:  Priority 1 / Subpriority 0 */
     IPC14SET = 0x40000 | 0x0;  /* UART2_TX:  Priority 1 / Subpriority 0 */
@@ -85,12 +84,9 @@ void EVIC_Initialize( void )
 
     /* Initialize External interrupt 0 callback object */
     extInt0CbObj.callback = NULL;
-    /* Initialize External interrupt 1 callback object */
-    extInt1CbObj.callback = NULL;
+    /* Initialize External interrupt 2 callback object */
+    extInt2CbObj.callback = NULL;
 
-
-    /* Configure External Interrupt Edge Polarity */
-    INTCONSET = _INTCON_INT1EP_MASK;
 
     /* Configure Shadow Register Set */
     PRISS = 0x76543210;
@@ -190,9 +186,9 @@ bool EVIC_ExternalInterruptCallbackRegister(
             extInt0CbObj.callback = callback;
             extInt0CbObj.context  = context;
             break;
-        case EXTERNAL_INT_1:
-            extInt1CbObj.callback = callback;
-            extInt1CbObj.context  = context;
+        case EXTERNAL_INT_2:
+            extInt2CbObj.callback = callback;
+            extInt2CbObj.context  = context;
             break;
         default:
             status = false;
@@ -226,21 +222,21 @@ void EXTERNAL_0_InterruptHandler()
 
 // *****************************************************************************
 /* Function:
-    void EXTERNAL_1_InterruptHandler()
+    void EXTERNAL_2_InterruptHandler()
 
   Summary:
-    Interrupt Handler for External Interrupt pin 1.
+    Interrupt Handler for External Interrupt pin 2.
 
   Remarks:
 	It is an internal function called from ISR, user should not call it directly.
 */
-void EXTERNAL_1_InterruptHandler()
+void EXTERNAL_2_InterruptHandler()
 {
-    IFS0CLR = _IFS0_INT1IF_MASK;
+    IFS0CLR = _IFS0_INT2IF_MASK;
 
-    if(extInt1CbObj.callback != NULL)
+    if(extInt2CbObj.callback != NULL)
     {
-        extInt1CbObj.callback (EXTERNAL_INT_1, extInt1CbObj.context);
+        extInt2CbObj.callback (EXTERNAL_INT_2, extInt2CbObj.context);
     }
 }
 

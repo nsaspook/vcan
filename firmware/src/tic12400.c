@@ -136,15 +136,13 @@ bool tic12400_init(void)
 	tic12400_wr(&setup1d, 1); // set wetting currents 0x1d
 	tic12400_wr(&setup1a, 2); // set switch debounce 0x1a
 	tic12400_status = tic12400_wr(&setup1a_trigger, 2); // trigger switch detections, 0x1a
-	if (ticstatus->spi_fail || ticstatus->parity_fail) {
+	if (ticstatus->spi_fail) {
 		init_fail = true;
 		goto fail;
 	}
 	tic12400_status = tic12400_wr(&ticdevid01, 1); // get device id, 0x01
-	INTCONSET = _INTCON_INT1EP_MASK; //External interrupt on rising edge
-	IFS0CLR = _IFS0_INT1IF_MASK; // Clear the external interrupt flag
-	EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_1, tic12400_interrupt, 0);
-	EVIC_ExternalInterruptEnable(EXTERNAL_INT_1);
+	EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_2, tic12400_interrupt, 0);
+	EVIC_ExternalInterruptEnable(EXTERNAL_INT_2);
 
 fail:
 	return !init_fail; // flip to return true if NO configuration failures
@@ -187,7 +185,8 @@ uint32_t tic12400_get_sw(void)
 	return tic12400_value;
 }
 
-void tic12400_interrupt(uint32_t status, uintptr_t context)
+void tic12400_interrupt(uint32_t a, uintptr_t b)
 {
 	RESET_LED_Toggle();
+	BSP_LED3_Toggle();
 }

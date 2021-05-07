@@ -64,11 +64,10 @@
 void CORE_TIMER_InterruptHandler( void );
 void EXTERNAL_0_InterruptHandler( void );
 void TIMER_1_InterruptHandler( void );
-void EXTERNAL_1_InterruptHandler( void );
 void TIMER_2_InterruptHandler( void );
+void EXTERNAL_2_InterruptHandler( void );
 void TIMER_3_InterruptHandler( void );
 void RTCC_InterruptHandler( void );
-void CHANGE_NOTICE_B_InterruptHandler( void );
 void UART2_FAULT_InterruptHandler( void );
 void UART2_RX_InterruptHandler( void );
 void UART2_TX_InterruptHandler( void );
@@ -101,14 +100,14 @@ void __ISR(_TIMER_1_VECTOR, ipl1SRS) TIMER_1_Handler (void)
 	TIMER_1_InterruptHandler();
 }
 
-void __ISR(_EXTERNAL_1_VECTOR, ipl4SRS) EXTERNAL_1_Handler (void)
-{
-    EXTERNAL_1_InterruptHandler();
-}
-
 void __ISR(_TIMER_2_VECTOR, ipl7SRS) TIMER_2_Handler (void)
 {
 	TIMER_2_InterruptHandler();
+}
+
+void __ISR(_EXTERNAL_2_VECTOR, ipl3SRS) EXTERNAL_2_Handler (void)
+{
+    EXTERNAL_2_InterruptHandler();
 }
 
 void __ISR(_TIMER_3_VECTOR, ipl5SRS) TIMER_3_Handler (void)
@@ -119,11 +118,6 @@ void __ISR(_TIMER_3_VECTOR, ipl5SRS) TIMER_3_Handler (void)
 void __ISR(_RTCC_VECTOR, ipl1SRS) RTCC_Handler (void)
 {
     RTCC_InterruptHandler();
-}
-
-void __ISR(_CHANGE_NOTICE_B_VECTOR, ipl1SRS) CHANGE_NOTICE_B_Handler (void)
-{
-	CHANGE_NOTICE_B_InterruptHandler();
 }
 
 void __ISR(_UART2_FAULT_VECTOR, ipl1SRS) UART2_FAULT_Handler (void)

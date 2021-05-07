@@ -309,8 +309,6 @@ void BDC_motor(struct DC_type * dcm)
 	MCPWM_Start();
 	U1_EN_Set();
 	U2_EN_Set();
-	tic12400_reset();
-	tic12400_init();
 
 	if (dcm->m_type == 1) {
 		while (true) {
@@ -365,7 +363,7 @@ void BDC_motor(struct DC_type * dcm)
 				eaDogM_WriteStringAtPos(9, 0, buffer);
 				sprintf(buffer, "POT1 %5i", an_data[POT1]);
 				eaDogM_WriteStringAtPos(10, 0, buffer);
-				sprintf(buffer, "TIC1 %5u,%5u", (uint32_t) sw_value_ptr->data & 0b11111111111111,TIC12400_INT_Get());
+				sprintf(buffer, "TIC1 %5u,%5u", (uint32_t) sw_value_ptr->data & 0b11111111111111, TIC_INT2_Get());
 				eaDogM_WriteStringAtPos(11, 0, buffer);
 				sprintf(buffer, "SET  %5i, %5i %i,%i,%i", dcm->m_pos, dcm->m_set, FLT5_Get(), FLT5_Get(), FLT15_Get());
 				eaDogM_WriteStringAtPos(12, 0, buffer);
@@ -474,7 +472,7 @@ time_t time(time_t * Time)
  */
 void wave_gen(uint32_t status, uintptr_t context)
 {
-	DEBUGD4_Set();
+	DEBUGB0_Set();
 	if (V.pwm_stop && V.pwm_update)
 		return;
 
@@ -707,6 +705,7 @@ int main(void)
 	 * start the external switch handler
 	 */
 	init_dio();
+
 	/*
 	 * software timers @1ms using 500ns ticks
 	 */
@@ -721,8 +720,8 @@ int main(void)
 
 	QEI1_Start();
 	//	QEI2_CallbackRegister(my_index, 0);
-	GPIO_PinInterruptCallbackRegister(GPIO_PIN_RB1, my_index, 0);
-	GPIO_PortInterruptEnable(GPIO_PORT_B, 0b10);
+	//	GPIO_PinInterruptCallbackRegister(GPIO_PIN_RB1, my_index, 0);
+	//	GPIO_PortInterruptEnable(GPIO_PORT_B, 0b10);
 	QEI2_Start();
 	QEI3_Start();
 	m35_ptr = &m35_3;
@@ -789,6 +788,8 @@ int main(void)
 	CORETIMER_Start();
 
 #ifdef	BDCM
+	tic12400_reset();
+	tic12400_init();
 	BDC_motor(&DCM);
 #endif
 

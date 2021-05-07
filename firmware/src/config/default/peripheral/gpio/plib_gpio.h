@@ -84,14 +84,9 @@
 #define SPI_EN1_Get()               ((PORTD >> 2) & 0x1)
 #define SPI_EN1_PIN                  GPIO_PIN_RD2
 
-/*** Macros for DEBUGD4 pin ***/
-#define DEBUGD4_Set()               (LATDSET = (1<<4))
-#define DEBUGD4_Clear()             (LATDCLR = (1<<4))
-#define DEBUGD4_Toggle()            (LATDINV= (1<<4))
-#define DEBUGD4_OutputEnable()      (TRISDCLR = (1<<4))
-#define DEBUGD4_InputEnable()       (TRISDSET = (1<<4))
-#define DEBUGD4_Get()               ((PORTD >> 4) & 0x1)
-#define DEBUGD4_PIN                  GPIO_PIN_RD4
+/*** Macros for TIC_INT2 pin ***/
+#define TIC_INT2_Get()               ((PORTD >> 4) & 0x1)
+#define TIC_INT2_PIN                  GPIO_PIN_RD4
 
 /*** Macros for TIC12400_EN0 pin ***/
 #define TIC12400_EN0_Set()               (LATGSET = (1<<8))
@@ -129,18 +124,23 @@
 #define QEI1_E0_Get()               ((PORTE >> 8) & 0x1)
 #define QEI1_E0_PIN                  GPIO_PIN_RE8
 
-/*** Macros for QEI2_E0 pin ***/
-#define QEI2_E0_Set()               (LATESET = (1<<9))
-#define QEI2_E0_Clear()             (LATECLR = (1<<9))
-#define QEI2_E0_Toggle()            (LATEINV= (1<<9))
-#define QEI2_E0_OutputEnable()      (TRISECLR = (1<<9))
-#define QEI2_E0_InputEnable()       (TRISESET = (1<<9))
-#define QEI2_E0_Get()               ((PORTE >> 9) & 0x1)
-#define QEI2_E0_PIN                  GPIO_PIN_RE9
+/*** Macros for DEBUGE9 pin ***/
+#define DEBUGE9_Set()               (LATESET = (1<<9))
+#define DEBUGE9_Clear()             (LATECLR = (1<<9))
+#define DEBUGE9_Toggle()            (LATEINV= (1<<9))
+#define DEBUGE9_OutputEnable()      (TRISECLR = (1<<9))
+#define DEBUGE9_InputEnable()       (TRISESET = (1<<9))
+#define DEBUGE9_Get()               ((PORTE >> 9) & 0x1)
+#define DEBUGE9_PIN                  GPIO_PIN_RE9
 
-/*** Macros for TIC12400_INT pin ***/
-#define TIC12400_INT_Get()               ((PORTB >> 0) & 0x1)
-#define TIC12400_INT_PIN                  GPIO_PIN_RB0
+/*** Macros for DEBUGB0 pin ***/
+#define DEBUGB0_Set()               (LATBSET = (1<<0))
+#define DEBUGB0_Clear()             (LATBCLR = (1<<0))
+#define DEBUGB0_Toggle()            (LATBINV= (1<<0))
+#define DEBUGB0_OutputEnable()      (TRISBCLR = (1<<0))
+#define DEBUGB0_InputEnable()       (TRISBSET = (1<<0))
+#define DEBUGB0_Get()               ((PORTB >> 0) & 0x1)
+#define DEBUGB0_PIN                  GPIO_PIN_RB0
 
 /*** Macros for qei2_index pin ***/
 #define qei2_index_Set()               (LATBSET = (1<<1))
@@ -150,8 +150,6 @@
 #define qei2_index_InputEnable()       (TRISBSET = (1<<1))
 #define qei2_index_Get()               ((PORTB >> 1) & 0x1)
 #define qei2_index_PIN                  GPIO_PIN_RB1
-#define qei2_index_InterruptEnable()   (CNENBSET = (1<<1))
-#define qei2_index_InterruptDisable()  (CNENBCLR = (1<<1))
 
 /*** Macros for ICSP5 pin ***/
 #define ICSP5_Set()               (LATBSET = (1<<2))
@@ -289,14 +287,14 @@
 #define MAX6818_INT_Get()               ((PORTB >> 7) & 0x1)
 #define MAX6818_INT_PIN                  GPIO_PIN_RB7
 
-/*** Macros for GPIO_RC13 pin ***/
-#define GPIO_RC13_Set()               (LATCSET = (1<<13))
-#define GPIO_RC13_Clear()             (LATCCLR = (1<<13))
-#define GPIO_RC13_Toggle()            (LATCINV= (1<<13))
-#define GPIO_RC13_OutputEnable()      (TRISCCLR = (1<<13))
-#define GPIO_RC13_InputEnable()       (TRISCSET = (1<<13))
-#define GPIO_RC13_Get()               ((PORTC >> 13) & 0x1)
-#define GPIO_RC13_PIN                  GPIO_PIN_RC13
+/*** Macros for SOSCI_IN pin ***/
+#define SOSCI_IN_Set()               (LATCSET = (1<<13))
+#define SOSCI_IN_Clear()             (LATCCLR = (1<<13))
+#define SOSCI_IN_Toggle()            (LATCINV= (1<<13))
+#define SOSCI_IN_OutputEnable()      (TRISCCLR = (1<<13))
+#define SOSCI_IN_InputEnable()       (TRISCSET = (1<<13))
+#define SOSCI_IN_Get()               ((PORTC >> 13) & 0x1)
+#define SOSCI_IN_PIN                  GPIO_PIN_RC13
 
 /*** Macros for IN7 pin ***/
 #define IN7_Set()               (LATBSET = (1<<9))
@@ -548,7 +546,6 @@ typedef enum
 
 } GPIO_PIN;
 
-typedef  void (*GPIO_PIN_CALLBACK) ( GPIO_PIN pin, uintptr_t context);
 
 void GPIO_Initialize(void);
 
@@ -573,29 +570,6 @@ void GPIO_PortToggle(GPIO_PORT port, uint32_t mask);
 void GPIO_PortInputEnable(GPIO_PORT port, uint32_t mask);
 
 void GPIO_PortOutputEnable(GPIO_PORT port, uint32_t mask);
-
-void GPIO_PortInterruptEnable(GPIO_PORT port, uint32_t mask);
-
-void GPIO_PortInterruptDisable(GPIO_PORT port, uint32_t mask);
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Local Data types and Prototypes
-// *****************************************************************************
-// *****************************************************************************
-
-typedef struct {
-
-    /* target pin */
-    GPIO_PIN                 pin;
-
-    /* Callback for event on target pin*/
-    GPIO_PIN_CALLBACK        callback;
-
-    /* Callback Context */
-    uintptr_t               context;
-
-} GPIO_PIN_CALLBACK_OBJ;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -643,21 +617,6 @@ static inline void GPIO_PinOutputEnable(GPIO_PIN pin)
     GPIO_PortOutputEnable((GPIO_PORT)(pin>>4), 0x1 << (pin & 0xF));
 }
 
-static inline void GPIO_PinInterruptEnable(GPIO_PIN pin)
-{
-    GPIO_PortInterruptEnable((GPIO_PORT)(pin>>4), 0x1 << (pin & 0xF));
-}
-
-static inline void GPIO_PinInterruptDisable(GPIO_PIN pin)
-{
-    GPIO_PortInterruptDisable((GPIO_PORT)(pin>>4), 0x1 << (pin & 0xF));
-}
-
-bool GPIO_PinInterruptCallbackRegister(
-    GPIO_PIN pin,
-    const   GPIO_PIN_CALLBACK callBack,
-    uintptr_t context
-);
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
