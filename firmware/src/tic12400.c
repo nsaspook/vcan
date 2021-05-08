@@ -98,10 +98,12 @@ const ticbuf_type ticreset1a = {
 /*
  * global status and value registers
  */
-volatile uint32_t tic12400_status = 0;
+volatile uint32_t tic12400_status = 0, tic12400_counts=0;
 volatile uint32_t tic12400_value = 0;
 ticread_type *ticstatus = (ticread_type*) & tic12400_status;
+ticread_type *ticvalue = (ticread_type*) & tic12400_value;
 volatile bool tic12400_init_fail = false, tic12400_event = false; // chip error detection flag
+volatile bool tic12400_parity_status = false;
 
 /*
  * software reset of the chip using SPI
@@ -122,10 +124,12 @@ bool tic12400_init(void)
 {
 	TIC12400_EN0_Set();
 	tic12400_status = tic12400_wr(&ticstat02, 0); // get status to check for proper operation
+
 	if ((ticstatus->data > por_bit) || !ticstatus->por) { // check for any high bits beyond POR bits set
 		tic12400_init_fail = true;
 		goto fail;
 	}
+
 	tic12400_wr(&setup32, 0); //all set to compare mode, 0x32
 	tic12400_wr(&setup21, 0); //Compare threshold all bits 2V, 0x21
 	tic12400_wr(&setup1c, 0); //all set to GND switch type, 0x1c
@@ -136,10 +140,12 @@ bool tic12400_init(void)
 	tic12400_wr(&setup1d, 0); // set wetting currents, 0x1d
 	tic12400_wr(&setup1a, 0); // set switch debounce to max 4 counts, 0x1a
 	tic12400_status = tic12400_wr(&setup1a_trigger, 2); // trigger switch detections & CRC, 0x1a
+
 	if (ticstatus->spi_fail) {
 		tic12400_init_fail = true;
 		goto fail;
 	}
+
 	tic12400_status = tic12400_wr(&ticdevid01, 0); // get device id, 0x01
 	/*
 	 * configure event handler for tic12400 interrupts
@@ -162,8 +168,15 @@ uint32_t tic12400_wr(const ticbuf_type * buffer, uint16_t del)
 	TIC12400_EN0_Clear();
 	SPI5_WriteRead((void*) buffer, 4, &rbuffer, 4);
 	TIC12400_EN0_Set();
-	if (del)
+
+	if (ticvalue->parity_fail) { // check for command parity errors
+		tic12400_parity_status = true;
+	};
+
+	if (del) {
 		delay_ms(del);
+	}
+
 	return rbuffer;
 }
 
@@ -173,19 +186,22 @@ uint32_t tic12400_wr(const ticbuf_type * buffer, uint16_t del)
  */
 uint32_t tic12400_get_sw(void)
 {
-	if (tic12400_init_fail) // Trouble in River City
+	if (tic12400_init_fail) { // Trouble in River City
 		return 0;
+	}
 
 	if (tic12400_value & (raw_mask_0)) {
 		BSP_LED1_Clear();
 	} else {
 		BSP_LED1_Set();
 	}
+
 	if (tic12400_value & (raw_mask_11)) {
 		BSP_LED2_Clear();
 	} else {
 		BSP_LED2_Set();
 	}
+
 	tic12400_event = false;
 	return tic12400_value;
 }
@@ -201,6 +217,10 @@ void tic12400_interrupt(uint32_t a, uintptr_t b)
 	tic12400_value = tic12400_wr(&ticread05, 0); // read switch
 	tic12400_status = tic12400_wr(&ticstat02, 0); // read status
 	RESET_LED_Toggle();
-	BSP_LED3_Toggle();
-	tic12400_event = true;
+
+	if (ticvalue->ssc) { // only trigger on switch state change
+		BSP_LED3_Toggle();
+		tic12400_event = true;
+	}
+	tic12400_counts++;
 }

@@ -5,7 +5,7 @@
 #include "dio.h"
 #include "timers.h"
 
-#define TIC12400_DRIVER	"V0.1"
+#define TIC12400_DRIVER	"V0.3"
 
 #define por_bit	0x01
 /*
@@ -49,10 +49,12 @@ uint32_t tic12400_wr(const ticbuf_type *, uint16_t);
 uint32_t tic12400_get_sw(void);
 void tic12400_interrupt(uint32_t, uintptr_t);
 
-extern volatile uint32_t tic12400_status;
+extern volatile uint32_t tic12400_status, tic12400_counts;
 extern volatile uint32_t tic12400_value;
 extern volatile bool tic12400_init_fail, tic12400_event;
 extern ticread_type *ticstatus;
+extern ticread_type *ticvalue;
+extern volatile bool tic12400_parity_status;
 
 /* Provide C++ Compatibility */
 #ifdef __cplusplus

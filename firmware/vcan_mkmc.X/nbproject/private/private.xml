@@ -10,10 +10,8 @@
             <file>file:/root/vcan/firmware/src/tic12400.h</file>
             <file>file:/root/vcan/firmware/src/config/default/peripheral/spi/spi_master/plib_spi5_master.h</file>
             <file>file:/root/vcan/firmware/src/dio.c</file>
-            <file>file:/root/vcan/firmware/src/config/default/peripheral/gpio/plib_gpio.c</file>
             <file>file:/root/vcan/firmware/src/main.c</file>
             <file>file:/root/vcan/firmware/src/config/default/peripheral/gpio/plib_gpio.h</file>
-            <file>file:/root/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.8.132/include/proc/p32mk1024mcm100.h</file>
         </group>
     </open-files>
 </project-private>
