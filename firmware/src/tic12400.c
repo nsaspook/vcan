@@ -38,12 +38,12 @@ const ticbuf_type setup1a = {
 	.wr = 1,
 	.addr = 0x1a,
 	.data = 0xc000,
-	.par = 0,
+	.par = 1,
 };
 const ticbuf_type setup1a_trigger = {
 	.wr = 1,
 	.addr = 0x1a,
-	.data = 0x0a00,
+	.data = 0x0a00, // trigger and do config register CRC 
 	.par = 1,
 };
 const ticbuf_type setup22 = {
@@ -67,8 +67,8 @@ const ticbuf_type setup24 = {
 const ticbuf_type setup1d = {
 	.wr = 1,
 	.addr = 0x1d,
-	.data = 0x1,
-	.par = 1,
+	.data = 011111111, // octal constant, all inputs 1mA wetting current
+	.par = 0,
 };
 const ticbuf_type ticread05 = {
 	.wr = 0,
@@ -121,26 +121,26 @@ void tic12400_reset(void)
 bool tic12400_init(void)
 {
 	TIC12400_EN0_Set();
-	tic12400_status = tic12400_wr(&ticstat02, 1); // get status to check for proper operation
+	tic12400_status = tic12400_wr(&ticstat02, 0); // get status to check for proper operation
 	if ((ticstatus->data > por_bit) || !ticstatus->por) { // check for any high bits beyond POR bits set
 		tic12400_init_fail = true;
 		goto fail;
 	}
-	tic12400_wr(&setup32, 1); //all set to compare mode, 0x32
-	tic12400_wr(&setup21, 1); //Compare threshold all bits 2V, 0x21
-	tic12400_wr(&setup1c, 1); //all set to GND switch type, 0x1c
-	tic12400_wr(&setup1b, 1); //all channels are enabled, 0x1b
-	tic12400_wr(&setup22, 1); //set switch interrupts, 0x22
-	tic12400_wr(&setup23, 1); //set switch interrupts, 0x23
-	tic12400_wr(&setup24, 1); // enable interrupts, 0x24
-	tic12400_wr(&setup1d, 1); // set wetting currents 0x1d
-	tic12400_wr(&setup1a, 2); // set switch debounce 0x1a
-	tic12400_status = tic12400_wr(&setup1a_trigger, 2); // trigger switch detections, 0x1a
+	tic12400_wr(&setup32, 0); //all set to compare mode, 0x32
+	tic12400_wr(&setup21, 0); //Compare threshold all bits 2V, 0x21
+	tic12400_wr(&setup1c, 0); //all set to GND switch type, 0x1c
+	tic12400_wr(&setup1b, 0); //all channels are enabled, 0x1b
+	tic12400_wr(&setup22, 0); //set switch interrupts, 0x22
+	tic12400_wr(&setup23, 0); //set switch interrupts, 0x23
+	tic12400_wr(&setup24, 0); // enable interrupts, 0x24
+	tic12400_wr(&setup1d, 0); // set wetting currents, 0x1d
+	tic12400_wr(&setup1a, 0); // set switch debounce to max 4 counts, 0x1a
+	tic12400_status = tic12400_wr(&setup1a_trigger, 2); // trigger switch detections & CRC, 0x1a
 	if (ticstatus->spi_fail) {
 		tic12400_init_fail = true;
 		goto fail;
 	}
-	tic12400_status = tic12400_wr(&ticdevid01, 1); // get device id, 0x01
+	tic12400_status = tic12400_wr(&ticdevid01, 0); // get device id, 0x01
 	/*
 	 * configure event handler for tic12400 interrupts
 	 */
