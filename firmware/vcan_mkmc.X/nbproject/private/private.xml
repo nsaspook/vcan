@@ -3,15 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/root/vcan/firmware/src/tic12400.c</file>
-            <file>file:/root/vcan/firmware/src/timers.c</file>
-            <file>file:/root/vcan/firmware/src/OledDriver.c</file>
-            <file>file:/root/vcan/firmware/src/adc_scan.c</file>
-            <file>file:/root/vcan/firmware/src/tic12400.h</file>
-            <file>file:/root/vcan/firmware/src/config/default/peripheral/spi/spi_master/plib_spi5_master.h</file>
-            <file>file:/root/vcan/firmware/src/dio.c</file>
-            <file>file:/root/vcan/firmware/src/main.c</file>
-            <file>file:/root/vcan/firmware/src/config/default/peripheral/gpio/plib_gpio.h</file>
+            <file>file:/fred/vcan/firmware/src/tic12400.c</file>
+            <file>file:/fred/vcan/firmware/src/vcan.h</file>
+            <file>file:/fred/vcan/firmware/src/config/default/peripheral/spi/spi_master/plib_spi5_master.c</file>
+            <file>file:/fred/vcan/firmware/src/pid.c</file>
+            <file>file:/fred/vcan/firmware/src/tic12400.h</file>
+            <file>file:/fred/vcan/firmware/src/main.c</file>
         </group>
     </open-files>
 </project-private>
