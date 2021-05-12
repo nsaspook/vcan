@@ -98,7 +98,7 @@ const ticbuf_type ticreset1a = {
 /*
  * global status and value registers
  */
-volatile uint32_t tic12400_status = 0, tic12400_counts=0;
+volatile uint32_t tic12400_status = 0, tic12400_counts = 0,tic12400_value_counts = 0;
 volatile uint32_t tic12400_value = 0;
 ticread_type *ticstatus = (ticread_type*) & tic12400_status;
 ticread_type *ticvalue = (ticread_type*) & tic12400_value;
@@ -207,6 +207,19 @@ uint32_t tic12400_get_sw(void)
 }
 
 /*
+ * 32-bit 1's parity check
+ * https://graphics.stanford.edu/~seander/bithacks.html#ParityNaive
+ */
+bool tic12400_parity(uint32_t v)
+{
+	v ^= v >> 16;
+	v ^= v >> 8;
+	v ^= v >> 4;
+	v &= 0xf;
+	return(0x6996 >> v) & 1;
+}
+
+/*
  * external interrupt 2 ISR
  * switch SPI status and switch data updates
  * toggles debug led and clears interrupt by reading status
@@ -218,9 +231,10 @@ void tic12400_interrupt(uint32_t a, uintptr_t b)
 	tic12400_status = tic12400_wr(&ticstat02, 0); // read status
 	RESET_LED_Toggle();
 
-	if (ticvalue->ssc) { // only trigger on switch state change
+	if (ticvalue->ssc && tic12400_parity(tic12400_value)) { // only trigger on switch state change
 		BSP_LED3_Toggle();
 		tic12400_event = true;
+		tic12400_value_counts++;
 	}
 	tic12400_counts++;
 }

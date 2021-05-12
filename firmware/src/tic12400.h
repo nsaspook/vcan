@@ -48,8 +48,9 @@ bool tic12400_init(void);
 uint32_t tic12400_wr(const ticbuf_type *, uint16_t);
 uint32_t tic12400_get_sw(void);
 void tic12400_interrupt(uint32_t, uintptr_t);
+bool tic12400_parity(uint32_t);
 
-extern volatile uint32_t tic12400_status, tic12400_counts;
+extern volatile uint32_t tic12400_status, tic12400_counts, tic12400_value_counts;
 extern volatile uint32_t tic12400_value;
 extern volatile bool tic12400_init_fail, tic12400_event;
 extern ticread_type *ticstatus;
