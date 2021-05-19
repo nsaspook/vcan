@@ -5,7 +5,7 @@
 #include "dio.h"
 #include "timers.h"
 
-#define TIC12400_DRIVER	"V0.3"
+#define TIC12400_DRIVER	"V0.4"
 
 #define por_bit	0x01
 /*
