@@ -9679,7 +9679,7 @@ super fast rectifier, 2 A</description>
 <pinref part="U1" gate="G$1" pin="CAP_D"/>
 </segment>
 </net>
-<net name="GND" class="0">
+<net name="GND" class="1">
 <segment>
 <pinref part="X2" gate="-10" pin="S"/>
 <pinref part="GND12" gate="1" pin="GND"/>

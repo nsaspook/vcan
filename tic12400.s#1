@@ -9091,8 +9091,22 @@ super fast rectifier, 2 A</description>
 <part name="P+8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+24V" device=""/>
 <part name="D1" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="ES2D" device="" package3d_urn="urn:adsk.eagle:package:43404/2"/>
 <part name="U2" library="MCZ33996EK" deviceset="MCZ33996EK" device=""/>
-<part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+24V" device=""/>
 <part name="GND19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="X5" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-23-2031" device="" package3d_urn="urn:adsk.eagle:package:8078634/1"/>
+<part name="GND20" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="D2" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="ES2D" device="" package3d_urn="urn:adsk.eagle:package:43404/2"/>
+<part name="C11" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1"/>
+<part name="C12" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="10uf"/>
+<part name="GND21" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="GND22" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="X6" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="KK-156-10" device="" package3d_urn="urn:adsk.eagle:package:8078799/1" value="OUTPUT1"/>
+<part name="X7" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="KK-156-10" device="" package3d_urn="urn:adsk.eagle:package:8078799/1" value="OUTPUT2"/>
+<part name="GND23" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="GND24" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="C13" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1"/>
+<part name="GND25" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="C14" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1"/>
+<part name="GND26" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -9367,11 +9381,121 @@ super fast rectifier, 2 A</description>
 <attribute name="NAME" x="193.0382" y="176.5337" size="1.77825" layer="95"/>
 <attribute name="VALUE" x="193.0329" y="121.2691" size="1.778990625" layer="96"/>
 </instance>
-<instance part="P+1" gate="1" x="185.42" y="170.18" smashed="yes" rot="R90">
-<attribute name="VALUE" x="190.5" y="167.64" size="1.778" layer="96" rot="R180"/>
-</instance>
 <instance part="GND19" gate="1" x="187.96" y="124.46" smashed="yes">
 <attribute name="VALUE" x="185.42" y="121.92" size="1.778" layer="96"/>
+</instance>
+<instance part="X5" gate="-1" x="43.18" y="160.02" smashed="yes" rot="R90">
+<attribute name="NAME" x="43.942" y="162.56" size="1.524" layer="95" rot="R90"/>
+<attribute name="VALUE" x="41.783" y="159.258" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="X5" gate="-2" x="45.72" y="160.02" smashed="yes" rot="R90">
+<attribute name="NAME" x="46.482" y="162.56" size="1.524" layer="95" rot="R90"/>
+</instance>
+<instance part="X5" gate="-3" x="48.26" y="160.02" smashed="yes" rot="R90">
+<attribute name="NAME" x="49.022" y="162.56" size="1.524" layer="95" rot="R90"/>
+</instance>
+<instance part="GND20" gate="1" x="40.64" y="157.48" smashed="yes" rot="R270">
+<attribute name="VALUE" x="38.1" y="160.02" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="D2" gate="G$1" x="45.72" y="152.4" smashed="yes" rot="R270">
+<attribute name="NAME" x="46.2026" y="149.86" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="43.4086" y="149.86" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="C11" gate="G$1" x="45.72" y="139.7" smashed="yes">
+<attribute name="NAME" x="46.736" y="140.335" size="1.778" layer="95"/>
+<attribute name="VALUE" x="46.736" y="135.509" size="1.778" layer="96"/>
+</instance>
+<instance part="C12" gate="G$1" x="55.88" y="139.7" smashed="yes">
+<attribute name="NAME" x="56.896" y="140.335" size="1.778" layer="95"/>
+<attribute name="VALUE" x="56.896" y="135.509" size="1.778" layer="96"/>
+</instance>
+<instance part="GND21" gate="1" x="45.72" y="132.08" smashed="yes">
+<attribute name="VALUE" x="43.18" y="129.54" size="1.778" layer="96"/>
+</instance>
+<instance part="GND22" gate="1" x="55.88" y="132.08" smashed="yes">
+<attribute name="VALUE" x="53.34" y="129.54" size="1.778" layer="96"/>
+</instance>
+<instance part="X6" gate="-1" x="147.32" y="180.34" smashed="yes">
+<attribute name="NAME" x="149.86" y="179.578" size="1.524" layer="95"/>
+<attribute name="VALUE" x="146.558" y="181.737" size="1.778" layer="96"/>
+</instance>
+<instance part="X6" gate="-2" x="147.32" y="177.8" smashed="yes">
+<attribute name="NAME" x="149.86" y="177.038" size="1.524" layer="95"/>
+</instance>
+<instance part="X6" gate="-3" x="147.32" y="175.26" smashed="yes">
+<attribute name="NAME" x="149.86" y="174.498" size="1.524" layer="95"/>
+</instance>
+<instance part="X6" gate="-4" x="147.32" y="172.72" smashed="yes">
+<attribute name="NAME" x="149.86" y="171.958" size="1.524" layer="95"/>
+</instance>
+<instance part="X6" gate="-5" x="147.32" y="170.18" smashed="yes">
+<attribute name="NAME" x="149.86" y="169.418" size="1.524" layer="95"/>
+</instance>
+<instance part="X6" gate="-6" x="147.32" y="167.64" smashed="yes">
+<attribute name="NAME" x="149.86" y="166.878" size="1.524" layer="95"/>
+</instance>
+<instance part="X6" gate="-7" x="147.32" y="165.1" smashed="yes">
+<attribute name="NAME" x="149.86" y="164.338" size="1.524" layer="95"/>
+</instance>
+<instance part="X6" gate="-8" x="147.32" y="162.56" smashed="yes">
+<attribute name="NAME" x="149.86" y="161.798" size="1.524" layer="95"/>
+</instance>
+<instance part="X6" gate="-9" x="147.32" y="160.02" smashed="yes">
+<attribute name="NAME" x="149.86" y="159.258" size="1.524" layer="95"/>
+</instance>
+<instance part="X6" gate="-10" x="147.32" y="157.48" smashed="yes">
+<attribute name="NAME" x="149.86" y="156.718" size="1.524" layer="95"/>
+</instance>
+<instance part="X7" gate="-1" x="165.1" y="147.32" smashed="yes">
+<attribute name="NAME" x="167.64" y="146.558" size="1.524" layer="95"/>
+<attribute name="VALUE" x="164.338" y="148.717" size="1.778" layer="96"/>
+</instance>
+<instance part="X7" gate="-2" x="165.1" y="144.78" smashed="yes">
+<attribute name="NAME" x="167.64" y="144.018" size="1.524" layer="95"/>
+</instance>
+<instance part="X7" gate="-3" x="165.1" y="142.24" smashed="yes">
+<attribute name="NAME" x="167.64" y="141.478" size="1.524" layer="95"/>
+</instance>
+<instance part="X7" gate="-4" x="165.1" y="139.7" smashed="yes">
+<attribute name="NAME" x="167.64" y="138.938" size="1.524" layer="95"/>
+</instance>
+<instance part="X7" gate="-5" x="165.1" y="137.16" smashed="yes">
+<attribute name="NAME" x="167.64" y="136.398" size="1.524" layer="95"/>
+</instance>
+<instance part="X7" gate="-6" x="165.1" y="134.62" smashed="yes">
+<attribute name="NAME" x="167.64" y="133.858" size="1.524" layer="95"/>
+</instance>
+<instance part="X7" gate="-7" x="165.1" y="132.08" smashed="yes">
+<attribute name="NAME" x="167.64" y="131.318" size="1.524" layer="95"/>
+</instance>
+<instance part="X7" gate="-8" x="165.1" y="129.54" smashed="yes">
+<attribute name="NAME" x="167.64" y="128.778" size="1.524" layer="95"/>
+</instance>
+<instance part="X7" gate="-9" x="165.1" y="127" smashed="yes">
+<attribute name="NAME" x="167.64" y="126.238" size="1.524" layer="95"/>
+</instance>
+<instance part="X7" gate="-10" x="165.1" y="124.46" smashed="yes">
+<attribute name="NAME" x="167.64" y="123.698" size="1.524" layer="95"/>
+</instance>
+<instance part="GND23" gate="1" x="162.56" y="121.92" smashed="yes">
+<attribute name="VALUE" x="160.02" y="119.38" size="1.778" layer="96"/>
+</instance>
+<instance part="GND24" gate="1" x="144.78" y="154.94" smashed="yes">
+<attribute name="VALUE" x="142.24" y="152.4" size="1.778" layer="96"/>
+</instance>
+<instance part="C13" gate="G$1" x="167.64" y="167.64" smashed="yes">
+<attribute name="NAME" x="168.656" y="168.275" size="1.778" layer="95"/>
+<attribute name="VALUE" x="168.656" y="163.449" size="1.778" layer="96"/>
+</instance>
+<instance part="GND25" gate="1" x="167.64" y="160.02" smashed="yes">
+<attribute name="VALUE" x="165.1" y="157.48" size="1.778" layer="96"/>
+</instance>
+<instance part="C14" gate="G$1" x="177.8" y="185.42" smashed="yes">
+<attribute name="NAME" x="178.816" y="186.055" size="1.778" layer="95"/>
+<attribute name="VALUE" x="178.816" y="181.229" size="1.778" layer="96"/>
+</instance>
+<instance part="GND26" gate="1" x="177.8" y="177.8" smashed="yes">
+<attribute name="VALUE" x="175.26" y="175.26" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -9411,8 +9535,12 @@ super fast rectifier, 2 A</description>
 <pinref part="U1" gate="G$1" pin="VDD"/>
 </segment>
 <segment>
-<wire x1="167.64" y1="172.72" x2="187.96" y2="172.72" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$1" pin="SOPWR"/>
+<pinref part="C14" gate="G$1" pin="1"/>
+<wire x1="175.26" y1="172.72" x2="187.96" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="187.96" x2="167.64" y2="187.96" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="187.96" x2="167.64" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="172.72" x2="175.26" y2="172.72" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="CS_JP3P11" class="0">
@@ -9478,11 +9606,14 @@ super fast rectifier, 2 A</description>
 <wire x1="86.36" y1="139.7" x2="86.36" y2="132.08" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="132.08" x2="76.2" y2="132.08" width="0.1524" layer="91"/>
 <junction x="86.36" y="132.08"/>
+<junction x="86.36" y="139.7"/>
 </segment>
 <segment>
 <pinref part="P+4" gate="1" pin="+24V"/>
 <wire x1="66.04" y1="144.78" x2="66.04" y2="149.86" width="0.1524" layer="91"/>
 <pinref part="D1" gate="G$1" pin="C"/>
+<junction x="66.04" y="149.86"/>
+<junction x="66.04" y="144.78"/>
 </segment>
 <segment>
 <pinref part="X2" gate="-9" pin="S"/>
@@ -9514,10 +9645,6 @@ super fast rectifier, 2 A</description>
 <segment>
 <pinref part="U1" gate="G$1" pin="VS"/>
 <pinref part="P+8" gate="1" pin="+24V"/>
-</segment>
-<segment>
-<pinref part="U2" gate="G$1" pin="VPWR"/>
-<pinref part="P+1" gate="1" pin="+24V"/>
 </segment>
 </net>
 <net name="N$8" class="0">
@@ -9673,6 +9800,34 @@ super fast rectifier, 2 A</description>
 <pinref part="GND19" gate="1" pin="GND"/>
 <junction x="187.96" y="127"/>
 <junction x="187.96" y="147.32"/>
+</segment>
+<segment>
+<pinref part="X5" gate="-1" pin="S"/>
+<pinref part="GND20" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C11" gate="G$1" pin="2"/>
+<pinref part="GND21" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C12" gate="G$1" pin="2"/>
+<pinref part="GND22" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="X7" gate="-10" pin="S"/>
+<pinref part="GND23" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="X6" gate="-10" pin="S"/>
+<pinref part="GND24" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C13" gate="G$1" pin="2"/>
+<pinref part="GND25" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C14" gate="G$1" pin="2"/>
+<pinref part="GND26" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="N$2" class="0">
@@ -9955,6 +10110,8 @@ super fast rectifier, 2 A</description>
 <junction x="66.04" y="157.48"/>
 <wire x1="66.04" y1="154.94" x2="66.04" y2="157.48" width="0.1524" layer="91"/>
 <pinref part="D1" gate="G$1" pin="A"/>
+<junction x="66.04" y="154.94"/>
+<junction x="68.58" y="157.48"/>
 </segment>
 </net>
 <net name="MOSI_JP4P3" class="0">
@@ -10011,15 +10168,375 @@ super fast rectifier, 2 A</description>
 <pinref part="U2" gate="G$1" pin="SO"/>
 </segment>
 </net>
+<net name="N$30" class="1">
+<segment>
+<pinref part="D2" gate="G$1" pin="A"/>
+<pinref part="X5" gate="-2" pin="S"/>
+<wire x1="45.72" y1="154.94" x2="45.72" y2="157.48" width="0.1524" layer="91"/>
+<pinref part="X5" gate="-3" pin="S"/>
+<wire x1="48.26" y1="157.48" x2="45.72" y2="157.48" width="0.1524" layer="91"/>
+<junction x="45.72" y="157.48"/>
+<junction x="45.72" y="154.94"/>
+<junction x="48.26" y="157.48"/>
+</segment>
+</net>
+<net name="N$32" class="1">
+<segment>
+<pinref part="C12" gate="G$1" pin="1"/>
+<pinref part="C11" gate="G$1" pin="1"/>
+<wire x1="55.88" y1="142.24" x2="45.72" y2="142.24" width="0.1524" layer="91"/>
+<pinref part="D2" gate="G$1" pin="C"/>
+<wire x1="45.72" y1="144.78" x2="45.72" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="147.32" x2="45.72" y2="149.86" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="142.24" x2="45.72" y2="144.78" width="0.1524" layer="91"/>
+<junction x="45.72" y="142.24"/>
+<junction x="55.88" y="142.24"/>
+<junction x="45.72" y="149.86"/>
+</segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="VPWR"/>
+<pinref part="C13" gate="G$1" pin="1"/>
+<wire x1="187.96" y1="170.18" x2="167.64" y2="170.18" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="144.78" y1="160.02" x2="134.62" y2="160.02" width="0.1524" layer="91"/>
+<pinref part="X6" gate="-9" pin="S"/>
+</segment>
+<segment>
+<wire x1="162.56" y1="127" x2="152.4" y2="127" width="0.1524" layer="91"/>
+<pinref part="X7" gate="-9" pin="S"/>
+</segment>
+</net>
+<net name="N$33" class="0">
+<segment>
+<pinref part="SV1" gate="1" pin="4"/>
+<pinref part="SV2" gate="G$1" pin="4"/>
+<wire x1="63.5" y1="20.32" x2="63.5" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="43.18" x2="63.5" y2="48.26" width="0.1524" layer="91"/>
+<junction x="63.5" y="43.18"/>
+</segment>
+<segment>
+<wire x1="187.96" y1="160.02" x2="182.88" y2="160.02" width="0.1524" layer="91"/>
+<pinref part="U2" gate="G$1" pin="!CS"/>
+</segment>
+</net>
+<net name="N$34" class="0">
+<segment>
+<pinref part="SV1" gate="1" pin="10"/>
+<pinref part="SV2" gate="G$1" pin="10"/>
+<wire x1="48.26" y1="20.32" x2="48.26" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="43.18" x2="48.26" y2="48.26" width="0.1524" layer="91"/>
+<junction x="48.26" y="43.18"/>
+<wire x1="48.26" y1="43.18" x2="48.26" y2="48.26" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="187.96" y1="165.1" x2="182.88" y2="165.1" width="0.1524" layer="91"/>
+<pinref part="U2" gate="G$1" pin="PWM"/>
+</segment>
+</net>
+<net name="N$35" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT0"/>
+<wire x1="223.52" y1="172.72" x2="231.14" y2="172.72" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="137.16" y1="180.34" x2="144.78" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="X6" gate="-1" pin="S"/>
+<junction x="144.78" y="180.34"/>
+</segment>
+</net>
+<net name="N$36" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT1"/>
+<wire x1="223.52" y1="170.18" x2="231.14" y2="170.18" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="137.16" y1="177.8" x2="144.78" y2="177.8" width="0.1524" layer="91"/>
+<pinref part="X6" gate="-2" pin="S"/>
+<junction x="144.78" y="177.8"/>
+</segment>
+</net>
+<net name="N$37" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT2"/>
+<wire x1="223.52" y1="167.64" x2="231.14" y2="167.64" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="137.16" y1="175.26" x2="144.78" y2="175.26" width="0.1524" layer="91"/>
+<pinref part="X6" gate="-3" pin="S"/>
+<junction x="144.78" y="175.26"/>
+</segment>
+</net>
+<net name="N$38" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT3"/>
+<wire x1="223.52" y1="165.1" x2="231.14" y2="165.1" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="137.16" y1="172.72" x2="144.78" y2="172.72" width="0.1524" layer="91"/>
+<pinref part="X6" gate="-4" pin="S"/>
+<junction x="144.78" y="172.72"/>
+</segment>
+</net>
+<net name="N$39" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT4"/>
+<wire x1="223.52" y1="162.56" x2="231.14" y2="162.56" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="137.16" y1="170.18" x2="144.78" y2="170.18" width="0.1524" layer="91"/>
+<pinref part="X6" gate="-5" pin="S"/>
+<junction x="144.78" y="170.18"/>
+</segment>
+</net>
+<net name="N$40" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT5"/>
+<wire x1="223.52" y1="160.02" x2="231.14" y2="160.02" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="137.16" y1="167.64" x2="144.78" y2="167.64" width="0.1524" layer="91"/>
+<pinref part="X6" gate="-6" pin="S"/>
+<junction x="144.78" y="167.64"/>
+</segment>
+</net>
+<net name="N$41" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT6"/>
+<wire x1="223.52" y1="157.48" x2="231.14" y2="157.48" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="137.16" y1="165.1" x2="144.78" y2="165.1" width="0.1524" layer="91"/>
+<pinref part="X6" gate="-7" pin="S"/>
+<junction x="144.78" y="165.1"/>
+</segment>
+</net>
+<net name="N$42" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT7"/>
+<wire x1="223.52" y1="154.94" x2="231.14" y2="154.94" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="137.16" y1="162.56" x2="144.78" y2="162.56" width="0.1524" layer="91"/>
+<pinref part="X6" gate="-8" pin="S"/>
+<junction x="144.78" y="162.56"/>
+</segment>
+</net>
+<net name="N$43" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT8"/>
+<wire x1="223.52" y1="152.4" x2="231.14" y2="152.4" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="154.94" y1="147.32" x2="162.56" y2="147.32" width="0.1524" layer="91"/>
+<pinref part="X7" gate="-1" pin="S"/>
+<junction x="162.56" y="147.32"/>
+</segment>
+</net>
+<net name="N$44" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT9"/>
+<wire x1="223.52" y1="149.86" x2="231.14" y2="149.86" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="154.94" y1="144.78" x2="162.56" y2="144.78" width="0.1524" layer="91"/>
+<pinref part="X7" gate="-2" pin="S"/>
+<junction x="162.56" y="144.78"/>
+</segment>
+</net>
+<net name="N$45" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT10"/>
+<wire x1="223.52" y1="147.32" x2="231.14" y2="147.32" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="154.94" y1="142.24" x2="162.56" y2="142.24" width="0.1524" layer="91"/>
+<pinref part="X7" gate="-3" pin="S"/>
+<junction x="162.56" y="142.24"/>
+</segment>
+</net>
+<net name="N$46" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT11"/>
+<wire x1="223.52" y1="144.78" x2="231.14" y2="144.78" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="X7" gate="-4" pin="S"/>
+<wire x1="162.56" y1="139.7" x2="165.1" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="139.7" x2="162.56" y2="139.7" width="0.1524" layer="91"/>
+<junction x="162.56" y="139.7"/>
+</segment>
+</net>
+<net name="N$47" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT12"/>
+<wire x1="223.52" y1="142.24" x2="231.14" y2="142.24" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="154.94" y1="137.16" x2="162.56" y2="137.16" width="0.1524" layer="91"/>
+<pinref part="X7" gate="-5" pin="S"/>
+<junction x="162.56" y="137.16"/>
+</segment>
+</net>
+<net name="N$48" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT13"/>
+<wire x1="223.52" y1="139.7" x2="231.14" y2="139.7" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="154.94" y1="134.62" x2="162.56" y2="134.62" width="0.1524" layer="91"/>
+<pinref part="X7" gate="-6" pin="S"/>
+<junction x="162.56" y="134.62"/>
+</segment>
+</net>
+<net name="N$49" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT14"/>
+<wire x1="223.52" y1="137.16" x2="231.14" y2="137.16" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="154.94" y1="132.08" x2="162.56" y2="132.08" width="0.1524" layer="91"/>
+<pinref part="X7" gate="-7" pin="S"/>
+<junction x="162.56" y="132.08"/>
+</segment>
+</net>
+<net name="N$50" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="OUT15"/>
+<wire x1="223.52" y1="134.62" x2="231.14" y2="134.62" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="154.94" y1="129.54" x2="162.56" y2="129.54" width="0.1524" layer="91"/>
+<pinref part="X7" gate="-8" pin="S"/>
+<junction x="162.56" y="129.54"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
 <errors>
 <approved hash="102,1,53.34,60.96,VDD,VDD_JP4P5,,,,"/>
+<approved hash="102,1,-5.08,109.22,VDD,VDD_JP4P5,,,,"/>
 <approved hash="102,1,86.36,99.06,VDD,VDD_JP4P5,,,,"/>
 <approved hash="102,1,-2.54,58.42,VDD,VDD_JP4P5,,,,"/>
 <approved hash="102,1,10.16,58.42,VDD,VDD_JP4P5,,,,"/>
+<approved hash="104,1,198.12,88.9,U1,VDD,VDD_JP4P5,,,"/>
+<approved hash="104,1,198.12,27.94,U1,DGND,GND,,,"/>
+<approved hash="104,1,198.12,30.48,U1,AGND,GND,,,"/>
+<approved hash="104,1,198.12,86.36,U1,VS,+24V,,,"/>
+<approved hash="104,1,198.12,33.02,U1,EP,GND,,,"/>
+<approved hash="104,1,187.96,172.72,U2,SOPWR,VDD_JP4P5,,,"/>
+<approved hash="104,1,187.96,170.18,U2,VPWR,N$32,,,"/>
+<approved hash="104,1,187.96,127,U2,EP,GND,,,"/>
+<approved hash="206,1,198.12,71.12,MISO_JP4P1,,,,,"/>
+<approved hash="206,1,187.96,152.4,MISO_JP4P1,,,,,"/>
 <approved hash="113,1,114.196,95.146,FRAME1,,,,,"/>
+<approved hash="115,1,185.42,157.48,SCK_JP4P2,,,,,"/>
+<approved hash="115,1,200.66,76.2,SCK_JP4P2,,,,,"/>
+<approved hash="115,1,156.21,35.56,N$5,,,,,"/>
+<approved hash="115,1,123.19,101.6,N$5,,,,,"/>
+<approved hash="115,1,158.75,71.12,N$22,,,,,"/>
+<approved hash="115,1,113.03,162.56,N$22,,,,,"/>
+<approved hash="115,1,153.67,40.64,N$11,,,,,"/>
+<approved hash="115,1,125.73,106.68,N$11,,,,,"/>
+<approved hash="115,1,185.42,160.02,N$33,,,,,"/>
+<approved hash="115,1,63.5,31.75,N$33,,,,,"/>
+<approved hash="115,1,158.75,137.16,N$47,,,,,"/>
+<approved hash="115,1,227.33,142.24,N$47,,,,,"/>
+<approved hash="115,1,158.75,83.82,N$17,,,,,"/>
+<approved hash="115,1,113.03,175.26,N$17,,,,,"/>
+<approved hash="115,1,208.28,45.72,N$8,,,,,"/>
+<approved hash="115,1,78.74,88.9,N$8,,,,,"/>
+<approved hash="115,1,148.59,50.8,N$15,,,,,"/>
+<approved hash="115,1,130.81,132.08,N$15,,,,,"/>
+<approved hash="115,1,151.13,45.72,N$13,,,,,"/>
+<approved hash="115,1,128.27,111.76,N$13,,,,,"/>
+<approved hash="115,1,212.09,27.94,GND,,,,,"/>
+<approved hash="115,1,209.55,30.48,GND,,,,,"/>
+<approved hash="115,1,149.86,48.26,N$14,,,,,"/>
+<approved hash="115,1,129.54,129.54,N$14,,,,,"/>
+<approved hash="115,1,140.97,170.18,N$39,,,,,"/>
+<approved hash="115,1,227.33,162.56,N$39,,,,,"/>
+<approved hash="115,1,201.93,53.34,EXT2_JP3P8,,,,,"/>
+<approved hash="115,1,158.75,134.62,N$48,,,,,"/>
+<approved hash="115,1,227.33,139.7,N$48,,,,,"/>
+<approved hash="115,1,147.32,53.34,N$16,,,,,"/>
+<approved hash="115,1,132.08,134.62,N$16,,,,,"/>
+<approved hash="115,1,158.75,68.58,N$23,,,,,"/>
+<approved hash="115,1,113.03,147.32,N$23,,,,,"/>
+<approved hash="115,1,203.2,78.74,CS_JP3P11,,,,,"/>
+<approved hash="115,1,158.75,81.28,N$18,,,,,"/>
+<approved hash="115,1,113.03,172.72,N$18,,,,,"/>
+<approved hash="115,1,140.97,172.72,N$38,,,,,"/>
+<approved hash="115,1,227.33,165.1,N$38,,,,,"/>
+<approved hash="115,1,158.75,129.54,N$50,,,,,"/>
+<approved hash="115,1,227.33,134.62,N$50,,,,,"/>
+<approved hash="115,1,154.94,38.1,N$7,,,,,"/>
+<approved hash="115,1,124.46,104.14,N$7,,,,,"/>
+<approved hash="115,1,140.97,167.64,N$40,,,,,"/>
+<approved hash="115,1,227.33,160.02,N$40,,,,,"/>
+<approved hash="115,1,158.75,60.96,N$25,,,,,"/>
+<approved hash="115,1,113.03,142.24,N$25,,,,,"/>
+<approved hash="115,1,157.48,127,N$32,,,,,"/>
+<approved hash="115,1,139.7,160.02,N$32,,,,,"/>
+<approved hash="115,1,177.8,170.18,N$32,,,,,"/>
+<approved hash="115,1,50.8,142.24,N$32,,,,,"/>
+<approved hash="115,1,215.9,40.64,N$10,,,,,"/>
+<approved hash="115,1,86.36,96.52,N$10,,,,,"/>
+<approved hash="115,1,158.75,142.24,N$45,,,,,"/>
+<approved hash="115,1,227.33,147.32,N$45,,,,,"/>
+<approved hash="115,1,153.67,86.36,N$2,,,,,"/>
+<approved hash="115,1,110.49,177.8,N$2,,,,,"/>
+<approved hash="115,1,185.42,154.94,MOSI_JP4P3,,,,,"/>
+<approved hash="115,1,200.66,73.66,MOSI_JP4P3,,,,,"/>
+<approved hash="115,1,181.61,172.72,VDD_JP4P5,,,,,"/>
+<approved hash="115,1,208.28,88.9,VDD_JP4P5,,,,,"/>
+<approved hash="115,1,158.75,73.66,N$21,,,,,"/>
+<approved hash="115,1,113.03,165.1,N$21,,,,,"/>
+<approved hash="115,1,163.83,139.7,N$46,,,,,"/>
+<approved hash="115,1,227.33,144.78,N$46,,,,,"/>
+<approved hash="115,1,185.42,165.1,N$34,,,,,"/>
+<approved hash="115,1,48.26,31.75,N$34,,,,,"/>
+<approved hash="115,1,140.97,162.56,N$42,,,,,"/>
+<approved hash="115,1,227.33,154.94,N$42,,,,,"/>
+<approved hash="115,1,158.75,76.2,N$20,,,,,"/>
+<approved hash="115,1,113.03,167.64,N$20,,,,,"/>
+<approved hash="115,1,147.32,88.9,N$1,,,,,"/>
+<approved hash="115,1,101.6,180.34,N$1,,,,,"/>
+<approved hash="115,1,158.75,144.78,N$44,,,,,"/>
+<approved hash="115,1,227.33,149.86,N$44,,,,,"/>
+<approved hash="115,1,156.21,27.94,N$28,,,,,"/>
+<approved hash="115,1,140.97,180.34,N$35,,,,,"/>
+<approved hash="115,1,227.33,172.72,N$35,,,,,"/>
+<approved hash="115,1,140.97,175.26,N$37,,,,,"/>
+<approved hash="115,1,227.33,167.64,N$37,,,,,"/>
+<approved hash="115,1,156.21,30.48,N$4,,,,,"/>
+<approved hash="115,1,158.75,147.32,N$43,,,,,"/>
+<approved hash="115,1,227.33,152.4,N$43,,,,,"/>
+<approved hash="115,1,158.75,132.08,N$49,,,,,"/>
+<approved hash="115,1,227.33,137.16,N$49,,,,,"/>
+<approved hash="115,1,180.34,162.56,N$6,,,,,"/>
+<approved hash="115,1,205.74,60.96,N$6,,,,,"/>
+<approved hash="115,1,69.85,81.28,N$6,,,,,"/>
+<approved hash="115,1,140.97,177.8,N$36,,,,,"/>
+<approved hash="115,1,227.33,170.18,N$36,,,,,"/>
+<approved hash="115,1,212.09,43.18,N$9,,,,,"/>
+<approved hash="115,1,82.55,93.98,N$9,,,,,"/>
+<approved hash="115,1,158.75,55.88,N$27,,,,,"/>
+<approved hash="115,1,111.76,137.16,N$27,,,,,"/>
+<approved hash="115,1,152.4,43.18,N$12,,,,,"/>
+<approved hash="115,1,127,109.22,N$12,,,,,"/>
+<approved hash="115,1,158.75,66.04,N$24,,,,,"/>
+<approved hash="115,1,113.03,144.78,N$24,,,,,"/>
+<approved hash="115,1,158.75,58.42,N$26,,,,,"/>
+<approved hash="115,1,113.03,139.7,N$26,,,,,"/>
+<approved hash="115,1,156.21,33.02,N$3,,,,,"/>
+<approved hash="115,1,185.42,152.4,MISO_JP4P1,,,,,"/>
+<approved hash="115,1,200.66,71.12,MISO_JP4P1,,,,,"/>
+<approved hash="115,1,158.75,78.74,N$19,,,,,"/>
+<approved hash="115,1,113.03,170.18,N$19,,,,,"/>
+<approved hash="115,1,140.97,165.1,N$41,,,,,"/>
+<approved hash="115,1,227.33,157.48,N$41,,,,,"/>
 </errors>
 </schematic>
 </drawing>
