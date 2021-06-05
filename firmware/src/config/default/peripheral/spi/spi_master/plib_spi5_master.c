@@ -79,7 +79,7 @@ void SPI5_Initialize ( void )
     IFS7CLR = 0x4;
 
     /* BAUD Rate register Setup */
-    SPI5BRG = 9;
+    SPI5BRG = 7;
 
     /* CLear the Overflow */
     SPI5STATCLR = _SPI5STAT_SPIROV_MASK;

@@ -8886,7 +8886,6 @@ super fast rectifier, 2 A</description>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="VDD1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
-<part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+24V" device=""/>
 <part name="P+2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+24V" device=""/>
 <part name="C1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="0.1"/>
 <part name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="10uf"/>
@@ -8914,9 +8913,9 @@ super fast rectifier, 2 A</description>
 <part name="VDD4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 <part name="VDD5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 <part name="SV2" library="con-lsta" library_urn="urn:adsk.eagle:library:161" deviceset="FE10-1" device="" package3d_urn="urn:adsk.eagle:package:8192/1" value="DEBUG_H"/>
-<part name="X2" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="KK-156-10" device="" package3d_urn="urn:adsk.eagle:package:8078799/1"/>
-<part name="X3" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="KK-156-10" device="" package3d_urn="urn:adsk.eagle:package:8078799/1"/>
-<part name="X4" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="KK-156-10" device="" package3d_urn="urn:adsk.eagle:package:8078799/1"/>
+<part name="X2" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="KK-156-10" device="" package3d_urn="urn:adsk.eagle:package:8078799/1" value="INPUT1"/>
+<part name="X3" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="KK-156-10" device="" package3d_urn="urn:adsk.eagle:package:8078799/1" value="INPUT2"/>
+<part name="X4" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="KK-156-10" device="" package3d_urn="urn:adsk.eagle:package:8078799/1" value="INPUT3"/>
 <part name="GND12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -8957,9 +8956,6 @@ super fast rectifier, 2 A</description>
 </instance>
 <instance part="VDD1" gate="G$1" x="53.34" y="63.5" smashed="yes">
 <attribute name="VALUE" x="50.8" y="60.96" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="P+1" gate="1" x="68.58" y="137.16" smashed="yes">
-<attribute name="VALUE" x="66.04" y="132.08" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="P+2" gate="1" x="76.2" y="137.16" smashed="yes">
 <attribute name="VALUE" x="73.66" y="132.08" size="1.778" layer="96" rot="R90"/>
@@ -9212,8 +9208,6 @@ super fast rectifier, 2 A</description>
 <nets>
 <net name="VDD_JP4P5" class="1">
 <segment>
-<wire x1="53.34" y1="88.9" x2="33.02" y2="88.9" width="0.1524" layer="91"/>
-<wire x1="33.02" y1="88.9" x2="33.02" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="33.02" y1="60.96" x2="53.34" y2="60.96" width="0.1524" layer="91"/>
 <pinref part="VDD1" gate="G$1" pin="VDD"/>
 <junction x="53.34" y="60.96"/>
@@ -9246,57 +9240,6 @@ super fast rectifier, 2 A</description>
 <pinref part="U1" gate="G$1" pin="VDD"/>
 </segment>
 </net>
-<net name="SCK_JP4P3" class="0">
-<segment>
-<wire x1="35.56" y1="93.98" x2="35.56" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="71.12" x2="68.58" y2="71.12" width="0.1524" layer="91"/>
-<pinref part="SV1" gate="1" pin="2"/>
-<wire x1="68.58" y1="71.12" x2="68.58" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="43.18" x2="68.58" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="53.34" y1="93.98" x2="35.56" y2="93.98" width="0.1524" layer="91"/>
-<label x="76.2" y="27.94" size="1.778" layer="95"/>
-<pinref part="SV2" gate="G$1" pin="2"/>
-<junction x="68.58" y="43.18"/>
-</segment>
-<segment>
-<wire x1="215.9" y1="73.66" x2="198.12" y2="73.66" width="0.1524" layer="91"/>
-<pinref part="U1" gate="G$1" pin="SI"/>
-</segment>
-</net>
-<net name="MISO_JP4P1" class="0">
-<segment>
-<wire x1="53.34" y1="91.44" x2="38.1" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="91.44" x2="38.1" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="73.66" x2="71.12" y2="73.66" width="0.1524" layer="91"/>
-<pinref part="SV1" gate="1" pin="1"/>
-<wire x1="71.12" y1="73.66" x2="71.12" y2="43.18" width="0.1524" layer="91"/>
-<label x="76.2" y="22.86" size="1.778" layer="95"/>
-<pinref part="SV2" gate="G$1" pin="1"/>
-<wire x1="71.12" y1="43.18" x2="71.12" y2="20.32" width="0.1524" layer="91"/>
-<junction x="71.12" y="43.18"/>
-</segment>
-<segment>
-<wire x1="213.36" y1="71.12" x2="198.12" y2="71.12" width="0.1524" layer="91"/>
-<pinref part="U1" gate="G$1" pin="SO"/>
-</segment>
-</net>
-<net name="MOSI_JP4P2" class="0">
-<segment>
-<pinref part="SV1" gate="1" pin="3"/>
-<wire x1="66.04" y1="20.32" x2="66.04" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="66.04" y1="43.18" x2="66.04" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="66.04" y1="76.2" x2="40.64" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="40.64" y1="76.2" x2="40.64" y2="96.52" width="0.1524" layer="91"/>
-<wire x1="40.64" y1="96.52" x2="53.34" y2="96.52" width="0.1524" layer="91"/>
-<label x="76.2" y="33.02" size="1.778" layer="95"/>
-<pinref part="SV2" gate="G$1" pin="3"/>
-<junction x="66.04" y="43.18"/>
-</segment>
-<segment>
-<wire x1="198.12" y1="76.2" x2="210.82" y2="76.2" width="0.1524" layer="91"/>
-<pinref part="U1" gate="G$1" pin="SCLK"/>
-</segment>
-</net>
 <net name="CS_JP3P11" class="0">
 <segment>
 <pinref part="SV1" gate="1" pin="5"/>
@@ -9304,10 +9247,8 @@ super fast rectifier, 2 A</description>
 <wire x1="60.96" y1="43.18" x2="60.96" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="60.96" y1="78.74" x2="43.18" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="78.74" x2="43.18" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="99.06" x2="53.34" y2="99.06" width="0.1524" layer="91"/>
 <pinref part="R3" gate="G$1" pin="1"/>
 <wire x1="43.18" y1="99.06" x2="-5.08" y2="99.06" width="0.1524" layer="91"/>
-<junction x="43.18" y="99.06"/>
 <label x="30.48" y="27.94" size="1.778" layer="95"/>
 <pinref part="SV2" gate="G$1" pin="5"/>
 <junction x="60.96" y="43.18"/>
@@ -9320,11 +9261,7 @@ super fast rectifier, 2 A</description>
 <net name="N$6" class="0">
 <segment>
 <wire x1="58.42" y1="81.28" x2="81.28" y2="81.28" width="0.1524" layer="91"/>
-<wire x1="81.28" y1="81.28" x2="83.82" y2="81.28" width="0.1524" layer="91"/>
-<wire x1="83.82" y1="81.28" x2="83.82" y2="91.44" width="0.1524" layer="91"/>
-<wire x1="83.82" y1="91.44" x2="68.58" y2="91.44" width="0.1524" layer="91"/>
 <pinref part="R1" gate="G$1" pin="2"/>
-<junction x="81.28" y="81.28"/>
 <pinref part="SV1" gate="1" pin="6"/>
 <wire x1="58.42" y1="20.32" x2="58.42" y2="43.18" width="0.1524" layer="91"/>
 <pinref part="SV2" gate="G$1" pin="6"/>
@@ -9340,9 +9277,7 @@ super fast rectifier, 2 A</description>
 <segment>
 <wire x1="50.8" y1="53.34" x2="76.2" y2="53.34" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="53.34" x2="76.2" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="99.06" x2="76.2" y2="99.06" width="0.1524" layer="91"/>
 <pinref part="R4" gate="G$1" pin="2"/>
-<junction x="76.2" y="99.06"/>
 <pinref part="SV1" gate="1" pin="9"/>
 <wire x1="50.8" y1="20.32" x2="50.8" y2="43.18" width="0.1524" layer="91"/>
 <label x="30.48" y="22.86" size="1.778" layer="95"/>
@@ -9357,7 +9292,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="+24V" class="1">
 <segment>
-<wire x1="68.58" y1="132.08" x2="76.2" y2="132.08" width="0.1524" layer="91"/>
 <pinref part="P+2" gate="1" pin="+24V"/>
 <wire x1="76.2" y1="132.08" x2="76.2" y2="134.62" width="0.1524" layer="91"/>
 <pinref part="C5" gate="G$1" pin="1"/>
@@ -9365,7 +9299,6 @@ super fast rectifier, 2 A</description>
 <wire x1="86.36" y1="139.7" x2="86.36" y2="132.08" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="132.08" x2="76.2" y2="132.08" width="0.1524" layer="91"/>
 <junction x="86.36" y="132.08"/>
-<junction x="76.2" y="132.08"/>
 </segment>
 <segment>
 <pinref part="P+4" gate="1" pin="+24V"/>
@@ -9455,9 +9388,7 @@ super fast rectifier, 2 A</description>
 <segment>
 <wire x1="53.34" y1="58.42" x2="30.48" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="30.48" y1="58.42" x2="30.48" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="30.48" y1="114.3" x2="53.34" y2="114.3" width="0.1524" layer="91"/>
 <pinref part="GND2" gate="1" pin="GND"/>
-<junction x="30.48" y="114.3"/>
 <pinref part="SV1" gate="1" pin="8"/>
 <wire x1="53.34" y1="20.32" x2="53.34" y2="43.18" width="0.1524" layer="91"/>
 <label x="30.48" y="53.34" size="1.778" layer="95"/>
@@ -9466,7 +9397,6 @@ super fast rectifier, 2 A</description>
 <junction x="53.34" y="43.18"/>
 </segment>
 <segment>
-<wire x1="68.58" y1="109.22" x2="96.52" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="GND1" gate="1" pin="GND"/>
 <wire x1="96.52" y1="109.22" x2="96.52" y2="106.68" width="0.1524" layer="91"/>
 <label x="96.52" y="111.76" size="1.778" layer="95"/>
@@ -9535,11 +9465,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="N$2" class="0">
 <segment>
-<wire x1="53.34" y1="101.6" x2="35.56" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="101.6" x2="35.56" y2="106.68" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="106.68" x2="22.86" y2="106.68" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="116.84" y1="177.8" x2="104.14" y2="177.8" width="0.1524" layer="91"/>
 <pinref part="X2" gate="-2" pin="S"/>
 <junction x="116.84" y="177.8"/>
@@ -9550,9 +9475,6 @@ super fast rectifier, 2 A</description>
 </segment>
 </net>
 <net name="N$1" class="0">
-<segment>
-<wire x1="53.34" y1="104.14" x2="22.86" y2="104.14" width="0.1524" layer="91"/>
-</segment>
 <segment>
 <wire x1="116.84" y1="180.34" x2="86.36" y2="180.34" width="0.1524" layer="91"/>
 <pinref part="X2" gate="-1" pin="S"/>
@@ -9565,11 +9487,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="N$5" class="0">
 <segment>
-<wire x1="53.34" y1="116.84" x2="35.56" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="116.84" x2="35.56" y2="121.92" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="121.92" x2="22.86" y2="121.92" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="129.54" y1="101.6" x2="116.84" y2="101.6" width="0.1524" layer="91"/>
 <pinref part="X4" gate="-5" pin="S"/>
 <junction x="116.84" y="101.6"/>
@@ -9580,11 +9497,6 @@ super fast rectifier, 2 A</description>
 </segment>
 </net>
 <net name="N$7" class="0">
-<segment>
-<wire x1="53.34" y1="119.38" x2="38.1" y2="119.38" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="119.38" x2="38.1" y2="124.46" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="124.46" x2="22.86" y2="124.46" width="0.1524" layer="91"/>
-</segment>
 <segment>
 <wire x1="132.08" y1="104.14" x2="116.84" y2="104.14" width="0.1524" layer="91"/>
 <pinref part="X4" gate="-4" pin="S"/>
@@ -9597,11 +9509,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="N$11" class="0">
 <segment>
-<wire x1="53.34" y1="121.92" x2="40.64" y2="121.92" width="0.1524" layer="91"/>
-<wire x1="40.64" y1="121.92" x2="40.64" y2="127" width="0.1524" layer="91"/>
-<wire x1="40.64" y1="127" x2="22.86" y2="127" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="134.62" y1="106.68" x2="116.84" y2="106.68" width="0.1524" layer="91"/>
 <pinref part="X4" gate="-3" pin="S"/>
 <junction x="116.84" y="106.68"/>
@@ -9612,11 +9519,6 @@ super fast rectifier, 2 A</description>
 </segment>
 </net>
 <net name="N$12" class="0">
-<segment>
-<wire x1="53.34" y1="124.46" x2="43.18" y2="124.46" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="124.46" x2="43.18" y2="129.54" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="129.54" x2="22.86" y2="129.54" width="0.1524" layer="91"/>
-</segment>
 <segment>
 <wire x1="137.16" y1="109.22" x2="116.84" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="X4" gate="-2" pin="S"/>
@@ -9629,11 +9531,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="N$13" class="0">
 <segment>
-<wire x1="53.34" y1="127" x2="45.72" y2="127" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="127" x2="45.72" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="132.08" x2="22.86" y2="132.08" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="139.7" y1="111.76" x2="116.84" y2="111.76" width="0.1524" layer="91"/>
 <pinref part="X4" gate="-1" pin="S"/>
 <junction x="116.84" y="111.76"/>
@@ -9644,11 +9541,6 @@ super fast rectifier, 2 A</description>
 </segment>
 </net>
 <net name="N$14" class="0">
-<segment>
-<wire x1="53.34" y1="129.54" x2="48.26" y2="129.54" width="0.1524" layer="91"/>
-<wire x1="48.26" y1="129.54" x2="48.26" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="48.26" y1="134.62" x2="22.86" y2="134.62" width="0.1524" layer="91"/>
-</segment>
 <segment>
 <wire x1="142.24" y1="129.54" x2="116.84" y2="129.54" width="0.1524" layer="91"/>
 <pinref part="X3" gate="-8" pin="S"/>
@@ -9661,11 +9553,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="N$15" class="0">
 <segment>
-<wire x1="53.34" y1="132.08" x2="50.8" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="50.8" y1="132.08" x2="50.8" y2="137.16" width="0.1524" layer="91"/>
-<wire x1="50.8" y1="137.16" x2="22.86" y2="137.16" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="144.78" y1="132.08" x2="116.84" y2="132.08" width="0.1524" layer="91"/>
 <pinref part="X3" gate="-7" pin="S"/>
 <junction x="116.84" y="132.08"/>
@@ -9676,10 +9563,6 @@ super fast rectifier, 2 A</description>
 </segment>
 </net>
 <net name="N$16" class="0">
-<segment>
-<wire x1="53.34" y1="134.62" x2="53.34" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="53.34" y1="139.7" x2="22.86" y2="139.7" width="0.1524" layer="91"/>
-</segment>
 <segment>
 <wire x1="147.32" y1="134.62" x2="116.84" y2="134.62" width="0.1524" layer="91"/>
 <pinref part="X3" gate="-6" pin="S"/>
@@ -9692,9 +9575,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="N$17" class="0">
 <segment>
-<wire x1="68.58" y1="101.6" x2="76.2" y2="101.6" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="109.22" y1="175.26" x2="116.84" y2="175.26" width="0.1524" layer="91"/>
 <pinref part="X2" gate="-3" pin="S"/>
 <junction x="116.84" y="175.26"/>
@@ -9705,9 +9585,6 @@ super fast rectifier, 2 A</description>
 </segment>
 </net>
 <net name="N$18" class="0">
-<segment>
-<wire x1="68.58" y1="104.14" x2="76.2" y2="104.14" width="0.1524" layer="91"/>
-</segment>
 <segment>
 <wire x1="109.22" y1="172.72" x2="116.84" y2="172.72" width="0.1524" layer="91"/>
 <pinref part="X2" gate="-4" pin="S"/>
@@ -9720,9 +9597,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="N$19" class="0">
 <segment>
-<wire x1="68.58" y1="106.68" x2="76.2" y2="106.68" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="109.22" y1="170.18" x2="116.84" y2="170.18" width="0.1524" layer="91"/>
 <pinref part="X2" gate="-5" pin="S"/>
 <junction x="116.84" y="170.18"/>
@@ -9733,9 +9607,6 @@ super fast rectifier, 2 A</description>
 </segment>
 </net>
 <net name="N$20" class="0">
-<segment>
-<wire x1="68.58" y1="111.76" x2="76.2" y2="111.76" width="0.1524" layer="91"/>
-</segment>
 <segment>
 <wire x1="109.22" y1="167.64" x2="116.84" y2="167.64" width="0.1524" layer="91"/>
 <pinref part="X2" gate="-6" pin="S"/>
@@ -9748,9 +9619,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="N$21" class="0">
 <segment>
-<wire x1="68.58" y1="114.3" x2="76.2" y2="114.3" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="109.22" y1="165.1" x2="116.84" y2="165.1" width="0.1524" layer="91"/>
 <pinref part="X2" gate="-7" pin="S"/>
 <junction x="116.84" y="165.1"/>
@@ -9761,9 +9629,6 @@ super fast rectifier, 2 A</description>
 </segment>
 </net>
 <net name="N$22" class="0">
-<segment>
-<wire x1="68.58" y1="116.84" x2="76.2" y2="116.84" width="0.1524" layer="91"/>
-</segment>
 <segment>
 <wire x1="109.22" y1="162.56" x2="116.84" y2="162.56" width="0.1524" layer="91"/>
 <pinref part="X2" gate="-8" pin="S"/>
@@ -9776,9 +9641,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="N$23" class="0">
 <segment>
-<wire x1="68.58" y1="119.38" x2="76.2" y2="119.38" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="109.22" y1="147.32" x2="116.84" y2="147.32" width="0.1524" layer="91"/>
 <pinref part="X3" gate="-1" pin="S"/>
 <junction x="116.84" y="147.32"/>
@@ -9789,9 +9651,6 @@ super fast rectifier, 2 A</description>
 </segment>
 </net>
 <net name="N$24" class="0">
-<segment>
-<wire x1="68.58" y1="121.92" x2="76.2" y2="121.92" width="0.1524" layer="91"/>
-</segment>
 <segment>
 <wire x1="109.22" y1="144.78" x2="116.84" y2="144.78" width="0.1524" layer="91"/>
 <pinref part="X3" gate="-2" pin="S"/>
@@ -9804,9 +9663,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="N$25" class="0">
 <segment>
-<wire x1="68.58" y1="124.46" x2="76.2" y2="124.46" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="109.22" y1="142.24" x2="116.84" y2="142.24" width="0.1524" layer="91"/>
 <pinref part="X3" gate="-3" pin="S"/>
 <junction x="116.84" y="142.24"/>
@@ -9818,9 +9674,6 @@ super fast rectifier, 2 A</description>
 </net>
 <net name="N$26" class="0">
 <segment>
-<wire x1="68.58" y1="127" x2="76.2" y2="127" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="109.22" y1="139.7" x2="116.84" y2="139.7" width="0.1524" layer="91"/>
 <pinref part="X3" gate="-4" pin="S"/>
 <junction x="116.84" y="139.7"/>
@@ -9831,9 +9684,6 @@ super fast rectifier, 2 A</description>
 </segment>
 </net>
 <net name="N$27" class="0">
-<segment>
-<wire x1="68.58" y1="129.54" x2="76.2" y2="129.54" width="0.1524" layer="91"/>
-</segment>
 <segment>
 <wire x1="109.22" y1="137.16" x2="114.3" y2="137.16" width="0.1524" layer="91"/>
 <pinref part="X3" gate="-5" pin="S"/>
@@ -9847,11 +9697,6 @@ super fast rectifier, 2 A</description>
 </segment>
 </net>
 <net name="N$3" class="0">
-<segment>
-<wire x1="53.34" y1="111.76" x2="40.64" y2="111.76" width="0.1524" layer="91"/>
-<junction x="40.64" y="111.76"/>
-<label x="22.86" y="111.76" size="1.778" layer="95"/>
-</segment>
 <segment>
 <wire x1="129.54" y1="99.06" x2="116.84" y2="99.06" width="0.1524" layer="91"/>
 <pinref part="X4" gate="-6" pin="S"/>
@@ -9873,11 +9718,6 @@ super fast rectifier, 2 A</description>
 <label x="137.16" y="96.52" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="53.34" y1="109.22" x2="40.64" y2="109.22" width="0.1524" layer="91"/>
-<junction x="40.64" y="109.22"/>
-<label x="22.86" y="109.22" size="1.778" layer="95"/>
-</segment>
-<segment>
 <wire x1="162.56" y1="30.48" x2="149.86" y2="30.48" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN22"/>
 </segment>
@@ -9889,11 +9729,6 @@ super fast rectifier, 2 A</description>
 <junction x="116.84" y="93.98"/>
 <junction x="129.54" y="93.98"/>
 <label x="137.16" y="93.98" size="1.778" layer="95"/>
-</segment>
-<segment>
-<wire x1="53.34" y1="106.68" x2="40.64" y2="106.68" width="0.1524" layer="91"/>
-<junction x="40.64" y="106.68"/>
-<label x="15.24" y="106.68" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="162.56" y1="27.94" x2="149.86" y2="27.94" width="0.1524" layer="91"/>
@@ -9908,6 +9743,48 @@ super fast rectifier, 2 A</description>
 <junction x="66.04" y="157.48"/>
 <wire x1="66.04" y1="154.94" x2="66.04" y2="157.48" width="0.1524" layer="91"/>
 <pinref part="D1" gate="G$1" pin="A"/>
+</segment>
+</net>
+<net name="MOSI_JP4P3" class="0">
+<segment>
+<pinref part="SV1" gate="1" pin="2"/>
+<pinref part="SV2" gate="G$1" pin="2"/>
+<wire x1="68.58" y1="20.32" x2="68.58" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="43.18" x2="68.58" y2="48.26" width="0.1524" layer="91"/>
+<junction x="68.58" y="43.18"/>
+<label x="68.58" y="55.88" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<wire x1="203.2" y1="73.66" x2="198.12" y2="73.66" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="SI"/>
+</segment>
+</net>
+<net name="SCK_JP4P2" class="0">
+<segment>
+<pinref part="SV1" gate="1" pin="3"/>
+<pinref part="SV2" gate="G$1" pin="3"/>
+<wire x1="66.04" y1="20.32" x2="66.04" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="43.18" x2="66.04" y2="48.26" width="0.1524" layer="91"/>
+<junction x="66.04" y="43.18"/>
+<label x="66.04" y="55.88" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<wire x1="203.2" y1="76.2" x2="198.12" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="SCLK"/>
+</segment>
+</net>
+<net name="MISO_JP4P1" class="0">
+<segment>
+<pinref part="SV1" gate="1" pin="1"/>
+<pinref part="SV2" gate="G$1" pin="1"/>
+<wire x1="71.12" y1="20.32" x2="71.12" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="71.12" y1="43.18" x2="71.12" y2="48.26" width="0.1524" layer="91"/>
+<junction x="71.12" y="43.18"/>
+<label x="71.12" y="55.88" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<wire x1="203.2" y1="71.12" x2="198.12" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="SO"/>
 </segment>
 </net>
 </nets>
