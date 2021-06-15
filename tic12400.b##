@@ -2062,24 +2062,26 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 </package3d>
 </packages3d>
 </library>
-<library name="ECS-CR2-16.00-B-TR">
+<library name="CSTNE12M0GH5L000R0">
 <packages>
-<package name="XTAL_ECS-CR2-16.00-B-TR">
-<wire x1="-1.85" y1="1.55" x2="1.85" y2="1.55" width="0.127" layer="51"/>
-<wire x1="1.85" y1="1.55" x2="1.85" y2="-1.55" width="0.127" layer="51"/>
-<wire x1="1.85" y1="-1.55" x2="-1.85" y2="-1.55" width="0.127" layer="51"/>
-<wire x1="-1.85" y1="-1.55" x2="-1.85" y2="1.55" width="0.127" layer="51"/>
-<wire x1="-2.25" y1="2.3" x2="2.25" y2="2.3" width="0.05" layer="39"/>
-<wire x1="2.25" y1="2.3" x2="2.25" y2="-2.3" width="0.05" layer="39"/>
-<wire x1="2.25" y1="-2.3" x2="-2.25" y2="-2.3" width="0.05" layer="39"/>
-<wire x1="-2.25" y1="-2.3" x2="-2.25" y2="2.3" width="0.05" layer="39"/>
-<text x="-2.45488125" y="2.50498125" size="0.75149375" layer="25">&gt;NAME</text>
-<text x="-2.453790625" y="-3.1048" size="0.7511625" layer="27">&gt;VALUE</text>
-<circle x="-2.576" y="0" radius="0.1" width="0.2" layer="21"/>
-<circle x="-2.576" y="0.004" radius="0.1" width="0.2" layer="51"/>
-<smd name="1" x="-1.5" y="0" dx="4.1" dy="1" layer="1" rot="R90"/>
-<smd name="2" x="0" y="0" dx="4.1" dy="0.7" layer="1" rot="R90"/>
-<smd name="3" x="1.5" y="0" dx="4.1" dy="1" layer="1" rot="R90"/>
+<package name="OSC_CSTNE12M0GH5L000R0">
+<wire x1="-1.6" y1="0.65" x2="1.6" y2="0.65" width="0.127" layer="51"/>
+<wire x1="1.6" y1="-0.65" x2="-1.6" y2="-0.65" width="0.127" layer="51"/>
+<wire x1="-1.85" y1="1.2" x2="1.85" y2="1.2" width="0.05" layer="39"/>
+<wire x1="1.85" y1="1.2" x2="1.85" y2="-1.2" width="0.05" layer="39"/>
+<wire x1="1.85" y1="-1.2" x2="-1.85" y2="-1.2" width="0.05" layer="39"/>
+<wire x1="-1.85" y1="-1.2" x2="-1.85" y2="1.2" width="0.05" layer="39"/>
+<circle x="-2.22" y="0" radius="0.1" width="0.2" layer="21"/>
+<wire x1="-1.6" y1="0.65" x2="-1.6" y2="-0.65" width="0.127" layer="51"/>
+<wire x1="1.6" y1="0.65" x2="1.6" y2="-0.65" width="0.127" layer="51"/>
+<circle x="-2.22" y="0" radius="0.1" width="0.2" layer="51"/>
+<text x="-2" y="1.3" size="0.8128" layer="25">&gt;NAME</text>
+<text x="-2" y="-1.3" size="0.8128" layer="27" align="top-left">&gt;VALUE</text>
+<wire x1="-1.72" y1="0.65" x2="-1.72" y2="-0.65" width="0.127" layer="21"/>
+<wire x1="1.72" y1="0.65" x2="1.72" y2="-0.65" width="0.127" layer="21"/>
+<smd name="1" x="-1.2" y="0" dx="0.4" dy="1.9" layer="1"/>
+<smd name="2" x="0" y="0" dx="0.4" dy="1.9" layer="1"/>
+<smd name="3" x="1.2" y="0" dx="0.4" dy="1.9" layer="1"/>
 </package>
 </packages>
 </library>
@@ -2623,15 +2625,13 @@ design rules under a new name.</description>
 <attribute name="TP_SIGNAL_NAME" value="" x="83.82" y="31.75" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="83.185" y="30.988" size="0.0254" layer="27"/>
 </element>
-<element name="Y1" library="ECS-CR2-16.00-B-TR" package="XTAL_ECS-CR2-16.00-B-TR" value="ECS-CR2-16.00-B-TR" x="-2.54" y="3.81" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="-2.54" y="3.81" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" 16MHz Ceramic Resonator Built in Capacitor 15pF ±0.3% -20°C ~ 80°C Surface Mount " x="-2.54" y="3.81" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="ECS Inc." x="-2.54" y="3.81" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="ECS-CR2-16.00-B-TR" x="-2.54" y="3.81" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="-4.99488125" y="6.31498125" size="0.75149375" layer="25"/>
-<attribute name="PACKAGE" value="SMD-3 ECS International" x="-2.54" y="3.81" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="-2.54" y="3.81" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-4.993790625" y="0.7052" size="0.7511625" layer="27"/>
+<element name="Y1" library="CSTNE12M0GH5L000R0" package="OSC_CSTNE12M0GH5L000R0" value="CSTNE12M0GH5L000R0" x="31.75" y="11.43" smashed="yes" rot="R90">
+<attribute name="MANUFACTURER" value="Murata" x="31.75" y="11.43" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MAXIMUM_PACKAGE_HEIGHT" value="0.8mm" x="31.75" y="11.43" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="NAME" x="30.45" y="9.43" size="0.8128" layer="25" rot="R90"/>
+<attribute name="PARTREV" value="JGC42-8858A" x="31.75" y="11.43" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="STANDARD" value="Manufacturer Recomendations" x="31.75" y="11.43" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="33.05" y="9.43" size="0.8128" layer="27" rot="R90" align="top-left"/>
 </element>
 </elements>
 <signals>
@@ -3120,7 +3120,7 @@ design rules under a new name.</description>
 <wire x1="7.62" y1="25.4" x2="16.84" y2="23.835" width="0" layer="19" extent="1-1"/>
 <wire x1="38.1" y1="38.42" x2="48.26" y2="30.48" width="0" layer="19" extent="1-1"/>
 <wire x1="15.24" y1="38.06" x2="16.84" y2="23.835" width="0" layer="19" extent="1-1"/>
-<wire x1="-2.54" y1="3.81" x2="18.73" y2="10.16" width="0" layer="19" extent="1-1"/>
+<wire x1="31.75" y1="11.43" x2="18.73" y2="10.16" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$2">
 <contactref element="X2" pad="2"/>
