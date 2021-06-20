@@ -12823,6 +12823,9 @@ Source: www.kingbright.com</description>
 <part name="GND33" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="SV3" library="con-lsta" library_urn="urn:adsk.eagle:library:161" deviceset="FE10-1" device="" package3d_urn="urn:adsk.eagle:package:8192/1" value="MCP2210_GPIO"/>
 <part name="GND34" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="VDD10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
+<part name="VDD11" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
+<part name="VDD12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -13086,8 +13089,8 @@ Source: www.kingbright.com</description>
 <instance part="GND18" gate="1" x="205.74" y="35.56" smashed="yes" rot="R90">
 <attribute name="VALUE" x="208.28" y="33.02" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="P+8" gate="1" x="200.66" y="86.36" smashed="yes" rot="R270">
-<attribute name="VALUE" x="195.58" y="88.9" size="1.778" layer="96"/>
+<instance part="P+8" gate="1" x="210.82" y="83.82" smashed="yes" rot="R270">
+<attribute name="VALUE" x="205.74" y="86.36" size="1.778" layer="96"/>
 </instance>
 <instance part="D1" gate="G$1" x="66.04" y="142.24" smashed="yes" rot="R270">
 <attribute name="NAME" x="66.5226" y="139.7" size="1.778" layer="95" rot="R270"/>
@@ -13309,23 +13312,20 @@ Source: www.kingbright.com</description>
 <instance part="GND34" gate="1" x="43.18" y="109.22" smashed="yes" rot="R270">
 <attribute name="VALUE" x="40.64" y="111.76" size="1.778" layer="96" rot="R270"/>
 </instance>
+<instance part="VDD10" gate="G$1" x="43.18" y="63.5" smashed="yes">
+<attribute name="VALUE" x="40.64" y="60.96" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="VDD11" gate="G$1" x="203.2" y="91.44" smashed="yes">
+<attribute name="VALUE" x="200.66" y="88.9" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="VDD12" gate="G$1" x="172.72" y="190.5" smashed="yes">
+<attribute name="VALUE" x="170.18" y="187.96" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
 <nets>
 <net name="VDD_JP4P5" class="1">
-<segment>
-<wire x1="33.02" y1="60.96" x2="53.34" y2="60.96" width="0.1524" layer="91"/>
-<pinref part="VDD1" gate="G$1" pin="VDD"/>
-<junction x="53.34" y="60.96"/>
-<pinref part="SV1" gate="1" pin="7"/>
-<wire x1="55.88" y1="20.32" x2="55.88" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="55.88" y1="43.18" x2="55.88" y2="60.96" width="0.1524" layer="91"/>
-<wire x1="55.88" y1="60.96" x2="53.34" y2="60.96" width="0.1524" layer="91"/>
-<label x="25.4" y="50.8" size="1.778" layer="95"/>
-<pinref part="SV2" gate="G$1" pin="7"/>
-<junction x="55.88" y="43.18"/>
-</segment>
 <segment>
 <pinref part="R3" gate="G$1" pin="2"/>
 <pinref part="VDD2" gate="G$1" pin="VDD"/>
@@ -13344,21 +13344,6 @@ Source: www.kingbright.com</description>
 <pinref part="C6" gate="G$1" pin="1"/>
 <pinref part="VDD5" gate="G$1" pin="VDD"/>
 <junction x="10.16" y="58.42"/>
-</segment>
-<segment>
-<wire x1="218.44" y1="88.9" x2="198.12" y2="88.9" width="0.1524" layer="91"/>
-<pinref part="U1" gate="G$1" pin="VDD"/>
-<junction x="198.12" y="88.9"/>
-</segment>
-<segment>
-<pinref part="U2" gate="G$1" pin="SOPWR"/>
-<pinref part="C14" gate="G$1" pin="1"/>
-<wire x1="175.26" y1="172.72" x2="187.96" y2="172.72" width="0.1524" layer="91"/>
-<wire x1="177.8" y1="187.96" x2="167.64" y2="187.96" width="0.1524" layer="91"/>
-<wire x1="167.64" y1="187.96" x2="167.64" y2="172.72" width="0.1524" layer="91"/>
-<wire x1="167.64" y1="172.72" x2="175.26" y2="172.72" width="0.1524" layer="91"/>
-<junction x="177.8" y="187.96"/>
-<junction x="187.96" y="172.72"/>
 </segment>
 </net>
 <net name="CS_JP3P11" class="0">
@@ -13492,7 +13477,7 @@ Source: www.kingbright.com</description>
 <segment>
 <pinref part="U1" gate="G$1" pin="VS"/>
 <pinref part="P+8" gate="1" pin="+24V"/>
-<junction x="198.12" y="86.36"/>
+<wire x1="208.28" y1="83.82" x2="198.12" y2="86.36" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$8" class="0">
@@ -14476,6 +14461,43 @@ Source: www.kingbright.com</description>
 <pinref part="VDD9" gate="G$1" pin="VDD"/>
 <junction x="20.32" y="119.38"/>
 </segment>
+<segment>
+<wire x1="33.02" y1="60.96" x2="43.18" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="VDD1" gate="G$1" pin="VDD"/>
+<junction x="53.34" y="60.96"/>
+<pinref part="SV1" gate="1" pin="7"/>
+<wire x1="43.18" y1="60.96" x2="53.34" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="20.32" x2="55.88" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="43.18" x2="55.88" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="60.96" x2="53.34" y2="60.96" width="0.1524" layer="91"/>
+<label x="25.4" y="50.8" size="1.778" layer="95"/>
+<pinref part="SV2" gate="G$1" pin="7"/>
+<junction x="55.88" y="43.18"/>
+<pinref part="VDD10" gate="G$1" pin="VDD"/>
+<junction x="43.18" y="60.96"/>
+</segment>
+<segment>
+<wire x1="218.44" y1="88.9" x2="203.2" y2="88.9" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="VDD"/>
+<junction x="198.12" y="88.9"/>
+<pinref part="VDD11" gate="G$1" pin="VDD"/>
+<wire x1="203.2" y1="88.9" x2="198.12" y2="88.9" width="0.1524" layer="91"/>
+<junction x="203.2" y="88.9"/>
+<wire x1="218.44" y1="88.9" x2="203.2" y2="88.9" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="SOPWR"/>
+<pinref part="C14" gate="G$1" pin="1"/>
+<wire x1="175.26" y1="172.72" x2="187.96" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="187.96" x2="172.72" y2="187.96" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="187.96" x2="167.64" y2="187.96" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="187.96" x2="167.64" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="172.72" x2="175.26" y2="172.72" width="0.1524" layer="91"/>
+<junction x="177.8" y="187.96"/>
+<junction x="187.96" y="172.72"/>
+<pinref part="VDD12" gate="G$1" pin="VDD"/>
+<junction x="172.72" y="187.96"/>
+</segment>
 </net>
 <net name="N$55" class="0">
 <segment>
@@ -14617,22 +14639,14 @@ Source: www.kingbright.com</description>
 </sheet>
 </sheets>
 <errors>
-<approved hash="102,1,53.34,60.96,VDD,VDD_JP4P5,,,,"/>
 <approved hash="102,1,-5.08,109.22,VDD,VDD_JP4P5,,,,"/>
 <approved hash="102,1,86.36,99.06,VDD,VDD_JP4P5,,,,"/>
 <approved hash="102,1,-2.54,58.42,VDD,VDD_JP4P5,,,,"/>
 <approved hash="102,1,10.16,58.42,VDD,VDD_JP4P5,,,,"/>
-<approved hash="201,1,10.16,58.42,VDD,VDD_JP4P5\, VDD,,,,"/>
-<approved hash="201,1,-2.54,58.42,VDD,VDD_JP4P5\, VDD,,,,"/>
-<approved hash="201,1,86.36,99.06,VDD,VDD_JP4P5\, VDD,,,,"/>
-<approved hash="201,1,-5.08,109.22,VDD,VDD_JP4P5\, VDD,,,,"/>
-<approved hash="201,1,53.34,60.96,VDD,VDD_JP4P5\, VDD,,,,"/>
-<approved hash="104,1,198.12,88.9,U1,VDD,VDD_JP4P5,,,"/>
 <approved hash="104,1,198.12,27.94,U1,DGND,GND,,,"/>
 <approved hash="104,1,198.12,30.48,U1,AGND,GND,,,"/>
 <approved hash="104,1,198.12,86.36,U1,VS,+24V,,,"/>
 <approved hash="104,1,198.12,33.02,U1,EP,GND,,,"/>
-<approved hash="104,1,187.96,172.72,U2,SOPWR,VDD_JP4P5,,,"/>
 <approved hash="104,1,187.96,170.18,U2,VPWR,N$30,,,"/>
 <approved hash="104,1,187.96,127,U2,EP,GND,,,"/>
 <approved hash="104,1,22.86,134.62,U3,VSS,GND,,,"/>
@@ -14654,8 +14668,6 @@ Source: www.kingbright.com</description>
 <approved hash="115,1,123.19,101.6,N$5,,,,,"/>
 <approved hash="115,1,152.4,43.18,N$12,,,,,"/>
 <approved hash="115,1,127,109.22,N$12,,,,,"/>
-<approved hash="115,1,181.61,172.72,VDD_JP4P5,,,,,"/>
-<approved hash="115,1,208.28,88.9,VDD_JP4P5,,,,,"/>
 <approved hash="115,1,140.97,177.8,N$36,,,,,"/>
 <approved hash="115,1,227.33,170.18,N$36,,,,,"/>
 <approved hash="115,1,158.75,73.66,N$21,,,,,"/>
