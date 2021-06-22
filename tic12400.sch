@@ -15205,11 +15205,13 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <wire x1="187.96" y1="160.02" x2="182.88" y2="160.02" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$1" pin="!CS"/>
 <junction x="187.96" y="160.02"/>
+<label x="157.48" y="160.02" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="27.94" y1="142.24" x2="22.86" y2="142.24" width="0.1524" layer="91"/>
 <pinref part="U3" gate="G$1" pin="GP8"/>
 <junction x="22.86" y="142.24"/>
+<label x="33.02" y="142.24" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="48.26" y1="114.3" x2="48.26" y2="109.22" width="0.1524" layer="91"/>
