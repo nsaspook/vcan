@@ -1,25 +1,25 @@
 EAGLE AutoRouter Statistics:
 
-Job           : /fred/vcan/tic12400.brd
+Job           : /root/vcan/tic12400.brd
 
-Start at      : 10:48:02 (6/20/21)
-End at        : 10:48:52 (6/20/21)
-Elapsed time  : 00:00:47
+Start at      : 19:50:15 (6/22/21)
+End at        : 19:50:55 (6/22/21)
+Elapsed time  : 00:00:39
 
-Signals       :    76   RoutingGrid: 3 mil  Layers: 2
-Connections   :   198   predefined:  197 ( 99 Vias )
+Signals       :    75   RoutingGrid: 3 mil  Layers: 2
+Connections   :   203   predefined:  202 ( 103 Vias )
 
 Router memory :   5586240
 
 Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4 Optimize5 Optimize6 Optimize7 Optimize8 Optimize9Optimize10Optimize11Optimize12
 
-Time per pass     :  00:00:35  00:00:00  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01
+Time per pass     :  00:00:27  00:00:00  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01
 Number of Ripups  :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
 max. Level        :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
 max. Total        :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
 
-Routed            :         0         1         1         1         1         1         1         1         1         1         1         1         1         1
+Routed            :         1         1         1         1         1         1         1         1         1         1         1         1         1         1
 Vias              :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
-Resolution        :    99.5 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
+Resolution        :   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
 Final             : 100.0% finished
