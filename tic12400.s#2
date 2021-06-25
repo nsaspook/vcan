@@ -13806,6 +13806,442 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="IQD-Frequency-Products" urn="urn:adsk.eagle:library:90">
+<description>&lt;b&gt;Crystals and Oscillators&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by IQD Frequency Products&lt;/author&gt;</description>
+<packages>
+<package name="2.6X2.1-4-PAD" urn="urn:adsk.eagle:footprint:3327/1" library_version="2">
+<description>&lt;b&gt;IQD Frequency Products SMD Package&lt;/b&gt;</description>
+<smd name="1" x="-0.8" y="-0.6" dx="0.9" dy="0.8" layer="1"/>
+<smd name="2" x="0.8" y="-0.6" dx="0.9" dy="0.8" layer="1"/>
+<smd name="3" x="0.8" y="0.6" dx="0.9" dy="0.8" layer="1" rot="R180"/>
+<smd name="4" x="-0.8" y="0.6" dx="0.9" dy="0.8" layer="1" rot="R180"/>
+<text x="-3.24" y="2.04" size="1.27" layer="25">&gt;NAME</text>
+<text x="-3.54" y="-3.41" size="1.27" layer="27">&gt;VALUE</text>
+<wire x1="-1.6" y1="1.4" x2="1.7" y2="1.4" width="0.127" layer="21"/>
+<wire x1="1.7" y1="1.4" x2="1.7" y2="-1.4" width="0.127" layer="21"/>
+<wire x1="1.7" y1="-1.4" x2="-1.6" y2="-1.4" width="0.127" layer="21"/>
+<wire x1="-1.6" y1="-1.4" x2="-1.6" y2="1.4" width="0.127" layer="21"/>
+<wire x1="-1.6" y1="1.4" x2="-2" y2="1.4" width="0.127" layer="21"/>
+<wire x1="-2" y1="1.4" x2="-2" y2="-1.4" width="0.127" layer="21"/>
+<wire x1="-2" y1="-1.4" x2="-1.6" y2="-1.4" width="0.127" layer="21"/>
+<circle x="-1.8" y="-1.7" radius="0.2" width="0" layer="21"/>
+</package>
+<package name="7.2X5.2-4-PAD" urn="urn:adsk.eagle:footprint:3328/1" library_version="2">
+<description>&lt;b&gt;IQD Frequency Products SMD Package&lt;/b&gt;</description>
+<smd name="1" x="-2.54" y="-2.1" dx="1.8" dy="1.6" layer="1"/>
+<smd name="2" x="2.54" y="-2.1" dx="1.8" dy="1.6" layer="1"/>
+<smd name="3" x="2.54" y="2.1" dx="1.8" dy="1.6" layer="1" rot="R180"/>
+<smd name="4" x="-2.54" y="2.1" dx="1.8" dy="1.6" layer="1" rot="R180"/>
+<text x="-3.8192" y="4.215" size="1.27" layer="25">&gt;NAME</text>
+<text x="-4.1192" y="-5.493" size="1.27" layer="27">&gt;VALUE</text>
+<wire x1="-5.5" y1="3.5" x2="4.63" y2="3.5" width="0.127" layer="21"/>
+<wire x1="4.63" y1="3.5" x2="4.73" y2="-3.5" width="0.127" layer="21"/>
+<wire x1="4.73" y1="-3.5" x2="-4.74" y2="-3.5" width="0.127" layer="21"/>
+<wire x1="-4.74" y1="-3.5" x2="-4.74" y2="3.46" width="0.127" layer="21"/>
+<wire x1="-5.5" y1="3.5" x2="-5.5" y2="-3.5" width="0.127" layer="21"/>
+<wire x1="-5.5" y1="-3.5" x2="-4.74" y2="-3.5" width="0.127" layer="21"/>
+<circle x="-5.1" y="-3.8" radius="0.2" width="0" layer="21"/>
+</package>
+<package name="3.4X2.7-4-PAD" urn="urn:adsk.eagle:footprint:3329/1" library_version="2">
+<description>&lt;b&gt;IQD Frequency Products SMD Package&lt;/b&gt;</description>
+<wire x1="-3.1" y1="1.9" x2="2.4" y2="1.9" width="0.2032" layer="21"/>
+<wire x1="2.4" y1="-1.9" x2="-3.1" y2="-1.9" width="0.2032" layer="21"/>
+<wire x1="2.4" y1="1.9" x2="2.4" y2="-1.91" width="0.2" layer="21"/>
+<wire x1="-2.42" y1="1.9" x2="-2.42" y2="-1.91" width="0.2" layer="21"/>
+<wire x1="-3.1" y1="1.9" x2="-3.1" y2="-1.9" width="0.2032" layer="21"/>
+<smd name="1" x="-1.1" y="-0.8" dx="1.4" dy="1.15" layer="1"/>
+<smd name="2" x="1.1" y="-0.8" dx="1.4" dy="1.15" layer="1"/>
+<smd name="3" x="1.1" y="0.8" dx="1.4" dy="1.15" layer="1" rot="R180"/>
+<smd name="4" x="-1.1" y="0.8" dx="1.4" dy="1.15" layer="1" rot="R180"/>
+<text x="-2.54" y="2.54" size="1.27" layer="25">&gt;NAME</text>
+<text x="-2.54" y="-3.81" size="1.27" layer="27">&gt;VALUE</text>
+<circle x="-2.7" y="-2.3" radius="0.2" width="0" layer="21"/>
+</package>
+<package name="5.0X3.2-4-PAD" urn="urn:adsk.eagle:footprint:3330/1" library_version="2">
+<description>&lt;b&gt;IQD Frequency Products SMD Package&lt;/b&gt;</description>
+<wire x1="-3.3" y1="-2.5" x2="2.368" y2="-2.5" width="0.2032" layer="21"/>
+<wire x1="-2.5" y1="2.476" x2="-2.5" y2="-2.476" width="0.2032" layer="21"/>
+<wire x1="2.368" y1="2.5" x2="-3.3" y2="2.5" width="0.2032" layer="21"/>
+<wire x1="2.4" y1="-2.476" x2="2.4" y2="2.476" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="2.5" x2="-3.3" y2="-2.5" width="0.2032" layer="21"/>
+<smd name="1" x="-1.25" y="-1.25" dx="1.4" dy="1.4" layer="1" rot="R90"/>
+<smd name="2" x="1.25" y="-1.25" dx="1.4" dy="1.4" layer="1" rot="R90"/>
+<smd name="3" x="1.25" y="1.25" dx="1.4" dy="1.4" layer="1" rot="R270"/>
+<smd name="4" x="-1.25" y="1.25" dx="1.4" dy="1.4" layer="1" rot="R270"/>
+<text x="3.04" y="4.39" size="1.27" layer="25" rot="R180">&gt;NAME</text>
+<text x="-3.686" y="-4.608" size="1.27" layer="27">&gt;VALUE</text>
+<circle x="-2.9" y="-2.9" radius="0.2" width="0" layer="21"/>
+</package>
+<package name="5.2X3.4-4-PAD" urn="urn:adsk.eagle:footprint:3331/1" library_version="2">
+<description>&lt;b&gt;IQD Frequency Products SMD Package&lt;/b&gt;</description>
+<wire x1="-4.2" y1="-2.3" x2="3.368" y2="-2.3" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="2.276" x2="-3.3" y2="-2.176" width="0.2032" layer="21"/>
+<wire x1="3.368" y1="2.3" x2="-4.2" y2="2.3" width="0.2032" layer="21"/>
+<wire x1="3.4" y1="-2.276" x2="3.4" y2="2.276" width="0.2032" layer="21"/>
+<wire x1="-4.2" y1="2.3" x2="-4.2" y2="-2.3" width="0.2032" layer="21"/>
+<smd name="1" x="-2.1" y="-1.1" dx="1.4" dy="1.6" layer="1" rot="R90"/>
+<smd name="2" x="2.1" y="-1.1" dx="1.4" dy="1.6" layer="1" rot="R90"/>
+<smd name="3" x="2.1" y="1.1" dx="1.4" dy="1.6" layer="1" rot="R270"/>
+<smd name="4" x="-2.1" y="1.1" dx="1.4" dy="1.6" layer="1" rot="R270"/>
+<text x="3.04" y="4.39" size="1.27" layer="25" rot="R180">&gt;NAME</text>
+<text x="-3.686" y="-4.608" size="1.27" layer="27">&gt;VALUE</text>
+<circle x="-3.7" y="-2.8" radius="0.2" width="0" layer="21"/>
+</package>
+<package name="2.0X1.6-4-PAD" urn="urn:adsk.eagle:footprint:3332/1" library_version="2">
+<description>&lt;b&gt;IQD Frequency Products SMD Package&lt;/b&gt;</description>
+<smd name="1" x="-0.637" y="-0.487" dx="0.875" dy="0.775" layer="1"/>
+<smd name="2" x="0.637" y="-0.487" dx="0.875" dy="0.775" layer="1"/>
+<smd name="3" x="0.637" y="0.487" dx="0.875" dy="0.775" layer="1" rot="R180"/>
+<smd name="4" x="-0.637" y="0.487" dx="0.875" dy="0.775" layer="1" rot="R180"/>
+<text x="-2.27" y="1.77" size="1.27" layer="25">&gt;NAME</text>
+<text x="-2.67" y="-3.34" size="1.27" layer="27">&gt;VALUE</text>
+<wire x1="-1.4" y1="1.3" x2="1.5" y2="1.3" width="0.127" layer="21"/>
+<wire x1="1.5" y1="1.3" x2="1.5" y2="-1.3" width="0.127" layer="21"/>
+<wire x1="1.5" y1="-1.3" x2="-1.4" y2="-1.3" width="0.127" layer="21"/>
+<wire x1="-1.4" y1="-1.3" x2="-1.4" y2="1.3" width="0.127" layer="21"/>
+<wire x1="-1.4" y1="1.3" x2="-1.9" y2="1.3" width="0.127" layer="21"/>
+<wire x1="-1.9" y1="1.3" x2="-1.9" y2="-1.3" width="0.127" layer="21"/>
+<wire x1="-1.9" y1="-1.3" x2="-1.4" y2="-1.3" width="0.127" layer="21"/>
+<circle x="-1.6" y="-1.6" radius="0.2" width="0" layer="21"/>
+</package>
+<package name="2.5X2-4-PAD" urn="urn:adsk.eagle:footprint:3333/1" library_version="2">
+<description>&lt;b&gt;IQD Frequency Products SMD Package&lt;/b&gt;</description>
+<smd name="1" x="-0.85" y="-0.65" dx="1.2" dy="1" layer="1"/>
+<smd name="2" x="0.85" y="-0.65" dx="1.2" dy="1" layer="1"/>
+<smd name="3" x="0.85" y="0.65" dx="1.2" dy="1" layer="1" rot="R180"/>
+<smd name="4" x="-0.85" y="0.65" dx="1.2" dy="1" layer="1" rot="R180"/>
+<text x="-3.27" y="2.07" size="1.27" layer="25">&gt;NAME</text>
+<text x="-3.47" y="-3.54" size="1.27" layer="27">&gt;VALUE</text>
+<wire x1="-2.1" y1="-1.5" x2="2" y2="-1.5" width="0.127" layer="21"/>
+<wire x1="2" y1="-1.5" x2="2" y2="1.5" width="0.127" layer="21"/>
+<wire x1="2" y1="1.5" x2="-2.1" y2="1.5" width="0.127" layer="21"/>
+<wire x1="-2.1" y1="1.5" x2="-2.1" y2="-1.5" width="0.127" layer="21"/>
+<wire x1="-2.1" y1="1.5" x2="-2.6" y2="1.5" width="0.127" layer="21"/>
+<wire x1="-2.6" y1="1.5" x2="-2.6" y2="-1.5" width="0.127" layer="21"/>
+<wire x1="-2.6" y1="-1.5" x2="-2.1" y2="-1.5" width="0.127" layer="21"/>
+<circle x="-2.3" y="-1.8" radius="0.2" width="0" layer="21"/>
+</package>
+</packages>
+<packages3d>
+<package3d name="2.6X2.1-4-PAD" urn="urn:adsk.eagle:package:3366/1" type="box" library_version="2">
+<description>IQD Frequency Products SMD Package</description>
+<packageinstances>
+<packageinstance name="2.6X2.1-4-PAD"/>
+</packageinstances>
+</package3d>
+<package3d name="7.2X5.2-4-PAD" urn="urn:adsk.eagle:package:3365/1" type="box" library_version="2">
+<description>IQD Frequency Products SMD Package</description>
+<packageinstances>
+<packageinstance name="7.2X5.2-4-PAD"/>
+</packageinstances>
+</package3d>
+<package3d name="3.4X2.7-4-PAD" urn="urn:adsk.eagle:package:3367/1" type="box" library_version="2">
+<description>IQD Frequency Products SMD Package</description>
+<packageinstances>
+<packageinstance name="3.4X2.7-4-PAD"/>
+</packageinstances>
+</package3d>
+<package3d name="5.0X3.2-4-PAD" urn="urn:adsk.eagle:package:3368/1" type="box" library_version="2">
+<description>IQD Frequency Products SMD Package</description>
+<packageinstances>
+<packageinstance name="5.0X3.2-4-PAD"/>
+</packageinstances>
+</package3d>
+<package3d name="5.2X3.4-4-PAD" urn="urn:adsk.eagle:package:3369/1" type="box" library_version="2">
+<description>IQD Frequency Products SMD Package</description>
+<packageinstances>
+<packageinstance name="5.2X3.4-4-PAD"/>
+</packageinstances>
+</package3d>
+<package3d name="2.0X1.6-4-PAD" urn="urn:adsk.eagle:package:3370/1" type="box" library_version="2">
+<description>IQD Frequency Products SMD Package</description>
+<packageinstances>
+<packageinstance name="2.0X1.6-4-PAD"/>
+</packageinstances>
+</package3d>
+<package3d name="2.5X2-4-PAD" urn="urn:adsk.eagle:package:3371/1" type="box" library_version="2">
+<description>IQD Frequency Products SMD Package</description>
+<packageinstances>
+<packageinstance name="2.5X2-4-PAD"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="QG2" urn="urn:adsk.eagle:symbol:3326/1" library_version="2">
+<wire x1="-7.62" y1="7.62" x2="-7.62" y2="-7.62" width="0.4064" layer="94"/>
+<wire x1="7.62" y1="-7.62" x2="-7.62" y2="-7.62" width="0.4064" layer="94"/>
+<wire x1="7.62" y1="-7.62" x2="7.62" y2="0" width="0.4064" layer="94"/>
+<wire x1="7.62" y1="0" x2="7.62" y2="5.08" width="0.4064" layer="94"/>
+<wire x1="7.62" y1="5.08" x2="7.62" y2="7.62" width="0.4064" layer="94"/>
+<wire x1="-7.62" y1="7.62" x2="7.62" y2="7.62" width="0.4064" layer="94"/>
+<wire x1="-1.27" y1="5.08" x2="2.54" y2="2.54" width="0.4064" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="6.35" y2="0" width="0.4064" layer="94"/>
+<wire x1="6.35" y1="0" x2="-1.27" y2="-5.08" width="0.4064" layer="94"/>
+<wire x1="-1.27" y1="-5.08" x2="-1.27" y2="-3.175" width="0.4064" layer="94"/>
+<wire x1="-1.27" y1="-3.175" x2="-1.27" y2="3.175" width="0.4064" layer="94"/>
+<wire x1="-1.27" y1="3.175" x2="-1.27" y2="5.08" width="0.4064" layer="94"/>
+<wire x1="-3.81" y1="3.175" x2="-1.27" y2="3.175" width="0.1524" layer="94"/>
+<wire x1="-3.81" y1="-3.175" x2="-1.27" y2="-3.175" width="0.1524" layer="94"/>
+<wire x1="6.35" y1="0" x2="7.62" y2="0" width="0.1524" layer="94"/>
+<wire x1="7.62" y1="5.08" x2="2.54" y2="5.08" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="5.08" x2="2.54" y2="2.54" width="0.1524" layer="94"/>
+<wire x1="-4.826" y1="-0.381" x2="-4.826" y2="0.381" width="0.254" layer="94"/>
+<wire x1="-4.826" y1="0.381" x2="-2.794" y2="0.381" width="0.254" layer="94"/>
+<wire x1="-2.794" y1="0.381" x2="-2.794" y2="-0.381" width="0.254" layer="94"/>
+<wire x1="-4.826" y1="-0.381" x2="-2.794" y2="-0.381" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-1.016" x2="-3.81" y2="-1.016" width="0.254" layer="94"/>
+<wire x1="-3.81" y1="-1.016" x2="-2.54" y2="-1.016" width="0.254" layer="94"/>
+<wire x1="-3.81" y1="1.016" x2="-3.81" y2="3.175" width="0.1524" layer="94"/>
+<wire x1="-3.81" y1="-3.175" x2="-3.81" y2="-1.016" width="0.1524" layer="94"/>
+<wire x1="-5.08" y1="1.016" x2="-2.54" y2="1.016" width="0.254" layer="94"/>
+<text x="-7.62" y="8.255" size="1.778" layer="95">&gt;NAME</text>
+<text x="-7.62" y="-10.16" size="1.778" layer="96">&gt;VALUE</text>
+<text x="-6.985" y="4.318" size="1.524" layer="95">VDD</text>
+<text x="-6.985" y="-5.842" size="1.524" layer="95">VSS</text>
+<text x="2.54" y="-5.842" size="1.524" layer="95">OUT</text>
+<text x="2.54" y="5.588" size="1.524" layer="95">CON</text>
+<pin name="VSS" x="-12.7" y="-5.08" visible="pad" length="middle" direction="pwr"/>
+<pin name="VDD" x="-12.7" y="5.08" visible="pad" length="middle" direction="pwr"/>
+<pin name="OUT" x="12.7" y="0" visible="pad" length="middle" direction="out" rot="R180"/>
+<pin name="CON" x="12.7" y="5.08" visible="pad" length="middle" direction="in" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="OSC-OE" urn="urn:adsk.eagle:component:3380/2" prefix="OS" library_version="2">
+<description>&lt;b&gt;OSCILLATOR WITH OE&lt;/b&gt;</description>
+<gates>
+<gate name="A" symbol="QG2" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-CFPS-107" package="2.6X2.1-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3366/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-CFPS-108" package="2.6X2.1-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3366/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-CFPS-109" package="2.6X2.1-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3366/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-CFPS-32" package="7.2X5.2-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3365/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-CFPS-39" package="3.4X2.7-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3367/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-CFPS-69" package="5.0X3.2-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3368/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-CFPS-72" package="7.2X5.2-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3365/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-CFPS-73" package="7.2X5.2-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3365/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-CFPS-9" package="5.2X3.4-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3369/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-IQXO-540" package="2.0X1.6-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3370/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-IQXO-541" package="2.0X1.6-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3370/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-IQXO-542" package="2.0X1.6-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3370/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-IQXO-793" package="2.5X2-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3371/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-IQXO-794" package="2.5X2-4-PAD">
+<connects>
+<connect gate="A" pin="CON" pad="1"/>
+<connect gate="A" pin="OUT" pad="3"/>
+<connect gate="A" pin="VDD" pad="4"/>
+<connect gate="A" pin="VSS" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:3371/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -13921,7 +14357,11 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="TP2" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
 <part name="TP3" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
 <part name="GND35" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="VDD13" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
+<part name="OS1" library="IQD-Frequency-Products" library_urn="urn:adsk.eagle:library:90" deviceset="OSC-OE" device="-CFPS-73" package3d_urn="urn:adsk.eagle:package:3365/1"/>
+<part name="GND36" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="VDD14" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
+<part name="VDD15" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
+<part name="TP4" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
 </parts>
 <sheets>
 <sheet>
@@ -14436,8 +14876,22 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <instance part="GND35" gate="1" x="76.2" y="167.64" smashed="yes">
 <attribute name="VALUE" x="73.66" y="165.1" size="1.778" layer="96"/>
 </instance>
-<instance part="VDD13" gate="G$1" x="30.48" y="175.26" smashed="yes" rot="R180">
-<attribute name="VALUE" x="33.02" y="177.8" size="1.778" layer="96" rot="R270"/>
+<instance part="OS1" gate="A" x="83.82" y="190.5" smashed="yes">
+<attribute name="NAME" x="76.2" y="198.755" size="1.778" layer="95"/>
+<attribute name="VALUE" x="76.2" y="180.34" size="1.778" layer="96"/>
+</instance>
+<instance part="GND36" gate="1" x="71.12" y="182.88" smashed="yes">
+<attribute name="VALUE" x="68.58" y="180.34" size="1.778" layer="96"/>
+</instance>
+<instance part="VDD14" gate="G$1" x="71.12" y="193.04" smashed="yes" rot="R180">
+<attribute name="VALUE" x="73.66" y="195.58" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="VDD15" gate="G$1" x="99.06" y="195.58" smashed="yes" rot="R270">
+<attribute name="VALUE" x="96.52" y="198.12" size="1.778" layer="96"/>
+</instance>
+<instance part="TP4" gate="G$1" x="104.14" y="190.5" smashed="yes" rot="R90">
+<attribute name="NAME" x="110.49" y="189.484" size="1.778" layer="95" rot="R180"/>
+<attribute name="TP_SIGNAL_NAME" x="106.68" y="191.77" size="1.778" layer="97" rot="R90"/>
 </instance>
 </instances>
 <busses>
@@ -14821,6 +15275,11 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <pinref part="TP3" gate="G$1" pin="TP"/>
 <pinref part="GND35" gate="1" pin="GND"/>
 <junction x="76.2" y="170.18"/>
+</segment>
+<segment>
+<pinref part="OS1" gate="A" pin="VSS"/>
+<pinref part="GND36" gate="1" pin="GND"/>
+<junction x="71.12" y="185.42"/>
 </segment>
 </net>
 <net name="N$2" class="0">
@@ -15621,14 +16080,14 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <junction x="10.16" y="58.42"/>
 </segment>
 <segment>
-<pinref part="U3" gate="G$1" pin="VUSB"/>
-<wire x1="22.86" y1="177.8" x2="30.48" y2="177.8" width="0.1524" layer="91"/>
-<pinref part="C15" gate="G$1" pin="1"/>
-<junction x="22.86" y="177.8"/>
-<junction x="38.1" y="177.8"/>
-<pinref part="VDD13" gate="G$1" pin="VDD"/>
-<wire x1="30.48" y1="177.8" x2="38.1" y2="177.8" width="0.1524" layer="91"/>
-<junction x="30.48" y="177.8"/>
+<pinref part="OS1" gate="A" pin="VDD"/>
+<pinref part="VDD14" gate="G$1" pin="VDD"/>
+<junction x="71.12" y="195.58"/>
+</segment>
+<segment>
+<pinref part="OS1" gate="A" pin="CON"/>
+<pinref part="VDD15" gate="G$1" pin="VDD"/>
+<junction x="96.52" y="195.58"/>
 </segment>
 </net>
 <net name="N$55" class="0">
@@ -15679,6 +16138,15 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <junction x="27.94" y="165.1"/>
 <junction x="38.1" y="160.02"/>
 <junction x="22.86" y="167.64"/>
+<label x="25.4" y="170.18" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="101.6" y1="190.5" x2="96.52" y2="190.5" width="0.1524" layer="91"/>
+<pinref part="OS1" gate="A" pin="OUT"/>
+<label x="99.06" y="187.96" size="1.778" layer="95"/>
+<junction x="96.52" y="190.5"/>
+<pinref part="TP4" gate="G$1" pin="TP"/>
+<junction x="101.6" y="190.5"/>
 </segment>
 </net>
 <net name="N$58" class="0">
@@ -15780,6 +16248,15 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <junction x="-7.62" y="165.1"/>
 </segment>
 </net>
+<net name="N$52" class="1">
+<segment>
+<pinref part="U3" gate="G$1" pin="VUSB"/>
+<pinref part="C15" gate="G$1" pin="1"/>
+<junction x="22.86" y="177.8"/>
+<junction x="38.1" y="177.8"/>
+<wire x1="22.86" y1="177.8" x2="38.1" y2="177.8" width="0.1524" layer="91"/>
+</segment>
+</net>
 </nets>
 </sheet>
 </sheets>
@@ -15792,130 +16269,131 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <approved hash="104,1,187.96,170.18,U2,VPWR,N$30,,,"/>
 <approved hash="104,1,187.96,127,U2,EP,GND,,,"/>
 <approved hash="104,1,22.86,134.62,U3,VSS,GND,,,"/>
-<approved hash="104,1,22.86,177.8,U3,VUSB,VDD,,,"/>
+<approved hash="104,1,22.86,177.8,U3,VUSB,N$52,,,"/>
+<approved hash="104,1,71.12,185.42,OS1,VSS,GND,,,"/>
 <approved hash="206,1,198.12,71.12,MISO_JP4P1,,,,,"/>
 <approved hash="206,1,187.96,152.4,MISO_JP4P1,,,,,"/>
 <approved hash="113,1,114.196,95.146,FRAME1,,,,,"/>
+<approved hash="115,1,158.75,66.04,N$24,,,,,"/>
+<approved hash="115,1,113.03,144.78,N$24,,,,,"/>
+<approved hash="115,1,-10.16,167.64,SCK_SIG,,,,,"/>
+<approved hash="115,1,60.96,114.3,N$60,,,,,"/>
+<approved hash="115,1,-12.7,142.24,N$60,,,,,"/>
+<approved hash="115,1,158.75,58.42,N$26,,,,,"/>
+<approved hash="115,1,113.03,139.7,N$26,,,,,"/>
+<approved hash="115,1,158.75,68.58,N$23,,,,,"/>
+<approved hash="115,1,113.03,147.32,N$23,,,,,"/>
+<approved hash="115,1,158.75,60.96,N$25,,,,,"/>
+<approved hash="115,1,113.03,142.24,N$25,,,,,"/>
+<approved hash="115,1,48.26,111.76,N$33,,,,,"/>
+<approved hash="115,1,63.5,31.75,N$33,,,,,"/>
+<approved hash="115,1,55.88,114.3,CS_JP3P11,,,,,"/>
+<approved hash="115,1,27.94,149.86,CS_JP3P11,,,,,"/>
+<approved hash="115,1,203.2,78.74,CS_JP3P11,,,,,"/>
+<approved hash="115,1,53.34,180.34,N$55,,,,,"/>
+<approved hash="115,1,-10.16,157.48,N$55,,,,,"/>
+<approved hash="115,1,50.8,113.03,N$65,,,,,"/>
+<approved hash="115,1,26.67,144.78,N$65,,,,,"/>
+<approved hash="115,1,149.86,48.26,N$14,,,,,"/>
+<approved hash="115,1,129.54,129.54,N$14,,,,,"/>
+<approved hash="115,1,158.75,81.28,N$18,,,,,"/>
+<approved hash="115,1,113.03,172.72,N$18,,,,,"/>
+<approved hash="115,1,158.75,78.74,N$19,,,,,"/>
+<approved hash="115,1,113.03,170.18,N$19,,,,,"/>
+<approved hash="115,1,158.75,83.82,N$17,,,,,"/>
+<approved hash="115,1,113.03,175.26,N$17,,,,,"/>
+<approved hash="115,1,147.32,53.34,N$16,,,,,"/>
+<approved hash="115,1,132.08,134.62,N$16,,,,,"/>
+<approved hash="115,1,153.67,40.64,N$11,,,,,"/>
+<approved hash="115,1,125.73,106.68,N$11,,,,,"/>
+<approved hash="115,1,66.04,113.03,N$62,,,,,"/>
+<approved hash="115,1,-11.43,147.32,N$62,,,,,"/>
 <approved hash="115,1,63.5,113.03,N$63,,,,,"/>
 <approved hash="115,1,-11.43,144.78,N$63,,,,,"/>
-<approved hash="115,1,53.34,113.03,EXT2_JP3P8,,,,,"/>
-<approved hash="115,1,26.67,147.32,EXT2_JP3P8,,,,,"/>
-<approved hash="115,1,201.93,53.34,EXT2_JP3P8,,,,,"/>
+<approved hash="115,1,158.75,71.12,N$22,,,,,"/>
+<approved hash="115,1,113.03,162.56,N$22,,,,,"/>
+<approved hash="115,1,140.97,170.18,N$39,,,,,"/>
+<approved hash="115,1,227.33,162.56,N$39,,,,,"/>
+<approved hash="115,1,158.75,142.24,N$45,,,,,"/>
+<approved hash="115,1,227.33,147.32,N$45,,,,,"/>
+<approved hash="115,1,148.59,50.8,N$15,,,,,"/>
+<approved hash="115,1,130.81,132.08,N$15,,,,,"/>
+<approved hash="115,1,208.28,45.72,N$8,,,,,"/>
+<approved hash="115,1,78.74,88.9,N$8,,,,,"/>
+<approved hash="115,1,151.13,45.72,N$13,,,,,"/>
+<approved hash="115,1,128.27,111.76,N$13,,,,,"/>
+<approved hash="115,1,158.75,134.62,N$48,,,,,"/>
+<approved hash="115,1,227.33,139.7,N$48,,,,,"/>
+<approved hash="115,1,58.42,113.03,N$64,,,,,"/>
+<approved hash="115,1,-11.43,139.7,N$64,,,,,"/>
+<approved hash="115,1,158.75,129.54,N$50,,,,,"/>
+<approved hash="115,1,227.33,134.62,N$50,,,,,"/>
+<approved hash="115,1,215.9,40.64,N$10,,,,,"/>
+<approved hash="115,1,86.36,96.52,N$10,,,,,"/>
+<approved hash="115,1,68.58,113.03,N$61,,,,,"/>
+<approved hash="115,1,-11.43,149.86,N$61,,,,,"/>
+<approved hash="115,1,212.09,27.94,GND,,,,,"/>
+<approved hash="115,1,209.55,30.48,GND,,,,,"/>
+<approved hash="115,1,158.75,73.66,N$21,,,,,"/>
+<approved hash="115,1,113.03,165.1,N$21,,,,,"/>
+<approved hash="115,1,156.21,33.02,N$3,,,,,"/>
+<approved hash="115,1,180.34,162.56,N$6,,,,,"/>
+<approved hash="115,1,205.74,60.96,N$6,,,,,"/>
+<approved hash="115,1,69.85,81.28,N$6,,,,,"/>
+<approved hash="115,1,158.75,147.32,N$43,,,,,"/>
+<approved hash="115,1,227.33,152.4,N$43,,,,,"/>
+<approved hash="115,1,140.97,175.26,N$37,,,,,"/>
+<approved hash="115,1,227.33,167.64,N$37,,,,,"/>
+<approved hash="115,1,158.75,55.88,N$27,,,,,"/>
+<approved hash="115,1,111.76,137.16,N$27,,,,,"/>
+<approved hash="115,1,50.8,180.34,N$56,,,,,"/>
+<approved hash="115,1,-10.16,154.94,N$56,,,,,"/>
+<approved hash="115,1,140.97,172.72,N$38,,,,,"/>
+<approved hash="115,1,227.33,165.1,N$38,,,,,"/>
+<approved hash="115,1,154.94,38.1,N$7,,,,,"/>
+<approved hash="115,1,124.46,104.14,N$7,,,,,"/>
+<approved hash="115,1,140.97,180.34,N$35,,,,,"/>
+<approved hash="115,1,227.33,172.72,N$35,,,,,"/>
+<approved hash="115,1,158.75,132.08,N$49,,,,,"/>
+<approved hash="115,1,227.33,137.16,N$49,,,,,"/>
+<approved hash="115,1,212.09,43.18,N$9,,,,,"/>
+<approved hash="115,1,82.55,93.98,N$9,,,,,"/>
+<approved hash="115,1,140.97,167.64,N$40,,,,,"/>
+<approved hash="115,1,227.33,160.02,N$40,,,,,"/>
+<approved hash="115,1,-10.16,162.56,MOSI_SIG,,,,,"/>
 <approved hash="115,1,185.42,165.1,N$34,,,,,"/>
 <approved hash="115,1,48.26,31.75,N$34,,,,,"/>
 <approved hash="115,1,140.97,165.1,N$41,,,,,"/>
 <approved hash="115,1,227.33,157.48,N$41,,,,,"/>
-<approved hash="115,1,158.75,129.54,N$50,,,,,"/>
-<approved hash="115,1,227.33,134.62,N$50,,,,,"/>
-<approved hash="115,1,140.97,172.72,N$38,,,,,"/>
-<approved hash="115,1,227.33,165.1,N$38,,,,,"/>
-<approved hash="115,1,68.58,113.03,N$61,,,,,"/>
-<approved hash="115,1,-11.43,149.86,N$61,,,,,"/>
-<approved hash="115,1,158.75,78.74,N$19,,,,,"/>
-<approved hash="115,1,113.03,170.18,N$19,,,,,"/>
-<approved hash="115,1,163.83,139.7,N$46,,,,,"/>
-<approved hash="115,1,227.33,144.78,N$46,,,,,"/>
+<approved hash="115,1,156.21,27.94,N$28,,,,,"/>
 <approved hash="115,1,140.97,177.8,N$36,,,,,"/>
 <approved hash="115,1,227.33,170.18,N$36,,,,,"/>
-<approved hash="115,1,140.97,175.26,N$37,,,,,"/>
-<approved hash="115,1,227.33,167.64,N$37,,,,,"/>
-<approved hash="115,1,158.75,134.62,N$48,,,,,"/>
-<approved hash="115,1,227.33,139.7,N$48,,,,,"/>
-<approved hash="115,1,153.67,40.64,N$11,,,,,"/>
-<approved hash="115,1,125.73,106.68,N$11,,,,,"/>
-<approved hash="115,1,140.97,170.18,N$39,,,,,"/>
-<approved hash="115,1,227.33,162.56,N$39,,,,,"/>
 <approved hash="115,1,157.48,127,N$30,,,,,"/>
 <approved hash="115,1,139.7,160.02,N$30,,,,,"/>
 <approved hash="115,1,177.8,170.18,N$30,,,,,"/>
 <approved hash="115,1,50.8,142.24,N$30,,,,,"/>
-<approved hash="115,1,60.96,114.3,N$60,,,,,"/>
-<approved hash="115,1,-12.7,142.24,N$60,,,,,"/>
-<approved hash="115,1,-10.16,167.64,SCK_SIG,,,,,"/>
-<approved hash="115,1,158.75,83.82,N$17,,,,,"/>
-<approved hash="115,1,113.03,175.26,N$17,,,,,"/>
-<approved hash="115,1,66.04,113.03,N$62,,,,,"/>
-<approved hash="115,1,-11.43,147.32,N$62,,,,,"/>
-<approved hash="115,1,48.26,111.76,N$33,,,,,"/>
-<approved hash="115,1,63.5,31.75,N$33,,,,,"/>
-<approved hash="115,1,140.97,180.34,N$35,,,,,"/>
-<approved hash="115,1,227.33,172.72,N$35,,,,,"/>
-<approved hash="115,1,158.75,68.58,N$23,,,,,"/>
-<approved hash="115,1,113.03,147.32,N$23,,,,,"/>
-<approved hash="115,1,156.21,30.48,N$4,,,,,"/>
-<approved hash="115,1,140.97,167.64,N$40,,,,,"/>
-<approved hash="115,1,227.33,160.02,N$40,,,,,"/>
-<approved hash="115,1,156.21,27.94,N$28,,,,,"/>
-<approved hash="115,1,140.97,162.56,N$42,,,,,"/>
-<approved hash="115,1,227.33,154.94,N$42,,,,,"/>
-<approved hash="115,1,58.42,113.03,N$64,,,,,"/>
-<approved hash="115,1,-11.43,139.7,N$64,,,,,"/>
-<approved hash="115,1,212.09,43.18,N$9,,,,,"/>
-<approved hash="115,1,82.55,93.98,N$9,,,,,"/>
-<approved hash="115,1,208.28,45.72,N$8,,,,,"/>
-<approved hash="115,1,78.74,88.9,N$8,,,,,"/>
-<approved hash="115,1,147.32,88.9,N$1,,,,,"/>
-<approved hash="115,1,101.6,180.34,N$1,,,,,"/>
-<approved hash="115,1,153.67,86.36,N$2,,,,,"/>
-<approved hash="115,1,110.49,177.8,N$2,,,,,"/>
-<approved hash="115,1,158.75,58.42,N$26,,,,,"/>
-<approved hash="115,1,113.03,139.7,N$26,,,,,"/>
-<approved hash="115,1,148.59,50.8,N$15,,,,,"/>
-<approved hash="115,1,130.81,132.08,N$15,,,,,"/>
-<approved hash="115,1,158.75,76.2,N$20,,,,,"/>
-<approved hash="115,1,113.03,167.64,N$20,,,,,"/>
-<approved hash="115,1,50.8,113.03,N$65,,,,,"/>
-<approved hash="115,1,26.67,144.78,N$65,,,,,"/>
-<approved hash="115,1,158.75,55.88,N$27,,,,,"/>
-<approved hash="115,1,111.76,137.16,N$27,,,,,"/>
-<approved hash="115,1,156.21,35.56,N$5,,,,,"/>
-<approved hash="115,1,123.19,101.6,N$5,,,,,"/>
-<approved hash="115,1,158.75,81.28,N$18,,,,,"/>
-<approved hash="115,1,113.03,172.72,N$18,,,,,"/>
-<approved hash="115,1,-10.16,162.56,MOSI_SIG,,,,,"/>
-<approved hash="115,1,158.75,60.96,N$25,,,,,"/>
-<approved hash="115,1,113.03,142.24,N$25,,,,,"/>
-<approved hash="115,1,158.75,66.04,N$24,,,,,"/>
-<approved hash="115,1,113.03,144.78,N$24,,,,,"/>
-<approved hash="115,1,149.86,48.26,N$14,,,,,"/>
-<approved hash="115,1,129.54,129.54,N$14,,,,,"/>
-<approved hash="115,1,158.75,132.08,N$49,,,,,"/>
-<approved hash="115,1,227.33,137.16,N$49,,,,,"/>
-<approved hash="115,1,53.34,180.34,N$55,,,,,"/>
-<approved hash="115,1,-10.16,157.48,N$55,,,,,"/>
-<approved hash="115,1,158.75,144.78,N$44,,,,,"/>
-<approved hash="115,1,227.33,149.86,N$44,,,,,"/>
-<approved hash="115,1,158.75,142.24,N$45,,,,,"/>
-<approved hash="115,1,227.33,147.32,N$45,,,,,"/>
-<approved hash="115,1,154.94,38.1,N$7,,,,,"/>
-<approved hash="115,1,124.46,104.14,N$7,,,,,"/>
-<approved hash="115,1,180.34,162.56,N$6,,,,,"/>
-<approved hash="115,1,205.74,60.96,N$6,,,,,"/>
-<approved hash="115,1,69.85,81.28,N$6,,,,,"/>
 <approved hash="115,1,152.4,43.18,N$12,,,,,"/>
 <approved hash="115,1,127,109.22,N$12,,,,,"/>
-<approved hash="115,1,212.09,27.94,GND,,,,,"/>
-<approved hash="115,1,209.55,30.48,GND,,,,,"/>
-<approved hash="115,1,215.9,40.64,N$10,,,,,"/>
-<approved hash="115,1,86.36,96.52,N$10,,,,,"/>
-<approved hash="115,1,158.75,73.66,N$21,,,,,"/>
-<approved hash="115,1,113.03,165.1,N$21,,,,,"/>
-<approved hash="115,1,151.13,45.72,N$13,,,,,"/>
-<approved hash="115,1,128.27,111.76,N$13,,,,,"/>
-<approved hash="115,1,156.21,33.02,N$3,,,,,"/>
-<approved hash="115,1,50.8,180.34,N$56,,,,,"/>
-<approved hash="115,1,-10.16,154.94,N$56,,,,,"/>
-<approved hash="115,1,55.88,114.3,CS_JP3P11,,,,,"/>
-<approved hash="115,1,27.94,149.86,CS_JP3P11,,,,,"/>
-<approved hash="115,1,203.2,78.74,CS_JP3P11,,,,,"/>
-<approved hash="115,1,158.75,147.32,N$43,,,,,"/>
-<approved hash="115,1,227.33,152.4,N$43,,,,,"/>
+<approved hash="115,1,53.34,113.03,EXT2_JP3P8,,,,,"/>
+<approved hash="115,1,26.67,147.32,EXT2_JP3P8,,,,,"/>
+<approved hash="115,1,201.93,53.34,EXT2_JP3P8,,,,,"/>
+<approved hash="115,1,153.67,86.36,N$2,,,,,"/>
+<approved hash="115,1,110.49,177.8,N$2,,,,,"/>
+<approved hash="115,1,163.83,139.7,N$46,,,,,"/>
+<approved hash="115,1,227.33,144.78,N$46,,,,,"/>
+<approved hash="115,1,156.21,35.56,N$5,,,,,"/>
+<approved hash="115,1,123.19,101.6,N$5,,,,,"/>
 <approved hash="115,1,158.75,137.16,N$47,,,,,"/>
 <approved hash="115,1,227.33,142.24,N$47,,,,,"/>
-<approved hash="115,1,158.75,71.12,N$22,,,,,"/>
-<approved hash="115,1,113.03,162.56,N$22,,,,,"/>
-<approved hash="115,1,147.32,53.34,N$16,,,,,"/>
-<approved hash="115,1,132.08,134.62,N$16,,,,,"/>
+<approved hash="115,1,140.97,162.56,N$42,,,,,"/>
+<approved hash="115,1,227.33,154.94,N$42,,,,,"/>
+<approved hash="115,1,158.75,144.78,N$44,,,,,"/>
+<approved hash="115,1,227.33,149.86,N$44,,,,,"/>
+<approved hash="115,1,156.21,30.48,N$4,,,,,"/>
+<approved hash="115,1,158.75,76.2,N$20,,,,,"/>
+<approved hash="115,1,113.03,167.64,N$20,,,,,"/>
+<approved hash="115,1,147.32,88.9,N$1,,,,,"/>
+<approved hash="115,1,101.6,180.34,N$1,,,,,"/>
 </errors>
 </schematic>
 </drawing>
