@@ -1,19 +1,19 @@
 EAGLE AutoRouter Statistics:
 
-Job           : /root/vcan/tic12400.brd
+Job           : /fred/vcan/tic12400.brd
 
-Start at      : 08:08:20 (6/25/21)
-End at        : 08:09:19 (6/25/21)
-Elapsed time  : 00:00:57
+Start at      : 11:28:09 (6/30/21)
+End at        : 11:28:53 (6/30/21)
+Elapsed time  : 00:00:42
 
-Signals       :    76   RoutingGrid: 3 mil  Layers: 2
-Connections   :   205   predefined:  204 ( 106 Vias )
+Signals       :    77   RoutingGrid: 3 mil  Layers: 2
+Connections   :   206   predefined:  205 ( 104 Vias )
 
 Router memory :   5586240
 
 Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4 Optimize5 Optimize6 Optimize7 Optimize8 Optimize9Optimize10Optimize11Optimize12
 
-Time per pass     :  00:00:38  00:00:00  00:00:01  00:00:02  00:00:01  00:00:02  00:00:02  00:00:01  00:00:02  00:00:01  00:00:02  00:00:02  00:00:01  00:00:02
+Time per pass     :  00:00:31  00:00:00  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:01  00:00:00  00:00:01  00:00:01  00:00:01
 Number of Ripups  :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
 max. Level        :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
 max. Total        :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
