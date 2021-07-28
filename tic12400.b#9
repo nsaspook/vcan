@@ -2062,6 +2062,36 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 </package3d>
 </packages3d>
 </library>
+<library name="IQD-Frequency-Products" urn="urn:adsk.eagle:library:90">
+<description>&lt;b&gt;Crystals and Oscillators&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by IQD Frequency Products&lt;/author&gt;</description>
+<packages>
+<package name="7.2X5.2-4-PAD" urn="urn:adsk.eagle:footprint:3328/1" library_version="2">
+<description>&lt;b&gt;IQD Frequency Products SMD Package&lt;/b&gt;</description>
+<smd name="1" x="-2.54" y="-2.1" dx="1.8" dy="1.6" layer="1"/>
+<smd name="2" x="2.54" y="-2.1" dx="1.8" dy="1.6" layer="1"/>
+<smd name="3" x="2.54" y="2.1" dx="1.8" dy="1.6" layer="1" rot="R180"/>
+<smd name="4" x="-2.54" y="2.1" dx="1.8" dy="1.6" layer="1" rot="R180"/>
+<text x="-3.8192" y="4.215" size="1.27" layer="25">&gt;NAME</text>
+<text x="-4.1192" y="-5.493" size="1.27" layer="27">&gt;VALUE</text>
+<wire x1="-5.5" y1="3.5" x2="4.63" y2="3.5" width="0.127" layer="21"/>
+<wire x1="4.63" y1="3.5" x2="4.73" y2="-3.5" width="0.127" layer="21"/>
+<wire x1="4.73" y1="-3.5" x2="-4.74" y2="-3.5" width="0.127" layer="21"/>
+<wire x1="-4.74" y1="-3.5" x2="-4.74" y2="3.46" width="0.127" layer="21"/>
+<wire x1="-5.5" y1="3.5" x2="-5.5" y2="-3.5" width="0.127" layer="21"/>
+<wire x1="-5.5" y1="-3.5" x2="-4.74" y2="-3.5" width="0.127" layer="21"/>
+<circle x="-5.1" y="-3.8" radius="0.2" width="0" layer="21"/>
+</package>
+</packages>
+<packages3d>
+<package3d name="7.2X5.2-4-PAD" urn="urn:adsk.eagle:package:3365/1" type="box" library_version="2">
+<description>IQD Frequency Products SMD Package</description>
+<packageinstances>
+<packageinstance name="7.2X5.2-4-PAD"/>
+</packageinstances>
+</package3d>
+</packages3d>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -2402,18 +2432,18 @@ design rules under a new name.</description>
 <attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/TIC12400DCPR/?ref=eda" x="48.26" y="24.13" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="44.43353125" y="19.0444" size="1.27215" layer="27" align="top-left"/>
 </element>
-<element name="D1" library="diode" library_urn="urn:adsk.eagle:library:210" package="SMB" package3d_urn="urn:adsk.eagle:package:43404/2" value="ES2D" x="72.39" y="29.21" smashed="yes">
-<attribute name="NAME" x="70.231" y="31.369" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="3" x="72.39" y="29.21" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="70.231" y="25.781" size="1.27" layer="27"/>
+<element name="D1" library="diode" library_urn="urn:adsk.eagle:library:210" package="SMB" package3d_urn="urn:adsk.eagle:package:43404/2" value="ES2D" x="72.39" y="34.29" smashed="yes">
+<attribute name="NAME" x="70.231" y="36.449" size="1.27" layer="25"/>
+<attribute name="POPULARITY" value="3" x="72.39" y="34.29" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="70.231" y="30.861" size="1.27" layer="27"/>
 </element>
 <element name="U2" library="MCZ33996EK" package="SOP65P1030X265-33N" value="MCZ33996EK" x="21.59" y="22.86" smashed="yes">
 <attribute name="AVAILABILITY" value="In Stock" x="21.59" y="22.86" size="1.778" layer="27" display="off"/>
 <attribute name="DESCRIPTION" value=" Power Switch/Driver 1:16 N-Channel 900mA 32-SOIC-EP " x="21.59" y="22.86" size="1.778" layer="27" display="off"/>
 <attribute name="MF" value="NXP USA" x="21.59" y="22.86" size="1.778" layer="27" display="off"/>
 <attribute name="MP" value="MCZ33996EK" x="21.59" y="22.86" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="18.189590625" y="29.16075" size="1.27015" layer="25"/>
 <attribute name="NAME" x="18.185309375" y="29.168690625" size="1.27175" layer="25"/>
+<attribute name="NAME" x="18.189590625" y="29.16075" size="1.27015" layer="25"/>
 <attribute name="PACKAGE" value="SOIC-32 NXP Semiconductors" x="21.59" y="22.86" size="1.778" layer="27" display="off"/>
 <attribute name="PRICE" value="None" x="21.59" y="22.86" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="18.18376875" y="15.446440625" size="1.27233125" layer="27"/>
@@ -2602,6 +2632,11 @@ design rules under a new name.</description>
 <attribute name="TP_SIGNAL_NAME" value="" x="83.82" y="31.75" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="83.185" y="30.988" size="0.0254" layer="27"/>
 </element>
+<element name="OS1" library="IQD-Frequency-Products" library_urn="urn:adsk.eagle:library:90" package="7.2X5.2-4-PAD" package3d_urn="urn:adsk.eagle:package:3365/1" value="OSC-OE-CFPS-73" x="72.39" y="27.94" smashed="yes" rot="R180">
+<attribute name="NAME" x="76.2092" y="23.725" size="1.27" layer="25" rot="R180"/>
+<attribute name="POPULARITY" value="0" x="72.39" y="27.94" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="76.5092" y="33.433" size="1.27" layer="27" rot="R180"/>
+</element>
 </elements>
 <signals>
 <signal name="CS_JP3P11">
@@ -2740,10 +2775,6 @@ design rules under a new name.</description>
 <wire x1="62.3316" y1="31.5468" x2="62.3316" y2="39.1668" width="0.3048" layer="1"/>
 <wire x1="63.4746" y1="40.3098" x2="63.5" y2="40.32" width="0.3048" layer="1"/>
 <wire x1="62.3316" y1="31.5468" x2="62.23" y2="31.43" width="0.3048" layer="1"/>
-<wire x1="66.9036" y1="29.2608" x2="70.1802" y2="29.2608" width="0.3048" layer="1"/>
-<wire x1="64.8462" y1="31.3182" x2="66.9036" y2="29.2608" width="0.3048" layer="1"/>
-<wire x1="70.1802" y1="29.2608" x2="70.19" y2="29.21" width="0.3048" layer="1"/>
-<wire x1="64.8462" y1="31.3182" x2="64.77" y2="31.43" width="0.3048" layer="1"/>
 <wire x1="73.9902" y1="40.386" x2="78.7146" y2="40.386" width="0.3048" layer="1"/>
 <wire x1="72.39" y1="41.9862" x2="73.9902" y2="40.386" width="0.3048" layer="1"/>
 <wire x1="78.7146" y1="40.386" x2="78.74" y2="40.32" width="0.3048" layer="1"/>
@@ -2768,6 +2799,9 @@ design rules under a new name.</description>
 <wire x1="55.8292" y1="29.21" x2="55.7784" y2="29.2608" width="0.3048" layer="16"/>
 <wire x1="60.0456" y1="39.0906" x2="60.0456" y2="30.8356" width="0.3048" layer="16"/>
 <wire x1="60.0456" y1="30.8356" x2="58.42" y2="29.21" width="0.3048" layer="16"/>
+<wire x1="67.7418" y1="34.29" x2="70.19" y2="34.29" width="0.3048" layer="1"/>
+<wire x1="64.9224" y1="31.4706" x2="67.7418" y2="34.29" width="0.3048" layer="1"/>
+<wire x1="64.9224" y1="31.4706" x2="64.77" y2="31.43" width="0.3048" layer="1"/>
 </signal>
 <signal name="N$8">
 <contactref element="C1" pad="1"/>
@@ -3031,6 +3065,11 @@ design rules under a new name.</description>
 <wire x1="88.8492" y1="22.479" x2="91.44" y2="22.479" width="0.3048" layer="1"/>
 <wire x1="88.3158" y1="21.9456" x2="88.8492" y2="22.479" width="0.3048" layer="1"/>
 <wire x1="91.44" y1="22.479" x2="91.44" y2="22.54" width="0.3048" layer="1"/>
+<contactref element="OS1" pad="2"/>
+<wire x1="66.8274" y1="30.0228" x2="69.7992" y2="30.0228" width="0.3048" layer="1"/>
+<wire x1="66.0654" y1="29.2608" x2="66.8274" y2="30.0228" width="0.3048" layer="1"/>
+<wire x1="69.7992" y1="30.0228" x2="69.85" y2="30.04" width="0.3048" layer="1"/>
+<wire x1="66.0654" y1="29.2608" x2="66.04" y2="29.21" width="0.3048" layer="1"/>
 </signal>
 <signal name="N$2">
 <contactref element="X2" pad="2"/>
@@ -3804,9 +3843,12 @@ design rules under a new name.</description>
 <signal name="N$51" class="1">
 <contactref element="D1" pad="A"/>
 <contactref element="F2" pad="2"/>
-<wire x1="74.5998" y1="29.2608" x2="78.5622" y2="29.2608" width="0.3048" layer="1"/>
-<wire x1="78.5622" y1="29.2608" x2="78.61" y2="29.21" width="0.3048" layer="1"/>
-<wire x1="74.5998" y1="29.2608" x2="74.59" y2="29.21" width="0.3048" layer="1"/>
+<wire x1="78.5622" y1="30.3276" x2="78.5622" y2="29.4132" width="0.3048" layer="1"/>
+<wire x1="74.5998" y1="34.29" x2="78.5622" y2="30.3276" width="0.3048" layer="1"/>
+<wire x1="74.5998" y1="34.29" x2="74.59" y2="34.29" width="0.3048" layer="1"/>
+<wire x1="78.6384" y1="29.337" x2="78.6384" y2="29.2608" width="0.3048" layer="1"/>
+<wire x1="78.6384" y1="29.2608" x2="78.61" y2="29.21" width="0.3048" layer="1"/>
+<wire x1="78.6384" y1="29.337" x2="78.5622" y2="29.4132" width="0.3048" layer="1"/>
 </signal>
 <signal name="SCK_SIG">
 <contactref element="R2" pad="1"/>
@@ -3939,7 +3981,8 @@ design rules under a new name.</description>
 <wire x1="79.7814" y1="9.4488" x2="77.1144" y2="12.1158" width="0.3048" layer="1"/>
 <wire x1="67.6656" y1="19.05" x2="67.63" y2="19.05" width="0.3048" layer="1"/>
 <wire x1="79.7814" y1="9.4488" x2="79.68" y2="9.35" width="0.3048" layer="1"/>
-<wire x1="67.6656" y1="23.8506" x2="79.0956" y2="23.8506" width="0.3048" layer="1"/>
+<wire x1="67.6656" y1="23.8506" x2="74.9808" y2="23.8506" width="0.3048" layer="1"/>
+<wire x1="74.9808" y1="23.8506" x2="79.0956" y2="23.8506" width="0.3048" layer="1"/>
 <wire x1="53.6448" y1="10.4394" x2="53.6448" y2="12.6492" width="0.3048" layer="1"/>
 <wire x1="52.1208" y1="8.9154" x2="53.6448" y2="10.4394" width="0.3048" layer="1"/>
 <wire x1="53.6448" y1="12.6492" x2="53.66" y2="12.7" width="0.3048" layer="1"/>
@@ -4004,6 +4047,13 @@ design rules under a new name.</description>
 <wire x1="89.4588" y1="20.574" x2="91.44" y2="20.574" width="0.3048" layer="1"/>
 <wire x1="88.8492" y1="19.9644" x2="89.4588" y2="20.574" width="0.3048" layer="1"/>
 <wire x1="91.44" y1="20.574" x2="91.44" y2="20.64" width="0.3048" layer="1"/>
+<contactref element="OS1" pad="4"/>
+<contactref element="OS1" pad="1"/>
+<wire x1="74.9808" y1="23.8506" x2="74.9808" y2="25.8318" width="0.3048" layer="1"/>
+<wire x1="74.9808" y1="25.8318" x2="74.93" y2="25.84" width="0.3048" layer="1"/>
+<wire x1="74.9808" y1="25.9842" x2="74.9808" y2="30.0228" width="0.3048" layer="1"/>
+<wire x1="74.9808" y1="30.0228" x2="74.93" y2="30.04" width="0.3048" layer="1"/>
+<wire x1="74.9808" y1="25.9842" x2="74.93" y2="25.84" width="0.3048" layer="1"/>
 </signal>
 <signal name="N$55">
 <contactref element="U3" pad="19"/>
@@ -4052,6 +4102,15 @@ design rules under a new name.</description>
 <wire x1="73.6854" y1="23.0886" x2="74.2188" y2="23.0886" width="0.1524" layer="1"/>
 <wire x1="80.3148" y1="21.336" x2="80.315" y2="21.325" width="0.1524" layer="1"/>
 <wire x1="73.6854" y1="23.0886" x2="73.66" y2="23.09" width="0.1524" layer="1"/>
+<contactref element="OS1" pad="3"/>
+<wire x1="71.1708" y1="24.5364" x2="69.8754" y2="25.8318" width="0.1524" layer="1"/>
+<wire x1="71.1708" y1="23.7744" x2="71.1708" y2="24.5364" width="0.1524" layer="16"/>
+<wire x1="71.7804" y1="23.1648" x2="71.1708" y2="23.7744" width="0.1524" layer="16"/>
+<wire x1="73.6092" y1="23.1648" x2="71.7804" y2="23.1648" width="0.1524" layer="1"/>
+<wire x1="69.8754" y1="25.8318" x2="69.85" y2="25.84" width="0.1524" layer="1"/>
+<wire x1="73.6092" y1="23.1648" x2="73.66" y2="23.09" width="0.1524" layer="1"/>
+<via x="71.1708" y="24.5364" extent="1-16" drill="0.35"/>
+<via x="71.7804" y="23.1648" extent="1-16" drill="0.35"/>
 </signal>
 <signal name="N$58">
 <contactref element="LED2" pad="A"/>

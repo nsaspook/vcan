@@ -1,25 +1,25 @@
 EAGLE AutoRouter Statistics:
 
-Job           : /root/vcan/tic12400.brd
+Job           : /fred/vcan/tic12400.brd
 
-Start at      : 22:59:55 (7/7/21)
-End at        : 23:01:15 (7/7/21)
-Elapsed time  : 00:01:16
+Start at      : 17:31:22 (7/27/21)
+End at        : 17:41:56 (7/27/21)
+Elapsed time  : 00:10:31
 
-Signals       :    78   RoutingGrid: 3 mil  Layers: 2
-Connections   :   221   predefined:  209 ( 106 Vias )
+Signals       :    79   RoutingGrid: 3 mil  Layers: 2
+Connections   :   223   predefined:  221 ( 132 Vias )
 
-Router memory :   5586240
+Router memory :   5707680
 
-Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4 Optimize5 Optimize6 Optimize7 Optimize8 Optimize9Optimize10Optimize11Optimize12
+Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4
 
-Time per pass     :  00:00:41  00:00:04  00:00:03  00:00:02  00:00:03  00:00:02  00:00:03  00:00:03  00:00:02  00:00:03  00:00:02  00:00:03  00:00:02  00:00:03
-Number of Ripups  :         0         2         0         0         0         0         0         0         0         0         0         0         0         0
-max. Level        :         0         1         0         0         0         0         0         0         0         0         0         0         0         0
-max. Total        :         0         3         0         0         0         0         0         0         0         0         0         0         0         0
+Time per pass     :  00:09:57  00:00:01  00:00:09  00:00:08  00:00:08  00:00:08
+Number of Ripups  :         0         0         0         0         0         0
+max. Level        :         0         0         0         0         0         0
+max. Total        :         0         0         0         0         0         0
 
-Routed            :         0        12        12        12        12        12        12        12        12        12        12        12        12        12
-Vias              :         0        10        10        10        10        10        10        10        10        10        10        10        10        10
-Resolution        :    94.6 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
+Routed            :         1         2         2         2         2         2
+Vias              :         0         0         0         0         0         0
+Resolution        :    99.6 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
 Final             : 100.0% finished
