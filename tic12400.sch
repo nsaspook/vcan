@@ -14870,6 +14870,608 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="wirepad" urn="urn:adsk.eagle:library:412">
+<description>&lt;b&gt;Single Pads&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="1,6/0,8" urn="urn:adsk.eagle:footprint:30809/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="-0.762" y1="0.762" x2="-0.508" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="-0.762" y1="0.762" x2="-0.762" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="0.762" x2="0.762" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="0.762" x2="0.508" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="-0.508" x2="0.762" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="-0.762" x2="0.508" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="-0.762" x2="-0.762" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="-0.762" y1="-0.762" x2="-0.762" y2="-0.508" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.635" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="0.8128" diameter="1.6002" shape="octagon"/>
+<text x="-0.762" y="1.016" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="0.6" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="1,6/0,9" urn="urn:adsk.eagle:footprint:30812/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="-0.508" y1="0.762" x2="-0.762" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="-0.762" y1="0.762" x2="-0.762" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-0.762" y1="-0.508" x2="-0.762" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="-0.762" y1="-0.762" x2="-0.508" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="0.508" y1="-0.762" x2="0.762" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="-0.762" x2="0.762" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="0.508" x2="0.762" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="0.762" x2="0.508" y2="0.762" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.635" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="0.9144" diameter="1.6002" shape="octagon"/>
+<text x="-0.762" y="1.016" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="0.6" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="2,15/1,0" urn="urn:adsk.eagle:footprint:30813/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.143" y1="-1.143" x2="1.143" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.143" y1="-1.143" x2="0.635" y2="-1.143" width="0.1524" layer="21"/>
+<wire x1="1.143" y1="0.635" x2="1.143" y2="1.143" width="0.1524" layer="21"/>
+<wire x1="1.143" y1="1.143" x2="0.635" y2="1.143" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="1.143" x2="-1.143" y2="1.143" width="0.1524" layer="21"/>
+<wire x1="-1.143" y1="1.143" x2="-1.143" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-1.143" y1="-0.635" x2="-1.143" y2="-1.143" width="0.1524" layer="21"/>
+<wire x1="-1.143" y1="-1.143" x2="-0.635" y2="-1.143" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.016" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.016" diameter="2.159" shape="octagon"/>
+<text x="-1.143" y="1.397" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="1" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="2,54/0,8" urn="urn:adsk.eagle:footprint:30820/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="-1.27" y1="1.27" x2="-0.762" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="1.27" x2="-1.27" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="1.27" x2="1.27" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="1.27" x2="0.762" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-0.762" x2="1.27" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-1.27" x2="0.762" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-0.762" y1="-1.27" x2="-1.27" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-1.27" x2="-1.27" y2="-0.762" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.635" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="0.8128" diameter="2.54" shape="octagon"/>
+<text x="-1.27" y="1.524" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="0.6" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="2,54/0,9" urn="urn:adsk.eagle:footprint:30821/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="-1.27" y1="1.27" x2="-0.762" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="1.27" x2="-1.27" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="1.27" x2="1.27" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="1.27" x2="0.762" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-0.762" x2="1.27" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-1.27" x2="0.762" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-0.762" y1="-1.27" x2="-1.27" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-1.27" x2="-1.27" y2="-0.762" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.635" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="0.9144" diameter="2.54" shape="octagon"/>
+<text x="-1.27" y="1.524" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="0.6" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="2,54/1,0" urn="urn:adsk.eagle:footprint:30810/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.27" y1="1.27" x2="1.27" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="1.27" x2="0.762" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="1.27" x2="-0.762" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="1.27" x2="-1.27" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-1.27" x2="-1.27" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-1.27" x2="-0.762" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="-1.27" x2="1.27" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-1.27" x2="1.27" y2="-0.762" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.016" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.016" diameter="2.54" shape="octagon"/>
+<text x="-1.27" y="1.524" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="1" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="2,54/1,1" urn="urn:adsk.eagle:footprint:30818/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.27" y1="1.27" x2="1.27" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="1.27" x2="0.762" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="1.27" x2="-1.27" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="1.27" x2="-0.762" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-1.27" x2="-1.27" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-1.27" x2="-0.762" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-1.27" x2="0.762" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-1.27" x2="1.27" y2="-0.762" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.016" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.1176" diameter="2.54" shape="octagon"/>
+<text x="-1.27" y="1.524" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="1" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="3,17/1,1" urn="urn:adsk.eagle:footprint:30814/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.524" y1="-1.016" x2="1.524" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="-1.524" x2="1.016" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="-1.016" y1="-1.524" x2="-1.524" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="-1.524" x2="-1.524" y2="-1.016" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="1.016" x2="-1.524" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="1.524" x2="-1.016" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="1.524" x2="1.524" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="1.524" x2="1.524" y2="1.016" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.27" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.1176" diameter="3.175" shape="octagon"/>
+<text x="-1.524" y="1.905" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="1.2" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="3,17/1,2" urn="urn:adsk.eagle:footprint:30824/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.524" y1="-1.016" x2="1.524" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="-1.524" x2="1.016" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="-1.016" y1="-1.524" x2="-1.524" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="-1.524" x2="-1.524" y2="-1.016" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="1.016" x2="-1.524" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="1.524" x2="-1.016" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="1.524" x2="1.524" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="1.524" x2="1.524" y2="1.016" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.27" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.1938" diameter="3.175" shape="octagon"/>
+<text x="-1.524" y="1.905" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="1.2" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="3,17/1,3" urn="urn:adsk.eagle:footprint:30815/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.524" y1="-1.016" x2="1.524" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="-1.524" x2="1.016" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="-1.016" y1="-1.524" x2="-1.524" y2="-1.524" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="-1.524" x2="-1.524" y2="-1.016" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="1.016" x2="-1.524" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="1.524" x2="-1.016" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="1.524" x2="1.524" y2="1.524" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="1.524" x2="1.524" y2="1.016" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.27" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.3208" diameter="3.175" shape="octagon"/>
+<text x="-1.524" y="1.905" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="1.2" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="3,81/1,1" urn="urn:adsk.eagle:footprint:30811/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.905" y1="-1.27" x2="1.905" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-1.905" x2="1.27" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-1.905" x2="-1.905" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="-1.905" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="1.27" x2="-1.905" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="1.905" x2="-1.27" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="1.905" x2="1.905" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="1.905" x2="1.905" y2="1.27" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.27" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.1176" diameter="3.81" shape="octagon"/>
+<text x="-1.905" y="2.286" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="1.2" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="3,81/1,3" urn="urn:adsk.eagle:footprint:30816/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.905" y1="-1.27" x2="1.905" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-1.905" x2="1.27" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-1.905" x2="-1.905" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="-1.905" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="1.27" x2="-1.905" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="1.905" x2="-1.27" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="1.905" x2="1.905" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="1.905" x2="1.905" y2="1.27" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.27" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.3208" diameter="3.81" shape="octagon"/>
+<text x="-1.905" y="2.286" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="1.2" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="3,81/1,4" urn="urn:adsk.eagle:footprint:30817/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.905" y1="-1.27" x2="1.905" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-1.905" x2="1.27" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-1.905" x2="-1.905" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="-1.905" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="1.27" x2="-1.905" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="1.905" x2="-1.27" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="1.905" x2="1.905" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="1.905" x2="1.905" y2="1.27" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.27" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="1.397" diameter="3.81" shape="octagon"/>
+<text x="-1.905" y="2.286" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="1.2" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="4,16O1,6" urn="urn:adsk.eagle:footprint:30825/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<pad name="1" x="0" y="0" drill="1.6002" diameter="4.1656" shape="octagon"/>
+<text x="0" y="0" size="0.0254" layer="27">&gt;VALUE</text>
+<text x="-2.1" y="2.2" size="1.27" layer="25">&gt;NAME</text>
+</package>
+<package name="5-1,8" urn="urn:adsk.eagle:footprint:30826/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.1684" y1="2.794" x2="-1.1684" y2="2.794" width="0.1524" layer="21"/>
+<wire x1="-1.1684" y1="-2.794" x2="-1.1684" y2="2.794" width="0.1524" layer="21"/>
+<wire x1="-1.1684" y1="-2.794" x2="1.1684" y2="-2.794" width="0.1524" layer="21"/>
+<wire x1="1.1684" y1="2.794" x2="1.1684" y2="-2.794" width="0.1524" layer="21"/>
+<smd name="1" x="0" y="0" dx="1.8288" dy="5.08" layer="1"/>
+<text x="-1.524" y="-2.54" size="1.27" layer="25" ratio="10" rot="R90">&gt;NAME</text>
+<text x="-0.1" y="2.8" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="5-2,5" urn="urn:adsk.eagle:footprint:30827/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="1.524" y1="2.794" x2="-1.524" y2="2.794" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="-2.794" x2="-1.524" y2="2.794" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="-2.794" x2="1.524" y2="-2.794" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="2.794" x2="1.524" y2="-2.794" width="0.1524" layer="21"/>
+<smd name="1" x="0" y="0" dx="2.54" dy="5.08" layer="1"/>
+<text x="-1.778" y="-2.54" size="1.27" layer="25" ratio="10" rot="R90">&gt;NAME</text>
+<text x="-0.1" y="2.8" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+<package name="SMD1,27-2,54" urn="urn:adsk.eagle:footprint:30822/1" library_version="2">
+<description>&lt;b&gt;SMD PAD&lt;/b&gt;</description>
+<smd name="1" x="0" y="0" dx="1.27" dy="2.54" layer="1"/>
+<text x="0" y="0" size="0.0254" layer="27">&gt;VALUE</text>
+<text x="-0.8" y="-2.4" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+</package>
+<package name="SMD2,54-5,08" urn="urn:adsk.eagle:footprint:30823/1" library_version="2">
+<description>&lt;b&gt;SMD PAD&lt;/b&gt;</description>
+<smd name="1" x="0" y="0" dx="2.54" dy="5.08" layer="1"/>
+<text x="0" y="0" size="0.0254" layer="27">&gt;VALUE</text>
+<text x="-1.5" y="-2.5" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="1,6/0,8" urn="urn:adsk.eagle:package:30830/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="1,6/0,8"/>
+</packageinstances>
+</package3d>
+<package3d name="1,6/0,9" urn="urn:adsk.eagle:package:30840/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="1,6/0,9"/>
+</packageinstances>
+</package3d>
+<package3d name="2,15/1,0" urn="urn:adsk.eagle:package:30831/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="2,15/1,0"/>
+</packageinstances>
+</package3d>
+<package3d name="2,54/0,8" urn="urn:adsk.eagle:package:30838/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="2,54/0,8"/>
+</packageinstances>
+</package3d>
+<package3d name="2,54/0,9" urn="urn:adsk.eagle:package:30847/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="2,54/0,9"/>
+</packageinstances>
+</package3d>
+<package3d name="2,54/1,0" urn="urn:adsk.eagle:package:30828/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="2,54/1,0"/>
+</packageinstances>
+</package3d>
+<package3d name="2,54/1,1" urn="urn:adsk.eagle:package:30836/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="2,54/1,1"/>
+</packageinstances>
+</package3d>
+<package3d name="3,17/1,1" urn="urn:adsk.eagle:package:30832/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="3,17/1,1"/>
+</packageinstances>
+</package3d>
+<package3d name="3,17/1,2" urn="urn:adsk.eagle:package:30842/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="3,17/1,2"/>
+</packageinstances>
+</package3d>
+<package3d name="3,17/1,3" urn="urn:adsk.eagle:package:30833/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="3,17/1,3"/>
+</packageinstances>
+</package3d>
+<package3d name="3,81/1,1" urn="urn:adsk.eagle:package:30829/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="3,81/1,1"/>
+</packageinstances>
+</package3d>
+<package3d name="3,81/1,3" urn="urn:adsk.eagle:package:30834/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="3,81/1,3"/>
+</packageinstances>
+</package3d>
+<package3d name="3,81/1,4" urn="urn:adsk.eagle:package:30835/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="3,81/1,4"/>
+</packageinstances>
+</package3d>
+<package3d name="4,16O1,6" urn="urn:adsk.eagle:package:30843/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="4,16O1,6"/>
+</packageinstances>
+</package3d>
+<package3d name="5-1,8" urn="urn:adsk.eagle:package:30844/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="5-1,8"/>
+</packageinstances>
+</package3d>
+<package3d name="5-2,5" urn="urn:adsk.eagle:package:30845/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="5-2,5"/>
+</packageinstances>
+</package3d>
+<package3d name="SMD1,27-2,54" urn="urn:adsk.eagle:package:30839/1" type="box" library_version="2">
+<description>SMD PAD</description>
+<packageinstances>
+<packageinstance name="SMD1,27-2,54"/>
+</packageinstances>
+</package3d>
+<package3d name="SMD2,54-5,08" urn="urn:adsk.eagle:package:30841/1" type="box" library_version="2">
+<description>SMD PAD</description>
+<packageinstances>
+<packageinstance name="SMD2,54-5,08"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="PAD" urn="urn:adsk.eagle:symbol:30808/1" library_version="2">
+<wire x1="-1.016" y1="1.016" x2="1.016" y2="-1.016" width="0.254" layer="94"/>
+<wire x1="-1.016" y1="-1.016" x2="1.016" y2="1.016" width="0.254" layer="94"/>
+<text x="-1.143" y="1.8542" size="1.778" layer="95">&gt;NAME</text>
+<text x="-1.143" y="-3.302" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="P" x="2.54" y="0" visible="off" length="short" direction="pas" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="WIREPAD" urn="urn:adsk.eagle:component:30861/2" prefix="PAD" library_version="2">
+<description>&lt;b&gt;Wire PAD&lt;/b&gt; connect wire on PCB</description>
+<gates>
+<gate name="G$1" symbol="PAD" x="0" y="0"/>
+</gates>
+<devices>
+<device name="1,6/0,8" package="1,6/0,8">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30830/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="1,6/0,9" package="1,6/0,9">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30840/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="2,15/1,0" package="2,15/1,0">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30831/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="2,54/0,8" package="2,54/0,8">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30838/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="2,54/0,9" package="2,54/0,9">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30847/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="6" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="2,54/1,0" package="2,54/1,0">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30828/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="2,54/1,1" package="2,54/1,1">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30836/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="3,17/1,1" package="3,17/1,1">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30832/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="3,17/1,2" package="3,17/1,2">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30842/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="3,17/1,3" package="3,17/1,3">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30833/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="5" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="3,81/1,1" package="3,81/1,1">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30829/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="3,81/1,3" package="3,81/1,3">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30834/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="3,81/1,4" package="3,81/1,4">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30835/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="4,16O1,6" package="4,16O1,6">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30843/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SMD5-1,8" package="5-1,8">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30844/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="4" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SMD5-2,5" package="5-2,5">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30845/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="3" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SMD1,27-254" package="SMD1,27-2,54">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30839/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="11" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SMD2,54-5,08" package="SMD2,54-5,08">
+<connects>
+<connect gate="G$1" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30841/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="2" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -15003,7 +15605,8 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <part name="VDD15" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 <part name="VDD16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 <part name="F3" library="polyfuse-smd_10" deviceset="?" device="1206L" technology="020"/>
-<part name="TP6" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
+<part name="PAD1" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="WIREPAD" device="1,6/0,8" package3d_urn="urn:adsk.eagle:package:30830/1"/>
+<part name="PAD2" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="WIREPAD" device="1,6/0,8" package3d_urn="urn:adsk.eagle:package:30830/1"/>
 </parts>
 <sheets>
 <sheet>
@@ -15581,9 +16184,13 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <attribute name="NAME" x="-3.81" y="193.04" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="-3.81" y="199.39" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="TP6" gate="G$1" x="91.44" y="7.62" smashed="yes" rot="R270">
-<attribute name="NAME" x="85.09" y="8.636" size="1.778" layer="95"/>
-<attribute name="TP_SIGNAL_NAME" x="88.9" y="6.35" size="1.778" layer="97" rot="R270"/>
+<instance part="PAD1" gate="G$1" x="76.2" y="0" smashed="yes">
+<attribute name="NAME" x="75.057" y="1.8542" size="1.778" layer="95"/>
+<attribute name="VALUE" x="75.057" y="-3.302" size="1.778" layer="96"/>
+</instance>
+<instance part="PAD2" gate="G$1" x="91.44" y="7.62" smashed="yes">
+<attribute name="NAME" x="90.297" y="9.4742" size="1.778" layer="95"/>
+<attribute name="VALUE" x="90.297" y="4.318" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -17061,10 +17668,20 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <junction x="-2.54" y="195.58"/>
 </segment>
 </net>
+<net name="N$71" class="0">
+<segment>
+<pinref part="U4" gate="G$1" pin="INT2"/>
+<wire x1="93.98" y1="5.08" x2="81.28" y2="5.08" width="0.1524" layer="91"/>
+<wire x1="81.28" y1="5.08" x2="81.28" y2="0" width="0.1524" layer="91"/>
+<wire x1="81.28" y1="0" x2="78.74" y2="0" width="0.1524" layer="91"/>
+<junction x="93.98" y="5.08"/>
+<pinref part="PAD1" gate="G$1" pin="P"/>
+</segment>
+</net>
 <net name="N$70" class="0">
 <segment>
 <pinref part="U4" gate="G$1" pin="INT1"/>
-<pinref part="TP6" gate="G$1" pin="TP"/>
+<pinref part="PAD2" gate="G$1" pin="P"/>
 </segment>
 </net>
 </nets>
@@ -17086,133 +17703,133 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <approved hash="206,1,198.12,71.12,MISO_JP4P1,,,,,"/>
 <approved hash="206,1,187.96,152.4,MISO_JP4P1,,,,,"/>
 <approved hash="113,1,114.196,95.146,FRAME1,,,,,"/>
-<approved hash="115,1,140.97,172.72,N$38,,,,,"/>
-<approved hash="115,1,227.33,165.1,N$38,,,,,"/>
-<approved hash="115,1,140.97,165.1,N$41,,,,,"/>
-<approved hash="115,1,227.33,157.48,N$41,,,,,"/>
-<approved hash="115,1,205.74,60.96,N$6,,,,,"/>
-<approved hash="115,1,69.85,81.28,N$6,,,,,"/>
-<approved hash="115,1,158.75,137.16,N$47,,,,,"/>
-<approved hash="115,1,227.33,142.24,N$47,,,,,"/>
-<approved hash="115,1,158.75,83.82,N$17,,,,,"/>
-<approved hash="115,1,113.03,175.26,N$17,,,,,"/>
-<approved hash="115,1,153.67,86.36,N$2,,,,,"/>
-<approved hash="115,1,110.49,177.8,N$2,,,,,"/>
-<approved hash="115,1,55.88,114.3,CS_JP3P11,,,,,"/>
-<approved hash="115,1,27.94,149.86,CS_JP3P11,,,,,"/>
-<approved hash="115,1,203.2,78.74,CS_JP3P11,,,,,"/>
-<approved hash="115,1,158.75,68.58,N$23,,,,,"/>
-<approved hash="115,1,113.03,147.32,N$23,,,,,"/>
-<approved hash="115,1,50.8,180.34,N$56,,,,,"/>
-<approved hash="115,1,-10.16,154.94,N$56,,,,,"/>
-<approved hash="115,1,158.75,134.62,N$48,,,,,"/>
-<approved hash="115,1,227.33,139.7,N$48,,,,,"/>
-<approved hash="115,1,140.97,162.56,N$42,,,,,"/>
-<approved hash="115,1,227.33,154.94,N$42,,,,,"/>
-<approved hash="115,1,140.97,177.8,N$36,,,,,"/>
-<approved hash="115,1,227.33,170.18,N$36,,,,,"/>
-<approved hash="115,1,158.75,81.28,N$18,,,,,"/>
-<approved hash="115,1,113.03,172.72,N$18,,,,,"/>
-<approved hash="115,1,212.09,27.94,GND,,,,,"/>
-<approved hash="115,1,209.55,30.48,GND,,,,,"/>
-<approved hash="115,1,163.83,139.7,N$46,,,,,"/>
-<approved hash="115,1,227.33,144.78,N$46,,,,,"/>
-<approved hash="115,1,184.15,162.56,N$54,,,,,"/>
-<approved hash="115,1,-11.43,172.72,N$54,,,,,"/>
-<approved hash="115,1,91.44,15.24,MOSI_SIG,,,,,"/>
-<approved hash="115,1,-10.16,162.56,MOSI_SIG,,,,,"/>
-<approved hash="115,1,158.75,60.96,N$25,,,,,"/>
-<approved hash="115,1,113.03,142.24,N$25,,,,,"/>
-<approved hash="115,1,158.75,144.78,N$44,,,,,"/>
-<approved hash="115,1,227.33,149.86,N$44,,,,,"/>
-<approved hash="115,1,140.97,170.18,N$39,,,,,"/>
-<approved hash="115,1,227.33,162.56,N$39,,,,,"/>
-<approved hash="115,1,53.34,180.34,N$55,,,,,"/>
-<approved hash="115,1,-10.16,157.48,N$55,,,,,"/>
-<approved hash="115,1,158.75,147.32,N$43,,,,,"/>
-<approved hash="115,1,227.33,152.4,N$43,,,,,"/>
-<approved hash="115,1,158.75,71.12,N$22,,,,,"/>
-<approved hash="115,1,113.03,162.56,N$22,,,,,"/>
-<approved hash="115,1,147.32,53.34,N$16,,,,,"/>
-<approved hash="115,1,132.08,134.62,N$16,,,,,"/>
+<approved hash="115,1,185.42,165.1,N$34,,,,,"/>
+<approved hash="115,1,48.26,31.75,N$34,,,,,"/>
 <approved hash="115,1,208.28,45.72,N$8,,,,,"/>
 <approved hash="115,1,78.74,88.9,N$8,,,,,"/>
-<approved hash="115,1,140.97,167.64,N$40,,,,,"/>
-<approved hash="115,1,227.33,160.02,N$40,,,,,"/>
+<approved hash="115,1,158.75,142.24,N$45,,,,,"/>
+<approved hash="115,1,227.33,147.32,N$45,,,,,"/>
+<approved hash="115,1,140.97,180.34,N$35,,,,,"/>
+<approved hash="115,1,227.33,172.72,N$35,,,,,"/>
+<approved hash="115,1,140.97,172.72,N$38,,,,,"/>
+<approved hash="115,1,227.33,165.1,N$38,,,,,"/>
 <approved hash="115,1,156.21,35.56,N$5,,,,,"/>
 <approved hash="115,1,123.19,101.6,N$5,,,,,"/>
-<approved hash="115,1,140.97,175.26,N$37,,,,,"/>
-<approved hash="115,1,227.33,167.64,N$37,,,,,"/>
+<approved hash="115,1,158.75,129.54,N$50,,,,,"/>
+<approved hash="115,1,227.33,134.62,N$50,,,,,"/>
+<approved hash="115,1,158.75,68.58,N$23,,,,,"/>
+<approved hash="115,1,113.03,147.32,N$23,,,,,"/>
+<approved hash="115,1,140.97,165.1,N$41,,,,,"/>
+<approved hash="115,1,227.33,157.48,N$41,,,,,"/>
+<approved hash="115,1,68.58,113.03,N$61,,,,,"/>
+<approved hash="115,1,-11.43,149.86,N$61,,,,,"/>
+<approved hash="115,1,148.59,50.8,N$15,,,,,"/>
+<approved hash="115,1,130.81,132.08,N$15,,,,,"/>
 <approved hash="115,1,157.48,127,N$30,,,,,"/>
 <approved hash="115,1,139.7,160.02,N$30,,,,,"/>
 <approved hash="115,1,177.8,170.18,N$30,,,,,"/>
 <approved hash="115,1,50.8,142.24,N$30,,,,,"/>
-<approved hash="115,1,212.09,43.18,N$9,,,,,"/>
-<approved hash="115,1,82.55,93.98,N$9,,,,,"/>
-<approved hash="115,1,158.75,142.24,N$45,,,,,"/>
-<approved hash="115,1,227.33,147.32,N$45,,,,,"/>
-<approved hash="115,1,156.21,33.02,N$3,,,,,"/>
-<approved hash="115,1,158.75,66.04,N$24,,,,,"/>
-<approved hash="115,1,113.03,144.78,N$24,,,,,"/>
-<approved hash="115,1,90.17,20.32,N$64,,,,,"/>
-<approved hash="115,1,58.42,113.03,N$64,,,,,"/>
-<approved hash="115,1,-11.43,139.7,N$64,,,,,"/>
-<approved hash="115,1,215.9,40.64,N$10,,,,,"/>
-<approved hash="115,1,86.36,96.52,N$10,,,,,"/>
-<approved hash="115,1,158.75,58.42,N$26,,,,,"/>
-<approved hash="115,1,113.03,139.7,N$26,,,,,"/>
-<approved hash="115,1,185.42,165.1,N$34,,,,,"/>
-<approved hash="115,1,48.26,31.75,N$34,,,,,"/>
-<approved hash="115,1,158.75,76.2,N$20,,,,,"/>
-<approved hash="115,1,113.03,167.64,N$20,,,,,"/>
-<approved hash="115,1,68.58,113.03,N$61,,,,,"/>
-<approved hash="115,1,-11.43,149.86,N$61,,,,,"/>
-<approved hash="115,1,66.04,113.03,N$62,,,,,"/>
-<approved hash="115,1,-11.43,147.32,N$62,,,,,"/>
+<approved hash="115,1,140.97,175.26,N$37,,,,,"/>
+<approved hash="115,1,227.33,167.64,N$37,,,,,"/>
+<approved hash="115,1,158.75,144.78,N$44,,,,,"/>
+<approved hash="115,1,227.33,149.86,N$44,,,,,"/>
+<approved hash="115,1,158.75,147.32,N$43,,,,,"/>
+<approved hash="115,1,227.33,152.4,N$43,,,,,"/>
+<approved hash="115,1,158.75,137.16,N$47,,,,,"/>
+<approved hash="115,1,227.33,142.24,N$47,,,,,"/>
 <approved hash="115,1,158.75,78.74,N$19,,,,,"/>
 <approved hash="115,1,113.03,170.18,N$19,,,,,"/>
-<approved hash="115,1,156.21,27.94,N$28,,,,,"/>
-<approved hash="115,1,148.59,50.8,N$15,,,,,"/>
-<approved hash="115,1,130.81,132.08,N$15,,,,,"/>
+<approved hash="115,1,158.75,76.2,N$20,,,,,"/>
+<approved hash="115,1,113.03,167.64,N$20,,,,,"/>
+<approved hash="115,1,53.34,180.34,N$55,,,,,"/>
+<approved hash="115,1,-10.16,157.48,N$55,,,,,"/>
+<approved hash="115,1,156.21,33.02,N$3,,,,,"/>
 <approved hash="115,1,158.75,55.88,N$27,,,,,"/>
 <approved hash="115,1,111.76,137.16,N$27,,,,,"/>
+<approved hash="115,1,63.5,113.03,N$63,,,,,"/>
+<approved hash="115,1,-11.43,144.78,N$63,,,,,"/>
+<approved hash="115,1,156.21,30.48,N$4,,,,,"/>
+<approved hash="115,1,152.4,43.18,N$12,,,,,"/>
+<approved hash="115,1,127,109.22,N$12,,,,,"/>
+<approved hash="115,1,48.26,111.76,N$33,,,,,"/>
+<approved hash="115,1,163.83,139.7,N$46,,,,,"/>
+<approved hash="115,1,227.33,144.78,N$46,,,,,"/>
+<approved hash="115,1,158.75,58.42,N$26,,,,,"/>
+<approved hash="115,1,113.03,139.7,N$26,,,,,"/>
+<approved hash="115,1,158.75,83.82,N$17,,,,,"/>
+<approved hash="115,1,113.03,175.26,N$17,,,,,"/>
+<approved hash="115,1,50.8,180.34,N$56,,,,,"/>
+<approved hash="115,1,-10.16,154.94,N$56,,,,,"/>
+<approved hash="115,1,205.74,60.96,N$6,,,,,"/>
+<approved hash="115,1,69.85,81.28,N$6,,,,,"/>
+<approved hash="115,1,140.97,170.18,N$39,,,,,"/>
+<approved hash="115,1,227.33,162.56,N$39,,,,,"/>
+<approved hash="115,1,53.34,113.03,EXT2_JP3P8,,,,,"/>
+<approved hash="115,1,26.67,147.32,EXT2_JP3P8,,,,,"/>
+<approved hash="115,1,201.93,53.34,EXT2_JP3P8,,,,,"/>
+<approved hash="115,1,153.67,86.36,N$2,,,,,"/>
+<approved hash="115,1,110.49,177.8,N$2,,,,,"/>
+<approved hash="115,1,158.75,66.04,N$24,,,,,"/>
+<approved hash="115,1,113.03,144.78,N$24,,,,,"/>
+<approved hash="115,1,147.32,53.34,N$16,,,,,"/>
+<approved hash="115,1,132.08,134.62,N$16,,,,,"/>
+<approved hash="115,1,158.75,132.08,N$49,,,,,"/>
+<approved hash="115,1,227.33,137.16,N$49,,,,,"/>
+<approved hash="115,1,158.75,60.96,N$25,,,,,"/>
+<approved hash="115,1,113.03,142.24,N$25,,,,,"/>
+<approved hash="115,1,66.04,113.03,N$62,,,,,"/>
+<approved hash="115,1,-11.43,147.32,N$62,,,,,"/>
+<approved hash="115,1,91.44,17.78,SCK_SIG,,,,,"/>
+<approved hash="115,1,-10.16,167.64,SCK_SIG,,,,,"/>
+<approved hash="115,1,212.09,43.18,N$9,,,,,"/>
+<approved hash="115,1,82.55,93.98,N$9,,,,,"/>
+<approved hash="115,1,158.75,73.66,N$21,,,,,"/>
+<approved hash="115,1,113.03,165.1,N$21,,,,,"/>
+<approved hash="115,1,55.88,114.3,CS_JP3P11,,,,,"/>
+<approved hash="115,1,27.94,149.86,CS_JP3P11,,,,,"/>
+<approved hash="115,1,203.2,78.74,CS_JP3P11,,,,,"/>
+<approved hash="115,1,60.96,114.3,N$60,,,,,"/>
+<approved hash="115,1,-12.7,142.24,N$60,,,,,"/>
+<approved hash="115,1,184.15,162.56,N$54,,,,,"/>
+<approved hash="115,1,-11.43,172.72,N$54,,,,,"/>
+<approved hash="115,1,149.86,48.26,N$14,,,,,"/>
+<approved hash="115,1,129.54,129.54,N$14,,,,,"/>
+<approved hash="115,1,158.75,134.62,N$48,,,,,"/>
+<approved hash="115,1,227.33,139.7,N$48,,,,,"/>
+<approved hash="115,1,158.75,81.28,N$18,,,,,"/>
+<approved hash="115,1,113.03,172.72,N$18,,,,,"/>
+<approved hash="115,1,140.97,162.56,N$42,,,,,"/>
+<approved hash="115,1,227.33,154.94,N$42,,,,,"/>
+<approved hash="115,1,147.32,88.9,N$1,,,,,"/>
+<approved hash="115,1,101.6,180.34,N$1,,,,,"/>
+<approved hash="115,1,140.97,167.64,N$40,,,,,"/>
+<approved hash="115,1,227.33,160.02,N$40,,,,,"/>
+<approved hash="115,1,140.97,177.8,N$36,,,,,"/>
+<approved hash="115,1,227.33,170.18,N$36,,,,,"/>
+<approved hash="115,1,156.21,27.94,N$28,,,,,"/>
+<approved hash="115,1,215.9,40.64,N$10,,,,,"/>
+<approved hash="115,1,86.36,96.52,N$10,,,,,"/>
+<approved hash="115,1,151.13,45.72,N$13,,,,,"/>
+<approved hash="115,1,128.27,111.76,N$13,,,,,"/>
+<approved hash="115,1,158.75,71.12,N$22,,,,,"/>
+<approved hash="115,1,113.03,162.56,N$22,,,,,"/>
 <approved hash="115,1,91.44,12.7,MISO_JP4P1,,,,,"/>
-<approved hash="115,1,153.67,40.64,N$11,,,,,"/>
-<approved hash="115,1,125.73,106.68,N$11,,,,,"/>
 <approved hash="115,1,63.5,24.13,N$65,,,,,"/>
 <approved hash="115,1,63.5,46.99,N$65,,,,,"/>
 <approved hash="115,1,184.15,160.02,N$65,,,,,"/>
 <approved hash="115,1,50.8,113.03,N$65,,,,,"/>
 <approved hash="115,1,26.67,144.78,N$65,,,,,"/>
-<approved hash="115,1,156.21,30.48,N$4,,,,,"/>
-<approved hash="115,1,60.96,114.3,N$60,,,,,"/>
-<approved hash="115,1,-12.7,142.24,N$60,,,,,"/>
-<approved hash="115,1,151.13,45.72,N$13,,,,,"/>
-<approved hash="115,1,128.27,111.76,N$13,,,,,"/>
-<approved hash="115,1,149.86,48.26,N$14,,,,,"/>
-<approved hash="115,1,129.54,129.54,N$14,,,,,"/>
-<approved hash="115,1,152.4,43.18,N$12,,,,,"/>
-<approved hash="115,1,127,109.22,N$12,,,,,"/>
+<approved hash="115,1,153.67,40.64,N$11,,,,,"/>
+<approved hash="115,1,125.73,106.68,N$11,,,,,"/>
+<approved hash="115,1,90.17,20.32,N$64,,,,,"/>
+<approved hash="115,1,58.42,113.03,N$64,,,,,"/>
+<approved hash="115,1,-11.43,139.7,N$64,,,,,"/>
 <approved hash="115,1,154.94,38.1,N$7,,,,,"/>
 <approved hash="115,1,124.46,104.14,N$7,,,,,"/>
-<approved hash="115,1,91.44,17.78,SCK_SIG,,,,,"/>
-<approved hash="115,1,-10.16,167.64,SCK_SIG,,,,,"/>
-<approved hash="115,1,48.26,111.76,N$33,,,,,"/>
-<approved hash="115,1,63.5,113.03,N$63,,,,,"/>
-<approved hash="115,1,-11.43,144.78,N$63,,,,,"/>
-<approved hash="115,1,158.75,73.66,N$21,,,,,"/>
-<approved hash="115,1,113.03,165.1,N$21,,,,,"/>
-<approved hash="115,1,53.34,113.03,EXT2_JP3P8,,,,,"/>
-<approved hash="115,1,26.67,147.32,EXT2_JP3P8,,,,,"/>
-<approved hash="115,1,201.93,53.34,EXT2_JP3P8,,,,,"/>
-<approved hash="115,1,158.75,132.08,N$49,,,,,"/>
-<approved hash="115,1,227.33,137.16,N$49,,,,,"/>
-<approved hash="115,1,158.75,129.54,N$50,,,,,"/>
-<approved hash="115,1,227.33,134.62,N$50,,,,,"/>
-<approved hash="115,1,140.97,180.34,N$35,,,,,"/>
-<approved hash="115,1,227.33,172.72,N$35,,,,,"/>
-<approved hash="115,1,147.32,88.9,N$1,,,,,"/>
-<approved hash="115,1,101.6,180.34,N$1,,,,,"/>
+<approved hash="115,1,212.09,27.94,GND,,,,,"/>
+<approved hash="115,1,209.55,30.48,GND,,,,,"/>
+<approved hash="115,1,91.44,15.24,MOSI_SIG,,,,,"/>
+<approved hash="115,1,-10.16,162.56,MOSI_SIG,,,,,"/>
 </errors>
 </schematic>
 </drawing>
