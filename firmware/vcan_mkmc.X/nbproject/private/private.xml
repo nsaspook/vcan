@@ -2,21 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/fred/vcan/firmware/src/filters.h</file>
-            <file>file:/fred/vcan/firmware/src/OledDriver.h</file>
-            <file>file:/fred/vcan/firmware/src/dogm-graphic.h</file>
-            <file>file:/fred/vcan/firmware/src/gfx.h</file>
-            <file>file:/fred/vcan/firmware/src/adc_scan.c</file>
-            <file>file:/fred/vcan/firmware/src/adc_scan.h</file>
-            <file>file:/fred/vcan/firmware/src/config/default/initialization.c</file>
-            <file>file:/fred/vcan/firmware/src/OledChar.h</file>
-            <file>file:/fred/vcan/firmware/src/vcan.h</file>
-            <file>file:/fred/vcan/firmware/src/OledGrph.h</file>
-            <file>file:/fred/vcan/firmware/src/config/default/peripheral/evic/plib_evic.h</file>
-            <file>file:/fred/vcan/firmware/src/main.c</file>
-            <file>file:/fred/vcan/firmware/src/tests.h</file>
-            <file>file:/fred/vcan/firmware/src/display_type.h</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
