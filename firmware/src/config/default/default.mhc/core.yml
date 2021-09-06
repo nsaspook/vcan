@@ -3532,14 +3532,14 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '5'}
+        attributes: {value: '1'}
   - type: Hex
     attributes: {id: EVIC_14_PRIVALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '1310720'}
+        attributes: {id: core, value: '262144'}
   - type: Boolean
     attributes: {id: EVIC_156_ENABLE}
     children:

@@ -76,7 +76,7 @@ const char *build_date = __DATE__, *build_time = __TIME__;
 extern t_cli_ctx cli_ctx; // command buffer 
 
 volatile struct QEI_DATA m35_1 = {
-	.duty = 0, // default motor duty
+	.duty = MPCURRENT, // default motor duty
 },
 m35_2 = {
 	.duty = 0, // default motor duty
@@ -328,28 +328,19 @@ void wave_gen(uint32_t status, uintptr_t context)
 		return;
 
 	V.pwm_update = true;
-	if ((--m35_2.set) || (--m35_4.speed <= 0)) { // generate drive waveforms at m35_4.speed or bypass using m35_2.set
-		V.TimeUsed = (uint32_t) _CP0_GET_COUNT() - V.StartTime;
-		V.StartTime = (uint32_t) _CP0_GET_COUNT();
-		m35_1.vel = VEL1CNT;
-		m35_2.vel = VEL2CNT;
-		m35_3.vel = VEL3CNT;
-		/*
-		 * load sinewave constants from three-phase 3600 values per cycle lookup tables
-		 */
-		phase_duty(&m35_2, m35_4.current, V.m_speed, V.pacing);
-		phase_duty(&m35_3, m35_4.current, V.m_speed, V.pacing);
-		phase_duty(&m35_4, m35_4.current, V.m_speed, V.pacing);
-		set_motor_speed(abs(m35_2.error), pi_freq_error);
-		m35_4.speed = V.motor_speed;
-	}
 
-	current_error = hb_current(u_total, false) - MPCURRENT;
-	pi_current_error = lp_filter_f(UpdatePI(&current_pi, current_error), 5);
+	V.TimeUsed = (uint32_t) _CP0_GET_COUNT() - V.StartTime;
+	V.StartTime = (uint32_t) _CP0_GET_COUNT();
+	/*
+	 * load sinewave constants from three-phase 360 values per cycle lookup tables
+	 */
+	phase_duty(&m35_2, m35_4.current, V.m_speed, 2);
+	phase_duty(&m35_3, m35_4.current, V.m_speed, 2);
+	phase_duty(&m35_4, m35_4.current, V.m_speed, 2);
 	/*
 	 * generate a current error drive signal
 	 */
-	m35_4.current = MPCURRENT + (MPCURRENT - (int32_t) pi_current_error);
+	m35_4.current = MPCURRENT;
 	/*
 	 * limit motor drive current
 	 */
@@ -357,58 +348,15 @@ void wave_gen(uint32_t status, uintptr_t context)
 		m35_4.current = motor_volts;
 	}
 	m35_4.current_prev = m35_4.current;
-	/*
-	 * position error from motor encoder vs position setting encoder
-	 */
-	m35_2.error = (POS3CNT * m35_3.gain) - POS2CNT;
-	/*
-	 * generated a motor drive frequency from the position error signal
-	 */
-	pi_freq_error = fabs(UpdatePI(&freq_pi, (double) m35_2.error));
-	/*
-	 * limit frequency error signal
-	 */
-	if (pi_freq_error > 1999.0) {
-		pi_freq_error = 1999.0;
-	}
-	/*
-	 * check for position error dead-band
-	 */
-	if (abs(m35_2.error) < motor_error_stop) {
-		ResetPI(&freq_pi);
-		m35_2.set = 3;
-	} else {
-		m35_2.set = false;
-	}
-	/*
-	 * motor stop/start pacing
-	 */
-	V.pacing = velo_loop(pi_velocity_error, m35_2.set);
-	/*
-	 * position housekeeping
-	 */
-	if (m35_2.error > 0) {
-		if (m35_2.ccw) {
-			m35_2.ccw = false;
-		}
-		m35_2.cw = true;
-	} else {
-		if (m35_2.cw) {
-			m35_2.cw = false;
-		}
-		m35_2.ccw = true;
-	}
-	if (m35_2.error == 0) {
-		m35_2.cw = false;
-		m35_2.ccw = false;
-	}
+
 	/*
 	 * set channel duty cycle for motor sinewave outputs at ISR time 1ms intervals
 	 */
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
+	V.pwm_update = false;
 	DEBUGB0_Clear();
 }
 
@@ -418,6 +366,9 @@ void wave_gen(uint32_t status, uintptr_t context)
 void my_time(uint32_t status, uintptr_t context)
 {
 	t1_time++;
+#ifdef G400HZ
+	start_adc_scan();
+#endif
 }
 
 void my_index(GPIO_PIN pin, uintptr_t context)
@@ -534,7 +485,6 @@ void fh_ho(void *a_data)
 int main(void)
 {
 	char buffer[STR_BUF_SIZE];
-	uint8_t i;
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
@@ -644,49 +594,10 @@ int main(void)
 	 */
 	U1_EN_Set();
 	U2_EN_Set();
-
-	/*
-	 * Bang-Bang initialization
-	 *
-	 * move to locked rotor position
-	 * block-commutated
-	 */
-	for (i = 0; i < 7; i++) {
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, ((step_code[i & 0x7] >> 2)&0x1) * MBLOCK);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, ((step_code[i & 0x7] >> 2)&0x1) * MBLOCK);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, ((step_code[i & 0x7] >> 1)&0x1) * MBLOCK);
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, ((step_code[i & 0x7] >> 0)&0x1) * MBLOCK);
-		switch (i) {
-		case 0:
-			MCPWM_Start();
-			WaitMs(600);
-			/*
-			 * zero position counters at locked rotor position
-			 */
-			POS1CNT = 0;
-			POS2CNT = 0;
-			POS3CNT = 0;
-			break;
-		case 6:
-			WaitMs(900);
-			sprintf(buffer, "HP %6i:%6i CtoMA %4.4f    ", POS2CNT, m35_2.ppr / m35_2.pole_pairs, QEI_PER_MREV);
-			eaDogM_WriteStringAtPos(3, 0, buffer);
-			m35_2.ppp = POS2CNT;
-			//			POS2CNT = 0; // reset zero for new home
-			break;
-		case 1:
-		default:
-			sprintf(buffer, "HP %7i      ", POS2CNT);
-			eaDogM_WriteStringAtPos(2, 0, buffer);
-			break;
-		}
-		OledUpdate();
-		WaitMs(200);
-	}
-	WaitMs(2000);
+	MCPWM_Start();
 
 	V.vcan_state = V_home;
-	TMR3_Start(); // start auto movement functions
+	//	TMR3_Start(); // start auto movement functions
 	PWM_motor2(M_PWM);
 	V.StartTime = (uint32_t) _CP0_GET_COUNT();
 	/*
@@ -695,17 +606,6 @@ int main(void)
 	TMR2_Stop();
 	TMR2_CallbackRegister(wave_gen, 0);
 	TMR2_Start();
-
-	//Module CTMU
-	PMD1bits.CTMUMD = 0; //Enable CTMU Module
-	CTMUCONbits.TGEN = 0; // TGEN = 0 for enable current through diode
-	CTMUCONbits.EDG1STAT = 1; // EDGESTAT1 = EDGESTAT2  for enable current trough diode
-	CTMUCONbits.EDG2STAT = 1; // EDGESTAT1 = EDGESTAT2  for enable current trough diode
-	CTMUCONbits.IRNG = 0b11; //100xBase current level
-	CTMUCONbits.ON = 1; // CTMU is ON
-
-	// wait for first 3-phase calculation then stop, pwm_stop is true
-	while (!V.pwm_update);
 	// setup motor position values
 	m35_4.current = MBLOCK;
 	V.pacing = 1;
@@ -713,16 +613,10 @@ int main(void)
 	phase_duty(&m35_3, m35_4.current, V.m_speed, V.pacing);
 	phase_duty(&m35_4, m35_4.current, V.m_speed, V.pacing);
 
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
-	WaitMs(600);
-	m35_2.sine_zero = POS2CNT;
-	sprintf(buffer, "HP 3-PH %7i  %6i    ", POS2CNT, m35_2.sine_zero - m35_2.ppp);
-	eaDogM_WriteStringAtPos(4, 0, buffer);
-	OledUpdate();
-	WaitMs(3000);
 	V.pwm_stop = false; // let ISR generate waveforms
 
 	/*
@@ -734,47 +628,13 @@ int main(void)
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
 
+#ifndef G400HZ_NODIS
 		if (TimerDone(TMR_MOTOR)) {
 			StartTimer(TMR_MOTOR, MOTOR_UPDATES);
 			/*
 			 * read serial port 3 for command data
 			 */
 			cli_read(&cli_ctx);
-
-			m35_2.cw = false;
-			m35_2.ccw = false;
-			/* update local values of the encoder status counters */
-			m35_1.pos = POS1CNT;
-			m35_1.vel = VEL1HLD;
-			m35_1.indexcnt = INDX1CNT;
-			m35_2.pos = POS2CNT;
-			m35_2.vel = VEL2HLD;
-			m35_2.indexcnt = INDX2CNT;
-#ifdef NOINDEX
-			if (POS2CNT) {
-				m35_2.indexcnt = abs(POS2CNT) / ENCODER_PULSES_PER_REV;
-			}
-#endif
-			m35_3.pos = POS3CNT;
-			m35_3.vel = VEL3HLD;
-			m35_3.indexcnt = INDX3CNT;
-
-			/*
-			 * update compare positions for next motor position sample
-			 */
-			QEI2ICC = POS2CNT;
-			QEI2CMPL = POS2CNT;
-
-			if (V.pacing == 0) {
-				m35_2.stopped = true;
-				m35_4.current = MIDLE;
-			} else {
-				m35_2.stopped = false;
-			}
-
-			if (m35_2.set || !m35_4.speed) {
-				set_motor_speed(abs(m35_2.error), pi_freq_error);
-			}
 
 			/*
 			 * test switch interface with motor control
@@ -818,62 +678,43 @@ int main(void)
 			LATGbits.LATG13 = m35_ptr->pos >> 12;
 			LATGbits.LATG14 = m35_ptr->pos >> 14;
 #endif
-			if (TimerDone(TMR_BLINK)) {
-				StartTimer(TMR_BLINK, 1000);
-				RESET_LED_Toggle();
-			}
-			mHz = (double) V.TimeUsed / 60.0; // 60MHz core timer clock for ms per sinewave tick
-			mHz_raw = ((mHz * (double) sine_res) / 1000.0)* (double) NUM_POLE_PAIRS; // time in ms for a complete wave cycle for each motor pole pair
-			mHz = 1000000.0 / mHz_raw;
-			mHz_real = (double) INT2HLD;
-			mHz_real = mHz_real / (60.0 / 128.0);
-			mHz_real_raw = ((mHz_real * (double) ENCODER_PULSES_PER_REV) / 1000.0);
-			mHz_real = 1000000.0 / mHz_real_raw;
-			pi_velocity_error = UpdatePI(&velocity_pi, mHz_real - mHz);
-			sr_slip = (mHz - mHz_real) / mHz;
-
 			//run_tests(100000); // port diagnostics
 			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
 				OledClearBuffer();
 				sprintf(buffer, " Options: 1:%d 2:%d   %4.1f", option1_Get(), option2_Get(), pi_current_error);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
-				sprintf(buffer, "C %5i:%i     %1i:%1i:%1i:%1i     ", m35_ptr->pos, m35_2.error, m35_2.cw, m35_2.ccw, m35_2.stopped, m35_2.set);
-				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_2;
-				sprintf(buffer, "C %4i:%i:%u:%u      ", POS2CNT, VEL2HLD, INT2HLD, INT2TMR);
-				eaDogM_WriteStringAtPos(2, 0, buffer);
+				sprintf(buffer, "C %4i:%i:%u      ", POS2CNT, VEL2HLD, INT2HLD);
+				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_3;
 				/*
 				 * show some test results on the LCD screen
 				 */
-				sprintf(buffer, "Phase   L1   L2   L3  ");
+				sprintf(buffer, "Phase    L1   L2   L3  ");
 				eaDogM_WriteStringAtPos(3, 0, buffer);
-				sprintf(buffer, "%4i:P %4i %4i %4i  %4i      ", m35_2.erotations, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u_total, false));
+				sprintf(buffer, "%4i:P %4i %4i %4i  %4i      ", m35_2.erotations/(int) t1_time, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u_total, false));
 				eaDogM_WriteStringAtPos(4, 0, buffer);
 				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(current_error, true));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
-				sprintf(buffer, "%4i:S %4i %4i %4i  Pace %i", V.motor_speed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps, V.pacing);
+				sprintf(buffer, "%4i:S %4i %4i %4i  ", V.TimeUsed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
-				sprintf(buffer, "%4i:D %4i %4i %4i  S %i    ", m35_4.current, m35_2.duty, m35_3.duty, m35_4.duty, m35_4.speed);
+				sprintf(buffer, "%4i:Drive     ", m35_4.current);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
-				sprintf(buffer, "Drive mHz %4.5f  %f  ", mHz, mHz_raw);
-				eaDogM_WriteStringAtPos(8, 0, buffer);
-				sprintf(buffer, "QEI   mHz %4.5f  %f  ", mHz_real, mHz_real_raw);
-				eaDogM_WriteStringAtPos(9, 0, buffer);
-				sprintf(buffer, "Velo Err %4.2f Slip %4.2f  ", pi_velocity_error, sr_slip);
-				eaDogM_WriteStringAtPos(10, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
-				sprintf(buffer, "%i    ", (int) t1_time);
-				eaDogM_WriteStringAtPos(13, 0, buffer);
 				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    ", (((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0);
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph(true, false);
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 333);
+				StartTimer(TMR_DISPLAY, 1);
 			}
+		}
+#endif
+		if (TimerDone(TMR_BLINK)) {
+			StartTimer(TMR_BLINK, 1000);
+			RESET_LED_Toggle();
 		}
 	}
 

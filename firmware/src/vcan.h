@@ -19,7 +19,10 @@ extern "C" {
 #include <stdio.h>
 
 	/* Use Brushed DC Motor routines */
-#define BDCM
+//#define BDCM
+	/* 400Hz generator */
+#define G400HZ
+//#define G400HZ_NODIS	
 
 	/*
 	 * jumper pin settings JP4
@@ -45,9 +48,9 @@ extern "C" {
 #ifdef HVDC_M
 #define MBLOCK			1600
 #define MIDLE			1500  // motor idle current
-#define MPCURRENT		800  // setpoint for motor current
+#define MPCURRENT		6000  // setpoint for motor current
 #define motor_error_stop	ENCODER_PULSES_PER_REV/2000
-#define motor_volts		1800 // limits amount of current at max torque, TI motor and AC servo motor
+#define motor_volts		12000 // limits amount of current at max torque, TI motor and AC servo motor
 #else
 #define MBLOCK			2200
 #define MIDLE			2400  // motor idle current

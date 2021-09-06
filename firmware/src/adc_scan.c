@@ -33,7 +33,9 @@ void end_of_adc_scan(void)
 	}
 	IFS3CLR = _IFS3_AD1EOSIF_MASK; // Clear the interrupt
 #ifndef BDCM
+#ifndef G400HZ
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // scan re-trigger
+#endif
 #endif
 }
 

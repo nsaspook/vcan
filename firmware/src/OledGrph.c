@@ -1015,7 +1015,7 @@ void OledMoveLeft(void)
 {
 	/* Are we at the left edge of the display already
 	 */
-	if (((pbOledCur - rgbOledBmp) & ((ccolOledMax<<1) - 1)) == 0) { // check for bad edge limiting
+	if (((pbOledCur - rgbOledBmp) & ((ccolOledMax << 1) - 1)) == 0) { // check for bad edge limiting
 		return;
 	}
 
@@ -1046,9 +1046,13 @@ void OledMoveRight(void)
 {
 	/* Are we at the right edge of the display already
 	 */
-	if (((pbOledCur - rgbOledBmp) & (ccolOledMax - 1)) == ((ccolOledMax<<1) - 1)) { // check for bad edge limiting
+	if (((pbOledCur - rgbOledBmp) & (ccolOledMax - 1)) == (ccolOledMax - 1)) {
 		return;
 	}
+
+//	if (((pbOledCur - rgbOledBmp) & (ccolOledMax - 1)) == ((ccolOledMax << 1) - 1)) { // check for bad edge limiting
+//		return;
+//	}
 
 	/* Not at the right edge, so go forward one byte
 	 */

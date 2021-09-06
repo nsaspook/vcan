@@ -15,10 +15,10 @@ extern "C" {
 
 	//#define NOINDEX
 
-#define sine_res	3600
+#define sine_res	360
 #define sinea		0
-#define	sineb		1200
-#define sinec		2400
+#define	sineb		120
+#define sinec		240
 
 	/*
 	 * PI limits
