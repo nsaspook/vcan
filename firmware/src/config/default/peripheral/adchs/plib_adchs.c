@@ -62,8 +62,8 @@ void ADCHS_Initialize()
     ADC7CFG = DEVADC7;
 
     ADCCON1 = 0x630000;
-    ADCCON2 = 0xf0001;
-    ADCCON3 = 0x85002000;
+    ADCCON2 = 0x50001;
+    ADCCON3 = 0x80002000;
 
     ADCTRGMODE = 0x0;
 
@@ -84,7 +84,7 @@ void ADCHS_Initialize()
 
     /* Input scan */
     ADCCSS1 = 0x824802;
-    ADCCSS2 = 0x340030; 
+    ADCCSS2 = 0x200030; 
 
     /* Turn ON ADC */
     ADCCON1bits.ON = 1;

@@ -367,7 +367,7 @@ void my_time(uint32_t status, uintptr_t context)
 {
 	t1_time++;
 #ifdef G400HZ
-	start_adc_scan();
+	//	start_adc_scan();
 #endif
 }
 
@@ -524,12 +524,21 @@ int main(void)
 	QEI2_Start();
 	QEI3_Start();
 	m35_ptr = &m35_3;
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty); // neutral channel set to zero reference
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, duty_max);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, duty_max);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, duty_max);
 
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
+
+	//Module CTMU for temp diode current
+	PMD1bits.CTMUMD = 0; //Enable CTMU Module
+	CTMUCONbits.TGEN = 0; // TGEN = 0 for enable current through diode
+	CTMUCONbits.EDG1STAT = 1; // EDGESTAT1 = EDGESTAT2  for enable current trough diode
+	CTMUCONbits.EDG2STAT = 1; // EDGESTAT1 = EDGESTAT2  for enable current trough diode
+	CTMUCONbits.IRNG = 0b11; //100xBase current level
+	CTMUCONbits.ON = 1; // CTMU is ON
 
 #ifdef EDOGM
 	init_display();
@@ -579,8 +588,6 @@ int main(void)
 	StartTimer(TMR_MOTOR, 1);
 	StartTimer(TMR_DISPLAY, 500);
 	StartTimer(TMR_VEL, 1000);
-
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
 
 	/* Start system tick timer */
 	CORETIMER_Start();
@@ -691,11 +698,11 @@ int main(void)
 				/*
 				 * show some test results on the LCD screen
 				 */
-				sprintf(buffer, "Phase    L1   L2   L3  ");
+				sprintf(buffer, "Phase    L1   L2   L3     N");
 				eaDogM_WriteStringAtPos(3, 0, buffer);
-				sprintf(buffer, "%4i:P %4i %4i %4i  %4i      ", m35_2.erotations/(int) t1_time, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u_total, false));
+				sprintf(buffer, "%4i:P %4i %4i %4i  %4i      ", m35_2.erotations / (int) t1_time, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u1ai, false));
 				eaDogM_WriteStringAtPos(4, 0, buffer);
-				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(current_error, true));
+				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(u1ai, true));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
 				sprintf(buffer, "%4i:S %4i %4i %4i  ", V.TimeUsed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
@@ -704,7 +711,7 @@ int main(void)
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
-				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    ", (((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0);
+				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    ", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4));
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph(true, false);
 				OledUpdate();

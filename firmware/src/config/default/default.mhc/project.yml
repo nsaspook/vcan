@@ -27,13 +27,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: null
-- generatedChecksum: FDB6C30FB59D313D88304837D62F10D1
+- generatedChecksum: 2CC991FCD91BDDD69750CFF6E9E7268D
   logicalPath: config/default/peripheral/adchs
   name: plib_adchs.c
   physicalPath: peripheral/adchs
   security: NON_SECURE
   type: SOURCE
-  userChecksum: FDB6C30FB59D313D88304837D62F10D1
+  userChecksum: 2CC991FCD91BDDD69750CFF6E9E7268D
 - generatedChecksum: E7A7CC95533908670EF7D9FEFA62CB4C
   logicalPath: config/default/peripheral/clk
   name: plib_clk.c

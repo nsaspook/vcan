@@ -1,5 +1,6 @@
 #include "vcan.h"
 #include "timers.h"
+#include "adc_scan.h"
 
 extern volatile uint16_t tickCount[TMR_COUNT];
 
@@ -46,6 +47,9 @@ void timer_ms_tick(uint32_t status, uintptr_t context)
 {
 	static uint8_t i;
 
+#ifdef G400HZ
+	start_adc_scan();
+#endif
 	//Decrement each software timer
 	for (i = 0; i < TMR_COUNT; i++) {
 		if (tickCount[i] != 0) {
