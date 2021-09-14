@@ -117,7 +117,7 @@ extern "C" {
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <proc/p32mk1024mcf100.h>
+#include <proc/p32mk1024mcm100.h>
 #include "config/default/definitions.h"                 // SYS function prototypes
 #include "tests.h"
 #include "m35qei.h"

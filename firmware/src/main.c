@@ -79,7 +79,7 @@ volatile struct QEI_DATA m35_1 = {
 	.duty = MPCURRENT, // default motor duty
 },
 m35_2 = {
-	.duty = 0, // default motor duty
+	.duty = MPCURRENT, // default motor duty
 	.gain = error_gain, // motor position encoder gain
 	.sine_steps = sinea,
 	.pole_pairs = NUM_POLE_PAIRS,
@@ -90,7 +90,7 @@ m35_2 = {
 	.set = false,
 },
 m35_3 = {
-	.duty = 0,
+	.duty = MPCURRENT,
 	.gain = pos_gain, // input position encoder gain
 	.sine_steps = sineb,
 	.phaseIncrement = PHASE_INC,
@@ -98,7 +98,7 @@ m35_3 = {
 	.phaseAccumulator = 0,
 },
 m35_4 = {
-	.duty = 0,
+	.duty = MPCURRENT,
 	.gain = herror_gain, // PWM sine-wave gain
 	.sine_steps = sinec,
 	.speed = MOTOR_SPEED,
@@ -596,12 +596,7 @@ int main(void)
 	BDC_motor(1);
 #endif
 
-	/*
-	 * enable motor channels
-	 */
-	U1_EN_Set();
-	U2_EN_Set();
-	MCPWM_Start();
+
 
 	V.vcan_state = V_home;
 	//	TMR3_Start(); // start auto movement functions
@@ -614,7 +609,7 @@ int main(void)
 	TMR2_CallbackRegister(wave_gen, 0);
 	TMR2_Start();
 	// setup motor position values
-	m35_4.current = MBLOCK;
+	m35_4.current = MPCURRENT;
 	V.pacing = 1;
 	phase_duty(&m35_2, m35_4.current, V.m_speed, V.pacing);
 	phase_duty(&m35_3, m35_4.current, V.m_speed, V.pacing);
@@ -624,6 +619,13 @@ int main(void)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
+		/*
+	 * enable inverter channels
+	 */
+	U1_EN_Set();
+	U2_EN_Set();
+	MCPWM_Start();
+	
 	V.pwm_stop = false; // let ISR generate waveforms
 
 	/*
@@ -708,6 +710,8 @@ int main(void)
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%4i:Drive     ", m35_4.current);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
+				sprintf(buffer, "%4i:D %5i %5i %5i  ", V.TimeUsed, m35_2.duty, m35_3.duty, m35_4.duty);
+				eaDogM_WriteStringAtPos(8, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);

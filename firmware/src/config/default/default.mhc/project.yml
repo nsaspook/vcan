@@ -6,20 +6,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: 4740AACCBC4C1947D22D226FDE20FA79
+- generatedChecksum: 10892489B1A84BFBBA017D10ED1B7252
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 4740AACCBC4C1947D22D226FDE20FA79
-- generatedChecksum: 0A46E39A107685EF27AB9CB4239F53CC
+  userChecksum: 10892489B1A84BFBBA017D10ED1B7252
+- generatedChecksum: 4FB7848491B0A761DECD59F3E40811FB
   logicalPath: config/default
   name: interrupts.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: F47AC7DE9D9EF149BD4C21B6FBCC8BEA
+  userChecksum: 4F9EDF3F4EECD3BECCF378DADC0FAF28
 - generatedChecksum: null
   logicalPath: ''
   name: main.c
@@ -27,13 +27,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: null
-- generatedChecksum: 2CC991FCD91BDDD69750CFF6E9E7268D
+- generatedChecksum: 5F1DA3608A85FE20A0E655E5FDE37758
   logicalPath: config/default/peripheral/adchs
   name: plib_adchs.c
   physicalPath: peripheral/adchs
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 2CC991FCD91BDDD69750CFF6E9E7268D
+  userChecksum: 5F1DA3608A85FE20A0E655E5FDE37758
 - generatedChecksum: E7A7CC95533908670EF7D9FEFA62CB4C
   logicalPath: config/default/peripheral/clk
   name: plib_clk.c
@@ -62,13 +62,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: F0F77E9605002F86303776FD504751EB
-- generatedChecksum: E881653F86873458649F3940F2AEAE68
+- generatedChecksum: 0A5D112DD1679431A5E0A300F756B275
   logicalPath: config/default/peripheral/evic
   name: plib_evic.c
   physicalPath: peripheral/evic
   security: NON_SECURE
   type: SOURCE
-  userChecksum: E881653F86873458649F3940F2AEAE68
+  userChecksum: 0A5D112DD1679431A5E0A300F756B275
 - generatedChecksum: 401F7A3007AD2D44CDDF21968285C4BC
   logicalPath: config/default/peripheral/gpio
   name: plib_gpio.c
@@ -139,27 +139,27 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: C8253EC66B72A8CCFA1FAC95CDF8F7A2
-- generatedChecksum: 3EFF0789604EA50341F5545399226230
+- generatedChecksum: 6269829CBF3F4604C872FB3521F1C17F
   logicalPath: config/default/peripheral/uart
   name: plib_uart2.c
   physicalPath: peripheral/uart
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 3EFF0789604EA50341F5545399226230
-- generatedChecksum: 50ADA63476D86E190C78512CFC8ED46D
+  userChecksum: 6269829CBF3F4604C872FB3521F1C17F
+- generatedChecksum: B756DAF94905972282E2AF6597235E45
   logicalPath: config/default/peripheral/uart
   name: plib_uart3.c
   physicalPath: peripheral/uart
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 50ADA63476D86E190C78512CFC8ED46D
-- generatedChecksum: 9088BFBE527D46AEB3E4C330D56F4E9D
+  userChecksum: B756DAF94905972282E2AF6597235E45
+- generatedChecksum: 0B206DF0C724134DA01E790E2E3ABC34
   logicalPath: config/default/peripheral/uart
   name: plib_uart6.c
   physicalPath: peripheral/uart
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 9088BFBE527D46AEB3E4C330D56F4E9D
+  userChecksum: 0B206DF0C724134DA01E790E2E3ABC34
 - generatedChecksum: 7806B30ECAE0D18D08CD583D8775530D
   logicalPath: config/default/stdio
   name: xc32_monitor.c
@@ -167,13 +167,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 7806B30ECAE0D18D08CD583D8775530D
-- generatedChecksum: F50236B70613DF099DB7FD8D8D089CF4
+- generatedChecksum: E6DF6E22BDB888F72A4B98C0583C097F
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: F50236B70613DF099DB7FD8D8D089CF4
+  userChecksum: E6DF6E22BDB888F72A4B98C0583C097F
 - generatedChecksum: E189C26B2269F8DE46033CCD0621958D
   logicalPath: config/default
   name: device.h
@@ -195,13 +195,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: C01AE18A7DFCD4A8BA698F9EF951536B
-- generatedChecksum: C33A7F48915DF50A82501D3A25FB312C
+- generatedChecksum: 5485BB926F2ECC7BD1D7B2DE51ED2795
   logicalPath: config/default/peripheral/adchs
   name: plib_adchs_common.h
   physicalPath: peripheral/adchs
   security: NON_SECURE
   type: HEADER
-  userChecksum: C33A7F48915DF50A82501D3A25FB312C
+  userChecksum: 5485BB926F2ECC7BD1D7B2DE51ED2795
 - generatedChecksum: 7066CC390335CF75126E2A50C46E3BDD
   logicalPath: config/default/peripheral/clk
   name: plib_clk.h
@@ -230,13 +230,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: B97B50D5217602B30A68AA8AA5D77BFB
-- generatedChecksum: 54A7D9971CB5133CCFF9A6ABA1CEC859
+- generatedChecksum: DDBD13A1702993E0D9317998A7363BC2
   logicalPath: config/default/peripheral/evic
   name: plib_evic.h
   physicalPath: peripheral/evic
   security: NON_SECURE
   type: HEADER
-  userChecksum: 54A7D9971CB5133CCFF9A6ABA1CEC859
+  userChecksum: DDBD13A1702993E0D9317998A7363BC2
 - generatedChecksum: B82243085129ECB8072083ADAC39B5E4
   logicalPath: config/default/peripheral/gpio
   name: plib_gpio.h
@@ -377,13 +377,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 2C8543317B3F067432097AB9BD3E8672
-- generatedChecksum: 6DE570F802207D507CD7CBFFF6DD97AD
+- generatedChecksum: 60938F3EBAF933059F4892CBE43139F8
   logicalPath: config/default
-  name: p32MK1024MCF100.ld
+  name: p32MK1024MCM100.ld
   physicalPath: ''
   security: NON_SECURE
   type: LINKER
-  userChecksum: 6DE570F802207D507CD7CBFFF6DD97AD
+  userChecksum: 60938F3EBAF933059F4892CBE43139F8
 format_version: v1.0
 libraries: []
 settings:
@@ -392,7 +392,7 @@ settings:
   delimiter: ;
   key: extra-include-directories
   security: NON_SECURE
-  value: ../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP;
+  value: ../src;../src/config/default;../src/packs/PIC32MK1024MCM100_DFP;
 - append: false
   category: C32
   delimiter: ''
@@ -422,7 +422,7 @@ settings:
   delimiter: ;
   key: extra-include-directories
   security: NON_SECURE
-  value: ../src;../src/config/default;../src/packs/PIC32MK1024MCF100_DFP;
+  value: ../src;../src/config/default;../src/packs/PIC32MK1024MCM100_DFP;
 - append: false
   category: C32CPP
   delimiter: ''

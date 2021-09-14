@@ -1,5 +1,5 @@
 
-#include <proc/p32mk1024mcf100.h>
+#include <proc/p32mk1024mcm100.h>
 #include "m35qei.h"
 #include <xc.h>
 #include <stdio.h>

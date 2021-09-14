@@ -813,14 +813,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '52224'}
+        attributes: {id: mcpwm, value: '1007147068'}
   - type: Hex
     attributes: {id: MCPWM_IOCON8}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '52224'}
+        attributes: {id: mcpwm, value: '1009768508'}
   - type: Hex
     attributes: {id: MCPWM_IOCON9}
     children:
