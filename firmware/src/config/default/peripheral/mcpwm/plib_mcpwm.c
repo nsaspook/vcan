@@ -83,7 +83,7 @@ void MCPWM_Initialize (void)
 
     /* IOCON1 register  */
     /*  SWAP    = 0*/
-    /*  PMOD    = 0*/
+    /*  PMOD    = 1*/
     /*  POLH    = 0*/
     /*  POLL    = 0*/
     /*  FLTDAT  = 0b11 */
@@ -94,7 +94,7 @@ void MCPWM_Initialize (void)
     /*  CLMOD  = 0 */
     /*  CLPOL  = 0  */
     /*  CLSRC  = 15  */
-    IOCON1 = 0x3c27c03c;
+    IOCON1 = 0x3c27c43c;
 
     PDC1 = 6000;
     SDC1 = 500;

@@ -79,7 +79,7 @@ volatile struct QEI_DATA m35_1 = {
 	.duty = MPCURRENT, // default motor duty
 },
 m35_2 = {
-	.duty = MPCURRENT, // default motor duty
+	.duty = 0, // default motor duty
 	.gain = error_gain, // motor position encoder gain
 	.sine_steps = sinea,
 	.pole_pairs = NUM_POLE_PAIRS,
@@ -90,7 +90,7 @@ m35_2 = {
 	.set = false,
 },
 m35_3 = {
-	.duty = MPCURRENT,
+	.duty = 0,
 	.gain = pos_gain, // input position encoder gain
 	.sine_steps = sineb,
 	.phaseIncrement = PHASE_INC,
@@ -98,7 +98,7 @@ m35_3 = {
 	.phaseAccumulator = 0,
 },
 m35_4 = {
-	.duty = MPCURRENT,
+	.duty = 0,
 	.gain = herror_gain, // PWM sine-wave gain
 	.sine_steps = sinec,
 	.speed = MOTOR_SPEED,
@@ -352,7 +352,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	/*
 	 * set channel duty cycle for motor sinewave outputs at ISR time 1ms intervals
 	 */
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
@@ -524,7 +524,7 @@ int main(void)
 	QEI2_Start();
 	QEI3_Start();
 	m35_ptr = &m35_3;
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty); // neutral channel set to zero reference
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, duty_max); // neutral channel set to zero reference
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, duty_max);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, duty_max);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, duty_max);
@@ -615,7 +615,7 @@ int main(void)
 	phase_duty(&m35_3, m35_4.current, V.m_speed, V.pacing);
 	phase_duty(&m35_4, m35_4.current, V.m_speed, V.pacing);
 
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
@@ -719,7 +719,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph(true, false);
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 1);
+				StartTimer(TMR_DISPLAY, 200);
 			}
 		}
 #endif
