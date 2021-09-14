@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=vcan_mkmc.X
+PROJECTNAME=i400hz3ph.X
 
 # Active Configuration
 DEFAULTCONF=default
