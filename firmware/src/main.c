@@ -340,12 +340,17 @@ void wave_gen(uint32_t status, uintptr_t context)
 	/*
 	 * generate a current error drive signal
 	 */
-	m35_4.current = MPCURRENT;
+	m35_4.current = MPCURRENT + POS3CNT;
 	/*
 	 * limit motor drive current
 	 */
-	if (m35_4.current > motor_volts) {
-		m35_4.current = motor_volts;
+	if (m35_4.current > inverter_volts) {
+		m35_4.current = inverter_volts;
+		POS3CNT = inverter_volts - MPCURRENT;
+	}
+	if (m35_4.current < 0) {
+		m35_4.current = 0;
+		POS3CNT = (-MPCURRENT);
 	}
 	m35_4.current_prev = m35_4.current;
 
@@ -561,14 +566,14 @@ int main(void)
 		OledUpdate();
 		WaitMs(5000);
 	} else {
-		sprintf(buffer, "VCAN %s %s       ", build_date, build_time);
+		sprintf(buffer, "I400HZ3P %s %s       ", build_date, build_time);
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
 		sprintf(buffer, " Options: 1:%d 2:%d ", option1_Get(), option2_Get());
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
-		WaitMs(500);
+		WaitMs(1500);
 	}
 
 
@@ -619,13 +624,13 @@ int main(void)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
-		/*
+	/*
 	 * enable inverter channels
 	 */
 	U1_EN_Set();
 	U2_EN_Set();
 	MCPWM_Start();
-	
+
 	V.pwm_stop = false; // let ISR generate waveforms
 
 	/*
@@ -691,10 +696,8 @@ int main(void)
 			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
 				OledClearBuffer();
-				sprintf(buffer, " Options: 1:%d 2:%d   %4.1f", option1_Get(), option2_Get(), pi_current_error);
-				eaDogM_WriteStringAtPos(0, 0, buffer);
 				m35_ptr = &m35_2;
-				sprintf(buffer, "C %4i:%i:%u      ", POS2CNT, VEL2HLD, INT2HLD);
+				sprintf(buffer, "Control %4i:%i:%u      ", POS3CNT, VEL3HLD, INT3HLD);
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_3;
 				/*
@@ -708,7 +711,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(5, 0, buffer);
 				sprintf(buffer, "%4i:S %4i %4i %4i  ", V.TimeUsed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
-				sprintf(buffer, "%4i:Drive     ", m35_4.current);
+				sprintf(buffer, "%4i:Drive    %4i ", m35_4.current, POS3CNT);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				sprintf(buffer, "%4i:D %5i %5i %5i  ", V.TimeUsed, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
@@ -719,7 +722,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph(true, false);
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 200);
+				StartTimer(TMR_DISPLAY, 100);
 			}
 		}
 #endif

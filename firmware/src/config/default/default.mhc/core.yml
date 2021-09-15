@@ -1053,7 +1053,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: ''}
+        attributes: {value: PWMF5}
   - type: String
     attributes: {id: BSP_PIN_41_FUNCTION_TYPE}
     children:
@@ -1088,7 +1088,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: ''}
+        attributes: {value: PWMF6}
   - type: String
     attributes: {id: BSP_PIN_42_FUNCTION_TYPE}
     children:
@@ -1270,7 +1270,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: ''}
+        attributes: {value: PWMF15}
   - type: String
     attributes: {id: BSP_PIN_50_FUNCTION_TYPE}
     children:

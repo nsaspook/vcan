@@ -72,8 +72,8 @@ void ADCHS_Initialize()
     ADCTRG3 = 0x3000000; 
     ADCTRG4 = 0x30000; 
     ADCTRG5 = 0x300; 
-    
-    
+    ADCTRG6 = 0x0; 
+    ADCTRG7 = 0x0; 
 
     ADCTRGSNS = 0x0;
 
