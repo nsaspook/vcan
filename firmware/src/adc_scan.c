@@ -36,6 +36,7 @@ void end_of_adc_scan(void)
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // scan re-trigger
 #endif
 #endif
+		DEBUGB0_Clear();
 }
 
 void init_end_of_adc_scan(void)
@@ -72,5 +73,6 @@ int32_t hb_current(const int32_t adc_value, const bool motor)
 
 void start_adc_scan(void)
 {
+		DEBUGB0_Set();
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // scan re-trigger	
 }

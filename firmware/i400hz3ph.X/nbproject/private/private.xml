@@ -5,6 +5,7 @@
         <group>
             <file>file:/root/vcan/firmware/src/faults.h</file>
             <file>file:/root/vcan/firmware/src/timers.c</file>
+            <file>file:/root/vcan/firmware/src/timers.h</file>
             <file>file:/root/vcan/firmware/src/adc_scan.c</file>
             <file>file:/root/vcan/firmware/src/dio.c</file>
             <file>file:/root/vcan/firmware/src/main.c</file>

@@ -326,7 +326,7 @@ time_t time(time_t * Time)
  */
 void wave_gen(uint32_t status, uintptr_t context)
 {
-	DEBUGB0_Set();
+	//	DEBUGB0_Set();
 	if (V.pwm_stop && V.pwm_update)
 		return;
 
@@ -365,7 +365,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	V.pwm_update = false;
-	DEBUGB0_Clear();
+	//	DEBUGB0_Clear();
 }
 
 /*
@@ -608,6 +608,7 @@ int main(void)
 	StartTimer(TMR_MOTOR, 1);
 	StartTimer(TMR_DISPLAY, 500);
 	StartTimer(TMR_VEL, 1000);
+	StartTimer(TMR_ADC, 10);
 
 	/* Start system tick timer */
 	CORETIMER_Start();
@@ -738,10 +739,13 @@ int main(void)
 				motor_graph(true, false);
 				OledUpdate();
 				StartTimer(TMR_DISPLAY, 100);
-				start_adc_scan();
 			}
 		}
 #endif
+		if (TimerDone(TMR_ADC)) {
+			StartTimer(TMR_ADC, 10);
+			start_adc_scan();
+		}
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, 1000);
 			RESET_LED_Toggle();
