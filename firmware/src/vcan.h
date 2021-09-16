@@ -17,12 +17,15 @@ extern "C" {
 #include <xc.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 	/* Use Brushed DC Motor routines */
-//#define BDCM
+	//#define BDCM
 	/* 400Hz generator */
 #define G400HZ
-//#define G400HZ_NODIS	
+	//#define G400HZ_NODIS	
+#define FLT15_IN4	3
+#define FAULT_DELAY	2
 
 	/*
 	 * jumper pin settings JP4
@@ -140,10 +143,11 @@ extern "C" {
 
 	struct V_type {
 		uint32_t StartTime, TimeUsed;
-		volatile uint32_t pacing, pwm_update, pwm_stop;
+		volatile uint32_t pacing, pwm_update, pwm_stop, fault_count, fault_ticks;
 		V_STATE vcan_state;
 		M_SPEED m_speed;
 		int32_t motor_speed;
+		volatile bool fault_active;
 	};
 
 #define KNOB1_INC	POS3CNT
