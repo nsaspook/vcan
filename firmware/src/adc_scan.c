@@ -7,7 +7,8 @@ void end_of_adc_scan(void)
 	 * check for ADC scanning done, a 'end of scan' interrupt ISR
 	 */
 
-
+	DEBUGB0_Clear();
+	DEBUGB0_Set();
 	if ((ADCCON2 & _ADCCON2_EOSRDY_MASK)) { //  End of Scan Interrupt Status bit
 		/*
 		 * update program variables from the ADC result registers
@@ -36,7 +37,7 @@ void end_of_adc_scan(void)
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // scan re-trigger
 #endif
 #endif
-		DEBUGB0_Clear();
+	DEBUGB0_Clear();
 }
 
 void init_end_of_adc_scan(void)
@@ -73,6 +74,6 @@ int32_t hb_current(const int32_t adc_value, const bool motor)
 
 void start_adc_scan(void)
 {
-		DEBUGB0_Set();
+	DEBUGB0_Set();
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // scan re-trigger	
 }

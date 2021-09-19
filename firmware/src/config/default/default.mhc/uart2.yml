@@ -65,6 +65,8 @@ children:
       children:
       - type: Dynamic
         attributes: {id: uart2, value: '2'}
+      - type: User
+        attributes: {value: '2'}
   - type: Boolean
     attributes: {id: UART_RING_BUFFER_ENABLE}
     children:

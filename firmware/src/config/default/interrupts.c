@@ -186,22 +186,22 @@ void __ISR(_QEI2_VECTOR, ipl3SRS) QEI2_Handler (void)
 {
 }
 
-void __ISR(_PWM1_VECTOR, ipl1SRS) PWM1_Handler (void)
+void __ISR(_PWM1_VECTOR, ipl5SRS) PWM1_Handler (void)
 {
     PWM1_InterruptHandler();
 }
 
-void __ISR(_PWM2_VECTOR, ipl1SRS) PWM2_Handler (void)
+void __ISR(_PWM2_VECTOR, ipl5SRS) PWM2_Handler (void)
 {
     PWM2_InterruptHandler();
 }
 
-void __ISR(_PWM3_VECTOR, ipl1SRS) PWM3_Handler (void)
+void __ISR(_PWM3_VECTOR, ipl5SRS) PWM3_Handler (void)
 {
     PWM3_InterruptHandler();
 }
 
-void __ISR(_PWM4_VECTOR, ipl1SRS) PWM4_Handler (void)
+void __ISR(_PWM4_VECTOR, ipl5SRS) PWM4_Handler (void)
 {
     PWM4_InterruptHandler();
 }

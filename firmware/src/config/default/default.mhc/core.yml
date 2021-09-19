@@ -3747,6 +3747,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: PWM1_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_173_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '5'}
+  - type: Hex
+    attributes: {id: EVIC_173_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '5120'}
   - type: Boolean
     attributes: {id: EVIC_174_ENABLE}
     children:
@@ -3768,6 +3782,34 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: PWM2_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_174_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '5'}
+  - type: Hex
+    attributes: {id: EVIC_174_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '1310720'}
+  - type: Combo
+    attributes: {id: EVIC_174_SUBPRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: Hex
+    attributes: {id: EVIC_174_SUBPRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '65536'}
   - type: Boolean
     attributes: {id: EVIC_175_ENABLE}
     children:
@@ -3789,6 +3831,34 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: PWM3_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_175_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '5'}
+  - type: Hex
+    attributes: {id: EVIC_175_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '335544320'}
+  - type: Combo
+    attributes: {id: EVIC_175_SUBPRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '2'}
+  - type: Hex
+    attributes: {id: EVIC_175_SUBPRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '33554432'}
   - type: Boolean
     attributes: {id: EVIC_176_ENABLE}
     children:
@@ -3810,6 +3880,34 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: PWM4_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_176_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '5'}
+  - type: Hex
+    attributes: {id: EVIC_176_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '20'}
+  - type: Combo
+    attributes: {id: EVIC_176_SUBPRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '3'}
+  - type: Hex
+    attributes: {id: EVIC_176_SUBPRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '3'}
   - type: Boolean
     attributes: {id: EVIC_189_ENABLE}
     children:

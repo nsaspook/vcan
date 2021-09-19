@@ -76,10 +76,10 @@ void EVIC_Initialize( void )
     IPC41SET = 0x40000 | 0x0;  /* UART6_TX:  Priority 1 / Subpriority 0 */
     IPC42SET = 0xc00 | 0x0;  /* QEI1:  Priority 3 / Subpriority 0 */
     IPC42SET = 0xc0000 | 0x0;  /* QEI2:  Priority 3 / Subpriority 0 */
-    IPC43SET = 0x400 | 0x0;  /* PWM1:  Priority 1 / Subpriority 0 */
-    IPC43SET = 0x40000 | 0x0;  /* PWM2:  Priority 1 / Subpriority 0 */
-    IPC43SET = 0x4000000 | 0x0;  /* PWM3:  Priority 1 / Subpriority 0 */
-    IPC44SET = 0x4 | 0x0;  /* PWM4:  Priority 1 / Subpriority 0 */
+    IPC43SET = 0x1400 | 0x0;  /* PWM1:  Priority 5 / Subpriority 0 */
+    IPC43SET = 0x140000 | 0x10000;  /* PWM2:  Priority 5 / Subpriority 1 */
+    IPC43SET = 0x14000000 | 0x2000000;  /* PWM3:  Priority 5 / Subpriority 2 */
+    IPC44SET = 0x14 | 0x3;  /* PWM4:  Priority 5 / Subpriority 3 */
     IPC47SET = 0x400 | 0x0;  /* QEI3:  Priority 1 / Subpriority 0 */
     IPC54SET = 0x4000000 | 0x0;  /* SPI3_RX:  Priority 1 / Subpriority 0 */
     IPC55SET = 0x4 | 0x0;  /* SPI3_TX:  Priority 1 / Subpriority 0 */

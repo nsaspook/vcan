@@ -9,6 +9,7 @@
             <file>file:/root/vcan/firmware/src/adc_scan.c</file>
             <file>file:/root/vcan/firmware/src/dio.c</file>
             <file>file:/root/vcan/firmware/src/main.c</file>
+            <file>file:/root/vcan/firmware/src/tests.c</file>
             <file>file:/root/vcan/firmware/src/vcan.h</file>
             <file>file:/root/vcan/firmware/src/config/default/peripheral/gpio/plib_gpio.h</file>
             <file>file:/root/vcan/firmware/src/config/default/peripheral/qei/plib_qei3.c</file>
