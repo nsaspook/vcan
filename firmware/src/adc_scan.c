@@ -7,23 +7,23 @@ void end_of_adc_scan(void)
 	 * check for ADC scanning done, a 'end of scan' interrupt ISR
 	 */
 
-
+	DEBUGB0_Clear();
+	DEBUGB0_Set();
 	if ((ADCCON2 & _ADCCON2_EOSRDY_MASK)) { //  End of Scan Interrupt Status bit
 		/*
 		 * update program variables from the ADC result registers
 		 */
-		u2ai = ADCHS_ChannelResultGet(23U); // JP5 pin 7, AN23, FBB2/RG15
-		u2bi = ADCHS_ChannelResultGet(ADCHS_CH14); // JP5 pin 6, AN14, FBA2/RE14
-		u1ai = ADCHS_ChannelResultGet(37U); // JP5 pin 5, AN37, FBA1/RF12
-		u1bi = ADCHS_ChannelResultGet(36U); // JP5 pin 4, AN36, FBB1/RF13
-		an_data[ANA1] = ADCHS_ChannelResultGet(ADCHS_CH1); // JP5 pin x, AN1, ANA1/RA1
-		an_data[POT1] = ADCHS_ChannelResultGet(ADCHS_CH11); // JP5 pin x, AN11 POT1/RC11
-//		an_data[POT2] = ADCHS_ChannelResultGet(ADCHS_CH17); // JP5 pin x, AN17 POT2/RG8
-		an_data[IVREF] = ADCHS_ChannelResultGet(ADCHS_CH50); // IVREF 1.2V (internal AN50)
-//		an_data[VBAT2] = ADCHS_ChannelResultGet(ADCHS_CH52); // VBAT/2 (internal AN52)
+		u2ai = ADCHS_ChannelResultGet(ADCHS_CH14); // JP5 pin 6, AN14, FBA2/RE14
+		u2bi = ADCHS_ChannelResultGet(ADCHS_CH23); // JP5 pin 7, AN23, FBB2/RG15
+		u1ai = ADCHS_ChannelResultGet(ADCHS_CH37); // JP5 pin 5, AN37, FBA1/RF12
+		u1bi = ADCHS_ChannelResultGet(ADCHS_CH36); // JP5 pin 4, AN36, FBB1/RF13
+		an_data[ANA1] = ADCHS_ChannelResultGet(ADCHS_CH1); // JP5 pin 14, AN1, ANA1/RA1
+		an_data[POT1] = ADCHS_ChannelResultGet(ADCHS_CH11); // JP5 pin 2, AN11 POT1/RC11
+		an_data[POT2] = ADCHS_ChannelResultGet(ADCHS_CH17); // JP5 pin 11, AN17 POT2/RG8
+		an_data[IVREF] = ADCHS_ChannelResultGet(ADCHS_CH50); // IVREF 1.2V (internal AN50), extern vref+ 2.5-V REF3425
 		an_data[TSENSOR] = ADCHS_ChannelResultGet(ADCHS_CH53); //  CTMU Temperature Sensor (internal AN53)
 		if (!option1_Get()) {
-//			u1bi = u1ai;
+
 		}
 		u1ai = (int32_t) lp_filter_f((double) u1ai, 0); // try filter
 		u1bi = (int32_t) lp_filter_f((double) u1bi, 1);
@@ -37,6 +37,7 @@ void end_of_adc_scan(void)
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // scan re-trigger
 #endif
 #endif
+	DEBUGB0_Clear();
 }
 
 void init_end_of_adc_scan(void)
@@ -73,5 +74,6 @@ int32_t hb_current(const int32_t adc_value, const bool motor)
 
 void start_adc_scan(void)
 {
+	DEBUGB0_Set();
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // scan re-trigger	
 }

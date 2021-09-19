@@ -4,6 +4,6 @@
 #include <xc.h>
 #include <stdio.h>
 
-struct QEI_DATA m35_1, m35_2, m35_3, m35_4, *m35_ptr;
+//struct QEI_DATA m35_1, m35_2, m35_3, m35_4, *m35_ptr;
 
 

@@ -78,6 +78,10 @@ void TIMER_6_InterruptHandler( void );
 void UART6_FAULT_InterruptHandler( void );
 void UART6_RX_InterruptHandler( void );
 void UART6_TX_InterruptHandler( void );
+void PWM1_InterruptHandler( void );
+void PWM2_InterruptHandler( void );
+void PWM3_InterruptHandler( void );
+void PWM4_InterruptHandler( void );
 void SPI3_RX_InterruptHandler( void );
 void SPI3_TX_InterruptHandler( void );
 
@@ -180,6 +184,26 @@ void __ISR(_QEI1_VECTOR, ipl3SRS) QEI1_Handler (void)
 
 void __ISR(_QEI2_VECTOR, ipl3SRS) QEI2_Handler (void)
 {
+}
+
+void __ISR(_PWM1_VECTOR, ipl5SRS) PWM1_Handler (void)
+{
+    PWM1_InterruptHandler();
+}
+
+void __ISR(_PWM2_VECTOR, ipl5SRS) PWM2_Handler (void)
+{
+    PWM2_InterruptHandler();
+}
+
+void __ISR(_PWM3_VECTOR, ipl5SRS) PWM3_Handler (void)
+{
+    PWM3_InterruptHandler();
+}
+
+void __ISR(_PWM4_VECTOR, ipl5SRS) PWM4_Handler (void)
+{
+    PWM4_InterruptHandler();
 }
 
 void __ISR(_QEI3_VECTOR, ipl1SRS) QEI3_Handler (void)

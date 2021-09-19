@@ -33,8 +33,9 @@ bool uart_tests(void)
 	DERE_Set(); // set RS485 port to transmit
 	/*
 	 * RS485 port
+	 * NO ring buffer
 	 */
-	while (UART6_WriteFreeBufferCountGet() < 10);
+//	while (UART6_WriteFreeBufferCountGet() < 10);
 	UART6_Write((uint8_t*) " Tests 6 1", 10);
 	UART6_Write((uint8_t*) " Tests 6 2", 10);
 

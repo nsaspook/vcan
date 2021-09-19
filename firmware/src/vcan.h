@@ -17,12 +17,15 @@ extern "C" {
 #include <xc.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 	/* Use Brushed DC Motor routines */
-//#define BDCM
+	//#define BDCM
 	/* 400Hz generator */
 #define G400HZ
-//#define G400HZ_NODIS	
+	//#define G400HZ_NODIS	
+#define FLT15_IN4	3
+#define FAULT_DELAY	2
 
 	/*
 	 * jumper pin settings JP4
@@ -48,9 +51,10 @@ extern "C" {
 #ifdef HVDC_M
 #define MBLOCK			1600
 #define MIDLE			1500  // motor idle current
-#define MPCURRENT		5800  // setpoint for motor current
+#define MPCURRENT		500  // setpoint for motor current
 #define motor_error_stop	ENCODER_PULSES_PER_REV/2000
 #define motor_volts		12000 // limits amount of current at max torque, TI motor and AC servo motor
+#define inverter_volts		6000  // max inverter voltage setting
 #else
 #define MBLOCK			2200
 #define MIDLE			2400  // motor idle current
@@ -139,10 +143,11 @@ extern "C" {
 
 	struct V_type {
 		uint32_t StartTime, TimeUsed;
-		volatile uint32_t pacing, pwm_update, pwm_stop;
+		volatile uint32_t pacing, pwm_update, pwm_stop, fault_count, fault_ticks;
 		V_STATE vcan_state;
 		M_SPEED m_speed;
 		int32_t motor_speed;
+		volatile bool fault_active;
 	};
 
 #define KNOB1_INC	POS3CNT

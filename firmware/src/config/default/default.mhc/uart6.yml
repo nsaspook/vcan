@@ -50,7 +50,7 @@ children:
       - type: String
         attributes: {id: source}
         children:
-        - {type: Value, value: ../peripheral/uart_02478/templates/plib_uart_ring_buffer.h.ftl}
+        - {type: Value, value: ../peripheral/uart_02478/templates/plib_uart.h.ftl}
   - type: Boolean
     attributes: {id: UART_INTERRUPT_MODE_ENABLE}
     children:
@@ -65,6 +65,8 @@ children:
       children:
       - type: Dynamic
         attributes: {id: uart6, value: '2'}
+      - type: User
+        attributes: {value: '1'}
   - type: Boolean
     attributes: {id: UART_RING_BUFFER_ENABLE}
     children:
@@ -84,7 +86,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: uart6, value: 'true'}
+        attributes: {id: uart6, value: 'false'}
   - type: Comment
     attributes: {id: UART_RING_BUFFER_SIZE_CONFIG}
     children:
@@ -93,7 +95,7 @@ children:
       - type: Boolean
         attributes: {id: visible}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
   - type: Integer
     attributes: {id: UART_RX_RING_BUFFER_SIZE}
     children:
@@ -102,7 +104,7 @@ children:
       - type: Boolean
         attributes: {id: visible}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
   - type: File
     attributes: {id: UART_SOURCE}
     children:
@@ -111,7 +113,7 @@ children:
       - type: String
         attributes: {id: source}
         children:
-        - {type: Value, value: ../peripheral/uart_02478/templates/plib_uart_ring_buffer.c.ftl}
+        - {type: Value, value: ../peripheral/uart_02478/templates/plib_uart.c.ftl}
   - type: Integer
     attributes: {id: UART_TX_RING_BUFFER_SIZE}
     children:
@@ -120,7 +122,7 @@ children:
       - type: Boolean
         attributes: {id: visible}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
   - type: Hex
     attributes: {id: UMODE_VALUE}
     children:

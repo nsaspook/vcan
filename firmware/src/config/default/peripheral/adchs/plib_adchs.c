@@ -56,14 +56,14 @@ void ADCHS_Initialize()
 {
     ADCCON1bits.ON = 0;
     ADC1CFG = DEVADC1;
-    ADC1TIME = 0x3010001;
+    ADC1TIME = 0x302000a;
 
 
     ADC7CFG = DEVADC7;
 
     ADCCON1 = 0x630000;
-    ADCCON2 = 0x50001;
-    ADCCON3 = 0x80002000;
+    ADCCON2 = 0xa0002;
+    ADCCON3 = 0x87002000;
 
     ADCTRGMODE = 0x0;
 
@@ -72,8 +72,8 @@ void ADCHS_Initialize()
     ADCTRG3 = 0x3000000; 
     ADCTRG4 = 0x30000; 
     ADCTRG5 = 0x300; 
-    
-    
+    ADCTRG6 = 0x3000000; 
+    ADCTRG7 = 0x0; 
 
     ADCTRGSNS = 0x0;
 
@@ -83,8 +83,8 @@ void ADCHS_Initialize()
     ADCIMCON4 = 0x0; 
 
     /* Input scan */
-    ADCCSS1 = 0x24802;
-    ADCCSS2 = 0x200000; 
+    ADCCSS1 = 0x824802;
+    ADCCSS2 = 0x240030; 
 
     /* Turn ON ADC */
     ADCCON1bits.ON = 1;

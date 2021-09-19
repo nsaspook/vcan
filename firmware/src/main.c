@@ -71,6 +71,7 @@ IC = M * sin (? + 240)
 #include "scmd.h"
 #include "peripheral/coretimer/plib_coretimer.h"
 #include "gfx.h"
+#include "faults.h"
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 extern t_cli_ctx cli_ctx; // command buffer 
@@ -147,6 +148,8 @@ volatile struct V_type V = {
 	.vcan_state = V_init,
 	.m_speed = M_SLEW,
 	.motor_speed = MOTOR_SPEED,
+	.fault_active = false,
+	.fault_count = 0,
 };
 double mHz = 0.0, mHz_real = 0.0, sr_slip = 0.0, mHz_raw = 0.0, mHz_real_raw = 0.0;
 double pi_current_error = 0.0, pi_velocity_error = 0.0, pi_freq_error = 0.0;
@@ -323,7 +326,7 @@ time_t time(time_t * Time)
  */
 void wave_gen(uint32_t status, uintptr_t context)
 {
-	DEBUGB0_Set();
+	//	DEBUGB0_Set();
 	if (V.pwm_stop && V.pwm_update)
 		return;
 
@@ -340,12 +343,17 @@ void wave_gen(uint32_t status, uintptr_t context)
 	/*
 	 * generate a current error drive signal
 	 */
-	m35_4.current = MPCURRENT;
+	m35_4.current = MPCURRENT + POS3CNT;
 	/*
 	 * limit motor drive current
 	 */
-	if (m35_4.current > motor_volts) {
-		m35_4.current = motor_volts;
+	if (m35_4.current > inverter_volts) {
+		m35_4.current = inverter_volts;
+		POS3CNT = inverter_volts - MPCURRENT;
+	}
+	if (m35_4.current < 0) {
+		m35_4.current = 0;
+		POS3CNT = (-MPCURRENT);
 	}
 	m35_4.current_prev = m35_4.current;
 
@@ -357,7 +365,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	V.pwm_update = false;
-	DEBUGB0_Clear();
+	//	DEBUGB0_Clear();
 }
 
 /*
@@ -368,6 +376,15 @@ void my_time(uint32_t status, uintptr_t context)
 	t1_time++;
 #ifdef G400HZ
 	//	start_adc_scan();
+	if (check_fault()) {
+		V.fault_ticks++;
+		if (V.fault_ticks > FAULT_DELAY) {
+			U1_EN_Set();
+			U2_EN_Set();
+			clear_fault_flag();
+			V.fault_ticks = 0;
+		}
+	};
 #endif
 }
 
@@ -524,6 +541,9 @@ int main(void)
 	QEI2_Start();
 	QEI3_Start();
 	m35_ptr = &m35_3;
+	/*
+	 * default duty cycle
+	 */
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, duty_max); // neutral channel set to zero reference
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, duty_max);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, duty_max);
@@ -561,14 +581,14 @@ int main(void)
 		OledUpdate();
 		WaitMs(5000);
 	} else {
-		sprintf(buffer, "VCAN %s %s       ", build_date, build_time);
+		sprintf(buffer, "I400HZ3P %s %s       ", build_date, build_time);
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
 		sprintf(buffer, " Options: 1:%d 2:%d ", option1_Get(), option2_Get());
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
-		WaitMs(500);
+		WaitMs(1500);
 	}
 
 
@@ -588,6 +608,7 @@ int main(void)
 	StartTimer(TMR_MOTOR, 1);
 	StartTimer(TMR_DISPLAY, 500);
 	StartTimer(TMR_VEL, 1000);
+	StartTimer(TMR_ADC, 10);
 
 	/* Start system tick timer */
 	CORETIMER_Start();
@@ -619,19 +640,30 @@ int main(void)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
-		/*
+	/*
 	 * enable inverter channels
 	 */
 	U1_EN_Set();
 	U2_EN_Set();
+	/*
+	 * fault interrupt call-backs for PWM
+	 */
+	MCPWM_CallbackRegister(MCPWM_CH_1, set_fault, 0);
+	MCPWM_CallbackRegister(MCPWM_CH_2, set_fault, 0);
+	MCPWM_CallbackRegister(MCPWM_CH_3, set_fault, 0);
+	MCPWM_CallbackRegister(MCPWM_CH_4, set_fault, 0);
 	MCPWM_Start();
-	
 	V.pwm_stop = false; // let ISR generate waveforms
 
 	/*
 	 * init serial command parser
 	 */
 	scmd_init();
+	/*
+	 * clear startup faults
+	 */
+	V.fault_count = 0;
+	V.fault_ticks = 0;
 
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
@@ -646,42 +678,27 @@ int main(void)
 			cli_read(&cli_ctx);
 
 			/*
-			 * test switch interface with motor control
+			 * test switch interface with inverter control
 			 */
-			if (get_switch(S2)) { // enable motor current for calibration
-				int i = 40;
-				U1_EN_Clear();
-				U2_EN_Clear();
-				WaitMs(10000);
-				//				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
-				//				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 1000);
-				U2_EN_Set();
-				PWM_motor2(M_CAL);
-				do {
-					sprintf(buffer, "%4i:P %4i %4i %4i  %4i      ", i, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u_total, false));
-					eaDogM_WriteStringAtPos(4, 0, buffer);
-					OledUpdate();
-					WaitMs(500);
-				} while (i--);
-				PWM_motor2(M_PWM);
-				U2_EN_Clear();
+			if (get_switch(S2)) { // mode select
+
 			}
 
-			if (get_switch(S1)) { // enable motor power
+			if (get_switch(S1)) { // enable inverter power
 				U1_EN_Set();
 				U2_EN_Set();
 			}
 
-			if (get_switch(S0)) { // disengage motor power
+			if (get_switch(S0)) { // disengage inverter power
 				U1_EN_Clear();
 				U2_EN_Clear();
 			}
 		} else {
 			/* flash the board led(s) using the position counter bits */
 #ifdef QEI_SLOW
-			LATGbits.LATG12 = m35_3.pos >> 3;
-			LATGbits.LATG13 = m35_3.pos >> 5;
-			LATGbits.LATG14 = m35_2.pos & 1;
+			LATGbits.LATG12 = POS3CNT >> 3;
+			LATGbits.LATG13 = POS3CNT >> 5;
+			LATGbits.LATG14 = POS3CNT & 1;
 #else
 			LATGbits.LATG12 = m35_ptr->pos >> 10;
 			LATGbits.LATG13 = m35_ptr->pos >> 12;
@@ -691,10 +708,10 @@ int main(void)
 			if (TimerDone(TMR_DISPLAY)) {
 				/* format and send data to LCD screen */
 				OledClearBuffer();
-				sprintf(buffer, " Options: 1:%d 2:%d   %4.1f", option1_Get(), option2_Get(), pi_current_error);
-				eaDogM_WriteStringAtPos(0, 0, buffer);
 				m35_ptr = &m35_2;
-				sprintf(buffer, "C %4i:%i:%u      ", POS2CNT, VEL2HLD, INT2HLD);
+				sprintf(buffer, "I400HZ3P %s %s       ", build_date, build_time);
+				eaDogM_WriteStringAtPos(0, 0, buffer);
+				sprintf(buffer, "Q %4i:%i  F %i %i %i H %i", POS3CNT, VEL3HLD, PWMF15_Get(), PWMF5_Get(), PWMF6_Get(), get_switch(FLT15_IN4));
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_3;
 				/*
@@ -702,27 +719,33 @@ int main(void)
 				 */
 				sprintf(buffer, "Phase    L1   L2   L3     N");
 				eaDogM_WriteStringAtPos(3, 0, buffer);
-				sprintf(buffer, "%4i:P %4i %4i %4i  %4i      ", m35_2.erotations / (int) t1_time, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u1ai, false));
+				sprintf(buffer, "%4i:P %4i %4i %4i  %4i   ", m35_2.erotations / (int) t1_time, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u1ai, false));
 				eaDogM_WriteStringAtPos(4, 0, buffer);
 				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(u1ai, true));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
 				sprintf(buffer, "%4i:S %4i %4i %4i  ", V.TimeUsed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
-				sprintf(buffer, "%4i:Drive     ", m35_4.current);
+				sprintf(buffer, "%4i:Drive    %4i F%2i %2i", m35_4.current, POS3CNT, V.fault_count, V.fault_ticks);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				sprintf(buffer, "%4i:D %5i %5i %5i  ", V.TimeUsed, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
+				sprintf(buffer, "%4i:A %4i %4i  %4i", an_data[IVREF], an_data[ANA1], an_data[POT1], an_data[POT2]);
+				eaDogM_WriteStringAtPos(14, 0, buffer);
 				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    ", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4));
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph(true, false);
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 200);
+				StartTimer(TMR_DISPLAY, 100);
 			}
 		}
 #endif
+		if (TimerDone(TMR_ADC)) {
+			StartTimer(TMR_ADC, 10);
+			start_adc_scan();
+		}
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, 1000);
 			RESET_LED_Toggle();

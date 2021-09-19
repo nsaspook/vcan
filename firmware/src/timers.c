@@ -48,7 +48,7 @@ void timer_ms_tick(uint32_t status, uintptr_t context)
 	static uint8_t i;
 
 #ifdef G400HZ
-	start_adc_scan();
+//	start_adc_scan();
 #endif
 	//Decrement each software timer
 	for (i = 0; i < TMR_COUNT; i++) {
