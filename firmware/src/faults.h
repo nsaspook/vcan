@@ -18,6 +18,7 @@ extern "C" {
 	bool check_fault(void);
 	void set_fault(uint32_t status, uintptr_t context);
 	void clear_fault_flag(void);
+	void init_faults(void);
 
 #ifdef	__cplusplus
 }

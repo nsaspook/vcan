@@ -17,8 +17,21 @@ void set_fault(uint32_t status, uintptr_t context)
 	V.fault_ticks = 0;
 	V.fault_count++;
 	V.fault_active = true;
+	V.fault_source = context;
 }
+
 void clear_fault_flag(void)
 {
 	V.fault_active = false;
+}
+
+void init_faults(void)
+{
+	/*
+	 * fault interrupt call-backs for PWM
+	 */
+	MCPWM_CallbackRegister(MCPWM_CH_1, set_fault, 1);
+	MCPWM_CallbackRegister(MCPWM_CH_2, set_fault, 2);
+	MCPWM_CallbackRegister(MCPWM_CH_3, set_fault, 3);
+	MCPWM_CallbackRegister(MCPWM_CH_4, set_fault, 4);
 }

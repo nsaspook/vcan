@@ -51,7 +51,7 @@ extern "C" {
 #ifdef HVDC_M
 #define MBLOCK			1600
 #define MIDLE			1500  // motor idle current
-#define MPCURRENT		500  // setpoint for motor current
+#define MPCURRENT		2500  // setpoint for motor current
 #define motor_error_stop	ENCODER_PULSES_PER_REV/2000
 #define motor_volts		12000 // limits amount of current at max torque, TI motor and AC servo motor
 #define inverter_volts		6000  // max inverter voltage setting
@@ -143,7 +143,7 @@ extern "C" {
 
 	struct V_type {
 		uint32_t StartTime, TimeUsed;
-		volatile uint32_t pacing, pwm_update, pwm_stop, fault_count, fault_ticks;
+		volatile uint32_t pacing, pwm_update, pwm_stop, fault_count, fault_ticks, fault_source;
 		V_STATE vcan_state;
 		M_SPEED m_speed;
 		int32_t motor_speed;

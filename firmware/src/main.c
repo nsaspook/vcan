@@ -78,6 +78,7 @@ extern t_cli_ctx cli_ctx; // command buffer
 
 volatile struct QEI_DATA m35_1 = {
 	.duty = MPCURRENT, // default motor duty
+	.current_offset = 0,
 },
 m35_2 = {
 	.duty = 0, // default motor duty
@@ -89,6 +90,7 @@ m35_2 = {
 	.phase_steps = 0,
 	.phaseAccumulator = 0,
 	.set = false,
+	.current_offset = 0,
 },
 m35_3 = {
 	.duty = 0,
@@ -97,6 +99,7 @@ m35_3 = {
 	.phaseIncrement = PHASE_INC,
 	.phase_steps = 0,
 	.phaseAccumulator = 0,
+	.current_offset = 0,
 },
 m35_4 = {
 	.duty = 0,
@@ -107,6 +110,7 @@ m35_4 = {
 	.phaseIncrement = PHASE_INC,
 	.phase_steps = 0,
 	.phaseAccumulator = 0,
+	.current_offset = 0,
 },
 
 *m35_ptr;
@@ -337,9 +341,9 @@ void wave_gen(uint32_t status, uintptr_t context)
 	/*
 	 * load sinewave constants from three-phase 360 values per cycle lookup tables
 	 */
-	phase_duty(&m35_2, m35_4.current, V.m_speed, 2);
-	phase_duty(&m35_3, m35_4.current, V.m_speed, 2);
-	phase_duty(&m35_4, m35_4.current, V.m_speed, 2);
+	phase_duty(&m35_2, m35_4.current+m35_2.current_offset, V.m_speed, 2);
+	phase_duty(&m35_3, m35_4.current+m35_3.current_offset, V.m_speed, 2);
+	phase_duty(&m35_4, m35_4.current+m35_4.current_offset, V.m_speed, 2);
 	/*
 	 * generate a current error drive signal
 	 */
@@ -645,13 +649,7 @@ int main(void)
 	 */
 	U1_EN_Set();
 	U2_EN_Set();
-	/*
-	 * fault interrupt call-backs for PWM
-	 */
-	MCPWM_CallbackRegister(MCPWM_CH_1, set_fault, 0);
-	MCPWM_CallbackRegister(MCPWM_CH_2, set_fault, 0);
-	MCPWM_CallbackRegister(MCPWM_CH_3, set_fault, 0);
-	MCPWM_CallbackRegister(MCPWM_CH_4, set_fault, 0);
+	init_faults(); // PWM faults from the bridge driver chips
 	MCPWM_Start();
 	V.pwm_stop = false; // let ISR generate waveforms
 
@@ -719,9 +717,9 @@ int main(void)
 				 */
 				sprintf(buffer, "Phase    L1   L2   L3     N");
 				eaDogM_WriteStringAtPos(3, 0, buffer);
-				sprintf(buffer, "%4i:P %4i %4i %4i  %4i   ", m35_2.erotations / (int) t1_time, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u1ai, false));
+				sprintf(buffer, "%4i:P %4i %4i %4i  %4i   ", m35_2.erotations / (int) t1_time, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u_total, false));
 				eaDogM_WriteStringAtPos(4, 0, buffer);
-				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(u1ai, true));
+				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(u_total, true));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
 				sprintf(buffer, "%4i:S %4i %4i %4i  ", V.TimeUsed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
 				eaDogM_WriteStringAtPos(6, 0, buffer);

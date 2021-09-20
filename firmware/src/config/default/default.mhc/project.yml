@@ -6,13 +6,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: 3101EB80A5915B4E58D11865D19E4DF3
+- generatedChecksum: CD3491D995ACB8FA42362A0908083F55
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 3101EB80A5915B4E58D11865D19E4DF3
+  userChecksum: CD3491D995ACB8FA42362A0908083F55
 - generatedChecksum: 2BF0128B550D110C8FC42E8B2D94F4E7
   logicalPath: config/default
   name: interrupts.c
@@ -76,13 +76,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: DAAC08E1F6944BBE28C745BDA652A544
-- generatedChecksum: 1D99D6705831DF90D8737E1389B247D8
+- generatedChecksum: AF1E0D09CB475C7C6115FE9C5D4DE464
   logicalPath: config/default/peripheral/mcpwm
   name: plib_mcpwm.c
   physicalPath: peripheral/mcpwm
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 1D99D6705831DF90D8737E1389B247D8
+  userChecksum: AF1E0D09CB475C7C6115FE9C5D4DE464
 - generatedChecksum: 4C46D161126F8BA6D8CF6106A90A2B1C
   logicalPath: config/default/peripheral/qei
   name: plib_qei1.c
@@ -167,13 +167,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 7806B30ECAE0D18D08CD583D8775530D
-- generatedChecksum: F50236B70613DF099DB7FD8D8D089CF4
+- generatedChecksum: C52E35337CA17879AF386D3C0E2D89CB
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: F50236B70613DF099DB7FD8D8D089CF4
+  userChecksum: C52E35337CA17879AF386D3C0E2D89CB
 - generatedChecksum: E189C26B2269F8DE46033CCD0621958D
   logicalPath: config/default
   name: device.h
