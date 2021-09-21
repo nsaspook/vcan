@@ -341,9 +341,9 @@ void wave_gen(uint32_t status, uintptr_t context)
 	/*
 	 * load sinewave constants from three-phase 360 values per cycle lookup tables
 	 */
-	phase_duty(&m35_2, m35_4.current+m35_2.current_offset, V.m_speed, 2);
-	phase_duty(&m35_3, m35_4.current+m35_3.current_offset, V.m_speed, 2);
-	phase_duty(&m35_4, m35_4.current+m35_4.current_offset, V.m_speed, 2);
+	phase_duty(&m35_2, m35_4.current + m35_2.current_offset, V.m_speed, 2);
+	phase_duty(&m35_3, m35_4.current + m35_3.current_offset, V.m_speed, 2);
+	phase_duty(&m35_4, m35_4.current + m35_4.current_offset, V.m_speed, 2);
 	/*
 	 * generate a current error drive signal
 	 */
@@ -678,8 +678,10 @@ int main(void)
 			/*
 			 * test switch interface with inverter control
 			 */
-			if (get_switch(S2)) { // mode select
-
+			if (get_switch(S4)) { // power select
+				POS3CNT = inverter_volts;
+			} else {
+				POS3CNT = 0;
 			}
 
 			if (get_switch(S1)) { // enable inverter power
