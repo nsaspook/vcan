@@ -597,11 +597,11 @@ int main(void)
 
 
 	/*
-	 * sine slew speed routines
+	 * sine slew speed routines for inverter function
 	 */
 	sine_table();
 	/*
-	 * sine_foo slow speed routines
+	 * sine_foo slow speed routines, motor functions.
 	 */
 	fillTable();
 	preset_phase();
@@ -678,7 +678,7 @@ int main(void)
 			/*
 			 * test switch interface with inverter control
 			 */
-			if (get_switch(S4)) { // power select
+			if (get_switch(S7)) { // power select
 				POS3CNT = inverter_volts;
 			} else {
 				POS3CNT = 0;

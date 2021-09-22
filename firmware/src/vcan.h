@@ -24,6 +24,14 @@ extern "C" {
 	/* 400Hz generator */
 #define G400HZ
 	//#define G400HZ_NODIS	
+/*
+ * 3-phase signal table size and offsets for each phase
+ */
+#define sine_res	360
+#define sinea		0
+#define	sineb		120
+#define sinec		240
+
 #define FLT15_IN4	3
 #define FAULT_DELAY	2
 

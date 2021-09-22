@@ -1,7 +1,6 @@
 #include "freqgen.h"
 
 static double sine_const[sine_res + 1];
-//static double sine_const_harmonic[sine_res + 1];
 static double table[256];
 extern struct QEI_DATA m35_1, m35_2, m35_3, m35_4;
 
