@@ -379,7 +379,6 @@ void my_time(uint32_t status, uintptr_t context)
 {
 	t1_time++;
 #ifdef G400HZ
-	//	start_adc_scan();
 	if (check_fault()) {
 		V.fault_ticks++;
 		if (V.fault_ticks > FAULT_DELAY) {
@@ -599,7 +598,7 @@ int main(void)
 	/*
 	 * sine slew speed routines for inverter function
 	 */
-	sine_table();
+	sine_table(false);
 	/*
 	 * sine_foo slow speed routines, motor functions.
 	 */

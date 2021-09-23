@@ -104,7 +104,6 @@ int32_t lp_filter(int32_t input, uint8_t chan)
 {
 	int32_t output;
 
-	//	output = IIR_butter_1_16(input, coeff, history, chan);
 	output = IIR_butter_1_16_f((double) input, coeff_f, history_f, chan);
 	return output;
 }

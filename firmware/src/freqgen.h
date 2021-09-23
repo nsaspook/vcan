@@ -27,7 +27,7 @@ extern "C" {
 	// *****************************************************************************
 	void MCLIB_SinCosCalc(float const rotor_angle, float* sineAngle, float* cosAngle);
 	void MCLIB_WrapAngle(float * const angle);
-	void sine_table(void);
+	void sine_table(bool);
 	int32_t phase_duty(volatile struct QEI_DATA * const, const double, const M_SPEED, const int32_t);
 	int32_t phase_duty_table(volatile struct QEI_DATA * const, const double, const int32_t);
 	void fillTable(void);

@@ -6,7 +6,10 @@ extern struct QEI_DATA m35_1, m35_2, m35_3, m35_4;
 
 static double sine_foo(volatile struct QEI_DATA *);
 
-void sine_table(void)
+/*
+ * slew speed sine table
+ */
+void sine_table(bool saddleback)
 {
 	int I, H, j = 1;
 
@@ -14,14 +17,16 @@ void sine_table(void)
 		sine_const[I] = sin((M_PI * 2.0 * (double) I) / (double) sine_res);
 		H = I * HARMONIC_NUM; // need third harmonic
 		if (H >= (sine_res * j)) {
-			H = H - (sine_res*j);
+			H = H - (sine_res * j);
 			j++;
 		}
 		/*
 		 * compute saddle-back waveform instead of pure sine
 		 * THA sets the harmonic content, 1/6 is the recommended amount but we use more here
 		 */
-		sine_const[I] = sine_const[I] + ((sin((M_PI * 2.0 * (double) H) / (double) sine_res)) * THA);
+		if (saddleback) {
+			sine_const[I] = sine_const[I] + ((sin((M_PI * 2.0 * (double) H) / (double) sine_res)) * THA);
+		}
 	}
 }
 
@@ -30,13 +35,13 @@ void sine_table(void)
  */
 int32_t phase_duty_table(volatile struct QEI_DATA * const phase, const double mag, const int32_t adj)
 {
-	int32_t next_step=sine_steps_adj(phase, adj);
-	
+	int32_t next_step = sine_steps_adj(phase, adj);
+
 	if (next_step >= sine_res) {
 		phase->sine_steps = 0;
 		phase->erotations++;
 	}
-	
+
 	if (next_step < 0) {
 		phase->sine_steps = sine_res;
 		phase->erotations--;
@@ -68,10 +73,10 @@ int32_t sine_steps_adj(volatile struct QEI_DATA * const phase, const int32_t adj
 }
 
 /*
- * micro-stepping  sinusoidal commutation for PWM using sine_foo
+ * micro-stepping  sinusoidal commutation for PWM using sine_foo or constant table
  */
 int32_t phase_duty(
-volatile struct QEI_DATA * const phase, const double mag, const M_SPEED mode, const int32_t adj)
+	volatile struct QEI_DATA * const phase, const double mag, const M_SPEED mode, const int32_t adj)
 {
 	if (mode == M_SLEW) {
 		return phase_duty_table(phase, mag, adj);
