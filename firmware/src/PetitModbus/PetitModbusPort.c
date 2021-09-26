@@ -25,7 +25,7 @@ void PetitModBus_TIMER_Initialise(void)
 
 void PetitModBus_UART_Putch(unsigned char c)
 {
-	while (UART6_WriteIsBusy());
+//	while (UART6_WriteIsBusy());
 	UART6_Write(&c, 1);
 }
 

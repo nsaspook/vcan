@@ -151,7 +151,7 @@ extern "C" {
 
 	struct V_type {
 		uint32_t StartTime, TimeUsed;
-		volatile uint32_t pacing, pwm_update, pwm_stop, fault_count, fault_ticks, fault_source;
+		volatile uint32_t pacing, pwm_update, pwm_stop, fault_count, fault_ticks, fault_source, modbus_rx, modbus_tx;
 		V_STATE vcan_state;
 		M_SPEED m_speed;
 		int32_t motor_speed;

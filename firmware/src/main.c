@@ -181,7 +181,7 @@ void set_motor_speed(const uint32_t, double);
 int32_t velo_loop(double, bool);
 void wave_gen(uint32_t, uintptr_t);
 void BDC_motor(uint32_t);
-void my_modbus_rx(uintptr_t);
+void my_modbus_rx(UART_EVENT, uintptr_t);
 
 void BDC_motor(uint32_t m_type)
 {
@@ -499,13 +499,14 @@ void fh_ho(void *a_data)
 	UART3_Write((uint8_t*) " ho      ", 8);
 }
 
-void my_modbus_rx(uintptr_t context)
+void my_modbus_rx(UART_EVENT event, uintptr_t context)
 {
 	static uint8_t m_data = 0;
 
 	BSP_LED3_Toggle();
 	UART6_Read(&m_data, 1);
 	ReceiveInterrupt(m_data);
+	V.modbus_rx++;
 }
 
 // *****************************************************************************
@@ -541,9 +542,11 @@ int main(void)
 	 * MODBUS RX callback with init
 	 */
 	DERE_Clear(); // enable modbus receiver
+	UART6_ReadThresholdSet(1); // callback every char
+	UART6_ReadNotificationEnable(true, true);
 	UART6_ReadCallbackRegister(my_modbus_rx, 0);
 	InitPetitModbus(1);
-//	UART6_Write("fred fred",9);
+	//	UART6_Write("fred fred",9);
 	/*
 	 * software timers @1ms using 500ns ticks
 	 */
@@ -746,7 +749,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				sprintf(buffer, "%4i:D %5i %5i %5i  ", V.TimeUsed, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
-				sprintf(buffer, "MODBUS %5i %5i %5i", PetitRegisters[5].ActValue, PetitReceiveCounter,UART6_ReadCountGet());
+				sprintf(buffer, "MODBUS %5i %3i %3i %5i", PetitRegisters[5].ActValue, PetitReceiveCounter, UART6_ReadCountGet(), V.modbus_rx);
 				eaDogM_WriteStringAtPos(9, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
