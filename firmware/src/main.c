@@ -72,6 +72,7 @@ IC = M * sin (? + 240)
 #include "peripheral/coretimer/plib_coretimer.h"
 #include "gfx.h"
 #include "faults.h"
+#include "PetitModbus/PetitModbus.h"
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 extern t_cli_ctx cli_ctx; // command buffer 
@@ -180,6 +181,7 @@ void set_motor_speed(const uint32_t, double);
 int32_t velo_loop(double, bool);
 void wave_gen(uint32_t, uintptr_t);
 void BDC_motor(uint32_t);
+void my_modbus_rx(uintptr_t);
 
 void BDC_motor(uint32_t m_type)
 {
@@ -369,6 +371,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	V.pwm_update = false;
+	PetitModBus_TimerValues(); // modbus time tick
 	//	DEBUGB0_Clear();
 }
 
@@ -496,6 +499,15 @@ void fh_ho(void *a_data)
 	UART3_Write((uint8_t*) " ho      ", 8);
 }
 
+void my_modbus_rx(uintptr_t context)
+{
+	static uint8_t m_data = 0;
+
+	BSP_LED3_Toggle();
+	UART6_Read(&m_data, 1);
+	ReceiveInterrupt(m_data);
+}
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Main Entry Point
@@ -516,15 +528,22 @@ int main(void)
 	//	SPI3_Initialize_edogs();
 #endif
 
-	LATGbits.LATG12 = 1;
-	LATGbits.LATG13 = 1;
-	LATGbits.LATG14 = 1;
+	BSP_LED1_Set();
+	BSP_LED2_Set();
+	BSP_LED3_Clear();
 	_CP0_SET_COUNT(0); // Set Core Timer count to 0
 
 	/*
 	 * start the external switch handler
 	 */
 	init_dio();
+	/*
+	 * MODBUS RX callback with init
+	 */
+	DERE_Clear(); // enable modbus receiver
+	UART6_ReadCallbackRegister(my_modbus_rx, 0);
+	InitPetitModbus(1);
+//	UART6_Write("fred fred",9);
 	/*
 	 * software timers @1ms using 500ns ticks
 	 */
@@ -665,6 +684,7 @@ int main(void)
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
+		ProcessPetitModbus();
 
 #ifndef G400HZ_NODIS
 		if (TimerDone(TMR_MOTOR)) {
@@ -697,11 +717,9 @@ int main(void)
 #ifdef QEI_SLOW
 			LATGbits.LATG12 = POS3CNT >> 3;
 			LATGbits.LATG13 = POS3CNT >> 5;
-			LATGbits.LATG14 = POS3CNT & 1;
 #else
 			LATGbits.LATG12 = m35_ptr->pos >> 10;
 			LATGbits.LATG13 = m35_ptr->pos >> 12;
-			LATGbits.LATG14 = m35_ptr->pos >> 14;
 #endif
 			//run_tests(100000); // port diagnostics
 			if (TimerDone(TMR_DISPLAY)) {
@@ -728,6 +746,8 @@ int main(void)
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				sprintf(buffer, "%4i:D %5i %5i %5i  ", V.TimeUsed, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
+				sprintf(buffer, "MODBUS %5i %5i %5i", PetitRegisters[5].ActValue, PetitReceiveCounter,UART6_ReadCountGet());
+				eaDogM_WriteStringAtPos(9, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
@@ -748,6 +768,8 @@ int main(void)
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, 1000);
 			RESET_LED_Toggle();
+			PetitRegisters[5].ActValue++;
+			PetitRegisters[10].ActValue = 12345;
 		}
 	}
 

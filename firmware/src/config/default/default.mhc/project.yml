@@ -6,13 +6,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: CD3491D995ACB8FA42362A0908083F55
+- generatedChecksum: 3101EB80A5915B4E58D11865D19E4DF3
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: CD3491D995ACB8FA42362A0908083F55
+  userChecksum: 3101EB80A5915B4E58D11865D19E4DF3
 - generatedChecksum: 2BF0128B550D110C8FC42E8B2D94F4E7
   logicalPath: config/default
   name: interrupts.c
@@ -34,27 +34,27 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 7D8BD4B4A22E83D1151ADD9A8B66967C
-- generatedChecksum: E7A7CC95533908670EF7D9FEFA62CB4C
+- generatedChecksum: 92DE40A746F30E2288D25E98C81D5D8A
   logicalPath: config/default/peripheral/clk
   name: plib_clk.c
   physicalPath: peripheral/clk
   security: NON_SECURE
   type: SOURCE
-  userChecksum: E7A7CC95533908670EF7D9FEFA62CB4C
-- generatedChecksum: 1C64A0CC3068C1F1EB55F6817B1579A6
+  userChecksum: 92DE40A746F30E2288D25E98C81D5D8A
+- generatedChecksum: CDE489012C46160ED6A67092B2FFCE99
   logicalPath: config/default/peripheral/coretimer
   name: plib_coretimer.c
   physicalPath: peripheral/coretimer
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 1C64A0CC3068C1F1EB55F6817B1579A6
-- generatedChecksum: D33E618B4EA3CB0D0FEA9114B2A428CE
+  userChecksum: CDE489012C46160ED6A67092B2FFCE99
+- generatedChecksum: C55E57C998986D15E031981C694C6F31
   logicalPath: config/default/peripheral/dmac
   name: plib_dmac.c
   physicalPath: peripheral/dmac
   security: NON_SECURE
   type: SOURCE
-  userChecksum: D33E618B4EA3CB0D0FEA9114B2A428CE
+  userChecksum: C55E57C998986D15E031981C694C6F31
 - generatedChecksum: F0F77E9605002F86303776FD504751EB
   logicalPath: config/default/peripheral/eeprom
   name: plib_eeprom.c
@@ -62,20 +62,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: F0F77E9605002F86303776FD504751EB
-- generatedChecksum: 7E8A65407AC31447FE1569033B3C312F
+- generatedChecksum: 5B11490EB18998EEC817C53C08E71AF9
   logicalPath: config/default/peripheral/evic
   name: plib_evic.c
   physicalPath: peripheral/evic
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 7E8A65407AC31447FE1569033B3C312F
-- generatedChecksum: DAAC08E1F6944BBE28C745BDA652A544
+  userChecksum: 5B11490EB18998EEC817C53C08E71AF9
+- generatedChecksum: 597426BE72906DB66917998036127E11
   logicalPath: config/default/peripheral/gpio
   name: plib_gpio.c
   physicalPath: peripheral/gpio
   security: NON_SECURE
   type: SOURCE
-  userChecksum: DAAC08E1F6944BBE28C745BDA652A544
+  userChecksum: 597426BE72906DB66917998036127E11
 - generatedChecksum: AF1E0D09CB475C7C6115FE9C5D4DE464
   logicalPath: config/default/peripheral/mcpwm
   name: plib_mcpwm.c
@@ -104,13 +104,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 2ECABC436DDB8F584D914FF4F25D3975
-- generatedChecksum: 16DB17D4B29CE2EFCAC92E012A2149DD
+- generatedChecksum: E3FE4B5B89491E6E8F955757D5E36143
   logicalPath: config/default/peripheral/spi/spi_master
   name: plib_spi3_master.c
   physicalPath: peripheral/spi/spi_master
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 16DB17D4B29CE2EFCAC92E012A2149DD
+  userChecksum: E3FE4B5B89491E6E8F955757D5E36143
 - generatedChecksum: 486993F80882C945265A2F5A9E19B298
   logicalPath: config/default/peripheral/tmr1
   name: plib_tmr1.c
@@ -153,13 +153,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: B756DAF94905972282E2AF6597235E45
-- generatedChecksum: 91710C2A8F2733A3BA67CEFF2C8E789C
+- generatedChecksum: 816B383CA607BD5C75334C933852BD3B
   logicalPath: config/default/peripheral/uart
   name: plib_uart6.c
   physicalPath: peripheral/uart
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 91710C2A8F2733A3BA67CEFF2C8E789C
+  userChecksum: 816B383CA607BD5C75334C933852BD3B
 - generatedChecksum: 7806B30ECAE0D18D08CD583D8775530D
   logicalPath: config/default/stdio
   name: xc32_monitor.c
@@ -167,13 +167,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 7806B30ECAE0D18D08CD583D8775530D
-- generatedChecksum: C52E35337CA17879AF386D3C0E2D89CB
+- generatedChecksum: F50236B70613DF099DB7FD8D8D089CF4
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: C52E35337CA17879AF386D3C0E2D89CB
+  userChecksum: F50236B70613DF099DB7FD8D8D089CF4
 - generatedChecksum: E189C26B2269F8DE46033CCD0621958D
   logicalPath: config/default
   name: device.h
@@ -209,20 +209,20 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 7066CC390335CF75126E2A50C46E3BDD
-- generatedChecksum: 3D6EB2BF99796DE22C8637CC7F213F11
+- generatedChecksum: 07F6F97AE60963B2D2AE2345013D9FDC
   logicalPath: config/default/peripheral/coretimer
   name: plib_coretimer.h
   physicalPath: peripheral/coretimer
   security: NON_SECURE
   type: HEADER
-  userChecksum: 3D6EB2BF99796DE22C8637CC7F213F11
-- generatedChecksum: D4A1E2329C517DB8AB49B9143079554F
+  userChecksum: 07F6F97AE60963B2D2AE2345013D9FDC
+- generatedChecksum: AC36F429D7162D7D1A68B9955ED194A3
   logicalPath: config/default/peripheral/dmac
   name: plib_dmac.h
   physicalPath: peripheral/dmac
   security: NON_SECURE
   type: HEADER
-  userChecksum: D4A1E2329C517DB8AB49B9143079554F
+  userChecksum: AC36F429D7162D7D1A68B9955ED194A3
 - generatedChecksum: B97B50D5217602B30A68AA8AA5D77BFB
   logicalPath: config/default/peripheral/eeprom
   name: plib_eeprom.h
@@ -237,13 +237,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: DDBD13A1702993E0D9317998A7363BC2
-- generatedChecksum: 7AC37F12B5BCDCEF3D95A04FB1DCB8A9
+- generatedChecksum: 6BACAB96287998791DF9ADD149E8D1F8
   logicalPath: config/default/peripheral/gpio
   name: plib_gpio.h
   physicalPath: peripheral/gpio
   security: NON_SECURE
   type: HEADER
-  userChecksum: 7AC37F12B5BCDCEF3D95A04FB1DCB8A9
+  userChecksum: 6BACAB96287998791DF9ADD149E8D1F8
 - generatedChecksum: 12CBE2439F4C4DECD2B376033BBADA45
   logicalPath: config/default/peripheral/mcpwm
   name: plib_mcpwm.h
@@ -286,13 +286,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: D6A76BFCD1B06AC07959D1D4CB4D2B3E
-- generatedChecksum: 8F2E844DA6CAA767345FCCE94FA28735
+- generatedChecksum: 9B6C5ABCF224CD04F3D58233EE9A1877
   logicalPath: config/default/peripheral/spi/spi_master
   name: plib_spi3_master.h
   physicalPath: peripheral/spi/spi_master
   security: NON_SECURE
   type: HEADER
-  userChecksum: 8F2E844DA6CAA767345FCCE94FA28735
+  userChecksum: 9B6C5ABCF224CD04F3D58233EE9A1877
 - generatedChecksum: CFA758C8B7258190473EF7C60C4BA4E9
   logicalPath: config/default/peripheral/spi/spi_master
   name: plib_spi_master_common.h
@@ -356,13 +356,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: F613C2A88FC64B39872A4104D398E822
-- generatedChecksum: F412E1A4EC7473B5C222E3E29EA8E16B
+- generatedChecksum: 4B0130B4F22EDB40B65FBA04ADFDDA62
   logicalPath: config/default/peripheral/uart
   name: plib_uart6.h
   physicalPath: peripheral/uart
   security: NON_SECURE
   type: HEADER
-  userChecksum: F412E1A4EC7473B5C222E3E29EA8E16B
+  userChecksum: 4B0130B4F22EDB40B65FBA04ADFDDA62
 - generatedChecksum: 67EEAF539A53B6B8FD7B600ACCB3F3CA
   logicalPath: config/default/peripheral/uart
   name: plib_uart_common.h
@@ -370,13 +370,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 67EEAF539A53B6B8FD7B600ACCB3F3CA
-- generatedChecksum: 2C8543317B3F067432097AB9BD3E8672
+- generatedChecksum: 7DC91D6D376C98802C9C2990432DE9B7
   logicalPath: config/default
   name: toolchain_specifics.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 2C8543317B3F067432097AB9BD3E8672
+  userChecksum: 7DC91D6D376C98802C9C2990432DE9B7
 - generatedChecksum: 0D025660A81D3BAE5CC13F9B622DECFA
   logicalPath: config/default
   name: p32MK1024MCM100.ld
@@ -392,7 +392,7 @@ settings:
   delimiter: ;
   key: extra-include-directories
   security: NON_SECURE
-  value: ../src;../src/config/default;../src/packs/PIC32MK1024MCM100_DFP;
+  value: ../src;../src/config/default;
 - append: false
   category: C32
   delimiter: ''
@@ -422,7 +422,7 @@ settings:
   delimiter: ;
   key: extra-include-directories
   security: NON_SECURE
-  value: ../src;../src/config/default;../src/packs/PIC32MK1024MCM100_DFP;
+  value: ../src;../src/config/default;
 - append: false
   category: C32CPP
   delimiter: ''

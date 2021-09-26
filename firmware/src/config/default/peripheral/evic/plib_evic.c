@@ -197,7 +197,7 @@ bool EVIC_ExternalInterruptCallbackRegister(
 
 // *****************************************************************************
 /* Function:
-    void EXTERNAL_0_InterruptHandler()
+    void EXTERNAL_0_InterruptHandler(void)
 
   Summary:
     Interrupt Handler for External Interrupt pin 0.
@@ -205,7 +205,7 @@ bool EVIC_ExternalInterruptCallbackRegister(
   Remarks:
 	It is an internal function called from ISR, user should not call it directly.
 */
-void EXTERNAL_0_InterruptHandler()
+void EXTERNAL_0_InterruptHandler(void)
 {
     IFS0CLR = _IFS0_INT0IF_MASK;
 
