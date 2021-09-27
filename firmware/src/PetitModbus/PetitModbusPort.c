@@ -4,57 +4,75 @@
 #include "tests.h"
 
 // This port file for PIC microcontrollers!
+// for XC32 and half-duplex transfers
 
 // Modbus RTU Variables
-volatile unsigned char PetitReceiveBuffer[PETITMODBUS_RECEIVE_BUFFER_SIZE]; // Buffer to collect data from hardware
-volatile unsigned char PetitReceiveCounter = 0; // Collected data number
+volatile uint8_t PetitReceiveBuffer[PETITMODBUS_RECEIVE_BUFFER_SIZE]; // Buffer to collect data from hardware
+volatile uint8_t PetitReceiveCounter = 0; // Collected data number
+static void half_dup_tx(void);
+static void half_dup_rx(void);
 
-// UART Initialize for Microconrollers, yes you can use another phsycal layer!
+// UART Initialize for controller, yes you can use another physical layer!
 
 void PetitModBus_UART_Initialise(void)
 {
+	// MHC
 }
 
 // Timer Initialize for Petit Modbus, 1ms Timer will be good for us!
 
 void PetitModBus_TIMER_Initialise(void)
 {
+	// MHC
 }
 
 // This is used for send one character
 
-void PetitModBus_UART_Putch(unsigned char c)
+void PetitModBus_UART_Putch(uint8_t c)
 {
-	//	while (UART6_WriteIsBusy());
 	UART6_Write(&c, 1);
-	V.modbus_tx++;
+	V.modbus_tx++; // stat collection
 }
 
-// This is used for send string, better to use DMA for it ;)
+// switch RS transceiver to transmit mode and wait
 
-unsigned char PetitModBus_UART_String(unsigned char *s, unsigned int Length)
+static void half_dup_tx(void)
 {
-	unsigned short DummyCounter;
-
 	DERE_Set(); // enable modbus transmitter
 	delay_ms(10);
-	for (DummyCounter = 0; DummyCounter < Length; DummyCounter++) {
-		PetitModBus_UART_Putch(s[DummyCounter]);
-	}
+}
 
+// switch RS transceiver to receive mode and wait
+
+static void half_dup_rx(void)
+{
 	while (UART6_WriteCountGet()) {
 	};
 	delay_ms(10);
-	DERE_Clear(); // enable modbus receiver
+	DERE_Clear(); // enable modbus receiver	
+}
+
+// This is used for send string, better to use DMA for it ;)
+// uses interrupt tx buffer on pic32 and handles half-duplex switching and timing
+
+uint8_t PetitModBus_UART_String(uint8_t *s, uint32_t Length)
+{
+	uint16_t DummyCounter;
+
+	half_dup_tx();
+	for (DummyCounter = 0; DummyCounter < Length; DummyCounter++) {
+		PetitModBus_UART_Putch(s[DummyCounter]);
+	}
+	half_dup_rx();
 
 	return TRUE;
 }
 
-/*************************Interrupt Fonction Slave*****************************/
+/*************************Interrupt Function Slave*****************************/
 // Call this function into your UART Interrupt. Collect data from it!
 // Better to use DMA
 
-void ReceiveInterrupt(unsigned char Data)
+void ReceiveInterrupt(uint8_t Data)
 {
 	PetitReceiveBuffer[PetitReceiveCounter] = Data;
 	PetitReceiveCounter++;
@@ -63,7 +81,7 @@ void ReceiveInterrupt(unsigned char Data)
 		PetitReceiveCounter = 0;
 
 	PetitModbusTimerValue = 0;
-	V.modbus_rx++;
+	V.modbus_rx++; // stat collection
 }
 
 // Call this function into 1ms Interrupt or Event!

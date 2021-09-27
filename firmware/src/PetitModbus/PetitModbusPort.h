@@ -16,15 +16,15 @@
 #define FALSE 0
 #endif
 
-extern volatile unsigned char    PetitReceiveBuffer[PETITMODBUS_RECEIVE_BUFFER_SIZE];
-extern volatile unsigned char    PetitReceiveCounter;
+extern volatile uint8_t    PetitReceiveBuffer[PETITMODBUS_RECEIVE_BUFFER_SIZE];
+extern volatile uint8_t    PetitReceiveCounter;
 
 extern void             PetitModBus_UART_Initialise(void);
 extern void             PetitModBus_TIMER_Initialise(void);
-extern void             PetitModBus_UART_Putch(unsigned char c);
-extern unsigned char    PetitModBus_UART_String(unsigned char *s, unsigned int Length);
+extern void             PetitModBus_UART_Putch(uint8_t c);
+extern uint8_t		PetitModBus_UART_String(uint8_t *s, uint32_t Length);
 
-extern void             ReceiveInterrupt(unsigned char Data);
+extern void             ReceiveInterrupt(uint8_t Data);
 extern void             PetitModBus_TimerValues(void);
 
 #endif

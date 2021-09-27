@@ -3,7 +3,10 @@
  *  Date    :   27.07.16
  *  
  *  Tips    :   If you want to use RS485 you have to use RX-Pull-Up Resistor!
+ * updated for XC32 and half-duplex transfers
  */
+
+#include <stdint.h>
 
 #ifndef __PETITMODBUS__H
 #define __PETITMODBUS__H
@@ -24,17 +27,17 @@
 #define PETITMODBUS_RXTX_BUFFER_SIZE                    PETITMODBUS_TRANSMIT_BUFFER_SIZE
 
 // Variable for Slave Address
-extern unsigned char PETITMODBUS_SLAVE_ADDRESS; // Petit Modbus RTU Slave icin adres numarasi [0 to 255]
+extern uint8_t PETITMODBUS_SLAVE_ADDRESS; // Petit Modbus RTU Slave address [0 to 255]
 
 typedef struct {
-	short ActValue;
+	int16_t ActValue;
 } PetitRegStructure;
 
 extern PetitRegStructure PetitRegisters[NUMBER_OF_OUTPUT_PETITREGISTERS];
-extern volatile unsigned short PetitModbusTimerValue;
+extern volatile uint16_t PetitModbusTimerValue;
 
 // Main Functions
-extern void InitPetitModbus(unsigned char PetitModbusSlaveAddress);
+extern void InitPetitModbus(uint8_t PetitModbusSlaveAddress);
 extern void ProcessPetitModbus(void);
 
 // Petit Modbus Port Header

@@ -20,7 +20,7 @@
 #define PETIT_ERROR_CODE_01                     0x01                            // Function code is not supported
 #define PETIT_ERROR_CODE_02                     0x02                            // Register address is not allowed or write-protected
 
-unsigned char PETITMODBUS_SLAVE_ADDRESS = 1;
+uint8_t PETITMODBUS_SLAVE_ADDRESS = 1;
 
 typedef enum {
 	PETIT_RXTX_IDLE,
@@ -31,26 +31,26 @@ typedef enum {
 } PETIT_RXTX_STATE;
 
 typedef struct {
-	unsigned char Address;
-	unsigned char Function;
-	unsigned char DataBuf[PETITMODBUS_RXTX_BUFFER_SIZE];
-	unsigned short DataLen;
+	uint8_t Address;
+	uint8_t Function;
+	uint8_t DataBuf[PETITMODBUS_RXTX_BUFFER_SIZE];
+	uint16_t DataLen;
 } PETIT_RXTX_DATA;
 
 /**********************Slave Transmit and Receive Variables********************/
 PETIT_RXTX_DATA Petit_Tx_Data;
-unsigned int Petit_Tx_Current = 0;
-unsigned int Petit_Tx_CRC16 = 0xFFFF;
+uint32_t Petit_Tx_Current = 0;
+uint32_t Petit_Tx_CRC16 = 0xFFFF;
 PETIT_RXTX_STATE Petit_Tx_State = PETIT_RXTX_IDLE;
-unsigned char Petit_Tx_Buf[PETITMODBUS_TRANSMIT_BUFFER_SIZE];
-unsigned int Petit_Tx_Buf_Size = 0;
+uint8_t Petit_Tx_Buf[PETITMODBUS_TRANSMIT_BUFFER_SIZE];
+uint32_t Petit_Tx_Buf_Size = 0;
 
 PETIT_RXTX_DATA Petit_Rx_Data;
-unsigned int Petit_Rx_CRC16 = 0xFFFF;
+uint32_t Petit_Rx_CRC16 = 0xFFFF;
 PETIT_RXTX_STATE Petit_Rx_State = PETIT_RXTX_IDLE;
-unsigned char Petit_Rx_Data_Available = FALSE;
+uint8_t Petit_Rx_Data_Available = FALSE;
 
-volatile unsigned short PetitModbusTimerValue = 0;
+volatile uint16_t PetitModbusTimerValue = 0;
 /****************End of Slave Transmit and Receive Variables*******************/
 
 /*
@@ -59,11 +59,11 @@ volatile unsigned short PetitModbusTimerValue = 0;
  * @param[in/out]       : CRC   - Anlik CRC degeri
  * @How to use          : First initial data has to be 0xFFFF.
  */
-void Petit_CRC16(const unsigned char Data, unsigned int* CRC)
+void Petit_CRC16(const uint8_t Data, uint32_t* CRC)
 {
-	unsigned int i;
+	uint32_t i;
 
-	*CRC = *CRC ^(unsigned int) Data;
+	*CRC = *CRC ^(uint32_t) Data;
 	for (i = 8; i > 0; i--) {
 		if (*CRC & 0x0001)
 			*CRC = (*CRC >> 1) ^ 0xA001;
@@ -79,7 +79,7 @@ void Petit_CRC16(const unsigned char Data, unsigned int* CRC)
  * @param[out]          : TRUE
  * @How to use          : It is used for send data package over physical layer
  */
-unsigned char Petit_DoSlaveTX(void)
+uint8_t Petit_DoSlaveTX(void)
 {
 	PetitModBus_UART_String(Petit_Tx_Buf, Petit_Tx_Buf_Size);
 
@@ -94,7 +94,7 @@ unsigned char Petit_DoSlaveTX(void)
  * @param[out]          : TRUE/FALSE
  * @How to use          : This function start to sending messages
  */
-unsigned char PetitSendMessage(void)
+uint8_t PetitSendMessage(void)
 {
 	if (Petit_Tx_State != PETIT_RXTX_IDLE)
 		return FALSE;
@@ -111,7 +111,7 @@ unsigned char PetitSendMessage(void)
  * Function Name        : HandleModbusError
  * @How to use          : This function generated errors to Modbus Master
  */
-void HandlePetitModbusError(char ErrorCode)
+void HandlePetitModbusError(int8_t ErrorCode)
 {
 	// Initialize the output buffer. The first byte in the buffer says how many registers we have read
 	Petit_Tx_Data.Function = ErrorCode | 0x80;
@@ -134,13 +134,13 @@ void HandlePetitModbusReadHoldingRegisters(void)
 	// Holding registers are effectively numerical outputs that can be written to by the host.
 	// They can be control registers or analogue outputs.
 	// We pot have one - the pwm output value
-	unsigned int Petit_StartAddress = 0;
-	unsigned int Petit_NumberOfRegisters = 0;
-	unsigned int Petit_i = 0;
+	uint32_t Petit_StartAddress = 0;
+	uint32_t Petit_NumberOfRegisters = 0;
+	uint32_t Petit_i = 0;
 
 	// The message contains the requested start address and number of registers
-	Petit_StartAddress = ((unsigned int) (Petit_Rx_Data.DataBuf[0]) << 8) + (unsigned int) (Petit_Rx_Data.DataBuf[1]);
-	Petit_NumberOfRegisters = ((unsigned int) (Petit_Rx_Data.DataBuf[2]) << 8) + (unsigned int) (Petit_Rx_Data.DataBuf[3]);
+	Petit_StartAddress = ((uint32_t) (Petit_Rx_Data.DataBuf[0]) << 8) + (uint32_t) (Petit_Rx_Data.DataBuf[1]);
+	Petit_NumberOfRegisters = ((uint32_t) (Petit_Rx_Data.DataBuf[2]) << 8) + (uint32_t) (Petit_Rx_Data.DataBuf[3]);
 
 	// If it is bigger than RegisterNumber return error to Modbus Master
 	if ((Petit_StartAddress + Petit_NumberOfRegisters) > NUMBER_OF_OUTPUT_PETITREGISTERS)
@@ -153,10 +153,10 @@ void HandlePetitModbusReadHoldingRegisters(void)
 		Petit_Tx_Data.DataBuf[0] = 0;
 
 		for (Petit_i = 0; Petit_i < Petit_NumberOfRegisters; Petit_i++) {
-			unsigned short Petit_CurrentData = PetitRegisters[Petit_StartAddress + Petit_i].ActValue;
+			uint16_t Petit_CurrentData = PetitRegisters[Petit_StartAddress + Petit_i].ActValue;
 
-			Petit_Tx_Data.DataBuf[Petit_Tx_Data.DataLen] = (unsigned char) ((Petit_CurrentData & 0xFF00) >> 8);
-			Petit_Tx_Data.DataBuf[Petit_Tx_Data.DataLen + 1] = (unsigned char) (Petit_CurrentData & 0xFF);
+			Petit_Tx_Data.DataBuf[Petit_Tx_Data.DataLen] = (uint8_t) ((Petit_CurrentData & 0xFF00) >> 8);
+			Petit_Tx_Data.DataBuf[Petit_Tx_Data.DataLen + 1] = (uint8_t) (Petit_CurrentData & 0xFF);
 			Petit_Tx_Data.DataLen += 2;
 			Petit_Tx_Data.DataBuf[0] = Petit_Tx_Data.DataLen - 1;
 		}
@@ -177,13 +177,13 @@ void HandlePetitModbusReadHoldingRegisters(void)
 void HandlePetitModbusWriteSingleRegister(void)
 {
 	// Write single numerical output
-	unsigned int Petit_Address = 0;
-	unsigned int Petit_Value = 0;
-	unsigned char Petit_i = 0;
+	uint32_t Petit_Address = 0;
+	uint32_t Petit_Value = 0;
+	uint8_t Petit_i = 0;
 
 	// The message contains the requested start address and number of registers
-	Petit_Address = ((unsigned int) (Petit_Rx_Data.DataBuf[0]) << 8) + (unsigned int) (Petit_Rx_Data.DataBuf[1]);
-	Petit_Value = ((unsigned int) (Petit_Rx_Data.DataBuf[2]) << 8) + (unsigned int) (Petit_Rx_Data.DataBuf[3]);
+	Petit_Address = ((uint32_t) (Petit_Rx_Data.DataBuf[0]) << 8) + (uint32_t) (Petit_Rx_Data.DataBuf[1]);
+	Petit_Value = ((uint32_t) (Petit_Rx_Data.DataBuf[2]) << 8) + (uint32_t) (Petit_Rx_Data.DataBuf[3]);
 
 	// Initialize the output buffer. The first byte in the buffer says how many registers we have read
 	Petit_Tx_Data.Function = PETITMODBUS_WRITE_SINGLE_REGISTER;
@@ -214,15 +214,15 @@ void HandlePetitModbusWriteSingleRegister(void)
 void HandleMPetitodbusWriteMultipleRegisters(void)
 {
 	// Write single numerical output
-	unsigned int Petit_StartAddress = 0;
-	//    unsigned char   Petit_ByteCount               =0;
-	unsigned int Petit_NumberOfRegisters = 0;
-	unsigned char Petit_i = 0;
-	unsigned int Petit_Value = 0;
+	uint32_t Petit_StartAddress = 0;
+	//    uint8_t   Petit_ByteCount               =0;
+	uint32_t Petit_NumberOfRegisters = 0;
+	uint8_t Petit_i = 0;
+	uint32_t Petit_Value = 0;
 
 	// The message contains the requested start address and number of registers
-	Petit_StartAddress = ((unsigned int) (Petit_Rx_Data.DataBuf[0]) << 8) + (unsigned int) (Petit_Rx_Data.DataBuf[1]);
-	Petit_NumberOfRegisters = ((unsigned int) (Petit_Rx_Data.DataBuf[2]) << 8) + (unsigned int) (Petit_Rx_Data.DataBuf[3]);
+	Petit_StartAddress = ((uint32_t) (Petit_Rx_Data.DataBuf[0]) << 8) + (uint32_t) (Petit_Rx_Data.DataBuf[1]);
+	Petit_NumberOfRegisters = ((uint32_t) (Petit_Rx_Data.DataBuf[2]) << 8) + (uint32_t) (Petit_Rx_Data.DataBuf[3]);
 	//    Petit_ByteCount           = Petit_Rx_Data.DataBuf[4];
 
 	// If it is bigger than RegisterNumber return error to Modbus Master
@@ -256,9 +256,9 @@ void HandleMPetitodbusWriteMultipleRegisters(void)
  * @return              : If Data is Ready, Return TRUE
  *                        If Data is not Ready, Return FALSE
  */
-unsigned char Petit_RxDataAvailable(void)
+uint8_t Petit_RxDataAvailable(void)
 {
-	unsigned char Result = Petit_Rx_Data_Available;
+	uint8_t Result = Petit_Rx_Data_Available;
 
 	Petit_Rx_Data_Available = FALSE;
 
@@ -272,7 +272,7 @@ unsigned char Petit_RxDataAvailable(void)
  * @return              : If Time is out return TRUE
  *                        If Time is not out return FALSE
  */
-unsigned char Petit_CheckRxTimeout(void)
+uint8_t Petit_CheckRxTimeout(void)
 {
 	// A return value of true indicates there is a timeout    
 	if (PetitModbusTimerValue >= PETITMODBUS_TIMEOUTTIMER) {
@@ -293,7 +293,7 @@ unsigned char Petit_CheckRxTimeout(void)
  *                        If data is not ready, return          DATA_NOT_READY
  *                        If functions is wrong, return         FALSE_FUNCTION
  */
-unsigned char CheckPetitModbusBufferComplete(void)
+uint8_t CheckPetitModbusBufferComplete(void)
 {
 	int PetitExpectedReceiveCount = 0;
 
@@ -330,8 +330,8 @@ unsigned char CheckPetitModbusBufferComplete(void)
  */
 void Petit_RxRTU(void)
 {
-	unsigned char Petit_i;
-	unsigned char Petit_ReceiveBufferControl = 0;
+	uint8_t Petit_i;
+	uint8_t Petit_ReceiveBufferControl = 0;
 
 	Petit_ReceiveBufferControl = CheckPetitModbusBufferComplete();
 
@@ -361,7 +361,7 @@ void Petit_RxRTU(void)
 			Petit_CRC16(Petit_Rx_Data.DataBuf[Petit_i], &Petit_Rx_CRC16);
 		}
 
-		if (((unsigned int) Petit_Rx_Data.DataBuf[Petit_Rx_Data.DataLen] + ((unsigned int) Petit_Rx_Data.DataBuf[Petit_Rx_Data.DataLen + 1] << 8)) == Petit_Rx_CRC16) {
+		if (((uint32_t) Petit_Rx_Data.DataBuf[Petit_Rx_Data.DataLen] + ((uint32_t) Petit_Rx_Data.DataBuf[Petit_Rx_Data.DataLen + 1] << 8)) == Petit_Rx_CRC16) {
 			// Valid message!
 			Petit_Rx_Data_Available = TRUE;
 		}
@@ -454,7 +454,7 @@ void ProcessPetitModbus(void)
  * Function Name        : InitPetitModbus
  * @How to use          : Petite ModBus slave initialize
  */
-void InitPetitModbus(unsigned char PetitModbusSlaveAddress)
+void InitPetitModbus(uint8_t PetitModbusSlaveAddress)
 {
 	PETITMODBUS_SLAVE_ADDRESS = PetitModbusSlaveAddress;
 
