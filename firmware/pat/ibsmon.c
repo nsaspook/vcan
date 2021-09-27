@@ -82,14 +82,14 @@ void init_ihcmon(void);
 uint8_t init_stream_params(void);
 
 uint16_t req_length = 0;
-const uint8_t modbus_cc_mode[] = {0x01, 0x03, 0x00, 0x05, 0x00, 0x05},
-modbus_cc_error[] = {0x01, 0x03, 0x01, 0x21, 0x00, 0x02},
-modbus_cc_clear[] = {0x01, 0x79, 0x00, 0x00, 0x00, 0x01},
-modbus_cc_freset[] = {0x01, 0x78, 0x00, 0x00, 0x00, 0x01},
-re20a_mode[] = {0x01, 0x03, 0x02, 0x00, 0x02, 0x39, 0x85},
-re20a_error[] = {0x01, 0x03, 0x04, 0x00, 0x00, 0x00, 0x00, 0x39, 0x85},
-re20a_clear[] = {0x01, 0x79, 0x00, 0x00, 0x00, 0x01, 0x5d, 0xc0},
-re20a_freset[] = {0x01, 0x78, 0x00, 0x00, 0x00, 0x01, 0x60, 0x00};
+const uint8_t modbus_cc_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x06},
+modbus_cc_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x0A, 0x00, 0x02},
+modbus_cc_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0A, 0x00, 0x01},
+modbus_cc_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0B, 0x00, 0x01},
+i400_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x85, 0x01, 0x03, 0x00, 0x00, 0x00, 0x00, 0x85, 0x00, 0x00, 0x85},
+i400_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x04, 0x00, 0x00, 0x00, 0x00, 0x39, 0x85},
+i400_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x5d, 0xc0},
+i400_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x60, 0x00};
 
 volatile struct V_data V = {
 	.blink_lock = 0,
@@ -122,13 +122,19 @@ int8_t controller_work(void)
 	case CLEAR:
 		clear_2hz();
 		cstate = INIT;
-		modbus_command = mcmd++;
+		modbus_command = mcmd++; // sequence commands to client
 		if (mcmd > G_LAST)
 			mcmd = G_MODE;
 		/*
 		 * command specific tx buffer setup
 		 */
 		switch (modbus_command) {
+		case G_SET: // error code request
+			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));
+			break;
+		case G_AUX: // error code request
+			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_clear, sizeof(modbus_cc_clear));
+			break;
 		case G_ERROR: // error code request
 			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_error, sizeof(modbus_cc_error));
 			break;
@@ -174,14 +180,50 @@ int8_t controller_work(void)
 			 * check received response data for size and format for each command sent
 			 */
 			switch (modbus_command) {
-			case G_ERROR: // check for controller error codes
-				req_length = sizeof(re20a_error);
-				if ((V.recv_count >= req_length) && (cc_buffer[0] == 0x01) && (cc_buffer[1] == 0x03)) {
+			case G_SET: // check for controller error codes
+				req_length = sizeof(i400_freset);
+				if ((V.recv_count >= req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
 					uint16_t temp;
 					c_crc = crc16(cc_buffer, req_length - 2);
 					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[req_length - 1] & 0x00ff);
 					if (c_crc == c_crc_rec) {
-						if ((temp = (cc_buffer[3] << 8) +(cc_buffer[4]&0xff))) {
+
+					}
+					cstate = CLEAR;
+				} else {
+					if (get_500hz(FALSE) > RDELAY) {
+						cstate = CLEAR;
+						RE20A_ERROR = OFF;
+						mcmd = G_MODE;
+					}
+				}
+				break;
+			case G_AUX: // check for controller error codes
+				req_length = sizeof(i400_clear);
+				if ((V.recv_count >= req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
+					uint16_t temp;
+					c_crc = crc16(cc_buffer, req_length - 2);
+					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[req_length - 1] & 0x00ff);
+					if (c_crc == c_crc_rec) {
+
+					}
+					cstate = CLEAR;
+				} else {
+					if (get_500hz(FALSE) > RDELAY) {
+						cstate = CLEAR;
+						RE20A_ERROR = OFF;
+						mcmd = G_MODE;
+					}
+				}
+				break;
+			case G_ERROR: // check for controller error codes
+				req_length = sizeof(i400_error);
+				if ((V.recv_count >= req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
+					uint16_t temp;
+					c_crc = crc16(cc_buffer, req_length - 2);
+					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[req_length - 1] & 0x00ff);
+					if (c_crc == c_crc_rec) {
+						if ((temp = ((uint16_t) cc_buffer[3] << 8) +((uint16_t) cc_buffer[4]&0xff))) {
 							NOP();
 							RE20A_ERROR = ON;
 							set_led_blink(ERROR_BLINKS);
@@ -200,8 +242,8 @@ int8_t controller_work(void)
 				break;
 			case G_MODE: // check for current operating mode
 			default:
-				req_length = sizeof(re20a_mode);
-				if ((V.recv_count >= req_length) && (cc_buffer[0] == 0x01) && (cc_buffer[1] == 0x03)) {
+				req_length = sizeof(i400_mode);
+				if ((V.recv_count >= req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
 					uint8_t temp;
 					static uint8_t volts = CC_OFFLINE;
 
@@ -295,15 +337,15 @@ void init_ihcmon(void)
 	//OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_64);
 	T0CON = 0b10000101;
 	tmp = TIMERFAST >> 8;
-	TMR0H = tmp;
+	TMR0H = (uint8_t) tmp;
 	tmp = TIMERFAST & 0xFF;
-	TMR0L = tmp;
+	TMR0L = (uint8_t) tmp;
 	//OpenTimer1(TIMER_INT_ON & T1_16BIT_RW & T1_SOURCE_INT & T1_PS_1_4 & T1_OSC1EN_OFF & T1_SYNC_EXT_OFF);
 	T1CON = 0b10100101;
 	tmp = SAMPLEFREQ >> 8;
-	TMR1H = tmp;
+	TMR1H = (uint8_t) tmp;
 	tmp = SAMPLEFREQ & 0xFF;
-	TMR1L = tmp;
+	TMR1L = (uint8_t) tmp;
 
 	CCP1CON |= 0b00001100;
 	T2CONbits.TMR2ON = 0;

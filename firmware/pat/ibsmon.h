@@ -43,6 +43,7 @@ typedef enum cmd_type {
 	G_MODE = 0,
 	G_ERROR,
 	G_AUX,
+	G_SET,
 	G_LAST,
 } cmd_type;
 
@@ -66,7 +67,7 @@ union PWMDC {
 #define	PWMFREQ		65			// timer2 pwm
 #define PWMVOLTS	127
 
-#define MAX_DATA        20
+#define MAX_DATA        64
 #define MAX_GLITCH      3
 #define MAX_PARAMS      5
 #define MAX_BLINKS	10
@@ -77,6 +78,17 @@ union PWMDC {
 #define IBSPORTB	TRISB
 #define IBSPORT_IOA	0b00001100		//
 #define IBSPORT_IOB	0b00010010		// RS-232 receive on B4
+
+#define MADDR		0x01
+/*******************************ModBus Functions*******************************/
+#define READ_COILS                  1
+#define READ_DISCRETE_INPUTS        2
+#define READ_HOLDING_REGISTERS      3
+#define READ_INPUT_REGISTERS        4
+#define WRITE_SINGLE_COIL           5
+#define WRITE_SINGLE_REGISTER       6
+#define WRITE_MULTIPLE_COILS        15
+#define WRITE_MULTIPLE_REGISTERS    16
 
 #define DE		LATAbits.LATA0
 #define RE_		LATAbits.LATA1

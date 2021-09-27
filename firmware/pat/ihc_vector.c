@@ -29,28 +29,28 @@ void __interrupt() tm_handler(void) // timer/serial functions are handled here
 	if (PIR1bits.TMR1IF) { //      Timer1 int handler
 		PIR1bits.TMR1IF = FALSE; //      clear int flag
 		tmp = SAMPLEFREQ >> 8;
-		TMR1H = tmp;
+		TMR1H = (uint8_t) tmp;
 		tmp = SAMPLEFREQ & 0xFF;
-		TMR1L = tmp;
+		TMR1L = (uint8_t) tmp;
 		V.clock_500hz++;
 	}
 
 	if (INTCONbits.TMR0IF) { //      check timer0 irq time timer
 		INTCONbits.TMR0IF = FALSE; //      clear interrupt flag
 		tmp = TIMERFAST >> 8;
-		TMR0H = tmp;
+		TMR0H = (uint8_t) tmp;
 		tmp = TIMERFAST & 0xFF;
-		TMR0L = tmp;
+		TMR0L = (uint8_t) tmp;
 		V.clock_2hz++;
 		V.clock_blinks++;
 		led_blink();
 	}
 
-	if (PIR1bits.TMR2IF) { //      check timer0 irq time timer
+	if (PIR1bits.TMR2IF) { //      check timer2 irq time timer
 		PIR1bits.TMR2IF = FALSE; //      clear interrupt flag
 	}
 
-	if (PIR1bits.CCP1IF) { //      check timer0 irq time timer
+	if (PIR1bits.CCP1IF) { //      check  ccp1 irq
 		PIR1bits.CCP1IF = FALSE; //      clear interrupt flag
 	}
 
