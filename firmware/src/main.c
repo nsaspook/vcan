@@ -371,7 +371,6 @@ void wave_gen(uint32_t status, uintptr_t context)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	V.pwm_update = false;
-	PetitModBus_TimerValues(); // modbus time tick
 	//	DEBUGB0_Clear();
 }
 
@@ -382,6 +381,7 @@ void my_time(uint32_t status, uintptr_t context)
 {
 	t1_time++;
 #ifdef G400HZ
+	PetitModBus_TimerValues(); // modbus time tick
 	if (check_fault()) {
 		V.fault_ticks++;
 		if (V.fault_ticks > FAULT_DELAY) {
@@ -506,7 +506,6 @@ void my_modbus_rx(UART_EVENT event, uintptr_t context)
 	BSP_LED3_Toggle();
 	UART6_Read(&m_data, 1);
 	ReceiveInterrupt(m_data);
-	V.modbus_rx++;
 }
 
 // *****************************************************************************
@@ -749,7 +748,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				sprintf(buffer, "%4i:D %5i %5i %5i  ", V.TimeUsed, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
-				sprintf(buffer, "MODBUS %5i %3i %3i %5i", PetitRegisters[5].ActValue, PetitReceiveCounter, UART6_ReadCountGet(), V.modbus_rx);
+				sprintf(buffer, "MODBUS %4i %3i %3i %4i %4i", PetitRegisters[5].ActValue, (uint) PetitReceiveCounter, UART6_ReadCountGet(), V.modbus_rx, V.modbus_tx);
 				eaDogM_WriteStringAtPos(9, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));

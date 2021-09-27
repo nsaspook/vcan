@@ -25,8 +25,9 @@ void PetitModBus_TIMER_Initialise(void)
 
 void PetitModBus_UART_Putch(unsigned char c)
 {
-//	while (UART6_WriteIsBusy());
+	//	while (UART6_WriteIsBusy());
 	UART6_Write(&c, 1);
+	V.modbus_tx++;
 }
 
 // This is used for send string, better to use DMA for it ;)
@@ -35,8 +36,16 @@ unsigned char PetitModBus_UART_String(unsigned char *s, unsigned int Length)
 {
 	unsigned short DummyCounter;
 
-	for (DummyCounter = 0; DummyCounter < Length; DummyCounter++)
+	DERE_Set(); // enable modbus transmitter
+	delay_ms(10);
+	for (DummyCounter = 0; DummyCounter < Length; DummyCounter++) {
 		PetitModBus_UART_Putch(s[DummyCounter]);
+	}
+
+	while (UART6_WriteCountGet()) {
+	};
+	delay_ms(10);
+	DERE_Clear(); // enable modbus receiver
 
 	return TRUE;
 }
@@ -54,6 +63,7 @@ void ReceiveInterrupt(unsigned char Data)
 		PetitReceiveCounter = 0;
 
 	PetitModbusTimerValue = 0;
+	V.modbus_rx++;
 }
 
 // Call this function into 1ms Interrupt or Event!

@@ -14,6 +14,10 @@ extern "C" {
 
 #include <xc.h>
 #include "PetitModbus/PetitModbus.h"
+#include "vcan.h"
+#include "timers.h"
+
+	extern volatile struct V_type V;
 
 #ifdef	__cplusplus
 }
