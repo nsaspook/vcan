@@ -50,19 +50,11 @@
 
 
 /*
- * Driver software Rover Elite charge mode monitor
+ * Driver software 400Hz 3-phase inverter
  * Runs on a PIC18F1320 
  *	nsaspook@nsaspook.com
  * cpu clock 10mhz external
  * Version
- * 1.0 Rover Elite RS485 controller status monitor
- * 1.1 for rev 1.1 PCB
- * 1.2 full CRC for TX and RX
- * 1.3 status led blinker code
- * 1.4 adjust pwm values for new board
- * 1.5 switch to High Voltage chip programming
- * 1.6 convert to xc8 compiler
- * 1.7 sequence mode and error modbus commands
  * 3.0 i400hz 3-phase inverter modbus commands
  */
 
@@ -129,13 +121,13 @@ int8_t controller_work(void)
 		 * command specific tx buffer setup
 		 */
 		switch (modbus_command) {
-		case G_SET: // error code request
+		case G_SET: // write code request
 			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));
 			break;
-		case G_AUX: // error code request
+		case G_AUX: // write code request
 			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_clear, sizeof(modbus_cc_clear));
 			break;
-		case G_ERROR: // error code request
+		case G_ERROR: // read code request
 			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_error, sizeof(modbus_cc_error));
 			break;
 		case G_MODE: // operating mode request
@@ -363,10 +355,10 @@ void init_ihcmon(void)
 	RCSTAbits.CREN = 1;
 	PIR1bits.TXIF = 0;
 	PIR1bits.RCIF = 0;
-	BAUDCTLbits.BRG16 = 0; // 40MHz osc HS/PLL 9600 baud
+	BAUDCTLbits.BRG16 = 1; // 40MHz osc HS/PLL 57.6k baud
 	TXSTAbits.BRGH = 0;
 	SPBRGH = 0;
-	SPBRG = 64;
+	SPBRG = 42;
 	TXSTAbits.TXEN = 1;
 	RCSTAbits.SPEN = 1;
 

@@ -39,7 +39,7 @@ void PetitModBus_UART_Putch(uint8_t c)
 static void half_dup_tx(void)
 {
 	DERE_Set(); // enable modbus transmitter
-	delay_ms(10);
+	delay_ms(5);
 }
 
 // switch RS transceiver to receive mode and wait
@@ -48,7 +48,7 @@ static void half_dup_rx(void)
 {
 	while (UART6_WriteCountGet()) {
 	};
-	delay_ms(10);
+	delay_ms(5);
 	DERE_Clear(); // enable modbus receiver	
 }
 

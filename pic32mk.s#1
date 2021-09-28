@@ -16540,12 +16540,12 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <plain>
 <text x="-12.7" y="-109.22" size="1.778" layer="91">change to VDD from VSS</text>
 <text x="-12.7" y="-86.36" size="1.778" layer="91">change to VSS from orig VCC</text>
-<text x="-132.08" y="-40.64" size="1.778" layer="91">A</text>
-<text x="-132.08" y="-50.8" size="1.778" layer="91">B</text>
-<text x="-132.08" y="-35.56" size="1.778" layer="91">Index</text>
-<text x="-137.16" y="-33.02" size="1.778" layer="91">Index</text>
-<text x="-137.16" y="-30.48" size="1.778" layer="91">A</text>
-<text x="-137.16" y="-27.94" size="1.778" layer="91">B</text>
+<text x="-132.08" y="-40.64" size="1.778" layer="91">A qei2</text>
+<text x="-132.08" y="-50.8" size="1.778" layer="91">B qei2</text>
+<text x="-132.08" y="-35.56" size="1.778" layer="91">Index qei2</text>
+<text x="-137.16" y="-33.02" size="1.778" layer="91">Index qei1</text>
+<text x="-137.16" y="-30.48" size="1.778" layer="91">A qei1</text>
+<text x="-137.16" y="-27.94" size="1.778" layer="91">B qei1</text>
 <text x="182.88" y="-149.86" size="1.778" layer="91">FLT6</text>
 <text x="200.66" y="73.66" size="1.778" layer="91">FLT5</text>
 <text x="5.08" y="-149.86" size="1.778" layer="91">FLT15</text>

@@ -16549,6 +16549,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <text x="182.88" y="-149.86" size="1.778" layer="91">FLT6</text>
 <text x="200.66" y="73.66" size="1.778" layer="91">FLT5</text>
 <text x="5.08" y="-149.86" size="1.778" layer="91">FLT15</text>
+<text x="208.28" y="-76.2" size="1.778" layer="91">Swap VCC and VIO next board rev</text>
 </plain>
 <instances>
 <instance part="IC1" gate="G$1" x="12.7" y="45.72" smashed="yes">

@@ -10,14 +10,14 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '9600'}
+        attributes: {value: '57600'}
   - type: Integer
     attributes: {id: BRG_VALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: uart6, value: '3124'}
+        attributes: {id: uart6, value: '520'}
   - type: KeyValueSet
     attributes: {id: UART_BRGH}
     children:
