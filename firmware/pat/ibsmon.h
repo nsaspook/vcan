@@ -48,8 +48,13 @@ typedef enum cmd_type {
 } cmd_type;
 
 union PWMDC {
-	unsigned int lpwm;
+	uint16_t lpwm;
 	char bpwm[2];
+};
+
+union MREG {
+	int16_t value;
+	char bytes[2];
 };
 
 #define TRUE	1
@@ -99,15 +104,14 @@ union PWMDC {
 #define BOOT_FLAG  	LATBbits.LATB2 // debug
 #define ANA_SIG		LATBbits.LATB3
 
-
 #define LINK_COUNT      10
 #define MAX_C_ERROR     3
 
 //#define LOCAL_ECHO	1
-#define TDELAY		3
-#define RDELAY		2000
-#define QDELAY		1
-#define TODELAY		4
+#define TDELAY		3	// half-duplex delay
+#define RDELAY		2000	// receive timeout
+#define QDELAY		1	// query delay
+#define TODELAY		4	// misc delay
 
 #define CC_DEACT	61	// 1.00 normal 61
 #define CC_ACT		92	// 1.50

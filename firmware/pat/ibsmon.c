@@ -76,20 +76,20 @@ uint8_t init_stream_params(void);
 uint16_t req_length = 0;
 const uint8_t modbus_cc_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x06},
 modbus_cc_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x0A, 0x00, 0x02},
-modbus_cc_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0A, 0x00, 0x01},
-modbus_cc_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0B, 0x00, 0x01},
 i400_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x85, 0x01, 0x03, 0x00, 0x00, 0x00, 0x00, 0x85, 0x00, 0x00, 0x85},
 i400_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x04, 0x00, 0x00, 0x00, 0x00, 0x39, 0x85},
 i400_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x5d, 0xc0},
 i400_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x60, 0x00};
+
+uint8_t modbus_cc_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0A, 0x00, 0x01},
+modbus_cc_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0B, 0x00, 0x02};
 
 volatile struct V_data V = {
 	.blink_lock = 0,
 };
 volatile uint8_t cc_stream_file, cc_buffer[MAX_DATA]; // half-duplex so we can share the cc_buffer for TX and RX
 uint32_t crc_error;
-comm_type cstate = CLEAR;
-cmd_type modbus_command = G_MODE;
+union MREG rvalue;
 const char *build_date = __DATE__, *build_time = __TIME__, build_version[5] = "3.0a";
 
 void SetDCPWM1(uint16_t dutycycle)
@@ -106,15 +106,20 @@ void SetDCPWM1(uint16_t dutycycle)
 	CCP1CON = (CCP1CON & 0xCF) | ((DCycle.bpwm[0] >> 2) & 0x30);
 }
 
+/*
+ * simple modbus master state machine
+ */
 int8_t controller_work(void)
 {
 	static uint8_t mcmd = G_MODE;
+	static comm_type cstate = CLEAR;
+	static cmd_type modbus_command = G_MODE;
 
 	switch (cstate) {
 	case CLEAR:
 		clear_2hz();
 		cstate = INIT;
-		modbus_command = mcmd++; // sequence commands to client
+		modbus_command = mcmd++; // sequence modbus commands to client
 		if (mcmd > G_LAST)
 			mcmd = G_MODE;
 		/*
@@ -122,9 +127,15 @@ int8_t controller_work(void)
 		 */
 		switch (modbus_command) {
 		case G_SET: // write code request
+			rvalue.value = 369;
+			modbus_cc_freset[4] = rvalue.bytes[1];
+			modbus_cc_freset[5] = rvalue.bytes[0];
 			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));
 			break;
 		case G_AUX: // write code request
+			rvalue.value = -1;
+			modbus_cc_clear[4] = rvalue.bytes[1];
+			modbus_cc_clear[5] = rvalue.bytes[0];
 			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_clear, sizeof(modbus_cc_clear));
 			break;
 		case G_ERROR: // read code request
@@ -137,7 +148,7 @@ int8_t controller_work(void)
 		}
 		break;
 	case INIT:
-		if (get_2hz(FALSE) > QDELAY) {
+		if (get_2hz(FALSE) >= QDELAY) {
 #ifdef LOCAL_ECHO
 			RE_ = 0; // keep receiver active
 #else
@@ -175,7 +186,6 @@ int8_t controller_work(void)
 			case G_SET: // check for controller error codes
 				req_length = sizeof(i400_freset);
 				if ((V.recv_count >= req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
-					uint16_t temp;
 					c_crc = crc16(cc_buffer, req_length - 2);
 					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[req_length - 1] & 0x00ff);
 					if (c_crc == c_crc_rec) {
@@ -183,6 +193,9 @@ int8_t controller_work(void)
 					}
 					cstate = CLEAR;
 				} else {
+					/*
+					 * receiver timeout, restart
+					 */
 					if (get_500hz(FALSE) > RDELAY) {
 						cstate = CLEAR;
 						RE20A_ERROR = OFF;
@@ -193,7 +206,6 @@ int8_t controller_work(void)
 			case G_AUX: // check for controller error codes
 				req_length = sizeof(i400_clear);
 				if ((V.recv_count >= req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
-					uint16_t temp;
 					c_crc = crc16(cc_buffer, req_length - 2);
 					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[req_length - 1] & 0x00ff);
 					if (c_crc == c_crc_rec) {

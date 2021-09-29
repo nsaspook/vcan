@@ -180,87 +180,7 @@ void move_pos_qei(uint32_t, uintptr_t);
 void set_motor_speed(const uint32_t, double);
 int32_t velo_loop(double, bool);
 void wave_gen(uint32_t, uintptr_t);
-void BDC_motor(uint32_t);
 void my_modbus_rx(UART_EVENT, uintptr_t);
-
-void BDC_motor(uint32_t m_type)
-{
-	char buffer[STR_BUF_SIZE];
-	uint32_t i = 11500, j = 6000;
-	bool gfx_move = false, gfx_reset = false;
-
-	TMR2_Stop();
-	TMR3_Stop();
-
-	//Module CTMU
-	PMD1bits.CTMUMD = 0; //Enable CTMU Module
-	CTMUCONbits.TGEN = 0; // TGEN = 0 for enable current through diode
-	CTMUCONbits.EDG1STAT = 1; // EDGESTAT1 = EDGESTAT2  for enable current trough diode
-	CTMUCONbits.EDG2STAT = 1; // EDGESTAT1 = EDGESTAT2  for enable current trough diode
-	CTMUCONbits.IRNG = 0b11; //100xBase current level
-	CTMUCONbits.ON = 1; // CTMU is ON
-
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, i);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, 6000);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, 0);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, 0);
-	MCPWM_Start();
-	U1_EN_Set();
-	U2_EN_Set();
-	if (m_type == 1) {
-		while (true) {
-			sprintf(buffer, "TMP %5i      ", an_data[TSENSOR]);
-			eaDogM_WriteStringAtPos(0, 0, buffer);
-			sprintf(buffer, "IM1 %5i      ", u1ai);
-			eaDogM_WriteStringAtPos(1, 0, buffer);
-			sprintf(buffer, "IM2 %5i      ", u1bi);
-			eaDogM_WriteStringAtPos(2, 0, buffer);
-			sprintf(buffer, "POT %5i      ", KNOB1_INC);
-			eaDogM_WriteStringAtPos(3, 0, buffer);
-			sprintf(buffer, "HP  %5i      ", MOTOR1_INC);
-			eaDogM_WriteStringAtPos(4, 0, buffer);
-			sprintf(buffer, "PWM  %5i      ", j);
-			eaDogM_WriteStringAtPos(5, 0, buffer);
-			start_adc_scan();
-
-			if (TimerDone(TMR_MOTOR)) {
-				StartTimer(TMR_MOTOR, 10000);
-				i += 8000;
-				if (i > 11000) {
-					i = 2000;
-					j = 7000;
-					gfx_move = true;
-				} else {
-					j = 5000;
-					gfx_move = false;
-				}
-				MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, j);
-			}
-
-			if (TimerDone(TMR_DISPLAY)) {
-				vector_graph(gfx_move, gfx_reset);
-				{
-					//	100 Hz updates, processing takes 5ms
-					uint32_t tickStart, delayTicks;
-					tickStart = coreTmr.tickCounter;
-					delayTicks = (1000 * update_delay) / CORE_TIMER_INTERRUPT_PERIOD_IN_US; // Number of tick interrupts to wait for the delay
-					LA_gfx(false, false, 0);
-					while ((coreTmr.tickCounter - tickStart) < delayTicks) {
-						// extra processing loop while waiting for clock time to expire
-						LA_gfx(false, false, 400);
-					}
-				}
-				OledUpdate();
-				StartTimer(TMR_DISPLAY, 100);
-			}
-			if (TimerDone(TMR_BLINK)) {
-				StartTimer(TMR_BLINK, 500);
-				RESET_LED_Toggle();
-				OledClearBuffer();
-			}
-		}
-	}
-}
 
 void PWM_motor2(M_CTRL mmode)
 {
@@ -319,7 +239,6 @@ void PWM_motor2(M_CTRL mmode)
 		IOCON3bits.OVRENL = 1;
 		break;
 	}
-
 }
 
 time_t time(time_t * Time)
@@ -328,7 +247,7 @@ time_t time(time_t * Time)
 }
 
 /*
- * PWM 1ms waveform interrupt routine, timer #2
+ * PWM waveform generation interrupt routine, timer #2
  */
 void wave_gen(uint32_t status, uintptr_t context)
 {
@@ -637,12 +556,6 @@ int main(void)
 	/* Start system tick timer */
 	CORETIMER_Start();
 
-#ifdef	BDCM
-	BDC_motor(1);
-#endif
-
-
-
 	V.vcan_state = V_home;
 	//	TMR3_Start(); // start auto movement functions
 	PWM_motor2(M_PWM);
@@ -686,7 +599,8 @@ int main(void)
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
-		ProcessPetitModbus();
+		ProcessPetitModbus(); // MODBUS processing 
+		POS3CNT = (int32_t) PetitRegisters[11].ActValue;
 
 #ifndef G400HZ_NODIS
 		if (TimerDone(TMR_MOTOR)) {
@@ -748,7 +662,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				sprintf(buffer, "%4i:D %5i %5i %5i  ", V.TimeUsed, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
-				sprintf(buffer, "MODBUS %4i %3i %3i %4i %4i", PetitRegisters[5].ActValue, (uint) PetitReceiveCounter, UART6_ReadCountGet(), V.modbus_rx, V.modbus_tx);
+				sprintf(buffer, "MODBUS %4i %3i %3i %4i %4i", (int32_t) PetitRegisters[5].ActValue, (int32_t) PetitRegisters[10].ActValue, (int32_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
 				eaDogM_WriteStringAtPos(9, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
@@ -759,19 +673,18 @@ int main(void)
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph(true, false);
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 100);
+				StartTimer(TMR_DISPLAY, DISPLAY_UPDATE);
 			}
 		}
 #endif
 		if (TimerDone(TMR_ADC)) {
-			StartTimer(TMR_ADC, 10);
+			StartTimer(TMR_ADC, ADC_UPDATE);
 			start_adc_scan();
 		}
 		if (TimerDone(TMR_BLINK)) {
-			StartTimer(TMR_BLINK, 1000);
+			StartTimer(TMR_BLINK, BLINK_UPDATE);
 			RESET_LED_Toggle();
 			PetitRegisters[5].ActValue++;
-			PetitRegisters[10].ActValue = 12345;
 		}
 	}
 

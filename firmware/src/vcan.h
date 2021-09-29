@@ -24,9 +24,9 @@ extern "C" {
 	/* 400Hz generator */
 #define G400HZ
 	//#define G400HZ_NODIS	
-/*
- * 3-phase signal table size and offsets for each phase
- */
+	/*
+	 * 3-phase signal table size and offsets for each phase
+	 */
 #define sine_res	360
 #define sinea		0
 #define	sineb		120
@@ -48,7 +48,6 @@ extern "C" {
 #define PHASE_INC	(256 * 65536) / SAMPLERATE
 
 #define MOTOR_SPEED	1	// sinewave update divider
-#define MOTOR_UPDATES	1	// main motor loop timer in ms
 #define HVDC_M			// 24 + volts for motor drive
 
 	//#define ENCODER_PULSES_PER_REV	327680 // m35 encoder
@@ -160,6 +159,11 @@ extern "C" {
 
 #define KNOB1_INC	POS3CNT
 #define MOTOR1_INC	POS2CNT
+
+#define MOTOR_UPDATES	1	// main loop timer in ms
+#define DISPLAY_UPDATE	200
+#define ADC_UPDATE	10
+#define BLINK_UPDATE	1000
 
 #ifdef	__cplusplus
 }
