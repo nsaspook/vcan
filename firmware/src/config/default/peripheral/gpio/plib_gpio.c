@@ -103,12 +103,6 @@ void GPIO_Initialize ( void )
     ANSELGCLR = 0xec0; /* Digital Mode Enable */
     CNPUGSET = 0xc2; /* Pull-Up Enable */
 
-    /* Unlock system for PPS configuration */
-    SYSKEY = 0x00000000;
-    SYSKEY = 0xAA996655;
-    SYSKEY = 0x556699AA;
-
-    CFGCONbits.IOLOCK = 0;
 
     /* PPS Input Remapping */
     QEA1R = 0;
@@ -130,10 +124,6 @@ void GPIO_Initialize ( void )
     RPD3R = 14;
     RPE15R = 2;
 
-        /* Lock back the system after PPS configuration */
-    CFGCONbits.IOLOCK = 1;
-
-    SYSKEY = 0x00000000;
 
     uint32_t i;
     /* Initialize Interrupt Pin data structures */
