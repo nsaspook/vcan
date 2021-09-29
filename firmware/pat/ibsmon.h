@@ -84,7 +84,7 @@ union MREG {
 #define IBSPORT_IOA	0b00001100		//
 #define IBSPORT_IOB	0b00010010		// RS-232 receive on B4
 
-#define MADDR		0x01
+#define MADDR		0x04 // modbus i400hz client address
 /*******************************ModBus Functions*******************************/
 #define READ_COILS                  1
 #define READ_DISCRETE_INPUTS        2
@@ -97,7 +97,7 @@ union MREG {
 
 #define DE		LATAbits.LATA0
 #define RE_		LATAbits.LATA1
-#define RE20A_ERROR	LATAbits.LATA2
+#define I400_ERROR	LATAbits.LATA2
 #define SIG4		LATAbits.LATA3
 #define SIG5		LATAbits.LATA6
 #define LED1		LATBbits.LATB0

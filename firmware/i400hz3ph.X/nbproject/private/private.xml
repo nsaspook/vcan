@@ -5,6 +5,7 @@
         <group>
             <file>file:/root/vcan/firmware/src/PetitModbus/PetitModbus.h</file>
             <file>file:/root/vcan/firmware/src/PetitModbus/PetitModbus.c</file>
+            <file>file:/root/vcan/firmware/src/adc_scan.c</file>
             <file>file:/root/vcan/firmware/src/main.c</file>
             <file>file:/root/vcan/firmware/src/tests.c</file>
             <file>file:/root/vcan/firmware/src/PetitModbus/PetitModbusPort.c</file>

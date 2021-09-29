@@ -175,7 +175,6 @@ volatile float q0 = 1.0, q1 = 1.0, q2 = 1.0, q3 = 1.0; // quaternion
 
 time_t time(time_t *);
 void my_time(uint32_t, uintptr_t);
-void my_index(GPIO_PIN, uintptr_t);
 void move_pos_qei(uint32_t, uintptr_t);
 void set_motor_speed(const uint32_t, double);
 int32_t velo_loop(double, bool);
@@ -313,11 +312,6 @@ void my_time(uint32_t status, uintptr_t context)
 #endif
 }
 
-void my_index(GPIO_PIN pin, uintptr_t context)
-{
-	POS2CNT = 0;
-}
-
 /*
  * input position auto-positioning, timer #3
  */
@@ -422,7 +416,7 @@ void my_modbus_rx(UART_EVENT event, uintptr_t context)
 {
 	static uint8_t m_data = 0;
 
-	BSP_LED3_Toggle();
+	BSP_LED3_Set();
 	UART6_Read(&m_data, 1);
 	ReceiveInterrupt(m_data);
 }
@@ -463,8 +457,7 @@ int main(void)
 	UART6_ReadThresholdSet(1); // callback every char
 	UART6_ReadNotificationEnable(true, true);
 	UART6_ReadCallbackRegister(my_modbus_rx, 0);
-	InitPetitModbus(1);
-	//	UART6_Write("fred fred",9);
+	InitPetitModbus(4);
 	/*
 	 * software timers @1ms using 500ns ticks
 	 */
@@ -478,9 +471,6 @@ int main(void)
 	StartTimer(TMR_LCD_UP, 10);
 
 	QEI1_Start();
-	//	QEI2_CallbackRegister(my_index, 0);
-	GPIO_PinInterruptCallbackRegister(GPIO_PIN_RB1, my_index, 0);
-	GPIO_PortInterruptEnable(GPIO_PORT_B, 0b10);
 	QEI2_Start();
 	QEI3_Start();
 	m35_ptr = &m35_3;
@@ -600,7 +590,14 @@ int main(void)
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
 		ProcessPetitModbus(); // MODBUS processing 
+		BSP_LED3_Clear();
 		POS3CNT = (int32_t) PetitRegisters[11].ActValue;
+		PetitRegisters[0].ActValue = (int16_t) hb_current(u1bi, true);
+		PetitRegisters[1].ActValue = (int16_t) hb_current(u2ai, true);
+		PetitRegisters[2].ActValue = (int16_t) hb_current(u2bi, true);
+		PetitRegisters[3].ActValue = (int16_t) an_data[ANA1]; // AC voltage value
+		PetitRegisters[4].ActValue = (int16_t) (MODBUS_VER <<8) + PWMF15_Get() + (PWMF5_Get() << 1) + (PWMF6_Get() << 2) + (U1_EN_Get() << 3) + (U2_EN_Get() << 4)+ (check_adc_ivref() << 5);
+		PetitRegisters[5].ActValue = (int16_t) m35_4.current; // pwm voltage output value
 
 #ifndef G400HZ_NODIS
 		if (TimerDone(TMR_MOTOR)) {
@@ -644,7 +641,7 @@ int main(void)
 				m35_ptr = &m35_2;
 				sprintf(buffer, "I400HZ3P %s %s       ", build_date, build_time);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
-				sprintf(buffer, "Q %4i:%i  F %i %i %i H %i", POS3CNT, VEL3HLD, PWMF15_Get(), PWMF5_Get(), PWMF6_Get(), get_switch(FLT15_IN4));
+				sprintf(buffer, "Q %4i:%i  F %i %i %i H %i A %i", POS3CNT, VEL3HLD, PWMF15_Get(), PWMF5_Get(), PWMF6_Get(), get_switch(FLT15_IN4), check_adc_ivref());
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_3;
 				/*
@@ -662,12 +659,12 @@ int main(void)
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				sprintf(buffer, "%4i:D %5i %5i %5i  ", V.TimeUsed, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
-				sprintf(buffer, "MODBUS %4i %3i %3i %4i %4i", (int32_t) PetitRegisters[5].ActValue, (int32_t) PetitRegisters[10].ActValue, (int32_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
+				sprintf(buffer, "MB %4i %3i %3i %4i %4i", (int32_t) PetitRegisters[5].ActValue, (int32_t) PetitRegisters[10].ActValue, (int32_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
 				eaDogM_WriteStringAtPos(9, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
-				sprintf(buffer, "%4i:A %4i %4i  %4i", an_data[IVREF], an_data[ANA1], an_data[POT1], an_data[POT2]);
+				sprintf(buffer, "%4i:A %4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[POT1], an_data[POT2]);
 				eaDogM_WriteStringAtPos(14, 0, buffer);
 				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    ", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4));
 				eaDogM_WriteStringAtPos(15, 0, buffer);

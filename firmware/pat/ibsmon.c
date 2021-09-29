@@ -62,7 +62,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <pic18f1320.h>
 #include "ibsmon.h"
 #include "ihc_vector.h"
 #include "crc.h"
@@ -70,17 +69,22 @@
 #define BusyUSART( ) (!TXSTAbits.TRMT)
 
 int8_t controller_work(void);
-void init_ihcmon(void);
+void init_i400mon(void);
 uint8_t init_stream_params(void);
 
 uint16_t req_length = 0;
+/*
+ * send and receive MODBUS templates
+ */
 const uint8_t modbus_cc_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x06},
 modbus_cc_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x0A, 0x00, 0x02},
 i400_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x85, 0x01, 0x03, 0x00, 0x00, 0x00, 0x00, 0x85, 0x00, 0x00, 0x85},
 i400_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x04, 0x00, 0x00, 0x00, 0x00, 0x39, 0x85},
 i400_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x5d, 0xc0},
 i400_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x60, 0x00};
-
+/*
+ * send variable register commands
+ */
 uint8_t modbus_cc_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0A, 0x00, 0x01},
 modbus_cc_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0B, 0x00, 0x02};
 
@@ -90,6 +94,14 @@ volatile struct V_data V = {
 volatile uint8_t cc_stream_file, cc_buffer[MAX_DATA]; // half-duplex so we can share the cc_buffer for TX and RX
 uint32_t crc_error;
 union MREG rvalue;
+/*
+ * variable register data
+ */
+int16_t i400_pwm = 369; // inverter voltage control
+int16_t i400_power = 0x0130; // power commands upper byte and modbus master software version lower byte
+/*
+ * program version data
+ */
 const char *build_date = __DATE__, *build_time = __TIME__, build_version[5] = "3.0a";
 
 void SetDCPWM1(uint16_t dutycycle)
@@ -127,13 +139,13 @@ int8_t controller_work(void)
 		 */
 		switch (modbus_command) {
 		case G_SET: // write code request
-			rvalue.value = 369;
+			rvalue.value = i400_pwm;
 			modbus_cc_freset[4] = rvalue.bytes[1];
 			modbus_cc_freset[5] = rvalue.bytes[0];
 			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));
 			break;
 		case G_AUX: // write code request
-			rvalue.value = -1;
+			rvalue.value = i400_power;
 			modbus_cc_clear[4] = rvalue.bytes[1];
 			modbus_cc_clear[5] = rvalue.bytes[0];
 			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_clear, sizeof(modbus_cc_clear));
@@ -198,7 +210,7 @@ int8_t controller_work(void)
 					 */
 					if (get_500hz(FALSE) > RDELAY) {
 						cstate = CLEAR;
-						RE20A_ERROR = OFF;
+						I400_ERROR = OFF;
 						mcmd = G_MODE;
 					}
 				}
@@ -215,7 +227,7 @@ int8_t controller_work(void)
 				} else {
 					if (get_500hz(FALSE) > RDELAY) {
 						cstate = CLEAR;
-						RE20A_ERROR = OFF;
+						I400_ERROR = OFF;
 						mcmd = G_MODE;
 					}
 				}
@@ -229,17 +241,17 @@ int8_t controller_work(void)
 					if (c_crc == c_crc_rec) {
 						if ((temp = ((uint16_t) cc_buffer[3] << 8) +((uint16_t) cc_buffer[4]&0xff))) {
 							NOP();
-							RE20A_ERROR = ON;
+							I400_ERROR = ON;
 							set_led_blink(ERROR_BLINKS);
 						} else {
-							RE20A_ERROR = OFF;
+							I400_ERROR = OFF;
 						}
 					}
 					cstate = CLEAR;
 				} else {
 					if (get_500hz(FALSE) > RDELAY) {
 						cstate = CLEAR;
-						RE20A_ERROR = OFF;
+						I400_ERROR = OFF;
 						mcmd = G_MODE;
 					}
 				}
@@ -309,7 +321,7 @@ int8_t controller_work(void)
 	return 0;
 }
 
-void init_ihcmon(void)
+void init_i400mon(void)
 {
 	uint16_t tmp;
 	V.boot_code = FALSE;
@@ -335,7 +347,7 @@ void init_ihcmon(void)
 	INTCON2bits.RBPU = 0; // enable weak pull-ups, mainly for receive serial when RS485 Rx transceiver is off.
 
 	LED1 = OFF;
-	RE20A_ERROR = OFF;
+	I400_ERROR = OFF;
 	V.clock_blinks = 0;
 	set_led_blink(BOFF);
 	//OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_64);
@@ -393,7 +405,7 @@ uint8_t init_stream_params(void)
 
 void main(void)
 {
-	init_ihcmon();
+	init_i400mon();
 	/* Loop forever */
 	while (TRUE) { // busy work
 		controller_work();

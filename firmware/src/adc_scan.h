@@ -15,6 +15,9 @@ extern "C" {
 #include "vcan.h"
 #include "filters.h"
 
+#define ADC_L	1960
+#define ADC_H	1970
+	
 	typedef enum {
 		FBA1 = 0,
 		FBB1,
@@ -35,6 +38,7 @@ extern "C" {
 	void init_end_of_adc_scan(void);
 	int32_t hb_current(const int32_t, const bool);
 	void start_adc_scan(void);
+	bool check_adc_ivref(void);
 
 #ifdef	__cplusplus
 }

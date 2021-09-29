@@ -18,7 +18,12 @@ extern "C" {
 #include <math.h>
 #include <stdio.h>
 #include <stdbool.h>
-
+	
+/*
+ * modbus client software version
+ */
+#define MODBUS_VER	0x30
+	
 	/* Use Brushed DC Motor routines */
 	//#define BDCM
 	/* 400Hz generator */

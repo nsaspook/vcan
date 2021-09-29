@@ -77,3 +77,15 @@ void start_adc_scan(void)
 	DEBUGB0_Set();
 	ADCCON3SET = _ADCCON3_GSWTRG_MASK; // scan re-trigger	
 }
+
+/*
+ * make sure ADC conversions have good values
+ */
+bool check_adc_ivref(void)
+{
+	if ((an_data[IVREF] > ADC_L) && (an_data[IVREF] < ADC_H)) {
+		return true;
+	} else {
+		return false;
+	}
+}
