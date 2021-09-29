@@ -759,7 +759,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph(true, false);
 				OledUpdate();
-				StartTimer(TMR_DISPLAY, 100);
+				StartTimer(TMR_DISPLAY, 250);
 			}
 		}
 #endif
