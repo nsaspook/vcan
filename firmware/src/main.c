@@ -434,6 +434,7 @@ void my_modbus_rx(UART_EVENT event, uintptr_t context)
 int main(void)
 {
 	char buffer[STR_BUF_SIZE];
+	bool dmt = RCONbits.DMTO; // set dead man restart status
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
@@ -512,7 +513,7 @@ int main(void)
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
-		sprintf(buffer, " Options: 1:%d 2:%d ", option1_Get(), option2_Get());
+		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", option1_Get(), option2_Get(), dmt);
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
 		WaitMs(5000);
@@ -521,7 +522,7 @@ int main(void)
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
-		sprintf(buffer, " Options: 1:%d 2:%d ", option1_Get(), option2_Get());
+		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", option1_Get(), option2_Get(), dmt);
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
 		WaitMs(1500);
@@ -685,6 +686,7 @@ int main(void)
 			StartTimer(TMR_BLINK, BLINK_UPDATE);
 			RESET_LED_Toggle();
 			PetitRegisters[5].ActValue++;
+			DMT_Clear(); // clear the Dead Man Timer
 		}
 	}
 
