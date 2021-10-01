@@ -24,7 +24,7 @@ static void cli_init(t_cli_ctx *a_ctx, t_cmd *a_cmds)
 	 * serial port boot messages
 	 */
 	while (UART3_WriteFreeBufferCountGet() < 10);
-	sprintf(a_ctx->cmd, "\r\n VCAN %s %s\r\n", build_date, build_time);
+	sprintf(a_ctx->cmd, "\r\n I400 %s %s\r\n", build_date, build_time);
 	UART3_Write((uint8_t *) a_ctx->cmd, strlen(a_ctx->cmd));
 	while (UART3_WriteFreeBufferCountGet() < 10);
 	UART3_Write((uint8_t *) cmdm, strlen(cmdm));

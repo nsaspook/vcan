@@ -6,13 +6,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: 3101EB80A5915B4E58D11865D19E4DF3
+- generatedChecksum: E00F212392A4829CF7647EC571D524BF
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 3101EB80A5915B4E58D11865D19E4DF3
+  userChecksum: E00F212392A4829CF7647EC571D524BF
 - generatedChecksum: 2BF0128B550D110C8FC42E8B2D94F4E7
   logicalPath: config/default
   name: interrupts.c
@@ -55,6 +55,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: C55E57C998986D15E031981C694C6F31
+- generatedChecksum: C0EE20734A40542E8E06C6CE209E25BC
+  logicalPath: config/default/peripheral/dmt
+  name: plib_dmt.c
+  physicalPath: peripheral/dmt
+  security: NON_SECURE
+  type: SOURCE
+  userChecksum: C0EE20734A40542E8E06C6CE209E25BC
 - generatedChecksum: F0F77E9605002F86303776FD504751EB
   logicalPath: config/default/peripheral/eeprom
   name: plib_eeprom.c
@@ -167,13 +174,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 7806B30ECAE0D18D08CD583D8775530D
-- generatedChecksum: F50236B70613DF099DB7FD8D8D089CF4
+- generatedChecksum: 0E26104585CF233F7424B037CAEDE184
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: F50236B70613DF099DB7FD8D8D089CF4
+  userChecksum: 0E26104585CF233F7424B037CAEDE184
 - generatedChecksum: E189C26B2269F8DE46033CCD0621958D
   logicalPath: config/default
   name: device.h
@@ -223,6 +230,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: AC36F429D7162D7D1A68B9955ED194A3
+- generatedChecksum: 3329229CDAAD502271065BBAD985B6AB
+  logicalPath: config/default/peripheral/dmt
+  name: plib_dmt.h
+  physicalPath: peripheral/dmt
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: 3329229CDAAD502271065BBAD985B6AB
 - generatedChecksum: B97B50D5217602B30A68AA8AA5D77BFB
   logicalPath: config/default/peripheral/eeprom
   name: plib_eeprom.h

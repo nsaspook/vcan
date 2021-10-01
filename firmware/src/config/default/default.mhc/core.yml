@@ -2611,12 +2611,26 @@ children:
       - type: User
         attributes: {value: '1'}
   - type: Combo
+    attributes: {id: CONFIG_DMTCNT}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: DMT28}
+  - type: Combo
     attributes: {id: CONFIG_FCKSM}
     children:
     - type: Values
       children:
       - type: User
         attributes: {value: CSDCMD}
+  - type: Combo
+    attributes: {id: CONFIG_FDMTEN}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'ON'}
   - type: Combo
     attributes: {id: CONFIG_FNOSC}
     children:
@@ -3324,6 +3338,77 @@ children:
   - type: Boolean
     attributes: {id: DMA_ENABLE}
     children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
+  - type: Comment
+    attributes: {id: DMT_CONFIG_COMMENT}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
+  - type: String
+    attributes: {id: DMT_COUNT_INTERVAL}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
+  - type: String
+    attributes: {id: DMT_COUNT_SELECT}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 268435456 (2^28) cycles}
+  - type: File
+    attributes: {id: DMT_HEADER}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'true'}
+  - type: File
+    attributes: {id: DMT_SOURCE}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'true'}
+  - type: File
+    attributes: {id: DMT_SYS_DEF}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: enabled}
+        children:
+        - {type: Value, value: 'true'}
+  - type: Boolean
+    attributes: {id: DMT_USE}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: readOnly}
+        children:
+        - {type: Value, value: 'true'}
     - type: Values
       children:
       - type: Dynamic

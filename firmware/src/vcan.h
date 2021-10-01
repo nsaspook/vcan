@@ -18,14 +18,28 @@ extern "C" {
 #include <math.h>
 #include <stdio.h>
 #include <stdbool.h>
-	
-/*
- * modbus client software version
- */
-#define MODBUS_VER	0x30
-	
-	/* Use Brushed DC Motor routines */
-	//#define BDCM
+
+	/*
+	 * modbus client software params
+	 */
+#define MODBUS_PORT	UART6
+#define MODBUS_VER	0x30	// software version
+#define MB_ADDR		4	// slave address
+
+	/*
+	 * read registers
+	 * 0	h-bridge 1 current mA
+	 * 1	h-bridge 2 current mA
+	 * 2	h-bridge 3 current mA
+	 * 3	Inverter AC output voltage
+	 * 4	Fault/status bits and slave SW version
+	 * 5	Voltage/PWM Inverter current value
+	 * 
+	 * write registers
+	 * 10	power commands and master SW version
+	 * 11	Adjust Voltage/PWM value
+	 */
+
 	/* 400Hz generator */
 #define G400HZ
 	//#define G400HZ_NODIS	
@@ -40,12 +54,6 @@ extern "C" {
 #define FLT15_IN4	3
 #define FAULT_DELAY	2
 
-	/*
-	 * jumper pin settings JP4
-	 * RF1	option1		special configurations for board testing
-	 * RG1	option2		motor/encoder configurations
-	 */
-
 #define SYS_FREQ	120000000 // Running at 120MHz
 #define SAMPLERATE	36000
 #define SR120		12000
@@ -55,8 +63,6 @@ extern "C" {
 #define MOTOR_SPEED	1	// sinewave update divider
 #define HVDC_M			// 24 + volts for motor drive
 
-	//#define ENCODER_PULSES_PER_REV	327680 // m35 encoder
-	//#define ENCODER_PULSES_PER_REV	8000 // AC servo motor encoder
 #define ENCODER_PULSES_PER_REV	4000 // TEKNIC motor encoder, HURST BLDC motor encoder
 
 #if ENCODER_PULSES_PER_REV < 9000
@@ -160,6 +166,7 @@ extern "C" {
 		M_SPEED m_speed;
 		int32_t motor_speed;
 		volatile bool fault_active;
+		volatile UART_ERROR mb_error;
 	};
 
 #define KNOB1_INC	POS3CNT

@@ -4,7 +4,7 @@
 #include "tests.h"
 
 // This port file for PIC microcontrollers!
-// for XC32 and half-duplex transfers
+// for XC32 and half-duplex transfers using PIC32 Harmony USART drivers
 
 // Modbus RTU Variables
 volatile uint8_t PetitReceiveBuffer[PETITMODBUS_RECEIVE_BUFFER_SIZE]; // Buffer to collect data from hardware

@@ -417,8 +417,12 @@ void my_modbus_rx(UART_EVENT event, uintptr_t context)
 	static uint8_t m_data = 0;
 
 	BSP_LED3_Set();
-	UART6_Read(&m_data, 1);
-	ReceiveInterrupt(m_data);
+	if (event == UART_EVENT_READ_ERROR) {
+		V.mb_error = UART6_ErrorGet();
+	} else {
+		UART6_Read(&m_data, 1);
+		ReceiveInterrupt(m_data);
+	}
 }
 
 // *****************************************************************************
@@ -453,11 +457,11 @@ int main(void)
 	/*
 	 * MODBUS RX callback with init
 	 */
-	DERE_Clear(); // enable modbus receiver
+	DERE_Clear(); // enable modbus receiver USART6
 	UART6_ReadThresholdSet(1); // callback every char
 	UART6_ReadNotificationEnable(true, true);
 	UART6_ReadCallbackRegister(my_modbus_rx, 0);
-	InitPetitModbus(4);
+	InitPetitModbus(MB_ADDR);
 	/*
 	 * software timers @1ms using 500ns ticks
 	 */
@@ -468,7 +472,6 @@ int main(void)
 	TMR1_CallbackRegister(my_time, 0);
 	TMR1_Start();
 	StartTimer(TMR_BLINK, 1000);
-	StartTimer(TMR_LCD_UP, 10);
 
 	QEI1_Start();
 	QEI2_Start();
@@ -577,7 +580,7 @@ int main(void)
 	V.pwm_stop = false; // let ISR generate waveforms
 
 	/*
-	 * init serial command parser
+	 * init serial command parser on USART3
 	 */
 	scmd_init();
 	/*
@@ -596,7 +599,7 @@ int main(void)
 		PetitRegisters[1].ActValue = (int16_t) hb_current(u2ai, true);
 		PetitRegisters[2].ActValue = (int16_t) hb_current(u2bi, true);
 		PetitRegisters[3].ActValue = (int16_t) an_data[ANA1]; // AC voltage value
-		PetitRegisters[4].ActValue = (int16_t) (MODBUS_VER <<8) + PWMF15_Get() + (PWMF5_Get() << 1) + (PWMF6_Get() << 2) + (U1_EN_Get() << 3) + (U2_EN_Get() << 4)+ (check_adc_ivref() << 5);
+		PetitRegisters[4].ActValue = (int16_t) (MODBUS_VER << 8) + PWMF15_Get() + (PWMF5_Get() << 1) + (PWMF6_Get() << 2) + (U1_EN_Get() << 3) + (U2_EN_Get() << 4)+ (check_adc_ivref() << 5);
 		PetitRegisters[5].ActValue = (int16_t) m35_4.current; // pwm voltage output value
 
 #ifndef G400HZ_NODIS
