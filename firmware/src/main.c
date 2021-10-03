@@ -176,8 +176,7 @@ volatile float q0 = 1.0, q1 = 1.0, q2 = 1.0, q3 = 1.0; // quaternion
 time_t time(time_t *);
 void my_time(uint32_t, uintptr_t);
 void move_pos_qei(uint32_t, uintptr_t);
-void set_motor_speed(const uint32_t, double);
-int32_t velo_loop(double, bool);
+//int32_t velo_loop(double, bool);
 void wave_gen(uint32_t, uintptr_t);
 void my_modbus_rx(UART_EVENT, uintptr_t);
 
@@ -324,74 +323,7 @@ void move_pos_qei(uint32_t status, uintptr_t context)
 	return;
 }
 
-int32_t velo_loop(double error, bool stop)
-{
-	int32_t pace = 0;
 
-	if (stop) {
-		return pace;
-	}
-
-	if (m35_2.error > 0) {
-		pace = 1;
-	} else {
-		pace = -1;
-	}
-	return pace;
-}
-
-void set_motor_speed(const uint32_t error_sig, double pi_error)
-{
-	V.motor_speed = MOTOR_SPEED;
-
-	if (error_sig >= (ENCODER_PULSES_PER_REV / 800))
-		V.motor_speed = MOTOR_SPEED;
-
-	if (error_sig > (ENCODER_PULSES_PER_REV / 4)) {
-		V.motor_speed = MOTOR_SPEED;
-		if (TimerDone(TMR_BLINK)) {
-			StartTimer(TMR_BLINK, 250);
-			RESET_LED_Toggle();
-		}
-	}
-
-#if (ENCODER_PULSES_PER_REV < 9000)
-	freq_pi.pGain = 2.0;
-	freq_pi.iGain = 1.125;
-	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
-		V.motor_speed = MOTOR_SPEED;
-	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
-		V.motor_speed = 10;
-	if (error_sig < (ENCODER_PULSES_PER_REV / 1000))
-		V.motor_speed = 50;
-	if (error_sig < (ENCODER_PULSES_PER_REV / 1200))
-		V.motor_speed = 200;
-	if (error_sig < (ENCODER_PULSES_PER_REV / 1500))
-		V.motor_speed = 1000;
-	if (error_sig < (ENCODER_PULSES_PER_REV / 2000))
-		V.motor_speed = 10000;
-	if (error_sig < (ENCODER_PULSES_PER_REV / 800))
-		V.motor_speed = 2000 - (uint32_t) pi_error;
-#else
-	freq_pi.pGain = 3.0;
-	freq_pi.iGain = 2.0;
-	if (error_sig > (ENCODER_PULSES_PER_REV / 800))
-		V.motor_speed = MOTOR_SPEED;
-	if (error_sig < (ENCODER_PULSES_PER_REV / 900))
-		V.motor_speed = 10;
-	if (error_sig < (ENCODER_PULSES_PER_REV / 1000))
-		V.motor_speed = 50;
-	if (error_sig < (ENCODER_PULSES_PER_REV / 1200))
-		V.motor_speed = 200;
-	if (error_sig < (ENCODER_PULSES_PER_REV / 1500))
-		V.motor_speed = 1000;
-	if (error_sig < 40)
-		V.motor_speed = 10000;
-	if (error_sig <= (ENCODER_PULSES_PER_REV / 800))
-		V.motor_speed = 2000 - (uint32_t) pi_error;
-#endif
-	m35_4.speed = V.motor_speed;
-}
 
 void fh_hw(void *a_data)
 {
@@ -645,7 +577,7 @@ int main(void)
 				m35_ptr = &m35_2;
 				sprintf(buffer, "I400HZ3P %s %s       ", build_date, build_time);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
-				sprintf(buffer, "Q %4i:%i  F %i %i %i H %i A %i", POS3CNT, VEL3HLD, PWMF15_Get(), PWMF5_Get(), PWMF6_Get(), get_switch(FLT15_IN4), check_adc_ivref());
+				sprintf(buffer, "Q %4i:%i  F %i %i %i R %i A %i", POS3CNT, VEL3HLD, PWMF15_Get(), PWMF5_Get(), PWMF6_Get(), (bool)~(dmt|wdt), check_adc_ivref());
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_3;
 				/*

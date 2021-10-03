@@ -16,7 +16,7 @@ extern "C" {
 #include "filters.h"
 
 #define ADC_L	1960
-#define ADC_H	1971
+#define ADC_H	1990
 	
 	typedef enum {
 		FBA1 = 0,
