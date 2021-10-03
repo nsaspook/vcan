@@ -434,7 +434,7 @@ void my_modbus_rx(UART_EVENT event, uintptr_t context)
 int main(void)
 {
 	char buffer[STR_BUF_SIZE];
-	bool dmt = RCONbits.DMTO; // set dead man restart status
+	bool dmt = RCONbits.DMTO, wdt = RCONbits.WDTO; // set dead man restart status
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
@@ -513,7 +513,7 @@ int main(void)
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
-		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", option1_Get(), option2_Get(), dmt);
+		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", option1_Get(), option2_Get(), dmt + (wdt << 1));
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
 		WaitMs(5000);
@@ -522,7 +522,7 @@ int main(void)
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
-		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", option1_Get(), option2_Get(), dmt);
+		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", option1_Get(), option2_Get(), dmt + (wdt << 1));
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
 		WaitMs(1500);
@@ -670,7 +670,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(12, 0, buffer);
 				sprintf(buffer, "%4i:A %4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[POT1], an_data[POT2]);
 				eaDogM_WriteStringAtPos(14, 0, buffer);
-				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    ", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4));
+				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    R%d", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4),dmt + (wdt << 1));
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph(true, false);
 				OledUpdate();

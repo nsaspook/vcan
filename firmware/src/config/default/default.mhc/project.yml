@@ -6,13 +6,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: E00F212392A4829CF7647EC571D524BF
+- generatedChecksum: 0FA9E6F8E1EB7206A37BAB67E95C3B5D
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: E00F212392A4829CF7647EC571D524BF
+  userChecksum: 0FA9E6F8E1EB7206A37BAB67E95C3B5D
 - generatedChecksum: 2BF0128B550D110C8FC42E8B2D94F4E7
   logicalPath: config/default
   name: interrupts.c

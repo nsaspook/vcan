@@ -2616,7 +2616,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: DMT28}
+        attributes: {value: DMT29}
   - type: Combo
     attributes: {id: CONFIG_FCKSM}
     children:
@@ -3372,7 +3372,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 268435456 (2^28) cycles}
+        attributes: {id: core, value: 536870912 (2^29) cycles}
   - type: File
     attributes: {id: DMT_HEADER}
     children:

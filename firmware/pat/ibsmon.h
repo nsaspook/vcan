@@ -109,7 +109,7 @@ union MREG {
 
 //#define LOCAL_ECHO	1
 #define TDELAY		3	// half-duplex delay
-#define RDELAY		2000	// receive timeout
+#define RDELAY		300	// receive timeout
 #define QDELAY		1	// query delay
 #define TODELAY		4	// misc delay
 
