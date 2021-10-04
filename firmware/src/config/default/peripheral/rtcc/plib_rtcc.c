@@ -72,38 +72,21 @@ void RTCC_Initialize( void )
     SYSKEY = 0xAA996655;
     SYSKEY = 0x556699AA;
 
-    /* Initialize RTCC */
     RTCCONSET = _RTCCON_RTCWREN_MASK;  /* Enable writes to RTCC */
 
-    RTCCONCLR = _RTCCON_ON_MASK;   /* Disable clock to RTCC */
+    /* Lock System */
+    SYSKEY = 0x00000000;
 
-    /* wait for clock to stop. Block too long? */
-    while(RTCCONbits.RTCCLKON);  /* clock disabled? */
-
-    /* initialize the time, date and alarm */
-    RTCTIME = 0x23595000;   /* Set RTCC time */
-
-    RTCDATE = 0x20072900;  /* Set RTCC date */
-
-    RTCALRMCLR = _RTCALRM_ALRMEN_MASK;  /* Disable alarm */
-
-    while(RTCALRMbits.ALRMSYNC);  /* Wait for disable */
-
-    ALRMTIME = 0x23595500;   /* Set alarm time */
-
-    ALRMDATE = 0x00123100;   /* Set alarm date */
-
-    /* repeat forever or 0-255 times */
-    RTCALRMCLR = _RTCALRM_CHIME_MASK;  /* Set alarm to repeat finite number of times */
-
-    RTCALRMbits.ARPT = 0;
-
-    RTCALRMbits.AMASK = 1;
-
-    RTCCONCLR = _RTCCON_RTCOE_MASK;  /* Enable RTCC output */
+    RTCCONbits.RTCOE= 0;  /* Disable RTCC output */
 
     /* Set RTCC clock source (LPRC/SOSC) */
     RTCCONbits.RTCCLKSEL = 1;
+
+
+    /* Set alarm to repeat finite number of times */
+    RTCALRMCLR = _RTCALRM_CHIME_MASK;
+    RTCALRMbits.ARPT = 0;
+
 
     /* start the RTC */
     RTCCONSET = _RTCCON_ON_MASK;
@@ -172,6 +155,9 @@ bool RTCC_AlarmSet( struct tm *alarmTime, RTCC_ALARM_MASK alarmFreq )
     uint32_t dataDate, dataTime;
 
 
+    RTCALRMCLR = _RTCALRM_ALRMEN_MASK;  /* Disable alarm */
+    while(RTCALRMbits.ALRMSYNC);  /* Wait for disable */
+
     if(RTCC_ALARM_MASK_OFF != alarmFreq)
     {
         dataDate  = (decimaltobcd(alarmTime->tm_mon) << _RTCDATE_MONTH01_POSITION) & (_RTCDATE_MONTH01_MASK | _RTCDATE_MONTH10_MASK);
@@ -195,11 +181,6 @@ bool RTCC_AlarmSet( struct tm *alarmTime, RTCC_ALARM_MASK alarmFreq )
 
         /* ALRMEN = 1 */
         RTCALRMSET = _RTCALRM_ALRMEN_MASK;  /* Enable the alarm */
-    }
-    else
-    {
-        /* ALRMEN = 0 */
-        RTCALRMCLR = _RTCALRM_ALRMEN_MASK;  /* Disable the alarm */
     }
 
 

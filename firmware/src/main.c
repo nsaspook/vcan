@@ -323,8 +323,6 @@ void move_pos_qei(uint32_t status, uintptr_t context)
 	return;
 }
 
-
-
 void fh_hw(void *a_data)
 {
 	t_cli_ctx *cmd = a_data;
@@ -370,6 +368,23 @@ int main(void)
 
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
+
+	if (dmt) {
+		uint16_t tgl = 1;
+		/*
+		 * make sure inverter power to h-bridge is off
+		 */
+		U1_EN_Clear();
+		U2_EN_Clear();
+		while (true) {
+			if (!tgl++) {
+				BSP_LED1_Toggle();
+				BSP_LED2_Toggle();
+				BSP_LED3_Toggle();
+			}
+			DMT_Clear(); // clear the Dead Man Timer
+		}
+	}
 
 #ifdef EDOGM
 	//	SPI3_Initialize_edogm();
@@ -577,7 +592,7 @@ int main(void)
 				m35_ptr = &m35_2;
 				sprintf(buffer, "I400HZ3P %s %s       ", build_date, build_time);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
-				sprintf(buffer, "Q %4i:%i  F %i %i %i R %i A %i", POS3CNT, VEL3HLD, PWMF15_Get(), PWMF5_Get(), PWMF6_Get(), (bool)~(dmt|wdt), check_adc_ivref());
+				sprintf(buffer, "Q %4i:%i  F %i %i %i R %i A %i", POS3CNT, VEL3HLD, PWMF15_Get(), PWMF5_Get(), PWMF6_Get(), (bool) ~(dmt | wdt), check_adc_ivref());
 				eaDogM_WriteStringAtPos(1, 0, buffer);
 				m35_ptr = &m35_3;
 				/*
@@ -602,7 +617,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(12, 0, buffer);
 				sprintf(buffer, "%4i:A %4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[POT1], an_data[POT2]);
 				eaDogM_WriteStringAtPos(14, 0, buffer);
-				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    R%d", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4),dmt + (wdt << 1));
+				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    R%d", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4), dmt + (wdt << 1));
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph(true, false);
 				OledUpdate();
