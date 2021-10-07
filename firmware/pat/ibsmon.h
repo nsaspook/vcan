@@ -3,6 +3,7 @@
 //	hardware defines
 
 #include <stdint.h>
+#include <stdbool.h>
 
 typedef struct V_data { // ISR used, mainly for non-atomic mod problems
 	uint32_t clock_500hz;

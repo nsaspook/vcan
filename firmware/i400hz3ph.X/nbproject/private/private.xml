@@ -6,7 +6,6 @@
             <file>file:/fred/vcan/firmware/src/adc_scan.h</file>
             <file>file:/fred/vcan/firmware/src/vcan.h</file>
             <file>file:/fred/vcan/firmware/src/main.c</file>
-            <file>file:/fred/vcan/firmware/src/adc_scan.c</file>
         </group>
     </open-files>
 </project-private>

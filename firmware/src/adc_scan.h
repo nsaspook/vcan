@@ -15,7 +15,7 @@ extern "C" {
 #include "vcan.h"
 #include "filters.h"
 
-#define ADC_L	1960
+#define ADC_L	1930
 #define ADC_H	1990
 	
 	typedef enum {

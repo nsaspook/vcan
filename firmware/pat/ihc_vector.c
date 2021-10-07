@@ -106,13 +106,13 @@ static void led_blink(void)
 	if (V.num_blinks == 255) {
 		LED1 = ON;
 		V.clock_blinks = 0;
-		V.blink_lock = 0;
+		V.blink_lock = false;
 		return;
 	}
 	if (!V.num_blinks || V.num_blinks > MAX_BLINKS) {
 		LED1 = OFF;
 		V.clock_blinks = 0;
-		V.blink_lock = 0;
+		V.blink_lock = false;
 		return;
 	}
 
@@ -121,7 +121,7 @@ static void led_blink(void)
 		if ((BLINK_SPACE + (V.num_blinks << 1)) <= V.clock_blinks) {
 			V.clock_blinks = 0;
 			LED1 = OFF;
-			V.blink_lock = 0;
+			V.blink_lock = false;
 		} else {
 			LED1 = ~LED1;
 		}
@@ -131,16 +131,17 @@ static void led_blink(void)
 /*
  * set the number of blinks variable from mainline code
  */
-void set_led_blink(uint8_t blinks)
+bool set_led_blink(uint8_t blinks)
 {
 	if (V.blink_lock)
-		return;
+		return false;
 
 	if (blinks > MAX_BLINKS && (blinks != 255))
 		blinks = 0;
 
 	INTCONbits.GIEH = 0;
-	V.blink_lock = 1;
+	V.blink_lock = true;
 	V.num_blinks = blinks;
 	INTCONbits.GIEH = 1;
+	return true;
 }
