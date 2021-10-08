@@ -292,20 +292,34 @@ void wave_gen(uint32_t status, uintptr_t context)
 }
 
 /*
- * SOSC timer #1
+ * SOSC driven timer #1
+ * 1ms interrupts
  */
 void my_time(uint32_t status, uintptr_t context)
 {
+	static bool once = true;
+
 	t1_time++;
 #ifdef G400HZ
 	PetitModBus_TimerValues(); // modbus time tick
+	/*
+	 * system fault flags checks
+	 * shutdown inverter driver if detected
+	 */
 	if (check_fault()) {
 		V.fault_ticks++;
-		if (V.fault_ticks > FAULT_DELAY) {
+		/*
+		 * try to clean fault only one time
+		 */
+		if (once && (V.fault_ticks > FAULT_DELAY)) {
 			U1_EN_Set();
 			U2_EN_Set();
 			clear_fault_flag();
 			V.fault_ticks = 0;
+			once = false;
+		} else {
+			U1_EN_Clear();
+			U2_EN_Clear();
 		}
 	};
 #endif
@@ -565,6 +579,10 @@ int main(void)
 				POS3CNT = inverter_volts;
 			} else {
 				POS3CNT = 0;
+			}
+
+			if (get_switch(S2)) { // clear inverter fault
+				clear_fault_flag();
 			}
 
 			if (get_switch(S1)) { // enable inverter power

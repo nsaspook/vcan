@@ -4,14 +4,18 @@
 
 static volatile S_data S;
 
+/*
+ * setup external interrupt for input chip and read initial switch condition
+ */
 void init_dio(void)
 {
 	MAX_EN1_Set(); // disable MAX output pins
 	INTCONCLR = _INTCON_INT0EP_MASK; //External interrupt on falling edge
 	IFS0CLR = _IFS0_INT0IF_MASK; // Clear the external interrupt flag
-	EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_0,update_di,0);
+	EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_0, update_di, 0);
 	EVIC_ExternalInterruptEnable(EXTERNAL_INT_0);
 	RESET_LED_Clear();
+	update_di(0, 0);
 }
 
 /*

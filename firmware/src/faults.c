@@ -14,10 +14,12 @@ void set_fault(uint32_t status, uintptr_t context)
 	/*
 	 * clear enable flags to see if we can clear the inverter driver error(s) later
 	 */
-	V.fault_ticks = 0;
-	V.fault_count++;
-	V.fault_active = true;
-	V.fault_source = context;
+	if (!PWMF15_Get() | !PWMF5_Get() | !PWMF6_Get() | !check_adc_ivref()) {
+		V.fault_ticks = 0;
+		V.fault_count++;
+		V.fault_active = true;
+		V.fault_source = context;
+	}
 }
 
 void clear_fault_flag(void)

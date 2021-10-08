@@ -13,6 +13,7 @@ extern "C" {
 #endif
 
 #include "vcan.h"
+#include "adc_scan.h"
 
 	extern volatile struct V_type V;
 	bool check_fault(void);
