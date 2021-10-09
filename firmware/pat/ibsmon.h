@@ -7,6 +7,7 @@
 
 typedef struct V_data { // ISR used, mainly for non-atomic mod problems
 	uint32_t clock_500hz;
+	uint32_t clock_10hz;
 	uint32_t clock_2hz;
 	uint8_t clock_blinks;
 	uint8_t num_blinks;
@@ -58,8 +59,6 @@ union MREG {
 	char bytes[2];
 };
 
-#define TRUE	1
-#define FALSE	0
 #define	ON	1
 #define	OFF	0
 #define	LEDON	0   // logic low lights led
@@ -109,8 +108,11 @@ union MREG {
 #define MAX_C_ERROR     3
 
 //#define LOCAL_ECHO	1
+#define FASTQ			// MODBUS query speed
+
 #define TDELAY		3	// half-duplex delay
 #define RDELAY		300	// receive timeout
+#define CDELAY		50	// 10Hz
 #define QDELAY		1	// query delay
 #define TODELAY		4	// misc delay
 

@@ -130,6 +130,7 @@ int8_t controller_work(void)
 	switch (cstate) {
 	case CLEAR:
 		clear_2hz();
+		clear_10hz();
 		cstate = INIT;
 		modbus_command = mcmd++; // sequence modbus commands to client
 		if (mcmd > G_LAST)
@@ -160,7 +161,13 @@ int8_t controller_work(void)
 		}
 		break;
 	case INIT:
+#ifdef	FASTQ
+		if (get_10hz(false) >= CDELAY) {
+			get_2hz(false);
+#else
 		if (get_2hz(FALSE) >= QDELAY) {
+			get_10hz(false);
+#endif
 #ifdef LOCAL_ECHO
 			RE_ = 0; // keep receiver active
 #else
@@ -174,7 +181,7 @@ int8_t controller_work(void)
 		}
 		break;
 	case SEND:
-		if (get_500hz(FALSE) > TDELAY) {
+		if (get_500hz(false) > TDELAY) {
 			do {
 				while (BusyUSART()); // wait for each byte
 				TXREG = cc_buffer[V.send_count];
@@ -185,7 +192,7 @@ int8_t controller_work(void)
 		}
 		break;
 	case RECV:
-		if (get_500hz(FALSE) > TDELAY) {
+		if (get_500hz(false) > TDELAY) {
 			uint16_t c_crc, c_crc_rec;
 
 			DE = 0;
@@ -202,13 +209,16 @@ int8_t controller_work(void)
 					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[req_length - 1] & 0x00ff);
 					if (c_crc == c_crc_rec) {
 
+					} else {
+						crc_error++;
+						set_led_blink(BOFF);
 					}
 					cstate = CLEAR;
 				} else {
 					/*
 					 * receiver timeout, restart
 					 */
-					if (get_500hz(FALSE) > RDELAY) {
+					if (get_500hz(false) > RDELAY) {
 						cstate = CLEAR;
 						I400_ERROR = OFF;
 						mcmd = G_MODE;
@@ -222,10 +232,13 @@ int8_t controller_work(void)
 					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[req_length - 1] & 0x00ff);
 					if (c_crc == c_crc_rec) {
 
+					} else {
+						crc_error++;
+						set_led_blink(BOFF);
 					}
 					cstate = CLEAR;
 				} else {
-					if (get_500hz(FALSE) > RDELAY) {
+					if (get_500hz(false) > RDELAY) {
 						cstate = CLEAR;
 						I400_ERROR = OFF;
 						mcmd = G_MODE;
@@ -246,10 +259,13 @@ int8_t controller_work(void)
 						} else {
 							I400_ERROR = OFF;
 						}
+					} else {
+						crc_error++;
+						set_led_blink(BOFF);
 					}
 					cstate = CLEAR;
 				} else {
-					if (get_500hz(FALSE) > RDELAY) {
+					if (get_500hz(false) > RDELAY) {
 						cstate = CLEAR;
 						I400_ERROR = OFF;
 						mcmd = G_MODE;
@@ -304,7 +320,7 @@ int8_t controller_work(void)
 					SetDCPWM1(V.pwm_volts);
 					cstate = CLEAR;
 				} else {
-					if (get_500hz(FALSE) > RDELAY) {
+					if (get_500hz(false) > RDELAY) {
 						set_led_blink(BOFF);
 						cstate = CLEAR;
 						V.pwm_volts = CC_OFFLINE;
@@ -324,19 +340,19 @@ int8_t controller_work(void)
 void init_i400mon(void)
 {
 	uint16_t tmp;
-	V.boot_code = FALSE;
-	BOOT_FLAG = FALSE;
+	V.boot_code = false;
+	BOOT_FLAG = false;
 	if (RCON != 0b0011100)
-		V.boot_code = TRUE;
+		V.boot_code = true;
 
 	if (STKPTRbits.STKFUL || STKPTRbits.STKUNF) {
-		V.boot_code = TRUE;
+		V.boot_code = true;
 		STKPTRbits.STKFUL = 0;
 		STKPTRbits.STKUNF = 0;
 	}
 
 	if (V.boot_code)
-		BOOT_FLAG = TRUE;
+		BOOT_FLAG = true;
 
 	ADCON1 = 0x7F; // all digital, no ADC
 	/* interrupt priority ON */
@@ -399,7 +415,7 @@ void init_i400mon(void)
 
 uint8_t init_stream_params(void)
 {
-	V.config = FALSE;
+	V.config = false;
 	return 0;
 }
 
@@ -407,7 +423,7 @@ void main(void)
 {
 	init_i400mon();
 	/* Loop forever */
-	while (TRUE) { // busy work
+	while (true) { // busy work
 		controller_work();
 	}
 }

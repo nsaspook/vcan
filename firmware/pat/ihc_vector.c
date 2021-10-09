@@ -11,8 +11,8 @@ void __interrupt() tm_handler(void) // timer/serial functions are handled here
 		cc_stream_file = RCREG;
 		if (RCSTAbits.OERR || RCSTAbits.FERR) {
 			cc_stream_file = 0x00; // nulls for data on errors
-			RCSTAbits.CREN = FALSE; // clear overrun
-			RCSTAbits.CREN = TRUE; // re-enable
+			RCSTAbits.CREN = OFF; // clear overrun
+			RCSTAbits.CREN = ON; // re-enable
 			if (c_error++>MAX_C_ERROR) {
 				c_error = 0;
 			}
@@ -27,16 +27,17 @@ void __interrupt() tm_handler(void) // timer/serial functions are handled here
 	}
 
 	if (PIR1bits.TMR1IF) { //      Timer1 int handler
-		PIR1bits.TMR1IF = FALSE; //      clear int flag
+		PIR1bits.TMR1IF = OFF; //      clear int flag
 		tmp = SAMPLEFREQ >> 8;
 		TMR1H = (uint8_t) tmp;
 		tmp = SAMPLEFREQ & 0xFF;
 		TMR1L = (uint8_t) tmp;
 		V.clock_500hz++;
+		V.clock_10hz++;
 	}
 
 	if (INTCONbits.TMR0IF) { //      check timer0 irq time timer
-		INTCONbits.TMR0IF = FALSE; //      clear interrupt flag
+		INTCONbits.TMR0IF = OFF; //      clear interrupt flag
 		tmp = TIMERFAST >> 8;
 		TMR0H = (uint8_t) tmp;
 		tmp = TIMERFAST & 0xFF;
@@ -47,11 +48,11 @@ void __interrupt() tm_handler(void) // timer/serial functions are handled here
 	}
 
 	if (PIR1bits.TMR2IF) { //      check timer2 irq time timer
-		PIR1bits.TMR2IF = FALSE; //      clear interrupt flag
+		PIR1bits.TMR2IF = OFF; //      clear interrupt flag
 	}
 
 	if (PIR1bits.CCP1IF) { //      check  ccp1 irq
-		PIR1bits.CCP1IF = FALSE; //      clear interrupt flag
+		PIR1bits.CCP1IF = OFF; //      clear interrupt flag
 	}
 
 }
@@ -60,6 +61,13 @@ void clear_2hz(void)
 {
 	INTCONbits.GIEH = 0;
 	V.clock_2hz = 0;
+	INTCONbits.GIEH = 1;
+}
+
+void clear_10hz(void)
+{
+	INTCONbits.GIEH = 0;
+	V.clock_10hz = 0;
 	INTCONbits.GIEH = 1;
 }
 
@@ -79,6 +87,19 @@ uint32_t get_2hz(uint8_t mode)
 
 	INTCONbits.GIEH = 0;
 	tmp = V.clock_2hz;
+	INTCONbits.GIEH = 1;
+	return tmp;
+}
+
+uint32_t get_10hz(uint8_t mode)
+{
+	static uint32_t tmp = 0;
+
+	if (mode)
+		return tmp;
+
+	INTCONbits.GIEH = 0;
+	tmp = V.clock_10hz;
 	INTCONbits.GIEH = 1;
 	return tmp;
 }
