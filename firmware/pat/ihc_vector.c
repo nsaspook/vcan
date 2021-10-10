@@ -9,20 +9,25 @@ void __interrupt() tm_handler(void) // timer/serial functions are handled here
 
 	if (PIR1bits.RCIF) { // is data from RS485 port
 		cc_stream_file = RCREG;
+		/*
+		 * error check the receiver
+		 */
 		if (RCSTAbits.OERR || RCSTAbits.FERR) {
 			cc_stream_file = 0x00; // nulls for data on errors
 			RCSTAbits.CREN = OFF; // clear overrun
 			RCSTAbits.CREN = ON; // re-enable
 			if (c_error++>MAX_C_ERROR) {
 				c_error = 0;
+				V.error++;
 			}
 		} else {
 			/*
-			 * process received charge controller data stream
+			 * process received controller data stream
 			 */
 			cc_buffer[V.recv_count] = cc_stream_file;
-			if (++V.recv_count >= MAX_DATA)
+			if (++V.recv_count >= MAX_DATA) {
 				V.recv_count = 0; // reset buffer position
+			}
 		}
 	}
 

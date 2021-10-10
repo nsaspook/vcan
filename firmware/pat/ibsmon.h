@@ -15,7 +15,7 @@ typedef struct V_data { // ISR used, mainly for non-atomic mod problems
 	uint8_t config : 1;
 	uint8_t stable : 1;
 	uint8_t boot_code : 1;
-	uint8_t send_count, recv_count, pwm_volts;
+	uint8_t send_count, recv_count, pwm_volts, error;
 } V_data;
 
 typedef struct OUTBITS2 {

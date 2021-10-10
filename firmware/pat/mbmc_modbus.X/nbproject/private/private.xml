@@ -7,7 +7,6 @@
             <file>file:/root/vcan/firmware/pat/ihc_vector.c</file>
             <file>file:/root/vcan/firmware/pat/ibsmon.h</file>
             <file>file:/root/vcan/firmware/pat/ihc_vector.h</file>
-            <file>file:/root/vcan/firmware/pat/crc.c</file>
         </group>
     </open-files>
 </project-private>
