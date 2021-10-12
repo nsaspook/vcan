@@ -15,6 +15,7 @@ typedef struct V_data { // ISR used, mainly for non-atomic mod problems
 	uint8_t config : 1;
 	uint8_t stable : 1;
 	uint8_t boot_code : 1;
+	uint8_t power_on : 1;
 	uint8_t send_count, recv_count, pwm_volts, error;
 } V_data;
 
@@ -58,6 +59,8 @@ union MREG {
 	int16_t value;
 	char bytes[2];
 };
+
+#define SWVER	0x30;
 
 #define	ON	1
 #define	OFF	0

@@ -90,6 +90,7 @@ modbus_cc_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0B, 0x00, 0x02};
 
 volatile struct V_data V = {
 	.blink_lock = false,
+	.power_on = true,
 };
 volatile uint8_t cc_stream_file, cc_buffer[MAX_DATA]; // half-duplex so we can share the cc_buffer for TX and RX
 uint32_t crc_error;
@@ -146,6 +147,8 @@ int8_t controller_work(void)
 			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));
 			break;
 		case G_AUX: // write code request
+			i400_power = V.power_on << 8; // inverter power command flag
+			i400_power += ((V.error & 0xff) << 9) + SWVER; // receive errors  and software version
 			rvalue.value = i400_power;
 			modbus_cc_clear[4] = rvalue.bytes[1];
 			modbus_cc_clear[5] = rvalue.bytes[0];
@@ -211,6 +214,7 @@ int8_t controller_work(void)
 
 					} else {
 						crc_error++;
+						V.error++;
 						set_led_blink(BOFF);
 					}
 					cstate = CLEAR;
@@ -222,6 +226,7 @@ int8_t controller_work(void)
 						cstate = CLEAR;
 						I400_ERROR = OFF;
 						mcmd = G_MODE;
+						V.error++;
 					}
 				}
 				break;
@@ -234,6 +239,7 @@ int8_t controller_work(void)
 
 					} else {
 						crc_error++;
+						V.error++;
 						set_led_blink(BOFF);
 					}
 					cstate = CLEAR;
@@ -242,6 +248,7 @@ int8_t controller_work(void)
 						cstate = CLEAR;
 						I400_ERROR = OFF;
 						mcmd = G_MODE;
+						V.error++;
 					}
 				}
 				break;
@@ -261,6 +268,7 @@ int8_t controller_work(void)
 						}
 					} else {
 						crc_error++;
+						V.error++;
 						set_led_blink(BOFF);
 					}
 					cstate = CLEAR;
@@ -269,6 +277,7 @@ int8_t controller_work(void)
 						cstate = CLEAR;
 						I400_ERROR = OFF;
 						mcmd = G_MODE;
+						V.error++;
 					}
 				}
 				break;
@@ -314,6 +323,7 @@ int8_t controller_work(void)
 						}
 					} else {
 						crc_error++;
+						V.error++;
 						set_led_blink(BOFF);
 					}
 					V.pwm_volts = volts;
@@ -326,6 +336,7 @@ int8_t controller_work(void)
 						V.pwm_volts = CC_OFFLINE;
 						SetDCPWM1(V.pwm_volts);
 						mcmd = G_MODE;
+						V.error++;
 					}
 				}
 			}

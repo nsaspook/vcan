@@ -267,6 +267,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	 * generate a current error drive signal
 	 */
 	m35_4.current = MPCURRENT + POS3CNT;
+	//	m35_4.current = MPCURRENT;
 	/*
 	 * limit motor drive current
 	 */
@@ -556,13 +557,13 @@ int main(void)
 		SYS_Tasks();
 		ProcessPetitModbus(); // MODBUS processing 
 		BSP_LED3_Clear();
-		POS3CNT = (int32_t) PetitRegisters[11].ActValue;
+		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master
 		PetitRegisters[0].ActValue = (int16_t) hb_current(u1bi, true);
 		PetitRegisters[1].ActValue = (int16_t) hb_current(u2ai, true);
 		PetitRegisters[2].ActValue = (int16_t) hb_current(u2bi, true);
 		PetitRegisters[3].ActValue = (int16_t) an_data[ANA1]; // AC voltage value
 		PetitRegisters[4].ActValue = (int16_t) (MODBUS_VER << 8) + PWMF15_Get() + (PWMF5_Get() << 1) + (PWMF6_Get() << 2) + (U1_EN_Get() << 3) + (U2_EN_Get() << 4)+ (check_adc_ivref() << 5);
-		PetitRegisters[5].ActValue = (int16_t) m35_4.current; // pwm voltage output value
+		PetitRegisters[5].ActValue = (int16_t) m35_4.current; // current pwm voltage output value
 
 #ifndef G400HZ_NODIS
 		if (TimerDone(TMR_MOTOR)) {
@@ -575,10 +576,17 @@ int main(void)
 			/*
 			 * test switch interface with inverter control
 			 */
-			if (get_switch(S7)) { // power select
+			if (get_switch(S7)) { // pulse max power select
+				/*
+				 * changes value set from MODBUS and encoder
+				 */
 				POS3CNT = inverter_volts;
-			} else {
-				POS3CNT = 0;
+			}
+			if (get_switch(S5)) { // reset power value
+				/*
+				 * changes value back to default
+				 */
+				POS3CNT = MPCURRENT;
 			}
 
 			if (get_switch(S2)) { // clear inverter fault
@@ -628,7 +636,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				sprintf(buffer, "%4i:D %5i %5i %5i  ", V.TimeUsed, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
-				sprintf(buffer, "MB %4i %3i %3i %4i %4i", (int32_t) PetitRegisters[5].ActValue, (int32_t) PetitRegisters[10].ActValue, (int32_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
+				sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[5].ActValue, (uint16_t) PetitRegisters[10].ActValue, (int16_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
 				eaDogM_WriteStringAtPos(9, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
@@ -650,7 +658,6 @@ int main(void)
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, BLINK_UPDATE);
 			RESET_LED_Toggle();
-			PetitRegisters[5].ActValue++;
 			DMT_Clear(); // clear the Dead Man Timer
 		}
 	}
