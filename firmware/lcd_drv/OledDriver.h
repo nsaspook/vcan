@@ -32,8 +32,7 @@
 /*	04/29/2011(GeneA): created											*/
 /*																		*/
 /************************************************************************/
-#include <stdint.h>
-#include "dogm-graphic.h"
+#include "lcd_drv.h"
 
 #if !defined(OLEDDRIVER_INC)
 #define	OLEDDRIVER_INC

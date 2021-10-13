@@ -1,25 +1,12 @@
 #ifndef DOGMGRAPHIC_H_INCLUDED
 #define DOGMGRAPHIC_H_INCLUDED
 
-#include <xc.h>
-#include <inttypes.h>
-#include <string.h>
-#include "display_type.h"
-#include "tests.h"
+#include "lcd_drv.h"
 #include "timers.h"
 
 /*****************************************************************************
  * BEGIN CONFIG BLOCK
  *****************************************************************************/
-
-/*
- * use DMA for disply buffer updates
- */
-//#define USE_DMA
-
-
-//Select the display type: DOGS102: 102, DOGM128/DOGL128: 128, DOGM132: 132, DOGXL160: 160, DOGXL240: 240
-//#define DISPLAY_TYPE  240
 
 //Display Orientation: Normal (0) or upside-down (1)?
 #define ORIENTATION_UPSIDEDOWN 0
@@ -70,7 +57,7 @@ extern void init_spi_lcd(void);
 #define LCD_WRAP_AROUND  0
 
 //Include graphic functions, i.e. lcd_draw_image_P, lcd_draw_image_xy_P, lcd_clear_area ? 
-#define LCD_INCLUDE_GRAPHIC_FUNCTIONS  0
+#define LCD_INCLUDE_GRAPHIC_FUNCTIONS  1
 
 /*Example SPI setup (Atmega162)
  *init spi: msb first, update on falling edge , read on rising edge, 9 MHz

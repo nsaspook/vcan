@@ -46,7 +46,6 @@
 /* ------------------------------------------------------------ */
 
 #include "lcd_drv.h"
-#include "tests.h"
 
 /* ------------------------------------------------------------ */
 /*				Local Symbol Definitions						*/
@@ -58,7 +57,7 @@
 /* ------------------------------------------------------------ */
 /*				Global Variables								*/
 /* ------------------------------------------------------------ */
-volatile uint8_t dma_flag = 0, disp_frame = false;
+volatile uint8_t dma_flag = 0, disp_frame = lcd_frame;
 
 extern uint8_t rgbOledFont0[];
 extern uint8_t rgbOledFontUser[cbOledFontUser];
@@ -95,13 +94,14 @@ uint8_t * pbOledFontUser;
  ** so display data is rendered into this offscreen buffer and then
  ** copied to the display.
  *  must be in uncached memory for pic32 DMA so use __attribute__((coherent))
- * DMA0 SPI TX transfers
+ * DMA0 SPI TX transfers DATA
+ * DMA2 SPI TX transfers CMD
  * DMA1 GLCD buffer transfers
  */
 uint8_t __attribute__((coherent)) rgbOledBmp0[cbOledDispMax]; // two display buffers for page flipping
 uint8_t __attribute__((coherent)) rgbOledBmp1[cbOledDispMax];
 #ifdef USE_DMA
-static uint8_t __attribute__((coherent)) rgbOledBmp_blank[4]; // 32-bit frame-buffer clearing variable
+static uint8_t __attribute__((coherent)) rgbOledBmp_blank[4] = {0x00, 0x00, 0x00, 0x00}; // 32-bit frame-buffer clearing variable
 #endif
 volatile uint8_t __attribute__((coherent)) rgbOledBmp_page[5];
 
@@ -479,6 +479,8 @@ void OledClearBuffer(void)
 	wait_lcd_done();
 	/* setup the source and destination parms */
 	DMAC_ChannelTransfer(DMAC_CHANNEL_1, (const void *) rgbOledBmp_blank, (size_t) 4, (const void*) pb, (size_t) cbOledDispMax, (size_t) cbOledDispMax);
+	DEBUGB0_Clear();
+	DEBUGB0_Set();
 	DCH1ECONSET = _DCH1ECON_CFORCE_MASK; // set CFORCE to 1 to start the transfer
 #else
 	int32_t ib;
@@ -488,6 +490,8 @@ void OledClearBuffer(void)
 	for (ib = 0; ib < cbOledDispMax; ib++) {
 		*pb++ = 0x00;
 	}
+	DEBUGB0_Clear();
+	DEBUGB0_Set();
 #endif
 }
 
@@ -554,7 +558,7 @@ void OledUpdate(void)
  */
 void SPI3DmaChannelHandler_State(DMAC_TRANSFER_EVENT event, uintptr_t contextHandle)
 {
-	static int32_t ipag; // buffer page number
+	static int32_t ipag = 0; // buffer page number
 	static uint8_t* pb; // buffer page address
 
 	DEBUGB0_Set(); // back to mainline code, GLCD updates in background using DMA and interrupts

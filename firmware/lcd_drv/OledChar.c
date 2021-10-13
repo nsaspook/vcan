@@ -40,13 +40,7 @@
 /*				Include File Definitions						*/
 /* ------------------------------------------------------------ */
 
-#include <stdint.h>
-
-#include <inttypes.h>
-
-#include "OledDriver.h"
 #include "OledChar.h"
-#include "OledGrph.h"
 
 /* ------------------------------------------------------------ */
 /*				Local Type Definitions							*/

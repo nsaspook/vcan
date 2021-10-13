@@ -448,17 +448,8 @@ int main(void)
 	CTMUCONbits.IRNG = 0b11; //100xBase current level
 	CTMUCONbits.ON = 1; // CTMU is ON
 
-#ifdef EDOGM
-	init_display();
-	eaDogM_CursorOff();
-#endif
-#ifdef EDOGS
-	SPI_EN1_Set();
-	wdtdelay(IS_DELAYPOWERUP); // > 400ms power up delay
-	lcd_init();
-	OledInit();
-	OledSetCharUpdate(0); // manual LCD screen updates for speed
-#endif
+	init_lcd_drv(D_INIT);
+	
 	if (OSCCONbits.CF) { // check for sysclock proper operation
 		sprintf(buffer, "VCAN Clock Error       ");
 		eaDogM_WriteStringAtPos(0, 0, buffer);

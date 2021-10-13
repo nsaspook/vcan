@@ -1,6 +1,4 @@
 #include "eadog.h"
-#include <stdio.h>
-#include <string.h>
 
 /* Global object to save SPI Exchange related data */
 extern SPI_OBJECT spi3Obj;

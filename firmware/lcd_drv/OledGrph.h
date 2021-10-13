@@ -36,6 +36,8 @@
 #if !defined(OLEDGRPH_H)
 #define	OLEDGRPH_H
 
+#include "lcd_drv.h"
+
 /* ------------------------------------------------------------ */
 /*					Miscellaneous Declarations					*/
 /* ------------------------------------------------------------ */

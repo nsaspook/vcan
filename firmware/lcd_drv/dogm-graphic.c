@@ -39,6 +39,7 @@
  *   - added function lcd_draw_image_xy_P
  *   - added function lcd_clear_area
  *   - added SPI initialization
+ *   DMA driver for pic32MK FGB
  *****************************************************************************/
 
 #include "dogm-graphic.h"

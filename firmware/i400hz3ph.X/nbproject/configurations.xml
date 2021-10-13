@@ -101,6 +101,8 @@
       <itemPath>../lcd_drv/eadog.h</itemPath>
       <itemPath>../lcd_drv/lcd_drv.h</itemPath>
       <itemPath>../lcd_drv/dogm-graphic.c</itemPath>
+      <itemPath>../lcd_drv/lcd_drv.c</itemPath>
+      <itemPath>../lcd_drv/foo.c</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

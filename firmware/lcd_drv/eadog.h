@@ -25,28 +25,7 @@
 extern "C" {
 #endif
 
-#define DMA_MAGIC	1957
-#define USE_DMA // use DMA spi driver
-
-#ifdef USE_DMA
-#define	DMA_GAP		1	// set to 0 for SPI byte gaps in DMA transmissions
-#define DMA_STATE_M
-#endif
-
-#ifndef DMA_STATE_M
-#define USE_INT // SPI driver uses interrupts
-#endif
-
-	//#define EDOGM
-#define EDOGS
-
-#include <stdint.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include "tests.h"
-#include "device.h"
-#include "OledDriver.h"
-#include "OledChar.h"
+#include "lcd_drv.h"
 
 #define max_strlen	STR_BUF_SIZE-1
 

@@ -37,6 +37,8 @@
 #if !defined(OLEDCHAR_H)
 #define OLEDCHAR_H
 
+#include "lcd_drv.h"
+
 /* ------------------------------------------------------------ */
 /*					Miscellaneous Declarations					*/
 /* ------------------------------------------------------------ */
