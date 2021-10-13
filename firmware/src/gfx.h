@@ -14,7 +14,7 @@ extern "C" {
 
 #include "vcan.h"
 #include <math.h>
-#include "OledGrph.h"
+#include "../lcd_drv/lcd_drv.h"
 
 	extern int32_t xa, ya, za;
 	extern volatile float q0, q1, q2, q3; // quaternion 

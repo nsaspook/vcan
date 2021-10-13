@@ -62,11 +62,7 @@ IC = M * sin (? + 240)
 #include "timers.h"
 #include "pid.h"
 #include "freqgen.h"
-#include "eadog.h" 
-#include "dogm-graphic.h"
-#include "OledDriver.h"
-#include "OledChar.h"
-#include "OledGrph.h"
+#include "../lcd_drv/lcd_drv.h"
 #include "dio.h"
 #include "scmd.h"
 #include "peripheral/coretimer/plib_coretimer.h"
@@ -400,13 +396,6 @@ int main(void)
 			DMT_Clear(); // clear the Dead Man Timer
 		}
 	}
-
-#ifdef EDOGM
-	//	SPI3_Initialize_edogm();
-#endif
-#ifdef EDOGS
-	//	SPI3_Initialize_edogs();
-#endif
 
 	BSP_LED1_Set();
 	BSP_LED2_Set();

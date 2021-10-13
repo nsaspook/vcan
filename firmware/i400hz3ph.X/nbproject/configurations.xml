@@ -73,7 +73,6 @@
       </logicalFolder>
       <itemPath>../src/m35qei.h</itemPath>
       <itemPath>../src/tests.h</itemPath>
-      <itemPath>../src/eadog.h</itemPath>
       <itemPath>../src/dio.h</itemPath>
       <itemPath>../src/vcan.h</itemPath>
       <itemPath>../src/adc_scan.h</itemPath>
@@ -83,15 +82,25 @@
       <itemPath>../src/freqgen.h</itemPath>
       <itemPath>../src/mc_picontrol.h</itemPath>
       <itemPath>../src/mclib.h</itemPath>
-      <itemPath>../src/OledChar.h</itemPath>
-      <itemPath>../src/OledDriver.h</itemPath>
-      <itemPath>../src/OledGrph.h</itemPath>
-      <itemPath>../src/dogm-graphic.h</itemPath>
-      <itemPath>../src/display_type.h</itemPath>
       <itemPath>../src/scmd.h</itemPath>
       <itemPath>../src/gfx.h</itemPath>
       <itemPath>../src/faults.h</itemPath>
       <itemPath>../src/pmodbus.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="lcd_drv" displayName="lcd_drv" projectFiles="true">
+      <itemPath>../lcd_drv/ChrFont0.c</itemPath>
+      <itemPath>../lcd_drv/OledChar.c</itemPath>
+      <itemPath>../lcd_drv/OledChar.h</itemPath>
+      <itemPath>../lcd_drv/OledDriver.c</itemPath>
+      <itemPath>../lcd_drv/OledDriver.h</itemPath>
+      <itemPath>../lcd_drv/OledGrph.c</itemPath>
+      <itemPath>../lcd_drv/OledGrph.h</itemPath>
+      <itemPath>../lcd_drv/display_type.h</itemPath>
+      <itemPath>../lcd_drv/dogm-graphic.h</itemPath>
+      <itemPath>../lcd_drv/eadog.c</itemPath>
+      <itemPath>../lcd_drv/eadog.h</itemPath>
+      <itemPath>../lcd_drv/lcd_drv.h</itemPath>
+      <itemPath>../lcd_drv/dogm-graphic.c</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -178,7 +187,6 @@
       </logicalFolder>
       <itemPath>../src/m35qei.c</itemPath>
       <itemPath>../src/tests.c</itemPath>
-      <itemPath>../src/eadog.c</itemPath>
       <itemPath>../src/dio.c</itemPath>
       <itemPath>../src/adc_scan.c</itemPath>
       <itemPath>../src/filters.c</itemPath>
@@ -187,12 +195,7 @@
       <itemPath>../src/freqgen.c</itemPath>
       <itemPath>../src/mc_picontrol.c</itemPath>
       <itemPath>../src/mclib.c</itemPath>
-      <itemPath>../src/ChrFont0.c</itemPath>
       <itemPath>../src/FillPat.c</itemPath>
-      <itemPath>../src/OledChar.c</itemPath>
-      <itemPath>../src/OledDriver.c</itemPath>
-      <itemPath>../src/OledGrph.c</itemPath>
-      <itemPath>../src/dogm-graphic.c</itemPath>
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/scdm.c</itemPath>
       <itemPath>../src/gfx.c</itemPath>
@@ -230,6 +233,7 @@
   <sourceRootList>
     <Elem>../src</Elem>
     <Elem>display</Elem>
+    <Elem>../lcd_drv</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -239,7 +243,7 @@
         <targetDevice>PIC32MK1024MCM100</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>ICD3PlatformTool</platformTool>
+        <platformTool>pk4hybrid</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>3.01</languageToolchainVersion>
         <platform>2</platform>

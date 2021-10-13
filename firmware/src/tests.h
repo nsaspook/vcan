@@ -17,7 +17,7 @@ extern "C" {
 
 #include "config/default/definitions.h"                 // SYS function prototypes
 #include <proc/p32mk1024mcm100.h>
-#include "eadog.h"
+#include "../lcd_drv/lcd_drv.h"
 
 	bool run_tests(uint32_t);
 	bool spi_tests(void);

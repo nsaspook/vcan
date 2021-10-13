@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   eadog.h
  * Author: root
  *
@@ -6,8 +6,9 @@
  */
 
 /* Parts taken from:
- * This version for XC8 2.10 PIC18f47K42 polled
- * 
+ * This version for XC32 PIC32MK MCM
+ * modified for DMA and 32-bit hardware
+ *
  *            file: EA-DOGM_MIO.c
  *         version: 2.03
  *     description: Multi I/O driver for EA DOGM displays
@@ -24,9 +25,20 @@
 extern "C" {
 #endif
 
+#define DMA_MAGIC	1957
+#define USE_DMA // use DMA spi driver
+
+#ifdef USE_DMA
+#define	DMA_GAP		1	// set to 0 for SPI byte gaps in DMA transmissions
+#define DMA_STATE_M
+#endif
+
+#ifndef DMA_STATE_M
+#define USE_INT // SPI driver uses interrupts
+#endif
+
 	//#define EDOGM
 #define EDOGS
-	//#define EDOGS_DEMO
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -35,7 +47,7 @@ extern "C" {
 #include "device.h"
 #include "OledDriver.h"
 #include "OledChar.h"
-	
+
 #define max_strlen	STR_BUF_SIZE-1
 
 #define LCD_CMD_MASK	0x01
@@ -73,7 +85,7 @@ extern "C" {
 	void eaDogM_WriteByteToCGRAM(uint8_t, uint8_t);
 	void SPI3_Initialize_edogm(void);
 	void SPI3_Initialize_edogs(void);
-	void SPI_ExchangeBuffer(uint8_t *, uint16_t);
+	void SPI3_ExchangeBuffer(uint8_t *, uint16_t);
 
 #define eaDogM_Cls()             eaDogM_WriteCommand(EADOGM_CMD_CLR)
 #define eaDogM_CursorOn()        eaDogM_WriteCommand(EADOGM_CMD_CURSOR_ON)

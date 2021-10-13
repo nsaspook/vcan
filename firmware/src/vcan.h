@@ -69,7 +69,7 @@ extern "C" {
 #ifdef HVDC_M
 #define MBLOCK			1600
 #define MIDLE			1500  // motor idle current
-#define MPCURRENT		3000  // setpoint for motor current
+#define MPCURRENT		1000  // setpoint for motor current
 #define motor_error_stop	ENCODER_PULSES_PER_REV/2000
 #define motor_volts		12000 // limits amount of current at max torque, TI motor and AC servo motor
 #define inverter_volts		6000  // max inverter voltage setting
@@ -144,7 +144,7 @@ extern "C" {
 #include "tests.h"
 #include "m35qei.h"
 #include "config/default/peripheral/rtcc/plib_rtcc.h"
-#include "eadog.h"
+#include "../lcd_drv/lcd_drv.h"
 
 	typedef enum {
 		V_init,

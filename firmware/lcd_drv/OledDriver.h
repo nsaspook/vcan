@@ -43,6 +43,7 @@
 /* ------------------------------------------------------------ */
 #if DISPLAY_TYPE == 240                 // Autor: Robert Steigemann
 #define	cbOledDispMax		3840		//max number of bytes in display buffer
+#define	cbOledDispMax32		cbOledDispMax/4	//max number of 32-bit words in display buffer
 #define	ccolOledMax		240		//number of display columns
 #define	crowOledMax		128		//number of display rows
 #define	cpagOledMax		16		//number of display memory pages
@@ -90,7 +91,15 @@
 
 /* ------------------------------------------------------------ */
 /*					Procedure Declarations						*/
+
 /* ------------------------------------------------------------ */
+
+typedef enum {
+	D_init,
+	D_page,
+	D_buffer,
+	D_idle,
+} DMA_RUN_STATE;
 
 void OledInit(void);
 void OledTerm(void);

@@ -44,12 +44,8 @@
 /* ------------------------------------------------------------ */
 /*				Include File Definitions	*/
 /* ------------------------------------------------------------ */
- 
-#include "display_type.h"
-#include "OledDriver.h"
-#include "OledChar.h"
-#include "OledGrph.h"
-#include "dogm-graphic.h"
+
+#include "lcd_drv.h"
 #include "tests.h"
 
 /* ------------------------------------------------------------ */
@@ -62,10 +58,10 @@
 /* ------------------------------------------------------------ */
 /*				Global Variables								*/
 /* ------------------------------------------------------------ */
-volatile uint8_t dma_flag = 0;
+volatile uint8_t dma_flag = 0, disp_frame = false;
 
 extern uint8_t rgbOledFont0[];
-extern uint8_t rgbOledFontUser[];
+extern uint8_t rgbOledFontUser[cbOledFontUser];
 extern uint8_t rgbFillPat[];
 
 extern int32_t xchOledMax;
@@ -98,8 +94,18 @@ uint8_t * pbOledFontUser;
  ** It isn't possible to read back frome the OLED display device,
  ** so display data is rendered into this offscreen buffer and then
  ** copied to the display.
+ *  must be in uncached memory for pic32 DMA so use __attribute__((coherent))
+ * DMA0 SPI TX transfers
+ * DMA1 GLCD buffer transfers
  */
-uint8_t rgbOledBmp[cbOledDispMax];
+uint8_t __attribute__((coherent)) rgbOledBmp0[cbOledDispMax]; // two display buffers for page flipping
+uint8_t __attribute__((coherent)) rgbOledBmp1[cbOledDispMax];
+#ifdef USE_DMA
+static uint8_t __attribute__((coherent)) rgbOledBmp_blank[4]; // 32-bit frame-buffer clearing variable
+#endif
+volatile uint8_t __attribute__((coherent)) rgbOledBmp_page[5];
+
+static volatile DMA_RUN_STATE dstate = D_idle;
 
 /* ------------------------------------------------------------ */
 /*				Forward Declarations							*/
@@ -112,13 +118,16 @@ void OledDevTerm(void);
 void OledDvrInit(void);
 void OledPutBuffer(int32_t cb, uint8_t * rgbTx);
 
-uint16_t SPI1_to_Buffer(uint8_t *, uint16_t, uint8_t *);
+void CBDmaChannelHandler(DMAC_TRANSFER_EVENT, uintptr_t);
+void SPI3DmaChannelHandler(DMAC_TRANSFER_EVENT, uintptr_t);
+void SPI3DmaChannelHandler_State(DMAC_TRANSFER_EVENT, uintptr_t);
+uint16_t SPI3_to_Buffer(uint8_t *, uint16_t, uint8_t *);
 
 void RS_SetLow(void);
 void RS_SetHigh(void);
 void CSB_SetLow(void);
 void CSB_SetHigh(void);
-void SPI1_Exchange8bit(uint8_t);
+void SPI3_Exchange8bit(uint8_t);
 
 
 /* ------------------------------------------------------------ */
@@ -159,10 +168,16 @@ void OledInit(void)
 	 * init DMA
 	 */
 #ifdef USE_DMA
-	DMA1_Initialize();
-	/*
-	 * set RX for DMA mode
-	 */
+#ifdef DMA_STATE_M
+	DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, SPI3DmaChannelHandler_State, 0); // end of LCD buffer transfer interrupt function
+#else
+	DMAC_ChannelCallbackRegister(DMAC_CHANNEL_2, SPI3DmaChannelHandler, 0); // end of LCD CDM transfer interrupt function
+	DMAC_ChannelCallbackRegister(DMAC_CHANNEL_0, SPI3DmaChannelHandler, 0); // end of LCD buffer transfer interrupt function
+#endif
+	DMAC_ChannelCallbackRegister(DMAC_CHANNEL_1, CBDmaChannelHandler, 0); // end of buffer clear transfer interrupt function
+
+	SPI3CONbits.STXISEL = DMA_GAP; // set to 0 for byte gaps
+	SPI3CONbits.ENHBUF = true; // enable FIFO
 #endif
 
 	/* Clear the display.
@@ -437,18 +452,43 @@ void OledClear(void)
  **		Clear the display memory buffer.
  */
 
+/* just clears a output timing flag bit */
+void CBDmaChannelHandler(DMAC_TRANSFER_EVENT event, uintptr_t contextHandle)
+{
+	if (event == DMAC_TRANSFER_EVENT_COMPLETE) {
+		DEBUGB0_Clear();
+	}
+}
+
 void OledClearBuffer(void)
 {
-	int32_t ib;
 	uint8_t * pb;
 
-	pb = rgbOledBmp;
+	DEBUGB0_Set();
+	if (disp_frame) {
+		pb = rgbOledBmp0;
+	} else {
+		pb = rgbOledBmp1;
+	}
+
+#ifdef USE_DMA
+	/*
+	 * DMAC_ChannelCallbackRegister in OledInit
+	 */
+	while (dstate != D_idle);
+	wait_lcd_done();
+	/* setup the source and destination parms */
+	DMAC_ChannelTransfer(DMAC_CHANNEL_1, (const void *) rgbOledBmp_blank, (size_t) 4, (const void*) pb, (size_t) cbOledDispMax, (size_t) cbOledDispMax);
+	DCH1ECONSET = _DCH1ECON_CFORCE_MASK; // set CFORCE to 1 to start the transfer
+#else
+	int32_t ib;
 
 	/* Fill the memory buffer with 0.
 	 */
 	for (ib = 0; ib < cbOledDispMax; ib++) {
 		*pb++ = 0x00;
 	}
+#endif
 }
 
 /* ------------------------------------------------------------ */
@@ -470,13 +510,23 @@ void OledClearBuffer(void)
 
 void OledUpdate(void)
 {
+#ifdef DMA_STATE_M
+	wait_lcd_done();
+	SPI3DmaChannelHandler_State(0, DMA_MAGIC); // set DMA state machine init mode to start transfers
+	return;
+#else
 #ifdef EDOGS
 	int32_t ipag;
 	uint8_t* pb;
 
-	pb = rgbOledBmp;
+	if (disp_frame) {
+		pb = rgbOledBmp0;
+	} else {
+		pb = rgbOledBmp1;
+	}
+	rgbOledBmp_page[4] = 0;
 
-	for (ipag = 0; ipag < cpagOledMax; ipag++) {
+	for (ipag = 0; ipag < cpagOledMax; ipag++) { // mainline code loop for GLCD update
 		/* Set the page address
 		 */
 		//Set page command
@@ -491,7 +541,65 @@ void OledUpdate(void)
 		OledPutBuffer(ccolOledMax, pb);
 		pb += ccolOledMax;
 	}
+	DEBUGB0_Clear();
 #endif
+#endif
+}
+
+/*
+ * start a GLCD update: Called in user code with contextHandle set to DMA_MAGIC for a background screen update,
+ * during background transfers this function is used as the callback for DMA transfer complete events to
+ * sequence commands and data to the GLCD via the SPI port using the dstate ENUM variable
+ * dstate is set to 'D_idle' when the complete set of transfers is done.
+ */
+void SPI3DmaChannelHandler_State(DMAC_TRANSFER_EVENT event, uintptr_t contextHandle)
+{
+	static int32_t ipag; // buffer page number
+	static uint8_t* pb; // buffer page address
+
+	DEBUGB0_Set(); // back to mainline code, GLCD updates in background using DMA and interrupts
+	LCD_UNSELECT();
+	if (contextHandle == DMA_MAGIC) { // re-init state machine for next GLCD update
+		dstate = D_init;
+	}
+
+	switch (dstate) {
+	case D_init:
+		ipag = 0;
+		if (disp_frame) { // select flipper buffer
+			pb = rgbOledBmp0;
+		} else {
+			pb = rgbOledBmp1;
+		}
+	case D_page: // send the page address commands via DMA
+		LCD_SELECT(); // enable the GLCD chip for SPI transfers
+		dstate = D_buffer;
+		lcd_moveto_xy(ipag, 0); // calculate address data nibbles and store in rgbOledBmp_page array
+		/*
+		 * DMAC_ChannelCallbackRegister and SPI setup in OledInit
+		 */
+		LCD_CMD();
+		DMAC_ChannelTransfer(DMAC_CHANNEL_0, (const void *) rgbOledBmp_page, (size_t) 4, (const void*) &SPI3BUF, (size_t) 1, (size_t) 1);
+		break;
+	case D_buffer: // send the GLCD buffer data via DMA
+		ipag++;
+		if (ipag <= cpagOledMax) {
+			LCD_SELECT(); // enable the GLCD chip for SPI transfers
+			dstate = D_page;
+			LCD_DRAM();
+			DMAC_ChannelTransfer(DMAC_CHANNEL_0, (const void *) pb, (size_t) ccolOledMax, (const void*) &SPI3BUF, (size_t) 1, (size_t) 1);
+			pb += ccolOledMax;
+		} else {
+			dstate = D_idle;
+			LCD_UNSELECT(); // all done with the GLCD
+		}
+		break;
+	case D_idle:
+	default:
+		LCD_UNSELECT();
+		break;
+	}
+	DEBUGB0_Clear();
 }
 
 /* ------------------------------------------------------------ */
@@ -515,45 +623,55 @@ void OledUpdate(void)
 
 void OledPutBuffer(int32_t cb, uint8_t * rgbTx)
 {
-	SPI1_to_Buffer(rgbTx, cb, NULL);
+	SPI3_to_Buffer(rgbTx, cb, NULL);
 }
 
-uint16_t SPI1_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
+void SPI3DmaChannelHandler(DMAC_TRANSFER_EVENT event, uintptr_t contextHandle)
+{
+	if (event == DMAC_TRANSFER_EVENT_COMPLETE) {
+
+		LCD_UNSELECT();
+	}
+}
+
+uint16_t SPI3_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 {
 	uint16_t bytesWritten = 0;
 
 #ifdef USE_DMA
-	PWM8_LoadDutyValue(1);
-	while (dma_flag);
-
-	SPI1CON0bits.EN = 0;
-	SPI1CON2 = 0x02; //  Received data is not stored in the FIFO
-	SPI1CON0bits.EN = 1;
-	DMA1CON0bits.EN = 0; /* disable DMA to change source count */
-	DMA1SSA = (uint24_t) & dataIn[0];
-	//	DMA1SSZ = (uint16_t) bufLen;
-	DMA1SSZ = 16;
-	DMA1CON0bits.EN = 1;
-	dma_flag = 1;
-	DMA1CON0bits.DMA1SIRQEN = 1; /* start DMA trigger */
-
-	return bufLen;
+	wait_lcd_done();
+	/*
+	 * DMAC_ChannelCallbackRegister and SPI setup in OledInit
+	 */
+	LCD_SELECT();
+	LCD_CMD();
+	DMAC_ChannelTransfer(DMAC_CHANNEL_2, (const void *) rgbOledBmp_page, (size_t) 4, (const void*) &SPI3BUF, (size_t) 1, (size_t) 1);
+	wait_lcd_done();
+	bytesWritten = bufLen;
+	LCD_SELECT();
+	LCD_DRAM();
+	if (bufLen != 0) {
+		DMAC_ChannelTransfer(DMAC_CHANNEL_0, (const void *) dataIn, (size_t) bufLen, (const void*) &SPI3BUF, (size_t) 1, (size_t) 1);
+	}
+	return bytesWritten;
 #else
+#ifdef USE_INT
 	while (SPI3_IsBusy());
+#endif
 	LCD_SELECT();
 	LCD_DRAM();
 	if (bufLen != 0) {
 #ifdef EDOGS
-		SPI_ExchangeBuffer(dataIn, bufLen);
+		SPI3_ExchangeBuffer(dataIn, bufLen);
 		bytesWritten = bufLen;
 #endif
 #ifdef EDOGM
 		if (dataIn != NULL) {
 			while (bytesWritten < bufLen) {
 				if (dataOut == NULL) {
-					SPI1_Exchange8bit(dataIn[bytesWritten]);
+					SPI3_Exchange8bit(dataIn[bytesWritten]);
 				} else {
-					SPI1_Exchange8bit(dataIn[bytesWritten]);
+					SPI3_Exchange8bit(dataIn[bytesWritten]);
 				}
 				lcd_inc_column(1);
 				bytesWritten++;
@@ -561,7 +679,7 @@ uint16_t SPI1_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 		} else {
 			if (dataOut != NULL) {
 				while (bytesWritten < bufLen) {
-					SPI1_Exchange8bit(0xff);
+					SPI3_Exchange8bit(0xff);
 					lcd_inc_column(1);
 					bytesWritten++;
 				}
@@ -577,7 +695,11 @@ uint16_t SPI1_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 void wait_lcd_done(void)
 {
 #ifdef USE_DMA
-	while (dma_flag);
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0));
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_1));
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_2));
 #endif
+#ifdef USE_INT
 	while (SPI3_IsBusy());
+#endif
 }

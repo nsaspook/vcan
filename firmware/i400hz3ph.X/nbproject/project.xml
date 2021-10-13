@@ -15,6 +15,7 @@
             <sourceRootList>
                 <sourceRootElem>../src</sourceRootElem>
                 <sourceRootElem>display</sourceRootElem>
+                <sourceRootElem>../lcd_drv</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   display_type.h
  * Author: root
  *
