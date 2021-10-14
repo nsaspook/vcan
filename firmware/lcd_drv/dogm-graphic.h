@@ -57,7 +57,7 @@ extern void init_spi_lcd(void);
 #define LCD_WRAP_AROUND  0
 
 //Include graphic functions, i.e. lcd_draw_image_P, lcd_draw_image_xy_P, lcd_clear_area ? 
-#define LCD_INCLUDE_GRAPHIC_FUNCTIONS  1
+#define LCD_INCLUDE_GRAPHIC_FUNCTIONS  0
 
 /*Example SPI setup (Atmega162)
  *init spi: msb first, update on falling edge , read on rising edge, 9 MHz

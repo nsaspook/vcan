@@ -15,8 +15,9 @@ void init_lcd_drv(LCD_DVR_STATE init_type)
 		lcd_init();
 		OledInit();
 		OledSetCharUpdate(0); // manual LCD screen updates for speed
-//		lcd_draw_image_P((uint8_t *) foo_map, 100, 100, 0);
-//		wdtdelay(10000000); // > 400ms power up delay
+		OledMoveTo(60, 24);
+		OledPutBmp(100, 100, (uint8_t *) foo_map);
+		wdtdelay(10000000); // > 400ms power up delay
 #endif
 		break;
 	default:
