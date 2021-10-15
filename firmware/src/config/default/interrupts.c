@@ -100,7 +100,7 @@ void __ISR(_EXTERNAL_0_VECTOR, ipl3SRS) EXTERNAL_0_Handler (void)
 	EXTERNAL_0_InterruptHandler();
 }
 
-void __ISR(_TIMER_1_VECTOR, ipl1SRS) TIMER_1_Handler (void)
+void __ISR(_TIMER_1_VECTOR, ipl2SRS) TIMER_1_Handler (void)
 {
 	TIMER_1_InterruptHandler();
 }
@@ -120,52 +120,52 @@ void __ISR(_CHANGE_NOTICE_B_VECTOR, ipl1SRS) CHANGE_NOTICE_B_Handler (void)
 	CHANGE_NOTICE_B_InterruptHandler();
 }
 
-void __ISR(_UART2_FAULT_VECTOR, ipl1SRS) UART2_FAULT_Handler (void)
+void __ISR(_UART2_FAULT_VECTOR, ipl3SRS) UART2_FAULT_Handler (void)
 {
 	UART2_FAULT_InterruptHandler();
 }
 
-void __ISR(_UART2_RX_VECTOR, ipl1SRS) UART2_RX_Handler (void)
+void __ISR(_UART2_RX_VECTOR, ipl3SRS) UART2_RX_Handler (void)
 {
 	UART2_RX_InterruptHandler();
 }
 
-void __ISR(_UART2_TX_VECTOR, ipl1SRS) UART2_TX_Handler (void)
+void __ISR(_UART2_TX_VECTOR, ipl3SRS) UART2_TX_Handler (void)
 {
 	UART2_TX_InterruptHandler();
 }
 
-void __ISR(_UART3_FAULT_VECTOR, ipl1SRS) UART3_FAULT_Handler (void)
+void __ISR(_UART3_FAULT_VECTOR, ipl3SRS) UART3_FAULT_Handler (void)
 {
 	UART3_FAULT_InterruptHandler();
 }
 
-void __ISR(_UART3_RX_VECTOR, ipl1SRS) UART3_RX_Handler (void)
+void __ISR(_UART3_RX_VECTOR, ipl3SRS) UART3_RX_Handler (void)
 {
 	UART3_RX_InterruptHandler();
 }
 
-void __ISR(_UART3_TX_VECTOR, ipl1SRS) UART3_TX_Handler (void)
+void __ISR(_UART3_TX_VECTOR, ipl3SRS) UART3_TX_Handler (void)
 {
 	UART3_TX_InterruptHandler();
 }
 
-void __ISR(_DMA0_VECTOR, ipl1SRS) DMA0_Handler (void)
+void __ISR(_DMA0_VECTOR, ipl2SRS) DMA0_Handler (void)
 {
     DMA0_InterruptHandler();
 }
 
-void __ISR(_DMA1_VECTOR, ipl1SRS) DMA1_Handler (void)
+void __ISR(_DMA1_VECTOR, ipl2SRS) DMA1_Handler (void)
 {
     DMA1_InterruptHandler();
 }
 
-void __ISR(_DMA2_VECTOR, ipl1SRS) DMA2_Handler (void)
+void __ISR(_DMA2_VECTOR, ipl2SRS) DMA2_Handler (void)
 {
     DMA2_InterruptHandler();
 }
 
-void __ISR(_TIMER_6_VECTOR, ipl1SRS) TIMER_6_Handler (void)
+void __ISR(_TIMER_6_VECTOR, ipl2SRS) TIMER_6_Handler (void)
 {
 	TIMER_6_InterruptHandler();
 }
@@ -175,17 +175,17 @@ void __ISR(_ADC_EOS_VECTOR, ipl1SRS) ADC_EOS_Handler (void)
 	end_of_adc_scan();
 }
 
-void __ISR(_UART6_FAULT_VECTOR, ipl1SRS) UART6_FAULT_Handler (void)
+void __ISR(_UART6_FAULT_VECTOR, ipl3SRS) UART6_FAULT_Handler (void)
 {
 	UART6_FAULT_InterruptHandler();
 }
 
-void __ISR(_UART6_RX_VECTOR, ipl1SRS) UART6_RX_Handler (void)
+void __ISR(_UART6_RX_VECTOR, ipl3SRS) UART6_RX_Handler (void)
 {
 	UART6_RX_InterruptHandler();
 }
 
-void __ISR(_UART6_TX_VECTOR, ipl1SRS) UART6_TX_Handler (void)
+void __ISR(_UART6_TX_VECTOR, ipl3SRS) UART6_TX_Handler (void)
 {
 	UART6_TX_InterruptHandler();
 }
