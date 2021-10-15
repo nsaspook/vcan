@@ -63,12 +63,13 @@
 /* ------------------------------------------------------------ */
 volatile uint8_t dma_flag = 0, disp_frame = lcd_frame;
 
-extern uint8_t rgbOledFont0[];
+/*
+ * various fonts locations
+ * types have been checked
+ */
+extern const uint8_t rgbOledFont0[];
 extern uint8_t rgbOledFontUser[cbOledFontUser];
-extern uint8_t rgbFillPat[];
-
-extern int32_t xchOledMax;
-extern int32_t ychOledMax;
+extern const uint8_t rgbFillPat[];
 
 /* Coordinates of current pixel location on the display. The origin
  ** is at the upper left of the display. X increases to the right
@@ -289,7 +290,7 @@ void OledDvrInit(void)
 	 */
 	dxcoOledFontCur = cbOledChar;
 	dycoOledFontCur = 8;
-	pbOledFontCur = rgbOledFont0;
+	pbOledFontCur = (uint8_t *) rgbOledFont0;
 	pbOledFontUser = rgbOledFontUser;
 
 	for (ib = 0; ib < cbOledFontUser; ib++) {
@@ -306,7 +307,7 @@ void OledDvrInit(void)
 	/* Set the default foreground draw color and fill pattern
 	 */
 	clrOledCur = 0x01;
-	pbOledPatCur = rgbFillPat;
+	pbOledPatCur = (uint8_t *) rgbFillPat;
 	OledSetDrawMode(modOledSet);
 
 	/* Default the character routines to manual

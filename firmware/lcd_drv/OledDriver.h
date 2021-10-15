@@ -36,10 +36,15 @@
 /*
  *	machine dependant hardware routines should be here
  */
-#include "lcd_drv.h"
+
 
 #if !defined(OLEDDRIVER_INC)
 #define	OLEDDRIVER_INC
+
+#include "lcd_drv.h"
+
+extern int32_t xchOledMax;
+extern int32_t ychOledMax;
 
 /* ------------------------------------------------------------ */
 /*					Miscellaneous Declarations					*/

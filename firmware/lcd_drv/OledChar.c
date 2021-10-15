@@ -42,35 +42,6 @@
 
 #include "OledChar.h"
 
-/* ------------------------------------------------------------ */
-/*				Local Type Definitions							*/
-/* ------------------------------------------------------------ */
-
-
-/* ------------------------------------------------------------ */
-/*				Global Variables								*/
-/* ------------------------------------------------------------ */
-
-extern int32_t xcoOledCur;
-extern int32_t ycoOledCur;
-
-extern uint8_t * pbOledCur;
-extern uint8_t mskOledCur;
-extern int32_t bnOledCur;
-extern int32_t fOledCharUpdate;
-
-extern uint8_t rgbOledBmp[cbOledDispMax];
-
-extern int32_t dxcoOledFontCur;
-extern int32_t dycoOledFontCur;
-
-extern uint8_t * pbOledFontCur;
-extern uint8_t * pbOledFontUser;
-
-/* ------------------------------------------------------------ */
-/*				Local Variables									*/
-/* ------------------------------------------------------------ */
-
 int32_t xchOledCur;
 int32_t ychOledCur;
 

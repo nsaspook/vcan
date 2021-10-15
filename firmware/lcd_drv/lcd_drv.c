@@ -1,5 +1,13 @@
 #include "lcd_drv.h"
 
+/*
+ * This 'driver'is a merge of two  libs so it's a bit of a jumble
+ * with hardware specific statements in at least two source files.
+ * Because the PIC32MK version will likely only be used with graphic
+ * displays much of the code is unused and will eventully be removed
+ * after functional testing is complete.
+ * FGB 10/15/2021
+ */
 static volatile uint8_t NOPER = 0;
 
 void init_lcd_drv(LCD_DVR_STATE init_type)

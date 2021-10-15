@@ -34,49 +34,10 @@
 /*																		*/
 /************************************************************************/
 
-
-/* ------------------------------------------------------------ */
-/*				Include File Definitions						*/
-/* ------------------------------------------------------------ */
-
 #include "OledGrph.h"
-
-/* ------------------------------------------------------------ */
-/*				Local Type Definitions							*/
-/* ------------------------------------------------------------ */
-
-
-/* ------------------------------------------------------------ */
-/*				Global Variables								*/
-/* ------------------------------------------------------------ */
-
-extern int32_t xcoOledCur;
-extern int32_t ycoOledCur;
-extern uint8_t * pbOledCur;
-//extern uint8_t rgbOledBmp[];
-extern uint8_t rgbOledBmp0[];
-extern uint8_t rgbOledBmp1[];
-extern uint8_t rgbFillPat[];
-extern int32_t bnOledCur;
-extern uint8_t clrOledCur;
-extern uint8_t * pbOledPatCur;
-extern uint8_t * pbOledFontUser;
-extern uint8_t * pbOledFontCur;
-extern int32_t dxcoOledFontCur;
-extern int32_t dycoOledFontCur;
-
-extern volatile uint8_t disp_frame;
-
-/* ------------------------------------------------------------ */
-/*				Local Variables									*/
-/* ------------------------------------------------------------ */
 
 uint8_t(*pfnDoRop)(uint8_t bPix, uint8_t bDsp, uint8_t mskPix);
 int32_t modOledCur;
-
-/* ------------------------------------------------------------ */
-/*				Forward Declarations							*/
-/* ------------------------------------------------------------ */
 
 void OledMoveDown(void);
 void OledMoveUp(void);
@@ -88,10 +49,6 @@ uint8_t OledRopAnd(uint8_t bPix, uint8_t bDsp, uint8_t mskPix);
 uint8_t OledRopXor(uint8_t bPix, uint8_t bDsp, uint8_t mskPix);
 int32_t OledClampXco(int32_t xco);
 int32_t OledClampYco(int32_t yco);
-
-/* ------------------------------------------------------------ */
-/*				Procedure Definitions							*/
-/* ------------------------------------------------------------ */
 
 /***	OledMoveTo
  **
@@ -198,7 +155,7 @@ void OledSetDrawColor(uint8_t clr)
 
 uint8_t * OledGetStdPattern(int32_t ipat)
 {
-	return rgbFillPat + 8 * ipat;
+	return(uint8_t *) rgbFillPat + 8 * ipat;
 }
 
 /* ------------------------------------------------------------ */
@@ -1085,13 +1042,13 @@ void OledMoveRight(void)
 	/* Are we at the right edge of the display already
 	 */
 	if (disp_frame) {
-//		if (((pbOledCur - rgbOledBmp0) & (ccolOledMax - 1)) == ((ccolOledMax << 1) - 1)) { // check for bad edge limiting
-//			return;
-//		}
+		//		if (((pbOledCur - rgbOledBmp0) & (ccolOledMax - 1)) == ((ccolOledMax << 1) - 1)) { // check for bad edge limiting
+		//			return;
+		//		}
 	} else {
-//		if (((pbOledCur - rgbOledBmp1) & (ccolOledMax - 1)) == ((ccolOledMax << 1) - 1)) { // check for bad edge limiting
-//			return;
-//		}
+		//		if (((pbOledCur - rgbOledBmp1) & (ccolOledMax - 1)) == ((ccolOledMax << 1) - 1)) { // check for bad edge limiting
+		//			return;
+		//		}
 	}
 
 	/* Not at the right edge, so go forward one byte

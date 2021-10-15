@@ -103,6 +103,7 @@
       <itemPath>../lcd_drv/dogm-graphic.c</itemPath>
       <itemPath>../lcd_drv/lcd_drv.c</itemPath>
       <itemPath>../lcd_drv/foo.c</itemPath>
+      <itemPath>../lcd_drv/FillPat.c</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -197,7 +198,6 @@
       <itemPath>../src/freqgen.c</itemPath>
       <itemPath>../src/mc_picontrol.c</itemPath>
       <itemPath>../src/mclib.c</itemPath>
-      <itemPath>../src/FillPat.c</itemPath>
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/scdm.c</itemPath>
       <itemPath>../src/gfx.c</itemPath>

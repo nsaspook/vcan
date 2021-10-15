@@ -38,33 +38,21 @@
 
 #include "lcd_drv.h"
 
-/* ------------------------------------------------------------ */
-/*					Miscellaneous Declarations					*/
-/* ------------------------------------------------------------ */
+extern int32_t xcoOledCur;
+extern int32_t ycoOledCur;
 
+extern uint8_t * pbOledCur;
+extern uint8_t mskOledCur;
+extern int32_t bnOledCur;
+extern int32_t fOledCharUpdate;
 
+extern uint8_t rgbOledBmp[cbOledDispMax];
 
-/* ------------------------------------------------------------ */
-/*					General Type Declarations					*/
-/* ------------------------------------------------------------ */
+extern int32_t dxcoOledFontCur;
+extern int32_t dycoOledFontCur;
 
-
-
-/* ------------------------------------------------------------ */
-/*					Object Class Declarations					*/
-/* ------------------------------------------------------------ */
-
-
-
-/* ------------------------------------------------------------ */
-/*					Variable Declarations						*/
-/* ------------------------------------------------------------ */
-
-
-
-/* ------------------------------------------------------------ */
-/*					Procedure Declarations						*/
-/* ------------------------------------------------------------ */
+extern uint8_t * pbOledFontCur;
+extern uint8_t * pbOledFontUser;
 
 void OledSetCursor(int32_t xch, int32_t ych);
 void OledGetCursor(int32_t * pxcy, int32_t * pych);

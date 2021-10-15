@@ -38,31 +38,21 @@
 
 #include "lcd_drv.h"
 
-/* ------------------------------------------------------------ */
-/*					Miscellaneous Declarations					*/
-/* ------------------------------------------------------------ */
+extern int32_t xcoOledCur;
+extern int32_t ycoOledCur;
+extern uint8_t * pbOledCur;
+extern uint8_t rgbOledBmp0[];
+extern uint8_t rgbOledBmp1[];
+extern const uint8_t rgbFillPat[];
+extern int32_t bnOledCur;
+extern uint8_t clrOledCur;
+extern uint8_t * pbOledPatCur;
+extern uint8_t * pbOledFontUser;
+extern uint8_t * pbOledFontCur;
+extern int32_t dxcoOledFontCur;
+extern int32_t dycoOledFontCur;
 
-
-
-/* ------------------------------------------------------------ */
-/*					General Type Declarations					*/
-/* ------------------------------------------------------------ */
-
-/* ------------------------------------------------------------ */
-/*					Object Class Declarations					*/
-/* ------------------------------------------------------------ */
-
-
-
-/* ------------------------------------------------------------ */
-/*					Variable Declarations						*/
-/* ------------------------------------------------------------ */
-
-
-
-/* ------------------------------------------------------------ */
-/*					Procedure Declarations						*/
-/* ------------------------------------------------------------ */
+extern volatile uint8_t disp_frame;
 
 void OledSetDrawColor(uint8_t clr);
 void OledSetDrawMode(int32_t mod);
