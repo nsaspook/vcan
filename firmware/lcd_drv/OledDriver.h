@@ -32,6 +32,10 @@
 /*	04/29/2011(GeneA): created											*/
 /*																		*/
 /************************************************************************/
+
+/*
+ *	machine dependant hardware routines should be here
+ */
 #include "lcd_drv.h"
 
 #if !defined(OLEDDRIVER_INC)
@@ -56,6 +60,8 @@
 #define	cpagOledMax		8		//number of display memory pages
 #define STR_BUF_SIZE		20		//number of chars for display strings
 #endif
+
+#define max_strlen	STR_BUF_SIZE-1
 
 #define	cbOledChar		8		//font glyph definitions is 8 bytes long
 #define	chOledUserMax		0x20	//number of character defs in user font table

@@ -45,16 +45,23 @@ extern "C" {
 #include "tests.h"
 #include "device.h"
 
+#define	DMT_INST_COUNT	3500000		// counts between DMT clears
+#define BMP_DELAY	20000000	// image display delay counts
+#define bmp_x		60		// screen positions of image
+#define bmp_y		24
+#define bmp_size	100		// x,y size of image
+
 	typedef enum {
 		D_INIT,
 		D_MISC,
 	} LCD_DVR_STATE;
-	
-#define lcd_frame	1	// frame buffer 1 or 0
+
+#define lcd_frame	0	// frame buffer 1 or 0
 
 	void init_lcd_drv(LCD_DVR_STATE init_type);
-	
-	extern const uint8_t foo_map[];
+
+	extern const uint8_t foo_map[]; // image in flash array
+	void dmtdelay(const uint32_t);
 
 #ifdef	__cplusplus
 }

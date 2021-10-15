@@ -17,41 +17,6 @@
 //Use Backlight?  (0: no backlight, 1: backlight (on when pin is high), 2: backlight (on when pin is low))
 #define LCD_USE_BACKLIGHT   0
 
-//A0 Port (CD on DOGS & DOGXL)
-#define PORT_A0  PORTF_OUT
-#define DDR_A0   PORTF_DIR
-#define PIN_A0   1
-
-//Reset Port
-#define PORT_RST PORTF_OUT
-#define DDR_RST  PORTF_DIR
-#define PIN_RST  0
-
-//Backlight Port
-#if LCD_USE_BACKLIGHT != 0
-#define PORT_LED PORTB
-#define DDR_LED  DDRB
-#define PIN_LED  4
-#endif
-
-//Chip select
-#if LCD_USE_CHIPSELECT == 1
-#define PORT_CS  PORTF_OUT
-#define DDR_CS   PORTF_DIR
-#define PIN_CS   4
-#endif
-
-//SPI routines
-//Define a function that initializes  the SPI interface, see below for an example
-extern void init_spi_lcd(void);
-#define LCD_INIT_SPI() init_spi_lcd()
-
-//Define a function that waits until SPI interface is idle
-#define spi_wait_for_idle() while(! (SPIF_STATUS & _BV(SPI_IF_bp)))
-
-//Define how to write to SPI data register
-#define spi_write(i) SPIF_DATA = i
-
 //Define this if LCD Output should continue in next line when reaching edge of display
 //Used for all outputs. To enable this feature for text only, use the appropriate flag in font.h
 #define LCD_WRAP_AROUND  0
@@ -59,19 +24,17 @@ extern void init_spi_lcd(void);
 //Include graphic functions, i.e. lcd_draw_image_P, lcd_draw_image_xy_P, lcd_clear_area ? 
 #define LCD_INCLUDE_GRAPHIC_FUNCTIONS  0
 
-/*Example SPI setup (Atmega162)
- *init spi: msb first, update on falling edge , read on rising edge, 9 MHz
- *void init_spi_lcd() {
- *  SPCR = 0 << SPIE | 1 << SPE | 0 << DORD | 1 << MSTR | 1 << CPOL | 1 << CPHA | 0 << SPR1 | 0 << SPR0;
- *  SPSR = 1 << SPI2X;
- *  SPDR = LCD_NO_OP; //Do not use 0 here, only LCD_NOP is allowed!
- *  }
- */
 /*****************************************************************************
  * END CONFIG BLOCK
  *****************************************************************************/
 
+extern volatile uint8_t __attribute__((coherent)) rgbOledBmp_page[];
 
+extern void RS_SetLow(void);
+extern void RS_SetHigh(void);
+extern void CSB_SetLow(void);
+extern void CSB_SetHigh(void);
+extern void SPI3_Exchange8bit(uint8_t);
 
 
 /*****************************************************************************

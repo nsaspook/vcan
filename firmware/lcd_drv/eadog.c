@@ -1,5 +1,10 @@
 #include "eadog.h"
 
+/*
+ *	LCD character display routines
+ *	machine dependant hardware routines should be here
+ */
+
 /* Global object to save SPI Exchange related data */
 extern SPI_OBJECT spi3Obj;
 

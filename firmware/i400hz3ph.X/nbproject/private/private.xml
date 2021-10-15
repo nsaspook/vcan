@@ -4,16 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/root/vcan/firmware/src/PetitModbus/PetitModbus.h</file>
+            <file>file:/root/vcan/firmware/lcd_drv/OledDriver.c</file>
             <file>file:/root/vcan/firmware/src/PetitModbus/PetitModbus.c</file>
             <file>file:/root/vcan/firmware/src/main.c</file>
             <file>file:/root/vcan/firmware/src/PetitModbus/PetitModbusPort.c</file>
             <file>file:/root/vcan/firmware/src/vcan.h</file>
-            <file>file:/root/vcan/firmware/lcd_drv/OledGrph.c</file>
+            <file>file:/root/vcan/firmware/lcd_drv/eadog.c</file>
             <file>file:/root/vcan/firmware/src/pmodbus.h</file>
-            <file>file:/root/vcan/firmware/src/faults.c</file>
+            <file>file:/root/vcan/firmware/lcd_drv/eadog.h</file>
             <file>file:/root/vcan/firmware/src/PetitModbus/PetitModbusPort.h</file>
             <file>file:/root/vcan/firmware/lcd_drv/lcd_drv.c</file>
-            <file>file:/root/vcan/firmware/src/tests.c</file>
             <file>file:/root/vcan/firmware/lcd_drv/foo.c</file>
             <file>file:/root/vcan/firmware/lcd_drv/lcd_drv.h</file>
         </group>

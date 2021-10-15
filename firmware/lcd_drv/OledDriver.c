@@ -38,6 +38,10 @@
 /*		function. Removed delay.h					*/
 /*	05/11/2017(FGB): convert XC32 and Harmony 2.0				*/
 /*	08/01/2020(FGB): convert to Harmony 3.0 for pic32mk			*/
+/*
+ *	LCD graphic display routines
+ *	machine dependant hardware routines should be here
+ */
 /************************************************************************/
 
 

@@ -50,13 +50,6 @@
 
 uint8_t lcd_current_page = 0;
 uint8_t lcd_current_column = 0;
-extern uint8_t __attribute__((coherent)) rgbOledBmp_page[];
-
-void RS_SetLow(void);
-void RS_SetHigh(void);
-void CSB_SetLow(void);
-void CSB_SetHigh(void);
-void SPI3_Exchange8bit(uint8_t);
 
 /******************************************************************************
  * Changes the internal cursor by s pages
@@ -293,33 +286,7 @@ void lcd_set_contrast(uint8_t value)
 void lcd_init(void)
 {
 	//Load settings
-#if DISPLAY_TYPE == 2400
-	BACKLIGHT_Clear();
-	WaitMs(2);
-	BACKLIGHT_Set();
-	WaitMs(150);
-	BACKLIGHT_Clear();
-	WaitMs(2);
-	BACKLIGHT_Set();
-	WaitMs(150);
-	lcd_command(0xF1); //last COM electrode
-	lcd_command(0x7F); //128-1 = 127
-	lcd_command(0xF2); //Display start line
-	lcd_command(0x00); //0
-	lcd_command(0xF3); //Display end line
-	lcd_command(0x7F); //0
-
-	LCD_SET_POTI(0x8F); // set Contrast to mid range lvl
-	LCD_SET_MAPPING_CTRL(2); // set mapping control to "bottom view"
-
-
-	lcd_command(0xA3); //9.4K per second line rate
-	lcd_command(0x25); //Set temp. comp. to -0.1%/?C
-	lcd_command(0xA9); //Enable Display
-	lcd_command(0xD1); //in Black and white mode
-#endif
 #if DISPLAY_TYPE == 240
-	//	LCD_SYSTEM_RESET; // software reset
 	BACKLIGHT_Clear();
 	WaitMs(2);
 	BACKLIGHT_Set();

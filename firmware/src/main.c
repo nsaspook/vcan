@@ -638,6 +638,10 @@ int main(void)
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, BLINK_UPDATE);
 			RESET_LED_Toggle();
+			/*
+			 * must be cleared within the instruction count window
+			 * simple fast repeats of DMT_Clear() will not work
+			 */
 			DMT_Clear(); // clear the Dead Man Timer
 		}
 	}

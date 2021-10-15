@@ -18,6 +18,10 @@
  *                  jgschmidt (CCS forum)
  */
 
+/*
+ *	machine dependant hardware routines should be here
+ */
+
 #ifndef EADOG_H
 #define	EADOG_H
 
@@ -26,8 +30,6 @@ extern "C" {
 #endif
 
 #include "lcd_drv.h"
-
-#define max_strlen	STR_BUF_SIZE-1
 
 #define LCD_CMD_MASK	0x01
 #define LCD_CMD_SET	0x100

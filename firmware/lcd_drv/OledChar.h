@@ -32,7 +32,6 @@
 /*	06/01/2011(GeneA): created											*/
 /*																		*/
 /************************************************************************/
-#include <stdint.h>
 
 #if !defined(OLEDCHAR_H)
 #define OLEDCHAR_H
