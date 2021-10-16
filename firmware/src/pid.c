@@ -16,6 +16,8 @@ double UpdatePI(volatile struct SPid * const pid, double const error)
 		pid->iState = pid->iMax;
 	} else if (pid->iState < pid->iMin) {
 		pid->iState = pid->iMin;
+	} else {
+		
 	}
 
 	iTerm = (pid->iGain * pid->iState); // calculate the integral term

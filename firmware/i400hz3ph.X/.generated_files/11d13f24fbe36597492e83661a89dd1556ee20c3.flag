@@ -1,5 +1,0 @@
-<<<<<<< HEAD:firmware/i400hz3ph.X/.generated_files/flags/default/23347b85c7a88f2f5a1c974341a19e623a5ed24d
- $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -fdata-sections -O2 -I"../src" -I"../src/config/default" -I"../src/packs/PIC32MK1024MCM100_DFP" -Werror -Wall   -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  /fred/vcan/firmware/src/pid.c
-=======
- $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -fdata-sections -O2 -I"../src" -I"../src/config/default" -I"../src/packs/PIC32MK1024MCM100_DFP" -Werror -Wall   -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  /root/vcan/firmware/src/dio.c
->>>>>>> 31a1509fe5fc00890d9e7dbb0e1eba8e92ec0af4:firmware/i400hz3ph.X/.generated_files/11d13f24fbe36597492e83661a89dd1556ee20c3.flag

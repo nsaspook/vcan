@@ -77,8 +77,9 @@ void ReceiveInterrupt(uint8_t Data)
 	PetitReceiveBuffer[PetitReceiveCounter] = Data;
 	PetitReceiveCounter++;
 
-	if (PetitReceiveCounter > PETITMODBUS_RECEIVE_BUFFER_SIZE)
+	if (PetitReceiveCounter > PETITMODBUS_RECEIVE_BUFFER_SIZE) {
 		PetitReceiveCounter = 0;
+	}
 
 	PetitModbusTimerValue = 0;
 	V.modbus_rx++; // stat collection

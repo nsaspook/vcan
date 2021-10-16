@@ -107,8 +107,9 @@ int32_t phase_duty(
 void fillTable(void)
 {
 	uint32_t i;
-	for (i = 0; i < 256; i++)
+	for (i = 0; i < 256; i++) {
 		table[i] = sin(2.0 * M_PI * (double) i / 256.0);
+	}
 }
 
 /*
@@ -118,10 +119,12 @@ void preset_phase(void)
 {
 	uint32_t i;
 
-	for (i = 0; i < SR120; i++)
+	for (i = 0; i < SR120; i++) {
 		sine_foo(&m35_3);
-	for (i = 0; i < SR240; i++)
+	}
+	for (i = 0; i < SR240; i++) {
 		sine_foo(&m35_4);
+	}
 }
 
 /*

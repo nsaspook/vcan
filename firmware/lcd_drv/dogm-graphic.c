@@ -235,10 +235,12 @@ void lcd_clear_area(uint8_t pages, uint8_t columns, uint8_t style)
 	uint8_t i, j, max;
 	uint8_t inv = (style & INVERT_BIT) ? 0xFF : 0;
 
-	if (pages > (max = LCD_RAM_PAGES - lcd_get_position_page()))
+	if (pages > (max = LCD_RAM_PAGES - lcd_get_position_page())) {
 		pages = max;
-	if (columns > (max = LCD_WIDTH - lcd_get_position_column()))
+	}
+	if (columns > (max = LCD_WIDTH - lcd_get_position_column())) {
 		columns = max;
+	}
 
 	for (j = 0; j < pages; j++) {
 		for (i = 0; i < columns; i++) {

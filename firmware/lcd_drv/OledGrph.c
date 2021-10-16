@@ -778,6 +778,8 @@ void OledDrawChar(char ch)
 		pbFont = pbOledFontUser + ch*cbOledChar;
 	} else if ((ch & 0x80) == 0) {
 		pbFont = pbOledFontCur + (ch - chOledUserMax) * cbOledChar;
+	} else {
+		
 	}
 
 	OledPutBmp(dxcoOledFontCur, dycoOledFontCur, pbFont);

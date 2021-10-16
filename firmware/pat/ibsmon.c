@@ -58,15 +58,8 @@
  * 3.0 i400hz 3-phase inverter modbus commands
  */
 
-#include <stdint.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include "ibsmon.h"
-#include "ihc_vector.h"
-#include "crc.h"
 
-#define BusyUSART( ) (!TXSTAbits.TRMT)
+#include "ibsmon.h"
 
 int8_t controller_work(void);
 void init_i400mon(void);
@@ -134,8 +127,9 @@ int8_t controller_work(void)
 		clear_10hz();
 		cstate = INIT;
 		modbus_command = mcmd++; // sequence modbus commands to client
-		if (mcmd > G_LAST)
+		if (mcmd > G_LAST) {
 			mcmd = G_MODE;
+		}
 		/*
 		 * command specific tx buffer setup
 		 */
@@ -148,7 +142,7 @@ int8_t controller_work(void)
 			break;
 		case G_AUX: // write code request
 			i400_power = V.power_on << 8; // inverter power command flag
-			i400_power += ((V.error & 0xff) << 9) + SWVER; // receive errors  and software version
+			i400_power += (((uint16_t) (V.error & 0x00ff)) << 9) + SWVER; // receive errors  and software version
 			rvalue.value = i400_power;
 			modbus_cc_clear[4] = rvalue.bytes[1];
 			modbus_cc_clear[5] = rvalue.bytes[0];
@@ -186,10 +180,12 @@ int8_t controller_work(void)
 	case SEND:
 		if (get_500hz(false) > TDELAY) {
 			do {
-				while (BusyUSART()); // wait for each byte
+				while (!TXSTAbits.TRMT) {
+				}; // wait for each byte
 				TXREG = cc_buffer[V.send_count];
 			} while (++V.send_count < req_length);
-			while (BusyUSART()); // wait for the last byte
+			while (!TXSTAbits.TRMT) {
+			}; // wait for the last byte
 			cstate = RECV;
 			clear_500hz();
 		}
@@ -353,8 +349,9 @@ void init_i400mon(void)
 	uint16_t tmp;
 	V.boot_code = false;
 	BOOT_FLAG = false;
-	if (RCON != 0b0011100)
+	if (RCON != 0b0011100) {
 		V.boot_code = true;
+	}
 
 	if (STKPTRbits.STKFUL || STKPTRbits.STKUNF) {
 		V.boot_code = true;
@@ -362,8 +359,9 @@ void init_i400mon(void)
 		STKPTRbits.STKUNF = 0;
 	}
 
-	if (V.boot_code)
+	if (V.boot_code) {
 		BOOT_FLAG = true;
+	}
 
 	ADCON1 = 0x7F; // all digital, no ADC
 	/* interrupt priority ON */
@@ -379,13 +377,13 @@ void init_i400mon(void)
 	set_led_blink(BOFF);
 	//OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_64);
 	T0CON = 0b10000101;
-	tmp = TIMERFAST >> 8;
+	tmp = TIMERFAST >> (uint8_t) 8;
 	TMR0H = (uint8_t) tmp;
 	tmp = TIMERFAST & 0xFF;
 	TMR0L = (uint8_t) tmp;
 	//OpenTimer1(TIMER_INT_ON & T1_16BIT_RW & T1_SOURCE_INT & T1_PS_1_4 & T1_OSC1EN_OFF & T1_SYNC_EXT_OFF);
 	T1CON = 0b10100101;
-	tmp = SAMPLEFREQ >> 8;
+	tmp = SAMPLEFREQ >> (uint8_t) 8;
 	TMR1H = (uint8_t) tmp;
 	tmp = SAMPLEFREQ & 0xFF;
 	TMR1L = (uint8_t) tmp;

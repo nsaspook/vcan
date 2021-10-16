@@ -48,7 +48,7 @@ void timer_ms_tick(uint32_t status, uintptr_t context)
 	static uint8_t i;
 
 #ifdef G400HZ
-//	start_adc_scan();
+	//	start_adc_scan();
 #endif
 	//Decrement each software timer
 	for (i = 0; i < TMR_COUNT; i++) {
@@ -68,7 +68,8 @@ void delay_us(uint32_t us)
 
 	_CP0_SET_COUNT(0); // Set Core Timer count to 0
 
-	while (us > _CP0_GET_COUNT()); // Wait until Core Timer count reaches the number we calculated earlier
+	while (us > _CP0_GET_COUNT()) {
+	}; // Wait until Core Timer count reaches the number we calculated earlier
 }
 
 void delay_ms(uint32_t ms)

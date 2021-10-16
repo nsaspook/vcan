@@ -13,8 +13,9 @@ extern "C" {
 #endif
 #include <xc.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "ibsmon.h"
+
+#define MAX_DATA        64
 
 	extern volatile struct V_data V;
 	extern volatile uint8_t cc_stream_file, cc_stream_file_prev, cc_buffer[MAX_DATA];

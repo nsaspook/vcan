@@ -4,6 +4,10 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+#include "ihc_vector.h"
+#include "crc.h"
 
 typedef struct V_data { // ISR used, mainly for non-atomic mod problems
 	uint32_t clock_500hz;
@@ -16,7 +20,8 @@ typedef struct V_data { // ISR used, mainly for non-atomic mod problems
 	uint8_t stable : 1;
 	uint8_t boot_code : 1;
 	uint8_t power_on : 1;
-	uint8_t send_count, recv_count, pwm_volts, error;
+	uint8_t send_count, recv_count, pwm_volts;
+	uint16_t error;
 } V_data;
 
 typedef struct OUTBITS2 {
@@ -52,7 +57,7 @@ typedef enum cmd_type {
 
 union PWMDC {
 	uint16_t lpwm;
-	char bpwm[2];
+	uint8_t bpwm[2];
 };
 
 union MREG {
@@ -60,7 +65,7 @@ union MREG {
 	char bytes[2];
 };
 
-#define SWVER	0x30;
+#define SWVER	0x0030;
 
 #define	ON	1
 #define	OFF	0
@@ -69,13 +74,12 @@ union MREG {
 #define BOFF	0
 #define BON	255
 
-#define	TIMEROFFSET	34268			// timer0 16bit counter value for 1 second to overflow
-#define	TIMERFAST	26600			// fast flash 2hz
-#define	SAMPLEFREQ	0xf660			// timer1 500hz
+#define	TIMEROFFSET	34268u			// timer0 16bit counter value for 1 second to overflow
+#define	TIMERFAST	26600u			// fast flash 2hz
+#define	SAMPLEFREQ	0xf660u			// timer1 500hz
 #define	PWMFREQ		65			// timer2 pwm
 #define PWMVOLTS	127
 
-#define MAX_DATA        64
 #define MAX_GLITCH      3
 #define MAX_PARAMS      5
 #define MAX_BLINKS	10

@@ -33,7 +33,7 @@ void __interrupt() tm_handler(void) // timer/serial functions are handled here
 
 	if (PIR1bits.TMR1IF) { //      Timer1 int handler
 		PIR1bits.TMR1IF = OFF; //      clear int flag
-		tmp = SAMPLEFREQ >> 8;
+		tmp = SAMPLEFREQ >> (uint8_t) 8;
 		TMR1H = (uint8_t) tmp;
 		tmp = SAMPLEFREQ & 0xFF;
 		TMR1L = (uint8_t) tmp;
@@ -43,7 +43,7 @@ void __interrupt() tm_handler(void) // timer/serial functions are handled here
 
 	if (INTCONbits.TMR0IF) { //      check timer0 irq time timer
 		INTCONbits.TMR0IF = OFF; //      clear interrupt flag
-		tmp = TIMERFAST >> 8;
+		tmp = TIMERFAST >> (uint8_t) 8;
 		TMR0H = (uint8_t) tmp;
 		tmp = TIMERFAST & 0xFF;
 		TMR0L = (uint8_t) tmp;
@@ -87,8 +87,9 @@ uint32_t get_2hz(uint8_t mode)
 {
 	static uint32_t tmp = 0;
 
-	if (mode)
+	if (mode) {
 		return tmp;
+	}
 
 	INTCONbits.GIEH = 0;
 	tmp = V.clock_2hz;
@@ -100,8 +101,9 @@ uint32_t get_10hz(uint8_t mode)
 {
 	static uint32_t tmp = 0;
 
-	if (mode)
+	if (mode) {
 		return tmp;
+	}
 
 	INTCONbits.GIEH = 0;
 	tmp = V.clock_10hz;
@@ -113,8 +115,9 @@ uint32_t get_500hz(uint8_t mode)
 {
 	static uint32_t tmp = 0;
 
-	if (mode)
+	if (mode) {
 		return tmp;
+	}
 
 	INTCONbits.GIEH = 0;
 	tmp = V.clock_500hz;
@@ -159,11 +162,13 @@ static void led_blink(void)
  */
 bool set_led_blink(uint8_t blinks)
 {
-	if (V.blink_lock)
+	if (V.blink_lock) {
 		return false;
+	}
 
-	if (blinks > MAX_BLINKS && (blinks != 255))
+	if (blinks > MAX_BLINKS && (blinks != 255)) {
 		blinks = 0;
+	}
 
 	INTCONbits.GIEH = 0;
 	V.blink_lock = true;

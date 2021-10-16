@@ -71,6 +71,7 @@ IC = M * sin (? + 240)
 #include "PetitModbus/PetitModbus.h"
 
 const char *build_date = __DATE__, *build_time = __TIME__;
+char buffer[STR_BUF_SIZE];
 extern t_cli_ctx cli_ctx; // command buffer 
 
 volatile struct QEI_DATA m35_1 = {
@@ -246,8 +247,9 @@ time_t time(time_t * Time)
 void wave_gen(uint32_t status, uintptr_t context)
 {
 	//	DEBUGB0_Set();
-	if (V.pwm_stop && V.pwm_update)
+	if (V.pwm_stop && V.pwm_update) {
 		return;
+	}
 
 	V.pwm_update = true;
 
@@ -374,7 +376,6 @@ void my_modbus_rx(UART_EVENT event, uintptr_t context)
 
 int main(void)
 {
-	char buffer[STR_BUF_SIZE];
 	bool dmt = RCONbits.DMTO, wdt = RCONbits.WDTO; // set dead man restart status
 
 	/* Initialize all modules */
@@ -449,7 +450,7 @@ int main(void)
 	CTMUCONbits.ON = 1; // CTMU is ON
 
 	init_lcd_drv(D_INIT);
-	
+
 	if (OSCCONbits.CF) { // check for sysclock proper operation
 		sprintf(buffer, "VCAN Clock Error       ");
 		eaDogM_WriteStringAtPos(0, 0, buffer);
