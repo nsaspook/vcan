@@ -173,7 +173,7 @@ extern "C" {
 #define MOTOR1_INC	POS2CNT
 
 #define MOTOR_UPDATES	1	// main loop timer in ms
-#define DISPLAY_UPDATE	200
+#define DISPLAY_UPDATE	160
 #define ADC_UPDATE	25
 #define BLINK_UPDATE	1000
 

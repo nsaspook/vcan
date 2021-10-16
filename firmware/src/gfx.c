@@ -21,9 +21,9 @@ void motor_graph(bool motion, bool reset)
 	}
 
 	if (motion) {
-		steps = 1.0;
+		steps = 8.0;
 	} else {
-		steps = -1.0;
+		steps = -8.0;
 	}
 
 	//Starting point
@@ -106,21 +106,6 @@ void vector_graph(bool motion, bool reset)
 	} else {
 		steps = -3.0;
 	}
-	//	double t1 = 60.0 * q1, t2 = 50.0 * q2, t3 = 50.0 * q3, t4 = 50.0 * q0;
-
-	//	OledMoveTo(60 + t1, 0 + t4);
-	//	OledLineTo(180 - t1, 0 + t4);
-	//	OledLineTo(180 - t1, 70 - t4);
-	//	OledMoveTo(60 + t1, 0 + t4);
-	//	OledLineTo(60 + t1, 70 - t4);
-	//	OledLineTo(180 - t1, 70 - t4);
-
-	//	OledMoveTo(80 + t3, 20 + t2);
-	//	OledLineTo(160 - t3, 20 + t2);
-	//	OledLineTo(160 - t3, 50 - t2);
-	//	OledMoveTo(80 + t3, 20 + t2);
-	//	OledLineTo(80 + t3, 50 - t2);
-	//	OledLineTo(160 - t3, 50 - t2);
 
 	//Starting point
 	xn1 = x1;
