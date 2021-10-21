@@ -1,24 +1,24 @@
 EAGLE AutoRouter Statistics:
 
-Job           : /root/vcan/pic32mk.brd
+Job           : /fred/vcan/pic32mk.brd
 
-Start at      : 17:05:04 (7/11/20)
-End at        : 17:13:24 (7/11/20)
-Elapsed time  : 00:08:18
+Start at      : 16:21:47 (10/20/21)
+End at        : 16:22:31 (10/20/21)
+Elapsed time  : 00:00:13
 
 Signals       :   146   RoutingGrid: 2.75 mil  Layers: 4
-Connections   :   449   predefined:  448 ( 219 Vias )
+Connections   :   449   predefined:  449 ( 222 Vias )
 
 Router memory :   15682368
 
 Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4
 
-Time per pass     :  00:07:51  00:00:00  00:00:07  00:00:06  00:00:07  00:00:07
+Time per pass     :  00:00:00  00:00:01  00:00:03  00:00:03  00:00:03  00:00:03
 Number of Ripups  :         0         0         0         0         0         0
 max. Level        :         0         0         0         0         0         0
 max. Total        :         0         0         0         0         0         0
 
-Routed            :         1         1         1         1         1         1
+Routed            :         0         0         0         0         0         0
 Vias              :         0         0         0         0         0         0
 Resolution        :   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 

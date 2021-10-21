@@ -16627,26 +16627,26 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <instance part="VSS11" gate="G$1" x="203.2" y="-73.66" smashed="yes">
 <attribute name="VALUE" x="200.66" y="-78.74" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="VDD7" gate="G$1" x="193.04" y="-53.34" smashed="yes">
-<attribute name="VALUE" x="190.5" y="-55.88" size="1.778" layer="96" rot="R90"/>
+<instance part="VDD7" gate="G$1" x="172.72" y="-53.34" smashed="yes">
+<attribute name="VALUE" x="170.18" y="-55.88" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="C2" gate="G$1" x="259.08" y="15.24" smashed="yes" rot="R180">
 <attribute name="NAME" x="258.064" y="14.605" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="258.064" y="19.431" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="C3" gate="G$1" x="180.34" y="-60.96" smashed="yes">
-<attribute name="NAME" x="176.276" y="-60.325" size="1.778" layer="95"/>
-<attribute name="VALUE" x="181.356" y="-65.151" size="1.778" layer="96"/>
+<instance part="C3" gate="G$1" x="167.64" y="-60.96" smashed="yes">
+<attribute name="NAME" x="163.576" y="-60.325" size="1.778" layer="95"/>
+<attribute name="VALUE" x="168.656" y="-65.151" size="1.778" layer="96"/>
 </instance>
-<instance part="C4" gate="G$1" x="195.58" y="-53.34" smashed="yes" rot="R180">
-<attribute name="NAME" x="194.564" y="-53.975" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="194.564" y="-49.149" size="1.778" layer="96" rot="R180"/>
+<instance part="C4" gate="G$1" x="177.8" y="-53.34" smashed="yes" rot="R180">
+<attribute name="NAME" x="176.784" y="-53.975" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="176.784" y="-49.149" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="VSS12" gate="G$1" x="180.34" y="-68.58" smashed="yes">
-<attribute name="VALUE" x="177.8" y="-73.66" size="1.778" layer="96" rot="R90"/>
+<instance part="VSS12" gate="G$1" x="167.64" y="-68.58" smashed="yes">
+<attribute name="VALUE" x="165.1" y="-73.66" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="VSS13" gate="G$1" x="195.58" y="-45.72" smashed="yes" rot="R180">
-<attribute name="VALUE" x="198.12" y="-40.64" size="1.778" layer="96" rot="R270"/>
+<instance part="VSS13" gate="G$1" x="177.8" y="-45.72" smashed="yes" rot="R180">
+<attribute name="VALUE" x="180.34" y="-40.64" size="1.778" layer="96" rot="R270"/>
 </instance>
 <instance part="C6" gate="G$1" x="66.04" y="-111.76" smashed="yes">
 <attribute name="NAME" x="67.056" y="-111.125" size="1.778" layer="95"/>
@@ -17116,8 +17116,8 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <attribute name="NAME" x="260.35" y="-64.77" size="1.778" layer="95" rot="R270"/>
 <attribute name="TP_SIGNAL_NAME" x="257.81" y="-67.31" size="1.778" layer="97" rot="R270"/>
 </instance>
-<instance part="P+11" gate="VCC" x="175.26" y="-55.88" smashed="yes">
-<attribute name="VALUE" x="172.72" y="-55.88" size="1.778" layer="96" rot="R90"/>
+<instance part="P+11" gate="VCC" x="162.56" y="-55.88" smashed="yes">
+<attribute name="VALUE" x="160.02" y="-55.88" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="C26" gate="G$1" x="50.8" y="-134.62" smashed="yes" rot="R270">
 <attribute name="NAME" x="51.435" y="-135.636" size="1.778" layer="95" rot="R270"/>
@@ -17753,13 +17753,16 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <junction x="226.06" y="12.7"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="VCC"/>
-<wire x1="203.2" y1="-55.88" x2="195.58" y2="-55.88" width="0.1524" layer="91"/>
 <pinref part="VDD7" gate="G$1" pin="VDD"/>
-<junction x="203.2" y="-55.88"/>
 <pinref part="C4" gate="G$1" pin="1"/>
-<wire x1="195.58" y1="-55.88" x2="193.04" y2="-55.88" width="0.1524" layer="91"/>
-<junction x="195.58" y="-55.88"/>
+<wire x1="177.8" y1="-55.88" x2="172.72" y2="-55.88" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="-55.88" x2="177.8" y2="-60.96" width="0.1524" layer="91"/>
+<junction x="177.8" y="-55.88"/>
+<wire x1="177.8" y1="-60.96" x2="187.96" y2="-60.96" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="-60.96" x2="187.96" y2="-58.42" width="0.1524" layer="91"/>
+<pinref part="IC2" gate="G$1" pin="VIO"/>
+<wire x1="187.96" y1="-58.42" x2="203.2" y2="-58.42" width="0.1524" layer="91"/>
+<junction x="203.2" y="-58.42"/>
 </segment>
 <segment>
 <pinref part="L1" gate="G$1" pin="1"/>
@@ -18025,12 +18028,12 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <segment>
 <pinref part="C3" gate="G$1" pin="2"/>
 <pinref part="VSS12" gate="G$1" pin="VSS"/>
-<junction x="180.34" y="-66.04"/>
+<junction x="167.64" y="-66.04"/>
 </segment>
 <segment>
 <pinref part="C4" gate="G$1" pin="2"/>
 <pinref part="VSS13" gate="G$1" pin="VSS"/>
-<junction x="195.58" y="-48.26"/>
+<junction x="177.8" y="-48.26"/>
 </segment>
 <segment>
 <pinref part="C6" gate="G$1" pin="2"/>
@@ -18257,12 +18260,14 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="VSS40" gate="G$1" pin="VSS"/>
 <wire x1="162.56" y1="-106.68" x2="165.1" y2="-106.68" width="0.1524" layer="91"/>
 <junction x="162.56" y="-106.68"/>
+<junction x="165.1" y="-106.68"/>
 </segment>
 <segment>
 <pinref part="C18" gate="G$1" pin="2"/>
 <pinref part="VSS41" gate="G$1" pin="VSS"/>
 <wire x1="261.62" y1="-106.68" x2="256.54" y2="-106.68" width="0.1524" layer="91"/>
 <junction x="261.62" y="-106.68"/>
+<junction x="256.54" y="-106.68"/>
 </segment>
 <segment>
 <pinref part="DIN" gate="-9" pin="S"/>
@@ -18480,11 +18485,6 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="VSS71" gate="G$1" pin="VSS"/>
 </segment>
 <segment>
-<pinref part="C36" gate="G$1" pin="2"/>
-<pinref part="VSS72" gate="G$1" pin="VSS"/>
-<junction x="71.12" y="-175.26"/>
-</segment>
-<segment>
 <pinref part="C37" gate="G$1" pin="2"/>
 <pinref part="VSS73" gate="G$1" pin="VSS"/>
 <junction x="-154.94" y="116.84"/>
@@ -18520,6 +18520,11 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="R17" gate="G$1" pin="2"/>
 <pinref part="VSS79" gate="G$1" pin="VSS"/>
 <junction x="254" y="0"/>
+</segment>
+<segment>
+<pinref part="C36" gate="G$1" pin="2"/>
+<pinref part="VSS72" gate="G$1" pin="VSS"/>
+<junction x="71.12" y="-175.26"/>
 </segment>
 </net>
 <net name="+5V" class="1">
@@ -18609,14 +18614,16 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <junction x="-66.04" y="134.62"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="VIO"/>
-<wire x1="203.2" y1="-58.42" x2="180.34" y2="-58.42" width="0.1524" layer="91"/>
-<junction x="203.2" y="-58.42"/>
 <pinref part="C3" gate="G$1" pin="1"/>
-<wire x1="180.34" y1="-58.42" x2="175.26" y2="-58.42" width="0.1524" layer="91"/>
-<junction x="180.34" y="-58.42"/>
+<wire x1="167.64" y1="-58.42" x2="162.56" y2="-58.42" width="0.1524" layer="91"/>
 <pinref part="P+11" gate="VCC" pin="VCC"/>
-<junction x="175.26" y="-58.42"/>
+<junction x="162.56" y="-58.42"/>
+<wire x1="167.64" y1="-58.42" x2="185.42" y2="-58.42" width="0.1524" layer="91"/>
+<junction x="167.64" y="-58.42"/>
+<wire x1="185.42" y1="-58.42" x2="185.42" y2="-55.88" width="0.1524" layer="91"/>
+<pinref part="IC2" gate="G$1" pin="VCC"/>
+<wire x1="185.42" y1="-55.88" x2="203.2" y2="-55.88" width="0.1524" layer="91"/>
+<junction x="203.2" y="-55.88"/>
 </segment>
 <segment>
 <pinref part="DIN" gate="-10" pin="S"/>
@@ -19027,6 +19034,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <wire x1="246.38" y1="-106.68" x2="233.68" y2="-106.68" width="0.1524" layer="91"/>
 <pinref part="P+37" gate="1" pin="+24V"/>
 <junction x="246.38" y="-106.68"/>
+<junction x="248.92" y="-106.68"/>
 </segment>
 <segment>
 <pinref part="U2" gate="G$1" pin="VPWRB@2"/>
@@ -21034,8 +21042,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <approved hash="102,1,-58.42,91.44,VSS,GND,,,,"/>
 <approved hash="201,1,-58.42,91.44,VSS,VSS\, GND,,,,"/>
 <approved hash="104,1,203.2,-53.34,IC2,GND_1,VSS,,,"/>
-<approved hash="104,1,203.2,-55.88,IC2,VCC,VDD,,,"/>
-<approved hash="104,1,203.2,-58.42,IC2,VIO,VCC,,,"/>
+<approved hash="104,1,203.2,-58.42,IC2,VIO,VDD,,,"/>
 <approved hash="104,1,203.2,-71.12,IC2,GND_2,VSS,,,"/>
 <approved hash="104,1,233.68,-53.34,IC2,GND_8,VSS,,,"/>
 <approved hash="104,1,233.68,-55.88,IC2,GND_7,VSS,,,"/>
