@@ -2872,7 +2872,7 @@ design rules under a new name.</description>
 <pass name="Default">
 <param name="RoutingGrid" value="50mil"/>
 <param name="AutoGrid" value="1"/>
-<param name="Efforts" value="0"/>
+<param name="Efforts" value="2"/>
 <param name="TopRouterVariant" value="1"/>
 <param name="tpViaShape" value="round"/>
 <param name="PrefDir.1" value="a"/>
@@ -3860,7 +3860,6 @@ design rules under a new name.</description>
 <wire x1="19.05" y1="12.6492" x2="21.336" y2="10.3632" width="0.1778" layer="16"/>
 <wire x1="19.05" y1="12.6492" x2="19.05" y2="12.7" width="0.1778" layer="16"/>
 <via x="96.6216" y="30.2514" extent="1-16" drill="0.35"/>
-<via x="10.9728" y="58.5978" extent="1-16" drill="0.35"/>
 <via x="8.8392" y="64.77" extent="1-16" drill="0.35"/>
 <via x="10.1346" y="43.2054" extent="1-16" drill="0.35"/>
 <via x="19.431" y="26.5938" extent="1-16" drill="0.35"/>
@@ -4181,14 +4180,6 @@ design rules under a new name.</description>
 <wire x1="6.3246" y1="56.1594" x2="6.6294" y2="56.4642" width="0.127" layer="16"/>
 <wire x1="6.3246" y1="53.34" x2="6.3246" y2="56.1594" width="0.127" layer="16"/>
 <wire x1="6.9342" y1="56.4642" x2="6.9342" y2="58.4454" width="0.127" layer="16"/>
-<wire x1="3.429" y1="63.4746" x2="7.9248" y2="63.4746" width="0.127" layer="1"/>
-<wire x1="1.905" y1="61.9506" x2="3.429" y2="63.4746" width="0.127" layer="1"/>
-<wire x1="0.0762" y1="61.9506" x2="1.905" y2="61.9506" width="0.127" layer="1"/>
-<wire x1="-0.4572" y1="61.4172" x2="0.0762" y2="61.9506" width="0.127" layer="1"/>
-<wire x1="-0.4572" y1="60.5028" x2="-0.4572" y2="61.4172" width="0.127" layer="1"/>
-<wire x1="0.6096" y1="59.436" x2="-0.4572" y2="60.5028" width="0.127" layer="1"/>
-<wire x1="6.0198" y1="59.436" x2="0.6096" y2="59.436" width="0.127" layer="1"/>
-<wire x1="6.9342" y1="58.5216" x2="6.0198" y2="59.436" width="0.127" layer="1"/>
 <wire x1="7.9248" y1="63.4746" x2="7.94" y2="63.5" width="0.127" layer="1"/>
 <wire x1="6.9342" y1="58.5216" x2="6.9342" y2="58.4454" width="0.127" layer="1"/>
 <wire x1="9.0678" y1="37.0332" x2="9.0678" y2="40.2336" width="0.127" layer="1"/>
@@ -4235,6 +4226,7 @@ design rules under a new name.</description>
 <wire x1="78.86065" y1="16.6243" x2="78.867" y2="16.6878" width="0.127" layer="16"/>
 <wire x1="74.52995" y1="12.1539" x2="74.5236" y2="12.1158" width="0.127" layer="1"/>
 <via x="74.8792" y="13.4112" extent="1-16" drill="0.35"/>
+<wire x1="6.9342" y1="58.5216" x2="7.9248" y2="63.4746" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VSS" class="1">
 <contactref element="C1" pad="2"/>
@@ -5298,8 +5290,6 @@ design rules under a new name.</description>
 </signal>
 <signal name="RPC1">
 <contactref element="IC1" pad="33"/>
-<wire x1="11.6586" y1="57.7596" x2="11.1252" y2="57.7596" width="0.127" layer="1"/>
-<wire x1="20.4216" y1="48.9966" x2="11.6586" y2="57.7596" width="0.127" layer="1"/>
 <wire x1="20.4216" y1="36.2712" x2="20.4216" y2="48.9966" width="0.127" layer="1"/>
 <wire x1="21.1074" y1="35.5854" x2="20.4216" y2="36.2712" width="0.127" layer="1"/>
 <wire x1="21.1074" y1="33.3756" x2="21.1074" y2="35.5854" width="0.127" layer="1"/>
@@ -5312,15 +5302,11 @@ design rules under a new name.</description>
 <via x="21.1074" y="33.3756" extent="1-16" drill="0.35"/>
 <via x="28.8036" y="23.241" extent="1-16" drill="0.35"/>
 <contactref element="QEI" pad="5"/>
-<wire x1="6.07695" y1="58.3946" x2="1.32715" y2="58.3946" width="0.127" layer="1"/>
-<wire x1="6.7056" y1="57.76595" x2="6.07695" y2="58.3946" width="0.127" layer="1"/>
-<wire x1="11.10615" y1="57.76595" x2="6.7056" y2="57.76595" width="0.127" layer="1"/>
 <wire x1="1.32715" y1="58.3946" x2="1.27" y2="58.42" width="0.127" layer="1"/>
-<wire x1="11.10615" y1="57.76595" x2="11.1252" y2="57.7596" width="0.127" layer="1"/>
+<wire x1="20.4216" y1="48.9966" x2="1.32715" y2="58.3946" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RPC10">
 <contactref element="IC1" pad="71"/>
-<wire x1="20.7264" y1="49.911" x2="10.5918" y2="60.0456" width="0.127" layer="1"/>
 <wire x1="20.7264" y1="40.4622" x2="20.7264" y2="49.911" width="0.127" layer="1"/>
 <wire x1="22.2504" y1="38.9382" x2="20.7264" y2="40.4622" width="0.127" layer="1"/>
 <wire x1="23.0886" y1="38.9382" x2="22.2504" y2="38.9382" width="0.127" layer="15"/>
@@ -5336,7 +5322,7 @@ design rules under a new name.</description>
 <via x="33.3756" y="27.8892" extent="1-16" drill="0.35"/>
 <contactref element="QEI" pad="6"/>
 <wire x1="1.32715" y1="60.9092" x2="1.27" y2="60.96" width="0.127" layer="1"/>
-<wire x1="1.32715" y1="60.9092" x2="10.5918" y2="60.0456" width="0" layer="19" extent="1-1"/>
+<wire x1="1.32715" y1="60.9092" x2="20.7264" y2="49.911" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RPB7">
 <contactref element="U$1" pad="CH_L"/>

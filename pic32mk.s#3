@@ -18485,11 +18485,6 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="VSS71" gate="G$1" pin="VSS"/>
 </segment>
 <segment>
-<pinref part="C36" gate="G$1" pin="2"/>
-<pinref part="VSS72" gate="G$1" pin="VSS"/>
-<junction x="71.12" y="-175.26"/>
-</segment>
-<segment>
 <pinref part="C37" gate="G$1" pin="2"/>
 <pinref part="VSS73" gate="G$1" pin="VSS"/>
 <junction x="-154.94" y="116.84"/>
@@ -18525,6 +18520,11 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="R17" gate="G$1" pin="2"/>
 <pinref part="VSS79" gate="G$1" pin="VSS"/>
 <junction x="254" y="0"/>
+</segment>
+<segment>
+<pinref part="C36" gate="G$1" pin="2"/>
+<pinref part="VSS72" gate="G$1" pin="VSS"/>
+<junction x="71.12" y="-175.26"/>
 </segment>
 </net>
 <net name="+5V" class="1">
