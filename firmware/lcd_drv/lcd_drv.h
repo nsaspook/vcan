@@ -50,6 +50,7 @@ extern "C" {
 #define bmp_x		60		// screen positions of image
 #define bmp_y		24
 #define bmp_size	100		// x,y size of image
+#define	BANK2		0xA0030000	// bank 2 frame buffer memory address to reduce memory contention
 
 	typedef enum {
 		D_INIT,

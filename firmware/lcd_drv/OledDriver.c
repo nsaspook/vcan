@@ -103,12 +103,12 @@ uint8_t * pbOledFontUser;
  * DMA2 SPI TX transfers CMD
  * DMA1 GLCD buffer transfers
  */
-uint8_t __attribute__((coherent)) rgbOledBmp0[cbOledDispMax]; // two display buffers for page flipping
-uint8_t __attribute__((coherent)) rgbOledBmp1[cbOledDispMax];
+uint8_t __attribute__((address(BANK2), coherent)) rgbOledBmp0[cbOledDispMax]; // two display buffers for page flipping
+uint8_t __attribute__((address(BANK2 + cbOledDispMax), coherent)) rgbOledBmp1[cbOledDispMax];
 #ifdef USE_DMA
-static uint8_t __attribute__((coherent)) rgbOledBmp_blank[4] = {0x00, 0x00, 0x00, 0x00}; // 32-bit frame-buffer clearing variable
+static uint8_t __attribute__((address(BANK2 - 8), coherent)) rgbOledBmp_blank[4] = {0x00, 0x00, 0x00, 0x00}; // 32-bit frame-buffer clearing variable
 #endif
-volatile uint8_t __attribute__((coherent)) rgbOledBmp_page[5];
+volatile uint8_t __attribute__((address(BANK2 - 16), coherent)) rgbOledBmp_page[5];
 
 static volatile DMA_RUN_STATE dstate = D_idle;
 
@@ -480,7 +480,8 @@ void OledClearBuffer(void)
 	/*
 	 * DMAC_ChannelCallbackRegister in OledInit
 	 */
-	while (dstate != D_idle){};
+	while (dstate != D_idle) {
+	};
 	wait_lcd_done();
 	/* setup the source and destination parms */
 	DMAC_ChannelTransfer(DMAC_CHANNEL_1, (const void *) rgbOledBmp_blank, (size_t) 4, (const void*) pb, (size_t) cbOledDispMax, (size_t) cbOledDispMax);
@@ -705,9 +706,12 @@ uint16_t SPI3_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 void wait_lcd_done(void)
 {
 #ifdef USE_DMA
-	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0)){};
-	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_1)){};
-	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_2)){};
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_0)) {
+	};
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_1)) {
+	};
+	while (DMAC_ChannelIsBusy(DMAC_CHANNEL_2)) {
+	};
 #endif
 #ifdef USE_INT
 	while (SPI3_IsBusy());
