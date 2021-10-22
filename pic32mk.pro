@@ -1,25 +1,25 @@
 EAGLE AutoRouter Statistics:
 
-Job           : /fred/vcan/pic32mk.brd
+Job           : /root/vcan/pic32mk.brd
 
-Start at      : 16:21:47 (10/20/21)
-End at        : 16:22:31 (10/20/21)
-Elapsed time  : 00:00:13
+Start at      : 08:44:34 (10/21/21)
+End at        : 08:49:34 (10/21/21)
+Elapsed time  : 00:04:54
 
-Signals       :   146   RoutingGrid: 2.75 mil  Layers: 4
-Connections   :   449   predefined:  449 ( 222 Vias )
+Signals       :   140   RoutingGrid: 2.75 mil  Layers: 4
+Connections   :   425   predefined:  422 ( 225 Vias )
 
 Router memory :   15682368
 
-Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4
+Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4 Optimize5 Optimize6 Optimize7 Optimize8 Optimize9Optimize10Optimize11Optimize12
 
-Time per pass     :  00:00:00  00:00:01  00:00:03  00:00:03  00:00:03  00:00:03
-Number of Ripups  :         0         0         0         0         0         0
-max. Level        :         0         0         0         0         0         0
-max. Total        :         0         0         0         0         0         0
+Time per pass     :  00:04:15  00:00:01  00:00:03  00:00:04  00:00:03  00:00:03  00:00:03  00:00:03  00:00:03  00:00:03  00:00:03  00:00:04  00:00:03  00:00:03
+Number of Ripups  :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
+max. Level        :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
+max. Total        :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
 
-Routed            :         0         0         0         0         0         0
-Vias              :         0         0         0         0         0         0
-Resolution        :   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
+Routed            :         2         3         3         3         3         3         3         3         3         3         3         3         3         3
+Vias              :         0         0         0         0         0         0         0         0         0         0         0         0         0         0
+Resolution        :    99.8 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
 Final             : 100.0% finished
