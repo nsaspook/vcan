@@ -7,6 +7,7 @@
  * displays much of the code is unused and will eventully be removed
  * after functional testing is complete.
  * FGB 10/15/2021
+ * uses SPI3 with a 30MHz clock for the LCD chip. 
  */
 static volatile uint8_t NOPER = 0;
 

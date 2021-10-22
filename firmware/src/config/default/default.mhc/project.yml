@@ -6,13 +6,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: E00F212392A4829CF7647EC571D524BF
+- generatedChecksum: B51A8C8539E338DD7EAC576DA853342E
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: E00F212392A4829CF7647EC571D524BF
+  userChecksum: B51A8C8539E338DD7EAC576DA853342E
 - generatedChecksum: 3BC2252135E1630017CF278DDCF3226D
   logicalPath: config/default
   name: interrupts.c
@@ -111,13 +111,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 2ECABC436DDB8F584D914FF4F25D3975
-- generatedChecksum: E3FE4B5B89491E6E8F955757D5E36143
+- generatedChecksum: A4E989D44396CC8FA1AFC23ED327780C
   logicalPath: config/default/peripheral/spi/spi_master
   name: plib_spi3_master.c
   physicalPath: peripheral/spi/spi_master
   security: NON_SECURE
   type: SOURCE
-  userChecksum: E3FE4B5B89491E6E8F955757D5E36143
+  userChecksum: A4E989D44396CC8FA1AFC23ED327780C
 - generatedChecksum: 486993F80882C945265A2F5A9E19B298
   logicalPath: config/default/peripheral/tmr1
   name: plib_tmr1.c
@@ -174,13 +174,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 7806B30ECAE0D18D08CD583D8775530D
-- generatedChecksum: 0E26104585CF233F7424B037CAEDE184
+- generatedChecksum: 8C8C7CB9547EAC9B5BC9DE1CFB559283
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 0E26104585CF233F7424B037CAEDE184
+  userChecksum: 8C8C7CB9547EAC9B5BC9DE1CFB559283
 - generatedChecksum: E189C26B2269F8DE46033CCD0621958D
   logicalPath: config/default
   name: device.h
