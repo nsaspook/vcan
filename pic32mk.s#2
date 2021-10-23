@@ -16258,6 +16258,67 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="wirepad" urn="urn:adsk.eagle:library:412">
+<description>&lt;b&gt;Single Pads&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="1,6/0,8" urn="urn:adsk.eagle:footprint:30809/1" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<wire x1="-0.762" y1="0.762" x2="-0.508" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="-0.762" y1="0.762" x2="-0.762" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="0.762" x2="0.762" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="0.762" x2="0.508" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="-0.508" x2="0.762" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="0.762" y1="-0.762" x2="0.508" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="-0.508" y1="-0.762" x2="-0.762" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="-0.762" y1="-0.762" x2="-0.762" y2="-0.508" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.635" width="0.1524" layer="51"/>
+<pad name="1" x="0" y="0" drill="0.8128" diameter="1.6002" shape="octagon"/>
+<text x="-0.762" y="1.016" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="0.6" size="0.0254" layer="27">&gt;VALUE</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="1,6/0,8" urn="urn:adsk.eagle:package:30830/1" type="box" library_version="2">
+<description>THROUGH-HOLE PAD</description>
+<packageinstances>
+<packageinstance name="1,6/0,8"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="PAD" urn="urn:adsk.eagle:symbol:30808/1" library_version="2">
+<wire x1="-1.016" y1="1.016" x2="1.016" y2="-1.016" width="0.254" layer="94"/>
+<wire x1="-1.016" y1="-1.016" x2="1.016" y2="1.016" width="0.254" layer="94"/>
+<text x="-1.143" y="1.8542" size="1.778" layer="95">&gt;NAME</text>
+<text x="-1.143" y="-3.302" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="P" x="2.54" y="0" visible="off" length="short" direction="pas" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="1,6/0,8" urn="urn:adsk.eagle:component:30848/2" prefix="PAD" uservalue="yes" library_version="2">
+<description>&lt;b&gt;THROUGH-HOLE PAD&lt;/b&gt;</description>
+<gates>
+<gate name="P" symbol="PAD" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="1,6/0,8">
+<connects>
+<connect gate="P" pin="P" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:30830/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="15" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -16540,6 +16601,17 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <part name="VSS79" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 <part name="SUPPLY7" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="JP1" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2" value="SEL8"/>
+<part name="FAN1PWR" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="3.3"/>
+<part name="FAN2PWR" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="3.3"/>
+<part name="FAN2GRN" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="0"/>
+<part name="FAN1GRN" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="1,6/0,8" device="" package3d_urn="urn:adsk.eagle:package:30830/1" value="0"/>
+<part name="+3V4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="+3V5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
+<part name="VSS5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="VSS16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="GNDPINS" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2" value="0"/>
+<part name="VSS17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="REFOUT" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
 </parts>
 <sheets>
 <sheet>
@@ -17574,6 +17646,45 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <attribute name="NAME" x="-39.37" y="-17.145" size="1.778" layer="95"/>
 <attribute name="VALUE" x="-39.37" y="-27.94" size="1.778" layer="96"/>
 </instance>
+<instance part="FAN1PWR" gate="P" x="-116.84" y="124.46" smashed="yes">
+<attribute name="NAME" x="-117.983" y="126.3142" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-117.983" y="121.158" size="1.778" layer="96"/>
+</instance>
+<instance part="FAN2PWR" gate="P" x="-116.84" y="116.84" smashed="yes">
+<attribute name="NAME" x="-117.983" y="118.6942" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-117.983" y="113.538" size="1.778" layer="96"/>
+</instance>
+<instance part="FAN2GRN" gate="P" x="-99.06" y="116.84" smashed="yes">
+<attribute name="NAME" x="-100.203" y="118.6942" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-100.203" y="113.538" size="1.778" layer="96"/>
+</instance>
+<instance part="FAN1GRN" gate="P" x="-99.06" y="124.46" smashed="yes">
+<attribute name="NAME" x="-100.203" y="126.3142" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-100.203" y="121.158" size="1.778" layer="96"/>
+</instance>
+<instance part="+3V4" gate="G$1" x="-109.22" y="116.84" smashed="yes" rot="R270">
+<attribute name="VALUE" x="-109.22" y="114.3" size="1.778" layer="96"/>
+</instance>
+<instance part="+3V5" gate="G$1" x="-109.22" y="124.46" smashed="yes" rot="R270">
+<attribute name="VALUE" x="-109.22" y="121.92" size="1.778" layer="96"/>
+</instance>
+<instance part="VSS5" gate="G$1" x="-91.44" y="124.46" smashed="yes" rot="R90">
+<attribute name="VALUE" x="-86.36" y="121.92" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="VSS16" gate="G$1" x="-91.44" y="116.84" smashed="yes" rot="R90">
+<attribute name="VALUE" x="-86.36" y="114.3" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="GNDPINS" gate="G$1" x="-55.88" y="119.38" smashed="yes">
+<attribute name="NAME" x="-62.23" y="125.095" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-62.23" y="114.3" size="1.778" layer="96"/>
+</instance>
+<instance part="VSS17" gate="G$1" x="-68.58" y="116.84" smashed="yes">
+<attribute name="VALUE" x="-71.12" y="111.76" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="REFOUT" gate="G$1" x="5.08" y="-119.38" smashed="yes" rot="R90">
+<attribute name="NAME" x="11.43" y="-115.57" size="1.778" layer="95" rot="R180"/>
+<attribute name="TP_SIGNAL_NAME" x="6.35" y="-118.11" size="1.778" layer="97" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -18412,6 +18523,29 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="VSS72" gate="G$1" pin="VSS"/>
 <junction x="71.12" y="-175.26"/>
 </segment>
+<segment>
+<pinref part="FAN1GRN" gate="P" pin="P"/>
+<pinref part="VSS5" gate="G$1" pin="VSS"/>
+<wire x1="-93.98" y1="124.46" x2="-96.52" y2="124.46" width="0.1524" layer="91"/>
+<junction x="-96.52" y="124.46"/>
+<junction x="-93.98" y="124.46"/>
+</segment>
+<segment>
+<pinref part="FAN2GRN" gate="P" pin="P"/>
+<pinref part="VSS16" gate="G$1" pin="VSS"/>
+<wire x1="-93.98" y1="116.84" x2="-96.52" y2="116.84" width="0.1524" layer="91"/>
+<junction x="-96.52" y="116.84"/>
+<junction x="-93.98" y="116.84"/>
+</segment>
+<segment>
+<pinref part="GNDPINS" gate="G$1" pin="1"/>
+<wire x1="-58.42" y1="121.92" x2="-68.58" y2="121.92" width="0.1524" layer="91"/>
+<pinref part="GNDPINS" gate="G$1" pin="2"/>
+<wire x1="-68.58" y1="121.92" x2="-68.58" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="-68.58" y1="119.38" x2="-58.42" y2="119.38" width="0.1524" layer="91"/>
+<pinref part="VSS17" gate="G$1" pin="VSS"/>
+<junction x="-68.58" y="119.38"/>
+</segment>
 </net>
 <net name="+5V" class="1">
 <segment>
@@ -18601,6 +18735,20 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="C34" gate="G$1" pin="1"/>
 <junction x="-129.54" y="109.22"/>
 <junction x="-127" y="109.22"/>
+</segment>
+<segment>
+<pinref part="FAN2PWR" gate="P" pin="P"/>
+<pinref part="+3V4" gate="G$1" pin="+3V3"/>
+<wire x1="-111.76" y1="116.84" x2="-114.3" y2="116.84" width="0.1524" layer="91"/>
+<junction x="-114.3" y="116.84"/>
+<junction x="-111.76" y="116.84"/>
+</segment>
+<segment>
+<pinref part="FAN1PWR" gate="P" pin="P"/>
+<pinref part="+3V5" gate="G$1" pin="+3V3"/>
+<wire x1="-111.76" y1="124.46" x2="-114.3" y2="124.46" width="0.1524" layer="91"/>
+<junction x="-114.3" y="124.46"/>
+<junction x="-111.76" y="124.46"/>
 </segment>
 </net>
 <net name="GND" class="1">
@@ -20428,6 +20576,8 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="IC1" gate="G$1" pin="VREF+/AN34/CVD34/PMPA6/RF10"/>
 <junction x="63.5" y="-88.9"/>
 <wire x1="63.5" y1="-88.9" x2="63.5" y2="-86.36" width="0.1524" layer="91"/>
+<pinref part="REFOUT" gate="G$1" pin="TP"/>
+<junction x="7.62" y="-119.38"/>
 </segment>
 <segment>
 <pinref part="J1" gate="G$1" pin="4"/>
@@ -20661,7 +20811,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <label x="-99.06" y="58.42" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$16" class="0">
+<net name="SPIVOLTS" class="0">
 <segment>
 <pinref part="SPI" gate="-7" pin="S"/>
 <wire x1="-104.14" y1="71.12" x2="-132.08" y2="71.12" width="0.1524" layer="91"/>

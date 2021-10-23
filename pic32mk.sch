@@ -16609,6 +16609,10 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <part name="+3V5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="VSS5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 <part name="VSS16" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="GNDPINS" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2" value="0"/>
+<part name="VSS17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
+<part name="REFOUT" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
+<part name="TPRESET" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
 </parts>
 <sheets>
 <sheet>
@@ -16675,7 +16679,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <attribute name="VALUE" x="246.38" y="27.94" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="RESET" gate="G$1" x="-73.66" y="7.62" smashed="yes">
-<attribute name="NAME" x="-57.15" y="15.24" size="1.778" layer="95" align="center-left"/>
+<attribute name="NAME" x="-82.55" y="7.62" size="1.778" layer="95" align="center-left"/>
 <attribute name="VALUE" x="-57.15" y="12.7" size="1.778" layer="96" align="center-left"/>
 </instance>
 <instance part="VSS6" gate="G$1" x="-83.82" y="2.54" smashed="yes">
@@ -17671,6 +17675,21 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <instance part="VSS16" gate="G$1" x="-91.44" y="116.84" smashed="yes" rot="R90">
 <attribute name="VALUE" x="-86.36" y="114.3" size="1.778" layer="96" rot="R180"/>
 </instance>
+<instance part="GNDPINS" gate="G$1" x="-55.88" y="119.38" smashed="yes">
+<attribute name="NAME" x="-62.23" y="125.095" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-62.23" y="114.3" size="1.778" layer="96"/>
+</instance>
+<instance part="VSS17" gate="G$1" x="-68.58" y="116.84" smashed="yes">
+<attribute name="VALUE" x="-71.12" y="111.76" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="REFOUT" gate="G$1" x="5.08" y="-119.38" smashed="yes" rot="R90">
+<attribute name="NAME" x="11.43" y="-115.57" size="1.778" layer="95" rot="R180"/>
+<attribute name="TP_SIGNAL_NAME" x="6.35" y="-118.11" size="1.778" layer="97" rot="R90"/>
+</instance>
+<instance part="TPRESET" gate="G$1" x="-55.88" y="10.16" smashed="yes" rot="R90">
+<attribute name="NAME" x="-57.15" y="16.51" size="1.778" layer="95" rot="R180"/>
+<attribute name="TP_SIGNAL_NAME" x="-54.61" y="11.43" size="1.778" layer="97" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -17688,6 +17707,8 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <wire x1="-53.34" y1="10.16" x2="-53.34" y2="7.62" width="0.1524" layer="91"/>
 <junction x="-53.34" y="7.62"/>
 <label x="-35.56" y="20.32" size="1.778" layer="95"/>
+<pinref part="TPRESET" gate="G$1" pin="TP"/>
+<junction x="-53.34" y="10.16"/>
 </segment>
 <segment>
 <pinref part="JP4" gate="A" pin="4"/>
@@ -18522,6 +18543,15 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <wire x1="-93.98" y1="116.84" x2="-96.52" y2="116.84" width="0.1524" layer="91"/>
 <junction x="-96.52" y="116.84"/>
 <junction x="-93.98" y="116.84"/>
+</segment>
+<segment>
+<pinref part="GNDPINS" gate="G$1" pin="1"/>
+<wire x1="-58.42" y1="121.92" x2="-68.58" y2="121.92" width="0.1524" layer="91"/>
+<pinref part="GNDPINS" gate="G$1" pin="2"/>
+<wire x1="-68.58" y1="121.92" x2="-68.58" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="-68.58" y1="119.38" x2="-58.42" y2="119.38" width="0.1524" layer="91"/>
+<pinref part="VSS17" gate="G$1" pin="VSS"/>
+<junction x="-68.58" y="119.38"/>
 </segment>
 </net>
 <net name="+5V" class="1">
@@ -20553,6 +20583,8 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <pinref part="IC1" gate="G$1" pin="VREF+/AN34/CVD34/PMPA6/RF10"/>
 <junction x="63.5" y="-88.9"/>
 <wire x1="63.5" y1="-88.9" x2="63.5" y2="-86.36" width="0.1524" layer="91"/>
+<pinref part="REFOUT" gate="G$1" pin="TP"/>
+<junction x="7.62" y="-119.38"/>
 </segment>
 <segment>
 <pinref part="J1" gate="G$1" pin="4"/>
