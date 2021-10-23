@@ -1054,14 +1054,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '1.5625'}
+        attributes: {id: adchs, value: '31.25'}
   - type: Float
     attributes: {id: ADCHS_CONV_RATE1}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '0.5'}
+        attributes: {id: adchs, value: '10.0'}
   - type: Float
     attributes: {id: ADCHS_CONV_RATE2}
     children:
@@ -1074,7 +1074,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '1.5625'}
+        attributes: {id: adchs, value: '31.25'}
   - type: Float
     attributes: {id: ADCHS_CONV_RATE3}
     children:
@@ -1087,7 +1087,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '1.5625'}
+        attributes: {id: adchs, value: '31.25'}
   - type: Float
     attributes: {id: ADCHS_CONV_RATE4}
     children:
@@ -1100,7 +1100,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '1.5625'}
+        attributes: {id: adchs, value: '31.25'}
   - type: Float
     attributes: {id: ADCHS_CONV_RATE5}
     children:
@@ -1113,7 +1113,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '1.5625'}
+        attributes: {id: adchs, value: '31.25'}
   - type: Float
     attributes: {id: ADCHS_CONV_RATE7}
     children:
@@ -1126,7 +1126,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '1.0'}
+        attributes: {id: adchs, value: '20.0'}
   - type: String
     attributes: {id: ADCHS_DMA_STATUS_REG}
     children:
@@ -1167,14 +1167,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '40000.0'}
+        attributes: {id: adchs, value: '2000.0'}
   - type: Float
     attributes: {id: ADCHS_TADC1}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '80000.0'}
+        attributes: {id: adchs, value: '4000.0'}
   - type: Float
     attributes: {id: ADCHS_TADC2}
     children:
@@ -1187,7 +1187,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '40000.0'}
+        attributes: {id: adchs, value: '2000.0'}
   - type: Float
     attributes: {id: ADCHS_TADC3}
     children:
@@ -1200,7 +1200,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '40000.0'}
+        attributes: {id: adchs, value: '2000.0'}
   - type: Float
     attributes: {id: ADCHS_TADC4}
     children:
@@ -1213,7 +1213,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '40000.0'}
+        attributes: {id: adchs, value: '2000.0'}
   - type: Float
     attributes: {id: ADCHS_TADC5}
     children:
@@ -1226,7 +1226,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '40000.0'}
+        attributes: {id: adchs, value: '2000.0'}
   - type: Float
     attributes: {id: ADCHS_TADC7}
     children:
@@ -1239,21 +1239,21 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '40000.0'}
+        attributes: {id: adchs, value: '2000.0'}
   - type: Float
     attributes: {id: ADCHS_TCLK}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '2500.0'}
+        attributes: {id: adchs, value: '125.0'}
   - type: Float
     attributes: {id: ADCHS_TQ}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: adchs, value: '20000.0'}
+        attributes: {id: adchs, value: '1000.0'}
   - type: Boolean
     attributes: {id: ADCIMCON1__DIFF1}
     children:

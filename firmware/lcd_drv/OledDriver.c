@@ -103,12 +103,14 @@ uint8_t * pbOledFontUser;
  * DMA2 SPI TX transfers CMD
  * DMA1 GLCD buffer transfers
  */
+#ifdef __32MK1024MCM100_H	// bank 2 for this CPU
 uint8_t __attribute__((address(BANK2), coherent)) rgbOledBmp0[cbOledDispMax]; // two display buffers for page flipping
 uint8_t __attribute__((address(BANK2 + cbOledDispMax), coherent)) rgbOledBmp1[cbOledDispMax];
 #ifdef USE_DMA
 static uint8_t __attribute__((address(BANK2 - 8), coherent)) rgbOledBmp_blank[4] = {0x00, 0x00, 0x00, 0x00}; // 32-bit frame-buffer clearing variable
 #endif
 volatile uint8_t __attribute__((address(BANK2 - 16), coherent)) rgbOledBmp_page[5];
+#endif
 
 static volatile DMA_RUN_STATE dstate = D_idle;
 

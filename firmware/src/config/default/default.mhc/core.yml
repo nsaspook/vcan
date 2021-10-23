@@ -17,7 +17,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '400000'}
+        attributes: {id: core, value: '8000000'}
   - type: Boolean
     attributes: {id: ADC_DATA11_INTERRUPT_ENABLE}
     children:
@@ -5968,7 +5968,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '6000000'}
+        attributes: {id: core, value: '120000000'}
   - type: String
     attributes: {id: REFO3TRIM_VALUE}
     children:
@@ -6031,7 +6031,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '3000000'}
+        attributes: {id: core, value: '60000000'}
   - type: Boolean
     attributes: {id: RTCC_INTERRUPT_ENABLE_UPDATE}
     children:

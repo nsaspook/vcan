@@ -4,10 +4,10 @@
 
 
 project: vcan
-creation_date: 2021-10-21T20:00:21.872-07:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2021-10-22T20:56:39.248-07:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Linux
 mhc_mode: IDE            # [IDE|Standalone|Headless]
-mhc_version: v3.8.1
+mhc_version: v3.8.2
 mplabx_version: v5.50        # if MPLAB X plugin only
 plugin_version: v3.6.4        # if MPLAB X plugin only
 compiler: XC32 (3.01)
