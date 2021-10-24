@@ -71,7 +71,7 @@ IC = M * sin (? + 240)
 #include "PetitModbus/PetitModbus.h"
 
 const char *build_date = __DATE__, *build_time = __TIME__;
-char buffer[STR_BUF_SIZE];
+static char buffer[STR_BUF_SIZE];
 extern t_cli_ctx cli_ctx; // command buffer 
 
 volatile struct QEI_DATA m35_1 = {
@@ -137,9 +137,9 @@ volatile struct SPid velocity_pi = {
 volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, u_total = 0, current_error, an_data[NUM_AN];
 volatile uint16_t tickCount[TMR_COUNT];
 
-time_t rawtime;
-volatile time_t t1_time;
-struct tm * timeinfo;
+static time_t rawtime;
+static volatile time_t t1_time;
+static struct tm * timeinfo;
 
 volatile struct V_type V = {
 	.StartTime = 1,
