@@ -135,7 +135,11 @@ int8_t controller_work(void)
 		 */
 		switch (modbus_command) {
 		case G_SET: // write code request
-			rvalue.value = i400_pwm;
+			if (SIG4) {
+				rvalue.value = i400_pwm;
+			} else {
+				rvalue.value = 0;
+			}
 			modbus_cc_freset[4] = rvalue.bytes[1];
 			modbus_cc_freset[5] = rvalue.bytes[0];
 			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));

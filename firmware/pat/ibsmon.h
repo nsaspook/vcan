@@ -88,7 +88,7 @@ union MREG {
 
 #define IBSPORTA	TRISA
 #define IBSPORTB	TRISB
-#define IBSPORT_IOA	0b00001100		//
+#define IBSPORT_IOA	0b01001100		//
 #define IBSPORT_IOB	0b00010010		// RS-232 receive on B4
 
 #define MADDR		0x04 // modbus i400hz client address
