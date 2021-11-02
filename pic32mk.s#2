@@ -16612,6 +16612,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <part name="GNDPINS" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2" value="0"/>
 <part name="VSS17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VSS" device=""/>
 <part name="REFOUT" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
+<part name="TPRESET" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
 </parts>
 <sheets>
 <sheet>
@@ -16678,7 +16679,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <attribute name="VALUE" x="246.38" y="27.94" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="RESET" gate="G$1" x="-73.66" y="7.62" smashed="yes">
-<attribute name="NAME" x="-57.15" y="15.24" size="1.778" layer="95" align="center-left"/>
+<attribute name="NAME" x="-82.55" y="7.62" size="1.778" layer="95" align="center-left"/>
 <attribute name="VALUE" x="-57.15" y="12.7" size="1.778" layer="96" align="center-left"/>
 </instance>
 <instance part="VSS6" gate="G$1" x="-83.82" y="2.54" smashed="yes">
@@ -17685,6 +17686,10 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <attribute name="NAME" x="11.43" y="-115.57" size="1.778" layer="95" rot="R180"/>
 <attribute name="TP_SIGNAL_NAME" x="6.35" y="-118.11" size="1.778" layer="97" rot="R90"/>
 </instance>
+<instance part="TPRESET" gate="G$1" x="-55.88" y="10.16" smashed="yes" rot="R90">
+<attribute name="NAME" x="-57.15" y="16.51" size="1.778" layer="95" rot="R180"/>
+<attribute name="TP_SIGNAL_NAME" x="-54.61" y="11.43" size="1.778" layer="97" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -17702,6 +17707,8 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <wire x1="-53.34" y1="10.16" x2="-53.34" y2="7.62" width="0.1524" layer="91"/>
 <junction x="-53.34" y="7.62"/>
 <label x="-35.56" y="20.32" size="1.778" layer="95"/>
+<pinref part="TPRESET" gate="G$1" pin="TP"/>
+<junction x="-53.34" y="10.16"/>
 </segment>
 <segment>
 <pinref part="JP4" gate="A" pin="4"/>

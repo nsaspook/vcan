@@ -20786,7 +20786,7 @@ http://www.fairchildsemi.com/ds/LM/LM7805.pdf</description>
 <label x="-99.06" y="58.42" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$16" class="0">
+<net name="SPIVOLTS" class="0">
 <segment>
 <pinref part="SPI" gate="-7" pin="S"/>
 <wire x1="-104.14" y1="71.12" x2="-132.08" y2="71.12" width="0.1524" layer="91"/>
