@@ -4,7 +4,7 @@
  * This 'driver'is a merge of two  libs so it's a bit of a jumble
  * with hardware specific statements in at least two source files.
  * Because the PIC32MK version will likely only be used with graphic
- * displays much of the code is unused and will eventully be removed
+ * displays much of the code is unused and will one-day be removed
  * after functional testing is complete.
  * FGB 10/15/2021
  * uses SPI3 with a 30MHz clock for the LCD chip. 
@@ -22,7 +22,7 @@ void init_lcd_drv(LCD_DVR_STATE init_type)
 #endif
 #ifdef EDOGS
 		SPI_EN1_Set();
-		wdtdelay(IS_DELAYPOWERUP); // > 400ms power up delay
+		dmtdelay(IS_DELAYPOWERUP); // > 400ms power up delay
 		lcd_init();
 		OledInit();
 		OledSetCharUpdate(0); // manual LCD screen updates for speed

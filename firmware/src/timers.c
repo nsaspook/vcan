@@ -60,6 +60,7 @@ void timer_ms_tick(uint32_t status, uintptr_t context)
 
 /*
  * microsecond busy wait delay, 90 seconds MAX
+ * Careful, uses core timer
  */
 void delay_us(uint32_t us)
 {
@@ -74,5 +75,5 @@ void delay_us(uint32_t us)
 
 void delay_ms(uint32_t ms)
 {
-	delay_us(ms * 1000);
+	WaitMs(ms);
 }

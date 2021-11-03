@@ -152,6 +152,7 @@ volatile struct V_type V = {
 	.motor_speed = MOTOR_SPEED,
 	.fault_active = false,
 	.fault_count = 0,
+	.dmt_sosc_flag = false,
 };
 double mHz = 0.0, mHz_real = 0.0, sr_slip = 0.0, mHz_raw = 0.0, mHz_real_raw = 0.0;
 double pi_current_error = 0.0, pi_velocity_error = 0.0, pi_freq_error = 0.0;
@@ -254,6 +255,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	V.pwm_update = true;
 
 	V.TimeUsed = (uint32_t) _CP0_GET_COUNT() - V.StartTime;
+	_CP0_SET_COUNT(DMT_PWM_TIME); // Set Core Timer count
 	V.StartTime = (uint32_t) _CP0_GET_COUNT();
 	/*
 	 * load sinewave constants from three-phase 360 values per cycle lookup tables
@@ -299,6 +301,7 @@ void my_time(uint32_t status, uintptr_t context)
 	static bool once = true;
 
 	t1_time++;
+	V.dmt_sosc_flag = true;
 #ifdef G400HZ
 	PetitModBus_TimerValues(); // modbus time tick
 	/*
@@ -317,8 +320,10 @@ void my_time(uint32_t status, uintptr_t context)
 			V.fault_ticks = 0;
 			once = false;
 		} else {
-			U1_EN_Clear();
-			U2_EN_Clear();
+			if (!once) {
+				U1_EN_Clear();
+				U2_EN_Clear();
+			}
 		}
 	};
 #endif
@@ -401,7 +406,7 @@ int main(void)
 	BSP_LED1_Set();
 	BSP_LED2_Set();
 	BSP_LED3_Clear();
-	_CP0_SET_COUNT(0); // Set Core Timer count to 0
+	_CP0_SET_COUNT(DMT_PWM_TIME); // Set Core Timer count
 
 	/*
 	 * start the external switch handler
@@ -418,6 +423,11 @@ int main(void)
 	/*
 	 * software timers @1ms using 500ns ticks
 	 */
+	/*
+	 * make sure inverter power to h-bridge is off
+	 */
+	U1_EN_Clear();
+	U2_EN_Clear();
 	TMR6_CallbackRegister(timer_ms_tick, 0);
 	TMR6_Start();
 	TMR3_Stop();
@@ -489,6 +499,7 @@ int main(void)
 	StartTimer(TMR_DISPLAY, 500);
 	StartTimer(TMR_VEL, 1000);
 	StartTimer(TMR_ADC, 10);
+	StartTimer(TMR_DMT, DMT_UPDATE);
 
 	/* Start system tick timer */
 	CORETIMER_Start();
@@ -615,7 +626,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%4i:Drive    %4i F%2i %2i", m35_4.current, POS3CNT, V.fault_count, V.fault_ticks);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
-				sprintf(buffer, "%4i:D %5i %5i %5i  ", V.TimeUsed, m35_2.duty, m35_3.duty, m35_4.duty);
+				sprintf(buffer, "%4i:D %5i %5i %5i  ", DMT_ClearWindowStatusGet(), m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
 				sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[5].ActValue, (uint16_t) PetitRegisters[10].ActValue, (int16_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
 				eaDogM_WriteStringAtPos(9, 0, buffer);
@@ -639,10 +650,26 @@ int main(void)
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, BLINK_UPDATE);
 			RESET_LED_Toggle();
+		}
+		/*
+		 * timer based DMT shutdown
+		 */
+		if (TimerDone(TMR_DMT)) {
+			StartTimer(TMR_DMT, DMT_UPDATE);
 			/*
 			 * must be cleared within the instruction count window
 			 * simple fast repeats of DMT_Clear() will not work
 			 */
+			if (V.dmt_sosc_flag) {
+				DMT_Clear(); // clear the Dead Man Timer
+				V.dmt_sosc_flag = false;
+			}
+		}
+		/*
+		 * PWM interrupt loss shutdown using DMT
+		 */
+		if (!V.pwm_update && ((V.StartTime + DMT_PWM_TIME) < (uint32_t) _CP0_GET_COUNT())) {
+			UART3_Write((unsigned char *) " P\r\n", 4);
 			DMT_Clear(); // clear the Dead Man Timer
 		}
 	}

@@ -69,7 +69,7 @@ extern "C" {
 #ifdef HVDC_M
 #define MBLOCK			1600
 #define MIDLE			1500  // motor idle current
-#define MPCURRENT		3000  // setpoint for motor current
+#define MPCURRENT		2000  // setpoint for motor current
 #define motor_error_stop	ENCODER_PULSES_PER_REV/2000
 #define motor_volts		12000 // limits amount of current at max torque, TI motor and AC servo motor
 #define inverter_volts		6000  // max inverter voltage setting
@@ -165,7 +165,7 @@ extern "C" {
 		V_STATE vcan_state;
 		M_SPEED m_speed;
 		int32_t motor_speed;
-		volatile bool fault_active;
+		volatile bool fault_active, dmt_sosc_flag;
 		volatile UART_ERROR mb_error;
 	};
 
@@ -173,9 +173,11 @@ extern "C" {
 #define MOTOR1_INC	POS2CNT
 
 #define MOTOR_UPDATES	1	// main loop timer in ms
-#define DISPLAY_UPDATE	50
+#define DISPLAY_UPDATE	100
 #define ADC_UPDATE	25
 #define BLINK_UPDATE	1000
+#define DMT_UPDATE	1100	// DMT regular clearing timer in ms
+#define DMT_PWM_TIME	1800	// core timer cycles until DMT system shutdown
 
 #ifdef	__cplusplus
 }

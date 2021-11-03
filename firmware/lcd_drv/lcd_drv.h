@@ -45,7 +45,7 @@ extern "C" {
 #include "tests.h"
 #include "device.h"
 
-#define	DMT_INST_COUNT	3500000		// counts between DMT clears
+#define	DMT_INST_COUNT	1500000		// counts between DMT clears 3500000
 #define BMP_DELAY	20000000	// image display delay counts
 #define bmp_x		60		// screen positions of image
 #define bmp_y		24
