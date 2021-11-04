@@ -28,7 +28,7 @@ extern "C" {
 #define EDOGS
 
 	/*
-	 * DMA driver for DOGXL240 @20MHz SPI clock
+	 * DMA driver for DOGXL240 @15MHz SPI clock
 	 * 2021 XC32 and H3
 	 */
 

@@ -6,8 +6,8 @@
  * Because the PIC32MK version will likely only be used with graphic
  * displays much of the code is unused and will one-day be removed
  * after functional testing is complete.
- * FGB 10/15/2021
- * uses SPI3 with a 30MHz clock for the LCD chip. 
+ * 10/15/2021
+ * uses SPI3 with a 15MHz clock for the LCD chip. 
  */
 static volatile uint8_t NOPER = 0;
 
@@ -21,7 +21,7 @@ void init_lcd_drv(LCD_DVR_STATE init_type)
 		eaDogM_CursorOff();
 #endif
 #ifdef EDOGS
-		SPI_EN1_Set();
+		SPI_EN1_Set(); // select SPI GLCD display, DOGXL240 @15MHz SPI clock
 		dmtdelay(IS_DELAYPOWERUP); // > 400ms power up delay
 		lcd_init();
 		OledInit();
@@ -36,6 +36,9 @@ void init_lcd_drv(LCD_DVR_STATE init_type)
 	}
 }
 
+/*
+ * delay routine that clears the DMT in the required instruction count window
+ */
 void dmtdelay(const uint32_t delay)
 {
 	static uint32_t dcount;
