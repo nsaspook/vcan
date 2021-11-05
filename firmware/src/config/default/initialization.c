@@ -71,7 +71,7 @@
 
 /*** DEVCFG1 ***/
 #pragma config FNOSC =      SPLL
-#pragma config DMTINTV =    WIN_15_16
+#pragma config DMTINTV =    WIN_31_32
 #pragma config FSOSCEN =    OFF
 #pragma config IESO =       OFF
 #pragma config POSCMOD =    EC

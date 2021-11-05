@@ -129,6 +129,10 @@
 #define QEI2_E0_Get()               ((PORTE >> 9) & 0x1)
 #define QEI2_E0_PIN                  GPIO_PIN_RE9
 
+/*** Macros for FAST_AN1 pin ***/
+#define FAST_AN1_Get()               ((PORTA >> 1) & 0x1)
+#define FAST_AN1_PIN                  GPIO_PIN_RA1
+
 /*** Macros for DEBUGB0 pin ***/
 #define DEBUGB0_Set()               (LATBSET = (1<<0))
 #define DEBUGB0_Clear()             (LATBCLR = (1<<0))
@@ -138,16 +142,9 @@
 #define DEBUGB0_Get()               ((PORTB >> 0) & 0x1)
 #define DEBUGB0_PIN                  GPIO_PIN_RB0
 
-/*** Macros for qei2_index pin ***/
-#define qei2_index_Set()               (LATBSET = (1<<1))
-#define qei2_index_Clear()             (LATBCLR = (1<<1))
-#define qei2_index_Toggle()            (LATBINV= (1<<1))
-#define qei2_index_OutputEnable()      (TRISBCLR = (1<<1))
-#define qei2_index_InputEnable()       (TRISBSET = (1<<1))
-#define qei2_index_Get()               ((PORTB >> 1) & 0x1)
-#define qei2_index_PIN                  GPIO_PIN_RB1
-#define qei2_index_InterruptEnable()   (CNENBSET = (1<<1))
-#define qei2_index_InterruptDisable()  (CNENBCLR = (1<<1))
+/*** Macros for FAST_AN3 pin ***/
+#define FAST_AN3_Get()               ((PORTB >> 1) & 0x1)
+#define FAST_AN3_PIN                  GPIO_PIN_RB1
 
 /*** Macros for GPIO_RB2 pin ***/
 #define GPIO_RB2_Set()               (LATBSET = (1<<2))
@@ -575,7 +572,6 @@ typedef enum
 
 } GPIO_PIN;
 
-typedef  void (*GPIO_PIN_CALLBACK) ( GPIO_PIN pin, uintptr_t context);
 
 void GPIO_Initialize(void);
 
@@ -600,29 +596,6 @@ void GPIO_PortToggle(GPIO_PORT port, uint32_t mask);
 void GPIO_PortInputEnable(GPIO_PORT port, uint32_t mask);
 
 void GPIO_PortOutputEnable(GPIO_PORT port, uint32_t mask);
-
-void GPIO_PortInterruptEnable(GPIO_PORT port, uint32_t mask);
-
-void GPIO_PortInterruptDisable(GPIO_PORT port, uint32_t mask);
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Local Data types and Prototypes
-// *****************************************************************************
-// *****************************************************************************
-
-typedef struct {
-
-    /* target pin */
-    GPIO_PIN                 pin;
-
-    /* Callback for event on target pin*/
-    GPIO_PIN_CALLBACK        callback;
-
-    /* Callback Context */
-    uintptr_t               context;
-
-} GPIO_PIN_CALLBACK_OBJ;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -670,17 +643,6 @@ static inline void GPIO_PinOutputEnable(GPIO_PIN pin)
     GPIO_PortOutputEnable((GPIO_PORT)(pin>>4), 0x1 << (pin & 0xF));
 }
 
-#define GPIO_PinInterruptEnable(pin)       GPIO_PinIntEnable(pin, GPIO_INTERRUPT_ON_MISMATCH)
-#define GPIO_PinInterruptDisable(pin)      GPIO_PinIntDisable(pin)
-
-void GPIO_PinIntEnable(GPIO_PIN pin, GPIO_INTERRUPT_STYLE style);
-void GPIO_PinIntDisable(GPIO_PIN pin);
-
-bool GPIO_PinInterruptCallbackRegister(
-    GPIO_PIN pin,
-    const   GPIO_PIN_CALLBACK callBack,
-    uintptr_t context
-);
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

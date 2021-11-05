@@ -17,7 +17,7 @@ extern "C" {
 
 #define ADC_L	1930
 #define ADC_H	1990
-	
+
 	typedef enum {
 		FBA1 = 0,
 		FBB1,
@@ -26,6 +26,7 @@ extern "C" {
 		POT1,
 		POT2,
 		ANA1,
+		ANA3,
 		IVREF,
 		VBAT2,
 		TSENSOR,

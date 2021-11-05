@@ -1289,6 +1289,20 @@ children:
         attributes: {id: text}
         children:
         - {type: Value, value: '**** Trailing edge dead time is 0.625 uS ****'}
+  - type: Hex
+    attributes: {id: MCPWM_TRGCON2}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: mcpwm, value: '4224'}
+  - type: Hex
+    attributes: {id: MCPWM_TRGCON3}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: mcpwm, value: '4224'}
   - type: Integer
     attributes: {id: PDC10__PDC}
     children:
@@ -1857,5 +1871,61 @@ children:
       children:
       - type: User
         attributes: {value: '0'}
+  - type: Integer
+    attributes: {id: STRIG2__STRGCMP}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: Integer
+    attributes: {id: STRIG3__STRGCMP}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: KeyValueSet
+    attributes: {id: TRGCON2__DTM}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: KeyValueSet
+    attributes: {id: TRGCON2__TRGDIV}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: KeyValueSet
+    attributes: {id: TRGCON3__DTM}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: KeyValueSet
+    attributes: {id: TRGCON3__TRGDIV}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: Integer
+    attributes: {id: TRIG2__TRGCMP}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: Integer
+    attributes: {id: TRIG3__TRGCMP}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
 - type: ElementPosition
   attributes: {x: '167', y: '81', id: mcpwm}

@@ -17,7 +17,8 @@ void end_of_adc_scan(void)
 		u2bi = ADCHS_ChannelResultGet(ADCHS_CH23); // JP5 pin 7, AN23, FBB2/RG15
 		u1ai = ADCHS_ChannelResultGet(ADCHS_CH37); // JP5 pin 5, AN37, FBA1/RF12
 		u1bi = ADCHS_ChannelResultGet(ADCHS_CH36); // JP5 pin 4, AN36, FBB1/RF13
-		an_data[ANA1] = ADCHS_ChannelResultGet(ADCHS_CH1); // JP5 pin 14, AN1, ANA1/RA1
+//		an_data[ANA1] = ADCHS_ChannelResultGet(ADCHS_CH1); // JP5 pin 14, AN1, ANA1/RA1
+//		an_data[ANA3] = ADCHS_ChannelResultGet(ADCHS_CH3); // QEI pin 4, AN3, ANA3/RA3
 		an_data[POT1] = ADCHS_ChannelResultGet(ADCHS_CH11); // JP5 pin 2, AN11 POT1/RC11
 		an_data[POT2] = ADCHS_ChannelResultGet(ADCHS_CH17); // JP5 pin 11, AN17 POT2/RG8
 		an_data[IVREF] = ADCHS_ChannelResultGet(ADCHS_CH50); // IVREF 1.2V (internal AN50), extern vref+ 2.5-V REF3425

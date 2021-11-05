@@ -5,8 +5,12 @@
         <group>
             <file>file:/root/vcan/firmware/lcd_drv/lcd_drv.c</file>
             <file>file:/root/vcan/firmware/lcd_drv/OledDriver.c</file>
+            <file>file:/root/vcan/firmware/src/adc_scan.c</file>
             <file>file:/root/vcan/firmware/src/main.c</file>
+            <file>file:/root/vcan/firmware/src/config/default/interrupts.c</file>
             <file>file:/root/vcan/firmware/src/vcan.h</file>
+            <file>file:/root/vcan/firmware/src/adc_scan.h</file>
+            <file>file:/root/vcan/firmware/src/config/default/peripheral/adchs/plib_adchs.c</file>
             <file>file:/root/vcan/firmware/src/faults.c</file>
             <file>file:/root/vcan/firmware/lcd_drv/lcd_drv.h</file>
         </group>

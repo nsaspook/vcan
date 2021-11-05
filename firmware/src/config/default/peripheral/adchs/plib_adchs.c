@@ -50,6 +50,8 @@
 // *****************************************************************************
 // *****************************************************************************
 
+/* Object to hold callback function and context */
+ADCHS_CALLBACK_OBJECT ADCHS_CallbackObj[53];
 
 
 
@@ -57,16 +59,18 @@ void ADCHS_Initialize()
 {
     ADCCON1bits.ON = 0;
 ADC1CFG = DEVADC1;
-ADC1TIME = 0x302000a;
+ADC1TIME = 0x3010003;
+ADC3CFG = DEVADC3;
+ADC3TIME = 0x3010003;
     ADC7CFG = DEVADC7;
 
     ADCCON1 = 0x630000;
     ADCCON2 = 0xa0001;
-    ADCCON3 = 0x87002000;
+    ADCCON3 = 0x83006000;
 
     ADCTRGMODE = 0x0;
 
-    ADCTRG1 = 0x300; 
+    ADCTRG1 = 0xc000b00; 
     ADCTRG2 = 0x0; 
     ADCTRG3 = 0x3000000; 
     ADCTRG4 = 0x30000; 
@@ -82,13 +86,18 @@ ADC1TIME = 0x302000a;
     ADCIMCON4 = 0x0; 
 
     /* Input scan */
-    ADCCSS1 = 0x824802;
+    ADCCSS1 = 0x824800;
     ADCCSS2 = 0x240030; 
 
 
 
 
-
+/* Result interrupt enable */
+ADCGIRQEN1 = 0xa;
+ADCGIRQEN2 = 0x0;
+/* Interrupt Enable */
+IEC3SET = 0x2800;
+IEC4SET = 0x0;
 
 
 
@@ -101,6 +110,11 @@ ADC1TIME = 0x302000a;
     ADCANCONbits.ANEN1 = 1;      // Enable the clock to analog bias
     while(!ADCANCONbits.WKRDY1); // Wait until ADC is ready
     ADCCON3bits.DIGEN1 = 1;      // Enable ADC
+
+    /* ADC 3 */
+    ADCANCONbits.ANEN3 = 1;      // Enable the clock to analog bias
+    while(!ADCANCONbits.WKRDY3); // Wait until ADC is ready
+    ADCCON3bits.DIGEN3 = 1;      // Enable ADC
 
     /* ADC 7 */
     ADCANCONbits.ANEN7 = 1;      // Enable the clock to analog bias
@@ -216,6 +230,11 @@ uint16_t ADCHS_ChannelResultGet(ADCHS_CHANNEL_NUM channel)
 
 }
 
+void ADCHS_CallbackRegister(ADCHS_CHANNEL_NUM channel, ADCHS_CALLBACK callback, uintptr_t context)
+{
+    ADCHS_CallbackObj[channel].callback_fn = callback;
+    ADCHS_CallbackObj[channel].context = context;
+}
 
 
 
@@ -225,4 +244,24 @@ bool ADCHS_EOSStatusGet(void)
     return (bool)(ADCCON2bits.EOSRDY);
 }
 
+void ADC_DATA1_InterruptHandler(void)
+{
+    if (ADCHS_CallbackObj[1].callback_fn != NULL)
+    {
+      ADCHS_CallbackObj[1].callback_fn(ADCHS_CH1, ADCHS_CallbackObj[1].context);
+    }
+
+
+    IFS3CLR = _IFS3_AD1D1IF_MASK;
+}
+void ADC_DATA3_InterruptHandler(void)
+{
+    if (ADCHS_CallbackObj[3].callback_fn != NULL)
+    {
+      ADCHS_CallbackObj[3].callback_fn(ADCHS_CH3, ADCHS_CallbackObj[3].context);
+    }
+
+
+    IFS3CLR = _IFS3_AD1D3IF_MASK;
+}
 
