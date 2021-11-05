@@ -17,7 +17,6 @@ void StartTimer(const uint8_t timer, const uint16_t count)
 
 bool TimerDone(const uint8_t timer)
 {
-	//	ClrWdt(); // reset the WDT timer
 	if (tickCount[timer] == 0) { //Check if counted down to zero
 		return true; //then return true
 	}
@@ -45,13 +44,11 @@ void WaitMs(const uint16_t numMilliseconds)
  */
 void timer_ms_tick(uint32_t status, uintptr_t context)
 {
-	static uint8_t i;
-
 #ifdef G400HZ
 	//	start_adc_scan();
 #endif
 	//Decrement each software timer
-	for (i = 0; i < TMR_COUNT; i++) {
+	for (uint i = 0; i < TMR_COUNT; i++) {
 		if (tickCount[i] != 0) {
 			tickCount[i]--;
 		}

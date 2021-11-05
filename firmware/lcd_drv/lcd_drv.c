@@ -41,7 +41,7 @@ void init_lcd_drv(LCD_DVR_STATE init_type)
  */
 void dmtdelay(const uint32_t delay)
 {
-	static uint32_t dcount;
+	uint32_t dcount; // keep this static to force loop timing
 	uint32_t dmt_clear_count = DMT_INST_COUNT;
 
 	for (dcount = 0; dcount <= delay; dcount++) { // delay a bit

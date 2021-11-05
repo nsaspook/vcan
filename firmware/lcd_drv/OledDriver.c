@@ -158,19 +158,10 @@ void SPI3_Exchange8bit(uint8_t);
 
 void OledInit(void)
 {
-	/* Init the PIC32 peripherals used to talk to the display.
-	 */
-	OledHostInit();
-
 	/* Init the memory variables used to control access to the
 	 ** display.
 	 */
 	OledDvrInit();
-
-	/* Init the OLED display hardware.
-	 */
-	OledDevInit();
-
 	/*
 	 * init DMA
 	 */
@@ -463,7 +454,7 @@ void OledClear(void)
 void CBDmaChannelHandler(DMAC_TRANSFER_EVENT event, uintptr_t contextHandle)
 {
 	if (event == DMAC_TRANSFER_EVENT_COMPLETE) {
-		DEBUGB0_Clear();
+//		DEBUGB0_Clear();
 	}
 }
 
@@ -471,7 +462,6 @@ void OledClearBuffer(void)
 {
 	uint8_t * pb;
 
-	DEBUGB0_Set();
 	if (disp_frame) {
 		pb = rgbOledBmp0;
 	} else {
@@ -487,8 +477,6 @@ void OledClearBuffer(void)
 	wait_lcd_done();
 	/* setup the source and destination parms */
 	DMAC_ChannelTransfer(DMAC_CHANNEL_1, (const void *) rgbOledBmp_blank, (size_t) 4, (const void*) pb, (size_t) cbOledDispMax, (size_t) cbOledDispMax);
-	DEBUGB0_Clear();
-	DEBUGB0_Set();
 	DCH1ECONSET = _DCH1ECON_CFORCE_MASK; // set CFORCE to 1 to start the transfer
 #else
 	int32_t ib;
@@ -498,8 +486,6 @@ void OledClearBuffer(void)
 	for (ib = 0; ib < cbOledDispMax; ib++) {
 		*pb++ = 0x00;
 	}
-	DEBUGB0_Clear();
-	DEBUGB0_Set();
 #endif
 }
 
@@ -553,7 +539,6 @@ void OledUpdate(void)
 		OledPutBuffer(ccolOledMax, pb);
 		pb += ccolOledMax;
 	}
-	DEBUGB0_Clear();
 #endif
 #endif
 }
@@ -569,7 +554,7 @@ void SPI3DmaChannelHandler_State(DMAC_TRANSFER_EVENT event, uintptr_t contextHan
 	static int32_t ipag = 0; // buffer page number
 	static uint8_t* pb; // buffer page address
 
-	DEBUGB0_Set(); // back to mainline code, GLCD updates in background using DMA and interrupts
+//	DEBUGB0_Set(); // back to mainline code, GLCD updates in background using DMA and interrupts
 	LCD_UNSELECT();
 	if (contextHandle == DMA_MAGIC) { // re-init state machine for next GLCD update
 		dstate = D_init;
@@ -612,7 +597,7 @@ void SPI3DmaChannelHandler_State(DMAC_TRANSFER_EVENT event, uintptr_t contextHan
 		LCD_UNSELECT();
 		break;
 	}
-	DEBUGB0_Clear();
+//	DEBUGB0_Clear();
 }
 
 /* ------------------------------------------------------------ */

@@ -605,6 +605,7 @@ int main(void)
 #endif
 			//run_tests(100000); // port diagnostics
 			if (TimerDone(TMR_DISPLAY)) {
+				DEBUGB0_Set();
 				/* format and send data to LCD screen */
 				OledClearBuffer();
 				m35_ptr = &m35_2;
@@ -642,6 +643,7 @@ int main(void)
 				motor_graph(true, false);
 				OledUpdate();
 				StartTimer(TMR_DISPLAY, DISPLAY_UPDATE);
+				DEBUGB0_Clear();
 			}
 		}
 #endif
