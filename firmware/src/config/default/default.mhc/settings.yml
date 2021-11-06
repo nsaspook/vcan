@@ -1,7 +1,7 @@
 configName: default
 folderName: ''
 format_version: v1.0
-frameworkPath: ../../root/HarmonyFramework
+frameworkPath: ../Harmony3
 processor: PIC32MK1024MCM100
 projectName: ''
 settings:

@@ -17,7 +17,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '8000000'}
+        attributes: {id: core, value: '120000000'}
   - type: Boolean
     attributes: {id: ADC_DATA11_INTERRUPT_ENABLE}
     children:
@@ -3748,6 +3748,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: ADC_DATA1_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_107_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '6'}
+  - type: Hex
+    attributes: {id: EVIC_107_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '402653184'}
   - type: Boolean
     attributes: {id: EVIC_109_ENABLE}
     children:
@@ -3769,6 +3783,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: ADC_DATA3_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_109_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '6'}
+  - type: Hex
+    attributes: {id: EVIC_109_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '6144'}
   - type: Boolean
     attributes: {id: EVIC_117_ENABLE}
     children:
@@ -4179,6 +4207,8 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'true'}
+      - type: User
+        attributes: {value: 'false'}
   - type: Boolean
     attributes: {id: EVIC_173_HANDLER_LOCK}
     children:
@@ -4214,6 +4244,8 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'true'}
+      - type: User
+        attributes: {value: 'false'}
   - type: Boolean
     attributes: {id: EVIC_174_HANDLER_LOCK}
     children:
@@ -4263,6 +4295,8 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'true'}
+      - type: User
+        attributes: {value: 'false'}
   - type: Boolean
     attributes: {id: EVIC_175_HANDLER_LOCK}
     children:
@@ -4312,6 +4346,8 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'true'}
+      - type: User
+        attributes: {value: 'false'}
   - type: Boolean
     attributes: {id: EVIC_176_HANDLER_LOCK}
     children:
@@ -5832,7 +5868,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: String
     attributes: {id: PWM1_INTERRUPT_HANDLER}
     children:
@@ -5860,7 +5896,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: String
     attributes: {id: PWM2_INTERRUPT_HANDLER}
     children:
@@ -5888,7 +5924,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: String
     attributes: {id: PWM3_INTERRUPT_HANDLER}
     children:
@@ -5916,7 +5952,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'false'}
+        attributes: {id: core, value: 'true'}
   - type: String
     attributes: {id: PWM4_INTERRUPT_HANDLER}
     children:

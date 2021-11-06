@@ -164,9 +164,9 @@ void MCPWM_Initialize (void)
     ALTDTR2 = 300;
 
     /* Trigger Generator */
-    TRGCON2 = 0x1080;
-    TRIG2 = 1;
-    STRIG2 = 1;
+    TRGCON2 = 0x80;
+    TRIG2 = 0;
+    STRIG2 = 0;
 
     /* leading edge blanking */
     /* LEBCON2 register  */
@@ -222,9 +222,9 @@ void MCPWM_Initialize (void)
     ALTDTR3 = 300;
 
     /* Trigger Generator */
-    TRGCON3 = 0x1080;
-    TRIG3 = 1;
-    STRIG3 = 1;
+    TRGCON3 = 0x80;
+    TRIG3 = 0;
+    STRIG3 = 0;
 
     /* leading edge blanking */
     /* LEBCON3 register  */

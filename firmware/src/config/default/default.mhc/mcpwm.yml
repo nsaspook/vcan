@@ -1295,14 +1295,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '4224'}
+        attributes: {id: mcpwm, value: '128'}
   - type: Hex
     attributes: {id: MCPWM_TRGCON3}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '4224'}
+        attributes: {id: mcpwm, value: '128'}
   - type: Integer
     attributes: {id: PDC10__PDC}
     children:
@@ -1877,14 +1877,14 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: Integer
     attributes: {id: STRIG3__STRGCMP}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: TRGCON2__DTM}
     children:
@@ -1898,7 +1898,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: TRGCON3__DTM}
     children:
@@ -1912,20 +1912,20 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: Integer
     attributes: {id: TRIG2__TRGCMP}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: Integer
     attributes: {id: TRIG3__TRGCMP}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
 - type: ElementPosition
   attributes: {x: '167', y: '81', id: mcpwm}
