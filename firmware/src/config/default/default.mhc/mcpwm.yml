@@ -746,7 +746,7 @@ children:
       - type: String
         attributes: {id: text}
         children:
-        - {type: Value, value: '**** PWM Frequency is 3333.33333333 Hz ****'}
+        - {type: Value, value: '**** PWM Frequency is 10000.0 Hz ****'}
   - type: Comment
     attributes: {id: MCPWM_FREQ_CH12}
     children:
@@ -755,7 +755,7 @@ children:
       - type: String
         attributes: {id: text}
         children:
-        - {type: Value, value: '**** PWM Frequency is 3333.33333333 Hz ****'}
+        - {type: Value, value: '**** PWM Frequency is 10000.0 Hz ****'}
   - type: Comment
     attributes: {id: MCPWM_FREQ_CH2}
     children:
@@ -791,7 +791,7 @@ children:
       - type: String
         attributes: {id: text}
         children:
-        - {type: Value, value: '**** PWM Frequency is 3333.33333333 Hz ****'}
+        - {type: Value, value: '**** PWM Frequency is 10000.0 Hz ****'}
   - type: Comment
     attributes: {id: MCPWM_FREQ_CH6}
     children:
@@ -800,7 +800,7 @@ children:
       - type: String
         attributes: {id: text}
         children:
-        - {type: Value, value: '**** PWM Frequency is 3333.33333333 Hz ****'}
+        - {type: Value, value: '**** PWM Frequency is 10000.0 Hz ****'}
   - type: Comment
     attributes: {id: MCPWM_FREQ_CH7}
     children:
@@ -827,7 +827,7 @@ children:
       - type: String
         attributes: {id: text}
         children:
-        - {type: Value, value: '**** PWM Frequency is 3333.33333333 Hz ****'}
+        - {type: Value, value: '**** PWM Frequency is 10000.0 Hz ****'}
   - type: Hex
     attributes: {id: MCPWM_IOCON1}
     children:
@@ -1040,14 +1040,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '36000'}
+        attributes: {id: mcpwm, value: '12000'}
   - type: Integer
     attributes: {id: MCPWM_PERIOD_CH12}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '36000'}
+        attributes: {id: mcpwm, value: '12000'}
   - type: Integer
     attributes: {id: MCPWM_PERIOD_CH2}
     children:
@@ -1075,14 +1075,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '36000'}
+        attributes: {id: mcpwm, value: '12000'}
   - type: Integer
     attributes: {id: MCPWM_PERIOD_CH6}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '36000'}
+        attributes: {id: mcpwm, value: '12000'}
   - type: Integer
     attributes: {id: MCPWM_PERIOD_CH7}
     children:
@@ -1103,14 +1103,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '36000'}
+        attributes: {id: mcpwm, value: '12000'}
   - type: Float
     attributes: {id: MCPWM_PRI_FREQ}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '3333.3333'}
+        attributes: {id: mcpwm, value: '10000.0'}
   - type: Hex
     attributes: {id: MCPWM_PTCON}
     children:
@@ -1124,7 +1124,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '8390272'}
+        attributes: {id: mcpwm, value: '8389760'}
   - type: Hex
     attributes: {id: MCPWM_PWMCON10}
     children:
@@ -1138,21 +1138,21 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '8390272'}
+        attributes: {id: mcpwm, value: '8389760'}
   - type: Hex
     attributes: {id: MCPWM_PWMCON3}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '8390272'}
+        attributes: {id: mcpwm, value: '8389760'}
   - type: Hex
     attributes: {id: MCPWM_PWMCON4}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '8390272'}
+        attributes: {id: mcpwm, value: '8389760'}
   - type: Hex
     attributes: {id: MCPWM_PWMCON7}
     children:
@@ -1290,19 +1290,33 @@ children:
         children:
         - {type: Value, value: '**** Trailing edge dead time is 0.625 uS ****'}
   - type: Hex
+    attributes: {id: MCPWM_TRGCON1}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: mcpwm, value: '1024'}
+  - type: Hex
     attributes: {id: MCPWM_TRGCON2}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '128'}
+        attributes: {id: mcpwm, value: '1024'}
   - type: Hex
     attributes: {id: MCPWM_TRGCON3}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '128'}
+        attributes: {id: mcpwm, value: '1024'}
+  - type: Hex
+    attributes: {id: MCPWM_TRGCON4}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: mcpwm, value: '1024'}
   - type: Integer
     attributes: {id: PDC10__PDC}
     children:
@@ -1338,7 +1352,7 @@ children:
       - type: Integer
         attributes: {id: max}
         children:
-        - {type: Value, value: '12000'}
+        - {type: Value, value: '2000'}
     - type: Values
       children:
       - type: User
@@ -1351,11 +1365,11 @@ children:
       - type: Integer
         attributes: {id: max}
         children:
-        - {type: Value, value: '12000'}
+        - {type: Value, value: '2000'}
     - type: Values
       children:
       - type: User
-        attributes: {value: '0'}
+        attributes: {value: '6000'}
   - type: Integer
     attributes: {id: PDC3__PDC}
     children:
@@ -1364,11 +1378,11 @@ children:
       - type: Integer
         attributes: {id: max}
         children:
-        - {type: Value, value: '12000'}
+        - {type: Value, value: '2000'}
     - type: Values
       children:
       - type: User
-        attributes: {value: '0'}
+        attributes: {value: '6000'}
   - type: Integer
     attributes: {id: PDC4__PDC}
     children:
@@ -1377,11 +1391,11 @@ children:
       - type: Integer
         attributes: {id: max}
         children:
-        - {type: Value, value: '12000'}
+        - {type: Value, value: '2000'}
     - type: Values
       children:
       - type: User
-        attributes: {value: '0'}
+        attributes: {value: '6000'}
   - type: Integer
     attributes: {id: PDC5__PDC}
     children:
@@ -1440,28 +1454,28 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '12000'}
+        attributes: {value: '0'}
   - type: Integer
     attributes: {id: PHASE2__PHASE}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '12000'}
+        attributes: {value: '0'}
   - type: Integer
     attributes: {id: PHASE3__PHASE}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '12000'}
+        attributes: {value: '0'}
   - type: Integer
     attributes: {id: PHASE4__PHASE}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '12000'}
+        attributes: {value: '0'}
   - type: Integer
     attributes: {id: PHASE7__PHASE}
     children:
@@ -1489,7 +1503,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '36000'}
+        attributes: {value: '12000'}
   - type: KeyValueSet
     attributes: {id: PWMCON10__ITB}
     children:
@@ -1531,7 +1545,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: PWMCON1__MTBS}
     children:
@@ -1573,7 +1587,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: PWMCON3__DTC}
     children:
@@ -1601,7 +1615,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: PWMCON4__DTC}
     children:
@@ -1629,7 +1643,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: PWMCON4__MTBS}
     children:
@@ -1777,7 +1791,7 @@ children:
       - type: Integer
         attributes: {id: max}
         children:
-        - {type: Value, value: '12000'}
+        - {type: Value, value: '2000'}
   - type: Integer
     attributes: {id: SDC2__SDC}
     children:
@@ -1786,7 +1800,7 @@ children:
       - type: Integer
         attributes: {id: max}
         children:
-        - {type: Value, value: '12000'}
+        - {type: Value, value: '2000'}
   - type: Integer
     attributes: {id: SDC3__SDC}
     children:
@@ -1795,7 +1809,7 @@ children:
       - type: Integer
         attributes: {id: max}
         children:
-        - {type: Value, value: '12000'}
+        - {type: Value, value: '2000'}
   - type: Integer
     attributes: {id: SDC4__SDC}
     children:
@@ -1804,7 +1818,7 @@ children:
       - type: Integer
         attributes: {id: max}
         children:
-        - {type: Value, value: '12000'}
+        - {type: Value, value: '2000'}
   - type: Integer
     attributes: {id: SDC5__SDC}
     children:
@@ -1863,7 +1877,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '0'}
+        attributes: {value: '10'}
   - type: KeyValueSet
     attributes: {id: STCON__SCLKDIV}
     children:
@@ -1885,13 +1899,27 @@ children:
       children:
       - type: User
         attributes: {value: '0'}
+  - type: Integer
+    attributes: {id: STRIG4__STRGCMP}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '0'}
+  - type: KeyValueSet
+    attributes: {id: TRGCON1__TRGSEL}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
   - type: KeyValueSet
     attributes: {id: TRGCON2__DTM}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: TRGCON2__TRGDIV}
     children:
@@ -1900,12 +1928,19 @@ children:
       - type: User
         attributes: {value: '0'}
   - type: KeyValueSet
-    attributes: {id: TRGCON3__DTM}
+    attributes: {id: TRGCON2__TRGSEL}
     children:
     - type: Values
       children:
       - type: User
         attributes: {value: '1'}
+  - type: KeyValueSet
+    attributes: {id: TRGCON3__DTM}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: TRGCON3__TRGDIV}
     children:
@@ -1913,19 +1948,47 @@ children:
       children:
       - type: User
         attributes: {value: '0'}
+  - type: KeyValueSet
+    attributes: {id: TRGCON3__TRGSEL}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: KeyValueSet
+    attributes: {id: TRGCON4__TRGSEL}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: Integer
+    attributes: {id: TRIG1__TRGCMP}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '11990'}
   - type: Integer
     attributes: {id: TRIG2__TRGCMP}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '0'}
+        attributes: {value: '10'}
   - type: Integer
     attributes: {id: TRIG3__TRGCMP}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '0'}
+        attributes: {value: '11990'}
+  - type: Integer
+    attributes: {id: TRIG4__TRGCMP}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '11990'}
 - type: ElementPosition
   attributes: {x: '167', y: '81', id: mcpwm}

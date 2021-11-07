@@ -308,8 +308,10 @@ void an1_callback(uint32_t status, uintptr_t context)
  */
 void an3_callback(uint32_t status, uintptr_t context)
 {
-	DEBUGB0_Clear();
+	DEBUGB0_Set();
+	an_data[ANA1] = ADCHS_ChannelResultGet(ADCHS_CH1); // JP5 pin 14, AN1, ANA1/RA1
 	an_data[ANA3] = ADCHS_ChannelResultGet(ADCHS_CH3); // QEI pin 4, AN3, ANA3/RA3
+	DEBUGB0_Clear();
 }
 
 /*
@@ -551,7 +553,7 @@ int main(void)
 	U1_EN_Set();
 	U2_EN_Set();
 	init_faults(); // PWM faults from the bridge driver chips
-	ADCHS_CallbackRegister(ADCHS_CH1, an1_callback, 0);
+	//	ADCHS_CallbackRegister(ADCHS_CH1, an1_callback, 0);
 	ADCHS_CallbackRegister(ADCHS_CH3, an3_callback, 0);
 	MCPWM_Start();
 	V.pwm_stop = false; // let ISR generate waveforms
@@ -658,7 +660,7 @@ int main(void)
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
-				sprintf(buffer, "%4i:A %4i %4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[ANA3], an_data[POT1], an_data[POT2]);
+				sprintf(buffer, "%4i:A U%4i V%4i W%4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[ANA3], -an_data[ANA1] - an_data[ANA3], an_data[POT1], an_data[POT2]);
 				eaDogM_WriteStringAtPos(14, 0, buffer);
 				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    R%d", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4), dmt + (wdt << 1));
 				eaDogM_WriteStringAtPos(15, 0, buffer);

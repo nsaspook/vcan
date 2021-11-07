@@ -70,7 +70,7 @@ ADC3TIME = 0x3010001;
 
     ADCTRGMODE = 0x0;
 
-    ADCTRG1 = 0xc000b00; 
+    ADCTRG1 = 0xb000b00; 
     ADCTRG2 = 0x0; 
     ADCTRG3 = 0x3000000; 
     ADCTRG4 = 0x30000; 
@@ -93,10 +93,10 @@ ADC3TIME = 0x3010001;
 
 
 /* Result interrupt enable */
-ADCGIRQEN1 = 0xa;
+ADCGIRQEN1 = 0x8;
 ADCGIRQEN2 = 0x0;
 /* Interrupt Enable */
-IEC3SET = 0x2800;
+IEC3SET = 0x2000;
 IEC4SET = 0x0;
 
 
@@ -244,16 +244,6 @@ bool ADCHS_EOSStatusGet(void)
     return (bool)(ADCCON2bits.EOSRDY);
 }
 
-void ADC_DATA1_InterruptHandler(void)
-{
-    if (ADCHS_CallbackObj[1].callback_fn != NULL)
-    {
-      ADCHS_CallbackObj[1].callback_fn(ADCHS_CH1, ADCHS_CallbackObj[1].context);
-    }
-
-
-    IFS3CLR = _IFS3_AD1D1IF_MASK;
-}
 void ADC_DATA3_InterruptHandler(void)
 {
     if (ADCHS_CallbackObj[3].callback_fn != NULL)

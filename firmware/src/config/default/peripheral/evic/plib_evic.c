@@ -72,7 +72,6 @@ void EVIC_Initialize( void )
     IPC18SET = 0x80000 | 0x30000;  /* DMA2:  Priority 2 / Subpriority 3 */
     IPC19SET = 0x8 | 0x1;  /* TIMER_6:  Priority 2 / Subpriority 1 */
     IPC25SET = 0x400 | 0x0;  /* ADC_EOS:  Priority 1 / Subpriority 0 */
-    IPC26SET = 0x18000000 | 0x0;  /* ADC_DATA1:  Priority 6 / Subpriority 0 */
     IPC27SET = 0x1800 | 0x0;  /* ADC_DATA3:  Priority 6 / Subpriority 0 */
     IPC41SET = 0xc | 0x0;  /* UART6_FAULT:  Priority 3 / Subpriority 0 */
     IPC41SET = 0xc00 | 0x0;  /* UART6_RX:  Priority 3 / Subpriority 0 */

@@ -76,7 +76,6 @@ void DMA0_InterruptHandler( void );
 void DMA1_InterruptHandler( void );
 void DMA2_InterruptHandler( void );
 void TIMER_6_InterruptHandler( void );
-void ADC_DATA1_InterruptHandler( void );
 void ADC_DATA3_InterruptHandler( void );
 void UART6_FAULT_InterruptHandler( void );
 void UART6_RX_InterruptHandler( void );
@@ -165,11 +164,6 @@ void __ISR(_TIMER_6_VECTOR, ipl2SRS) TIMER_6_Handler (void)
 void __ISR(_ADC_EOS_VECTOR, ipl1SRS) ADC_EOS_Handler (void)
 {
 	end_of_adc_scan();
-}
-
-void __ISR(_ADC_DATA1_VECTOR, ipl6SRS) ADC_DATA1_Handler (void)
-{
-    ADC_DATA1_InterruptHandler();
 }
 
 void __ISR(_ADC_DATA3_VECTOR, ipl6SRS) ADC_DATA3_Handler (void)

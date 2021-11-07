@@ -62,10 +62,10 @@ void MCPWM_Initialize (void)
     /*  SSEIEN = false */
     STCON = 0x0;
 
-    PTPER = 36000;
+    PTPER = 12000;
     STPER = 2000;
     SEVTCMP = 0;
-    SSEVTCMP = 0;
+    SSEVTCMP = 10;
 
     /*********** Channel 1 Configurations **********/
     /* PWMCON1 register  */
@@ -74,13 +74,13 @@ void MCPWM_Initialize (void)
     /*  ECAM   =  1 */
     /*  DTCP   =  0 */
     /*  DTC    =  2 */
-    /*  ITB    = 1 */
+    /*  ITB    = 0 */
     /*  PWMHIEN =  false */
     /*  PWMLIEN = false */
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = true */
-    PWMCON1 = 0x800680;
+    PWMCON1 = 0x800480;
 
     /* IOCON1 register  */
     /*  SWAP    = 0*/
@@ -97,17 +97,17 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 4  */
     IOCON1 = 0x1325c400;
 
-    PDC1 = 6000;
+    PDC1 = 2000;
     SDC1 = 500;
-    PHASE1 = 12000;
+    PHASE1 = 0;
 
     /* Dead Time */
     DTR1 = 300;
     ALTDTR1 = 300;
 
     /* Trigger Generator */
-    TRGCON1 = 0x0;
-    TRIG1 = 0;
+    TRGCON1 = 0x400;
+    TRIG1 = 11990;
     STRIG1 = 0;
 
     /* leading edge blanking */
@@ -132,13 +132,13 @@ void MCPWM_Initialize (void)
     /*  ECAM   =  1 */
     /*  DTCP   =  0 */
     /*  DTC    =  2 */
-    /*  ITB    = 1 */
+    /*  ITB    = 0 */
     /*  PWMHIEN =  false */
     /*  PWMLIEN = false */
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = true */
-    PWMCON2 = 0x800680;
+    PWMCON2 = 0x800480;
 
     /* IOCON2 register  */
     /*  SWAP    = 0*/
@@ -155,17 +155,17 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 4  */
     IOCON2 = 0x1325c400;
 
-    PDC2 = 0;
+    PDC2 = 2000;
     SDC2 = 500;
-    PHASE2 = 12000;
+    PHASE2 = 0;
 
     /* Dead Time */
     DTR2 = 300;
     ALTDTR2 = 300;
 
     /* Trigger Generator */
-    TRGCON2 = 0x80;
-    TRIG2 = 0;
+    TRGCON2 = 0x400;
+    TRIG2 = 10;
     STRIG2 = 0;
 
     /* leading edge blanking */
@@ -190,13 +190,13 @@ void MCPWM_Initialize (void)
     /*  ECAM   =  1 */
     /*  DTCP   =  0 */
     /*  DTC    =  2 */
-    /*  ITB    = 1 */
+    /*  ITB    = 0 */
     /*  PWMHIEN =  false */
     /*  PWMLIEN = false */
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = true */
-    PWMCON3 = 0x800680;
+    PWMCON3 = 0x800480;
 
     /* IOCON3 register  */
     /*  SWAP    = 0*/
@@ -213,17 +213,17 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 5  */
     IOCON3 = 0x172dc400;
 
-    PDC3 = 0;
+    PDC3 = 2000;
     SDC3 = 500;
-    PHASE3 = 12000;
+    PHASE3 = 0;
 
     /* Dead Time */
     DTR3 = 300;
     ALTDTR3 = 300;
 
     /* Trigger Generator */
-    TRGCON3 = 0x80;
-    TRIG3 = 0;
+    TRGCON3 = 0x400;
+    TRIG3 = 11990;
     STRIG3 = 0;
 
     /* leading edge blanking */
@@ -248,13 +248,13 @@ void MCPWM_Initialize (void)
     /*  ECAM   =  1 */
     /*  DTCP   =  0 */
     /*  DTC    =  2 */
-    /*  ITB    = 1 */
+    /*  ITB    = 0 */
     /*  PWMHIEN =  false */
     /*  PWMLIEN = false */
     /*  TRGIEN = false */
     /*  CLIEN = false */
     /*  FLTIEN = true */
-    PWMCON4 = 0x800680;
+    PWMCON4 = 0x800480;
 
     /* IOCON4 register  */
     /*  SWAP    = 0*/
@@ -271,17 +271,17 @@ void MCPWM_Initialize (void)
     /*  CLSRC  = 5  */
     IOCON4 = 0x172dc400;
 
-    PDC4 = 0;
+    PDC4 = 2000;
     SDC4 = 500;
-    PHASE4 = 12000;
+    PHASE4 = 0;
 
     /* Dead Time */
     DTR4 = 300;
     ALTDTR4 = 300;
 
     /* Trigger Generator */
-    TRGCON4 = 0x0;
-    TRIG4 = 0;
+    TRGCON4 = 0x400;
+    TRIG4 = 11990;
     STRIG4 = 0;
 
     /* leading edge blanking */
