@@ -660,7 +660,7 @@ int main(void)
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
-				sprintf(buffer, "%4i:A U%4i V%4i W%4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[ANA3], -an_data[ANA1] - an_data[ANA3], an_data[POT1], an_data[POT2]);
+				sprintf(buffer, "%4i:A U%4i V%4i W%4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[ANA3], ((-an_data[ANA1]) - an_data[ANA3]), an_data[POT1], an_data[POT2]);
 				eaDogM_WriteStringAtPos(14, 0, buffer);
 				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    R%d", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4), dmt + (wdt << 1));
 				eaDogM_WriteStringAtPos(15, 0, buffer);
