@@ -573,7 +573,7 @@ int main(void)
 		SYS_Tasks();
 		ProcessPetitModbus(); // MODBUS processing 
 		BSP_LED3_Clear();
-		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master
+//		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master
 		PetitRegisters[0].ActValue = (int16_t) hb_current(u1bi, true);
 		PetitRegisters[1].ActValue = (int16_t) hb_current(u2ai, true);
 		PetitRegisters[2].ActValue = (int16_t) hb_current(u2bi, true);

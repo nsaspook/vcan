@@ -373,6 +373,33 @@ children:
         children:
         - {type: Value, value: '**** Leading edge dead time is 1.0 uS ****'}
   - type: Comment
+    attributes: {id: MCPWM_LEADING_DEADTIME10}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Leading edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_LEADING_DEADTIME11}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Leading edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_LEADING_DEADTIME12}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Leading edge dead time is 0.625 uS ****'}
+  - type: Comment
     attributes: {id: MCPWM_LEADING_DEADTIME2}
     children:
     - type: Attributes
@@ -390,6 +417,60 @@ children:
         attributes: {id: text}
         children:
         - {type: Value, value: '**** Leading edge dead time is 1.0 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_LEADING_DEADTIME4}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Leading edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_LEADING_DEADTIME5}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Leading edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_LEADING_DEADTIME6}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Leading edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_LEADING_DEADTIME7}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Leading edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_LEADING_DEADTIME8}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Leading edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_LEADING_DEADTIME9}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Leading edge dead time is 0.625 uS ****'}
   - type: Integer
     attributes: {id: MCPWM_PERIOD_CH1}
     children:
@@ -519,6 +600,33 @@ children:
         children:
         - {type: Value, value: '**** Trailing edge dead time is 1.0 uS ****'}
   - type: Comment
+    attributes: {id: MCPWM_TRAILING_DEADTIME10}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Trailing edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_TRAILING_DEADTIME11}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Trailing edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_TRAILING_DEADTIME12}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Trailing edge dead time is 0.625 uS ****'}
+  - type: Comment
     attributes: {id: MCPWM_TRAILING_DEADTIME2}
     children:
     - type: Attributes
@@ -536,6 +644,60 @@ children:
         attributes: {id: text}
         children:
         - {type: Value, value: '**** Trailing edge dead time is 1.0 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_TRAILING_DEADTIME4}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Trailing edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_TRAILING_DEADTIME5}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Trailing edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_TRAILING_DEADTIME6}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Trailing edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_TRAILING_DEADTIME7}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Trailing edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_TRAILING_DEADTIME8}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Trailing edge dead time is 0.625 uS ****'}
+  - type: Comment
+    attributes: {id: MCPWM_TRAILING_DEADTIME9}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: text}
+        children:
+        - {type: Value, value: '**** Trailing edge dead time is 0.625 uS ****'}
   - type: Hex
     attributes: {id: MCPWM_TRGCON1}
     children:

@@ -679,6 +679,13 @@ children:
       - type: User
         attributes: {value: '2'}
   - type: Combo
+    attributes: {id: CONFIG_FNOSC}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: SPLL}
+  - type: Combo
     attributes: {id: CONFIG_FPLLICLK}
     children:
     - type: Values
@@ -691,7 +698,35 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: DIV_3}
+        attributes: {value: DIV_1}
+  - type: Combo
+    attributes: {id: CONFIG_FPLLMULT}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: MUL_40}
+  - type: Combo
+    attributes: {id: CONFIG_FPLLRNG}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: RANGE_8_16_MHZ}
+  - type: Combo
+    attributes: {id: CONFIG_FSOSCEN}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'ON'}
+  - type: Combo
+    attributes: {id: CONFIG_OSCIOFNC}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'OFF'}
   - type: Combo
     attributes: {id: CONFIG_POSCMOD}
     children:
@@ -705,14 +740,14 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '24000000'}
+        attributes: {value: '12000000'}
   - type: String
     attributes: {id: CONFIG_SYS_CLK_PBCLK1_FREQ}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '60000000'}
+        attributes: {value: '120000000'}
   - type: String
     attributes: {id: CONFIG_SYS_CLK_PBCLK2_FREQ}
     children:
@@ -741,6 +776,13 @@ children:
       children:
       - type: User
         attributes: {value: '30000000'}
+  - type: Integer
+    attributes: {id: CONFIG_SYS_CLK_PBDIV1}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
   - type: String
     attributes: {id: CONFIG_SYS_CLK_REFCLK1_FREQ}
     children:
@@ -769,6 +811,13 @@ children:
       children:
       - type: User
         attributes: {value: '0'}
+  - type: Combo
+    attributes: {id: CONFIG_UPLLEN}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: 'ON'}
   - type: String
     attributes: {id: CPU_CLOCK_FREQUENCY}
     children:
@@ -1380,6 +1429,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '0'}
+  - type: String
+    attributes: {id: PB1DIV_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '0x8000'}
+  - type: Combo
+    attributes: {id: PLLRANGE_VAL}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: RANGE_8_16_MHZ}
   - type: Hex
     attributes: {id: PMD1_REG_VALUE}
     children:
@@ -1925,6 +1988,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '0'}
+  - type: Hex
+    attributes: {id: UPLLCON_REG_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '52363266'}
+  - type: Boolean
+    attributes: {id: UPLL_EN}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
   - type: Integer
     attributes: {id: USB1_CLOCK_FREQUENCY}
     children:

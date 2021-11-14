@@ -148,14 +148,14 @@
         <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/adchs.yml</itemPath>
         <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/core.yml</itemPath>
         <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/dfp.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/GraphSettings.yml</itemPath>
         <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/mcpwm.yml</itemPath>
         <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/pmsm_foc.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/project.yml</itemPath>
         <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/qei2.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/settings.yml</itemPath>
         <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/uart2.yml</itemPath>
         <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/X2CScope.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/GraphSettings.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/settings.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/project.yml</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
       <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/harmony-manifest-success.yml</itemPath>
@@ -172,13 +172,13 @@
         <targetDevice>PIC32MK1024MCM100</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>ICD4Tool</platformTool>
+        <platformTool>noID</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>3.01</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>2</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC32MK-MC_DFP" vendor="Microchip" version="1.8.132"/>
+        <pack name="PIC32MK-MC_DFP" vendor="Microchip" version="1.9.143"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -192,7 +192,7 @@
         </archiverTool>
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
-          <parseOnProdLoad>true</parseOnProdLoad>
+          <parseOnProdLoad>false</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
         <subordinates>
@@ -213,11 +213,11 @@
         <property key="addresss-attribute-use" value="false"/>
         <property key="enable-app-io" value="false"/>
         <property key="enable-omit-frame-pointer" value="false"/>
-        <property key="enable-symbols" value="true"/>
+        <property key="enable-symbols" value="false"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/mclv2_pic32_mk_mcm_pim;../src/config/mclv2_pic32_mk_mcm_pim/X2CCode;../src/packs/PIC32MK1024MCM100_DFP"/>
+                  value="../src;../src/config/mclv2_pic32_mk_mcm_pim;../src/config/mclv2_pic32_mk_mcm_pim/X2CCode"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -316,7 +316,7 @@
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/mclv2_pic32_mk_mcm_pim;../src/packs/PIC32MK1024MCM100_DFP"/>
+                  value="../src;../src/config/mclv2_pic32_mk_mcm_pim"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>

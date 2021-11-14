@@ -91,8 +91,22 @@ void CLK_Initialize( void )
 
  
       
+    /* Configure UPLL */
+    /* UPOSCEN = UPLL */
+    /* PLLODIV = DIV_8 */
+    /* PLLMULT = MUL_32 */
+    /* PLLIDIV = DIV_1 */
+    /* PLLRANGE = RANGE_8_16_MHZ */
+    UPLLCON = 0x31f0002;
+
+    /* Peripheral Bus 1 is by default enabled, set its divisor */
+    PB1DIVbits.PBDIV = 0;
+  
 
     /* Peripheral Module Disable Configuration */
+
+    CFGCONbits.PMDLOCK = 0;
+
     PMD1 = 0x370;
     PMD2 = 0x17001f;
     PMD3 = 0xffffffff;
@@ -100,6 +114,8 @@ void CLK_Initialize( void )
     PMD5 = 0xf30f3f3d;
     PMD6 = 0xd0d0000;
     PMD7 = 0x0;
+
+    CFGCONbits.PMDLOCK = 1;
 
     /* Lock system since done with clock configuration */
     SYSKEY = 0x33333333;

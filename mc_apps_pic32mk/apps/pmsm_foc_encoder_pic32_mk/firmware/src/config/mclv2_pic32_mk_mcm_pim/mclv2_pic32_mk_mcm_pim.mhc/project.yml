@@ -20,13 +20,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: 43827F4C418167B0F8371351B14C94D6
+- generatedChecksum: 980699AD1C2C3CDE742C0C4F2EB010FD
   logicalPath: config/mclv2_pic32_mk_mcm_pim
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 43827F4C418167B0F8371351B14C94D6
+  userChecksum: 980699AD1C2C3CDE742C0C4F2EB010FD
 - generatedChecksum: AF7ABE441ABD363FC31E60780F4A20CE
   logicalPath: config/mclv2_pic32_mk_mcm_pim
   name: interrupts.c
@@ -118,20 +118,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: AC6BCEE3FBA8DE5023D13C3EB1EA76A0
-- generatedChecksum: A11AD61211395ADD6ABFC381B067F8DB
+- generatedChecksum: 335C2CD0AA4238C725F87DDB79808B87
   logicalPath: config/mclv2_pic32_mk_mcm_pim/peripheral/adchs
   name: plib_adchs.c
   physicalPath: peripheral/adchs
   security: NON_SECURE
   type: SOURCE
-  userChecksum: A11AD61211395ADD6ABFC381B067F8DB
-- generatedChecksum: 8E1BEC88D1705DDD3BB9EE563D34001D
+  userChecksum: 335C2CD0AA4238C725F87DDB79808B87
+- generatedChecksum: E3F2CEF812E4D3508FD5E97090800434
   logicalPath: config/mclv2_pic32_mk_mcm_pim/peripheral/clk
   name: plib_clk.c
   physicalPath: peripheral/clk
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 8E1BEC88D1705DDD3BB9EE563D34001D
+  userChecksum: E3F2CEF812E4D3508FD5E97090800434
 - generatedChecksum: 4356AD00924CB7D98FF00899084312AC
   logicalPath: config/mclv2_pic32_mk_mcm_pim/peripheral/evic
   name: plib_evic.c
@@ -321,13 +321,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 74058744638925EEB20F58B4328F1B68
-- generatedChecksum: 5485BB926F2ECC7BD1D7B2DE51ED2795
+- generatedChecksum: 9BC740B9E11F5CABC4A22BD0F7689C26
   logicalPath: config/mclv2_pic32_mk_mcm_pim/peripheral/adchs
   name: plib_adchs_common.h
   physicalPath: peripheral/adchs
   security: NON_SECURE
   type: HEADER
-  userChecksum: 5485BB926F2ECC7BD1D7B2DE51ED2795
+  userChecksum: 9BC740B9E11F5CABC4A22BD0F7689C26
 - generatedChecksum: 7066CC390335CF75126E2A50C46E3BDD
   logicalPath: config/mclv2_pic32_mk_mcm_pim/peripheral/clk
   name: plib_clk.h
@@ -342,13 +342,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 4D592E1C42727324FE2F5EB681F6C5AA
-- generatedChecksum: 21A7B3C83BE7ED10FDDEF07C8FE9D141
+- generatedChecksum: 32D4481C9929D11B3B5249A815A3F3A0
   logicalPath: config/mclv2_pic32_mk_mcm_pim/peripheral/gpio
   name: plib_gpio.h
   physicalPath: peripheral/gpio
   security: NON_SECURE
   type: HEADER
-  userChecksum: 21A7B3C83BE7ED10FDDEF07C8FE9D141
+  userChecksum: 32D4481C9929D11B3B5249A815A3F3A0
 - generatedChecksum: 12CBE2439F4C4DECD2B376033BBADA45
   logicalPath: config/mclv2_pic32_mk_mcm_pim/peripheral/mcpwm
   name: plib_mcpwm.h
@@ -391,20 +391,20 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 67EEAF539A53B6B8FD7B600ACCB3F3CA
-- generatedChecksum: 2C8543317B3F067432097AB9BD3E8672
+- generatedChecksum: 7DC91D6D376C98802C9C2990432DE9B7
   logicalPath: config/mclv2_pic32_mk_mcm_pim
   name: toolchain_specifics.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 2C8543317B3F067432097AB9BD3E8672
-- generatedChecksum: 124DEAAE0F75B72DC018E0DDCE8AB35D
+  userChecksum: 7DC91D6D376C98802C9C2990432DE9B7
+- generatedChecksum: 0D025660A81D3BAE5CC13F9B622DECFA
   logicalPath: config/mclv2_pic32_mk_mcm_pim
   name: p32MK1024MCM100.ld
   physicalPath: ''
   security: NON_SECURE
   type: LINKER
-  userChecksum: 124DEAAE0F75B72DC018E0DDCE8AB35D
+  userChecksum: 0D025660A81D3BAE5CC13F9B622DECFA
 format_version: v1.0
 libraries:
 - name: libPIC32MK_X2CScope.a
@@ -422,7 +422,7 @@ settings:
   delimiter: ;
   key: extra-include-directories
   security: NON_SECURE
-  value: ../src;../src/config/mclv2_pic32_mk_mcm_pim;../src/packs/PIC32MK1024MCM100_DFP;
+  value: ../src;../src/config/mclv2_pic32_mk_mcm_pim;
 - append: false
   category: C32
   delimiter: ''
@@ -452,7 +452,7 @@ settings:
   delimiter: ;
   key: extra-include-directories
   security: NON_SECURE
-  value: ../src;../src/config/mclv2_pic32_mk_mcm_pim;../src/packs/PIC32MK1024MCM100_DFP;
+  value: ../src;../src/config/mclv2_pic32_mk_mcm_pim;
 - append: false
   category: C32CPP
   delimiter: ''

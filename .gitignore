@@ -4,3 +4,5 @@
 /firmware/i400hz3ph.X/dist/
 /firmware/pat/mbmc_modbus.X/build/
 /firmware/pat/mbmc_modbus.X/dist/
+/mc_apps_pic32mk/apps/pmsm_foc_encoder_pic32_mk/firmware/mclv2_pic32_mk_mcm_pim.X/build/
+/mc_apps_pic32mk/apps/pmsm_foc_encoder_pic32_mk/firmware/mclv2_pic32_mk_mcm_pim.X/dist/
