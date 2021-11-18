@@ -62,13 +62,13 @@ void TMR2_Initialize(void)
 
     /*
     SIDL = 0
-    SYNC = 0
+    SYNC = 1
     TGATE = 0
     TCKPS =4
     T32   = 1
     TCS = 0
     */
-    T2CONSET = 0x48;
+    T2CONSET = 0x148;
 
     /* Clear counter */
     TMR2 = 0x0;
