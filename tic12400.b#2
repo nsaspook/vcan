@@ -2564,8 +2564,8 @@ design rules under a new name.</description>
 <attribute name="DESCRIPTION" value=" Power Switch/Driver 1:16 N-Channel 900mA 32-SOIC-EP " x="21.59" y="22.86" size="1.778" layer="27" display="off"/>
 <attribute name="MF" value="NXP USA" x="21.59" y="22.86" size="1.778" layer="27" display="off"/>
 <attribute name="MP" value="MCZ33996EK" x="21.59" y="22.86" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="18.185309375" y="29.168690625" size="1.27175" layer="25"/>
 <attribute name="NAME" x="18.189590625" y="29.16075" size="1.27015" layer="25"/>
+<attribute name="NAME" x="18.185309375" y="29.168690625" size="1.27175" layer="25"/>
 <attribute name="PACKAGE" value="SOIC-32 NXP Semiconductors" x="21.59" y="22.86" size="1.778" layer="27" display="off"/>
 <attribute name="PRICE" value="None" x="21.59" y="22.86" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="18.18376875" y="15.446440625" size="1.27233125" layer="27"/>
@@ -2972,7 +2972,7 @@ design rules under a new name.</description>
 <via x="88.8492" y="18.1356" extent="1-16" drill="0.35"/>
 <via x="53.4162" y="21.5646" extent="1-16" drill="0.35"/>
 </signal>
-<signal name="IN_SW_PWR" class="1">
+<signal name="+24V" class="1">
 <contactref element="C5" pad="1"/>
 <contactref element="C4" pad="1"/>
 <contactref element="X2" pad="9"/>
@@ -4064,7 +4064,7 @@ design rules under a new name.</description>
 <wire x1="26.3652" y1="27.7368" x2="26.34" y2="27.735" width="0.3048" layer="1"/>
 <wire x1="31.6992" y1="45.9486" x2="31.75" y2="45.98" width="0.3048" layer="1"/>
 </signal>
-<signal name="SW_PWR" class="1">
+<signal name="N$30" class="1">
 <contactref element="C12" pad="1"/>
 <contactref element="C11" pad="1"/>
 <contactref element="D2" pad="C"/>
