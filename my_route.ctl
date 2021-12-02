@@ -8,10 +8,16 @@
 
   tpViaShape      = round
 
+  ; Extended parameters:
+
+  AutoGrid        = 1
+  Efforts         = 2
+  TopRouterVariant  = 1
+
   ; Preferred Directions:
 
   PrefDir.1       = *
-  PrefDir.2       = *
+  PrefDir.2       = a
   PrefDir.3       = 0
   PrefDir.4       = 0
   PrefDir.5       = 0
@@ -24,7 +30,7 @@
   PrefDir.12      = 0
   PrefDir.13      = 0
   PrefDir.14      = 0
-  PrefDir.15      = *
+  PrefDir.15      = a
   PrefDir.16      = *
 
   Active          =    1
