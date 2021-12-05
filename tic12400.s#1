@@ -15203,7 +15203,7 @@ Created by Upverter.com</description>
 <classes>
 <class number="0" name="default" width="0" drill="0">
 </class>
-<class number="1" name="icurrent" width="0.3048" drill="0">
+<class number="1" name="icurrent" width="0.254" drill="0">
 </class>
 </classes>
 <parts>
@@ -15332,6 +15332,9 @@ Created by Upverter.com</description>
 <part name="F4" library="polyfuse-smd_10" deviceset="?" device="1206L" technology="020"/>
 <part name="C19" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="10uf"/>
 <part name="GND39" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="DC_OUT" library="con-molex" library_urn="urn:adsk.eagle:library:165" deviceset="22-23-2031" device="" package3d_urn="urn:adsk.eagle:package:8078634/1"/>
+<part name="GND41" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="VDD7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -15923,6 +15926,22 @@ Created by Upverter.com</description>
 <instance part="GND39" gate="1" x="-17.78" y="76.2" smashed="yes">
 <attribute name="VALUE" x="-20.32" y="73.66" size="1.778" layer="96"/>
 </instance>
+<instance part="DC_OUT" gate="-1" x="5.08" y="25.4" smashed="yes" rot="R180">
+<attribute name="NAME" x="2.54" y="26.162" size="1.524" layer="95" rot="R180"/>
+<attribute name="VALUE" x="5.842" y="24.003" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="DC_OUT" gate="-2" x="5.08" y="27.94" smashed="yes" rot="R180">
+<attribute name="NAME" x="2.54" y="28.702" size="1.524" layer="95" rot="R180"/>
+</instance>
+<instance part="DC_OUT" gate="-3" x="5.08" y="30.48" smashed="yes" rot="R180">
+<attribute name="NAME" x="2.54" y="31.242" size="1.524" layer="95" rot="R180"/>
+</instance>
+<instance part="GND41" gate="1" x="10.16" y="27.94" smashed="yes" rot="R90">
+<attribute name="VALUE" x="12.7" y="25.4" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="VDD7" gate="G$1" x="7.62" y="33.02" smashed="yes">
+<attribute name="VALUE" x="5.08" y="30.48" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -16330,6 +16349,11 @@ Created by Upverter.com</description>
 <pinref part="C19" gate="G$1" pin="2"/>
 <pinref part="GND39" gate="1" pin="GND"/>
 <junction x="-17.78" y="78.74"/>
+</segment>
+<segment>
+<pinref part="DC_OUT" gate="-2" pin="S"/>
+<pinref part="GND41" gate="1" pin="GND"/>
+<junction x="7.62" y="27.94"/>
 </segment>
 </net>
 <net name="N$2" class="0">
@@ -17284,6 +17308,11 @@ Created by Upverter.com</description>
 <pinref part="VDD17" gate="G$1" pin="VDD"/>
 <junction x="20.32" y="86.36"/>
 </segment>
+<segment>
+<pinref part="DC_OUT" gate="-3" pin="S"/>
+<pinref part="VDD7" gate="G$1" pin="VDD"/>
+<junction x="7.62" y="30.48"/>
+</segment>
 </net>
 <net name="N$55" class="0">
 <segment>
@@ -17507,7 +17536,7 @@ Created by Upverter.com</description>
 <pinref part="PAD2" gate="G$1" pin="P"/>
 </segment>
 </net>
-<net name="N$72" class="0">
+<net name="USB5V_FUSE" class="1">
 <segment>
 <pinref part="U5" gate="G$0" pin="INPUT"/>
 <pinref part="F4" gate="G$1" pin="2"/>
@@ -17515,6 +17544,13 @@ Created by Upverter.com</description>
 <pinref part="C19" gate="G$1" pin="1"/>
 <wire x1="-10.16" y1="86.36" x2="-17.78" y2="86.36" width="0.1524" layer="91"/>
 <junction x="-17.78" y="86.36"/>
+<label x="-20.32" y="91.44" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="15.24" y1="25.4" x2="7.62" y2="25.4" width="0.1524" layer="91"/>
+<pinref part="DC_OUT" gate="-1" pin="S"/>
+<label x="12.7" y="22.86" size="1.778" layer="95"/>
+<junction x="7.62" y="25.4"/>
 </segment>
 </net>
 <net name="TC_INT" class="0">
@@ -17606,6 +17642,7 @@ Created by Upverter.com</description>
 <approved hash="208,1,71.12,195.58,VDD,sup,,,,"/>
 <approved hash="208,1,20.32,86.36,VDD,out,,,,"/>
 <approved hash="208,1,20.32,86.36,VDD,sup,,,,"/>
+<approved hash="208,1,7.62,30.48,VDD,sup,,,,"/>
 <approved hash="113,1,114.196,95.146,FRAME1,,,,,"/>
 <approved hash="115,1,-10.16,162.56,MOSI_SIG,,,,,"/>
 <approved hash="115,1,-10.16,167.64,SCK_SIG,,,,,"/>

@@ -15941,6 +15941,7 @@ Created by Upverter.com</description>
 <junction x="60.96" y="43.18"/>
 <junction x="-2.54" y="99.06"/>
 <junction x="60.96" y="20.32"/>
+<label x="60.96" y="20.32" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <wire x1="198.12" y1="78.74" x2="208.28" y2="78.74" width="0.1524" layer="91"/>
@@ -15969,6 +15970,7 @@ Created by Upverter.com</description>
 <wire x1="58.42" y1="43.18" x2="58.42" y2="81.28" width="0.1524" layer="91"/>
 <junction x="58.42" y="43.18"/>
 <junction x="58.42" y="20.32"/>
+<label x="58.42" y="25.4" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <wire x1="213.36" y1="60.96" x2="198.12" y2="60.96" width="0.1524" layer="91"/>
@@ -16132,6 +16134,7 @@ Created by Upverter.com</description>
 <junction x="53.34" y="43.18"/>
 <junction x="30.48" y="114.3"/>
 <junction x="53.34" y="20.32"/>
+<label x="53.34" y="22.86" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <pinref part="GND1" gate="1" pin="GND"/>
@@ -16354,6 +16357,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="86.36" x2="144.78" y2="86.36" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN1"/>
 <junction x="162.56" y="86.36"/>
+<label x="147.32" y="86.36" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -16366,6 +16370,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="88.9" x2="132.08" y2="88.9" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN0"/>
 <junction x="162.56" y="88.9"/>
+<label x="144.78" y="88.9" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -16378,6 +16383,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="35.56" x2="149.86" y2="35.56" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN20"/>
 <junction x="162.56" y="35.56"/>
+<label x="152.4" y="35.56" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$7" class="0">
@@ -16390,6 +16396,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="38.1" x2="147.32" y2="38.1" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN19"/>
 <junction x="162.56" y="38.1"/>
+<label x="149.86" y="38.1" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$11" class="0">
@@ -16402,6 +16409,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="40.64" x2="144.78" y2="40.64" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN18"/>
 <junction x="162.56" y="40.64"/>
+<label x="147.32" y="40.64" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$12" class="0">
@@ -16414,6 +16422,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="43.18" x2="142.24" y2="43.18" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN17"/>
 <junction x="162.56" y="43.18"/>
+<label x="144.78" y="43.18" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$13" class="0">
@@ -16426,6 +16435,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="45.72" x2="139.7" y2="45.72" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN16"/>
 <junction x="162.56" y="45.72"/>
+<label x="142.24" y="45.72" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$14" class="0">
@@ -16439,6 +16449,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="48.26" x2="137.16" y2="48.26" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN15"/>
 <junction x="162.56" y="48.26"/>
+<label x="142.24" y="48.26" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$15" class="0">
@@ -16452,6 +16463,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="50.8" x2="134.62" y2="50.8" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN14"/>
 <junction x="162.56" y="50.8"/>
+<label x="139.7" y="50.8" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$16" class="0">
@@ -16465,6 +16477,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="53.34" x2="132.08" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN13"/>
 <junction x="162.56" y="53.34"/>
+<label x="137.16" y="53.34" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$17" class="0">
@@ -16477,6 +16490,7 @@ Created by Upverter.com</description>
 <wire x1="154.94" y1="83.82" x2="162.56" y2="83.82" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN2"/>
 <junction x="162.56" y="83.82"/>
+<label x="154.94" y="83.82" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$18" class="0">
@@ -16489,6 +16503,7 @@ Created by Upverter.com</description>
 <wire x1="154.94" y1="81.28" x2="162.56" y2="81.28" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN3"/>
 <junction x="162.56" y="81.28"/>
+<label x="154.94" y="81.28" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$19" class="0">
@@ -16501,6 +16516,7 @@ Created by Upverter.com</description>
 <wire x1="154.94" y1="78.74" x2="162.56" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN4"/>
 <junction x="162.56" y="78.74"/>
+<label x="154.94" y="78.74" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$20" class="0">
@@ -16513,6 +16529,7 @@ Created by Upverter.com</description>
 <wire x1="154.94" y1="76.2" x2="162.56" y2="76.2" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN5"/>
 <junction x="162.56" y="76.2"/>
+<label x="154.94" y="76.2" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$21" class="0">
@@ -16525,6 +16542,7 @@ Created by Upverter.com</description>
 <wire x1="154.94" y1="73.66" x2="162.56" y2="73.66" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN6"/>
 <junction x="162.56" y="73.66"/>
+<label x="154.94" y="73.66" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$22" class="0">
@@ -16537,6 +16555,7 @@ Created by Upverter.com</description>
 <wire x1="154.94" y1="71.12" x2="162.56" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN7"/>
 <junction x="162.56" y="71.12"/>
+<label x="154.94" y="71.12" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$23" class="0">
@@ -16550,6 +16569,7 @@ Created by Upverter.com</description>
 <wire x1="154.94" y1="68.58" x2="162.56" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN8"/>
 <junction x="162.56" y="68.58"/>
+<label x="154.94" y="68.58" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$24" class="0">
@@ -16563,6 +16583,7 @@ Created by Upverter.com</description>
 <wire x1="154.94" y1="66.04" x2="162.56" y2="66.04" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN9"/>
 <junction x="162.56" y="66.04"/>
+<label x="154.94" y="66.04" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$25" class="0">
@@ -16576,6 +16597,7 @@ Created by Upverter.com</description>
 <wire x1="154.94" y1="60.96" x2="162.56" y2="60.96" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN10"/>
 <junction x="162.56" y="60.96"/>
+<label x="154.94" y="60.96" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$26" class="0">
@@ -16589,6 +16611,7 @@ Created by Upverter.com</description>
 <wire x1="154.94" y1="58.42" x2="162.56" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN11"/>
 <junction x="162.56" y="58.42"/>
+<label x="154.94" y="58.42" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$27" class="0">
@@ -16604,6 +16627,7 @@ Created by Upverter.com</description>
 <wire x1="154.94" y1="55.88" x2="162.56" y2="55.88" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN12"/>
 <junction x="162.56" y="55.88"/>
+<label x="154.94" y="55.88" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -16618,6 +16642,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="33.02" x2="149.86" y2="33.02" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN21"/>
 <junction x="162.56" y="33.02"/>
+<label x="149.86" y="33.02" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$4" class="0">
@@ -16632,6 +16657,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="30.48" x2="149.86" y2="30.48" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN22"/>
 <junction x="162.56" y="30.48"/>
+<label x="152.4" y="30.48" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$28" class="0">
@@ -16646,6 +16672,7 @@ Created by Upverter.com</description>
 <wire x1="162.56" y1="27.94" x2="149.86" y2="27.94" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="IN23"/>
 <junction x="162.56" y="27.94"/>
+<label x="152.4" y="27.94" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$29" class="1">
@@ -16673,6 +16700,7 @@ Created by Upverter.com</description>
 <wire x1="83.82" y1="50.8" x2="83.82" y2="45.72" width="0.1524" layer="91"/>
 <junction x="83.82" y="45.72"/>
 <junction x="68.58" y="20.32"/>
+<label x="73.66" y="25.4" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SCK_JP4P2" class="0">
@@ -16687,6 +16715,7 @@ Created by Upverter.com</description>
 <pinref part="R2" gate="G$1" pin="2"/>
 <junction x="83.82" y="53.34"/>
 <junction x="66.04" y="20.32"/>
+<label x="73.66" y="27.94" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="MISO_JP4P1" class="0">
@@ -16698,6 +16727,7 @@ Created by Upverter.com</description>
 <junction x="71.12" y="43.18"/>
 <label x="71.12" y="55.88" size="1.778" layer="95" rot="R90"/>
 <junction x="71.12" y="20.32"/>
+<label x="73.66" y="22.86" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="203.2" y1="71.12" x2="198.12" y2="71.12" width="0.1524" layer="91"/>
@@ -16758,6 +16788,7 @@ Created by Upverter.com</description>
 <junction x="48.26" y="43.18"/>
 <wire x1="48.26" y1="43.18" x2="48.26" y2="48.26" width="0.1524" layer="91"/>
 <junction x="48.26" y="20.32"/>
+<label x="48.26" y="22.86" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <wire x1="187.96" y1="165.1" x2="182.88" y2="165.1" width="0.1524" layer="91"/>
@@ -17136,6 +17167,8 @@ Created by Upverter.com</description>
 <pinref part="VDD10" gate="G$1" pin="VDD"/>
 <junction x="43.18" y="60.96"/>
 <junction x="55.88" y="20.32"/>
+<label x="33.02" y="63.5" size="1.778" layer="95"/>
+<label x="55.88" y="22.86" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <wire x1="218.44" y1="88.9" x2="203.2" y2="88.9" width="0.1524" layer="91"/>
@@ -17384,6 +17417,7 @@ Created by Upverter.com</description>
 <wire x1="63.5" y1="20.32" x2="63.5" y2="27.94" width="0.1524" layer="91"/>
 <pinref part="SV1" gate="1" pin="4"/>
 <junction x="63.5" y="20.32"/>
+<label x="63.5" y="25.4" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="N$66" class="0">
