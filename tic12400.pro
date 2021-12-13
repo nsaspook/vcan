@@ -1,9 +1,9 @@
 EAGLE AutoRouter Statistics:
 
-Job           : /root/vcan/tic12400.brd
+Job           : /fred/vcan/tic12400.brd
 
-Start at      : 15:44:53 (12/4/21)
-End at        : 15:45:02 (12/4/21)
+Start at      : 11:16:06 (12/5/21)
+End at        : 11:16:13 (12/5/21)
 Elapsed time  : 00:00:04
 
 Signals       :    81   RoutingGrid: 3 mil  Layers: 4
