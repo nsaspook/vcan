@@ -378,7 +378,7 @@ void init_i400mon(void)
 	LED1 = OFF;
 	I400_ERROR = OFF;
 	V.clock_blinks = 0;
-	set_led_blink(BOFF);
+	set_led_blink(BON);
 	//OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_64);
 	T0CON = 0b10000101;
 	tmp = TIMERFAST >> (uint8_t) 8;

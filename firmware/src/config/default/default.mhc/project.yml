@@ -6,13 +6,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: 30870D92EE1C88922CF60E5617378A71
+- generatedChecksum: 461D723AAA18439F4F8AAA836FF61E15
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 30870D92EE1C88922CF60E5617378A71
+  userChecksum: 461D723AAA18439F4F8AAA836FF61E15
 - generatedChecksum: 60A804A80AE5D3027794AC5512D1B5D5
   logicalPath: config/default
   name: interrupts.c
@@ -174,13 +174,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 7806B30ECAE0D18D08CD583D8775530D
-- generatedChecksum: 2D4BE0C33EECD5B857673C1045FCC2AE
+- generatedChecksum: 15D94D06BE14626D7FA70BBE66109441
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 2D4BE0C33EECD5B857673C1045FCC2AE
+  userChecksum: 15D94D06BE14626D7FA70BBE66109441
 - generatedChecksum: E189C26B2269F8DE46033CCD0621958D
   logicalPath: config/default
   name: device.h
