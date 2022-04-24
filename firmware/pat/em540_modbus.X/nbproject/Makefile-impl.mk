@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=mbmc_modbus.X
+PROJECTNAME=em540_modbus.X
 
 # Active Configuration
 DEFAULTCONF=default

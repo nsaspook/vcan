@@ -1,0 +1,584 @@
+[p GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F1320 ]
+[d frameptr 4065 ]
+"120 /fred/vcan/firmware/pat/ibsmon.c
+[e E1957 cmd_type `uc
+G_MODE 0
+G_ERROR 1
+G_AUX 2
+G_SET 3
+G_LAST 4
+]
+"121
+[e E1951 comm_type `uc
+CLEAR 0
+INIT 1
+SEND 2
+RECV 3
+]
+"71 /fred/vcan/firmware/pat/crc.c
+[v _modbus_rtu_send_msg_crc modbus_rtu_send_msg_crc `(us  1 s 2 modbus_rtu_send_msg_crc ]
+"85
+[v _modbus_rtu_send_msg modbus_rtu_send_msg `(us  1 e 2 0 ]
+"94
+[v _crc16 crc16 `(us  1 e 2 0 ]
+"101 /fred/vcan/firmware/pat/ibsmon.c
+[v _SetDCPWM1 SetDCPWM1 `(v  1 e 1 0 ]
+"118
+[v _controller_work controller_work `(c  1 e 1 0 ]
+"351
+[v _init_i400mon init_i400mon `(v  1 e 1 0 ]
+"429
+[v _init_stream_params init_stream_params `(uc  1 e 1 0 ]
+"435
+[v _main main `(v  1 e 1 0 ]
+"5 /fred/vcan/firmware/pat/ihc_vector.c
+[v _tm_handler tm_handler `IIH(v  1 e 1 0 ]
+"65
+[v _clear_2hz clear_2hz `(v  1 e 1 0 ]
+"72
+[v _clear_10hz clear_10hz `(v  1 e 1 0 ]
+"79
+[v _clear_500hz clear_500hz `(v  1 e 1 0 ]
+"86
+[v _get_2hz get_2hz `(ul  1 e 4 0 ]
+"100
+[v _get_10hz get_10hz `(ul  1 e 4 0 ]
+"114
+[v _get_500hz get_500hz `(ul  1 e 4 0 ]
+"132
+[v _led_blink led_blink `(v  1 s 1 led_blink ]
+"163
+[v _set_led_blink set_led_blink `(a  1 e 1 0 ]
+"4 /opt/microchip/xc8/v2.35/pic/sources/c99/common/fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 /opt/microchip/xc8/v2.35/pic/sources/c99/common/float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 /opt/microchip/xc8/v2.35/pic/sources/c99/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 /opt/microchip/xc8/v2.35/pic/sources/c99/common/ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 /opt/microchip/xc8/v2.35/pic/sources/c99/common/ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 /opt/microchip/xc8/v2.35/pic/sources/c99/common/ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"4 /opt/microchip/xc8/v2.35/pic/sources/c99/common/memcpy.c
+[v _memcpy memcpy `(*.30v  1 e 2 0 ]
+"10 /opt/microchip/xc8/v2.35/pic/sources/c99/common/sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 /opt/microchip/xc8/v2.35/pic/sources/c99/common/sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 /opt/microchip/xc8/v2.35/pic/sources/c99/common/sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 /opt/microchip/xc8/v2.35/pic/sources/c99/common/Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 /opt/microchip/xc8/v2.35/pic/sources/c99/common/Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"6 /fred/vcan/firmware/pat/crc.c
+[v _table_crc_hi table_crc_hi `C[256]uc  1 s 256 table_crc_hi ]
+"36
+[v _table_crc_lo table_crc_lo `C[256]uc  1 s 256 table_crc_lo ]
+"68 /fred/vcan/firmware/pat/ibsmon.c
+[v _req_length req_length `us  1 e 2 0 ]
+"72
+[v _modbus_cc_mode modbus_cc_mode `C[6]uc  1 e 6 0 ]
+"73
+[v _modbus_cc_error modbus_cc_error `C[6]uc  1 e 6 0 ]
+"81
+[v _modbus_cc_clear modbus_cc_clear `[6]uc  1 e 6 0 ]
+"82
+[v _modbus_cc_freset modbus_cc_freset `[6]uc  1 e 6 0 ]
+[s S24 V_data 20 `ul 1 clock_500hz 4 0 `ul 1 clock_10hz 4 4 `ul 1 clock_2hz 4 8 `uc 1 clock_blinks 1 12 `uc 1 num_blinks 1 13 `uc 1 blink_lock 1 14 :1:0 
+`uc 1 config 1 14 :1:1 
+`uc 1 stable 1 14 :1:2 
+`uc 1 boot_code 1 14 :1:3 
+`uc 1 power_on 1 14 :1:4 
+`uc 1 send_count 1 15 `uc 1 recv_count 1 16 `uc 1 pwm_volts 1 17 `us 1 error 2 18 ]
+"84
+[v _V V `VES24  1 e 20 0 ]
+"88
+[v _cc_stream_file cc_stream_file `VEuc  1 e 1 0 ]
+[v _cc_buffer cc_buffer `VE[64]uc  1 e 64 0 ]
+"89
+[v _crc_error crc_error `ul  1 e 4 0 ]
+[u S39 MREG 2 `s 1 value 2 0 `[2]uc 1 bytes 2 0 ]
+"90
+[v _rvalue rvalue `S39  1 e 2 0 ]
+"95
+[v _i400_power i400_power `s  1 e 2 0 ]
+[s S66 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 LATA3 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 LATA6 1 0 :1:6 
+`uc 1 LATA7 1 0 :1:7 
+]
+"520 /opt/microchip/mplabx/v6.00/packs/Microchip/PIC18Fxxxx_DFP/1.3.36/xc8/pic/include/proc/pic18f1320.h
+[s S75 . 1 `uc 1 LA0 1 0 :1:0 
+`uc 1 LA1 1 0 :1:1 
+`uc 1 LA2 1 0 :1:2 
+`uc 1 LA3 1 0 :1:3 
+`uc 1 LA4 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 LA6 1 0 :1:6 
+`uc 1 LA7 1 0 :1:7 
+]
+[u S84 . 1 `S66 1 . 1 0 `S75 1 . 1 0 ]
+[v _LATAbits LATAbits `VES84  1 e 1 @3977 ]
+[s S200 . 1 `uc 1 LATB0 1 0 :1:0 
+`uc 1 LATB1 1 0 :1:1 
+`uc 1 LATB2 1 0 :1:2 
+`uc 1 LATB3 1 0 :1:3 
+`uc 1 LATB4 1 0 :1:4 
+`uc 1 LATB5 1 0 :1:5 
+`uc 1 LATB6 1 0 :1:6 
+`uc 1 LATB7 1 0 :1:7 
+]
+"622
+[s S209 . 1 `uc 1 LB0 1 0 :1:0 
+`uc 1 LB1 1 0 :1:1 
+`uc 1 LB2 1 0 :1:2 
+`uc 1 LB3 1 0 :1:3 
+`uc 1 LB4 1 0 :1:4 
+`uc 1 LB5 1 0 :1:5 
+`uc 1 LB6 1 0 :1:6 
+`uc 1 LB7 1 0 :1:7 
+]
+[u S218 . 1 `S200 1 . 1 0 `S209 1 . 1 0 ]
+[v _LATBbits LATBbits `VES218  1 e 1 @3978 ]
+"707
+[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
+"909
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+[s S428 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+]
+"1210
+[s S436 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 TX1IE 1 0 :1:4 
+`uc 1 RC1IE 1 0 :1:5 
+]
+[u S440 . 1 `S428 1 . 1 0 `S436 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES440  1 e 1 @3997 ]
+[s S510 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"1276
+[s S518 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 TX1IF 1 0 :1:4 
+`uc 1 RC1IF 1 0 :1:5 
+]
+[u S522 . 1 `S510 1 . 1 0 `S518 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES522  1 e 1 @3998 ]
+[s S630 . 1 `uc 1 TMR1IP 1 0 :1:0 
+`uc 1 TMR2IP 1 0 :1:1 
+`uc 1 CCP1IP 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 TXIP 1 0 :1:4 
+`uc 1 RCIP 1 0 :1:5 
+`uc 1 ADIP 1 0 :1:6 
+]
+"1342
+[s S638 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 TX1IP 1 0 :1:4 
+`uc 1 RC1IP 1 0 :1:5 
+]
+[u S642 . 1 `S630 1 . 1 0 `S638 1 . 1 0 ]
+[v _IPR1bits IPR1bits `VES642  1 e 1 @3999 ]
+[s S538 . 1 `uc 1 ABDEN 1 0 :1:0 
+`uc 1 WUE 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 BRG16 1 0 :1:3 
+`uc 1 SCKP 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 RCIDL 1 0 :1:6 
+]
+"1621
+[s S546 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RCMT 1 0 :1:6 
+]
+[s S549 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 W4E 1 0 :1:1 
+]
+[u S552 . 1 `S538 1 . 1 0 `S546 1 . 1 0 `S549 1 . 1 0 ]
+[v _BAUDCTLbits BAUDCTLbits `VES552  1 e 1 @4010 ]
+"1661
+[v _RCSTA RCSTA `VEuc  1 e 1 @4011 ]
+[s S456 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"1702
+[s S465 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 ADEN 1 0 :1:3 
+]
+[s S468 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 SRENA 1 0 :1:5 
+]
+[s S471 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RC8_9 1 0 :1:6 
+]
+[s S474 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RC9 1 0 :1:6 
+]
+[s S477 . 1 `uc 1 RCD8 1 0 :1:0 
+]
+[u S479 . 1 `S456 1 . 1 0 `S465 1 . 1 0 `S468 1 . 1 0 `S471 1 . 1 0 `S474 1 . 1 0 `S477 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES479  1 e 1 @4011 ]
+"1871
+[v _TXSTA TXSTA `VEuc  1 e 1 @4012 ]
+[s S132 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"1910
+[s S141 . 1 `uc 1 TX9D1 1 0 :1:0 
+`uc 1 TRMT1 1 0 :1:1 
+`uc 1 BRGH1 1 0 :1:2 
+`uc 1 SENDB1 1 0 :1:3 
+`uc 1 SYNC1 1 0 :1:4 
+`uc 1 TXEN1 1 0 :1:5 
+`uc 1 TX91 1 0 :1:6 
+`uc 1 CSRC1 1 0 :1:7 
+]
+[s S150 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[s S153 . 1 `uc 1 TXD8 1 0 :1:0 
+]
+[u S155 . 1 `S132 1 . 1 0 `S141 1 . 1 0 `S150 1 . 1 0 `S153 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES155  1 e 1 @4012 ]
+"2127
+[v _TXREG TXREG `VEuc  1 e 1 @4013 ]
+"2139
+[v _RCREG RCREG `VEuc  1 e 1 @4014 ]
+"2151
+[v _SPBRG SPBRG `VEuc  1 e 1 @4015 ]
+"2163
+[v _SPBRGH SPBRGH `VEuc  1 e 1 @4016 ]
+"2455
+[v _CCP1CON CCP1CON `VEuc  1 e 1 @4029 ]
+"2559
+[v _CCPR1L CCPR1L `VEuc  1 e 1 @4030 ]
+"2644
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
+[s S397 . 1 `uc 1 T2CKPS 1 0 :2:0 
+`uc 1 TMR2ON 1 0 :1:2 
+`uc 1 TOUTPS 1 0 :4:3 
+]
+"2911
+[s S401 . 1 `uc 1 T2CKPS0 1 0 :1:0 
+`uc 1 T2CKPS1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 TOUTPS0 1 0 :1:3 
+`uc 1 TOUTPS1 1 0 :1:4 
+`uc 1 TOUTPS2 1 0 :1:5 
+`uc 1 TOUTPS3 1 0 :1:6 
+]
+[u S409 . 1 `S397 1 . 1 0 `S401 1 . 1 0 ]
+[v _T2CONbits T2CONbits `VES409  1 e 1 @4042 ]
+"2961
+[v _PR2 PR2 `VEuc  1 e 1 @4043 ]
+"3078
+[v _T1CON T1CON `VEuc  1 e 1 @4045 ]
+"3190
+[v _TMR1L TMR1L `VEuc  1 e 1 @4046 ]
+"3197
+[v _TMR1H TMR1H `VEuc  1 e 1 @4047 ]
+"3204
+[v _RCON RCON `VEuc  1 e 1 @4048 ]
+[s S285 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+]
+"3246
+[s S287 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_POR 1 0 :1:1 
+]
+[s S290 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_PD 1 0 :1:2 
+]
+[s S293 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_TO 1 0 :1:3 
+]
+[s S296 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 NOT_RI 1 0 :1:4 
+]
+[s S299 . 1 `uc 1 nBOR 1 0 :1:0 
+`uc 1 nPOR 1 0 :1:1 
+`uc 1 nPD 1 0 :1:2 
+`uc 1 nTO 1 0 :1:3 
+`uc 1 nRI 1 0 :1:4 
+`uc 1 . 1 0 :2:5 
+`uc 1 IPEN 1 0 :1:7 
+]
+[s S307 . 1 `uc 1 BOR 1 0 :1:0 
+`uc 1 POR 1 0 :1:1 
+`uc 1 PD 1 0 :1:2 
+`uc 1 TO 1 0 :1:3 
+`uc 1 RI 1 0 :1:4 
+]
+[u S313 . 1 `S285 1 . 1 0 `S287 1 . 1 0 `S290 1 . 1 0 `S293 1 . 1 0 `S296 1 . 1 0 `S299 1 . 1 0 `S307 1 . 1 0 ]
+[v _RCONbits RCONbits `VES313  1 e 1 @4048 ]
+"3508
+[v _T0CON T0CON `VEuc  1 e 1 @4053 ]
+"3592
+[v _TMR0L TMR0L `VEuc  1 e 1 @4054 ]
+"3599
+[v _TMR0H TMR0H `VEuc  1 e 1 @4055 ]
+[s S352 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 NOT_RBPU 1 0 :1:7 
+]
+"3983
+[s S355 . 1 `uc 1 RBIP 1 0 :1:0 
+`uc 1 . 1 0 :1:1 
+`uc 1 TMR0IP 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INTEDG2 1 0 :1:4 
+`uc 1 INTEDG1 1 0 :1:5 
+`uc 1 INTEDG0 1 0 :1:6 
+`uc 1 nRBPU 1 0 :1:7 
+]
+[s S364 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T0IP 1 0 :1:2 
+`uc 1 . 1 0 :4:3 
+`uc 1 RBPU 1 0 :1:7 
+]
+[u S369 . 1 `S352 1 . 1 0 `S355 1 . 1 0 `S364 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES369  1 e 1 @4081 ]
+[s S573 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"4069
+[s S582 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S591 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 . 1 0 :2:2 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S599 . 1 `S573 1 . 1 0 `S582 1 . 1 0 `S591 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES599  1 e 1 @4082 ]
+[s S241 . 1 `uc 1 STKPTR 1 0 :5:0 
+`uc 1 . 1 0 :1:5 
+`uc 1 STKUNF 1 0 :1:6 
+`uc 1 STKFUL 1 0 :1:7 
+]
+"4288
+[s S246 . 1 `uc 1 STKPTR0 1 0 :1:0 
+`uc 1 STKPTR1 1 0 :1:1 
+`uc 1 STKPTR2 1 0 :1:2 
+`uc 1 STKPTR3 1 0 :1:3 
+`uc 1 STKPTR4 1 0 :1:4 
+`uc 1 . 1 0 :2:5 
+`uc 1 STKOVF 1 0 :1:7 
+]
+[s S254 . 1 `uc 1 SP0 1 0 :1:0 
+`uc 1 SP1 1 0 :1:1 
+`uc 1 SP2 1 0 :1:2 
+`uc 1 SP3 1 0 :1:3 
+`uc 1 SP4 1 0 :1:4 
+]
+[u S260 . 1 `S241 1 . 1 0 `S246 1 . 1 0 `S254 1 . 1 0 ]
+[v _STKPTRbits STKPTRbits `VES260  1 e 1 @4092 ]
+"435 /fred/vcan/firmware/pat/ibsmon.c
+[v _main main `(v  1 e 1 0 ]
+{
+"442
+} 0
+"351
+[v _init_i400mon init_i400mon `(v  1 e 1 0 ]
+{
+"427
+} 0
+"429
+[v _init_stream_params init_stream_params `(uc  1 e 1 0 ]
+{
+"433
+} 0
+"118
+[v _controller_work controller_work `(c  1 e 1 0 ]
+{
+"288
+[v controller_work@temp_727 temp `uc  1 a 1 30 ]
+"258
+[v controller_work@temp temp `us  1 a 2 28 ]
+"199
+[v controller_work@c_crc_rec c_crc_rec `us  1 a 2 33 ]
+[v controller_work@c_crc c_crc `us  1 a 2 31 ]
+"120
+[v controller_work@mcmd mcmd `uc  1 s 1 mcmd ]
+"121
+[v controller_work@cstate cstate `E1951  1 s 1 cstate ]
+"122
+[v controller_work@modbus_command modbus_command `E1957  1 s 1 modbus_command ]
+"289
+[v controller_work@volts volts `uc  1 s 1 volts ]
+"349
+} 0
+"163 /fred/vcan/firmware/pat/ihc_vector.c
+[v _set_led_blink set_led_blink `(a  1 e 1 0 ]
+{
+[v set_led_blink@blinks blinks `uc  1 a 1 wreg ]
+[v set_led_blink@blinks blinks `uc  1 a 1 wreg ]
+"165
+[v set_led_blink@blinks blinks `uc  1 a 1 8 ]
+"178
+} 0
+"85 /fred/vcan/firmware/pat/crc.c
+[v _modbus_rtu_send_msg modbus_rtu_send_msg `(us  1 e 2 0 ]
+{
+[v modbus_rtu_send_msg@cc_buffer cc_buffer `*.30v  1 p 1 21 ]
+[v modbus_rtu_send_msg@modbus_cc_mode modbus_cc_mode `*.35Cv  1 p 2 22 ]
+[v modbus_rtu_send_msg@req_length req_length `us  1 p 2 24 ]
+"92
+} 0
+"71
+[v _modbus_rtu_send_msg_crc modbus_rtu_send_msg_crc `(us  1 s 2 modbus_rtu_send_msg_crc ]
+{
+"73
+[v modbus_rtu_send_msg_crc@crc crc `us  1 a 2 19 ]
+"71
+[v modbus_rtu_send_msg_crc@req req `*.30VEuc  1 p 1 16 ]
+[v modbus_rtu_send_msg_crc@req_length req_length `us  1 p 2 17 ]
+"80
+} 0
+"94
+[v _crc16 crc16 `(us  1 e 2 0 ]
+{
+"97
+[v crc16@crc_lo crc_lo `uc  1 a 1 15 ]
+"96
+[v crc16@crc_hi crc_hi `uc  1 a 1 14 ]
+"98
+[v crc16@i i `uc  1 a 1 13 ]
+"94
+[v crc16@buffer buffer `*.30VEuc  1 p 1 8 ]
+[v crc16@buffer_length buffer_length `us  1 p 2 9 ]
+"108
+} 0
+"4 /opt/microchip/xc8/v2.35/pic/sources/c99/common/memcpy.c
+[v _memcpy memcpy `(*.30v  1 e 2 0 ]
+{
+"8
+[v memcpy@s s `*.35Cuc  1 a 2 13 ]
+"7
+[v memcpy@d d `*.30uc  1 a 1 16 ]
+"9
+[v memcpy@tmp tmp `uc  1 a 1 15 ]
+"4
+[v memcpy@d1 d1 `*.30v  1 p 1 8 ]
+[v memcpy@s1 s1 `*.35Cv  1 p 2 9 ]
+[v memcpy@n n `ui  1 p 2 11 ]
+"18
+} 0
+"114 /fred/vcan/firmware/pat/ihc_vector.c
+[v _get_500hz get_500hz `(ul  1 e 4 0 ]
+{
+[v get_500hz@mode mode `uc  1 a 1 wreg ]
+[v get_500hz@mode mode `uc  1 a 1 wreg ]
+"116
+[v get_500hz@tmp tmp `ul  1 s 4 tmp ]
+"118
+[v get_500hz@mode mode `uc  1 a 1 12 ]
+"126
+} 0
+"86
+[v _get_2hz get_2hz `(ul  1 e 4 0 ]
+{
+[v get_2hz@mode mode `uc  1 a 1 wreg ]
+[v get_2hz@mode mode `uc  1 a 1 wreg ]
+"88
+[v get_2hz@tmp tmp `ul  1 s 4 tmp ]
+"90
+[v get_2hz@mode mode `uc  1 a 1 8 ]
+"98
+} 0
+"100
+[v _get_10hz get_10hz `(ul  1 e 4 0 ]
+{
+[v get_10hz@mode mode `uc  1 a 1 wreg ]
+[v get_10hz@mode mode `uc  1 a 1 wreg ]
+"102
+[v get_10hz@tmp tmp `ul  1 s 4 tmp ]
+"104
+[v get_10hz@mode mode `uc  1 a 1 12 ]
+"112
+} 0
+"79
+[v _clear_500hz clear_500hz `(v  1 e 1 0 ]
+{
+"84
+} 0
+"65
+[v _clear_2hz clear_2hz `(v  1 e 1 0 ]
+{
+"70
+} 0
+"72
+[v _clear_10hz clear_10hz `(v  1 e 1 0 ]
+{
+"77
+} 0
+"101 /fred/vcan/firmware/pat/ibsmon.c
+[v _SetDCPWM1 SetDCPWM1 `(v  1 e 1 0 ]
+{
+[u S42 PWMDC 2 `us 1 lpwm 2 0 `[2]uc 1 bpwm 2 0 ]
+"103
+[v SetDCPWM1@DCycle DCycle `S42  1 a 2 12 ]
+"101
+[v SetDCPWM1@dutycycle dutycycle `us  1 p 2 8 ]
+"113
+} 0
+"5 /fred/vcan/firmware/pat/ihc_vector.c
+[v _tm_handler tm_handler `IIH(v  1 e 1 0 ]
+{
+"7
+[v tm_handler@c_error c_error `uc  1 s 1 c_error ]
+"63
+} 0
+"132
+[v _led_blink led_blink `(v  1 s 1 led_blink ]
+{
+"158
+} 0
