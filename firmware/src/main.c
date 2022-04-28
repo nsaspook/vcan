@@ -442,7 +442,7 @@ int main(void)
 	UART6_ReadThresholdSet(1); // callback every char
 	UART6_ReadNotificationEnable(true, true);
 	UART6_ReadCallbackRegister(my_modbus_rx_32, 0);
-	//	InitPetitModbus(MB_ADDR);
+	//InitPetitModbus(MB_ADDR);
 	/*
 	 * software timers @1ms using 500ns ticks
 	 */
@@ -455,7 +455,7 @@ int main(void)
 	TMR6_Start();
 	TMR8_CallbackRegister(timer_500ms_tick, 0);
 	TMR8_Start();
-	TMR9_CallbackRegister(timer_100ms_tick, 0);
+	TMR9_CallbackRegister(timer_2ms_tick, 0);
 	TMR9_Start();
 	TMR3_Stop();
 	TMR3_CallbackRegister(move_pos_qei, 0);
@@ -577,8 +577,8 @@ int main(void)
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
 		//		ProcessPetitModbus(); // slave MODBUS processing 
-		//		master_controller_work(); // master MODBUS processing
-		BSP_LED3_Clear();
+		master_controller_work(&C); // master MODBUS processing
+		//		BSP_LED3_Clear();
 		//		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master
 		PetitRegisters[0].ActValue = (int16_t) hb_current(u1bi, true);
 		PetitRegisters[1].ActValue = (int16_t) hb_current(u2ai, true);

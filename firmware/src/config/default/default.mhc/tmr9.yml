@@ -10,7 +10,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: tmr9, value: '120'}
+        attributes: {id: tmr9, value: '88'}
   - type: KeyValueSet
     attributes: {id: TIMER_32BIT_MODE_SEL}
     children:
@@ -24,7 +24,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: tmr9, value: '234375'}
+        attributes: {id: tmr9, value: '1875000'}
   - type: Long
     attributes: {id: TIMER_PERIOD}
     children:
@@ -37,14 +37,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: tmr9, value: '23436'}
+        attributes: {id: tmr9, value: '3749'}
   - type: KeyValueSet
     attributes: {id: TIMER_PRE_SCALER}
     children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '0'}
+        attributes: {value: '2'}
   - type: Float
     attributes: {id: TIMER_TIME_PERIOD_MS}
     children:
@@ -53,11 +53,18 @@ children:
       - type: Float
         attributes: {id: max}
         children:
-        - {type: Value, value: '1.8325194E7'}
+        - {type: Value, value: '2290649.2'}
     - type: Values
       children:
       - type: User
-        attributes: {value: '100.0'}
+        attributes: {value: '2.0'}
+  - type: Combo
+    attributes: {id: TIMER_UNIT}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: millisecond}
   - type: Integer
     attributes: {id: TIMER_WIDTH}
     children:
@@ -71,6 +78,6 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: tmr9, value: '256'}
+        attributes: {id: tmr9, value: '32'}
 - type: ElementPosition
   attributes: {x: '460', y: '20', id: tmr9}

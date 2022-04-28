@@ -49,9 +49,15 @@ extern "C" {
 		char bytes[2];
 	};
 
-#define SWVER	0x0030;
-#define MADDR		0x04 // modbus i400hz client address
-#define EMADDR		0x01 // modbus EM540 client address
+	typedef struct C_data { // client state machine data
+		uint8_t mcmd;
+		comm_type cstate;
+		cmd_type modbus_command;
+		uint16_t req_length;
+	} C_data;
+
+#define SWVER	0x0031;
+#define MADDR		0x01 // modbus client address
 	/*******************************ModBus Functions*******************************/
 #define READ_COILS                  1
 #define READ_DISCRETE_INPUTS        2
@@ -72,9 +78,8 @@ extern "C" {
 	uint16_t modbus_rtu_send_msg(void *, const void *, uint16_t);
 
 	void my_modbus_rx_32(UART_EVENT, uintptr_t);
-	int8_t controller_work(void);
 	uint8_t init_stream_params(void);
-	int8_t master_controller_work(void);
+	int8_t master_controller_work(C_data *);
 
 	void clear_2hz(void);
 	void clear_10hz(void);
@@ -86,7 +91,9 @@ extern "C" {
 	bool set_led_blink(uint8_t);
 
 	void timer_500ms_tick(uint32_t, uintptr_t);
-	void timer_100ms_tick(uint32_t, uintptr_t);
+	void timer_2ms_tick(uint32_t, uintptr_t);
+
+	extern C_data C; // MODBUS client state data
 
 #ifdef	__cplusplus
 }

@@ -38,6 +38,9 @@ void PetitModBus_UART_Putch(uint8_t c)
 
 static void half_dup_tx(void)
 {
+	if (DERE_Get()) {
+		return;
+	}
 	DERE_Set(); // enable modbus transmitter
 	delay_ms(5);
 }
@@ -46,6 +49,9 @@ static void half_dup_tx(void)
 
 static void half_dup_rx(void)
 {
+	if (!DERE_Get()) {
+		return;
+	}
 	while (UART6_WriteCountGet()) {
 	};
 	delay_ms(5);

@@ -64,17 +64,17 @@ void TMR9_Initialize(void)
     SIDL = 0
     SYNC = 0
     TGATE = 0
-    TCKPS =7
-    T32   = 1
+    TCKPS =5
+    T32   = 0
     TCS = 0
     */
-    T9CONSET = 0x78;
+    T9CONSET = 0x50;
 
     /* Clear counter */
     TMR9 = 0x0;
 
     /*Set period */
-    PR9 = 23436U;
+    PR9 = 3749U;
 
     IEC2SET = _IEC2_T9IE_MASK;
 
@@ -92,25 +92,25 @@ void TMR9_Stop (void)
     T9CONCLR = _T9CON_ON_MASK;
 }
 
-void TMR9_PeriodSet(uint32_t period)
+void TMR9_PeriodSet(uint16_t period)
 {
     PR9  = period;
 }
 
-uint32_t TMR9_PeriodGet(void)
+uint16_t TMR9_PeriodGet(void)
 {
-    return PR9;
+    return (uint16_t)PR9;
 }
 
-uint32_t TMR9_CounterGet(void)
+uint16_t TMR9_CounterGet(void)
 {
-    return (TMR9);
+    return (uint16_t)(TMR9);
 }
 
 
 uint32_t TMR9_FrequencyGet(void)
 {
-    return (234375);
+    return (1875000);
 }
 
 void TIMER_9_InterruptHandler (void)

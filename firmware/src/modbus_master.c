@@ -42,15 +42,22 @@ typedef struct M_data { // ISR used, mainly for non-atomic mod problems
 } M_data;
 
 volatile uint8_t cc_stream_file, cc_buffer[MAX_DATA]; // half-duplex so we can share the cc_buffer for TX and RX
-volatile struct M_data M = {
+volatile M_data M = {
 	.blink_lock = false,
 	.power_on = true,
+};
+
+C_data C = {
+	.mcmd = G_MODE,
+	.cstate = CLEAR,
+	.modbus_command = G_MODE,
+	.req_length = 0,
 };
 
 uint32_t crc_error;
 union MREG rvalue;
 
-uint16_t req_length = 0;
+//uint16_t req_length = 0;
 
 // code from libmodbus: https://raw.githubusercontent.com/stephane/libmodbus/master/src/modbus-rtu.c
 
@@ -204,49 +211,38 @@ uint8_t init_stream_params(void)
 /*
  * simple modbus master state machine
  */
-int8_t master_controller_work(void)
+int8_t master_controller_work(C_data * client)
 {
-	static uint8_t mcmd = G_MODE;
-	static comm_type cstate = CLEAR;
-	static cmd_type modbus_command = G_MODE;
-
-	switch (cstate) {
+	switch (client->cstate) {
 	case CLEAR:
+		BSP_LED3_Clear();
 		clear_2hz();
 		clear_10hz();
-		cstate = INIT;
-		modbus_command = mcmd++; // sequence modbus commands to client
-		if (mcmd > G_LAST) {
-			mcmd = G_MODE;
+		client->cstate = INIT;
+		client->modbus_command = client->mcmd++; // sequence modbus commands to client
+		if (client->mcmd > G_LAST) {
+			client->mcmd = G_MODE;
 		}
 		/*
 		 * command specific tx buffer setup
 		 */
-		switch (modbus_command) {
+		switch (client->modbus_command) {
 		case G_SET: // write code request
-			//			if (SIG4) {
-			//				rvalue.value = i400_pwm;
-			//			} else {
-			//				rvalue.value = 0;
-			//			}
 			modbus_cc_freset[4] = rvalue.bytes[1];
 			modbus_cc_freset[5] = rvalue.bytes[0];
-			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));
 			break;
 		case G_AUX: // write code request
-			//			i400_power = V.power_on << 8; // inverter power command flag
-			//			i400_power += (((uint16_t) (V.error & 0x00ff)) << 9) + SWVER; // receive errors  and software version
-			//			rvalue.value = i400_power;
 			modbus_cc_clear[4] = rvalue.bytes[1];
 			modbus_cc_clear[5] = rvalue.bytes[0];
-			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_clear, sizeof(modbus_cc_clear));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_clear, sizeof(modbus_cc_clear));
 			break;
 		case G_ERROR: // read code request
-			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_error, sizeof(modbus_cc_error));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_error, sizeof(modbus_cc_error));
 			break;
 		case G_MODE: // operating mode request
 		default:
-			req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_mode, sizeof(modbus_cc_mode));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_mode, sizeof(modbus_cc_mode));
 			break;
 		}
 		break;
@@ -263,7 +259,7 @@ int8_t master_controller_work(void)
 
 			M.send_count = 0;
 			M.recv_count = 0;
-			cstate = SEND;
+			client->cstate = SEND;
 			clear_500hz();
 		}
 		break;
@@ -273,10 +269,10 @@ int8_t master_controller_work(void)
 				while (UART6_WriteCountGet()) {
 				}; // wait for each byte
 				UART6_Write((uint8_t*) & cc_buffer[M.send_count], 1);
-			} while (++M.send_count < req_length);
+			} while (++M.send_count < client->req_length);
 			while (UART6_WriteCountGet()) {
 			}; // wait for the last byte
-			cstate = RECV;
+			client->cstate = RECV;
 			clear_500hz();
 		}
 		break;
@@ -284,17 +280,18 @@ int8_t master_controller_work(void)
 		if (get_500hz(false) > TDELAY) {
 			uint16_t c_crc, c_crc_rec;
 
+			BSP_LED3_Set();
 			half_dup_rx();
 
 			/*
 			 * check received response data for size and format for each command sent
 			 */
-			switch (modbus_command) {
+			switch (client->modbus_command) {
 			case G_SET: // check for controller error codes
-				req_length = sizeof(i400_freset);
-				if ((M.recv_count >= req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
-					c_crc = crc16(cc_buffer, req_length - 2);
-					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[req_length - 1] & 0x00ff);
+				client->req_length = sizeof(i400_freset);
+				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
+					c_crc = crc16(cc_buffer, client->req_length - 2);
+					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[client->req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[client->req_length - 1] & 0x00ff);
 					if (c_crc == c_crc_rec) {
 
 					} else {
@@ -302,24 +299,24 @@ int8_t master_controller_work(void)
 						M.error++;
 						set_led_blink(BOFF);
 					}
-					cstate = CLEAR;
+					client->cstate = CLEAR;
 				} else {
 					/*
 					 * receiver timeout, restart
 					 */
 					if (get_500hz(false) > RDELAY) {
-						cstate = CLEAR;
+						client->cstate = CLEAR;
 						MM_ERROR_C;
-						mcmd = G_MODE;
+						client->mcmd = G_MODE;
 						M.error++;
 					}
 				}
 				break;
 			case G_AUX: // check for controller error codes
-				req_length = sizeof(i400_clear);
-				if ((M.recv_count >= req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
-					c_crc = crc16(cc_buffer, req_length - 2);
-					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[req_length - 1] & 0x00ff);
+				client->req_length = sizeof(i400_clear);
+				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
+					c_crc = crc16(cc_buffer, client->req_length - 2);
+					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[client->req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[client->req_length - 1] & 0x00ff);
 					if (c_crc == c_crc_rec) {
 
 					} else {
@@ -327,22 +324,22 @@ int8_t master_controller_work(void)
 						M.error++;
 						set_led_blink(BOFF);
 					}
-					cstate = CLEAR;
+					client->cstate = CLEAR;
 				} else {
 					if (get_500hz(false) > RDELAY) {
-						cstate = CLEAR;
+						client->cstate = CLEAR;
 						MM_ERROR_C;
-						mcmd = G_MODE;
+						client->mcmd = G_MODE;
 						M.error++;
 					}
 				}
 				break;
 			case G_ERROR: // check for controller error codes
-				req_length = sizeof(i400_error);
-				if ((M.recv_count >= req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
+				client->req_length = sizeof(i400_error);
+				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
 					uint16_t temp;
-					c_crc = crc16(cc_buffer, req_length - 2);
-					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[req_length - 1] & 0x00ff);
+					c_crc = crc16(cc_buffer, client->req_length - 2);
+					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[client->req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[client->req_length - 1] & 0x00ff);
 					if (c_crc == c_crc_rec) {
 						if ((temp = ((uint16_t) cc_buffer[3] << 8) +((uint16_t) cc_buffer[4]&0xff))) {
 							//							NOP();
@@ -356,25 +353,25 @@ int8_t master_controller_work(void)
 						M.error++;
 						set_led_blink(BOFF);
 					}
-					cstate = CLEAR;
+					client->cstate = CLEAR;
 				} else {
 					if (get_500hz(false) > RDELAY) {
-						cstate = CLEAR;
+						client->cstate = CLEAR;
 						MM_ERROR_C;
-						mcmd = G_MODE;
+						client->mcmd = G_MODE;
 						M.error++;
 					}
 				}
 				break;
 			case G_MODE: // check for current operating mode
 			default:
-				req_length = sizeof(i400_mode);
-				if ((M.recv_count >= req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
+				client->req_length = sizeof(i400_mode);
+				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
 					uint8_t temp;
 					static uint8_t volts = CC_OFFLINE;
 
-					c_crc = crc16(cc_buffer, req_length - 2);
-					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[req_length - 1] & 0x00ff);
+					c_crc = crc16(cc_buffer, client->req_length - 2);
+					c_crc_rec = (uint16_t) ((uint16_t) cc_buffer[client->req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[client->req_length - 1] & 0x00ff);
 
 					if (c_crc == c_crc_rec) {
 						if ((temp = cc_buffer[4])) {
@@ -412,15 +409,13 @@ int8_t master_controller_work(void)
 						set_led_blink(BOFF);
 					}
 					M.pwm_volts = volts;
-					//					SetDCPWM1(V.pwm_volts);
-					cstate = CLEAR;
+					client->cstate = CLEAR;
 				} else {
 					if (get_500hz(false) > RDELAY) {
 						set_led_blink(BOFF);
-						cstate = CLEAR;
+						client->cstate = CLEAR;
 						M.pwm_volts = CC_OFFLINE;
-						//						SetDCPWM1(V.pwm_volts);
-						mcmd = G_MODE;
+						client->mcmd = G_MODE;
 						M.error++;
 					}
 				}
@@ -430,7 +425,7 @@ int8_t master_controller_work(void)
 	default:
 		break;
 	}
-	return 0;
+	return client->mcmd;
 }
 
 void clear_2hz(void)
@@ -492,23 +487,31 @@ bool set_led_blink(uint8_t blinks)
 	return true;
 }
 
-// switch RS transceiver to transmit mode and wait
+// switch RS transceiver to transmit mode and wait if not tx
 
 static void half_dup_tx(void)
 {
+	if (DERE_Get()) {
+		return;
+	}
 	DERE_Set(); // enable modbus transmitter
 	delay_ms(5);
 }
 
-// switch RS transceiver to receive mode and wait
+// switch RS transceiver to receive mode and wait if not rx
 
 static void half_dup_rx(void)
 {
+	if (!DERE_Get()) {
+		return;
+	}
 	while (UART6_WriteCountGet()) {
 	};
 	delay_ms(5);
 	DERE_Clear(); // enable modbus receiver	
 }
+
+// ISR function for TMR8
 
 void timer_500ms_tick(uint32_t status, uintptr_t context)
 {
@@ -516,7 +519,9 @@ void timer_500ms_tick(uint32_t status, uintptr_t context)
 	M.clock_blinks++;
 }
 
-void timer_100ms_tick(uint32_t status, uintptr_t context)
+// ISR function for TMR9
+
+void timer_2ms_tick(uint32_t status, uintptr_t context)
 {
 	M.clock_500hz++;
 	M.clock_10hz++;

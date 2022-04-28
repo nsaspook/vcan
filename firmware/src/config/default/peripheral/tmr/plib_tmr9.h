@@ -76,11 +76,11 @@ void TMR9_Start(void);
 
 void TMR9_Stop(void);
 
-void TMR9_PeriodSet(uint32_t);
+void TMR9_PeriodSet(uint16_t);
 
-uint32_t TMR9_PeriodGet(void);
+uint16_t TMR9_PeriodGet(void);
 
-uint32_t TMR9_CounterGet(void);
+uint16_t TMR9_CounterGet(void);
 
 uint32_t TMR9_FrequencyGet(void);
 
