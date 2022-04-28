@@ -65,10 +65,10 @@ void TMR9_Initialize(void)
     SYNC = 0
     TGATE = 0
     TCKPS =5
-    T32   = 0
+    T32   = 1
     TCS = 0
     */
-    T9CONSET = 0x50;
+    T9CONSET = 0x58;
 
     /* Clear counter */
     TMR9 = 0x0;
@@ -92,19 +92,19 @@ void TMR9_Stop (void)
     T9CONCLR = _T9CON_ON_MASK;
 }
 
-void TMR9_PeriodSet(uint16_t period)
+void TMR9_PeriodSet(uint32_t period)
 {
     PR9  = period;
 }
 
-uint16_t TMR9_PeriodGet(void)
+uint32_t TMR9_PeriodGet(void)
 {
-    return (uint16_t)PR9;
+    return PR9;
 }
 
-uint16_t TMR9_CounterGet(void)
+uint32_t TMR9_CounterGet(void)
 {
-    return (uint16_t)(TMR9);
+    return (TMR9);
 }
 
 

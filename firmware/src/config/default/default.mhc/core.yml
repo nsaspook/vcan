@@ -4083,14 +4083,14 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '3'}
+        attributes: {value: '2'}
   - type: Hex
     attributes: {id: EVIC_165_PRIVALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '3072'}
+        attributes: {id: core, value: '2048'}
   - type: Boolean
     attributes: {id: EVIC_166_ENABLE}
     children:
@@ -4118,14 +4118,14 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '3'}
+        attributes: {value: '2'}
   - type: Hex
     attributes: {id: EVIC_166_PRIVALUE}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '786432'}
+        attributes: {id: core, value: '524288'}
   - type: Boolean
     attributes: {id: EVIC_169_ENABLE}
     children:
@@ -5213,6 +5213,34 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: TIMER_8_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_84_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '4'}
+  - type: Hex
+    attributes: {id: EVIC_84_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '16'}
+  - type: Combo
+    attributes: {id: EVIC_84_SUBPRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '1'}
+  - type: Hex
+    attributes: {id: EVIC_84_SUBPRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '1'}
   - type: Boolean
     attributes: {id: EVIC_88_ENABLE}
     children:
@@ -5234,6 +5262,34 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: TIMER_9_InterruptHandler}
+  - type: Combo
+    attributes: {id: EVIC_88_PRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '4'}
+  - type: Hex
+    attributes: {id: EVIC_88_PRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '16'}
+  - type: Combo
+    attributes: {id: EVIC_88_SUBPRIORITY}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '2'}
+  - type: Hex
+    attributes: {id: EVIC_88_SUBPRIVALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '2'}
   - type: Boolean
     attributes: {id: EVIC_96_ENABLE}
     children:

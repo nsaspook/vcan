@@ -163,12 +163,12 @@ void __ISR(_TIMER_6_VECTOR, ipl2SRS) TIMER_6_Handler (void)
 	TIMER_6_InterruptHandler();
 }
 
-void __ISR(_TIMER_8_VECTOR, ipl1SRS) TIMER_8_Handler (void)
+void __ISR(_TIMER_8_VECTOR, ipl4SRS) TIMER_8_Handler (void)
 {
     TIMER_8_InterruptHandler();
 }
 
-void __ISR(_TIMER_9_VECTOR, ipl1SRS) TIMER_9_Handler (void)
+void __ISR(_TIMER_9_VECTOR, ipl4SRS) TIMER_9_Handler (void)
 {
     TIMER_9_InterruptHandler();
 }
@@ -188,12 +188,12 @@ void __ISR(_UART6_FAULT_VECTOR, ipl3SRS) UART6_FAULT_Handler (void)
 	UART6_FAULT_InterruptHandler();
 }
 
-void __ISR(_UART6_RX_VECTOR, ipl3SRS) UART6_RX_Handler (void)
+void __ISR(_UART6_RX_VECTOR, ipl2SRS) UART6_RX_Handler (void)
 {
 	UART6_RX_InterruptHandler();
 }
 
-void __ISR(_UART6_TX_VECTOR, ipl3SRS) UART6_TX_Handler (void)
+void __ISR(_UART6_TX_VECTOR, ipl2SRS) UART6_TX_Handler (void)
 {
 	UART6_TX_InterruptHandler();
 }

@@ -441,8 +441,12 @@ int main(void)
 	DERE_Clear(); // enable modbus receiver USART6
 	UART6_ReadThresholdSet(1); // callback every char
 	UART6_ReadNotificationEnable(true, true);
+#ifdef MB_MASTER
 	UART6_ReadCallbackRegister(my_modbus_rx_32, 0);
-	//InitPetitModbus(MB_ADDR);
+#else
+	UART6_ReadCallbackRegister(my_modbus_rx, 0);
+	InitPetitModbus(MB_ADDR);
+#endif
 	/*
 	 * software timers @1ms using 500ns ticks
 	 */
@@ -576,8 +580,13 @@ int main(void)
 	while (true) {
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
-		//		ProcessPetitModbus(); // slave MODBUS processing 
-		master_controller_work(&C); // master MODBUS processing
+#ifdef MB_MASTER
+		master_controller_work(&C); // master MODBUS processing	
+#else
+		ProcessPetitModbus(); // slave MODBUS processing 
+#endif
+
+
 		//		BSP_LED3_Clear();
 		//		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master
 		PetitRegisters[0].ActValue = (int16_t) hb_current(u1bi, true);
@@ -666,6 +675,8 @@ int main(void)
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
+				sprintf(buffer, "Trace %3i    ", C.trace);
+				eaDogM_WriteStringAtPos(13, 0, buffer);
 				sprintf(buffer, "%4i:A U%4i V%4i W%4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[ANA3], ((-an_data[ANA1]) - an_data[ANA3]), an_data[POT1], an_data[POT2]);
 				eaDogM_WriteStringAtPos(14, 0, buffer);
 				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    R%d", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4), dmt + (wdt << 1));

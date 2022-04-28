@@ -52,6 +52,7 @@ C_data C = {
 	.cstate = CLEAR,
 	.modbus_command = G_MODE,
 	.req_length = 0,
+	.trace = 0,
 };
 
 uint32_t crc_error;
@@ -213,8 +214,10 @@ uint8_t init_stream_params(void)
  */
 int8_t master_controller_work(C_data * client)
 {
+	client->trace = 1;
 	switch (client->cstate) {
 	case CLEAR:
+		client->trace = 2;
 		BSP_LED3_Clear();
 		clear_2hz();
 		clear_10hz();
@@ -228,25 +231,30 @@ int8_t master_controller_work(C_data * client)
 		 */
 		switch (client->modbus_command) {
 		case G_SET: // write code request
+			client->trace = 3;
 			modbus_cc_freset[4] = rvalue.bytes[1];
 			modbus_cc_freset[5] = rvalue.bytes[0];
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));
 			break;
 		case G_AUX: // write code request
+			client->trace = 4;
 			modbus_cc_clear[4] = rvalue.bytes[1];
 			modbus_cc_clear[5] = rvalue.bytes[0];
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_clear, sizeof(modbus_cc_clear));
 			break;
 		case G_ERROR: // read code request
+			client->trace = 5;
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_error, sizeof(modbus_cc_error));
 			break;
 		case G_MODE: // operating mode request
+			client->trace = 6;
 		default:
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_mode, sizeof(modbus_cc_mode));
 			break;
 		}
 		break;
 	case INIT:
+		client->trace = 7;
 #ifdef	FASTQ
 		if (get_10hz(false) >= CDELAY) {
 			get_2hz(false);
@@ -261,25 +269,39 @@ int8_t master_controller_work(C_data * client)
 			M.recv_count = 0;
 			client->cstate = SEND;
 			clear_500hz();
+			client->trace = 71;
 		}
 		break;
 	case SEND:
+		client->trace = 8;
 		if (get_500hz(false) > TDELAY) {
+			client->trace = 9;
 			do {
 				while (UART6_WriteCountGet()) {
 				}; // wait for each byte
 				UART6_Write((uint8_t*) & cc_buffer[M.send_count], 1);
+				if (cc_buffer[M.send_count]&0x01) {
+					UART3_Write((uint8_t*) "X", 1);
+				} else {
+					UART3_Write((uint8_t*) "O", 1);
+				}
 			} while (++M.send_count < client->req_length);
+			UART3_Write((uint8_t*) "\r\n", 2);
+			client->trace = 91;
 			while (UART6_WriteCountGet()) {
 			}; // wait for the last byte
+			UART6_ErrorGet();
 			client->cstate = RECV;
 			clear_500hz();
+			client->trace = 10;
 		}
 		break;
 	case RECV:
+		client->trace = 11;
 		if (get_500hz(false) > TDELAY) {
 			uint16_t c_crc, c_crc_rec;
 
+			client->trace = 12;
 			BSP_LED3_Set();
 			half_dup_rx();
 
@@ -288,6 +310,7 @@ int8_t master_controller_work(C_data * client)
 			 */
 			switch (client->modbus_command) {
 			case G_SET: // check for controller error codes
+				client->trace = 13;
 				client->req_length = sizeof(i400_freset);
 				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
@@ -313,6 +336,7 @@ int8_t master_controller_work(C_data * client)
 				}
 				break;
 			case G_AUX: // check for controller error codes
+				client->trace = 14;
 				client->req_length = sizeof(i400_clear);
 				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
@@ -335,6 +359,7 @@ int8_t master_controller_work(C_data * client)
 				}
 				break;
 			case G_ERROR: // check for controller error codes
+				client->trace = 15;
 				client->req_length = sizeof(i400_error);
 				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
 					uint16_t temp;
@@ -364,6 +389,7 @@ int8_t master_controller_work(C_data * client)
 				}
 				break;
 			case G_MODE: // check for current operating mode
+				client->trace = 16;
 			default:
 				client->req_length = sizeof(i400_mode);
 				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
@@ -411,12 +437,15 @@ int8_t master_controller_work(C_data * client)
 					M.pwm_volts = volts;
 					client->cstate = CLEAR;
 				} else {
+					client->trace = 17;
 					if (get_500hz(false) > RDELAY) {
+						client->trace = 18;
 						set_led_blink(BOFF);
 						client->cstate = CLEAR;
 						M.pwm_volts = CC_OFFLINE;
 						client->mcmd = G_MODE;
 						M.error++;
+						client->trace = 18;
 					}
 				}
 			}
@@ -425,6 +454,7 @@ int8_t master_controller_work(C_data * client)
 	default:
 		break;
 	}
+	client->trace = 200;
 	return client->mcmd;
 }
 

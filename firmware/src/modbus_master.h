@@ -54,6 +54,7 @@ extern "C" {
 		comm_type cstate;
 		cmd_type modbus_command;
 		uint16_t req_length;
+		uint8_t trace;
 	} C_data;
 
 #define SWVER	0x0031;
