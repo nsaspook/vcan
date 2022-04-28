@@ -26,7 +26,7 @@
 #define CC_LIMIT	230	// 4.00
 #define CC_OFFLINE	255	// 4.40
 
-typedef struct V_data { // ISR used, mainly for non-atomic mod problems
+typedef struct M_data { // ISR used, mainly for non-atomic mod problems
 	uint32_t clock_500hz;
 	uint32_t clock_10hz;
 	uint32_t clock_2hz;
@@ -39,10 +39,10 @@ typedef struct V_data { // ISR used, mainly for non-atomic mod problems
 	uint8_t power_on : 1;
 	uint8_t send_count, recv_count, pwm_volts;
 	uint16_t error;
-} V_data;
+} M_data;
 
 volatile uint8_t cc_stream_file, cc_buffer[MAX_DATA]; // half-duplex so we can share the cc_buffer for TX and RX
-volatile struct V_data M = {
+volatile struct M_data M = {
 	.blink_lock = false,
 	.power_on = true,
 };
@@ -435,23 +435,17 @@ int8_t master_controller_work(void)
 
 void clear_2hz(void)
 {
-
 	M.clock_2hz = 0;
-
 }
 
 void clear_10hz(void)
 {
-
 	M.clock_10hz = 0;
-
 }
 
 void clear_500hz(void)
 {
-
 	M.clock_500hz = 0;
-
 }
 
 uint32_t get_2hz(uint8_t mode)
@@ -462,9 +456,7 @@ uint32_t get_2hz(uint8_t mode)
 		return tmp;
 	}
 
-
 	tmp = M.clock_2hz;
-
 	return tmp;
 }
 
@@ -476,9 +468,7 @@ uint32_t get_10hz(uint8_t mode)
 		return tmp;
 	}
 
-
 	tmp = M.clock_10hz;
-
 	return tmp;
 }
 
@@ -490,9 +480,7 @@ uint32_t get_500hz(uint8_t mode)
 		return tmp;
 	}
 
-
 	tmp = M.clock_500hz;
-
 	return tmp;
 }
 
@@ -520,4 +508,16 @@ static void half_dup_rx(void)
 	};
 	delay_ms(5);
 	DERE_Clear(); // enable modbus receiver	
+}
+
+void timer_500ms_tick(uint32_t status, uintptr_t context)
+{
+	M.clock_2hz++;
+	M.clock_blinks++;
+}
+
+void timer_100ms_tick(uint32_t status, uintptr_t context)
+{
+	M.clock_500hz++;
+	M.clock_10hz++;
 }

@@ -64,7 +64,7 @@ extern "C" {
 
 #define BOFF	0
 #define BON	255
-	
+
 #define MM_ERROR_S	BSP_LED1_Set()
 #define MM_ERROR_C	BSP_LED1_Clear()
 
@@ -84,6 +84,9 @@ extern "C" {
 	uint32_t get_500hz(uint8_t);
 
 	bool set_led_blink(uint8_t);
+
+	void timer_500ms_tick(uint32_t, uintptr_t);
+	void timer_100ms_tick(uint32_t, uintptr_t);
 
 #ifdef	__cplusplus
 }
