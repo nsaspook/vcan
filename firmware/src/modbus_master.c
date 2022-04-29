@@ -8,15 +8,6 @@
 #define ERROR_BLINKS	MAX_BLINKS
 #define BLINK_SPACE	8
 
-//#define LOCAL_ECHO	1
-#define FASTQ			// MODBUS query speed
-
-#define TDELAY		3	// half-duplex delay
-#define RDELAY		300	// receive timeout
-#define CDELAY		50	// 10Hz
-#define QDELAY		1	// query delay
-#define TODELAY		4	// misc delay
-
 #define CC_DEACT	61	// 1.00 normal 61
 #define CC_ACT		92	// 1.50
 #define CC_MPPT		122	// 2.00
@@ -137,8 +128,9 @@ i400_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x60, 0x0
 uint8_t modbus_cc_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0A, 0x00, 0x01},
 modbus_cc_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0B, 0x00, 0x02};
 
-static void half_dup_tx(void);
-static void half_dup_rx(void);
+static void half_dup_tx(bool);
+static void half_dup_rx(bool);
+static bool u6_trmt(void);
 static uint16_t modbus_rtu_send_msg_crc(volatile uint8_t *, uint16_t);
 
 /*
@@ -255,17 +247,15 @@ int8_t master_controller_work(C_data * client)
 		break;
 	case INIT:
 		client->trace = 7;
-#ifdef	FASTQ
+		/*
+		 * MODBUS master query speed
+		 */
+#ifdef	FASTQ 
 		if (get_10hz(false) >= CDELAY) {
-			get_2hz(false);
 #else
 		if (get_2hz(FALSE) >= QDELAY) {
-			get_10hz(false);
 #endif
-
-			half_dup_tx();
-
-			M.send_count = 0;
+			half_dup_tx(false); // no delays here
 			M.recv_count = 0;
 			client->cstate = SEND;
 			clear_500hz();
@@ -274,36 +264,27 @@ int8_t master_controller_work(C_data * client)
 		break;
 	case SEND:
 		client->trace = 8;
-		if (get_500hz(false) > TDELAY) {
+		if (get_500hz(false) >= TDELAY) {
 			client->trace = 9;
-			do {
-				while (UART6_WriteCountGet()) {
-				}; // wait for each byte
-				UART6_Write((uint8_t*) & cc_buffer[M.send_count], 1);
-				if (cc_buffer[M.send_count]&0x01) {
-					UART3_Write((uint8_t*) "X", 1);
-				} else {
-					UART3_Write((uint8_t*) "O", 1);
-				}
-			} while (++M.send_count < client->req_length);
-			UART3_Write((uint8_t*) "\r\n", 2);
+			UART6_Write((uint8_t*) & cc_buffer, client->req_length);
+			UART3_Write((uint8_t*) "M\r\n", 3); // MODBUS trace signal to serial debug port
 			client->trace = 91;
-			while (UART6_WriteCountGet()) {
-			}; // wait for the last byte
-			UART6_ErrorGet();
 			client->cstate = RECV;
-			clear_500hz();
+			clear_500hz(); // state machine execute background timer clear
 			client->trace = 10;
 		}
 		break;
 	case RECV:
 		client->trace = 11;
-		if (get_500hz(false) > TDELAY) {
+		if (u6_trmt()) { // check for serial UART transmit shift register and buffer empty
+			clear_500hz(); // clear timer until buffer empty
+		}
+		if (get_500hz(false) >= TDELAY) { // state machine execute timer test
 			uint16_t c_crc, c_crc_rec;
 
 			client->trace = 12;
 			BSP_LED3_Set();
-			half_dup_rx();
+			half_dup_rx(false); // no delays here
 
 			/*
 			 * check received response data for size and format for each command sent
@@ -327,7 +308,7 @@ int8_t master_controller_work(C_data * client)
 					/*
 					 * receiver timeout, restart
 					 */
-					if (get_500hz(false) > RDELAY) {
+					if (get_500hz(false) >= RDELAY) {
 						client->cstate = CLEAR;
 						MM_ERROR_C;
 						client->mcmd = G_MODE;
@@ -350,7 +331,7 @@ int8_t master_controller_work(C_data * client)
 					}
 					client->cstate = CLEAR;
 				} else {
-					if (get_500hz(false) > RDELAY) {
+					if (get_500hz(false) >= RDELAY) {
 						client->cstate = CLEAR;
 						MM_ERROR_C;
 						client->mcmd = G_MODE;
@@ -380,7 +361,7 @@ int8_t master_controller_work(C_data * client)
 					}
 					client->cstate = CLEAR;
 				} else {
-					if (get_500hz(false) > RDELAY) {
+					if (get_500hz(false) >= RDELAY) {
 						client->cstate = CLEAR;
 						MM_ERROR_C;
 						client->mcmd = G_MODE;
@@ -438,7 +419,7 @@ int8_t master_controller_work(C_data * client)
 					client->cstate = CLEAR;
 				} else {
 					client->trace = 17;
-					if (get_500hz(false) > RDELAY) {
+					if (get_500hz(false) >= RDELAY) {
 						client->trace = 18;
 						set_led_blink(BOFF);
 						client->cstate = CLEAR;
@@ -458,6 +439,9 @@ int8_t master_controller_work(C_data * client)
 	return client->mcmd;
 }
 
+/*
+ * state machine no busy wait timers
+ */
 void clear_2hz(void)
 {
 	M.clock_2hz = 0;
@@ -519,25 +503,27 @@ bool set_led_blink(uint8_t blinks)
 
 // switch RS transceiver to transmit mode and wait if not tx
 
-static void half_dup_tx(void)
+static void half_dup_tx(bool delay)
 {
 	if (DERE_Get()) {
 		return;
 	}
 	DERE_Set(); // enable modbus transmitter
-	delay_ms(5);
+	if (delay) {
+		delay_ms(2); // busy waits
+	}
 }
 
 // switch RS transceiver to receive mode and wait if not rx
 
-static void half_dup_rx(void)
+static void half_dup_rx(bool delay)
 {
 	if (!DERE_Get()) {
 		return;
 	}
-	while (UART6_WriteCountGet()) {
-	};
-	delay_ms(5);
+	if (delay) {
+		delay_ms(2); // busy waits
+	}
 	DERE_Clear(); // enable modbus receiver	
 }
 
@@ -555,4 +541,22 @@ void timer_2ms_tick(uint32_t status, uintptr_t context)
 {
 	M.clock_500hz++;
 	M.clock_10hz++;
+}
+
+/*
+ * check if we are done with interrupt background buffered transmission of serial data with FIFO
+ * 
+ * TRMT: Transmit Shift Register is Empty bit (read-only)
+ * 1 = Transmit shift register is empty and transmit buffer is empty (the last transmission has completed)
+ * 0 = Transmit shift register is not empty, a transmission is in progress or queued in the transmit buffer
+ * 
+ * ? 8-level deep First-In-First-Out (FIFO) transmit data buffer, ? 8-level deep FIFO receive data buffer
+ * Interrupt is generated and asserted while the transmit buffer is empty
+ * 
+ * so this will return 'true' after the buffer is empty 'interrupt' and after the last bit is on the wire
+ */
+
+static bool u6_trmt(void)
+{
+	return !(U6STA & _U6STA_TRMT_MASK); // note, we invert the TRMT bit so it's true while transmitting
 }

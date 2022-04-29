@@ -599,9 +599,6 @@ int main(void)
 		master_controller_work(&C); // master MODBUS processing	
 #else
 		ProcessPetitModbus(); // slave MODBUS processing 
-#endif
-
-
 		//		BSP_LED3_Clear();
 		//		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master
 		PetitRegisters[0].ActValue = (int16_t) hb_current(u1bi, true);
@@ -610,6 +607,7 @@ int main(void)
 		PetitRegisters[3].ActValue = (int16_t) an_data[ANA1]; // AC voltage value
 		PetitRegisters[4].ActValue = (int16_t) (MODBUS_VER << 8) + PWMF15_Get() + (PWMF5_Get() << 1) + (PWMF6_Get() << 2) + (U1_EN_Get() << 3) + (U2_EN_Get() << 4)+ (check_adc_ivref() << 5);
 		PetitRegisters[5].ActValue = (int16_t) m35_4.current; // current pwm voltage output value
+#endif
 
 #ifndef G400HZ_NODIS
 		if (TimerDone(TMR_MOTOR)) {
@@ -649,6 +647,7 @@ int main(void)
 				U2_EN_Clear();
 			}
 		} else {
+#ifndef MB_MASTER
 			/* flash the board led(s) using the position counter bits */
 #ifdef QEI_SLOW
 			LATGbits.LATG12 = POS3CNT >> 3;
@@ -656,6 +655,7 @@ int main(void)
 #else
 			LATGbits.LATG12 = m35_ptr->pos >> 10;
 			LATGbits.LATG13 = m35_ptr->pos >> 12;
+#endif
 #endif
 			//run_tests(100000); // port diagnostics
 			if (TimerDone(TMR_DISPLAY)) {
@@ -730,8 +730,8 @@ int main(void)
 		/*
 		 * PWM interrupt loss shutdown using DMT
 		 */
-		if (!V.pwm_update && ((V.StartTime + DMT_PWM_TIME) < (uint32_t) _CP0_GET_COUNT())) {
-			UART3_Write((unsigned char *) " P\r\n", 4);
+		if (true && !V.pwm_update && ((V.StartTime + DMT_PWM_TIME) < (uint32_t) _CP0_GET_COUNT())) {
+//			UART3_Write((unsigned char *) " P\r\n", 4);
 			if (DMT_ClearWindowStatusGet()) {
 				DMT_Clear(); // clear the Dead Man Timer
 			}
