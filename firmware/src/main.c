@@ -53,6 +53,8 @@ IC = M * sin (? + 240)
  * timer 2	motor pwm waveform 1.0ms PRI 7, sub 2
  * timer 3	QEI slip speed updater 1 second
  * timer 6	software timer updates 0.5ms
+ * timer 8	MODBUS 2Hz timer
+ * timer 9	MODBUS 500Hz timer
  */
 
 #include "m35qei.h" 
@@ -422,7 +424,9 @@ int main(void)
 				BSP_LED2_Toggle();
 				BSP_LED3_Toggle();
 			}
-			DMT_Clear(); // clear the Dead Man Timer
+			if (DMT_ClearWindowStatusGet()) {
+				DMT_Clear(); // clear the Dead Man Timer
+			}
 		}
 	}
 
@@ -492,6 +496,10 @@ int main(void)
 
 	init_lcd_drv(D_INIT);
 
+	if (DMT_ClearWindowStatusGet()) {
+		DMT_Clear(); // clear the Dead Man Timer
+	}
+
 	if (OSCCONbits.CF) { // check for sysclock proper operation
 		sprintf(buffer, "VCAN Clock Error       ");
 		eaDogM_WriteStringAtPos(0, 0, buffer);
@@ -508,6 +516,12 @@ int main(void)
 		eaDogM_WriteStringAtPos(1, 0, buffer);
 		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", option1_Get(), option2_Get(), dmt + (wdt << 1));
 		eaDogM_WriteStringAtPos(2, 0, buffer);
+		sprintf(buffer, "%4i:D %5i %5i %5i  ", DMT_ClearWindowStatusGet(), m35_2.duty, m35_3.duty, m35_4.duty);
+		eaDogM_WriteStringAtPos(8, 0, buffer);
+		sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[5].ActValue, (uint16_t) PetitRegisters[10].ActValue, (int16_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
+		eaDogM_WriteStringAtPos(9, 0, buffer);
+		sprintf(buffer, "DM %10i %10i", DMT_CounterGet(), DMT_TimeOutCountGet());
+		eaDogM_WriteStringAtPos(10, 0, buffer);
 		OledUpdate();
 		WaitMs(1500);
 	}
@@ -543,6 +557,7 @@ int main(void)
 	 * start ISR for PWM waveform generator
 	 */
 	TMR2_Stop();
+	TMR2_PeriodSet(700); // set output voltage frequency, 51 for 400Hz, 340 ~60Hz
 	TMR2_CallbackRegister(wave_gen, 0);
 	TMR2_Start();
 	// setup motor position values
@@ -706,7 +721,9 @@ int main(void)
 			 * simple fast repeats of DMT_Clear() will not work
 			 */
 			if (V.dmt_sosc_flag) {
-				DMT_Clear(); // clear the Dead Man Timer
+				if (DMT_ClearWindowStatusGet()) {
+					DMT_Clear(); // clear the Dead Man Timer
+				}
 				V.dmt_sosc_flag = false;
 			}
 		}
@@ -715,7 +732,9 @@ int main(void)
 		 */
 		if (!V.pwm_update && ((V.StartTime + DMT_PWM_TIME) < (uint32_t) _CP0_GET_COUNT())) {
 			UART3_Write((unsigned char *) " P\r\n", 4);
-			DMT_Clear(); // clear the Dead Man Timer
+			if (DMT_ClearWindowStatusGet()) {
+				DMT_Clear(); // clear the Dead Man Timer
+			}
 		}
 	}
 

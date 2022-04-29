@@ -178,7 +178,7 @@ extern "C" {
 #define DISPLAY_UPDATE	100
 #define ADC_UPDATE	25
 #define BLINK_UPDATE	1000
-#define DMT_UPDATE	1100	// DMT regular clearing timer in ms
+#define DMT_UPDATE	1200	// DMT regular clearing timer in ms 1100
 #define DMT_PWM_TIME	1800	// core timer cycles until DMT system shutdown
 
 #ifdef	__cplusplus

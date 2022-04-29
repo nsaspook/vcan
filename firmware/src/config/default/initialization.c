@@ -81,7 +81,7 @@
 #pragma config WDTSPGM =    STOP
 #pragma config FWDTEN =     OFF
 #pragma config WINDIS =     NORMAL
-#pragma config FWDTWINSZ =  WINSZ_25
+#pragma config FWDTWINSZ =  WINSZ_75
 #pragma config DMTCNT =     DMT28
 #pragma config FDMTEN =     ON
 

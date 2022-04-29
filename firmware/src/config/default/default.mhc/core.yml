@@ -2765,6 +2765,13 @@ children:
       - type: User
         attributes: {value: 'OFF'}
   - type: Combo
+    attributes: {id: CONFIG_FWDTWINSZ}
+    children:
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: WINSZ_75}
+  - type: Combo
     attributes: {id: CONFIG_IESO}
     children:
     - type: Values
@@ -7936,6 +7943,13 @@ children:
       children:
       - type: User
         attributes: {value: 'false'}
+  - type: String
+    attributes: {id: WDT_ALLOWED_WINDOW_PERIOD}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 768.0 s}
   - type: Setting
     attributes: {id: XC32_HEAP}
     children:
