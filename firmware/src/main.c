@@ -327,6 +327,9 @@ void my_time(uint32_t status, uintptr_t context)
 
 	t1_time++;
 	V.dmt_sosc_flag = true;
+	if (DMT_ClearWindowStatusGet()) {
+		DMT_Clear(); // clear the Dead Man Timer
+	}
 #ifdef G400HZ
 	PetitModBus_TimerValues(); // modbus time tick
 	/*
@@ -369,20 +372,38 @@ void move_pos_qei(uint32_t status, uintptr_t context)
 void fh_hw(void *a_data)
 {
 	t_cli_ctx *cmd = a_data;
+	static uint32_t period = 2000;
 	POS3CNT = 1000;
 	UART3_Write((uint8_t*) cmd->cmd, strlen(cmd->cmd));
+	TMR2 = 0x0;
+	TMR2_PeriodSet(period); // set output voltage frequency, 51 for 400Hz, 340 ~60Hz
+	if (period < 1001) {
+		period = period - 25;
+	} else {
+		if (period <300) {
+			period = period - 2;
+		} else {
+		period = period - 100;
+		}
+	}
+	if (period < 260)
+		period = 2000;
 }
 
 void fh_hi(void *a_data)
 {
+
+
 	POS3CNT = 3000;
-	UART3_Write((uint8_t*) " hi      ", 8);
+	//	UART3_Write((uint8_t*) cmd->cmd, strlen(cmd->cmd));
 }
 
 void fh_ho(void *a_data)
 {
+	t_cli_ctx *cmd = a_data;
+
 	POS3CNT = 0;
-	UART3_Write((uint8_t*) " ho      ", 8);
+	UART3_Write((uint8_t*) cmd->cmd, strlen(cmd->cmd));
 }
 
 void my_modbus_rx(UART_EVENT event, uintptr_t context)
@@ -558,7 +579,7 @@ int main(void)
 	 * start ISR for PWM waveform generator
 	 */
 	TMR2_Stop();
-	TMR2_PeriodSet(700); // set output voltage frequency, 51 for 400Hz, 340 ~60Hz
+	TMR2_PeriodSet(1700); // set output voltage frequency, 51 for 400Hz, 340 ~60Hz
 	TMR2_CallbackRegister(wave_gen, 0);
 	TMR2_Start();
 	// setup motor position values
@@ -711,6 +732,7 @@ int main(void)
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, BLINK_UPDATE);
 			RESET_LED_Toggle();
+			fh_hw("motor speed test");
 		}
 		/*
 		 * timer based DMT shutdown
