@@ -179,7 +179,7 @@ extern "C" {
 #define ADC_UPDATE	25
 #define BLINK_UPDATE	1000
 #define DMT_UPDATE	500	// DMT regular clearing timer in ms 1100
-#define DMT_PWM_TIME	500	// core timer cycles until DMT system shutdown
+#define DMT_PWM_TIME	50000	// core timer cycles until DMT system shutdown
 
 #ifdef	__cplusplus
 }

@@ -411,7 +411,7 @@ int main(void)
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
 
-	if (dmt) {
+	if (dmt) { // shutdown system and loop
 		uint16_t tgl = 1;
 		/*
 		 * make sure inverter power to h-bridge is off
@@ -424,6 +424,7 @@ int main(void)
 				BSP_LED2_Toggle();
 				BSP_LED3_Toggle();
 			}
+			UART3_Write((unsigned char *) "DMT\r\n", 5);
 			if (DMT_ClearWindowStatusGet()) {
 				DMT_Clear(); // clear the Dead Man Timer
 			}
@@ -730,8 +731,8 @@ int main(void)
 		/*
 		 * PWM interrupt loss shutdown using DMT
 		 */
-		if (true && !V.pwm_update && ((V.StartTime + DMT_PWM_TIME) < (uint32_t) _CP0_GET_COUNT())) {
-//			UART3_Write((unsigned char *) " P\r\n", 4);
+		if (!V.pwm_update && ((V.StartTime + DMT_PWM_TIME) < (uint32_t) _CP0_GET_COUNT())) {
+			UART3_Write((unsigned char *) " P\r\n", 4);
 			if (DMT_ClearWindowStatusGet()) {
 				DMT_Clear(); // clear the Dead Man Timer
 			}
