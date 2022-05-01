@@ -27,6 +27,7 @@ extern "C" {
 #define MB_ADDR		4	// slave address
 	
 #define MB_MASTER
+#define MB_EM540
 
 	/*
 	 * read registers

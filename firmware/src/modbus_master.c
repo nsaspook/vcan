@@ -128,6 +128,21 @@ i400_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x60, 0x0
 uint8_t modbus_cc_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0A, 0x00, 0x01},
 modbus_cc_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0B, 0x00, 0x02};
 
+/*
+ * send and receive MODBUS templates for 3-phase energy monitor
+ */
+const uint8_t modbus_em_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x0b, 0x00, 0x00},
+modbus_em_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x03, 0x02, 0x00, 0x00},
+em_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
+em_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
+em_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x5d, 0xc0},
+em_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x60, 0x00};
+/*
+ * send variable register commands
+ */
+uint8_t modbus_em_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0A, 0x00, 0x01},
+modbus_em_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0B, 0x00, 0x02};
+
 static void half_dup_tx(bool);
 static void half_dup_rx(bool);
 static bool u6_trmt(void);
@@ -236,12 +251,20 @@ int8_t master_controller_work(C_data * client)
 			break;
 		case G_ERROR: // read code request
 			client->trace = 5;
+#ifdef	MB_EM540
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_em_error, sizeof(modbus_em_error));
+#else
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_error, sizeof(modbus_cc_error));
+#endif
 			break;
 		case G_MODE: // operating mode request
 			client->trace = 6;
 		default:
+#ifdef	MB_EM540
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_em_mode, sizeof(modbus_em_mode));
+#else
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_mode, sizeof(modbus_cc_mode));
+#endif
 			break;
 		}
 		break;
@@ -253,7 +276,7 @@ int8_t master_controller_work(C_data * client)
 #ifdef	FASTQ 
 		if (get_10hz(false) >= CDELAY) {
 #else
-		if (get_2hz(FALSE) >= QDELAY) {
+		if (get_2hz(false) >= QDELAY) {
 #endif
 			half_dup_tx(false); // no delays here
 			M.recv_count = 0;
@@ -341,6 +364,18 @@ int8_t master_controller_work(C_data * client)
 				break;
 			case G_ERROR: // check for controller error codes
 				client->trace = 15;
+#ifdef	MB_EM540
+				client->req_length = sizeof(em_error);
+				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
+				} else {
+					if (get_500hz(false) >= RDELAY) {
+						client->cstate = CLEAR;
+						MM_ERROR_C;
+						client->mcmd = G_MODE;
+						M.error++;
+					}
+				}
+#else
 				client->req_length = sizeof(i400_error);
 				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
 					uint16_t temp;
@@ -368,10 +403,26 @@ int8_t master_controller_work(C_data * client)
 						M.error++;
 					}
 				}
+#endif
 				break;
 			case G_MODE: // check for current operating mode
 				client->trace = 16;
 			default:
+#ifdef	MB_EM540
+				client->req_length = sizeof(em_mode);
+				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
+				} else {
+					client->trace = 17;
+					if (get_500hz(false) >= RDELAY) {
+						client->trace = 18;
+						set_led_blink(BOFF);
+						client->cstate = CLEAR;
+						client->mcmd = G_MODE;
+						M.error++;
+						client->trace = 19;
+					}
+				}
+#else
 				client->req_length = sizeof(i400_mode);
 				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
 					uint8_t temp;
@@ -426,9 +477,11 @@ int8_t master_controller_work(C_data * client)
 						M.pwm_volts = CC_OFFLINE;
 						client->mcmd = G_MODE;
 						M.error++;
-						client->trace = 18;
+						client->trace = 19;
 					}
 				}
+#endif
+				break;
 			}
 		}
 		break;
