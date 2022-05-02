@@ -131,17 +131,17 @@ modbus_cc_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0B, 0x00, 0x02};
 /*
  * send and receive MODBUS templates for 3-phase energy monitor
  */
-const uint8_t modbus_em_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x0b, 0x00, 0x00},
-modbus_em_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x03, 0x02, 0x00, 0x00},
-em_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-em_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-em_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x5d, 0xc0},
-em_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x01, 0x60, 0x00};
-/*
- * send variable register commands
- */
-uint8_t modbus_em_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0A, 0x00, 0x01},
-modbus_em_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x0B, 0x00, 0x02};
+const uint8_t
+// transmit frames
+modbus_em_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x0b, 0x00, 0x01}, // Carlo Gavazzi Controls identification code
+modbus_em_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x03, 0x02, 0x00, 0x01}, // Firmware version and revision code
+modbus_em_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x10, 0x02, 0x00, 0x01}, // System configuration, Value 1 = ?3P? (3-phase without neutral)
+modbus_em_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x10, 0x00, 0x00, 0x00}, // Password configuration, set to no password = 0
+// receive frames
+em_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x00},
+em_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x00},
+em_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x00},
+em_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x00};
 
 static void half_dup_tx(bool);
 static void half_dup_rx(bool);
@@ -221,6 +221,15 @@ uint8_t init_stream_params(void)
  */
 int8_t master_controller_work(C_data * client)
 {
+
+	/*
+	 * helper functions
+	 */
+	inline uint16_t crc16_receive(void)
+	{
+		return (uint16_t) ((uint16_t) cc_buffer[client->req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[client->req_length - 1] & 0x00ff);;
+	}
+
 	client->trace = 1;
 	switch (client->cstate) {
 	case CLEAR:
@@ -239,15 +248,23 @@ int8_t master_controller_work(C_data * client)
 		switch (client->modbus_command) {
 		case G_SET: // write code request
 			client->trace = 3;
+#ifdef	MB_EM540
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_em_freset, sizeof(modbus_em_freset));
+#else			
 			modbus_cc_freset[4] = rvalue.bytes[1];
 			modbus_cc_freset[5] = rvalue.bytes[0];
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));
+#endif
 			break;
 		case G_AUX: // write code request
 			client->trace = 4;
+#ifdef	MB_EM540
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_em_clear, sizeof(modbus_em_clear));
+#else			
 			modbus_cc_clear[4] = rvalue.bytes[1];
 			modbus_cc_clear[5] = rvalue.bytes[0];
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_clear, sizeof(modbus_cc_clear));
+#endif
 			break;
 		case G_ERROR: // read code request
 			client->trace = 5;
@@ -256,6 +273,10 @@ int8_t master_controller_work(C_data * client)
 #else
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_error, sizeof(modbus_cc_error));
 #endif
+			break;
+		case G_LAST: // end of command sequences
+			client->cstate = CLEAR;
+			client->mcmd = G_MODE;
 			break;
 		case G_MODE: // operating mode request
 			client->trace = 6;
@@ -289,7 +310,7 @@ int8_t master_controller_work(C_data * client)
 		client->trace = 8;
 		if (get_500hz(false) >= TDELAY) {
 			client->trace = 9;
-			UART6_Write((uint8_t*) & cc_buffer, client->req_length);
+			UART6_Write((uint8_t*) cc_buffer, client->req_length);
 			UART3_Write((uint8_t*) "M\r\n", 3); // MODBUS trace signal to serial debug port
 			client->trace = 91;
 			client->cstate = RECV;
@@ -315,6 +336,29 @@ int8_t master_controller_work(C_data * client)
 			switch (client->modbus_command) {
 			case G_SET: // check for controller error codes
 				client->trace = 13;
+#ifdef	MB_EM540
+				client->req_length = sizeof(em_freset);
+				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
+					c_crc = crc16(cc_buffer, client->req_length - 2);
+					c_crc_rec = crc16_receive();
+					if (c_crc == c_crc_rec) {
+						BSP_LED1_Toggle();
+					} else {
+						crc_error++;
+						M.error++;
+						set_led_blink(BOFF);
+					}
+					client->cstate = CLEAR;
+					client->mcmd = G_LAST;
+				} else {
+					if (get_500hz(false) >= RDELAY) {
+						client->cstate = CLEAR;
+						MM_ERROR_C;
+						client->mcmd = G_MODE;
+						M.error++;
+					}
+				}
+#else
 				client->req_length = sizeof(i400_freset);
 				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
@@ -338,9 +382,32 @@ int8_t master_controller_work(C_data * client)
 						M.error++;
 					}
 				}
+#endif
 				break;
 			case G_AUX: // check for controller error codes
 				client->trace = 14;
+#ifdef	MB_EM540
+				client->req_length = sizeof(em_clear);
+				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
+					c_crc = crc16(cc_buffer, client->req_length - 2);
+					c_crc_rec = crc16_receive();
+					if (c_crc == c_crc_rec) {
+						BSP_LED2_Toggle();
+					} else {
+						crc_error++;
+						M.error++;
+						set_led_blink(BOFF);
+					}
+					client->cstate = CLEAR;
+				} else {
+					if (get_500hz(false) >= RDELAY) {
+						client->cstate = CLEAR;
+						MM_ERROR_C;
+						client->mcmd = G_MODE;
+						M.error++;
+					}
+				}
+#else
 				client->req_length = sizeof(i400_clear);
 				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
@@ -361,12 +428,23 @@ int8_t master_controller_work(C_data * client)
 						M.error++;
 					}
 				}
+#endif
 				break;
 			case G_ERROR: // check for controller error codes
 				client->trace = 15;
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_error);
 				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
+					c_crc = crc16(cc_buffer, client->req_length - 2);
+					c_crc_rec = crc16_receive();
+					if (c_crc == c_crc_rec) {
+						BSP_LED1_Toggle();
+					} else {
+						crc_error++;
+						M.error++;
+						set_led_blink(BOFF);
+					}
+					client->cstate = CLEAR;
 				} else {
 					if (get_500hz(false) >= RDELAY) {
 						client->cstate = CLEAR;
@@ -411,6 +489,16 @@ int8_t master_controller_work(C_data * client)
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_mode);
 				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
+					c_crc = crc16(cc_buffer, client->req_length - 2);
+					c_crc_rec = crc16_receive();
+					if (c_crc == c_crc_rec) {
+						BSP_LED2_Toggle();
+					} else {
+						crc_error++;
+						M.error++;
+						set_led_blink(BOFF);
+					}
+					client->cstate = CLEAR;
 				} else {
 					client->trace = 17;
 					if (get_500hz(false) >= RDELAY) {
@@ -488,7 +576,6 @@ int8_t master_controller_work(C_data * client)
 	default:
 		break;
 	}
-	client->trace = 200;
 	return client->mcmd;
 }
 

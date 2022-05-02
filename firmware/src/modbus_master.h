@@ -24,9 +24,9 @@ extern "C" {
 
 	//#define LOCAL_ECHO	1
 #define FASTQ			// MODBUS query speed
-#define TDELAY		4	// half-duplex delay
+#define TDELAY		2	// half-duplex delay
 #define RDELAY		300	// receive timeout
-#define CDELAY		60	// 10Hz
+#define CDELAY		40	// fast query delay
 #define QDELAY		1	// query delay
 #define TODELAY		4	// misc delay	
 
