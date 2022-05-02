@@ -70,7 +70,25 @@ extern "C" {
 		uint8_t trace;
 	} C_data;
 
-#define SWVER	0x0031;
+	typedef struct M_data { // ISR used, mainly for non-atomic mod problems
+		uint32_t clock_500hz;
+		uint32_t clock_10hz;
+		uint32_t clock_2hz;
+		uint8_t clock_blinks;
+		uint8_t num_blinks;
+		uint8_t blink_lock : 1;
+		uint8_t config : 1;
+		uint8_t stable : 1;
+		uint8_t boot_code : 1;
+		uint8_t power_on : 1;
+		uint8_t send_count, recv_count, pwm_volts;
+		uint16_t error, crc_data, crc_calc;
+		uint32_t crc_error;
+		uint32_t to_error;
+		uint32_t sends;
+	} M_data;
+
+#define SWVER	0x0032;
 #define MADDR		0x01 // modbus client address
 	/*******************************ModBus Functions*******************************/
 #define READ_COILS                  1
@@ -108,6 +126,7 @@ extern "C" {
 	void timer_2ms_tick(uint32_t, uintptr_t);
 
 	extern C_data C; // MODBUS client state data
+	extern volatile M_data M;
 
 #ifdef	__cplusplus
 }

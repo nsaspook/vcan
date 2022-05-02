@@ -24,6 +24,7 @@ enum APP_TIMERS {
 	TMR_ADC,
 	TMR_TEXT,
 	TMR_DMT,
+	TMR_MBMASTER,
 	//
 	//(Add timers here as needed)
 	//

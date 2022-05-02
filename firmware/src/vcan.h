@@ -22,6 +22,8 @@ extern "C" {
 	/*
 	 * modbus client software params
 	 */
+	
+//#define MODBUS_DEBUG
 #define MODBUS_PORT	UART6
 #define MODBUS_VER	0x30	// software version
 #define MB_ADDR		4	// slave address
@@ -178,6 +180,7 @@ extern "C" {
 #define MOTOR_UPDATES	1	// main loop timer in ms
 #define DISPLAY_UPDATE	100
 #define ADC_UPDATE	25
+#define MB_UPDATE	10
 #define BLINK_UPDATE	1000
 #define DMT_UPDATE	500	// DMT regular clearing timer in ms 1100
 #define DMT_PWM_TIME	50000	// core timer cycles until DMT system shutdown

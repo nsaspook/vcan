@@ -17,22 +17,8 @@
 #define CC_LIMIT	230	// 4.00
 #define CC_OFFLINE	255	// 4.40
 
-typedef struct M_data { // ISR used, mainly for non-atomic mod problems
-	uint32_t clock_500hz;
-	uint32_t clock_10hz;
-	uint32_t clock_2hz;
-	uint8_t clock_blinks;
-	uint8_t num_blinks;
-	uint8_t blink_lock : 1;
-	uint8_t config : 1;
-	uint8_t stable : 1;
-	uint8_t boot_code : 1;
-	uint8_t power_on : 1;
-	uint8_t send_count, recv_count, pwm_volts;
-	uint16_t error;
-} M_data;
+volatile uint8_t cc_stream_file, cc_buffer[MAX_DATA], cc_buffer_tx[MAX_DATA]; // RX and TX command buffers
 
-volatile uint8_t cc_stream_file, cc_buffer[MAX_DATA]; // half-duplex so we can share the cc_buffer for TX and RX
 volatile M_data M = {
 	.blink_lock = false,
 	.power_on = true,
@@ -46,10 +32,9 @@ C_data C = {
 	.trace = 0,
 };
 
-uint32_t crc_error;
+//uint32_t crc_error;
 union MREG rvalue;
 
-//uint16_t req_length = 0;
 
 // code from libmodbus: https://raw.githubusercontent.com/stephane/libmodbus/master/src/modbus-rtu.c
 
@@ -140,14 +125,15 @@ modbus_em_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x10, 0x00, 0x00, 0x00}, // 
 // receive frames
 em_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x00},
 em_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x00},
-em_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x00},
-em_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x00};
+em_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
+em_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 static void half_dup_tx(bool);
 static void half_dup_rx(bool);
 static bool u6_trmt(void);
 static uint16_t modbus_rtu_send_msg_crc(volatile uint8_t *, uint16_t);
 static uint16_t crc16_receive(C_data *);
+static void log_crc_error(uint16_t, uint16_t);
 
 /*
  * be careful of C18 integer promotion rules on 16-bit registers
@@ -234,6 +220,14 @@ static uint16_t crc16_receive(C_data * client)
 	return crc16r;
 }
 
+static void log_crc_error(uint16_t c_crc, uint16_t c_crc_rec)
+{
+	M.crc_calc = c_crc;
+	M.crc_data = c_crc_rec;
+	M.crc_error++;
+	M.error++;
+}
+
 /*
  * simple modbus master state machine
  */
@@ -258,29 +252,29 @@ int8_t master_controller_work(C_data * client)
 		case G_SET: // write code request
 			client->trace = 3;
 #ifdef	MB_EM540
-			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_em_freset, sizeof(modbus_em_freset));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_em_freset, sizeof(modbus_em_freset));
 #else			
 			modbus_cc_freset[4] = rvalue.bytes[1];
 			modbus_cc_freset[5] = rvalue.bytes[0];
-			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_cc_freset, sizeof(modbus_cc_freset));
 #endif
 			break;
 		case G_AUX: // write code request
 			client->trace = 4;
 #ifdef	MB_EM540
-			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_em_clear, sizeof(modbus_em_clear));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_em_clear, sizeof(modbus_em_clear));
 #else			
 			modbus_cc_clear[4] = rvalue.bytes[1];
 			modbus_cc_clear[5] = rvalue.bytes[0];
-			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_clear, sizeof(modbus_cc_clear));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_cc_clear, sizeof(modbus_cc_clear));
 #endif
 			break;
 		case G_ERROR: // read code request
 			client->trace = 5;
 #ifdef	MB_EM540
-			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_em_error, sizeof(modbus_em_error));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_em_error, sizeof(modbus_em_error));
 #else
-			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_error, sizeof(modbus_cc_error));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_cc_error, sizeof(modbus_cc_error));
 #endif
 			break;
 		case G_LAST: // end of command sequences
@@ -291,9 +285,9 @@ int8_t master_controller_work(C_data * client)
 			client->trace = 6;
 		default:
 #ifdef	MB_EM540
-			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_em_mode, sizeof(modbus_em_mode));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_em_mode, sizeof(modbus_em_mode));
 #else
-			client->req_length = modbus_rtu_send_msg((void*) cc_buffer, (const void *) modbus_cc_mode, sizeof(modbus_cc_mode));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_cc_mode, sizeof(modbus_cc_mode));
 #endif
 			break;
 		}
@@ -319,12 +313,13 @@ int8_t master_controller_work(C_data * client)
 		client->trace = 8;
 		if (get_500hz(false) >= TDELAY) {
 			client->trace = 9;
-			UART6_Write((uint8_t*) cc_buffer, client->req_length);
+			UART6_Write((uint8_t*) cc_buffer_tx, client->req_length);
 			UART3_Write((uint8_t*) "M\r\n", 3); // MODBUS trace signal to serial debug port
 			client->trace = 91;
 			client->cstate = RECV;
 			clear_500hz(); // state machine execute background timer clear
 			client->trace = 10;
+			M.sends++;
 		}
 		break;
 	case RECV:
@@ -347,15 +342,13 @@ int8_t master_controller_work(C_data * client)
 				client->trace = 13;
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_freset);
-				if (DBUG_R ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER))) {
+				if (DBUG_R((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER))) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
 					c_crc_rec = crc16_receive(client);
 					if (DBUG_R c_crc == c_crc_rec) {
 						BSP_LED1_Toggle();
 					} else {
-						crc_error++;
-						M.error++;
-						set_led_blink(BOFF);
+						log_crc_error(c_crc, c_crc_rec);
 					}
 					client->cstate = CLEAR;
 					client->mcmd = G_LAST;
@@ -364,6 +357,7 @@ int8_t master_controller_work(C_data * client)
 						client->cstate = CLEAR;
 						MM_ERROR_C;
 						client->mcmd = G_MODE;
+						M.to_error++;
 						M.error++;
 					}
 				}
@@ -397,15 +391,13 @@ int8_t master_controller_work(C_data * client)
 				client->trace = 14;
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_clear);
-				if (DBUG_R ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER))) {
+				if (DBUG_R((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER))) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
 					c_crc_rec = crc16_receive(client);
 					if (DBUG_R c_crc == c_crc_rec) {
 						BSP_LED2_Toggle();
 					} else {
-						crc_error++;
-						M.error++;
-						set_led_blink(BOFF);
+						log_crc_error(c_crc, c_crc_rec);
 					}
 					client->cstate = CLEAR;
 				} else {
@@ -413,6 +405,7 @@ int8_t master_controller_work(C_data * client)
 						client->cstate = CLEAR;
 						MM_ERROR_C;
 						client->mcmd = G_MODE;
+						M.to_error++;
 						M.error++;
 					}
 				}
@@ -443,15 +436,13 @@ int8_t master_controller_work(C_data * client)
 				client->trace = 15;
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_error);
-				if (DBUG_R ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS))) {
+				if (DBUG_R((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS))) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
 					c_crc_rec = crc16_receive(client);
 					if (DBUG_R c_crc == c_crc_rec) {
 						BSP_LED1_Toggle();
 					} else {
-						crc_error++;
-						M.error++;
-						set_led_blink(BOFF);
+						log_crc_error(c_crc, c_crc_rec);
 					}
 					client->cstate = CLEAR;
 				} else {
@@ -459,6 +450,7 @@ int8_t master_controller_work(C_data * client)
 						client->cstate = CLEAR;
 						MM_ERROR_C;
 						client->mcmd = G_MODE;
+						M.to_error++;
 						M.error++;
 					}
 				}
@@ -497,24 +489,22 @@ int8_t master_controller_work(C_data * client)
 			default:
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_mode);
-				if (DBUG_R ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS))) {
+				if (DBUG_R((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS))) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
 					c_crc_rec = crc16_receive(client);
 					if (DBUG_R c_crc == c_crc_rec) {
 						BSP_LED2_Toggle();
 					} else {
-						crc_error++;
-						M.error++;
-						set_led_blink(BOFF);
+						log_crc_error(c_crc, c_crc_rec);
 					}
 					client->cstate = CLEAR;
 				} else {
 					client->trace = 17;
 					if (get_500hz(false) >= RDELAY) {
 						client->trace = 18;
-						set_led_blink(BOFF);
 						client->cstate = CLEAR;
 						client->mcmd = G_MODE;
+						M.to_error++;
 						M.error++;
 						client->trace = 19;
 					}

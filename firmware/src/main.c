@@ -380,10 +380,10 @@ void fh_hw(void *a_data)
 	if (period < 1001) {
 		period = period - 25;
 	} else {
-		if (period <300) {
+		if (period < 300) {
 			period = period - 2;
 		} else {
-		period = period - 100;
+			period = period - 100;
 		}
 	}
 	if (period < 260)
@@ -567,6 +567,7 @@ int main(void)
 	StartTimer(TMR_VEL, 1000);
 	StartTimer(TMR_ADC, 10);
 	StartTimer(TMR_DMT, DMT_UPDATE);
+	StartTimer(TMR_MBMASTER, MB_UPDATE);
 
 	/* Start system tick timer */
 	CORETIMER_Start();
@@ -709,11 +710,17 @@ int main(void)
 				eaDogM_WriteStringAtPos(9, 0, buffer);
 				sprintf(buffer, "DM %10i %10i", DMT_CounterGet(), DMT_TimeOutCountGet());
 				eaDogM_WriteStringAtPos(10, 0, buffer);
+#ifdef MODBUS_DEBUG
+				sprintf(buffer, "CRC E calc %X : data %X ", M.crc_calc, M.crc_data);
+				eaDogM_WriteStringAtPos(11, 0, buffer);
+#endif
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
 				eaDogM_WriteStringAtPos(12, 0, buffer);
-				sprintf(buffer, "Trace %3i    ", C.trace);
+#ifdef MODBUS_DEBUG
+				sprintf(buffer, "Trace %3i %3i %3i %3i %3i  ", C.trace, M.sends, M.error, M.crc_error, M.to_error);
 				eaDogM_WriteStringAtPos(13, 0, buffer);
+#endif
 				sprintf(buffer, "%4i:A U%4i V%4i W%4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[ANA3], ((-an_data[ANA1]) - an_data[ANA3]), an_data[POT1], an_data[POT2]);
 				eaDogM_WriteStringAtPos(14, 0, buffer);
 				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    R%d", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4), dmt + (wdt << 1));
