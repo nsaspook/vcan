@@ -147,6 +147,7 @@ static void half_dup_tx(bool);
 static void half_dup_rx(bool);
 static bool u6_trmt(void);
 static uint16_t modbus_rtu_send_msg_crc(volatile uint8_t *, uint16_t);
+static uint16_t crc16_receive(C_data *);
 
 /*
  * be careful of C18 integer promotion rules on 16-bit registers
@@ -175,11 +176,15 @@ uint16_t modbus_rtu_send_msg(void *cc_buffer, const void *modbus_cc_mode, uint16
 	return modbus_rtu_send_msg_crc((volatile uint8_t *) cc_buffer, req_length);
 }
 
+/*
+ * calculate a CRC16 from the data buffer
+ */
 uint16_t crc16(volatile uint8_t *buffer, uint16_t buffer_length)
 {
 	uint8_t crc_hi = 0xFF; /* high CRC byte initialized */
 	uint8_t crc_lo = 0xFF; /* low CRC byte initialized */
 	uint8_t i; /* will index into CRC lookup */
+	uint16_t crc16t;
 
 	/* pass through message buffer */
 	while (buffer_length--) {
@@ -188,7 +193,8 @@ uint16_t crc16(volatile uint8_t *buffer, uint16_t buffer_length)
 		crc_lo = table_crc_lo[i];
 	}
 
-	return((uint16_t) crc_hi << (uint16_t) 8 | (uint16_t) crc_lo);
+	crc16t = crc_hi << (uint16_t) 8 | (uint16_t) crc_lo;
+	return crc16t;
 }
 
 void my_modbus_rx_32(UART_EVENT event, uintptr_t context)
@@ -217,19 +223,22 @@ uint8_t init_stream_params(void)
 }
 
 /*
+ * helper functions
+ * received CRC16 bytes from client
+ */
+static uint16_t crc16_receive(C_data * client)
+{
+	uint16_t crc16r;
+
+	crc16r = ((uint16_t) cc_buffer[client->req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[client->req_length - 1] & 0x00ff);
+	return crc16r;
+}
+
+/*
  * simple modbus master state machine
  */
 int8_t master_controller_work(C_data * client)
 {
-
-	/*
-	 * helper functions
-	 */
-	inline uint16_t crc16_receive(void)
-	{
-		return (uint16_t) ((uint16_t) cc_buffer[client->req_length - 2] << (uint16_t) 8) | ((uint16_t) cc_buffer[client->req_length - 1] & 0x00ff);;
-	}
-
 	client->trace = 1;
 	switch (client->cstate) {
 	case CLEAR:
@@ -338,10 +347,10 @@ int8_t master_controller_work(C_data * client)
 				client->trace = 13;
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_freset);
-				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
+				if (DBUG_R ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER))) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
-					c_crc_rec = crc16_receive();
-					if (c_crc == c_crc_rec) {
+					c_crc_rec = crc16_receive(client);
+					if (DBUG_R c_crc == c_crc_rec) {
 						BSP_LED1_Toggle();
 					} else {
 						crc_error++;
@@ -388,10 +397,10 @@ int8_t master_controller_work(C_data * client)
 				client->trace = 14;
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_clear);
-				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER)) {
+				if (DBUG_R ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER))) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
-					c_crc_rec = crc16_receive();
-					if (c_crc == c_crc_rec) {
+					c_crc_rec = crc16_receive(client);
+					if (DBUG_R c_crc == c_crc_rec) {
 						BSP_LED2_Toggle();
 					} else {
 						crc_error++;
@@ -434,10 +443,10 @@ int8_t master_controller_work(C_data * client)
 				client->trace = 15;
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_error);
-				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
+				if (DBUG_R ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS))) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
-					c_crc_rec = crc16_receive();
-					if (c_crc == c_crc_rec) {
+					c_crc_rec = crc16_receive(client);
+					if (DBUG_R c_crc == c_crc_rec) {
 						BSP_LED1_Toggle();
 					} else {
 						crc_error++;
@@ -488,10 +497,10 @@ int8_t master_controller_work(C_data * client)
 			default:
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_mode);
-				if ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS)) {
+				if (DBUG_R ((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS))) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
-					c_crc_rec = crc16_receive();
-					if (c_crc == c_crc_rec) {
+					c_crc_rec = crc16_receive(client);
+					if (DBUG_R c_crc == c_crc_rec) {
 						BSP_LED2_Toggle();
 					} else {
 						crc_error++;

@@ -14,6 +14,11 @@ extern "C" {
 
 #define MAX_DATA        64
 
+	/*
+	 * fake good received bytes from client
+	 */
+#define	DBUG_R		//	true ||
+
 
 #include "vcan.h"
 #include <stdint.h>
