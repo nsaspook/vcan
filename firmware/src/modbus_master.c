@@ -32,7 +32,7 @@ C_data C = {
 	.trace = 0,
 };
 
-//uint32_t crc_error;
+EM_data em;
 union MREG rvalue;
 
 
@@ -120,11 +120,17 @@ const uint8_t
 // transmit frames
 modbus_em_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x0b, 0x00, 0x01}, // Carlo Gavazzi Controls identification code
 modbus_em_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x03, 0x02, 0x00, 0x01}, // Firmware version and revision code
+modbus_em_data[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 24},
 modbus_em_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x10, 0x02, 0x00, 0x01}, // System configuration, Value 1 = ?3P? (3-phase without neutral)
 modbus_em_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x10, 0x00, 0x00, 0x00}, // Password configuration, set to no password = 0
 // receive frames
 em_mode[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x00},
 em_error[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, 0x00, 0x00, 0x00, 0x00},
+em_data[] = {MADDR, READ_HOLDING_REGISTERS, 0x00, // number of 16-bit words returned
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00}, // crc
 em_clear[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
 em_freset[] = {MADDR, WRITE_SINGLE_REGISTER, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
@@ -228,6 +234,21 @@ static void log_crc_error(uint16_t c_crc, uint16_t c_crc_rec)
 	M.error++;
 }
 
+int32_t mb32_swap(int32_t value)
+{
+	uint8_t i;
+	union MREG32 dvalue;
+
+	dvalue.value = value;
+	i = dvalue.bytes[0];
+	dvalue.bytes[0] = dvalue.bytes[1];
+	dvalue.bytes[1] = i;
+	i = dvalue.bytes[2];
+	dvalue.bytes[2] = dvalue.bytes[3];
+	dvalue.bytes[3] = i;
+	return dvalue.value;
+}
+
 /*
  * simple modbus master state machine
  */
@@ -272,7 +293,7 @@ int8_t master_controller_work(C_data * client)
 		case G_ERROR: // read code request
 			client->trace = 5;
 #ifdef	MB_EM540
-			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_em_error, sizeof(modbus_em_error));
+			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_em_data, sizeof(modbus_em_data));
 #else
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_cc_error, sizeof(modbus_cc_error));
 #endif
@@ -434,12 +455,22 @@ int8_t master_controller_work(C_data * client)
 			case G_ERROR: // check for controller error codes
 				client->trace = 15;
 #ifdef	MB_EM540
-				client->req_length = sizeof(em_error);
+				client->req_length = sizeof(em_data);
 				if (DBUG_R((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS))) {
 					c_crc = crc16(cc_buffer, client->req_length - 2);
 					c_crc_rec = crc16_receive(client);
 					if (DBUG_R c_crc == c_crc_rec) {
 						BSP_LED1_Toggle();
+						memcpy((void*) &em, (void*) &cc_buffer[3], sizeof(em));
+						em.vl1l2 = mb32_swap(em.vl1l2);
+						em.vl2l3 = mb32_swap(em.vl2l3);
+						em.vl3l1 = mb32_swap(em.vl3l1);
+						em.al1 = mb32_swap(em.al1);
+						em.al2 = mb32_swap(em.al2);
+						em.al3 = mb32_swap(em.al3);
+						em.wl1 = mb32_swap(em.wl1);
+						em.wl2 = mb32_swap(em.wl2);
+						em.wl3 = mb32_swap(em.wl3);
 					} else {
 						log_crc_error(c_crc, c_crc_rec);
 					}

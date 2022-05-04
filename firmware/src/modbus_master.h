@@ -24,7 +24,7 @@ extern "C" {
 	/*
 	 * Display MODBUS debugging info screen
 	 */
-#define MODBUS_DEBUG
+	//#define MODBUS_DEBUG
 
 #include "vcan.h"
 #include <stdint.h>
@@ -34,7 +34,7 @@ extern "C" {
 #include "vcan.h"
 
 
-#define MAX_DATA        64
+#define MAX_DATA        128
 	//#define LOCAL_ECHO	1
 #define FASTQ			// MODBUS query speed
 #define TDELAY		2	// half-duplex delay
@@ -70,6 +70,11 @@ extern "C" {
 		char bytes[2];
 	};
 
+	union MREG32 {
+		int32_t value;
+		char bytes[4];
+	};
+
 	typedef struct C_data { // client state machine data
 		uint8_t mcmd;
 		comm_type cstate;
@@ -96,6 +101,13 @@ extern "C" {
 		uint32_t sends;
 	} M_data;
 
+	typedef struct EM_data {
+		int32_t vl1n, vl2n, vl3n,
+		vl1l2, vl2l3, vl3l1,
+		al1, al2, al3,
+		wl1, wl2, wl3;
+	} EM_data;
+
 	/*******************************ModBus Functions*******************************/
 #define READ_COILS                  1
 #define READ_DISCRETE_INPUTS        2
@@ -118,6 +130,7 @@ extern "C" {
 	void my_modbus_rx_32(UART_EVENT, uintptr_t);
 	uint8_t init_stream_params(void);
 	int8_t master_controller_work(C_data *);
+	int32_t mb32_swap(int32_t);
 
 	void clear_2hz(void);
 	void clear_10hz(void);
@@ -133,6 +146,7 @@ extern "C" {
 
 	extern C_data C; // MODBUS client state data
 	extern volatile M_data M;
+	extern EM_data em;
 
 #ifdef	__cplusplus
 }
