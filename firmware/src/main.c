@@ -327,9 +327,11 @@ void my_time(uint32_t status, uintptr_t context)
 
 	t1_time++;
 	V.dmt_sosc_flag = true;
+#ifndef NODMT
 	if (DMT_ClearWindowStatusGet()) {
 		DMT_Clear(); // clear the Dead Man Timer
 	}
+#endif
 #ifdef G400HZ
 	PetitModBus_TimerValues(); // modbus time tick
 	/*
@@ -432,6 +434,7 @@ int main(void)
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
 
+#ifndef NODMT
 	if (dmt) { // shutdown system and loop
 		uint16_t tgl = 1;
 		/*
@@ -446,16 +449,18 @@ int main(void)
 				BSP_LED3_Toggle();
 			}
 			UART3_Write((unsigned char *) "DMT\r\n", 5);
+
 			if (DMT_ClearWindowStatusGet()) {
 				DMT_Clear(); // clear the Dead Man Timer
 			}
 		}
 	}
+	_CP0_SET_COUNT(DMT_PWM_TIME); // Set Core Timer count
+#endif
 
 	BSP_LED1_Set();
 	BSP_LED2_Set();
 	BSP_LED3_Clear();
-	_CP0_SET_COUNT(DMT_PWM_TIME); // Set Core Timer count
 
 	/*
 	 * start the external switch handler
@@ -518,9 +523,11 @@ int main(void)
 
 	init_lcd_drv(D_INIT);
 
+#ifndef NODMT
 	if (DMT_ClearWindowStatusGet()) {
 		DMT_Clear(); // clear the Dead Man Timer
 	}
+#endif
 
 	if (OSCCONbits.CF) { // check for sysclock proper operation
 		sprintf(buffer, "VCAN Clock Error       ");
@@ -538,12 +545,18 @@ int main(void)
 		eaDogM_WriteStringAtPos(1, 0, buffer);
 		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", option1_Get(), option2_Get(), dmt + (wdt << 1));
 		eaDogM_WriteStringAtPos(2, 0, buffer);
+#ifndef NODMT
 		sprintf(buffer, "%4i:D %5i %5i %5i  ", DMT_ClearWindowStatusGet(), m35_2.duty, m35_3.duty, m35_4.duty);
+#else
+		sprintf(buffer, "Duty %5i %5i %5i  ", m35_2.duty, m35_3.duty, m35_4.duty);
+#endif
 		eaDogM_WriteStringAtPos(8, 0, buffer);
 		sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[5].ActValue, (uint16_t) PetitRegisters[10].ActValue, (int16_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
 		eaDogM_WriteStringAtPos(9, 0, buffer);
+#ifndef NODMT		
 		sprintf(buffer, "DM %10i %10i", DMT_CounterGet(), DMT_TimeOutCountGet());
 		eaDogM_WriteStringAtPos(10, 0, buffer);
+#endif
 		OledUpdate();
 		WaitMs(1500);
 	}
@@ -704,12 +717,18 @@ int main(void)
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%4i:Drive    %4i F%2i %2i", m35_4.current, POS3CNT, V.fault_count, V.fault_ticks);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
+#ifndef NODMT
 				sprintf(buffer, "%4i:D %5i %5i %5i  ", DMT_ClearWindowStatusGet(), m35_2.duty, m35_3.duty, m35_4.duty);
+#else
+				sprintf(buffer, "Duty %5i %5i %5i  ", m35_2.duty, m35_3.duty, m35_4.duty);
+#endif				
 				eaDogM_WriteStringAtPos(8, 0, buffer);
 				sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[5].ActValue, (uint16_t) PetitRegisters[10].ActValue, (int16_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
 				eaDogM_WriteStringAtPos(9, 0, buffer);
+#ifndef NODMT			
 				sprintf(buffer, "DM %10i %10i", DMT_CounterGet(), DMT_TimeOutCountGet());
 				eaDogM_WriteStringAtPos(10, 0, buffer);
+#endif
 #ifdef MODBUS_DEBUG
 				sprintf(buffer, "CRC E calc %X : data %X ", M.crc_calc, M.crc_data);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
@@ -739,8 +758,9 @@ int main(void)
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, BLINK_UPDATE);
 			RESET_LED_Toggle();
-			fh_hw("motor speed test");
+//			fh_hw("motor speed test");
 		}
+#ifndef NODMT
 		/*
 		 * timer based DMT shutdown
 		 */
@@ -751,6 +771,7 @@ int main(void)
 			 * simple fast repeats of DMT_Clear() will not work
 			 */
 			if (V.dmt_sosc_flag) {
+
 				if (DMT_ClearWindowStatusGet()) {
 					DMT_Clear(); // clear the Dead Man Timer
 				}
@@ -765,7 +786,9 @@ int main(void)
 			if (DMT_ClearWindowStatusGet()) {
 				DMT_Clear(); // clear the Dead Man Timer
 			}
+
 		}
+#endif
 	}
 
 	/* Execution should not come here during normal operation */

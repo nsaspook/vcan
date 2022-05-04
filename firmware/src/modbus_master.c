@@ -314,7 +314,6 @@ int8_t master_controller_work(C_data * client)
 		if (get_500hz(false) >= TDELAY) {
 			client->trace = 9;
 			UART6_Write((uint8_t*) cc_buffer_tx, client->req_length);
-			UART3_Write((uint8_t*) "M\r\n", 3); // MODBUS trace signal to serial debug port
 			client->trace = 91;
 			client->cstate = RECV;
 			clear_500hz(); // state machine execute background timer clear

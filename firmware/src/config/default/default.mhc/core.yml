@@ -2700,7 +2700,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: 'ON'}
+        attributes: {value: 'OFF'}
   - type: Combo
     attributes: {id: CONFIG_FNOSC}
     children:
@@ -3602,7 +3602,7 @@ children:
       - type: Boolean
         attributes: {id: visible}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
   - type: String
     attributes: {id: DMT_COUNT_INTERVAL}
     children:
@@ -3611,7 +3611,7 @@ children:
       - type: Boolean
         attributes: {id: visible}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
     - type: Values
       children:
       - type: Dynamic
@@ -3624,7 +3624,7 @@ children:
       - type: Boolean
         attributes: {id: visible}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
     - type: Values
       children:
       - type: Dynamic
@@ -3637,7 +3637,7 @@ children:
       - type: Boolean
         attributes: {id: enabled}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
   - type: File
     attributes: {id: DMT_SOURCE}
     children:
@@ -3646,7 +3646,7 @@ children:
       - type: Boolean
         attributes: {id: enabled}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
   - type: File
     attributes: {id: DMT_SYS_DEF}
     children:
@@ -3655,7 +3655,7 @@ children:
       - type: Boolean
         attributes: {id: enabled}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
   - type: Boolean
     attributes: {id: DMT_USE}
     children:
@@ -3664,11 +3664,11 @@ children:
       - type: Boolean
         attributes: {id: readOnly}
         children:
-        - {type: Value, value: 'true'}
+        - {type: Value, value: 'false'}
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: 'true'}
+        attributes: {id: core, value: 'false'}
   - type: Boolean
     attributes: {id: EEPROM_CLOCK_ENABLE}
     children:

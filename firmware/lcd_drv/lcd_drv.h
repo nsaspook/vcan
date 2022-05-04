@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+#define NODMT
+
 #define DMA_MAGIC	1957
 #define USE_DMA // use DMA spi driver
 

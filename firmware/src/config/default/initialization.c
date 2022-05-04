@@ -83,7 +83,7 @@
 #pragma config WINDIS =     NORMAL
 #pragma config FWDTWINSZ =  WINSZ_75
 #pragma config DMTCNT =     DMT28
-#pragma config FDMTEN =     ON
+#pragma config FDMTEN =     OFF
 
 /*** DEVCFG2 ***/
 #pragma config FPLLIDIV =   DIV_1

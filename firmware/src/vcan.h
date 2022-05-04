@@ -23,14 +23,12 @@ extern "C" {
 	 * modbus client software params
 	 */
 	
-//#define MODBUS_DEBUG
 #define MODBUS_PORT	UART6
 #define MODBUS_VER	0x30	// software version
 #define MB_ADDR		4	// slave address
-	
-#define MB_MASTER
-#define MB_EM540
 
+#define NODMT
+	
 	/*
 	 * read registers
 	 * 0	h-bridge 1 current mA

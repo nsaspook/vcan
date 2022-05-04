@@ -46,11 +46,14 @@ void dmtdelay(const uint32_t delay)
 
 	for (dcount = 0; dcount <= delay; dcount++) { // delay a bit
 		if (!dmt_clear_count--) {
+#ifndef NODMT
 			if (DMT_ClearWindowStatusGet()) {
 				DMT_Clear(); // clear the Dead Man Timer
 			}
+#endif
 			dmt_clear_count = DMT_INST_COUNT;
 		}
+		
 		NOPER++;
-	};
+	}
 }

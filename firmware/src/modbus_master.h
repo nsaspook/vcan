@@ -12,13 +12,19 @@
 extern "C" {
 #endif
 
-#define MAX_DATA        64
+#define MB_MASTER
+#define MB_EM540
+#define SWVER		0x0032;
+#define MADDR		0x01 // modbus client address
 
 	/*
 	 * fake good received bytes from client
 	 */
-#define	DBUG_R		//	true ||
-
+#define	DBUG_R	//	true ||
+	/*
+	 * Display MODBUS debugging info screen
+	 */
+#define MODBUS_DEBUG
 
 #include "vcan.h"
 #include <stdint.h>
@@ -27,6 +33,8 @@ extern "C" {
 #include <string.h>
 #include "vcan.h"
 
+
+#define MAX_DATA        64
 	//#define LOCAL_ECHO	1
 #define FASTQ			// MODBUS query speed
 #define TDELAY		2	// half-duplex delay
@@ -88,8 +96,6 @@ extern "C" {
 		uint32_t sends;
 	} M_data;
 
-#define SWVER	0x0032;
-#define MADDR		0x01 // modbus client address
 	/*******************************ModBus Functions*******************************/
 #define READ_COILS                  1
 #define READ_DISCRETE_INPUTS        2
