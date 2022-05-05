@@ -194,7 +194,7 @@ int32_t mb32_swap(int32_t value)
 /*
  * Simple MODBUS master state machine
  * this needs to run in the main programming loop
- * to hand I/O exchanges
+ * to handle RS485 serial I/O exchanges
  */
 int8_t master_controller_work(C_data * client)
 {
