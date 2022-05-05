@@ -28,7 +28,7 @@ extern "C" {
 	/*
 	 * fake good received bytes from client
 	 */
-#define	DBUG_R		true ||
+#define	DBUG_R	//	true ||
 	/*
 	 * Display MODBUS debugging info screen
 	 */
