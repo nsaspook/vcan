@@ -72,6 +72,8 @@ IC = M * sin (? + 240)
 #include "faults.h"
 #include "PetitModbus/PetitModbus.h"
 #include "modbus_master.h"
+//#include "em540.h"
+
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 static char buffer[STR_BUF_SIZE];
