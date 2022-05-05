@@ -5,6 +5,13 @@
  * Created on April 27, 2022, 4:02 PM
  */
 
+/*
+ * Simple MODBUS master for PIC32MK USART6
+ * coded for data collection from a EM540 3-phase power monitor
+ * https://www.gavazzionline.com/pdf/EM540_DS_ENG.pdf
+ */
+
+
 #ifndef MODBUS_MASTER_H
 #define	MODBUS_MASTER_H
 
@@ -14,7 +21,7 @@ extern "C" {
 
 #define MB_MASTER
 #define MB_EM540
-#define SWVER		0x0032;
+#define SWVER		0x0033;
 #define MADDR		0x01 // modbus client address
 
 	/*
@@ -46,17 +53,17 @@ extern "C" {
 	extern volatile struct V_type V;
 
 	typedef enum comm_type {
-		CLEAR,
+		CLEAR = 0,
 		INIT,
 		SEND,
 		RECV,
 	} comm_type;
 
 	typedef enum cmd_type {
-		G_MODE = 0,
-		G_ERROR,
-		G_AUX,
-		G_SET,
+		G_ID = 0,
+		G_DATA,
+		G_CONFIG,
+		G_PASSWD,
 		G_LAST,
 	} cmd_type;
 

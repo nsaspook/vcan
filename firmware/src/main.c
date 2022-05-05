@@ -734,7 +734,7 @@ int main(void)
 				sprintf(buffer, "CRC E calc %X : data %X ", M.crc_calc, M.crc_data);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
 #else
-				sprintf(buffer, "3-ph V %4.1fV %4.1fV %4.1fV ", em.vl1l2/10.0, em.vl2l3/10.0, em.vl3l1/10.0);
+				sprintf(buffer, "3-ph V %4.1fV %4.1fV %4.1fV ", em.vl1l2 / 10.0, em.vl2l3 / 10.0, em.vl3l1 / 10.0);
 				eaDogM_WriteStringAtPos(10, 0, buffer);
 #endif
 				rawtime = time(&rawtime);
@@ -744,9 +744,9 @@ int main(void)
 				sprintf(buffer, "Trace %3i %3i %3i %3i %3i  ", C.trace, M.sends, M.error, M.crc_error, M.to_error);
 				eaDogM_WriteStringAtPos(13, 0, buffer);
 #else
-				sprintf(buffer, "3-ph A %4.2fA %4.2fA %4.2fA ", em.al1/1000.0, em.al2/1000.0, em.al3/1000.0);
+				sprintf(buffer, "3-ph A %4.2fA %4.2fA %4.2fA ", em.al1 / 1000.0, em.al2 / 1000.0, em.al3 / 1000.0);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
-				sprintf(buffer, "3-ph P %5.1fW %5.1fW %5.1fW ", em.wl1/10.0, em.wl2/10.0, em.wl3/10.0);
+				sprintf(buffer, "3-ph P %5.1fW %5.1fW %5.1fW ", em.wl1 / 10.0, em.wl2 / 10.0, em.wl3 / 10.0);
 				eaDogM_WriteStringAtPos(12, 0, buffer);
 #endif
 				sprintf(buffer, "%4i:A U%4i V%4i W%4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[ANA3], ((-an_data[ANA1]) - an_data[ANA3]), an_data[POT1], an_data[POT2]);
