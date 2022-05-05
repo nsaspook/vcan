@@ -72,8 +72,6 @@ IC = M * sin (? + 240)
 #include "faults.h"
 #include "PetitModbus/PetitModbus.h"
 #include "modbus_master.h"
-//#include "em540.h"
-
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 static char buffer[STR_BUF_SIZE];
@@ -143,7 +141,7 @@ volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, u_total = 0, current_er
 volatile uint16_t tickCount[TMR_COUNT];
 
 static time_t rawtime;
-static volatile time_t t1_time;
+static volatile time_t t1_time=UNIXTIME;
 static struct tm * timeinfo;
 
 volatile struct V_type V = {
@@ -292,11 +290,15 @@ void wave_gen(uint32_t status, uintptr_t context)
 	 * set channel duty cycle for motor sinewave outputs at ISR time 1ms intervals
 	 */
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+	if (V.forward) {
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+	} else {
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty);
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_3.duty);
+	}
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	V.pwm_update = false;
-	//	DEBUGB0_Clear();
 }
 
 /*
@@ -390,8 +392,10 @@ void fh_hw(void *a_data)
 			period = period - 100;
 		}
 	}
-	if (period < 260)
+	if (period < 500) {
 		period = 2000;
+		V.forward = !V.forward;
+	}
 }
 
 void fh_hi(void *a_data)
@@ -706,6 +710,8 @@ int main(void)
 				eaDogM_WriteStringAtPos(0, 0, buffer);
 				sprintf(buffer, "Q %4i:%i  F %i %i %i R %i A %i", POS3CNT, VEL3HLD, PWMF15_Get(), PWMF5_Get(), PWMF6_Get(), (bool) ~(dmt | wdt), check_adc_ivref());
 				eaDogM_WriteStringAtPos(1, 0, buffer);
+				sprintf(buffer, "FW Main 0X%X MM 0X%X MC 0X%X ", MAINVER, SWMBMVER, SWMBCVER);
+				eaDogM_WriteStringAtPos(2, 0, buffer);
 				m35_ptr = &m35_3;
 				/*
 				 * show some test results on the LCD screen
@@ -741,7 +747,7 @@ int main(void)
 #endif
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
-				eaDogM_WriteStringAtPos(13, 0, buffer);
+				eaDogM_WriteStringAtPos(13, 0, buffer+2);
 #ifdef MODBUS_DEBUG
 				sprintf(buffer, "Trace %3i %3i %3i %3i %3i  ", C.trace, M.sends, M.error, M.crc_error, M.to_error);
 				eaDogM_WriteStringAtPos(13, 0, buffer);
@@ -758,7 +764,6 @@ int main(void)
 				motor_graph(true, false);
 				OledUpdate();
 				StartTimer(TMR_DISPLAY, DISPLAY_UPDATE);
-				//				DEBUGB0_Clear();
 			}
 		}
 #endif
@@ -769,7 +774,7 @@ int main(void)
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, BLINK_UPDATE);
 			RESET_LED_Toggle();
-			//			fh_hw("motor speed test");
+			fh_hw("motor speed test");
 		}
 #ifndef NODMT
 		/*

@@ -6,8 +6,9 @@
  */
 
 /*
- * Simple MODBUS master for PIC32MK on USART6 using Harmony 3
- * coded for data collection from a EM540 3-phase power monitor
+ * Simple MODBUS data polling master for PIC32MK on USART6 using Harmony 3
+ * the USART port uses interrupt driven buffered I/O
+ * hard coded for data collection from a EM540 3-phase power monitor
  * https://www.gavazzionline.com/pdf/EM540_DS_ENG.pdf
  */
 
@@ -21,7 +22,7 @@ extern "C" {
 
 #define MB_MASTER
 #define MB_EM540
-#define SWVER		0x0033;
+#define SWMBMVER	0X0033	// master SW version
 #define MADDR		0x01 // modbus client address
 
 	/*
@@ -87,6 +88,7 @@ extern "C" {
 		cmd_type modbus_command;
 		uint16_t req_length;
 		uint8_t trace;
+		bool id_ok, passwd_ok, config_ok;
 	} C_data;
 
 	typedef struct M_data { // ISR used, mainly for non-atomic mod problems

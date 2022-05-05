@@ -19,17 +19,21 @@ extern "C" {
 #include <stdio.h>
 #include <stdbool.h>
 
+#define MAINVER		0X0010  // main SW version
+#define UNIXTIME	1651774950
+
 	/*
 	 * modbus client software params
 	 */
 
-#define MODBUS_PORT	UART6
-#define MODBUS_VER	0x30	// software version
-#define MB_ADDR		4	// slave address
+#define MODBUS_PORT	UART6		// serial port for for RS485 interface
+#define SWMBCVER	0X0030	// client software version
+#define MB_ADDR		4		// client address
 
 #define NODMT
 
 	/*
+	 * PH3BD in client mode 
 	 * read registers
 	 * 0	h-bridge 1 current mA
 	 * 1	h-bridge 2 current mA
@@ -170,6 +174,7 @@ extern "C" {
 		int32_t motor_speed;
 		volatile bool fault_active, dmt_sosc_flag;
 		volatile UART_ERROR mb_error;
+		volatile bool forward;
 	};
 
 #define KNOB1_INC	POS3CNT
