@@ -55,7 +55,7 @@ extern int32_t ychOledMax;
 #define	ccolOledMax		240		//number of display columns
 #define	crowOledMax		128		//number of display rows
 #define	cpagOledMax		16		//number of display memory pages
-#define STR_BUF_SIZE		160		//number of chars for display strings
+#define STR_BUF_SIZE		256		//number of chars for display strings
 #endif
 
 #if DISPLAY_TYPE == 102
