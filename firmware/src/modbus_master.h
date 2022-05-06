@@ -62,8 +62,8 @@ extern "C" {
 	typedef enum cmd_type {
 		G_ID = 0,
 		G_DATA,
-		G_CONFIG,
-		G_PASSWD,
+		G_CONFIG, // keep sequence
+		G_PASSWD, // keep sequence
 		G_LAST,
 	} cmd_type;
 

@@ -207,6 +207,12 @@ int8_t master_controller_work(C_data * client)
 		clear_10hz();
 		client->cstate = INIT;
 		client->modbus_command = client->mcmd++; // sequence modbus commands to client
+		if (client->modbus_command == G_CONFIG && client->config_ok) { // skip if we have valid data from client
+			client->modbus_command = client->mcmd++;
+		}
+		if (client->modbus_command == G_PASSWD && client->passwd_ok) { // skip if we have valid data from client
+			client->modbus_command = client->mcmd++;
+		}
 		if (client->mcmd > G_LAST) {
 			client->mcmd = G_ID;
 		}
@@ -390,17 +396,23 @@ int8_t master_controller_work(C_data * client)
 						BSP_LED2_Toggle();
 						client->id_ok = true;
 					} else {
+						client->trace = 17;
+						client->id_ok = false;
+						client->config_ok = false;
+						client->passwd_ok = false;
 						log_crc_error(c_crc, c_crc_rec);
 					}
 					client->cstate = CLEAR;
 				} else {
-					client->trace = 17;
+					client->trace = 18;
 					if (get_500hz(false) >= RDELAY) {
-						client->trace = 18;
 						client->cstate = CLEAR;
 						client->mcmd = G_ID;
 						M.to_error++;
 						M.error++;
+						client->id_ok = false;
+						client->config_ok = false;
+						client->passwd_ok = false;
 						client->trace = 19;
 					}
 				}
