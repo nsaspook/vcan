@@ -47,7 +47,16 @@ extern "C" {
 #define RDELAY		300	// receive timeout
 #define CDELAY		40	// fast query delay
 #define QDELAY		1	// query delay
-#define TODELAY		4	// misc delay	
+#define TODELAY		4	// misc delay
+
+	/*
+	 * RS485 port defines
+	 * port is configured in harmony3 for PIC32MK
+	 */
+#define Swrite		UART6_Write
+#define Strmt		U6STA&_U6STA_TRMT_MASK
+#define Serror		UART6_ErrorGet
+#define Sread		UART6_Read
 
 	/*
 	 * serial communications states
@@ -66,6 +75,24 @@ extern "C" {
 		G_PASSWD, // keep sequence
 		G_LAST,
 	} cmd_type;
+
+	typedef enum trace_type {
+		T_begin = 1,
+		T_clear,
+		T_passwd,
+		T_config,
+		T_data,
+		T_id,
+		T_init,
+		T_init_d,
+		T_send,
+		T_send_d,
+		T_recv,
+		T_recv_r,
+		T_misc1,
+		T_misc2,
+		T_misc3,
+	} trace_type;
 
 	union PWMDC {
 		uint16_t lpwm;
@@ -88,7 +115,7 @@ extern "C" {
 		cmd_type modbus_command;
 		uint16_t req_length;
 		uint8_t trace;
-		bool id_ok, passwd_ok, config_ok;
+		bool id_ok, passwd_ok, config_ok, data_ok;
 	} C_data;
 
 	typedef struct M_data { // ISR used, mainly for non-atomic mod problems

@@ -64,7 +64,7 @@ EM_data em;
 
 static void half_dup_tx(bool);
 static void half_dup_rx(bool);
-static bool u6_trmt(void);
+static bool serial_trmt(void);
 static uint16_t modbus_rtu_send_msg_crc(volatile uint8_t *, uint16_t);
 static uint16_t crc16_receive(C_data *);
 static void log_crc_error(uint16_t, uint16_t);
@@ -126,12 +126,12 @@ void my_modbus_rx_32(UART_EVENT event, uintptr_t context)
 
 	BSP_LED3_Set();
 	if (event == UART_EVENT_READ_ERROR) {
-		V.mb_error = UART6_ErrorGet();
+		V.mb_error = Serror();
 	} else {
 		/*
 		 * process received controller data stream
 		 */
-		UART6_Read(&m_data, 1);
+		Sread(&m_data, 1);
 		cc_buffer[M.recv_count] = m_data;
 		if (++M.recv_count >= MAX_DATA) {
 			M.recv_count = 0; // reset buffer position
@@ -198,10 +198,10 @@ int32_t mb32_swap(int32_t value)
  */
 int8_t master_controller_work(C_data * client)
 {
-	client->trace = 1;
+	client->trace = T_begin;
 	switch (client->cstate) {
 	case CLEAR:
-		client->trace = 2;
+		client->trace = T_clear;
 		BSP_LED3_Clear();
 		clear_2hz();
 		clear_10hz();
@@ -221,19 +221,19 @@ int8_t master_controller_work(C_data * client)
 		 */
 		switch (client->modbus_command) {
 		case G_PASSWD: // write code request
-			client->trace = 3;
+			client->trace = T_passwd;
 #ifdef	MB_EM540
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_em_passwd, sizeof(modbus_em_passwd));
 #endif
 			break;
 		case G_CONFIG: // write code request
-			client->trace = 4;
+			client->trace = T_config;
 #ifdef	MB_EM540
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_em_config, sizeof(modbus_em_config));
 #endif
 			break;
 		case G_DATA: // read code request
-			client->trace = 5;
+			client->trace = T_data;
 #ifdef	MB_EM540
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_em_data, sizeof(modbus_em_data));
 #endif
@@ -243,7 +243,7 @@ int8_t master_controller_work(C_data * client)
 			client->mcmd = G_ID;
 			break;
 		case G_ID: // operating mode request
-			client->trace = 6;
+			client->trace = T_id;
 		default:
 #ifdef	MB_EM540
 			client->req_length = modbus_rtu_send_msg((void*) cc_buffer_tx, (const void *) modbus_em_id, sizeof(modbus_em_id));
@@ -252,7 +252,7 @@ int8_t master_controller_work(C_data * client)
 		}
 		break;
 	case INIT:
-		client->trace = 7;
+		client->trace = T_init;
 		/*
 		 * MODBUS master query speed
 		 */
@@ -265,30 +265,28 @@ int8_t master_controller_work(C_data * client)
 			M.recv_count = 0;
 			client->cstate = SEND;
 			clear_500hz();
-			client->trace = 71;
+			client->trace = T_init_d;
 		}
 		break;
 	case SEND:
-		client->trace = 8;
+		client->trace = T_send;
 		if (get_500hz(false) >= TDELAY) {
-			client->trace = 9;
-			UART6_Write((uint8_t*) cc_buffer_tx, client->req_length);
-			client->trace = 91;
+			Swrite((uint8_t*) cc_buffer_tx, client->req_length);
 			client->cstate = RECV;
 			clear_500hz(); // state machine execute background timer clear
-			client->trace = 10;
+			client->trace = T_send_d;
 			M.sends++;
 		}
 		break;
 	case RECV:
-		client->trace = 11;
-		if (u6_trmt()) { // check for serial UART transmit shift register and buffer empty
+		client->trace = T_recv;
+		if (serial_trmt()) { // check for serial UART transmit shift register and buffer empty
 			clear_500hz(); // clear timer until buffer empty
 		}
 		if (get_500hz(false) >= TDELAY) { // state machine execute timer test
 			uint16_t c_crc, c_crc_rec;
 
-			client->trace = 12;
+			client->trace = T_recv_r;
 			BSP_LED3_Set();
 			half_dup_rx(false); // no delays here
 
@@ -297,7 +295,6 @@ int8_t master_controller_work(C_data * client)
 			 */
 			switch (client->modbus_command) {
 			case G_PASSWD: // check for controller password codes
-				client->trace = 13;
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_passwd);
 				if (DBUG_R((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER))) {
@@ -307,6 +304,7 @@ int8_t master_controller_work(C_data * client)
 						BSP_LED1_Toggle();
 						client->passwd_ok = true;
 					} else {
+						client->passwd_ok = false;
 						log_crc_error(c_crc, c_crc_rec);
 					}
 					client->cstate = CLEAR;
@@ -323,7 +321,6 @@ int8_t master_controller_work(C_data * client)
 #endif
 				break;
 			case G_CONFIG: // check for controller configuration codes
-				client->trace = 14;
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_config);
 				if (DBUG_R((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == WRITE_SINGLE_REGISTER))) {
@@ -333,6 +330,7 @@ int8_t master_controller_work(C_data * client)
 						BSP_LED2_Toggle();
 						client->config_ok = true;
 					} else {
+						client->config_ok = false;
 						log_crc_error(c_crc, c_crc_rec);
 					}
 					client->cstate = CLEAR;
@@ -348,7 +346,6 @@ int8_t master_controller_work(C_data * client)
 #endif
 				break;
 			case G_DATA: // check for controller data codes
-				client->trace = 15;
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_data);
 				if (DBUG_R((M.recv_count >= client->req_length) && (cc_buffer[0] == MADDR) && (cc_buffer[1] == READ_HOLDING_REGISTERS))) {
@@ -356,6 +353,7 @@ int8_t master_controller_work(C_data * client)
 					c_crc_rec = crc16_receive(client);
 					if (DBUG_R c_crc == c_crc_rec) {
 						BSP_LED1_Toggle();
+						client->data_ok = true;
 						/*
 						 * move from receive buffer to data structure and munge the data into the correct local 32-bit format from MODBUS client
 						 */
@@ -370,6 +368,7 @@ int8_t master_controller_work(C_data * client)
 						em.wl2 = mb32_swap(em.wl2);
 						em.wl3 = mb32_swap(em.wl3);
 					} else {
+						client->data_ok = false;
 						log_crc_error(c_crc, c_crc_rec);
 					}
 					client->cstate = CLEAR;
@@ -385,7 +384,6 @@ int8_t master_controller_work(C_data * client)
 #endif
 				break;
 			case G_ID: // check for client module type
-				client->trace = 16;
 			default:
 #ifdef	MB_EM540
 				client->req_length = sizeof(em_id);
@@ -396,15 +394,14 @@ int8_t master_controller_work(C_data * client)
 						BSP_LED2_Toggle();
 						client->id_ok = true;
 					} else {
-						client->trace = 17;
 						client->id_ok = false;
 						client->config_ok = false;
 						client->passwd_ok = false;
+						client->data_ok = false;
 						log_crc_error(c_crc, c_crc_rec);
 					}
 					client->cstate = CLEAR;
 				} else {
-					client->trace = 18;
 					if (get_500hz(false) >= RDELAY) {
 						client->cstate = CLEAR;
 						client->mcmd = G_ID;
@@ -413,7 +410,7 @@ int8_t master_controller_work(C_data * client)
 						client->id_ok = false;
 						client->config_ok = false;
 						client->passwd_ok = false;
-						client->trace = 19;
+						client->data_ok = false;
 					}
 				}
 #endif
@@ -424,7 +421,7 @@ int8_t master_controller_work(C_data * client)
 	default:
 		break;
 	}
-	return client->mcmd;
+	return client->trace;
 }
 
 /*
@@ -544,7 +541,7 @@ void timer_2ms_tick(uint32_t status, uintptr_t context)
  * so this will return 'true' after the buffer is empty 'interrupt' and after the last bit is on the wire
  */
 
-static bool u6_trmt(void)
+static bool serial_trmt(void)
 {
-	return !(U6STA & _U6STA_TRMT_MASK); // note, we invert the TRMT bit so it's true while transmitting
+	return !(Strmt); // note, we invert the TRMT bit so it's true while transmitting
 }
