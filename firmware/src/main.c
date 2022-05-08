@@ -77,7 +77,7 @@ const char *build_date = __DATE__, *build_time = __TIME__;
 static char buffer[STR_BUF_SIZE];
 extern t_cli_ctx cli_ctx; // command buffer 
 t_cli_ctx cli_text = {
-	.cmd=" motor speed test\r\n",
+	.cmd = " motor speed test\r\n",
 };
 
 volatile struct QEI_DATA m35_1 = {
@@ -144,7 +144,7 @@ volatile int32_t u1ai = 0, u1bi = 0, u2ai = 0, u2bi = 0, u_total = 0, current_er
 volatile uint16_t tickCount[TMR_COUNT];
 
 static time_t rawtime;
-static volatile time_t t1_time=UNIXTIME;
+static volatile time_t t1_time = UNIXTIME;
 static struct tm * timeinfo;
 
 volatile struct V_type V = {
@@ -498,10 +498,9 @@ int main(void)
 	U2_EN_Clear();
 	TMR6_CallbackRegister(timer_ms_tick, 0);
 	TMR6_Start();
-	TMR8_CallbackRegister(timer_500ms_tick, 0);
-	TMR8_Start();
-	TMR9_CallbackRegister(timer_2ms_tick, 0);
-	TMR9_Start();
+#ifdef MB_MASTER
+	init_mb_master_timers();
+#endif
 	TMR3_Stop();
 	TMR3_CallbackRegister(move_pos_qei, 0);
 	TMR1_CallbackRegister(my_time, 0);
@@ -725,18 +724,18 @@ int main(void)
 				eaDogM_WriteStringAtPos(4, 0, buffer);
 				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(u_total, true));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
-				sprintf(buffer, "%4i:R %4i %4i %4i  ", 1872000/((V.TimeUsed*sine_res/8)/120), m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
+				sprintf(buffer, "%4i:R %4i %4i %4i  ", RPM_SCALE / ((V.TimeUsed * sine_res / NUM_POLES) / 120), m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
-//				sprintf(buffer, "%4i:Drive    %4i F%2i %2i", m35_4.current, POS3CNT, V.fault_count, V.fault_ticks);
-//				eaDogM_WriteStringAtPos(7, 0, buffer);
+				//				sprintf(buffer, "%4i:Drive    %4i F%2i %2i", m35_4.current, POS3CNT, V.fault_count, V.fault_ticks);
+				//				eaDogM_WriteStringAtPos(7, 0, buffer);
 #ifndef NODMT
 				sprintf(buffer, "%4i:D %5i %5i %5i  ", DMT_ClearWindowStatusGet(), m35_2.duty, m35_3.duty, m35_4.duty);
 #else
-//				sprintf(buffer, "Duty %5i %5i %5i  ", m35_2.duty, m35_3.duty, m35_4.duty);
+				//				sprintf(buffer, "Duty %5i %5i %5i  ", m35_2.duty, m35_3.duty, m35_4.duty);
 #endif				
-//				eaDogM_WriteStringAtPos(8, 0, buffer);
-//				sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[5].ActValue, (uint16_t) PetitRegisters[10].ActValue, (int16_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
-//				eaDogM_WriteStringAtPos(9, 0, buffer);
+				//				eaDogM_WriteStringAtPos(8, 0, buffer);
+				//				sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[5].ActValue, (uint16_t) PetitRegisters[10].ActValue, (int16_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
+				//				eaDogM_WriteStringAtPos(9, 0, buffer);
 #ifndef NODMT			
 				sprintf(buffer, "DM %10i %10i", DMT_CounterGet(), DMT_TimeOutCountGet());
 				eaDogM_WriteStringAtPos(10, 0, buffer);
@@ -750,7 +749,7 @@ int main(void)
 #endif
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
-				eaDogM_WriteStringAtPos(13, 0, buffer+2);
+				eaDogM_WriteStringAtPos(13, 0, buffer + 2);
 #ifdef MODBUS_DEBUG
 				sprintf(buffer, "Trace %3i %3i %3i %3i %3i  ", C.trace, M.sends, M.error, M.crc_error, M.to_error);
 				eaDogM_WriteStringAtPos(13, 0, buffer);
@@ -761,7 +760,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(12, 0, buffer);
 #endif
 				sprintf(buffer, "%4i:A U%4i V%4i W%4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[ANA3], ((-an_data[ANA1]) - an_data[ANA3]), an_data[POT1], an_data[POT2]);
-//				eaDogM_WriteStringAtPos(14, 0, buffer);
+				//				eaDogM_WriteStringAtPos(14, 0, buffer);
 				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    R%d", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4), dmt + (wdt << 1));
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph(true, false);

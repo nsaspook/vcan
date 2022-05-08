@@ -146,6 +146,17 @@ uint8_t init_stream_params(void)
 }
 
 /*
+ * state machine hardware timers interrupt ISR functions setup
+ */
+void init_mb_master_timers(void)
+{
+	TMR8_CallbackRegister(timer_500ms_tick, 0);
+	TMR8_Start();
+	TMR9_CallbackRegister(timer_2ms_tick, 0);
+	TMR9_Start();
+}
+
+/*
  * helper functions
  * received CRC16 bytes from client
  */

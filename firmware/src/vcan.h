@@ -97,6 +97,7 @@ extern "C" {
 
 #define NUM_POLES		8
 #define NUM_POLE_PAIRS		NUM_POLES/2
+#define RPM_SCALE		1872000
 
 	//	#define	SLIP_DRIVE // motor constant slew at calculated speed
 #define MOTOR_SLIP	-670

@@ -227,6 +227,7 @@ extern "C" {
 
 	void my_modbus_rx_32(UART_EVENT, uintptr_t);
 	uint8_t init_stream_params(void);
+	void init_mb_master_timers(void);
 	int8_t master_controller_work(C_data *);
 	int32_t mb32_swap(int32_t);
 
