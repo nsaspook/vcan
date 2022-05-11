@@ -309,7 +309,7 @@ void wave_gen(uint32_t status, uintptr_t context)
  */
 void an1_callback(uint32_t status, uintptr_t context)
 {
-	DEBUGB0_Set();
+	//	DEBUGB0_Set();
 	an_data[ANA1] = ADCHS_ChannelResultGet(ADCHS_CH1); // JP5 pin 14, AN1, ANA1/RA1
 }
 
@@ -318,10 +318,10 @@ void an1_callback(uint32_t status, uintptr_t context)
  */
 void an3_callback(uint32_t status, uintptr_t context)
 {
-	DEBUGB0_Set();
+	//	DEBUGB0_Set();
 	an_data[ANA1] = ADCHS_ChannelResultGet(ADCHS_CH1); // JP5 pin 14, AN1, ANA1/RA1
 	an_data[ANA3] = ADCHS_ChannelResultGet(ADCHS_CH3); // QEI pin 4, AN3, ANA3/RA3
-	DEBUGB0_Clear();
+	//	DEBUGB0_Clear();
 }
 
 /*
@@ -759,8 +759,8 @@ int main(void)
 				sprintf(buffer, "3-ph P %5.1fW %5.1fW %5.1fW ", em.wl1 / 10.0, em.wl2 / 10.0, em.wl3 / 10.0);
 				eaDogM_WriteStringAtPos(12, 0, buffer);
 #endif
-				sprintf(buffer, "%4i:A U%4i V%4i W%4i %4i %4i", an_data[IVREF], an_data[ANA1], an_data[ANA3], ((-an_data[ANA1]) - an_data[ANA3]), an_data[POT1], an_data[POT2]);
-				//				eaDogM_WriteStringAtPos(14, 0, buffer);
+				sprintf(buffer, "MODBUS Packets %6u  Er %u", C.data_count, M.error);
+				eaDogM_WriteStringAtPos(14, 0, buffer);
 				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    R%d", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4), dmt + (wdt << 1));
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 				motor_graph(true, false);

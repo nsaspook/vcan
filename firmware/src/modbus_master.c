@@ -128,6 +128,7 @@ void my_modbus_rx_32(UART_EVENT event, uintptr_t context)
 	if (event == UART_EVENT_READ_ERROR) {
 		V.mb_error = Serror();
 	} else {
+		V.rx = true;
 		/*
 		 * process received controller data stream
 		 */
@@ -209,6 +210,15 @@ int32_t mb32_swap(int32_t value)
  */
 int8_t master_controller_work(C_data * client)
 {
+	static uint32_t spacing = 0;
+
+	DEBUGB0_Set();
+	if (spacing++ <SPACING && !V.rx) {
+		DEBUGB0_Clear();
+		return T_spacing;
+	}
+	spacing = 0;
+
 	client->trace = T_begin;
 	switch (client->cstate) {
 	case CLEAR:
@@ -287,6 +297,7 @@ int8_t master_controller_work(C_data * client)
 			clear_500hz(); // state machine execute background timer clear
 			client->trace = T_send_d;
 			M.sends++;
+			V.rx = false;
 		}
 		break;
 	case RECV:
@@ -378,6 +389,8 @@ int8_t master_controller_work(C_data * client)
 						em.wl1 = mb32_swap(em.wl1);
 						em.wl2 = mb32_swap(em.wl2);
 						em.wl3 = mb32_swap(em.wl3);
+						client->data_prev = client->data_count;
+						client->data_count++;
 					} else {
 						client->data_ok = false;
 						log_crc_error(c_crc, c_crc_rec);
@@ -432,6 +445,7 @@ int8_t master_controller_work(C_data * client)
 	default:
 		break;
 	}
+	DEBUGB0_Clear();
 	return client->trace;
 }
 

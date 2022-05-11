@@ -175,7 +175,7 @@ extern "C" {
 		int32_t motor_speed;
 		volatile bool fault_active, dmt_sosc_flag;
 		volatile UART_ERROR mb_error;
-		volatile bool forward;
+		volatile bool forward, rx;
 	};
 
 #define KNOB1_INC	POS3CNT

@@ -9,7 +9,7 @@ void line_rot(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
 void motor_graph(bool motion, bool reset)
 {
 	static uint32_t irow = 0;
-	static int32_t x2 = 205, x1 = 220, y1 = 100, xn1, yn1, xn2, yn2, r;
+	static int32_t x2 = 205, x1 = 220, y1 = 65, xn1, yn1, xn2, yn2, r;
 	static double theta1 = sinea, theta2 = sineb, theta3 = sinec;
 	static double ra, si, co, steps = 0.0;
 

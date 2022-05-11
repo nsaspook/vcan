@@ -48,6 +48,7 @@ extern "C" {
 #define CDELAY		40	// fast query delay
 #define QDELAY		1	// query delay
 #define TODELAY		4	// misc delay
+#define SPACING		50	// control loop cpu usage factor
 
 	/*
 	 * RS485 port defines
@@ -92,6 +93,7 @@ extern "C" {
 		T_misc1,
 		T_misc2,
 		T_misc3,
+		T_spacing,
 	} trace_type;
 
 	union PWMDC {
@@ -116,6 +118,7 @@ extern "C" {
 		uint16_t req_length;
 		uint8_t trace;
 		bool id_ok, passwd_ok, config_ok, data_ok;
+		uint32_t data_count, data_prev;
 	} C_data;
 
 	typedef struct M_data { // ISR used, mainly for non-atomic mod problems
