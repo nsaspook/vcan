@@ -556,12 +556,12 @@ int main(void)
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 #ifndef NODMT
 		sprintf(buffer, "%4i:D %5i %5i %5i  ", DMT_ClearWindowStatusGet(), m35_2.duty, m35_3.duty, m35_4.duty);
-#else
-		sprintf(buffer, "Duty %5i %5i %5i  ", m35_2.duty, m35_3.duty, m35_4.duty);
-#endif
 		eaDogM_WriteStringAtPos(8, 0, buffer);
+#endif
+#ifndef MB_MASTER		
 		sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[5].ActValue, (uint16_t) PetitRegisters[10].ActValue, (int16_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
 		eaDogM_WriteStringAtPos(9, 0, buffer);
+#endif
 #ifndef NODMT		
 		sprintf(buffer, "DM %10i %10i", DMT_CounterGet(), DMT_TimeOutCountGet());
 		eaDogM_WriteStringAtPos(10, 0, buffer);

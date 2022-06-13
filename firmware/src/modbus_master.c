@@ -212,11 +212,11 @@ int8_t master_controller_work(C_data * client)
 {
 	static uint32_t spacing = 0;
 
-	DEBUGB0_Set();
 	if (spacing++ <SPACING && !V.rx) {
 		DEBUGB0_Clear();
 		return T_spacing;
 	}
+	DEBUGB0_Set();
 	spacing = 0;
 
 	client->trace = T_begin;
