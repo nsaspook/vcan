@@ -6,3 +6,5 @@
 /firmware/pat/mbmc_modbus.X/dist/
 /mc_apps_pic32mk/apps/pmsm_foc_encoder_pic32_mk/firmware/mclv2_pic32_mk_mcm_pim.X/build/
 /mc_apps_pic32mk/apps/pmsm_foc_encoder_pic32_mk/firmware/mclv2_pic32_mk_mcm_pim.X/dist/
+/firmware/i400qdrive.X/build/
+/firmware/i400qdrive.X/dist/
