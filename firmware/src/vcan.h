@@ -44,12 +44,12 @@ extern "C" {
 #define G400HZ
 	//#define G400HZ_NODIS	
 	/*
-	 * 3-phase signal table size and offsets for each phase
+	 * 2-phase signal table size and offsets for each phase plus ref phase a
 	 */
 #define sine_res	360
-#define sinea		0
-#define	sineb		120
-#define sinec		240
+#define sinea		0	// -90
+#define	sineb		90	// ref phase
+#define sinec		180	// +90
 
 #define FLT15_IN4	3
 #define FAULT_DELAY	2

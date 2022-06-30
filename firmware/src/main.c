@@ -493,7 +493,7 @@ int main(void)
 		OledUpdate();
 		WaitMs(5000);
 	} else {
-		sprintf(buffer, "I400HZ3P %s %s       ", build_date, build_time);
+		sprintf(buffer, "QPHASE2 %s %s       ", build_date, build_time);
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
@@ -633,7 +633,7 @@ int main(void)
 				/* format and send data to LCD screen */
 				OledClearBuffer();
 				m35_ptr = &m35_2;
-				sprintf(buffer, "I400HZ3P %s %s       ", build_date, build_time);
+				sprintf(buffer, "QPHASE2 %s %s       ", build_date, build_time);
 				eaDogM_WriteStringAtPos(0, 0, buffer);
 				sprintf(buffer, "Q %4i:%i  F %i %i %i R %i A %i", POS3CNT, VEL3HLD, PWMF15_Get(), PWMF5_Get(), PWMF6_Get(), (bool) ~(dmt | wdt), check_adc_ivref());
 				eaDogM_WriteStringAtPos(1, 0, buffer);
