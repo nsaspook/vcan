@@ -171,7 +171,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: IOCON1__POLH}
     children:
@@ -269,7 +269,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: IOCON2__POLH}
     children:
@@ -332,7 +332,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: IOCON4__CLDAT_PWMH}
     children:
@@ -409,7 +409,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '1'}
+        attributes: {value: '0'}
   - type: KeyValueSet
     attributes: {id: IOCON7__CLDAT_PWMH}
     children:
@@ -834,7 +834,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '321242112'}
+        attributes: {id: mcpwm, value: '321241088'}
   - type: Hex
     attributes: {id: MCPWM_IOCON10}
     children:
@@ -862,21 +862,21 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '321242112'}
+        attributes: {id: mcpwm, value: '321241088'}
   - type: Hex
     attributes: {id: MCPWM_IOCON3}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '388875264'}
+        attributes: {id: mcpwm, value: '388874240'}
   - type: Hex
     attributes: {id: MCPWM_IOCON4}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: mcpwm, value: '388875264'}
+        attributes: {id: mcpwm, value: '388874240'}
   - type: Hex
     attributes: {id: MCPWM_IOCON5}
     children:
