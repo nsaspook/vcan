@@ -284,10 +284,14 @@ void wave_gen(uint32_t status, uintptr_t context)
 	m35_4.current_prev = m35_4.current;
 
 	/*
-	 * set channel duty cycle for motor sinewave outputs at ISR time 1ms intervals
+	 * set channel duty cycle for phase-shifted sinewave outputs at ISR time 1ms intervals
 	 */
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_3.duty);
+	if (POS3CNT > 0) {
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+	} else {
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_4.duty);
+	}
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	V.pwm_update = false;
@@ -573,7 +577,7 @@ int main(void)
 		SYS_Tasks();
 		ProcessPetitModbus(); // MODBUS processing 
 		BSP_LED3_Clear();
-//		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master
+		//		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master
 		PetitRegisters[0].ActValue = (int16_t) hb_current(u1bi, true);
 		PetitRegisters[1].ActValue = (int16_t) hb_current(u2ai, true);
 		PetitRegisters[2].ActValue = (int16_t) hb_current(u2bi, true);

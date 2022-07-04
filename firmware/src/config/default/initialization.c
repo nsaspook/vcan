@@ -161,6 +161,8 @@
 
 void SYS_Initialize ( void* data )
 {
+    /* MISRAC 2012 deviation block start */
+    /* MISRA C-2012 Rule 2.2 deviated in this file.  Deviation record ID -  H3_MISRAC_2012_R_2_2_DR_1 */
 
     /* Start out with interrupts disabled before configuring any modules */
     __builtin_disable_interrupts();
@@ -185,14 +187,14 @@ void SYS_Initialize ( void* data )
 
 	UART6_Initialize();
 
-    CORETIMER_Initialize();
     TMR6_Initialize();
 
+    CORETIMER_Initialize();
 	UART3_Initialize();
 
-    ADCHS_Initialize();
-
     QEI1_Initialize();
+
+    ADCHS_Initialize();
 
     QEI2_Initialize();
 
@@ -200,9 +202,9 @@ void SYS_Initialize ( void* data )
 
 	UART2_Initialize();
 
-    EEPROM_Initialize();
-
     TMR2_Initialize();
+
+    EEPROM_Initialize();
 
     TMR3_Initialize();
 
@@ -220,6 +222,7 @@ void SYS_Initialize ( void* data )
     __builtin_enable_interrupts();
 
 
+    /* MISRAC 2012 deviation block end */
 }
 
 

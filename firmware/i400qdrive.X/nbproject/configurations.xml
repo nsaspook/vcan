@@ -207,26 +207,26 @@
                    displayName="Important Files"
                    projectFiles="false">
       <logicalFolder name="f1" displayName="default.mhc" projectFiles="true">
-        <itemPath>../src/config/default/default.mhc/adchs.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/core.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/core_timer.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/dfp.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/eeprom.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/GraphSettings.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/mcpwm.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/project.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/qei1.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/qei2.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/qei3.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/settings.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/spi3.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/tmr1.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/tmr2.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/tmr3.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/tmr6.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/uart2.yml</itemPath>
-        <itemPath>../src/config/default/default.mhc/uart3.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/qei3.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/mcpwm.yml</itemPath>
         <itemPath>../src/config/default/default.mhc/uart6.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/project.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/tmr3.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/spi3.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/core_timer.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/adchs.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/settings.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/qei2.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/uart3.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/tmr1.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/core.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/GraphSettings.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/dfp.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/uart2.yml</itemPath>
+        <itemPath>../src/config/default/default.mhc/eeprom.yml</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
       <itemPath>../src/config/default/harmony-manifest-success.yml</itemPath>
@@ -245,9 +245,9 @@
         <targetDevice>PIC32MK1024MCM100</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>pk4hybrid</platformTool>
+        <platformTool>ICD4Tool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>4.10</languageToolchainVersion>
+        <languageToolchainVersion>4.00</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <packs>
@@ -1064,6 +1064,8 @@
         <property key="communication.interface" value=""/>
         <property key="communication.interface.jtag" value="2wire"/>
         <property key="communication.speed" value="${communication.speed.default}"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.simultaneous.debug" value="false"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
         <property key="freeze.timers" value="false"/>
@@ -1080,10 +1082,7 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="1d000000-1d0fffff"/>
-        <property key="memories.rww" value="true"/>
         <property key="poweroptions.powerenable" value="false"/>
-        <property key="programmerToGoFilePath"
-                  value="/root/vcan/firmware/i400hz3ph.X/debug/default/vcan_mkmc_ptg"/>
         <property key="programmerToGoImageName" value="vcan_mkmc_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
@@ -1101,6 +1100,7 @@
         <property key="programoptions.preserveprogram.ranges" value=""/>
         <property key="programoptions.preserveprogramrange" value="false"/>
         <property key="programoptions.preserveuserid" value="false"/>
+        <property key="programoptions.program.otpconfig" value="false"/>
         <property key="programoptions.programcalmem" value="false"/>
         <property key="programoptions.programuserotp" value="false"/>
         <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
