@@ -56,8 +56,8 @@ extern "C" {
 
 #define SYS_FREQ	120000000 // Running at 120MHz
 #define SAMPLERATE	36000
-#define SR120		12000
-#define SR240		24000
+#define SR120		9000 // shift 90
+#define SR240		18000 // shift 180
 #define PHASE_INC	(256 * 65536) / SAMPLERATE
 
 #define MOTOR_SPEED	1	// sinewave update divider

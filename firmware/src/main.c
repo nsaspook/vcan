@@ -76,6 +76,15 @@ extern t_cli_ctx cli_ctx; // command buffer
 
 volatile struct QEI_DATA m35_1 = {
 	.duty = MPCURRENT, // default motor duty
+	.gain = error_gain, // motor position encoder gain
+	.current = MPCURRENT,
+	.sine_steps = sineb,
+	.pole_pairs = NUM_POLE_PAIRS,
+	.ppr = ENCODER_PULSES_PER_REV,
+	.phaseIncrement = PHASE_INC,
+	.phase_steps = 0,
+	.phaseAccumulator = 0,
+	.set = false,
 	.current_offset = 0,
 },
 m35_2 = {
@@ -93,7 +102,7 @@ m35_2 = {
 m35_3 = {
 	.duty = 0,
 	.gain = pos_gain, // input position encoder gain
-	.sine_steps = sineb,
+	.sine_steps = sinec,
 	.phaseIncrement = PHASE_INC,
 	.phase_steps = 0,
 	.phaseAccumulator = 0,
@@ -262,6 +271,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	/*
 	 * load sinewave constants from three-phase 360 values per cycle lookup tables
 	 */
+	phase_duty(&m35_1, m35_1.current + m35_1.current_offset, V.m_speed, 2);
 	phase_duty(&m35_2, m35_4.current + m35_2.current_offset, V.m_speed, 2);
 	phase_duty(&m35_3, m35_4.current + m35_3.current_offset, V.m_speed, 2);
 	phase_duty(&m35_4, m35_4.current + m35_4.current_offset, V.m_speed, 2);
@@ -286,13 +296,13 @@ void wave_gen(uint32_t status, uintptr_t context)
 	/*
 	 * set channel duty cycle for phase-shifted sinewave outputs at ISR time 1ms intervals
 	 */
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_3.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
 	if (POS3CNT > 0) {
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	} else {
 		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_4.duty);
 	}
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	V.pwm_update = false;
 	//	DEBUGB0_Clear();
