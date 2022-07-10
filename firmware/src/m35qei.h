@@ -67,11 +67,11 @@ extern "C" {
 	 * encoder device data
 	 */
 	struct QEI_DATA {
-		int32_t pos, vel, duty, error, speed, hold, gain, sine_steps, current, current_prev,current_offset;
+		int32_t pos, vel, duty, error, speed, hold, gain, sine_steps, current, current_prev, current_offset;
 		int32_t indexcnt, indexvel, ppp, sine_zero, erotations;
 		uint32_t pole_pairs, ppr, phaseAccumulator, phaseIncrement, phase_steps, set;
 		double sin, mi1, mi2, mi3;
-		bool cw, ccw, stopped, started;
+		bool cw, ccw, stopped, started, clockwise;
 	};
 
 	typedef enum {

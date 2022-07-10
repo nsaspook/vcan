@@ -86,6 +86,7 @@ volatile struct QEI_DATA m35_1 = {
 	.phaseAccumulator = 0,
 	.set = false,
 	.current_offset = 0,
+	.clockwise = true,
 },
 m35_2 = {
 	.duty = 0, // default motor duty
@@ -98,6 +99,7 @@ m35_2 = {
 	.phaseAccumulator = 0,
 	.set = false,
 	.current_offset = 0,
+	.clockwise = true,
 },
 m35_3 = {
 	.duty = 0,
@@ -107,6 +109,7 @@ m35_3 = {
 	.phase_steps = 0,
 	.phaseAccumulator = 0,
 	.current_offset = 0,
+	.clockwise = true,
 },
 m35_4 = {
 	.duty = 0,
@@ -118,6 +121,7 @@ m35_4 = {
 	.phase_steps = 0,
 	.phaseAccumulator = 0,
 	.current_offset = 0,
+	.clockwise = true,
 },
 
 *m35_ptr;
@@ -268,6 +272,30 @@ void wave_gen(uint32_t status, uintptr_t context)
 	V.TimeUsed = (uint32_t) _CP0_GET_COUNT() - V.StartTime;
 	_CP0_SET_COUNT(DMT_PWM_TIME); // Set Core Timer count
 	V.StartTime = (uint32_t) _CP0_GET_COUNT();
+
+	/*
+	 * set channel duty cycle for phase-shifted sinewave outputs at ISR time 1ms intervals
+	 */
+	if (POS3CNT > 0) {
+		m35_1.clockwise = true;
+	} else {
+		m35_1.clockwise = false;
+	}
+
+	if (m35_2.clockwise != m35_1.clockwise) {
+		m35_1.clockwise = m35_2.clockwise;
+		if (m35_1.clockwise) {
+			m35_2.sine_steps = sinea;
+			m35_1.sine_steps = sineb;
+			m35_3.sine_steps = sinec;
+			m35_4.sine_steps = sinec;
+		} else {
+			m35_2.sine_steps = sinec;
+			m35_1.sine_steps = sineb;
+			m35_3.sine_steps = sinec;
+			m35_4.sine_steps = sinec;
+		}
+	}
 	/*
 	 * load sinewave constants from three-phase 360 values per cycle lookup tables
 	 */
@@ -293,16 +321,9 @@ void wave_gen(uint32_t status, uintptr_t context)
 	}
 	m35_4.current_prev = m35_4.current;
 
-	/*
-	 * set channel duty cycle for phase-shifted sinewave outputs at ISR time 1ms intervals
-	 */
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
-	if (POS3CNT > 0) {
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-	} else {
-		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_4.duty);
-	}
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
 	V.pwm_update = false;
 	//	DEBUGB0_Clear();
@@ -661,7 +682,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(4, 0, buffer);
 				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(u_total, true));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
-				sprintf(buffer, "%4i:S %4i %4i %4i  ", V.TimeUsed, m35_2.sine_steps, m35_3.sine_steps, m35_4.sine_steps);
+				sprintf(buffer, "%4i:S %4i %4i %4i  ", V.TimeUsed, m35_1.sine_steps - m35_2.sine_steps, m35_1.sine_steps - m35_3.sine_steps, m35_1.sine_steps - m35_4.sine_steps);
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%4i:Drive    %4i F%2i %2i", m35_4.current, POS3CNT, V.fault_count, V.fault_ticks);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
