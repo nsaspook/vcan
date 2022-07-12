@@ -262,7 +262,9 @@ time_t time(time_t * Time)
  */
 void wave_gen(uint32_t status, uintptr_t context)
 {
-	//	DEBUGB0_Set();
+	static int16_t rev = 0;
+
+	DEBUGB0_Set();
 	if (V.pwm_stop && V.pwm_update) {
 		return;
 	}
@@ -274,30 +276,8 @@ void wave_gen(uint32_t status, uintptr_t context)
 	V.StartTime = (uint32_t) _CP0_GET_COUNT();
 
 	/*
-	 * set channel duty cycle for phase-shifted sinewave outputs at ISR time 1ms intervals
-	 */
-	if (POS3CNT > 0) {
-		m35_1.clockwise = true;
-	} else {
-		m35_1.clockwise = false;
-	}
-
-	if (m35_2.clockwise != m35_1.clockwise) {
-		m35_1.clockwise = m35_2.clockwise;
-		if (m35_1.clockwise) {
-			m35_2.sine_steps = sinea;
-			m35_1.sine_steps = sineb;
-			m35_3.sine_steps = sinec;
-			m35_4.sine_steps = sinec;
-		} else {
-			m35_2.sine_steps = sinec;
-			m35_1.sine_steps = sineb;
-			m35_3.sine_steps = sinec;
-			m35_4.sine_steps = sinec;
-		}
-	}
-	/*
 	 * load sinewave constants from three-phase 360 values per cycle lookup tables
+	 * for two-phase power generation
 	 */
 	phase_duty(&m35_1, m35_1.current + m35_1.current_offset, V.m_speed, 2);
 	phase_duty(&m35_2, m35_4.current + m35_2.current_offset, V.m_speed, 2);
@@ -321,12 +301,23 @@ void wave_gen(uint32_t status, uintptr_t context)
 	}
 	m35_4.current_prev = m35_4.current;
 
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty);
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty);
+	/*
+	 * set channel duty cycle for phase-shifted sinewave outputs at ISR time 1ms intervals
+	 */
+
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty); // 2P servo reference phase
+	if (++rev > 0) {
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_2.duty); // 2P servo control phase #1 -90
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_3.duty); // 2P servo control phase #2 +90
+		m35_2.clockwise = true;
+	} else {
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty); // 2P servo control phase #1 +90
+		MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_3.duty); // 2P servo control phase #2 -90
+		m35_2.clockwise = false;
+	}
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty); // 2P servo control phase #3
 	V.pwm_update = false;
-	//	DEBUGB0_Clear();
+	DEBUGB0_Clear();
 }
 
 /*
@@ -334,7 +325,7 @@ void wave_gen(uint32_t status, uintptr_t context)
  */
 void an1_callback(uint32_t status, uintptr_t context)
 {
-	DEBUGB0_Set();
+	//	DEBUGB0_Set();
 	an_data[ANA1] = ADCHS_ChannelResultGet(ADCHS_CH1); // JP5 pin 14, AN1, ANA1/RA1
 }
 
@@ -343,10 +334,10 @@ void an1_callback(uint32_t status, uintptr_t context)
  */
 void an3_callback(uint32_t status, uintptr_t context)
 {
-	DEBUGB0_Set();
+	//	DEBUGB0_Set();
 	an_data[ANA1] = ADCHS_ChannelResultGet(ADCHS_CH1); // JP5 pin 14, AN1, ANA1/RA1
 	an_data[ANA3] = ADCHS_ChannelResultGet(ADCHS_CH3); // QEI pin 4, AN3, ANA3/RA3
-	DEBUGB0_Clear();
+	//	DEBUGB0_Clear();
 }
 
 /*
@@ -573,6 +564,7 @@ int main(void)
 	TMR2_Start();
 	// setup motor position values
 	m35_4.current = MPCURRENT;
+	POS3CNT = -2100;
 	V.pacing = 1;
 	phase_duty(&m35_2, m35_4.current, V.m_speed, V.pacing);
 	phase_duty(&m35_3, m35_4.current, V.m_speed, V.pacing);
@@ -682,7 +674,7 @@ int main(void)
 				eaDogM_WriteStringAtPos(4, 0, buffer);
 				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(u_total, true));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
-				sprintf(buffer, "%4i:S %4i %4i %4i  ", V.TimeUsed, m35_1.sine_steps - m35_2.sine_steps, m35_1.sine_steps - m35_3.sine_steps, m35_1.sine_steps - m35_4.sine_steps);
+				sprintf(buffer, "%4i:S %4i %4i %4i  %s", V.TimeUsed, m35_1.sine_steps - m35_2.sine_steps, m35_1.sine_steps - m35_3.sine_steps, m35_1.sine_steps - m35_4.sine_steps, m35_2.clockwise ? "CW" : "CCW");
 				eaDogM_WriteStringAtPos(6, 0, buffer);
 				sprintf(buffer, "%4i:Drive    %4i F%2i %2i", m35_4.current, POS3CNT, V.fault_count, V.fault_ticks);
 				eaDogM_WriteStringAtPos(7, 0, buffer);

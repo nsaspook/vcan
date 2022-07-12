@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/root/vcan/firmware/src/m35qei.h</file>
-            <file>file:/root/vcan/firmware/src/main.c</file>
-            <file>file:/root/vcan/firmware/src/vcan.h</file>
+            <file>file:/root/qdrive/vcan/firmware/src/vcan.h</file>
+            <file>file:/root/qdrive/vcan/firmware/src/freqgen.h</file>
+            <file>file:/root/qdrive/vcan/firmware/src/main.c</file>
+            <file>file:/root/qdrive/vcan/firmware/src/freqgen.c</file>
         </group>
     </open-files>
 </project-private>
