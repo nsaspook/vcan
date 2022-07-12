@@ -280,26 +280,25 @@ void wave_gen(uint32_t status, uintptr_t context)
 	 * for two-phase power generation
 	 */
 	phase_duty(&m35_1, m35_1.current + m35_1.current_offset, V.m_speed, 2);
-	phase_duty(&m35_2, m35_4.current + m35_2.current_offset, V.m_speed, 2);
-	phase_duty(&m35_3, m35_4.current + m35_3.current_offset, V.m_speed, 2);
+	phase_duty(&m35_2, m35_2.current + m35_2.current_offset, V.m_speed, 2);
+	phase_duty(&m35_3, m35_3.current + m35_3.current_offset, V.m_speed, 2);
 	phase_duty(&m35_4, m35_4.current + m35_4.current_offset, V.m_speed, 2);
 	/*
-	 * generate a current error drive signal
+	 * generate a current error drive signal to just S1 for testing
 	 */
-	m35_4.current = MPCURRENT + POS3CNT;
-	//	m35_4.current = MPCURRENT;
+	m35_2.current = MPCURRENT + POS3CNT;
 	/*
 	 * limit motor drive current
 	 */
-	if (m35_4.current > inverter_volts) {
-		m35_4.current = inverter_volts;
+	if (m35_2.current > inverter_volts) {
+		m35_2.current = inverter_volts;
 		POS3CNT = inverter_volts - MPCURRENT;
 	}
-	if (m35_4.current < 0) {
-		m35_4.current = 0;
+	if (m35_2.current < 0) {
+		m35_2.current = 0;
 		POS3CNT = (-MPCURRENT);
 	}
-	m35_4.current_prev = m35_4.current;
+	m35_2.current_prev = m35_2.current;
 
 	/*
 	 * set channel duty cycle for phase-shifted sinewave outputs at ISR time 1ms intervals
@@ -562,15 +561,16 @@ int main(void)
 	TMR2_Stop();
 	TMR2_CallbackRegister(wave_gen, 0);
 	TMR2_Start();
-	// setup motor position values
+	// setup default motor position values
 	m35_4.current = MPCURRENT;
 	POS3CNT = -2100;
 	V.pacing = 1;
+	phase_duty(&m35_1, m35_4.current, V.m_speed, V.pacing);
 	phase_duty(&m35_2, m35_4.current, V.m_speed, V.pacing);
 	phase_duty(&m35_3, m35_4.current, V.m_speed, V.pacing);
 	phase_duty(&m35_4, m35_4.current, V.m_speed, V.pacing);
 
-	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_2.duty);
+	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_1, m35_1.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
@@ -601,13 +601,15 @@ int main(void)
 		ProcessPetitModbus(); // MODBUS processing 
 		BSP_LED3_Clear();
 		//		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master
-		PetitRegisters[0].ActValue = (int16_t) hb_current(u1bi, true);
-		PetitRegisters[1].ActValue = (int16_t) hb_current(u2ai, true);
-		PetitRegisters[2].ActValue = (int16_t) hb_current(u2bi, true);
-		PetitRegisters[3].ActValue = (int16_t) an_data[ANA1]; // AC voltage value
+		PetitRegisters[0].ActValue = (int16_t) hb_current(u1ai, true);
+		PetitRegisters[1].ActValue = (int16_t) hb_current(u1bi, true);
+		PetitRegisters[2].ActValue = (int16_t) hb_current(u2ai, true);
+		PetitRegisters[3].ActValue = (int16_t) hb_current(u2bi, true);
 		PetitRegisters[4].ActValue = (int16_t) (MODBUS_VER << 8) + PWMF15_Get() + (PWMF5_Get() << 1) + (PWMF6_Get() << 2) + (U1_EN_Get() << 3) + (U2_EN_Get() << 4)+ (check_adc_ivref() << 5);
-		PetitRegisters[5].ActValue = (int16_t) m35_4.current; // current pwm voltage output value
-
+		PetitRegisters[5].ActValue = (int16_t) m35_1.current; // current pwm voltage output value
+		PetitRegisters[6].ActValue = (int16_t) m35_2.current;
+		PetitRegisters[7].ActValue = (int16_t) m35_3.current;
+		PetitRegisters[8].ActValue = (int16_t) m35_4.current;
 #ifndef G400HZ_NODIS
 		if (TimerDone(TMR_MOTOR)) {
 			StartTimer(TMR_MOTOR, MOTOR_UPDATES);
@@ -668,21 +670,21 @@ int main(void)
 				/*
 				 * show some test results on the LCD screen
 				 */
-				sprintf(buffer, "Phase    L1   L2   L3     N");
+				sprintf(buffer, "Phase   REF   S1   S2   S3");
 				eaDogM_WriteStringAtPos(3, 0, buffer);
-				sprintf(buffer, "%4i:P %4i %4i %4i  %4i   ", m35_2.erotations / (int) t1_time, hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false), hb_current(u_total, false));
+				sprintf(buffer, "%4i:P %4i %4i %4i %4i      ", m35_2.erotations / (int) t1_time, hb_current(u1ai, false), hb_current(u1bi, false), hb_current(u2ai, false), hb_current(u2bi, false));
 				eaDogM_WriteStringAtPos(4, 0, buffer);
-				sprintf(buffer, "%4i:M %4i %4i %4i  %4i      ", m35_2.indexcnt, hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true), hb_current(u_total, true));
+				sprintf(buffer, "%4i:M %4i %4i %4i %4i      ", m35_2.indexcnt, hb_current(u1ai, true), hb_current(u1bi, true), hb_current(u2ai, true), hb_current(u2bi, true));
 				eaDogM_WriteStringAtPos(5, 0, buffer);
-				sprintf(buffer, "%4i:S %4i %4i %4i  %s", V.TimeUsed, m35_1.sine_steps - m35_2.sine_steps, m35_1.sine_steps - m35_3.sine_steps, m35_1.sine_steps - m35_4.sine_steps, m35_2.clockwise ? "CW" : "CCW");
+				sprintf(buffer, "%4i:S    0 %4i %4i %4i %s ", V.TimeUsed, m35_1.sine_steps - m35_2.sine_steps, m35_1.sine_steps - m35_3.sine_steps, m35_1.sine_steps - m35_4.sine_steps, m35_2.clockwise ? "CW" : "CCW");
 				eaDogM_WriteStringAtPos(6, 0, buffer);
-				sprintf(buffer, "%4i:Drive    %4i F%2i %2i", m35_4.current, POS3CNT, V.fault_count, V.fault_ticks);
+				sprintf(buffer, "%4i:Drive    %4i F%2i %2i", m35_2.current, POS3CNT, V.fault_count, V.fault_ticks);
 				eaDogM_WriteStringAtPos(7, 0, buffer);
-				sprintf(buffer, "%4i:D %5i %5i %5i  ", DMT_ClearWindowStatusGet(), m35_2.duty, m35_3.duty, m35_4.duty);
+				sprintf(buffer, "%5i:D %5i %5i %5i  ", m35_1.duty, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
-				sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[5].ActValue, (uint16_t) PetitRegisters[10].ActValue, (int16_t) PetitRegisters[11].ActValue, V.modbus_rx, V.modbus_tx);
+				sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[11].ActValue, (uint16_t) PetitRegisters[12].ActValue, (int16_t) PetitRegisters[13].ActValue, V.modbus_rx, V.modbus_tx);
 				eaDogM_WriteStringAtPos(9, 0, buffer);
-				sprintf(buffer, "DM %10i %10i", DMT_CounterGet(), DMT_TimeOutCountGet());
+				sprintf(buffer, "                     ");
 				eaDogM_WriteStringAtPos(10, 0, buffer);
 				rawtime = time(&rawtime);
 				strftime(buffer, sizeof(buffer), "%w %c", gmtime(&rawtime));
