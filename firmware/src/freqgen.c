@@ -120,10 +120,10 @@ void preset_phase(void)
 	uint32_t i;
 
 	for (i = 0; i < SR120; i++) {
-		sine_foo(&m35_3);
+		sine_foo(&m35_2);
 	}
 	for (i = 0; i < SR240; i++) {
-		sine_foo(&m35_4);
+		sine_foo(&m35_2);
 	}
 }
 

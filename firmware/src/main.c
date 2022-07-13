@@ -281,8 +281,8 @@ void wave_gen(uint32_t status, uintptr_t context)
 	 */
 	phase_duty(&m35_1, m35_1.current + m35_1.current_offset, V.m_speed, 2);
 	phase_duty(&m35_2, m35_2.current + m35_2.current_offset, V.m_speed, 2);
-	phase_duty(&m35_3, m35_3.current + m35_3.current_offset, V.m_speed, 2);
-	phase_duty(&m35_4, m35_4.current + m35_4.current_offset, V.m_speed, 2);
+	phase_duty(&m35_3, m35_2.current + m35_3.current_offset, V.m_speed, 2);
+	phase_duty(&m35_4, m35_2.current + m35_4.current_offset, V.m_speed, 2);
 	/*
 	 * generate a current error drive signal to just S1 for testing
 	 */
@@ -532,7 +532,7 @@ int main(void)
 	/*
 	 * sine slew speed routines for inverter function
 	 */
-	sine_table(false);
+	sine_table(true);
 	/*
 	 * sine_foo slow speed routines, motor functions.
 	 */
