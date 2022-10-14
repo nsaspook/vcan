@@ -141,8 +141,8 @@ void CLK_Initialize( void )
     /* REFO4CON register */
     /* ROSEL =  SPLL */
     /* DIVSWEN = 1 */
-    /* RODIV = 7 */
-    REFO4CON = 0x70207;
+    /* RODIV = 1 */
+    REFO4CON = 0x10207;
 
     /* REFO4TRIM register */
     /* ROTRIM = 256 */
@@ -160,7 +160,7 @@ void CLK_Initialize( void )
     PMD2 = 0x17001f;
     PMD3 = 0xffffffff;
     PMD4 = 0xff001d8;
-    PMD5 = 0xf30f3b19;
+    PMD5 = 0xe30f3b19;
     PMD6 = 0x80d0000;
     PMD7 = 0x0;
 

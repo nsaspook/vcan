@@ -166,6 +166,7 @@ bool UART6_SerialSetup( UART_SERIAL_SETUP *setup, uint32_t srcClkFreq )
 {
     bool status = false;
     uint32_t baud;
+    uint32_t status_ctrl;
     uint8_t brgh = 1;
     int32_t uxbrg = 0;
 
@@ -199,7 +200,10 @@ bool UART6_SerialSetup( UART_SERIAL_SETUP *setup, uint32_t srcClkFreq )
             return status;
         }
 
-        /* Turn OFF UART6 */
+        /* Turn OFF UART6. Save UTXEN, URXEN and UTXBRK bits as these are cleared upon disabling UART */
+
+        status_ctrl = U6STA & (_U6STA_UTXEN_MASK | _U6STA_URXEN_MASK | _U6STA_UTXBRK_MASK);
+
         U6MODECLR = _U6MODE_ON_MASK;
 
         if(setup->dataWidth == UART_DATA_9_BIT)
@@ -231,6 +235,9 @@ bool UART6_SerialSetup( UART_SERIAL_SETUP *setup, uint32_t srcClkFreq )
         }
 
         U6MODESET = _U6MODE_ON_MASK;
+
+        /* Restore UTXEN, URXEN and UTXBRK bits. */
+        U6STASET = status_ctrl;
 
         status = true;
     }
@@ -600,15 +607,15 @@ size_t UART6_WriteBufferSizeGet(void)
 }
 
 bool UART6_TransmitComplete(void)
-{    
+{
     if((U6STA & _U6STA_TRMT_MASK))
     {
         return true;
     }
-	else
-	{
-		return false;
-	}
+    else
+    {
+        return false;
+    }
 }
 
 bool UART6_WriteNotificationEnable(bool isEnabled, bool isPersistent)
