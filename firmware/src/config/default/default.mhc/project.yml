@@ -6,13 +6,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 99DB74296DF9943C474F4F03A700C790
-- generatedChecksum: 335F11CBAD48DA36A57134BD107D2F10
+- generatedChecksum: A124482FD281E319084241241476229B
   logicalPath: config/default
   name: initialization.c
   physicalPath: ''
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 335F11CBAD48DA36A57134BD107D2F10
+  userChecksum: A124482FD281E319084241241476229B
 - generatedChecksum: 60A804A80AE5D3027794AC5512D1B5D5
   logicalPath: config/default
   name: interrupts.c
@@ -34,13 +34,20 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 701FC9813F6D31CD8A800F55BF348EF3
-- generatedChecksum: E7A7CC95533908670EF7D9FEFA62CB4C
+- generatedChecksum: B2E19C6C2F01E97EF878080721C9CE44
+  logicalPath: config/default/peripheral/canfd
+  name: plib_canfd1.c
+  physicalPath: peripheral/canfd
+  security: NON_SECURE
+  type: SOURCE
+  userChecksum: B2E19C6C2F01E97EF878080721C9CE44
+- generatedChecksum: D9A5B2461ACB31D8EB0814614CAACA69
   logicalPath: config/default/peripheral/clk
   name: plib_clk.c
   physicalPath: peripheral/clk
   security: NON_SECURE
   type: SOURCE
-  userChecksum: E7A7CC95533908670EF7D9FEFA62CB4C
+  userChecksum: D9A5B2461ACB31D8EB0814614CAACA69
 - generatedChecksum: CDE489012C46160ED6A67092B2FFCE99
   logicalPath: config/default/peripheral/coretimer
   name: plib_coretimer.c
@@ -146,27 +153,27 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: C8253EC66B72A8CCFA1FAC95CDF8F7A2
-- generatedChecksum: 230E6CC969C461B5702A7B476C23AC3F
+- generatedChecksum: C6F94E797704E6E330606FCA424F620B
   logicalPath: config/default/peripheral/uart
   name: plib_uart2.c
   physicalPath: peripheral/uart
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 230E6CC969C461B5702A7B476C23AC3F
-- generatedChecksum: 2288FA95ED135656D9769D6CC9813CFC
+  userChecksum: C6F94E797704E6E330606FCA424F620B
+- generatedChecksum: 11E1586B27AAE001C1CA96D7CDDE7ED6
   logicalPath: config/default/peripheral/uart
   name: plib_uart3.c
   physicalPath: peripheral/uart
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 2288FA95ED135656D9769D6CC9813CFC
-- generatedChecksum: 4E1B8A52C0A9478B278BDB30AF2DC17D
+  userChecksum: 11E1586B27AAE001C1CA96D7CDDE7ED6
+- generatedChecksum: E11FFABF418DBAFED264430C0615544D
   logicalPath: config/default/peripheral/uart
   name: plib_uart6.c
   physicalPath: peripheral/uart
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 4E1B8A52C0A9478B278BDB30AF2DC17D
+  userChecksum: E11FFABF418DBAFED264430C0615544D
 - generatedChecksum: 71352EF41F6688AD8408E42970B50B66
   logicalPath: config/default/stdio
   name: xc32_monitor.c
@@ -174,13 +181,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: 71352EF41F6688AD8408E42970B50B66
-- generatedChecksum: 6C80C1F6A4464738152446D3C0713A2A
+- generatedChecksum: EA16719F6D1EFB7E1A9057951F96993F
   logicalPath: config/default
   name: definitions.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 6C80C1F6A4464738152446D3C0713A2A
+  userChecksum: EA16719F6D1EFB7E1A9057951F96993F
 - generatedChecksum: E189C26B2269F8DE46033CCD0621958D
   logicalPath: config/default
   name: device.h
@@ -209,6 +216,20 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 9BC740B9E11F5CABC4A22BD0F7689C26
+- generatedChecksum: D761D4F0FE91A7E4A56806CF00C6BC16
+  logicalPath: config/default/peripheral/canfd
+  name: plib_canfd1.h
+  physicalPath: peripheral/canfd
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: D761D4F0FE91A7E4A56806CF00C6BC16
+- generatedChecksum: AEFE39C8E52415FE642815364C699E0C
+  logicalPath: config/default/peripheral/canfd
+  name: plib_canfd_common.h
+  physicalPath: peripheral/canfd
+  security: NON_SECURE
+  type: HEADER
+  userChecksum: AEFE39C8E52415FE642815364C699E0C
 - generatedChecksum: 7066CC390335CF75126E2A50C46E3BDD
   logicalPath: config/default/peripheral/clk
   name: plib_clk.h
@@ -391,13 +412,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 7DC91D6D376C98802C9C2990432DE9B7
-- generatedChecksum: 076A5CDEAE185EDCB946BAC9F1AD03E5
+- generatedChecksum: 740BA660459545B43A5A43ADC5C42B27
   logicalPath: config/default
   name: p32MK1024MCM100.ld
   physicalPath: ''
   security: NON_SECURE
   type: LINKER
-  userChecksum: 076A5CDEAE185EDCB946BAC9F1AD03E5
+  userChecksum: 740BA660459545B43A5A43ADC5C42B27
 format_version: v1.0
 libraries: []
 settings:

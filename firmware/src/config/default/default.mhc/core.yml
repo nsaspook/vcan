@@ -2538,13 +2538,20 @@ children:
       children:
       - type: User
         attributes: {value: DIGITAL}
+  - type: Boolean
+    attributes: {id: CAN1_CLOCK_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: can1, value: 'true'}
   - type: Integer
     attributes: {id: CAN1_CLOCK_FREQUENCY}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0'}
+        attributes: {id: core, value: '40000000'}
   - type: Integer
     attributes: {id: CAN2_CLOCK_FREQUENCY}
     children:
@@ -2999,7 +3006,7 @@ children:
       - type: Dynamic
         attributes: {id: core, value: '120000000'}
       - type: User
-        attributes: {value: '8000000'}
+        attributes: {value: '40000000'}
   - type: Boolean
     attributes: {id: CONFIG_SYS_CLK_REFCLK4_OE}
     children:
@@ -3116,7 +3123,7 @@ children:
     - type: Values
       children:
       - type: User
-        attributes: {value: '7'}
+        attributes: {value: '1'}
   - type: Integer
     attributes: {id: CONFIG_SYS_CLK_ROTRIM1}
     children:
@@ -5826,7 +5833,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '4077861657'}
+        attributes: {id: core, value: '3809426201'}
   - type: Hex
     attributes: {id: PMD6_REG_VALUE}
     children:
@@ -6120,7 +6127,7 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '120000000'}
+        attributes: {id: core, value: '6000000'}
   - type: String
     attributes: {id: REFO3TRIM_VALUE}
     children:
@@ -6176,14 +6183,14 @@ children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '0x70207'}
+        attributes: {id: core, value: '0x10207'}
   - type: Integer
     attributes: {id: RTCC_CLOCK_FREQUENCY}
     children:
     - type: Values
       children:
       - type: Dynamic
-        attributes: {id: core, value: '60000000'}
+        attributes: {id: core, value: '3000000'}
   - type: Boolean
     attributes: {id: RTCC_INTERRUPT_ENABLE_UPDATE}
     children:
