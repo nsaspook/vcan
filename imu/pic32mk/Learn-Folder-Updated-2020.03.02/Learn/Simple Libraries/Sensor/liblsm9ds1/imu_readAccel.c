@@ -17,11 +17,11 @@
 #include "lsm9ds1.h"
 
 
-int __pinAG;
+extern int __pinAG;
 
-float __aRes;
-int __aBiasRaw[3];
-char __autoCalc;
+extern float __aRes;
+extern int __aBiasRaw[3];
+extern char __autoCalc;
 
 
 void imu_readAccel(int *ax, int *ay, int *az)

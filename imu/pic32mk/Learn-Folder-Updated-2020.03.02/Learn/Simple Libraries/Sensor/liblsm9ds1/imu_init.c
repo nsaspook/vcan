@@ -19,7 +19,7 @@
 #include "imu.h"
 #include "../../eadog.h"
 
-int __pinAG, __pinM, __pinSDIO, __pinSCL;
+extern int __pinAG, __pinM, __pinSDIO, __pinSCL;
 char __autoCalc = 0;
 
 int imu_init(int pinSCL, int pinSDIO, int pinAG, int pinM)

@@ -17,10 +17,10 @@
 #include "lsm9ds1.h"
 
 
-int __pinAG;
+extern int __pinAG;
 
 unsigned int  __settings_gyro_scale = 2000;
-float __gRes;
+extern float __gRes;
 
 
 void imu_setGyroScale(unsigned int gScl)

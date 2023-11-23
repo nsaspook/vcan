@@ -17,9 +17,9 @@
 #include "lsm9ds1.h"
 
 
-int __pinAG;
-float __gRes, __aRes;
-char __autoCalc;
+extern int __pinAG;
+extern float __gRes, __aRes;
+extern char __autoCalc;
 
 
 void imu_calibrateAG()

@@ -16,7 +16,7 @@
 
 #include "lsm9ds1.h"
 
-int __pinAG;
+extern int __pinAG;
 
 void imu_readTemp(int *temperature)
 {
