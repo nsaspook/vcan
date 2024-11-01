@@ -1585,7 +1585,7 @@ extern "C" {
 	 *
 	 * @returns A pseudo-random number within the defined range.
 	 */
-	int random(int limitLow, int limitHigh);
+//	int random(int limitLow, int limitHigh);
 
 
 

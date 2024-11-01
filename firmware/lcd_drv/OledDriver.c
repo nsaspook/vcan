@@ -513,33 +513,6 @@ void OledUpdate(void)
 	SPI3DmaChannelHandler_State(0, DMA_MAGIC); // set DMA state machine init mode to start transfers
 	return;
 #else
-#ifdef EDOGS
-	int32_t ipag;
-	uint8_t* pb;
-
-	if (disp_frame) {
-		pb = rgbOledBmp0;
-	} else {
-		pb = rgbOledBmp1;
-	}
-	rgbOledBmp_page[4] = 0;
-
-	for (ipag = 0; ipag < cpagOledMax; ipag++) { // mainline code loop for GLCD update
-		/* Set the page address
-		 */
-		//Set page command
-		//page number
-		/* Start at the left column
-		 */
-		//set low nibble of column
-		//set high nibble of column
-		lcd_moveto_xy(ipag, 0);
-		/* Copy this memory page of display data.
-		 */
-		OledPutBuffer(ccolOledMax, pb);
-		pb += ccolOledMax;
-	}
-#endif
 #endif
 }
 
@@ -653,40 +626,6 @@ uint16_t SPI3_to_Buffer(uint8_t *dataIn, uint16_t bufLen, uint8_t *dataOut)
 	}
 	return bytesWritten;
 #else
-#ifdef USE_INT
-	while (SPI3_IsBusy());
-#endif
-	LCD_SELECT();
-	LCD_DRAM();
-	if (bufLen != 0) {
-#ifdef EDOGS
-		SPI3_ExchangeBuffer(dataIn, bufLen);
-		bytesWritten = bufLen;
-#endif
-#ifdef EDOGM
-		if (dataIn != NULL) {
-			while (bytesWritten < bufLen) {
-				if (dataOut == NULL) {
-					SPI3_Exchange8bit(dataIn[bytesWritten]);
-				} else {
-					SPI3_Exchange8bit(dataIn[bytesWritten]);
-				}
-				lcd_inc_column(1);
-				bytesWritten++;
-			}
-		} else {
-			if (dataOut != NULL) {
-				while (bytesWritten < bufLen) {
-					SPI3_Exchange8bit(0xff);
-					lcd_inc_column(1);
-					bytesWritten++;
-				}
-			}
-		}
-#endif
-	}
-	LCD_UNSELECT();
-	return bytesWritten;
 #endif
 }
 

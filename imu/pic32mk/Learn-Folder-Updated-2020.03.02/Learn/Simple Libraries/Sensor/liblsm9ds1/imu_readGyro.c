@@ -16,11 +16,11 @@
 
 #include "lsm9ds1.h"
 
-int __pinAG;
+extern int __pinAG;
 
-float __gRes;
-int __gBiasRaw[3];
-char __autoCalc;
+extern float __gRes;
+extern int __gBiasRaw[3];
+extern char __autoCalc;
 
 
 void imu_readGyro(int *gx, int *gy, int *gz)

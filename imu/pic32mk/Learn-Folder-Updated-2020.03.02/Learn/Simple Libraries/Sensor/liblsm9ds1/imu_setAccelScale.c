@@ -17,10 +17,10 @@
 #include "lsm9ds1.h"
 
 
-int __pinAG;
+extern int __pinAG;
 
-unsigned char __settings_accel_scale;
-float __aRes;
+extern unsigned char __settings_accel_scale;
+extern float __aRes;
 
 
 void imu_setAccelScale(unsigned char aScl)
