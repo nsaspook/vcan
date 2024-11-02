@@ -85,9 +85,9 @@
 void CLK_Initialize( void )
 {
     /* unlock system for clock configuration */
-    SYSKEY = 0x00000000;
-    SYSKEY = 0xAA996655;
-    SYSKEY = 0x556699AA;
+    SYSKEY = 0x00000000U;
+    SYSKEY = 0xAA996655U;
+    SYSKEY = 0x556699AAU;
 
  
         /* Peripheral Bus 1 is by default enabled, set its divisor */
@@ -141,8 +141,8 @@ void CLK_Initialize( void )
     /* REFO4CON register */
     /* ROSEL =  SPLL */
     /* DIVSWEN = 1 */
-    /* RODIV = 1 */
-    REFO4CON = 0x10207;
+    /* RODIV = 7 */
+    REFO4CON = 0x70207;
 
     /* REFO4TRIM register */
     /* ROTRIM = 256 */
@@ -156,15 +156,15 @@ void CLK_Initialize( void )
     /* Peripheral Module Disable Configuration */
 
 
-    PMD1 = 0x100170;
-    PMD2 = 0x17001f;
-    PMD3 = 0xffffffff;
-    PMD4 = 0xff001d8;
-    PMD5 = 0xe30f3b19;
-    PMD6 = 0x80d0000;
-    PMD7 = 0x0;
+    PMD1 = 0x100170U;
+    PMD2 = 0x17001fU;
+    PMD3 = 0xffffffffU;
+    PMD4 = 0xff001d8U;
+    PMD5 = 0xf30f3b19U;
+    PMD6 = 0x80d0000U;
+    PMD7 = 0x0U;
 
 
     /* Lock system since done with clock configuration */
-    SYSKEY = 0x33333333;
+    SYSKEY = 0x33333333U;
 }

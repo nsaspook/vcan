@@ -67,6 +67,27 @@
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="true">
+      <logicalFolder name="f1"
+                     displayName="mclv2_pic32_mk_mcm_pim.mhc"
+                     projectFiles="true">
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/adchs.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/core.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/dfp.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/mcpwm.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/pmsm_foc.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/qei2.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/uart2.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/X2CScope.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/GraphSettings.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/settings.yml</itemPath>
+        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/project.yml</itemPath>
+      </logicalFolder>
+      <itemPath>Makefile</itemPath>
+      <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/harmony-manifest-success.yml</itemPath>
+    </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
                    projectFiles="true">
@@ -139,27 +160,6 @@
       </logicalFolder>
       <itemPath>../src/main_mclv2.c</itemPath>
     </logicalFolder>
-    <logicalFolder name="ExternalFiles"
-                   displayName="Important Files"
-                   projectFiles="false">
-      <logicalFolder name="f1"
-                     displayName="mclv2_pic32_mk_mcm_pim.mhc"
-                     projectFiles="true">
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/adchs.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/core.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/dfp.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/mcpwm.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/pmsm_foc.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/qei2.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/uart2.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/X2CScope.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/GraphSettings.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/settings.yml</itemPath>
-        <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/mclv2_pic32_mk_mcm_pim.mhc/project.yml</itemPath>
-      </logicalFolder>
-      <itemPath>Makefile</itemPath>
-      <itemPath>../src/config/mclv2_pic32_mk_mcm_pim/harmony-manifest-success.yml</itemPath>
-    </logicalFolder>
   </logicalFolder>
   <sourceRootList>
     <Elem>../src</Elem>
@@ -174,7 +174,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>noID</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>4.35</languageToolchainVersion>
+        <languageToolchainVersion>4.40</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <packs>

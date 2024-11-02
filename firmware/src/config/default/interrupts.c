@@ -48,11 +48,11 @@
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-
 #include "interrupts.h"
 #include "definitions.h"
 
 #include "../../adc_scan.h"
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -61,31 +61,44 @@
 // *****************************************************************************
 
 
-void CORE_TIMER_InterruptHandler( void );
-void EXTERNAL_0_InterruptHandler( void );
-void TIMER_1_InterruptHandler( void );
-void TIMER_2_InterruptHandler( void );
-void TIMER_3_InterruptHandler( void );
-void UART2_FAULT_InterruptHandler( void );
-void UART2_RX_InterruptHandler( void );
-void UART2_TX_InterruptHandler( void );
-void UART3_FAULT_InterruptHandler( void );
-void UART3_RX_InterruptHandler( void );
-void UART3_TX_InterruptHandler( void );
-void DMA0_InterruptHandler( void );
-void DMA1_InterruptHandler( void );
-void DMA2_InterruptHandler( void );
-void TIMER_6_InterruptHandler( void );
-void ADC_DATA3_InterruptHandler( void );
-void UART6_FAULT_InterruptHandler( void );
-void UART6_RX_InterruptHandler( void );
-void UART6_TX_InterruptHandler( void );
-void SPI3_RX_InterruptHandler( void );
-void SPI3_TX_InterruptHandler( void );
-
-
-
 /* All the handlers are defined here.  Each will call its PLIB-specific function. */
+// *****************************************************************************
+// *****************************************************************************
+// Section: System Interrupt Vector declarations
+// *****************************************************************************
+// *****************************************************************************
+void CORE_TIMER_Handler (void);
+void EXTERNAL_0_Handler (void);
+void TIMER_1_Handler (void);
+void TIMER_2_Handler (void);
+void TIMER_3_Handler (void);
+void UART2_FAULT_Handler (void);
+void UART2_RX_Handler (void);
+void UART2_TX_Handler (void);
+void UART3_FAULT_Handler (void);
+void UART3_RX_Handler (void);
+void UART3_TX_Handler (void);
+void DMA0_Handler (void);
+void DMA1_Handler (void);
+void DMA2_Handler (void);
+void TIMER_6_Handler (void);
+void ADC_EOS_Handler (void);
+void ADC_DATA3_Handler (void);
+void UART6_FAULT_Handler (void);
+void UART6_RX_Handler (void);
+void UART6_TX_Handler (void);
+void QEI1_Handler (void);
+void QEI2_Handler (void);
+void QEI3_Handler (void);
+void SPI3_RX_Handler (void);
+void SPI3_TX_Handler (void);
+
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: System Interrupt Vector definitions
+// *****************************************************************************
+// *****************************************************************************
 void __ISR(_CORE_TIMER_VECTOR, ipl1SRS) CORE_TIMER_Handler (void)
 {
     CORE_TIMER_InterruptHandler();

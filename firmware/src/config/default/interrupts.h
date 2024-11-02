@@ -50,11 +50,34 @@
 #include <stdint.h>
 
 
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Handler Routines
 // *****************************************************************************
 // *****************************************************************************
+
+void CORE_TIMER_InterruptHandler( void );
+void EXTERNAL_0_InterruptHandler( void );
+void TIMER_1_InterruptHandler( void );
+void TIMER_2_InterruptHandler( void );
+void TIMER_3_InterruptHandler( void );
+void UART2_FAULT_InterruptHandler( void );
+void UART2_RX_InterruptHandler( void );
+void UART2_TX_InterruptHandler( void );
+void UART3_FAULT_InterruptHandler( void );
+void UART3_RX_InterruptHandler( void );
+void UART3_TX_InterruptHandler( void );
+void DMA0_InterruptHandler( void );
+void DMA1_InterruptHandler( void );
+void DMA2_InterruptHandler( void );
+void TIMER_6_InterruptHandler( void );
+void ADC_DATA3_InterruptHandler( void );
+void UART6_FAULT_InterruptHandler( void );
+void UART6_RX_InterruptHandler( void );
+void UART6_TX_InterruptHandler( void );
+void SPI3_RX_InterruptHandler( void );
+void SPI3_TX_InterruptHandler( void );
 
 
 

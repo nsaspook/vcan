@@ -39,6 +39,7 @@
 *******************************************************************************/
 #include "device.h"
 #include "plib_mcpwm.h"
+#include "interrupts.h"
 
 // *****************************************************************************
 
@@ -46,7 +47,7 @@
 // Section: MCPWM Implementation
 // *****************************************************************************
 // *****************************************************************************
-MCPWM_CH_OBJECT mcpwmObj[12];
+volatile static MCPWM_CH_OBJECT mcpwmObj[12];
 
 void MCPWM_Initialize (void)
 {
@@ -329,7 +330,7 @@ void MCPWM_PrimaryPeriodSet(uint16_t period)
 
 uint16_t MCPWM_PrimaryPeriodGet(void)
 {
-    return PTPER;
+    return (uint16_t)PTPER;
 }
 
 
@@ -340,84 +341,95 @@ void MCPWM_SecondaryPeriodSet(uint16_t period)
 
 uint16_t MCPWM_SecondaryPeriodGet(void)
 {
-    return STPER;
+    return (uint16_t)STPER;
 }
 
 void MCPWM_ChannelPrimaryDutySet(MCPWM_CH_NUM channel, uint16_t duty)
 {
-    *(&PDC1 + (0x40 * (channel))) = duty;
+    *(&PDC1 + (0x40U * (channel))) = duty;
 }
 
 void MCPWM_ChannelSecondaryDutySet(MCPWM_CH_NUM channel, uint16_t duty)
 {
-    *(&SDC1 + (0x40 * (channel))) = duty;
+    *(&SDC1 + (0x40U * (channel))) = duty;
 }
 
 void MCPWM_ChannelDeadTimeSet(MCPWM_CH_NUM channel, uint16_t high_deadtime, uint16_t low_deadtime)
 {
-    *(&DTR1 + (0x40 * (channel))) = (high_deadtime & 0x3FFF);
-    *(&ALTDTR1 + (0x40 * (channel))) = (low_deadtime & 0x3FFF);
+    *(&DTR1 + (0x40U * (channel))) = ((uint32_t)high_deadtime & (uint32_t)0x3FFFU);
+    *(&ALTDTR1 + (0x40U * (channel))) = ((uint32_t)low_deadtime & (uint32_t)0x3FFFU);
 }
 
 void MCPWM_ChannelPrimaryTriggerSet(MCPWM_CH_NUM channel, uint16_t trigger)
 {
-    *(&TRIG1 + (0x40 * (channel))) = trigger;
+    *(&TRIG1 + (0x40U * (channel))) = trigger;
 }
 
 void MCPWM_ChannelSecondaryTriggerSet(MCPWM_CH_NUM channel, uint16_t trigger)
 {
-    *(&STRIG1 + (0x40 * (channel))) = trigger;
+    *(&STRIG1 + (0x40U * (channel))) = trigger;
 }
 
 void MCPWM_ChannelLeadingEdgeBlankingDelaySet(MCPWM_CH_NUM channel, uint16_t delay)
 {
-    *(&LEBDLY1 + (0x40 * (channel))) = delay;
+    *(&LEBDLY1 + (0x40U * (channel))) = delay;
 }
 
 void MCPWM_ChannelPinsOverrideEnable(MCPWM_CH_NUM channel)
 {
-    *(&IOCON1 + (0x40 * (channel))) |= _IOCON1_OVRENL_MASK | _IOCON1_OVRENH_MASK;
+    *(&IOCON1 + (0x40U * (channel))) |= _IOCON1_OVRENL_MASK | _IOCON1_OVRENH_MASK;
 }
 
 void MCPWM_ChannelPinsOverrideDisable(MCPWM_CH_NUM channel)
 {
-    *(&IOCON1 + (0x40 * (channel))) &= ~(_IOCON1_OVRENL_MASK | _IOCON1_OVRENH_MASK);
+    *(&IOCON1 + (0x40U * (channel))) &= ~(_IOCON1_OVRENL_MASK | _IOCON1_OVRENH_MASK);
 }
 
 void MCPWM_ChannelPinsOwnershipEnable(MCPWM_CH_NUM channel)
 {
-    *(&IOCON1 + (0x40 * (channel))) |= _IOCON1_PENH_MASK | _IOCON1_PENL_MASK;
+    *(&IOCON1 + (0x40U * (channel))) |= _IOCON1_PENH_MASK | _IOCON1_PENL_MASK;
 }
 
 void MCPWM_ChannelPinsOwnershipDisable(MCPWM_CH_NUM channel)
 {
-    *(&IOCON1 + (0x40 * (channel))) &= ~(_IOCON1_PENH_MASK | _IOCON1_PENL_MASK);
+    *(&IOCON1 + (0x40U * (channel))) &= ~(_IOCON1_PENH_MASK | _IOCON1_PENL_MASK);
 }
 
 
 
-void PWM1_InterruptHandler(void)
+void __attribute__((used)) PWM1_InterruptHandler(void)
 {
-    MCPWM_CH_STATUS status;
-    status = (MCPWM_CH_STATUS)(PWMCON1 & MCPWM_STATUS_MASK);
-    if (PWMCON1bits.PWMHIEN && PWMCON1bits.PWMHIF)
+    uint32_t tmp;
+    uintptr_t context = mcpwmObj[0].context;
+    uint32_t status = PWMCON1 & MCPWM_STATUS_MASK;
+
+    tmp = PWMCON1bits.PWMHIF;
+    if (((PWMCON1bits.PWMHIEN) != 0U) && (tmp != 0U))
     {
         PWMCON1bits.PWMHIF = 0;
     }
-    if (PWMCON1bits.PWMLIEN && PWMCON1bits.PWMLIF)
+
+    tmp = PWMCON1bits.PWMLIF;
+    if (((PWMCON1bits.PWMLIEN) != 0U) && (tmp != 0U))
     {
         PWMCON1bits.PWMLIF = 0;
     }
-    if (PWMCON1bits.TRGIEN && PWMCON1bits.TRGIF)
+
+    tmp = PWMCON1bits.TRGIF;
+    if (((PWMCON1bits.TRGIEN) != 0U) && (tmp != 0U))
     {
         PWMCON1bits.TRGIF = 0;
     }
-    if (PWMCON1bits.CLIEN && PWMCON1bits.CLIF)
+
+    tmp = PWMCON1bits.CLIF;
+    if (((PWMCON1bits.CLIEN) != 0U) && (tmp != 0U))
     {
         PWMCON1bits.CLIEN = 0;
         PWMCON1bits.CLIF = 0;
     }
-    if (PWMCON1bits.FLTIEN && PWMCON1bits.FLTIF)
+
+    tmp = PWMCON1bits.FLTIF;
+    if (((PWMCON1bits.FLTIEN) != 0U) && (tmp != 0U))
     {
         PWMCON1bits.FLTIEN = 0;
         PWMCON1bits.FLTIF = 0;
@@ -429,32 +441,43 @@ void PWM1_InterruptHandler(void)
 
     if( (mcpwmObj[0].callback != NULL))
     {
-        mcpwmObj[0].callback(status, mcpwmObj[0].context);
+        mcpwmObj[0].callback((MCPWM_CH_STATUS)status, context);
     }
 }
 
-void PWM2_InterruptHandler(void)
+void __attribute__((used)) PWM2_InterruptHandler(void)
 {
-    MCPWM_CH_STATUS status;
-    status = (MCPWM_CH_STATUS)(PWMCON2 & MCPWM_STATUS_MASK);
-    if (PWMCON2bits.PWMHIEN && PWMCON2bits.PWMHIF)
+    uint32_t tmp;
+    uintptr_t context = mcpwmObj[1].context;
+    uint32_t status = PWMCON2 & MCPWM_STATUS_MASK;
+
+    tmp = PWMCON2bits.PWMHIF;
+    if (((PWMCON2bits.PWMHIEN) != 0U) && (tmp != 0U))
     {
         PWMCON2bits.PWMHIF = 0;
     }
-    if (PWMCON2bits.PWMLIEN && PWMCON2bits.PWMLIF)
+
+    tmp = PWMCON2bits.PWMLIF;
+    if (((PWMCON2bits.PWMLIEN) != 0U) && (tmp != 0U))
     {
         PWMCON2bits.PWMLIF = 0;
     }
-    if (PWMCON2bits.TRGIEN && PWMCON2bits.TRGIF)
+
+    tmp = PWMCON2bits.TRGIF;
+    if (((PWMCON2bits.TRGIEN) != 0U) && (tmp != 0U))
     {
         PWMCON2bits.TRGIF = 0;
     }
-    if (PWMCON2bits.CLIEN && PWMCON2bits.CLIF)
+
+    tmp = PWMCON2bits.CLIF;
+    if (((PWMCON2bits.CLIEN) != 0U) && (tmp != 0U))
     {
         PWMCON2bits.CLIEN = 0;
         PWMCON2bits.CLIF = 0;
     }
-    if (PWMCON2bits.FLTIEN && PWMCON2bits.FLTIF)
+
+    tmp = PWMCON2bits.FLTIF;
+    if (((PWMCON2bits.FLTIEN) != 0U) && (tmp != 0U))
     {
         PWMCON2bits.FLTIEN = 0;
         PWMCON2bits.FLTIF = 0;
@@ -466,32 +489,43 @@ void PWM2_InterruptHandler(void)
 
     if( (mcpwmObj[1].callback != NULL))
     {
-        mcpwmObj[1].callback(status, mcpwmObj[1].context);
+        mcpwmObj[1].callback((MCPWM_CH_STATUS)status, context);
     }
 }
 
-void PWM3_InterruptHandler(void)
+void __attribute__((used)) PWM3_InterruptHandler(void)
 {
-    MCPWM_CH_STATUS status;
-    status = (MCPWM_CH_STATUS)(PWMCON3 & MCPWM_STATUS_MASK);
-    if (PWMCON3bits.PWMHIEN && PWMCON3bits.PWMHIF)
+    uint32_t tmp;
+    uintptr_t context = mcpwmObj[2].context;
+    uint32_t status = PWMCON3 & MCPWM_STATUS_MASK;
+
+    tmp = PWMCON3bits.PWMHIF;
+    if (((PWMCON3bits.PWMHIEN) != 0U) && (tmp != 0U))
     {
         PWMCON3bits.PWMHIF = 0;
     }
-    if (PWMCON3bits.PWMLIEN && PWMCON3bits.PWMLIF)
+
+    tmp = PWMCON3bits.PWMLIF;
+    if (((PWMCON3bits.PWMLIEN) != 0U) && (tmp != 0U))
     {
         PWMCON3bits.PWMLIF = 0;
     }
-    if (PWMCON3bits.TRGIEN && PWMCON3bits.TRGIF)
+
+    tmp = PWMCON3bits.TRGIF;
+    if (((PWMCON3bits.TRGIEN) != 0U) && (tmp != 0U))
     {
         PWMCON3bits.TRGIF = 0;
     }
-    if (PWMCON3bits.CLIEN && PWMCON3bits.CLIF)
+
+    tmp = PWMCON3bits.CLIF;
+    if (((PWMCON3bits.CLIEN) != 0U) && (tmp != 0U))
     {
         PWMCON3bits.CLIEN = 0;
         PWMCON3bits.CLIF = 0;
     }
-    if (PWMCON3bits.FLTIEN && PWMCON3bits.FLTIF)
+
+    tmp = PWMCON3bits.FLTIF;
+    if (((PWMCON3bits.FLTIEN) != 0U) && (tmp != 0U))
     {
         PWMCON3bits.FLTIEN = 0;
         PWMCON3bits.FLTIF = 0;
@@ -503,32 +537,43 @@ void PWM3_InterruptHandler(void)
 
     if( (mcpwmObj[2].callback != NULL))
     {
-        mcpwmObj[2].callback(status, mcpwmObj[2].context);
+        mcpwmObj[2].callback((MCPWM_CH_STATUS)status, context);
     }
 }
 
-void PWM4_InterruptHandler(void)
+void __attribute__((used)) PWM4_InterruptHandler(void)
 {
-    MCPWM_CH_STATUS status;
-    status = (MCPWM_CH_STATUS)(PWMCON4 & MCPWM_STATUS_MASK);
-    if (PWMCON4bits.PWMHIEN && PWMCON4bits.PWMHIF)
+    uint32_t tmp;
+    uintptr_t context = mcpwmObj[3].context;
+    uint32_t status = PWMCON4 & MCPWM_STATUS_MASK;
+
+    tmp = PWMCON4bits.PWMHIF;
+    if (((PWMCON4bits.PWMHIEN) != 0U) && (tmp != 0U))
     {
         PWMCON4bits.PWMHIF = 0;
     }
-    if (PWMCON4bits.PWMLIEN && PWMCON4bits.PWMLIF)
+
+    tmp = PWMCON4bits.PWMLIF;
+    if (((PWMCON4bits.PWMLIEN) != 0U) && (tmp != 0U))
     {
         PWMCON4bits.PWMLIF = 0;
     }
-    if (PWMCON4bits.TRGIEN && PWMCON4bits.TRGIF)
+
+    tmp = PWMCON4bits.TRGIF;
+    if (((PWMCON4bits.TRGIEN) != 0U) && (tmp != 0U))
     {
         PWMCON4bits.TRGIF = 0;
     }
-    if (PWMCON4bits.CLIEN && PWMCON4bits.CLIF)
+
+    tmp = PWMCON4bits.CLIF;
+    if (((PWMCON4bits.CLIEN) != 0U) && (tmp != 0U))
     {
         PWMCON4bits.CLIEN = 0;
         PWMCON4bits.CLIF = 0;
     }
-    if (PWMCON4bits.FLTIEN && PWMCON4bits.FLTIF)
+
+    tmp = PWMCON4bits.FLTIF;
+    if (((PWMCON4bits.FLTIEN) != 0U) && (tmp != 0U))
     {
         PWMCON4bits.FLTIEN = 0;
         PWMCON4bits.FLTIF = 0;
@@ -540,7 +585,7 @@ void PWM4_InterruptHandler(void)
 
     if( (mcpwmObj[3].callback != NULL))
     {
-        mcpwmObj[3].callback(status, mcpwmObj[3].context);
+        mcpwmObj[3].callback((MCPWM_CH_STATUS)status, context);
     }
 }
 
