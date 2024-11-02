@@ -278,14 +278,14 @@
 #define MAX_EN1_Get()               ((PORTD >> 8) & 0x1U)
 #define MAX_EN1_PIN                  GPIO_PIN_RD8
 
-/*** Macros for GPIO_RC13 pin ***/
-#define GPIO_RC13_Set()               (LATCSET = (1U<<13))
-#define GPIO_RC13_Clear()             (LATCCLR = (1U<<13))
-#define GPIO_RC13_Toggle()            (LATCINV= (1U<<13))
-#define GPIO_RC13_OutputEnable()      (TRISCCLR = (1U<<13))
-#define GPIO_RC13_InputEnable()       (TRISCSET = (1U<<13))
-#define GPIO_RC13_Get()               ((PORTC >> 13) & 0x1U)
-#define GPIO_RC13_PIN                  GPIO_PIN_RC13
+/*** Macros for SOSCI_GPIO_IN pin ***/
+#define SOSCI_GPIO_IN_Set()               (LATCSET = (1U<<13))
+#define SOSCI_GPIO_IN_Clear()             (LATCCLR = (1U<<13))
+#define SOSCI_GPIO_IN_Toggle()            (LATCINV= (1U<<13))
+#define SOSCI_GPIO_IN_OutputEnable()      (TRISCCLR = (1U<<13))
+#define SOSCI_GPIO_IN_InputEnable()       (TRISCSET = (1U<<13))
+#define SOSCI_GPIO_IN_Get()               ((PORTC >> 13) & 0x1U)
+#define SOSCI_GPIO_IN_PIN                  GPIO_PIN_RC13
 
 /*** Macros for IN7 pin ***/
 #define IN7_Set()               (LATBSET = (1U<<9))

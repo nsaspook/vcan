@@ -140,8 +140,6 @@ typedef uint32_t ADCHS_CHANNEL_NUM;
 
 
 
-
-
 // *****************************************************************************
 
 typedef void (*ADCHS_CALLBACK)(ADCHS_CHANNEL_NUM channel, uintptr_t context);

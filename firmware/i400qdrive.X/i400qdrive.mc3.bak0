@@ -2921,7 +2921,7 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="core" name="!@#harmonyUserData"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;UserData&gt;
   &lt;UserData dnOrder=&quot;0&quot;&gt;
-    &lt;GraphSettings canvasHeight=&quot;716&quot; canvasWidth=&quot;279&quot; dnOrder=&quot;0&quot;/&gt;
+    &lt;GraphSettings canvasHeight=&quot;715&quot; canvasWidth=&quot;284&quot; dnOrder=&quot;0&quot;/&gt;
     &lt;PowerProfiles dnOrder=&quot;1&quot;&gt;
       &lt;Profile dnOrder=&quot;0&quot; id=&quot;profile0&quot; name=&quot;Main&quot;/&gt;
     &lt;/PowerProfiles&gt;
@@ -5852,7 +5852,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;core&gt;
   &lt;core dnOrder=&quot;0&quot; id=&quot;BSP_PIN_73_FUNCTION_NAME&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;User dnOrder=&quot;0&quot; value=&quot;SOSCI_GPIO_IN&quot;/&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;GPIO_RC13&quot;/&gt;
     &lt;/Values&gt;
   &lt;/core&gt;
 &lt;/core&gt;
@@ -19724,7 +19724,7 @@
    <generatedFileHashHistoryMap class="java.util.TreeMap">
       <entry>
          <file>../src/config/default/definitions.h</file>
-         <hash>a79c208ffa68c20b38182614cda3e6644dc8eeb0f0bf5cbd75c386107b7aca27</hash>
+         <hash>3434ba690a58db77aa74aeff56914c899ae43cc5539d8daabe712c56a5a97468</hash>
       </entry>
       <entry>
          <file>../src/config/default/device.h</file>
@@ -19736,7 +19736,7 @@
       </entry>
       <entry>
          <file>../src/config/default/initialization.c</file>
-         <hash>98c0eb006403a7bbc50cf631ddc45bc4e743b75da83fe0c31ba009c0d92993f4</hash>
+         <hash>8c49eb74fb3d8b866166767e53ffb9cbfa59a8eb45714bc623c5741c05349b35</hash>
       </entry>
       <entry>
          <file>../src/config/default/interrupts.c</file>
@@ -19816,7 +19816,7 @@
       </entry>
       <entry>
          <file>../src/config/default/peripheral/gpio/plib_gpio.h</file>
-         <hash>e3084f3ff9be9e1ba1b4668d684fe06026cbe95b23ed1035e01d5715b6d122f6</hash>
+         <hash>7349ae1a933977a64063fb51324f333fc334e328a9f3e2ef1e87f3ac89811cbb</hash>
       </entry>
       <entry>
          <file>../src/config/default/peripheral/mcpwm/plib_mcpwm.c</file>
