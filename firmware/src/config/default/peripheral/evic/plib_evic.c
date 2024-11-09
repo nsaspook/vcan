@@ -82,6 +82,8 @@ void EVIC_Initialize( void )
     IPC47SET = 0x400U | 0x0U;  /* QEI3:  Priority 1 / Subpriority 0 */
     IPC54SET = 0x4000000U | 0x0U;  /* SPI3_RX:  Priority 1 / Subpriority 0 */
     IPC55SET = 0x4U | 0x0U;  /* SPI3_TX:  Priority 1 / Subpriority 0 */
+    IPC56SET = 0x400U | 0x0U;  /* SPI5_RX:  Priority 1 / Subpriority 0 */
+    IPC56SET = 0x40000U | 0x0U;  /* SPI5_TX:  Priority 1 / Subpriority 0 */
 
     /* Initialize External interrupt 0 callback object */
     extInt0CbObj.callback = NULL;

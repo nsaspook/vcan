@@ -91,7 +91,7 @@ void GPIO_Initialize ( void )
     CNPUFSET = 0x2U; /* Pull-Up Enable */
     /* PORTG Initialization */
     LATG = 0xa00U; /* Initial Latch Value */
-    TRISGCLR = 0x7e01U; /* Direction Control */
+    TRISGCLR = 0x7e00U; /* Direction Control */
     ANSELGCLR = 0xec0U; /* Digital Mode Enable */
     CNPUGSET = 0xc2U; /* Pull-Up Enable */
 
@@ -102,6 +102,7 @@ void GPIO_Initialize ( void )
     U6RXR = 13;
     INDX1R = 0;
     U3RXR = 5;
+    SDI5R = 11;
     QEA2R = 9;
     QEB2R = 6;
     QEA3R = 10;
@@ -113,8 +114,10 @@ void GPIO_Initialize ( void )
     RPA4R = 11;
     RPC6R = 1;
     RPA11R = 14;
+    RPG1R = 16;
     RPD3R = 14;
     RPE15R = 2;
+    RPG0R = 16;
 
 
 }

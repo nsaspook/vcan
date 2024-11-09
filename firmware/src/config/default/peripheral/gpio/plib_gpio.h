@@ -359,33 +359,6 @@
 #define IN8_Get()               ((PORTF >> 0) & 0x1U)
 #define IN8_PIN                  GPIO_PIN_RF0
 
-/*** Macros for option1 pin ***/
-#define option1_Set()               (LATFSET = (1U<<1))
-#define option1_Clear()             (LATFCLR = (1U<<1))
-#define option1_Toggle()            (LATFINV= (1U<<1))
-#define option1_OutputEnable()      (TRISFCLR = (1U<<1))
-#define option1_InputEnable()       (TRISFSET = (1U<<1))
-#define option1_Get()               ((PORTF >> 1) & 0x1U)
-#define option1_PIN                  GPIO_PIN_RF1
-
-/*** Macros for option2 pin ***/
-#define option2_Set()               (LATGSET = (1U<<1))
-#define option2_Clear()             (LATGCLR = (1U<<1))
-#define option2_Toggle()            (LATGINV= (1U<<1))
-#define option2_OutputEnable()      (TRISGCLR = (1U<<1))
-#define option2_InputEnable()       (TRISGSET = (1U<<1))
-#define option2_Get()               ((PORTG >> 1) & 0x1U)
-#define option2_PIN                  GPIO_PIN_RG1
-
-/*** Macros for GPIO_RG0 pin ***/
-#define GPIO_RG0_Set()               (LATGSET = (1U<<0))
-#define GPIO_RG0_Clear()             (LATGCLR = (1U<<0))
-#define GPIO_RG0_Toggle()            (LATGINV= (1U<<0))
-#define GPIO_RG0_OutputEnable()      (TRISGCLR = (1U<<0))
-#define GPIO_RG0_InputEnable()       (TRISGSET = (1U<<0))
-#define GPIO_RG0_Get()               ((PORTG >> 0) & 0x1U)
-#define GPIO_RG0_PIN                  GPIO_PIN_RG0
-
 /*** Macros for DO7 pin ***/
 #define DO7_Set()               (LATFSET = (1U<<6))
 #define DO7_Clear()             (LATFCLR = (1U<<6))

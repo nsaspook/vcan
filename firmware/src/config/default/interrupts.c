@@ -92,6 +92,8 @@ void QEI2_Handler (void);
 void QEI3_Handler (void);
 void SPI3_RX_Handler (void);
 void SPI3_TX_Handler (void);
+void SPI5_RX_Handler (void);
+void SPI5_TX_Handler (void);
 
 
 // *****************************************************************************
@@ -219,6 +221,16 @@ void __ISR(_SPI3_RX_VECTOR, ipl1SRS) SPI3_RX_Handler (void)
 void __ISR(_SPI3_TX_VECTOR, ipl1SRS) SPI3_TX_Handler (void)
 {
 	SPI3_TX_InterruptHandler();
+}
+
+void __ISR(_SPI5_RX_VECTOR, ipl1SRS) SPI5_RX_Handler (void)
+{
+    SPI5_RX_InterruptHandler();
+}
+
+void __ISR(_SPI5_TX_VECTOR, ipl1SRS) SPI5_TX_Handler (void)
+{
+    SPI5_TX_InterruptHandler();
 }
 
 

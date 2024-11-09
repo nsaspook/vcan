@@ -513,7 +513,7 @@ int main(void)
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
-		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", option1_Get(), option2_Get(), dmt + (wdt << 1));
+		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", 0, 0, dmt + (wdt << 1));
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
 		WaitMs(5000);
@@ -522,7 +522,7 @@ int main(void)
 		eaDogM_WriteStringAtPos(0, 0, buffer);
 		sprintf(buffer, "Clock Status %04x      ", CLKSTAT);
 		eaDogM_WriteStringAtPos(1, 0, buffer);
-		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", option1_Get(), option2_Get(), dmt + (wdt << 1));
+		sprintf(buffer, " Options: 1:%d 2:%d DMT:%d", 0, 0, dmt + (wdt << 1));
 		eaDogM_WriteStringAtPos(2, 0, buffer);
 		OledUpdate();
 		WaitMs(1500);
