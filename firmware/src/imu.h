@@ -18,7 +18,7 @@ extern "C" {
 #include <math.h>
 #include "imupic32mcj.h"
 
-#define IMU_DRIVER "V1.705" 
+#define IMU_DRIVER "V1.706" 
 #define IMU_ALIAS "IMU"
 
 #define IMU_ID_DELAY 400

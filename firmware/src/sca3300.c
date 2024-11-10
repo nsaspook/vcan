@@ -94,7 +94,7 @@ bool sca3300_imu_transfer(imu_cmd_t * imu, uint32_t data)
  * transfer consists of two phases. A response to the request is sent within next request
  * frame. The response concurrent to the request contains the data requested by the
  * previous command.
- * ~160us runtime per full data update
+ * under 1ms runtime per full data update
  */
 bool sca3300_getdata(void * imup)
 {
@@ -301,7 +301,7 @@ bool imu_cs(imu_cmd_t * imu)
 		switch (imu->cs) {
 		case 0:
 		default:
-			delay_us(SCA3300_CHIP_CS_DELAY); // 
+//			delay_us(SCA3300_CHIP_CS_DELAY); // 
 			imu->run = true;
 			SPI_EN1_Clear();
 			DEBUGB0_Clear();
