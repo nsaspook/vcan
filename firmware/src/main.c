@@ -770,7 +770,7 @@ int main(void)
 				imu0.op.imu_getdata(&imu0); // read data from the IMU chip
 				imu0.update = false;
 				getAllData(&accel, &imu0); // convert data from the chip
-				sprintf(buffer, "Ang: %3.2f %3.2f %3.2f ",accel.xa, accel.y, accel.z);
+				sprintf(buffer, "Ang: %3.2f %3.2f %3.2f TIlT=%d",accel.x, accel.y, accel.z, imu0.angles);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
 
 				motor_graph(true, false);

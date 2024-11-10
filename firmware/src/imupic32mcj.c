@@ -41,6 +41,7 @@ uint8_t set_imu_bits(void)
 }
 
 #ifdef BMA400
+
 /*
  * setup external interrupt #2 for IMU BMA4x0 data update interrupt trigger output
  */
