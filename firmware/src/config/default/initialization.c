@@ -82,7 +82,7 @@
 #pragma config WINDIS =     NORMAL
 #pragma config FWDTWINSZ =  WINSZ_25
 #pragma config DMTCNT =     DMT28
-#pragma config FDMTEN =     ON
+#pragma config FDMTEN =     OFF
 
 /*** DEVCFG2 ***/
 #pragma config FPLLIDIV =   DIV_1
@@ -195,29 +195,29 @@ void SYS_Initialize ( void* data )
 	UART6_Initialize();
 
     CORETIMER_Initialize();
-	UART3_Initialize();
-
     TMR6_Initialize();
 
-    QEI1_Initialize();
+	UART3_Initialize();
 
     ADCHS_Initialize();
 
-    QEI2_Initialize();
+    QEI1_Initialize();
 
-	UART2_Initialize();
+    QEI2_Initialize();
 
     QEI3_Initialize();
 
-    TMR2_Initialize();
+	UART2_Initialize();
 
     EEPROM_Initialize();
 
+    TMR2_Initialize();
+
     TMR3_Initialize();
 
-    TMR1_Initialize();
-
     MCPWM_Initialize();
+
+    TMR1_Initialize();
 
 
 

@@ -511,7 +511,7 @@ int main(void)
 				BSP_LED2_Toggle();
 				BSP_LED3_Toggle();
 			}
-			DMT_Clear(); // clear the Dead Man Timer
+//			DMT_Clear(); // clear the Dead Man Timer
 		}
 	}
 
@@ -800,7 +800,7 @@ int main(void)
 			 * simple fast repeats of DMT_Clear() will not work
 			 */
 			if (V.dmt_sosc_flag) {
-				DMT_Clear(); // clear the Dead Man Timer
+//				DMT_Clear(); // clear the Dead Man Timer
 				V.dmt_sosc_flag = false;
 			}
 		}
@@ -809,7 +809,7 @@ int main(void)
 		 */
 		if (!V.pwm_update && ((V.StartTime + DMT_PWM_TIME) < (uint32_t) _CP0_GET_COUNT())) {
 			UART3_Write((unsigned char *) " P\r\n", 4);
-			DMT_Clear(); // clear the Dead Man Timer
+//			DMT_Clear(); // clear the Dead Man Timer
 		}
 	}
 

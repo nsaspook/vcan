@@ -2925,7 +2925,7 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="core" name="!@#harmonyUserData"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;UserData&gt;
   &lt;UserData dnOrder=&quot;0&quot;&gt;
-    &lt;GraphSettings canvasHeight=&quot;715&quot; canvasWidth=&quot;457&quot; dnOrder=&quot;0&quot;/&gt;
+    &lt;GraphSettings canvasHeight=&quot;713&quot; canvasWidth=&quot;450&quot; dnOrder=&quot;0&quot;/&gt;
     &lt;PowerProfiles dnOrder=&quot;1&quot;&gt;
       &lt;Profile dnOrder=&quot;0&quot; id=&quot;profile0&quot; name=&quot;Main&quot;/&gt;
     &lt;/PowerProfiles&gt;
@@ -7189,7 +7189,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;core&gt;
   &lt;core dnOrder=&quot;0&quot; id=&quot;CONFIG_FDMTEN&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;User dnOrder=&quot;0&quot; value=&quot;ON&quot;/&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;OFF&quot;/&gt;
     &lt;/Values&gt;
   &lt;/core&gt;
 &lt;/core&gt;
@@ -8550,7 +8550,7 @@
   &lt;core dnOrder=&quot;0&quot; id=&quot;DMT_HEADER&quot;&gt;
     &lt;Attributes dnOrder=&quot;0&quot;&gt;
       &lt;Boolean dnOrder=&quot;0&quot; id=&quot;enabled&quot;&gt;
-        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;false&lt;/Value&gt;
       &lt;/Boolean&gt;
     &lt;/Attributes&gt;
   &lt;/core&gt;
@@ -8563,7 +8563,7 @@
   &lt;core dnOrder=&quot;0&quot; id=&quot;DMT_SOURCE&quot;&gt;
     &lt;Attributes dnOrder=&quot;0&quot;&gt;
       &lt;Boolean dnOrder=&quot;0&quot; id=&quot;enabled&quot;&gt;
-        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;false&lt;/Value&gt;
       &lt;/Boolean&gt;
     &lt;/Attributes&gt;
   &lt;/core&gt;
@@ -8576,7 +8576,7 @@
   &lt;core dnOrder=&quot;0&quot; id=&quot;DMT_SYS_DEF&quot;&gt;
     &lt;Attributes dnOrder=&quot;0&quot;&gt;
       &lt;Boolean dnOrder=&quot;0&quot; id=&quot;enabled&quot;&gt;
-        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;false&lt;/Value&gt;
       &lt;/Boolean&gt;
     &lt;/Attributes&gt;
   &lt;/core&gt;
@@ -8589,11 +8589,11 @@
   &lt;core dnOrder=&quot;0&quot; id=&quot;DMT_USE&quot;&gt;
     &lt;Attributes dnOrder=&quot;0&quot;&gt;
       &lt;Boolean dnOrder=&quot;0&quot; id=&quot;readOnly&quot;&gt;
-        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;false&lt;/Value&gt;
       &lt;/Boolean&gt;
     &lt;/Attributes&gt;
     &lt;Values dnOrder=&quot;1&quot;&gt;
-      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;core&quot; value=&quot;true&quot;/&gt;
+      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;core&quot; value=&quot;false&quot;/&gt;
     &lt;/Values&gt;
   &lt;/core&gt;
 &lt;/core&gt;
@@ -18984,7 +18984,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;spi5&gt;
   &lt;spi5 dnOrder=&quot;0&quot; id=&quot;SPI_BAUD_RATE&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;User dnOrder=&quot;0&quot; value=&quot;8000000&quot;/&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;4000000&quot;/&gt;
     &lt;/Values&gt;
   &lt;/spi5&gt;
 &lt;/spi5&gt;
@@ -18995,7 +18995,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;spi5&gt;
   &lt;spi5 dnOrder=&quot;0&quot; id=&quot;SPI_BRG_VALUE&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;spi5&quot; value=&quot;3&quot;/&gt;
+      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;spi5&quot; value=&quot;7&quot;/&gt;
     &lt;/Values&gt;
   &lt;/spi5&gt;
 &lt;/spi5&gt;
@@ -20445,7 +20445,7 @@
    <generatedFileHashHistoryMap class="java.util.TreeMap">
       <entry>
          <file>../src/config/default/definitions.h</file>
-         <hash>e581c8f29c5b44192c3d2bd2dcdea32a7fd9ec26ca507ef3471ff1371777b2c2</hash>
+         <hash>4dd04e48c6adba0e226a0abffc6c20f3c70e5ed94bed7643879239cefa36ce58</hash>
       </entry>
       <entry>
          <file>../src/config/default/device.h</file>
@@ -20457,7 +20457,7 @@
       </entry>
       <entry>
          <file>../src/config/default/initialization.c</file>
-         <hash>9fa4aecd1f0baaf15fb79e333da77e77812bb5151f8de72b473669a76556d906</hash>
+         <hash>7e15e10f5251c352e26f4a459a2cbaae8203f934a7d432d5b20823343fa749c2</hash>
       </entry>
       <entry>
          <file>../src/config/default/interrupts.c</file>
@@ -20506,14 +20506,6 @@
       <entry>
          <file>../src/config/default/peripheral/dmac/plib_dmac.h</file>
          <hash>78b9533671371600d12031eb6280ef51c292677cc636c809bb1b16ab772a4f8d</hash>
-      </entry>
-      <entry>
-         <file>../src/config/default/peripheral/dmt/plib_dmt.c</file>
-         <hash>d895c0ed4ac28c7c64cd1da55615ff7b7a98bc04328712997470dc9f41792e86</hash>
-      </entry>
-      <entry>
-         <file>../src/config/default/peripheral/dmt/plib_dmt.h</file>
-         <hash>afa67e8d2eac4da74d8c2fd24cc30772a4e1078dc7ee95b9a8f3df976cf104fd</hash>
       </entry>
       <entry>
          <file>../src/config/default/peripheral/eeprom/plib_eeprom.c</file>
@@ -20589,7 +20581,7 @@
       </entry>
       <entry>
          <file>../src/config/default/peripheral/spi/spi_master/plib_spi5_master.c</file>
-         <hash>d6e2a39597448675355b744bbb676951932cadf233c690428f2593e5bae265e4</hash>
+         <hash>5331571cfd2b09e1fbfb191d05dea7a91604069c8e88dc72df219cb58a13ba0c</hash>
       </entry>
       <entry>
          <file>../src/config/default/peripheral/spi/spi_master/plib_spi5_master.h</file>
