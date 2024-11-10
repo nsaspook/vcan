@@ -24,6 +24,7 @@ enum APP_TIMERS {
 	TMR_ADC,
 	TMR_TEXT,
 	TMR_DMT,
+	TMR_CS,
 	//
 	//(Add timers here as needed)
 	//
@@ -34,7 +35,7 @@ void StartTimer(const uint8_t timer, const uint16_t count);
 bool TimerDone(const uint8_t timer);
 void WaitMs(const uint16_t numMilliseconds);
 void timer_ms_tick(uint32_t, uintptr_t);
-
+void delay_us(uint32_t);
 void delay_ms(uint32_t);
 
 #endif //TIMERS_H

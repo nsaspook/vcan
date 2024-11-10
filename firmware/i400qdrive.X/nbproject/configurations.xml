@@ -87,6 +87,9 @@
       <itemPath>../src/gfx.h</itemPath>
       <itemPath>../src/faults.h</itemPath>
       <itemPath>../src/pmodbus.h</itemPath>
+      <itemPath>../src/sca3300.h</itemPath>
+      <itemPath>../src/imu.h</itemPath>
+      <itemPath>../src/imupic32mcj.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -233,6 +236,9 @@
       <itemPath>../src/scdm.c</itemPath>
       <itemPath>../src/gfx.c</itemPath>
       <itemPath>../src/faults.c</itemPath>
+      <itemPath>../src/sca3300.c</itemPath>
+      <itemPath>../src/imu.c</itemPath>
+      <itemPath>../src/imupic32mcj.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -251,7 +257,7 @@
         <platformTool>PK5Tool</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>4.45</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>2</platform>
       </toolsSet>
       <packs>
         <pack name="PIC32MK-MC_DFP" vendor="Microchip" version="1.11.151"/>

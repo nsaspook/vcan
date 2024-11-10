@@ -69,10 +69,75 @@ IC = M * sin (? + 240)
 #include "gfx.h"
 #include "faults.h"
 #include "PetitModbus/PetitModbus.h"
+#include "sca3300.h"
 
 const char *build_date = __DATE__, *build_time = __TIME__;
 static char buffer[STR_BUF_SIZE];
 extern t_cli_ctx cli_ctx; // command buffer 
+
+#ifdef BMA490L
+/*
+ * BMA490L instance
+ */
+imu_cmd_t imu0 = {
+	.id = CAN_IMU_INFO,
+	.tbuf[0] = CHIP_ID | RBIT,
+	.online = false,
+	.device = IMU_BMA490L, // device type
+	.cs = IMU_CS, // chip select number
+	.run = false,
+	.log_timeout = BMA_LOG_TIMEOUT,
+	.update = true,
+	.features = false,
+	.spi_bytes = 1,
+	.op.info_ptr = &bma490_version,
+	.op.imu_set_spimode = &bma490l_set_spimode,
+	.op.imu_getid = &bma490l_getid,
+	.op.imu_getdata = &bma490l_getdata,
+	.acc_range = range_2g,
+	.locked = true,
+	.warn = false,
+	.down = false,
+};
+#endif
+
+#ifdef SCA3300
+/*
+ * SCA3300-D01 instance
+ */
+imu_cmd_t imu0 = {
+	.id = 0,
+	.tbuf32[SCA3300_TRM] = SCA3300_SWRESET_32B,
+	.online = false,
+	.device = IMU_SCA3300, // device type
+	.cs = IMU_CS, // chip select number
+	.run = false,
+	.crc_error = false,
+	.log_timeout = SCA_LOG_TIMEOUT,
+	.update = true,
+	.features = false,
+	.spi_bytes = 4,
+	.op.info_ptr = &sca3300_version,
+	.op.imu_set_spimode = &sca3300_set_spimode,
+	.op.imu_getid = &sca3300_getid,
+	.op.imu_getdata = &sca3300_getdata,
+	.acc_range = range_15gl,
+	.acc_range_scl = range_inc2,
+	.angles = false,
+	.locked = true,
+	.warn = false,
+	.down = false,
+};
+#endif
+
+/*
+ * Logging data structure
+ */
+sSensorData_t accel = {
+	.id = 0,
+};
+
+uint32_t board_serial_id = 0x35A, cpu_serial_id = 0x1957;
 
 volatile struct QEI_DATA m35_1 = {
 	.duty = MPCURRENT, // default motor duty
@@ -264,7 +329,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 {
 	static int16_t rev = 0;
 
-	DEBUGB0_Set();
+	//	DEBUGB0_Set();
 	if (V.pwm_stop && V.pwm_update) {
 		return;
 	}
@@ -316,7 +381,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	}
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_4.duty); // 2P servo control phase #3
 	V.pwm_update = false;
-	DEBUGB0_Clear();
+	//	DEBUGB0_Clear();
 }
 
 /*
@@ -454,6 +519,7 @@ int main(void)
 	BSP_LED2_Set();
 	BSP_LED3_Clear();
 	_CP0_SET_COUNT(DMT_PWM_TIME); // Set Core Timer count
+	start_tick();
 
 	/*
 	 * start the external switch handler
@@ -528,6 +594,17 @@ int main(void)
 		WaitMs(1500);
 	}
 
+	/*
+	 * print the driver version
+	 */
+	imu0.op.info_ptr(); // print driver version on the serial port
+	eaDogM_WriteStringAtPos(3, 0, imu_buffer);
+	OledUpdate();
+	imu0.op.imu_set_spimode(&imu0);
+	if (sca3300_getid(&imu0)) {
+		eaDogM_WriteStringAtPos(4, 0, "IMU DETECTED");
+		OledUpdate();
+	}; // setup the IMU chip for SPI comms, X updates per second @ selected G range
 
 	/*
 	 * sine slew speed routines for inverter function
@@ -693,7 +770,11 @@ int main(void)
 				eaDogM_WriteStringAtPos(14, 0, buffer);
 				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    R%d", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4), dmt + (wdt << 1));
 				eaDogM_WriteStringAtPos(15, 0, buffer);
-				SPI5_Write((void *)&m35_1.duty,1);
+
+				//				imu0.op.imu_getdata(&imu0); // read data from the IMU chip
+				imu0.update = false;
+				getAllData(&accel, &imu0); // convert data from the chip
+
 				motor_graph(true, false);
 				OledUpdate();
 				StartTimer(TMR_DISPLAY, DISPLAY_UPDATE);
