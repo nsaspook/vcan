@@ -511,7 +511,7 @@ int main(void)
 				BSP_LED2_Toggle();
 				BSP_LED3_Toggle();
 			}
-//			DMT_Clear(); // clear the Dead Man Timer
+			//			DMT_Clear(); // clear the Dead Man Timer
 		}
 	}
 
@@ -600,11 +600,7 @@ int main(void)
 	imu0.op.info_ptr(); // print driver version on the serial port
 	eaDogM_WriteStringAtPos(3, 0, imu_buffer);
 	OledUpdate();
-	imu0.op.imu_set_spimode(&imu0);
-	if (sca3300_getid(&imu0)) {
-		eaDogM_WriteStringAtPos(4, 0, "IMU DETECTED");
-		OledUpdate();
-	}; // setup the IMU chip for SPI comms, X updates per second @ selected G range
+	imu0.op.imu_set_spimode(&imu0); // setup the IMU chip for SPI comms, X updates per second @ selected G range
 
 	/*
 	 * sine slew speed routines for inverter function
@@ -771,9 +767,11 @@ int main(void)
 				sprintf(buffer, "CPU TEMPERATURE: %3.2fC    R%d", lp_filter_f(((((TEMP_OFFSET_ADC_STEPS - (double) an_data[TSENSOR]) * MV_STEP * TEMP_MV_C)) + 25.0), 4), dmt + (wdt << 1));
 				eaDogM_WriteStringAtPos(15, 0, buffer);
 
-				//				imu0.op.imu_getdata(&imu0); // read data from the IMU chip
+				imu0.op.imu_getdata(&imu0); // read data from the IMU chip
 				imu0.update = false;
 				getAllData(&accel, &imu0); // convert data from the chip
+				sprintf(buffer, "Ang: %3.2f %3.2f %3.2f ",accel.xa, accel.y, accel.z);
+				eaDogM_WriteStringAtPos(11, 0, buffer);
 
 				motor_graph(true, false);
 				OledUpdate();
@@ -800,7 +798,7 @@ int main(void)
 			 * simple fast repeats of DMT_Clear() will not work
 			 */
 			if (V.dmt_sosc_flag) {
-//				DMT_Clear(); // clear the Dead Man Timer
+				//				DMT_Clear(); // clear the Dead Man Timer
 				V.dmt_sosc_flag = false;
 			}
 		}
@@ -809,7 +807,7 @@ int main(void)
 		 */
 		if (!V.pwm_update && ((V.StartTime + DMT_PWM_TIME) < (uint32_t) _CP0_GET_COUNT())) {
 			UART3_Write((unsigned char *) " P\r\n", 4);
-//			DMT_Clear(); // clear the Dead Man Timer
+			//			DMT_Clear(); // clear the Dead Man Timer
 		}
 	}
 
