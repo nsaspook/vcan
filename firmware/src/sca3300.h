@@ -62,7 +62,7 @@ extern "C" {
 #define SCA3300_CHIP_ID_DELAY		10000	// ID command repeat delays in usec
 #define SCA3300_CHIP_SWR_DELAY		10000	// chip software reset delay
 #define SCA3300_CHIP_MODE_DELAY		100000	// chip G mode setup delay
-#define SCA3300_CHIP_CS_DELAY		2	// CS high min duration between toggles
+#define SCA3300_CHIP_CS_DELAY		11	// CS high min duration between toggles
 #define SCA3300_CHIP_BTYES_PER_SPI	4	// 32-bit transfers, 4 bytes
 
 	/*

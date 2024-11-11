@@ -34,7 +34,7 @@ void WaitMs(const uint16_t numMilliseconds)
 		Nop();
 		Nop();
 		Nop();
-		//		ClrWdt(); // reset the WDT timer
+		// ClrWdt(); // reset the WDT timer
 		//		Idle();
 	} //Enter idle mode to reduce power while waiting
 } //(timer interrupt will wake part from idle)

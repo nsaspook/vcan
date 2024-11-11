@@ -708,7 +708,7 @@
                   value="toolpack.updateoptions.uselatestoolpack"/>
         <property key="toolpack.updateoptions.packversion"
                   value="Press to select which tool pack to use"/>
-        <property key="voltagevalue" value="3.5"/>
+        <property key="voltagevalue" value="3.6"/>
       </PK5Tool>
       <Tool>
         <property key="ADC" value="true"/>
@@ -864,7 +864,7 @@
                   value="toolpack.updateoptions.uselatestoolpack"/>
         <property key="toolpack.updateoptions.packversion"
                   value="Press to select which tool pack to use"/>
-        <property key="voltagevalue" value="3.5"/>
+        <property key="voltagevalue" value="3.6"/>
       </Tool>
       <pk4hybrid>
         <property key="ADC" value="true"/>

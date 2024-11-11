@@ -275,7 +275,7 @@ void sca3300_set_spimode(void * imup)
 			if (imu->device == IMU_SCA3300) {
 				accel_range = SCA3300_MODE1; // set to 3g full-scale, 70 Hz 1st order low pass filter
 			} else {
-				accel_range = SCL3300_MODE1; // set to 1.2g full-scale, 40 Hz 1st order low pass filter
+				accel_range = SCL3300_MODE3; // set to 1.2g full-scale, 40 Hz 1st order low pass filter
 			}
 			break;
 		}
@@ -301,7 +301,7 @@ bool imu_cs(imu_cmd_t * imu)
 		switch (imu->cs) {
 		case 0:
 		default:
-//			delay_us(SCA3300_CHIP_CS_DELAY); // 
+			delay_us(SCA3300_CHIP_CS_DELAY);
 			imu->run = true;
 			SPI_EN1_Clear();
 			DEBUGB0_Clear();

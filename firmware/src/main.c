@@ -415,7 +415,7 @@ void my_time(uint32_t status, uintptr_t context)
 	t1_time++;
 	V.dmt_sosc_flag = true;
 #ifdef G400HZ
-	PetitModBus_TimerValues(); // modbus time tick
+//	PetitModBus_TimerValues(); // modbus time tick
 	/*
 	 * system fault flags checks
 	 * shutdown inverter driver if detected
@@ -476,12 +476,11 @@ void my_modbus_rx(UART_EVENT event, uintptr_t context)
 {
 	static uint8_t m_data = 0;
 
-	BSP_LED3_Set();
 	if (event == UART_EVENT_READ_ERROR) {
 		V.mb_error = UART6_ErrorGet();
 	} else {
 		UART6_Read(&m_data, 1);
-		ReceiveInterrupt(m_data);
+		ReceiveInterrupt(m_data); // modbus include
 	}
 }
 
@@ -647,6 +646,7 @@ int main(void)
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_2, m35_2.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_3, m35_4.duty);
 	MCPWM_ChannelPrimaryDutySet(MCPWM_CH_4, m35_3.duty);
+
 	/*
 	 * enable inverter channels
 	 */
@@ -656,12 +656,14 @@ int main(void)
 	//	ADCHS_CallbackRegister(ADCHS_CH1, an1_callback, 0);
 	ADCHS_CallbackRegister(ADCHS_CH3, an3_callback, 0);
 	MCPWM_Start();
+
 	V.pwm_stop = false; // let ISR generate waveforms
 
 	/*
 	 * init serial command parser on USART3
 	 */
 	scmd_init();
+
 	/*
 	 * clear startup faults
 	 */
@@ -672,20 +674,24 @@ int main(void)
 		/* Maintain state machines of all polled MPLAB Harmony modules. */
 		SYS_Tasks();
 		ProcessPetitModbus(); // MODBUS processing 
-		BSP_LED3_Clear();
-		//		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master
-		PetitRegisters[0].ActValue = (int16_t) hb_current(u1ai, true);
-		PetitRegisters[1].ActValue = (int16_t) hb_current(u1bi, true);
-		PetitRegisters[2].ActValue = (int16_t) hb_current(u2ai, true);
-		PetitRegisters[3].ActValue = (int16_t) hb_current(u2bi, true);
-		PetitRegisters[4].ActValue = (int16_t) (MODBUS_VER << 8) + PWMF15_Get() + (PWMF5_Get() << 1) + (PWMF6_Get() << 2) + (U1_EN_Get() << 3) + (U2_EN_Get() << 4)+ (check_adc_ivref() << 5);
-		PetitRegisters[5].ActValue = (int16_t) m35_1.current; // current pwm voltage output value
-		PetitRegisters[6].ActValue = (int16_t) m35_2.current;
-		PetitRegisters[7].ActValue = (int16_t) m35_3.current;
-		PetitRegisters[8].ActValue = (int16_t) m35_4.current;
+		//		BSP_LED3_Clear();
+		//		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master, DON'T USE
+//		PetitRegisters[0].ActValue = (int16_t) hb_current(u1ai, true);
+//		PetitRegisters[1].ActValue = (int16_t) hb_current(u1bi, true);
+//		PetitRegisters[2].ActValue = (int16_t) hb_current(u2ai, true);
+//		PetitRegisters[3].ActValue = (int16_t) hb_current(u2bi, true);
+
+//		PetitRegisters[4].ActValue = (int16_t) (MODBUS_VER << 8) + PWMF15_Get() + (PWMF5_Get() << 1) + (PWMF6_Get() << 2) + (U1_EN_Get() << 3) + (U2_EN_Get() << 4)+ (check_adc_ivref() << 5);
+//		PetitRegisters[5].ActValue = (int16_t) m35_1.current; // current pwm voltage output value
+//		PetitRegisters[6].ActValue = (int16_t) m35_2.current;
+//		PetitRegisters[7].ActValue = (int16_t) m35_3.current;
+//		PetitRegisters[8].ActValue = (int16_t) m35_4.current;
+
+
 #ifndef G400HZ_NODIS
 		if (TimerDone(TMR_MOTOR)) {
 			StartTimer(TMR_MOTOR, MOTOR_UPDATES);
+
 			/*
 			 * read serial port 3 for command data
 			 */
@@ -723,15 +729,14 @@ int main(void)
 		} else {
 			/* flash the board led(s) using the position counter bits */
 #ifdef QEI_SLOW
-			LATGbits.LATG12 = POS3CNT >> 3;
-			LATGbits.LATG13 = POS3CNT >> 5;
+			//			LATGbits.LATG12 = POS3CNT >> 3;
+			//			LATGbits.LATG13 = POS3CNT >> 5;
 #else
 			LATGbits.LATG12 = m35_ptr->pos >> 10;
 			LATGbits.LATG13 = m35_ptr->pos >> 12;
 #endif
-			//run_tests(100000); // port diagnostics
+
 			if (TimerDone(TMR_DISPLAY)) {
-				//				DEBUGB0_Set();
 				/* format and send data to LCD screen */
 				OledClearBuffer();
 				m35_ptr = &m35_2;
@@ -755,8 +760,8 @@ int main(void)
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				sprintf(buffer, "%5i:D %5i %5i %5i  ", m35_1.duty, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
-				sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[11].ActValue, (uint16_t) PetitRegisters[12].ActValue, (int16_t) PetitRegisters[13].ActValue, V.modbus_rx, V.modbus_tx);
-				eaDogM_WriteStringAtPos(9, 0, buffer);
+//				sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[11].ActValue, (uint16_t) PetitRegisters[12].ActValue, (int16_t) PetitRegisters[13].ActValue, V.modbus_rx, V.modbus_tx);
+//				eaDogM_WriteStringAtPos(9, 0, buffer);
 				sprintf(buffer, "                     ");
 				eaDogM_WriteStringAtPos(10, 0, buffer);
 				rawtime = time(&rawtime);
@@ -770,45 +775,28 @@ int main(void)
 				imu0.op.imu_getdata(&imu0); // read data from the IMU chip
 				imu0.update = false;
 				getAllData(&accel, &imu0); // convert data from the chip
-				sprintf(buffer, "Ang: %3.2f %3.2f %3.2f TIlT=%d",accel.x, accel.y, accel.z, imu0.angles);
+				sprintf(buffer, "ACC: %3.2f %3.2f %3.2f RANG=%d", accel.x, accel.y, accel.z, imu0.acc_range);
 				eaDogM_WriteStringAtPos(11, 0, buffer);
+				sprintf(buffer, "ANG: %3.2f %3.2f %3.2f TIlT=%d", accel.xa, accel.ya, accel.za, imu0.angles);
+				eaDogM_WriteStringAtPos(10, 0, buffer);
 
 				motor_graph(true, false);
 				OledUpdate();
 				StartTimer(TMR_DISPLAY, DISPLAY_UPDATE);
-				//				DEBUGB0_Clear();
 			}
 		}
+
 #endif
 		if (TimerDone(TMR_ADC)) {
 			StartTimer(TMR_ADC, ADC_UPDATE);
 			start_adc_scan();
 		}
+
 		if (TimerDone(TMR_BLINK)) {
 			StartTimer(TMR_BLINK, BLINK_UPDATE);
 			RESET_LED_Toggle();
 		}
-		/*
-		 * timer based DMT shutdown
-		 */
-		if (TimerDone(TMR_DMT)) {
-			StartTimer(TMR_DMT, DMT_UPDATE);
-			/*
-			 * must be cleared within the instruction count window
-			 * simple fast repeats of DMT_Clear() will not work
-			 */
-			if (V.dmt_sosc_flag) {
-				//				DMT_Clear(); // clear the Dead Man Timer
-				V.dmt_sosc_flag = false;
-			}
-		}
-		/*
-		 * PWM interrupt loss shutdown using DMT
-		 */
-		if (!V.pwm_update && ((V.StartTime + DMT_PWM_TIME) < (uint32_t) _CP0_GET_COUNT())) {
-			UART3_Write((unsigned char *) " P\r\n", 4);
-			//			DMT_Clear(); // clear the Dead Man Timer
-		}
+		BSP_LED3_Set();
 	}
 
 	/* Execution should not come here during normal operation */
