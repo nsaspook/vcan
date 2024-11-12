@@ -84,14 +84,9 @@
 #define SPI_EN1_Get()               ((PORTD >> 2) & 0x1U)
 #define SPI_EN1_PIN                  GPIO_PIN_RD2
 
-/*** Macros for GPIO_RD4 pin ***/
-#define GPIO_RD4_Set()               (LATDSET = (1U<<4))
-#define GPIO_RD4_Clear()             (LATDCLR = (1U<<4))
-#define GPIO_RD4_Toggle()            (LATDINV= (1U<<4))
-#define GPIO_RD4_OutputEnable()      (TRISDCLR = (1U<<4))
-#define GPIO_RD4_InputEnable()       (TRISDSET = (1U<<4))
-#define GPIO_RD4_Get()               ((PORTD >> 4) & 0x1U)
-#define GPIO_RD4_PIN                  GPIO_PIN_RD4
+/*** Macros for EXT_INT2 pin ***/
+#define EXT_INT2_Get()               ((PORTD >> 4) & 0x1U)
+#define EXT_INT2_PIN                  GPIO_PIN_RD4
 
 /*** Macros for RESET_LED pin ***/
 #define RESET_LED_Set()               (LATGSET = (1U<<9))
@@ -133,14 +128,14 @@
 #define FAST_AN1_Get()               ((PORTA >> 1) & 0x1U)
 #define FAST_AN1_PIN                  GPIO_PIN_RA1
 
-/*** Macros for DEBUGB0 pin ***/
-#define DEBUGB0_Set()               (LATBSET = (1U<<0))
-#define DEBUGB0_Clear()             (LATBCLR = (1U<<0))
-#define DEBUGB0_Toggle()            (LATBINV= (1U<<0))
-#define DEBUGB0_OutputEnable()      (TRISBCLR = (1U<<0))
-#define DEBUGB0_InputEnable()       (TRISBSET = (1U<<0))
-#define DEBUGB0_Get()               ((PORTB >> 0) & 0x1U)
-#define DEBUGB0_PIN                  GPIO_PIN_RB0
+/*** Macros for TP3 pin ***/
+#define TP3_Set()               (LATBSET = (1U<<0))
+#define TP3_Clear()             (LATBCLR = (1U<<0))
+#define TP3_Toggle()            (LATBINV= (1U<<0))
+#define TP3_OutputEnable()      (TRISBCLR = (1U<<0))
+#define TP3_InputEnable()       (TRISBSET = (1U<<0))
+#define TP3_Get()               ((PORTB >> 0) & 0x1U)
+#define TP3_PIN                  GPIO_PIN_RB0
 
 /*** Macros for FAST_AN3 pin ***/
 #define FAST_AN3_Get()               ((PORTB >> 1) & 0x1U)

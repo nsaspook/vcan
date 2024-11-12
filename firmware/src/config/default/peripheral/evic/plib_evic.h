@@ -537,6 +537,7 @@ typedef uint32_t INT_SOURCE;
 typedef enum
 {
     EXTERNAL_INT_0 = _IEC0_INT0IE_MASK,
+    EXTERNAL_INT_2 = _IEC0_INT2IE_MASK,
 
 
 

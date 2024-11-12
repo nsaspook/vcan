@@ -46,6 +46,7 @@
 
 
 volatile static EXT_INT_PIN_CALLBACK_OBJ extInt0CbObj;
+volatile static EXT_INT_PIN_CALLBACK_OBJ extInt2CbObj;
 // *****************************************************************************
 // *****************************************************************************
 // Section: IRQ Implementation
@@ -61,6 +62,7 @@ void EVIC_Initialize( void )
     IPC0SET = 0xc000000U | 0x0U;  /* EXTERNAL_0:  Priority 3 / Subpriority 0 */
     IPC1SET = 0x8U | 0x0U;  /* TIMER_1:  Priority 2 / Subpriority 0 */
     IPC2SET = 0x1c00U | 0x200U;  /* TIMER_2:  Priority 7 / Subpriority 2 */
+    IPC3SET = 0xc00U | 0x100U;  /* EXTERNAL_2:  Priority 3 / Subpriority 1 */
     IPC3SET = 0x40000U | 0x0U;  /* TIMER_3:  Priority 1 / Subpriority 0 */
     IPC14SET = 0xcU | 0x0U;  /* UART2_FAULT:  Priority 3 / Subpriority 0 */
     IPC14SET = 0xc00U | 0x0U;  /* UART2_RX:  Priority 3 / Subpriority 0 */
@@ -87,6 +89,8 @@ void EVIC_Initialize( void )
 
     /* Initialize External interrupt 0 callback object */
     extInt0CbObj.callback = NULL;
+    /* Initialize External interrupt 2 callback object */
+    extInt2CbObj.callback = NULL;
 
 
     /* Configure Shadow Register Set */
@@ -215,6 +219,10 @@ bool EVIC_ExternalInterruptCallbackRegister(
             extInt0CbObj.callback = callback;
             extInt0CbObj.context  = context;
             break;
+        case EXTERNAL_INT_2:
+            extInt2CbObj.callback = callback;
+            extInt2CbObj.context  = context;
+            break;
         default:
             status = false;
             break;
@@ -244,6 +252,30 @@ void __attribute__((used)) EXTERNAL_0_InterruptHandler(void)
     {
         context_var = extInt0CbObj.context;
         extInt0CbObj.callback (EXTERNAL_INT_0, context_var);
+    }
+}
+
+
+// *****************************************************************************
+/* Function:
+    void EXTERNAL_2_InterruptHandler(void)
+
+  Summary:
+    Interrupt Handler for External Interrupt pin 2.
+
+  Remarks:
+    It is an internal function called from ISR, user should not call it directly.
+*/
+void __attribute__((used)) EXTERNAL_2_InterruptHandler(void)
+{
+    uintptr_t context_var;
+
+    IFS0CLR = _IFS0_INT2IF_MASK;
+
+    if(extInt2CbObj.callback != NULL)
+    {
+        context_var = extInt2CbObj.context;
+        extInt2CbObj.callback (EXTERNAL_INT_2, context_var);
     }
 }
 

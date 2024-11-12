@@ -304,7 +304,7 @@ bool imu_cs(imu_cmd_t * imu)
 			delay_us(SCA3300_CHIP_CS_DELAY);
 			imu->run = true;
 			SPI_EN1_Clear();
-			DEBUGB0_Clear();
+			TP3_Clear();
 			// set SPI receive complete callback
 			SPI5_CallbackRegister(imu_cs_cb, (uintptr_t) imu);
 			break;
@@ -326,7 +326,7 @@ void sca3300_cs_disable(imu_cmd_t * imu)
 		default:
 			imu->run = false;
 			SPI_EN1_Set();
-			DEBUGB0_Set();
+			TP3_Set();
 			break;
 		}
 	}
@@ -345,7 +345,7 @@ void imu_cs_cb(uintptr_t context)
 		case 0:
 		default:
 			SPI_EN1_Set();
-			DEBUGB0_Set();
+			TP3_Set();
 			imu->run = false;
 			break;
 		}

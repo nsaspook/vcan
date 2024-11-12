@@ -61,6 +61,7 @@ void CORE_TIMER_InterruptHandler( void );
 void EXTERNAL_0_InterruptHandler( void );
 void TIMER_1_InterruptHandler( void );
 void TIMER_2_InterruptHandler( void );
+void EXTERNAL_2_InterruptHandler( void );
 void TIMER_3_InterruptHandler( void );
 void UART2_FAULT_InterruptHandler( void );
 void UART2_RX_InterruptHandler( void );
