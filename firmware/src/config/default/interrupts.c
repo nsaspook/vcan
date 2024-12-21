@@ -102,139 +102,139 @@ void SPI5_TX_Handler (void);
 // Section: System Interrupt Vector definitions
 // *****************************************************************************
 // *****************************************************************************
-void __ISR(_CORE_TIMER_VECTOR, ipl1SRS) CORE_TIMER_Handler (void)
+void __attribute__((used)) __ISR(_CORE_TIMER_VECTOR, ipl1SRS) CORE_TIMER_Handler (void)
 {
     CORE_TIMER_InterruptHandler();
 }
 
-void __ISR(_EXTERNAL_0_VECTOR, ipl3SRS) EXTERNAL_0_Handler (void)
+void __attribute__((used)) __ISR(_EXTERNAL_0_VECTOR, ipl3SRS) EXTERNAL_0_Handler (void)
 {
 	EXTERNAL_0_InterruptHandler();
 }
 
-void __ISR(_TIMER_1_VECTOR, ipl2SRS) TIMER_1_Handler (void)
+void __attribute__((used)) __ISR(_TIMER_1_VECTOR, ipl2SRS) TIMER_1_Handler (void)
 {
 	TIMER_1_InterruptHandler();
 }
 
-void __ISR(_TIMER_2_VECTOR, ipl7SRS) TIMER_2_Handler (void)
+void __attribute__((used)) __ISR(_TIMER_2_VECTOR, ipl7SRS) TIMER_2_Handler (void)
 {
 	TIMER_2_InterruptHandler();
 }
 
-void __ISR(_EXTERNAL_2_VECTOR, ipl3SRS) EXTERNAL_2_Handler (void)
+void __attribute__((used)) __ISR(_EXTERNAL_2_VECTOR, ipl3SRS) EXTERNAL_2_Handler (void)
 {
     EXTERNAL_2_InterruptHandler();
 }
 
-void __ISR(_TIMER_3_VECTOR, ipl1SRS) TIMER_3_Handler (void)
+void __attribute__((used)) __ISR(_TIMER_3_VECTOR, ipl1SRS) TIMER_3_Handler (void)
 {
 	TIMER_3_InterruptHandler();
 }
 
-void __ISR(_UART2_FAULT_VECTOR, ipl3SRS) UART2_FAULT_Handler (void)
+void __attribute__((used)) __ISR(_UART2_FAULT_VECTOR, ipl3SRS) UART2_FAULT_Handler (void)
 {
 	UART2_FAULT_InterruptHandler();
 }
 
-void __ISR(_UART2_RX_VECTOR, ipl3SRS) UART2_RX_Handler (void)
+void __attribute__((used)) __ISR(_UART2_RX_VECTOR, ipl3SRS) UART2_RX_Handler (void)
 {
 	UART2_RX_InterruptHandler();
 }
 
-void __ISR(_UART2_TX_VECTOR, ipl3SRS) UART2_TX_Handler (void)
+void __attribute__((used)) __ISR(_UART2_TX_VECTOR, ipl3SRS) UART2_TX_Handler (void)
 {
 	UART2_TX_InterruptHandler();
 }
 
-void __ISR(_UART3_FAULT_VECTOR, ipl3SRS) UART3_FAULT_Handler (void)
+void __attribute__((used)) __ISR(_UART3_FAULT_VECTOR, ipl3SRS) UART3_FAULT_Handler (void)
 {
 	UART3_FAULT_InterruptHandler();
 }
 
-void __ISR(_UART3_RX_VECTOR, ipl3SRS) UART3_RX_Handler (void)
+void __attribute__((used)) __ISR(_UART3_RX_VECTOR, ipl3SRS) UART3_RX_Handler (void)
 {
 	UART3_RX_InterruptHandler();
 }
 
-void __ISR(_UART3_TX_VECTOR, ipl3SRS) UART3_TX_Handler (void)
+void __attribute__((used)) __ISR(_UART3_TX_VECTOR, ipl3SRS) UART3_TX_Handler (void)
 {
 	UART3_TX_InterruptHandler();
 }
 
-void __ISR(_DMA0_VECTOR, ipl2SRS) DMA0_Handler (void)
+void __attribute__((used)) __ISR(_DMA0_VECTOR, ipl2SRS) DMA0_Handler (void)
 {
     DMA0_InterruptHandler();
 }
 
-void __ISR(_DMA1_VECTOR, ipl2SRS) DMA1_Handler (void)
+void __attribute__((used)) __ISR(_DMA1_VECTOR, ipl2SRS) DMA1_Handler (void)
 {
     DMA1_InterruptHandler();
 }
 
-void __ISR(_DMA2_VECTOR, ipl2SRS) DMA2_Handler (void)
+void __attribute__((used)) __ISR(_DMA2_VECTOR, ipl2SRS) DMA2_Handler (void)
 {
     DMA2_InterruptHandler();
 }
 
-void __ISR(_TIMER_6_VECTOR, ipl2SRS) TIMER_6_Handler (void)
+void __attribute__((used)) __ISR(_TIMER_6_VECTOR, ipl2SRS) TIMER_6_Handler (void)
 {
 	TIMER_6_InterruptHandler();
 }
 
-void __ISR(_ADC_EOS_VECTOR, ipl1SRS) ADC_EOS_Handler (void)
+void __attribute__((used)) __ISR(_ADC_EOS_VECTOR, ipl1SRS) ADC_EOS_Handler (void)
 {
 	end_of_adc_scan();
 }
 
-void __ISR(_ADC_DATA3_VECTOR, ipl6SRS) ADC_DATA3_Handler (void)
+void __attribute__((used)) __ISR(_ADC_DATA3_VECTOR, ipl6SRS) ADC_DATA3_Handler (void)
 {
     ADC_DATA3_InterruptHandler();
 }
 
-void __ISR(_UART6_FAULT_VECTOR, ipl3SRS) UART6_FAULT_Handler (void)
+void __attribute__((used)) __ISR(_UART6_FAULT_VECTOR, ipl3SRS) UART6_FAULT_Handler (void)
 {
 	UART6_FAULT_InterruptHandler();
 }
 
-void __ISR(_UART6_RX_VECTOR, ipl3SRS) UART6_RX_Handler (void)
+void __attribute__((used)) __ISR(_UART6_RX_VECTOR, ipl3SRS) UART6_RX_Handler (void)
 {
 	UART6_RX_InterruptHandler();
 }
 
-void __ISR(_UART6_TX_VECTOR, ipl3SRS) UART6_TX_Handler (void)
+void __attribute__((used)) __ISR(_UART6_TX_VECTOR, ipl3SRS) UART6_TX_Handler (void)
 {
 	UART6_TX_InterruptHandler();
 }
 
-void __ISR(_QEI1_VECTOR, ipl3SRS) QEI1_Handler (void)
+void __attribute__((used)) __ISR(_QEI1_VECTOR, ipl3SRS) QEI1_Handler (void)
 {
 }
 
-void __ISR(_QEI2_VECTOR, ipl3SRS) QEI2_Handler (void)
+void __attribute__((used)) __ISR(_QEI2_VECTOR, ipl3SRS) QEI2_Handler (void)
 {
 }
 
-void __ISR(_QEI3_VECTOR, ipl1SRS) QEI3_Handler (void)
+void __attribute__((used)) __ISR(_QEI3_VECTOR, ipl1SRS) QEI3_Handler (void)
 {
 }
 
-void __ISR(_SPI3_RX_VECTOR, ipl1SRS) SPI3_RX_Handler (void)
+void __attribute__((used)) __ISR(_SPI3_RX_VECTOR, ipl1SRS) SPI3_RX_Handler (void)
 {
 	SPI3_RX_InterruptHandler();
 }
 
-void __ISR(_SPI3_TX_VECTOR, ipl1SRS) SPI3_TX_Handler (void)
+void __attribute__((used)) __ISR(_SPI3_TX_VECTOR, ipl1SRS) SPI3_TX_Handler (void)
 {
 	SPI3_TX_InterruptHandler();
 }
 
-void __ISR(_SPI5_RX_VECTOR, ipl1SRS) SPI5_RX_Handler (void)
+void __attribute__((used)) __ISR(_SPI5_RX_VECTOR, ipl1SRS) SPI5_RX_Handler (void)
 {
     SPI5_RX_InterruptHandler();
 }
 
-void __ISR(_SPI5_TX_VECTOR, ipl1SRS) SPI5_TX_Handler (void)
+void __attribute__((used)) __ISR(_SPI5_TX_VECTOR, ipl1SRS) SPI5_TX_Handler (void)
 {
     SPI5_TX_InterruptHandler();
 }

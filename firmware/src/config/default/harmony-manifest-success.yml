@@ -4,17 +4,17 @@
 
 
 project: vcan
-creation_date: 2024-11-12T09:07:54.789-08:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
+creation_date: 2024-12-20T20:25:54.047-08:00[America/Los_Angeles]    # ISO 8601 format: https://www.w3.org/TR/NOTE-datetime
 operating_system: Linux
 mcc_mode: IDE            # [IDE|Standalone|Headless]
 mcc_version: v5.5.1
 mcc_core_version: v5.7.1
 mplabx_version: v6.20        # if MPLAB X plugin only
-harmony_version: v1.5.3
-compiler: XC32 4.45
+harmony_version: v1.5.4
+compiler: XC32 4.21
 
 modules:
-    - {name: "csp", version: "v3.19.7"}
+    - {name: "csp", version: "v3.20.0"}
 
 packs:
     - {name: "PIC32MK-MC_DFP", version: "1.11.151"}

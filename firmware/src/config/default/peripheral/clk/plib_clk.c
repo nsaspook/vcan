@@ -89,6 +89,18 @@ void CLK_Initialize( void )
     SYSKEY = 0xAA996655U;
     SYSKEY = 0x556699AAU;
 
+    /* Peripheral Module Disable Configuration */
+ 
+
+    PMD1 = 0x100170U;
+    PMD2 = 0x17001fU;
+    PMD3 = 0xffffffffU;
+    PMD4 = 0xff001d8U;
+    PMD5 = 0xf30f2b19U;
+    PMD6 = 0x80d0000U;
+    PMD7 = 0x0U;
+
+
  
         /* Peripheral Bus 1 is by default enabled, set its divisor */
     PB1DIVbits.PBDIV = 19;
@@ -152,18 +164,6 @@ void CLK_Initialize( void )
     REFO4CONSET = 0x00008000;
 
   
-
-    /* Peripheral Module Disable Configuration */
-
-
-    PMD1 = 0x100170U;
-    PMD2 = 0x17001fU;
-    PMD3 = 0xffffffffU;
-    PMD4 = 0xff001d8U;
-    PMD5 = 0xf30f2b19U;
-    PMD6 = 0x80d0000U;
-    PMD7 = 0x0U;
-
 
     /* Lock system since done with clock configuration */
     SYSKEY = 0x33333333U;

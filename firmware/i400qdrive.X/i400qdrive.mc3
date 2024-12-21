@@ -75,7 +75,7 @@
       </entry>
    </usedClasses>
    <usedLibraries class="java.util.ArrayList">
-      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.harmony.Harmony3Library" version="1.5.3"/>
+      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.harmony.Harmony3Library" version="1.5.4"/>
    </usedLibraries>
    <tokenMap class="java.util.TreeMap">
       <entry>
@@ -19148,7 +19148,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;spi5&gt;
   &lt;spi5 dnOrder=&quot;0&quot; id=&quot;SPI_BAUD_RATE&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;User dnOrder=&quot;0&quot; value=&quot;8000000&quot;/&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;4000000&quot;/&gt;
     &lt;/Values&gt;
   &lt;/spi5&gt;
 &lt;/spi5&gt;
@@ -19159,7 +19159,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;spi5&gt;
   &lt;spi5 dnOrder=&quot;0&quot; id=&quot;SPI_BRG_VALUE&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;spi5&quot; value=&quot;3&quot;/&gt;
+      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;spi5&quot; value=&quot;7&quot;/&gt;
     &lt;/Values&gt;
   &lt;/spi5&gt;
 &lt;/spi5&gt;
@@ -20613,7 +20613,7 @@
    <generatedFileHashHistoryMap class="java.util.TreeMap">
       <entry>
          <file>../src/config/default/definitions.h</file>
-         <hash>f5ec05158af40e2586d4784d2e806b7fd165bcc01acdf9b366cd4445adc12d9e</hash>
+         <hash>e6af541475671dc9aafeb9fa53302de7c5c1fe7deb02d95239dc9b5cf43fcd1d</hash>
       </entry>
       <entry>
          <file>../src/config/default/device.h</file>
@@ -20625,11 +20625,11 @@
       </entry>
       <entry>
          <file>../src/config/default/initialization.c</file>
-         <hash>c440fec7bde12052b0f792cfc914c479473dd5073a74aefb129b699c6f7c8767</hash>
+         <hash>02233ae1adf7ecce7577b5b3a8a6144250484126ca1b327448104d8e57168f15</hash>
       </entry>
       <entry>
          <file>../src/config/default/interrupts.c</file>
-         <hash>97b48617b3ecd22ba9d431b3033f2e76cc10773d7dc0f710cc903c40e3613a66</hash>
+         <hash>1f67ff11b4d9a2d0f83f417699359cd8ef8f09d210ab29f044c966ba23766129</hash>
       </entry>
       <entry>
          <file>../src/config/default/interrupts.h</file>
@@ -20653,7 +20653,7 @@
       </entry>
       <entry>
          <file>../src/config/default/peripheral/clk/plib_clk.c</file>
-         <hash>8c632f92ac86247de915a20805b0e561c2047de7124676223097ff20dfca496d</hash>
+         <hash>1f7f2175503914f4a7ce778c3bf5465b9ee75124129ab98a978c9e7afb79e98c</hash>
       </entry>
       <entry>
          <file>../src/config/default/peripheral/clk/plib_clk.h</file>
@@ -20661,11 +20661,11 @@
       </entry>
       <entry>
          <file>../src/config/default/peripheral/coretimer/plib_coretimer.c</file>
-         <hash>b94670443f50120747ee844a4ea7c5f1aa5ade95cd485887bb887497fd730b2f</hash>
+         <hash>8ed27f29503046a8266e8781f592cb2b9bf37fb627b3baa4575c82ac3a54c738</hash>
       </entry>
       <entry>
          <file>../src/config/default/peripheral/coretimer/plib_coretimer.h</file>
-         <hash>43587ec200ec41310d6b78e1a9ac504b1314c3a8d48c961a5a3411b7f807fd25</hash>
+         <hash>4bb450e5909dea7240cfa12f157a017270a36f274ae99a594e8b046706a88eda</hash>
       </entry>
       <entry>
          <file>../src/config/default/peripheral/dmac/plib_dmac.c</file>
@@ -20697,7 +20697,7 @@
       </entry>
       <entry>
          <file>../src/config/default/peripheral/gpio/plib_gpio.h</file>
-         <hash>8fc47c877858d7d8e52ce146df4e5854e9aff585f0caa15df570c00914216a19</hash>
+         <hash>c2b5afb126ff71085dc13124bf6af4436a24844d658d1617a4c499a3ddbb4ece</hash>
       </entry>
       <entry>
          <file>../src/config/default/peripheral/mcpwm/plib_mcpwm.c</file>
@@ -20749,7 +20749,7 @@
       </entry>
       <entry>
          <file>../src/config/default/peripheral/spi/spi_master/plib_spi5_master.c</file>
-         <hash>d6e2a39597448675355b744bbb676951932cadf233c690428f2593e5bae265e4</hash>
+         <hash>5331571cfd2b09e1fbfb191d05dea7a91604069c8e88dc72df219cb58a13ba0c</hash>
       </entry>
       <entry>
          <file>../src/config/default/peripheral/spi/spi_master/plib_spi5_master.h</file>

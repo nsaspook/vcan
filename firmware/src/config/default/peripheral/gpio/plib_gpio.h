@@ -64,6 +64,7 @@
 
 /*** Macros for FBB2 pin ***/
 #define FBB2_Get()               ((PORTG >> 15) & 0x1U)
+#define FBB2_GetLatch()          ((LATG >> 15) & 0x1U)
 #define FBB2_PIN                  GPIO_PIN_RG15
 
 /*** Macros for SPI_EN0 pin ***/
@@ -73,6 +74,7 @@
 #define SPI_EN0_OutputEnable()      (TRISDCLR = (1U<<1))
 #define SPI_EN0_InputEnable()       (TRISDSET = (1U<<1))
 #define SPI_EN0_Get()               ((PORTD >> 1) & 0x1U)
+#define SPI_EN0_GetLatch()          ((LATD >> 1) & 0x1U)
 #define SPI_EN0_PIN                  GPIO_PIN_RD1
 
 /*** Macros for SPI_EN1 pin ***/
@@ -82,10 +84,12 @@
 #define SPI_EN1_OutputEnable()      (TRISDCLR = (1U<<2))
 #define SPI_EN1_InputEnable()       (TRISDSET = (1U<<2))
 #define SPI_EN1_Get()               ((PORTD >> 2) & 0x1U)
+#define SPI_EN1_GetLatch()          ((LATD >> 2) & 0x1U)
 #define SPI_EN1_PIN                  GPIO_PIN_RD2
 
 /*** Macros for EXT_INT2 pin ***/
 #define EXT_INT2_Get()               ((PORTD >> 4) & 0x1U)
+#define EXT_INT2_GetLatch()          ((LATD >> 4) & 0x1U)
 #define EXT_INT2_PIN                  GPIO_PIN_RD4
 
 /*** Macros for RESET_LED pin ***/
@@ -95,6 +99,7 @@
 #define RESET_LED_OutputEnable()      (TRISGCLR = (1U<<9))
 #define RESET_LED_InputEnable()       (TRISGSET = (1U<<9))
 #define RESET_LED_Get()               ((PORTG >> 9) & 0x1U)
+#define RESET_LED_GetLatch()          ((LATG >> 9) & 0x1U)
 #define RESET_LED_PIN                  GPIO_PIN_RG9
 
 /*** Macros for GPIO_RG10 pin ***/
@@ -104,6 +109,7 @@
 #define GPIO_RG10_OutputEnable()      (TRISGCLR = (1U<<10))
 #define GPIO_RG10_InputEnable()       (TRISGSET = (1U<<10))
 #define GPIO_RG10_Get()               ((PORTG >> 10) & 0x1U)
+#define GPIO_RG10_GetLatch()          ((LATG >> 10) & 0x1U)
 #define GPIO_RG10_PIN                  GPIO_PIN_RG10
 
 /*** Macros for QEI1_E0 pin ***/
@@ -113,6 +119,7 @@
 #define QEI1_E0_OutputEnable()      (TRISECLR = (1U<<8))
 #define QEI1_E0_InputEnable()       (TRISESET = (1U<<8))
 #define QEI1_E0_Get()               ((PORTE >> 8) & 0x1U)
+#define QEI1_E0_GetLatch()          ((LATE >> 8) & 0x1U)
 #define QEI1_E0_PIN                  GPIO_PIN_RE8
 
 /*** Macros for QEI2_E0 pin ***/
@@ -122,10 +129,12 @@
 #define QEI2_E0_OutputEnable()      (TRISECLR = (1U<<9))
 #define QEI2_E0_InputEnable()       (TRISESET = (1U<<9))
 #define QEI2_E0_Get()               ((PORTE >> 9) & 0x1U)
+#define QEI2_E0_GetLatch()          ((LATE >> 9) & 0x1U)
 #define QEI2_E0_PIN                  GPIO_PIN_RE9
 
 /*** Macros for FAST_AN1 pin ***/
 #define FAST_AN1_Get()               ((PORTA >> 1) & 0x1U)
+#define FAST_AN1_GetLatch()          ((LATA >> 1) & 0x1U)
 #define FAST_AN1_PIN                  GPIO_PIN_RA1
 
 /*** Macros for TP3 pin ***/
@@ -135,10 +144,12 @@
 #define TP3_OutputEnable()      (TRISBCLR = (1U<<0))
 #define TP3_InputEnable()       (TRISBSET = (1U<<0))
 #define TP3_Get()               ((PORTB >> 0) & 0x1U)
+#define TP3_GetLatch()          ((LATB >> 0) & 0x1U)
 #define TP3_PIN                  GPIO_PIN_RB0
 
 /*** Macros for FAST_AN3 pin ***/
 #define FAST_AN3_Get()               ((PORTB >> 1) & 0x1U)
+#define FAST_AN3_GetLatch()          ((LATB >> 1) & 0x1U)
 #define FAST_AN3_PIN                  GPIO_PIN_RB1
 
 /*** Macros for GPIO_RB2 pin ***/
@@ -148,6 +159,7 @@
 #define GPIO_RB2_OutputEnable()      (TRISBCLR = (1U<<2))
 #define GPIO_RB2_InputEnable()       (TRISBSET = (1U<<2))
 #define GPIO_RB2_Get()               ((PORTB >> 2) & 0x1U)
+#define GPIO_RB2_GetLatch()          ((LATB >> 2) & 0x1U)
 #define GPIO_RB2_PIN                  GPIO_PIN_RB2
 
 /*** Macros for GPIO_RB3 pin ***/
@@ -157,6 +169,7 @@
 #define GPIO_RB3_OutputEnable()      (TRISBCLR = (1U<<3))
 #define GPIO_RB3_InputEnable()       (TRISBSET = (1U<<3))
 #define GPIO_RB3_Get()               ((PORTB >> 3) & 0x1U)
+#define GPIO_RB3_GetLatch()          ((LATB >> 3) & 0x1U)
 #define GPIO_RB3_PIN                  GPIO_PIN_RB3
 
 /*** Macros for BACKLIGHT pin ***/
@@ -166,6 +179,7 @@
 #define BACKLIGHT_OutputEnable()      (TRISCCLR = (1U<<2))
 #define BACKLIGHT_InputEnable()       (TRISCSET = (1U<<2))
 #define BACKLIGHT_Get()               ((PORTC >> 2) & 0x1U)
+#define BACKLIGHT_GetLatch()          ((LATC >> 2) & 0x1U)
 #define BACKLIGHT_PIN                  GPIO_PIN_RC2
 
 /*** Macros for DERE pin ***/
@@ -175,26 +189,32 @@
 #define DERE_OutputEnable()      (TRISGCLR = (1U<<11))
 #define DERE_InputEnable()       (TRISGSET = (1U<<11))
 #define DERE_Get()               ((PORTG >> 11) & 0x1U)
+#define DERE_GetLatch()          ((LATG >> 11) & 0x1U)
 #define DERE_PIN                  GPIO_PIN_RG11
 
 /*** Macros for FBB1 pin ***/
 #define FBB1_Get()               ((PORTF >> 13) & 0x1U)
+#define FBB1_GetLatch()          ((LATF >> 13) & 0x1U)
 #define FBB1_PIN                  GPIO_PIN_RF13
 
 /*** Macros for FBA1 pin ***/
 #define FBA1_Get()               ((PORTF >> 12) & 0x1U)
+#define FBA1_GetLatch()          ((LATF >> 12) & 0x1U)
 #define FBA1_PIN                  GPIO_PIN_RF12
 
 /*** Macros for PWMF5 pin ***/
 #define PWMF5_Get()               ((PORTE >> 12) & 0x1U)
+#define PWMF5_GetLatch()          ((LATE >> 12) & 0x1U)
 #define PWMF5_PIN                  GPIO_PIN_RE12
 
 /*** Macros for PWMF6 pin ***/
 #define PWMF6_Get()               ((PORTE >> 13) & 0x1U)
+#define PWMF6_GetLatch()          ((LATE >> 13) & 0x1U)
 #define PWMF6_PIN                  GPIO_PIN_RE13
 
 /*** Macros for FBA2 pin ***/
 #define FBA2_Get()               ((PORTE >> 14) & 0x1U)
+#define FBA2_GetLatch()          ((LATE >> 14) & 0x1U)
 #define FBA2_PIN                  GPIO_PIN_RE14
 
 /*** Macros for IN1 pin ***/
@@ -204,6 +224,7 @@
 #define IN1_OutputEnable()      (TRISDCLR = (1U<<14))
 #define IN1_InputEnable()       (TRISDSET = (1U<<14))
 #define IN1_Get()               ((PORTD >> 14) & 0x1U)
+#define IN1_GetLatch()          ((LATD >> 14) & 0x1U)
 #define IN1_PIN                  GPIO_PIN_RD14
 
 /*** Macros for IN2 pin ***/
@@ -213,6 +234,7 @@
 #define IN2_OutputEnable()      (TRISDCLR = (1U<<15))
 #define IN2_InputEnable()       (TRISDSET = (1U<<15))
 #define IN2_Get()               ((PORTD >> 15) & 0x1U)
+#define IN2_GetLatch()          ((LATD >> 15) & 0x1U)
 #define IN2_PIN                  GPIO_PIN_RD15
 
 /*** Macros for IN3 pin ***/
@@ -222,10 +244,12 @@
 #define IN3_OutputEnable()      (TRISACLR = (1U<<8))
 #define IN3_InputEnable()       (TRISASET = (1U<<8))
 #define IN3_Get()               ((PORTA >> 8) & 0x1U)
+#define IN3_GetLatch()          ((LATA >> 8) & 0x1U)
 #define IN3_PIN                  GPIO_PIN_RA8
 
 /*** Macros for PWMF15 pin ***/
 #define PWMF15_Get()               ((PORTB >> 4) & 0x1U)
+#define PWMF15_GetLatch()          ((LATB >> 4) & 0x1U)
 #define PWMF15_PIN                  GPIO_PIN_RB4
 
 /*** Macros for U1_EN pin ***/
@@ -235,6 +259,7 @@
 #define U1_EN_OutputEnable()      (TRISECLR = (1U<<0))
 #define U1_EN_InputEnable()       (TRISESET = (1U<<0))
 #define U1_EN_Get()               ((PORTE >> 0) & 0x1U)
+#define U1_EN_GetLatch()          ((LATE >> 0) & 0x1U)
 #define U1_EN_PIN                  GPIO_PIN_RE0
 
 /*** Macros for U2_EN pin ***/
@@ -244,6 +269,7 @@
 #define U2_EN_OutputEnable()      (TRISECLR = (1U<<1))
 #define U2_EN_InputEnable()       (TRISESET = (1U<<1))
 #define U2_EN_Get()               ((PORTE >> 1) & 0x1U)
+#define U2_EN_GetLatch()          ((LATE >> 1) & 0x1U)
 #define U2_EN_PIN                  GPIO_PIN_RE1
 
 /*** Macros for IN5 pin ***/
@@ -253,6 +279,7 @@
 #define IN5_OutputEnable()      (TRISFCLR = (1U<<5))
 #define IN5_InputEnable()       (TRISFSET = (1U<<5))
 #define IN5_Get()               ((PORTF >> 5) & 0x1U)
+#define IN5_GetLatch()          ((LATF >> 5) & 0x1U)
 #define IN5_PIN                  GPIO_PIN_RF5
 
 /*** Macros for IN6 pin ***/
@@ -262,6 +289,7 @@
 #define IN6_OutputEnable()      (TRISCCLR = (1U<<15))
 #define IN6_InputEnable()       (TRISCSET = (1U<<15))
 #define IN6_Get()               ((PORTC >> 15) & 0x1U)
+#define IN6_GetLatch()          ((LATC >> 15) & 0x1U)
 #define IN6_PIN                  GPIO_PIN_RC15
 
 /*** Macros for MAX_EN1 pin ***/
@@ -271,6 +299,7 @@
 #define MAX_EN1_OutputEnable()      (TRISDCLR = (1U<<8))
 #define MAX_EN1_InputEnable()       (TRISDSET = (1U<<8))
 #define MAX_EN1_Get()               ((PORTD >> 8) & 0x1U)
+#define MAX_EN1_GetLatch()          ((LATD >> 8) & 0x1U)
 #define MAX_EN1_PIN                  GPIO_PIN_RD8
 
 /*** Macros for SOSCI_GPIO_IN pin ***/
@@ -280,6 +309,7 @@
 #define SOSCI_GPIO_IN_OutputEnable()      (TRISCCLR = (1U<<13))
 #define SOSCI_GPIO_IN_InputEnable()       (TRISCSET = (1U<<13))
 #define SOSCI_GPIO_IN_Get()               ((PORTC >> 13) & 0x1U)
+#define SOSCI_GPIO_IN_GetLatch()          ((LATC >> 13) & 0x1U)
 #define SOSCI_GPIO_IN_PIN                  GPIO_PIN_RC13
 
 /*** Macros for IN7 pin ***/
@@ -289,6 +319,7 @@
 #define IN7_OutputEnable()      (TRISBCLR = (1U<<9))
 #define IN7_InputEnable()       (TRISBSET = (1U<<9))
 #define IN7_Get()               ((PORTB >> 9) & 0x1U)
+#define IN7_GetLatch()          ((LATB >> 9) & 0x1U)
 #define IN7_PIN                  GPIO_PIN_RB9
 
 /*** Macros for DO1 pin ***/
@@ -298,6 +329,7 @@
 #define DO1_OutputEnable()      (TRISDCLR = (1U<<12))
 #define DO1_InputEnable()       (TRISDSET = (1U<<12))
 #define DO1_Get()               ((PORTD >> 12) & 0x1U)
+#define DO1_GetLatch()          ((LATD >> 12) & 0x1U)
 #define DO1_PIN                  GPIO_PIN_RD12
 
 /*** Macros for DO2 pin ***/
@@ -307,6 +339,7 @@
 #define DO2_OutputEnable()      (TRISDCLR = (1U<<13))
 #define DO2_InputEnable()       (TRISDSET = (1U<<13))
 #define DO2_Get()               ((PORTD >> 13) & 0x1U)
+#define DO2_GetLatch()          ((LATD >> 13) & 0x1U)
 #define DO2_PIN                  GPIO_PIN_RD13
 
 /*** Macros for DO3 pin ***/
@@ -316,6 +349,7 @@
 #define DO3_OutputEnable()      (TRISCCLR = (1U<<8))
 #define DO3_InputEnable()       (TRISCSET = (1U<<8))
 #define DO3_Get()               ((PORTC >> 8) & 0x1U)
+#define DO3_GetLatch()          ((LATC >> 8) & 0x1U)
 #define DO3_PIN                  GPIO_PIN_RC8
 
 /*** Macros for DO4 pin ***/
@@ -325,6 +359,7 @@
 #define DO4_OutputEnable()      (TRISDCLR = (1U<<5))
 #define DO4_InputEnable()       (TRISDSET = (1U<<5))
 #define DO4_Get()               ((PORTD >> 5) & 0x1U)
+#define DO4_GetLatch()          ((LATD >> 5) & 0x1U)
 #define DO4_PIN                  GPIO_PIN_RD5
 
 /*** Macros for DO5 pin ***/
@@ -334,6 +369,7 @@
 #define DO5_OutputEnable()      (TRISDCLR = (1U<<6))
 #define DO5_InputEnable()       (TRISDSET = (1U<<6))
 #define DO5_Get()               ((PORTD >> 6) & 0x1U)
+#define DO5_GetLatch()          ((LATD >> 6) & 0x1U)
 #define DO5_PIN                  GPIO_PIN_RD6
 
 /*** Macros for DO6 pin ***/
@@ -343,6 +379,7 @@
 #define DO6_OutputEnable()      (TRISCCLR = (1U<<9))
 #define DO6_InputEnable()       (TRISCSET = (1U<<9))
 #define DO6_Get()               ((PORTC >> 9) & 0x1U)
+#define DO6_GetLatch()          ((LATC >> 9) & 0x1U)
 #define DO6_PIN                  GPIO_PIN_RC9
 
 /*** Macros for IN8 pin ***/
@@ -352,6 +389,7 @@
 #define IN8_OutputEnable()      (TRISFCLR = (1U<<0))
 #define IN8_InputEnable()       (TRISFSET = (1U<<0))
 #define IN8_Get()               ((PORTF >> 0) & 0x1U)
+#define IN8_GetLatch()          ((LATF >> 0) & 0x1U)
 #define IN8_PIN                  GPIO_PIN_RF0
 
 /*** Macros for DO7 pin ***/
@@ -361,6 +399,7 @@
 #define DO7_OutputEnable()      (TRISFCLR = (1U<<6))
 #define DO7_InputEnable()       (TRISFSET = (1U<<6))
 #define DO7_Get()               ((PORTF >> 6) & 0x1U)
+#define DO7_GetLatch()          ((LATF >> 6) & 0x1U)
 #define DO7_PIN                  GPIO_PIN_RF6
 
 /*** Macros for DO8 pin ***/
@@ -370,6 +409,7 @@
 #define DO8_OutputEnable()      (TRISFCLR = (1U<<7))
 #define DO8_InputEnable()       (TRISFSET = (1U<<7))
 #define DO8_Get()               ((PORTF >> 7) & 0x1U)
+#define DO8_GetLatch()          ((LATF >> 7) & 0x1U)
 #define DO8_PIN                  GPIO_PIN_RF7
 
 /*** Macros for BSP_LED3 pin ***/
@@ -379,6 +419,7 @@
 #define BSP_LED3_OutputEnable()      (TRISGCLR = (1U<<14))
 #define BSP_LED3_InputEnable()       (TRISGSET = (1U<<14))
 #define BSP_LED3_Get()               ((PORTG >> 14) & 0x1U)
+#define BSP_LED3_GetLatch()          ((LATG >> 14) & 0x1U)
 #define BSP_LED3_PIN                  GPIO_PIN_RG14
 
 /*** Macros for BSP_LED1 pin ***/
@@ -388,6 +429,7 @@
 #define BSP_LED1_OutputEnable()      (TRISGCLR = (1U<<12))
 #define BSP_LED1_InputEnable()       (TRISGSET = (1U<<12))
 #define BSP_LED1_Get()               ((PORTG >> 12) & 0x1U)
+#define BSP_LED1_GetLatch()          ((LATG >> 12) & 0x1U)
 #define BSP_LED1_PIN                  GPIO_PIN_RG12
 
 /*** Macros for BSP_LED2 pin ***/
@@ -397,6 +439,7 @@
 #define BSP_LED2_OutputEnable()      (TRISGCLR = (1U<<13))
 #define BSP_LED2_InputEnable()       (TRISGSET = (1U<<13))
 #define BSP_LED2_Get()               ((PORTG >> 13) & 0x1U)
+#define BSP_LED2_GetLatch()          ((LATG >> 13) & 0x1U)
 #define BSP_LED2_PIN                  GPIO_PIN_RG13
 
 
@@ -571,7 +614,7 @@ void GPIO_PortOutputEnable(GPIO_PORT port, uint32_t mask);
 
 static inline void GPIO_PinWrite(GPIO_PIN pin, bool value)
 {
-	 uint32_t xvalue = (uint32_t)value;
+     uint32_t xvalue = (uint32_t)value;
     GPIO_PortWrite((pin>>4U), (uint32_t)(0x1U) << (pin & 0xFU), (xvalue) << (pin & 0xFU));
 }
 
