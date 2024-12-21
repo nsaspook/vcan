@@ -181,10 +181,11 @@ bool sca3300_getid(void * imup)
 			sca3300_imu_transfer(imu, SCA3300_WHOAMI_32B);
 			if ((((imu->rbuf32[SCA3300_REC] >> 8)&0xffff) == SCA3300_WHOAMI_ID) || (angles = ((imu->rbuf32[SCA3300_REC] >> 8)&0xffff) == SCA3300_WHOAMI_ID_SCL)) {
 				if (sca3300_check_crc(imu, SCA3300_REC)) {
-					if (angles) { // SCL3300 detected
+					if (true || angles) { // SCL3300 detected
 						imu->angles = true; // SLC3300 mode
 						imu->device = IMU_SCL3300;
 						imu->acc_range = imu->acc_range_scl; // set to SCL ranges
+						sca3300_imu_transfer(imu, SCL3300_ANGLE); // enable angle data
 						sca3300_imu_transfer(imu, SCL3300_ANGLE); // enable angle data
 						delay_us(SCA3300_CHIP_MODE_DELAY);
 					}
