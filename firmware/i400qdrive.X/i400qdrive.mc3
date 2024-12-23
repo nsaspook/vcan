@@ -19148,7 +19148,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;spi5&gt;
   &lt;spi5 dnOrder=&quot;0&quot; id=&quot;SPI_BAUD_RATE&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;User dnOrder=&quot;0&quot; value=&quot;4000000&quot;/&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;8000000&quot;/&gt;
     &lt;/Values&gt;
   &lt;/spi5&gt;
 &lt;/spi5&gt;
@@ -19159,7 +19159,7 @@
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;spi5&gt;
   &lt;spi5 dnOrder=&quot;0&quot; id=&quot;SPI_BRG_VALUE&quot;&gt;
     &lt;Values dnOrder=&quot;0&quot;&gt;
-      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;spi5&quot; value=&quot;7&quot;/&gt;
+      &lt;Dynamic dnOrder=&quot;0&quot; id=&quot;spi5&quot; value=&quot;3&quot;/&gt;
     &lt;/Values&gt;
   &lt;/spi5&gt;
 &lt;/spi5&gt;
@@ -20613,7 +20613,7 @@
    <generatedFileHashHistoryMap class="java.util.TreeMap">
       <entry>
          <file>../src/config/default/definitions.h</file>
-         <hash>e6af541475671dc9aafeb9fa53302de7c5c1fe7deb02d95239dc9b5cf43fcd1d</hash>
+         <hash>52a53632f6ce0d98c08a9ca64467e46d65410855017ecb53a2b306b58d0dd7b4</hash>
       </entry>
       <entry>
          <file>../src/config/default/device.h</file>
@@ -20625,7 +20625,7 @@
       </entry>
       <entry>
          <file>../src/config/default/initialization.c</file>
-         <hash>02233ae1adf7ecce7577b5b3a8a6144250484126ca1b327448104d8e57168f15</hash>
+         <hash>84ed0e44d69dfab9ce0f3363e546b555ca361b7aec14ef4ac7cad9be561bbb24</hash>
       </entry>
       <entry>
          <file>../src/config/default/interrupts.c</file>
@@ -20749,7 +20749,7 @@
       </entry>
       <entry>
          <file>../src/config/default/peripheral/spi/spi_master/plib_spi5_master.c</file>
-         <hash>5331571cfd2b09e1fbfb191d05dea7a91604069c8e88dc72df219cb58a13ba0c</hash>
+         <hash>d6e2a39597448675355b744bbb676951932cadf233c690428f2593e5bae265e4</hash>
       </entry>
       <entry>
          <file>../src/config/default/peripheral/spi/spi_master/plib_spi5_master.h</file>

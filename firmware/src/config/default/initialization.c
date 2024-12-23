@@ -195,30 +195,30 @@ void SYS_Initialize ( void* data )
 
 	UART6_Initialize();
 
-    CORETIMER_Initialize();
 	UART3_Initialize();
 
     TMR6_Initialize();
 
-    ADCHS_Initialize();
-
+    CORETIMER_Initialize();
     QEI1_Initialize();
+
+    ADCHS_Initialize();
 
     QEI2_Initialize();
 
-    QEI3_Initialize();
-
 	UART2_Initialize();
 
-    EEPROM_Initialize();
+    QEI3_Initialize();
 
     TMR2_Initialize();
 
+    EEPROM_Initialize();
+
     TMR3_Initialize();
 
-    MCPWM_Initialize();
-
     TMR1_Initialize();
+
+    MCPWM_Initialize();
 
 
     EVIC_Initialize();
