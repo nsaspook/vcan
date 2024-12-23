@@ -177,7 +177,7 @@ bool sca3300_getid(void * imup)
 
 	if (imu) {
 		if (!imu->run) {
-			delay_us(SCA3300_CHIP_ID_DELAY); // sca3300 ID command spacing
+			CORETIMER_DelayUs(SCA3300_CHIP_ID_DELAY); // sca3300 ID command spacing
 			sca3300_imu_transfer(imu, SCA3300_WHOAMI_32B);
 			if ((((imu->rbuf32[SCA3300_REC] >> 8)&0xffff) == SCA3300_WHOAMI_ID) || (angles = ((imu->rbuf32[SCA3300_REC] >> 8)&0xffff) == SCA3300_WHOAMI_ID_SCL)) {
 				if (sca3300_check_crc(imu, SCA3300_REC)) {
@@ -187,7 +187,7 @@ bool sca3300_getid(void * imup)
 						imu->acc_range = imu->acc_range_scl; // set to SCL ranges
 						sca3300_imu_transfer(imu, SCL3300_ANGLE); // enable angle data
 						sca3300_imu_transfer(imu, SCL3300_ANGLE); // enable angle data
-						delay_us(SCA3300_CHIP_MODE_DELAY);
+						CORETIMER_DelayUs(SCA3300_CHIP_MODE_DELAY);
 					}
 					imu->online = true;
 					imu->rbuf32[SCA3300_REC] = 0;
@@ -216,7 +216,7 @@ bool sca3300_getserial(void * imup)
 
 	if (imu) {
 		if (!imu->run) {
-			delay_us(SCA3300_CHIP_ID_DELAY); // sca3300 command spacing
+			CORETIMER_DelayUs(SCA3300_CHIP_ID_DELAY); // sca3300 command spacing
 			sca3300_imu_transfer(imu, SCA3300_BANK1);
 			sca3300_imu_transfer(imu, SCA3300_SERIAL1);
 			sca3300_imu_transfer(imu, SCA3300_SERIAL2);
@@ -246,7 +246,7 @@ void sca3300_set_spimode(void * imup)
 		sca3300_getid(imu);
 		sca3300_getid(imu);
 		sca3300_imu_transfer(imu, SCA3300_SWRESET_32B); // chip software reset
-		delay_us(SCA3300_CHIP_SWR_DELAY);
+		CORETIMER_DelayUs(SCA3300_CHIP_SWR_DELAY);
 		switch (imu->acc_range) { // set the range variable
 		case range_15g:
 			accel_range = SCA3300_MODE3; // set to 1.5g full-scale, 70 Hz 1st order low pass filter
@@ -281,7 +281,7 @@ void sca3300_set_spimode(void * imup)
 			break;
 		}
 		sca3300_imu_transfer(imu, accel_range); // send the range command
-		delay_us(SCA3300_CHIP_MODE_DELAY);
+		CORETIMER_DelayUs(SCA3300_CHIP_MODE_DELAY);
 		sca3300_imu_transfer(imu, SCA3300_RS_32B);
 		sca3300_imu_transfer(imu, SCA3300_RS_32B);
 		sca3300_imu_transfer(imu, SCA3300_RS_32B);
@@ -302,7 +302,7 @@ bool imu_cs(imu_cmd_t * imu)
 		switch (imu->cs) {
 		case 0:
 		default:
-			delay_us(SCA3300_CHIP_CS_DELAY);
+			CORETIMER_DelayUs(SCA3300_CHIP_CS_DELAY);
 			imu->run = true;
 			SPI_EN1_Clear();
 			TP3_Clear();

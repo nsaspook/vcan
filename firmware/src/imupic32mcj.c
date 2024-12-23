@@ -1,7 +1,5 @@
 #include "imupic32mcj.h"
 
-static uint32_t delay_freq = 0;
-
 #ifdef __32MK0512MCJ048__
 void qei_index_cb(QEI_STATUS, uintptr_t);
 
@@ -83,8 +81,8 @@ void update_imu_int1(uint32_t a, uintptr_t context)
 void start_tick(void)
 {
 	/* Start system tick timer */
-	CORETIMER_Start();
-	delay_freq = CORETIMER_FrequencyGet() / 1000000;
+//	CORETIMER_Start();
+//	delay_freq = CORETIMER_FrequencyGet() / 1000000;
 
 #ifdef __32MK0512MCJ048__
 	TMR9_Start(); // IMU time-stamp counter

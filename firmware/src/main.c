@@ -230,7 +230,6 @@ volatile struct V_type V = {
 	.motor_speed = MOTOR_SPEED,
 	.fault_active = false,
 	.fault_count = 0,
-	.dmt_sosc_flag = false,
 };
 double mHz = 0.0, mHz_real = 0.0, sr_slip = 0.0, mHz_raw = 0.0, mHz_real_raw = 0.0;
 double pi_current_error = 0.0, pi_velocity_error = 0.0, pi_freq_error = 0.0;
@@ -245,7 +244,7 @@ const uint8_t step_code[] = {// A,B,C bits in order
 	0b101,
 };
 int32_t xa, ya, za;
-extern CORETIMER_OBJECT coreTmr;
+//extern CORETIMER_OBJECT coreTmr;
 const uint32_t update_delay = 5;
 volatile float q0 = 1.0, q1 = 1.0, q2 = 1.0, q3 = 1.0; // quaternion 
 
@@ -337,7 +336,7 @@ void wave_gen(uint32_t status, uintptr_t context)
 	V.pwm_update = true;
 
 	V.TimeUsed = (uint32_t) _CP0_GET_COUNT() - V.StartTime;
-	_CP0_SET_COUNT(DMT_PWM_TIME); // Set Core Timer count
+	//	_CP0_SET_COUNT(0); // Set Core Timer count
 	V.StartTime = (uint32_t) _CP0_GET_COUNT();
 
 	/*
@@ -413,9 +412,8 @@ void my_time(uint32_t status, uintptr_t context)
 	static bool once = true;
 
 	t1_time++;
-	V.dmt_sosc_flag = true;
 #ifdef G400HZ
-//	PetitModBus_TimerValues(); // modbus time tick
+	//	PetitModBus_TimerValues(); // modbus time tick
 	/*
 	 * system fault flags checks
 	 * shutdown inverter driver if detected
@@ -497,27 +495,12 @@ int main(void)
 	/* Initialize all modules */
 	SYS_Initialize(NULL);
 
-	if (dmt) {
-		uint16_t tgl = 1;
-		/*
-		 * make sure inverter power to h-bridge is off
-		 */
-		U1_EN_Clear();
-		U2_EN_Clear();
-		while (true) {
-			if (!tgl++) {
-				BSP_LED1_Toggle();
-				BSP_LED2_Toggle();
-				BSP_LED3_Toggle();
-			}
-			//			DMT_Clear(); // clear the Dead Man Timer
-		}
-	}
-
 	BSP_LED1_Set();
 	BSP_LED2_Set();
 	BSP_LED3_Clear();
-	_CP0_SET_COUNT(DMT_PWM_TIME); // Set Core Timer count
+
+	/* Start system tick timer */
+	CORETIMER_Start();
 	start_tick();
 
 	/*
@@ -618,10 +601,6 @@ int main(void)
 	StartTimer(TMR_DISPLAY, 500);
 	StartTimer(TMR_VEL, 1000);
 	StartTimer(TMR_ADC, 10);
-	StartTimer(TMR_DMT, DMT_UPDATE);
-
-	/* Start system tick timer */
-	CORETIMER_Start();
 
 	V.vcan_state = V_home;
 	//	TMR3_Start(); // start auto movement functions
@@ -676,16 +655,16 @@ int main(void)
 		ProcessPetitModbus(); // MODBUS processing 
 		//		BSP_LED3_Clear();
 		//		POS3CNT = (int32_t) PetitRegisters[11].ActValue; // PWM offset from MODBUS master, DON'T USE
-//		PetitRegisters[0].ActValue = (int16_t) hb_current(u1ai, true);
-//		PetitRegisters[1].ActValue = (int16_t) hb_current(u1bi, true);
-//		PetitRegisters[2].ActValue = (int16_t) hb_current(u2ai, true);
-//		PetitRegisters[3].ActValue = (int16_t) hb_current(u2bi, true);
+		//		PetitRegisters[0].ActValue = (int16_t) hb_current(u1ai, true);
+		//		PetitRegisters[1].ActValue = (int16_t) hb_current(u1bi, true);
+		//		PetitRegisters[2].ActValue = (int16_t) hb_current(u2ai, true);
+		//		PetitRegisters[3].ActValue = (int16_t) hb_current(u2bi, true);
 
-//		PetitRegisters[4].ActValue = (int16_t) (MODBUS_VER << 8) + PWMF15_Get() + (PWMF5_Get() << 1) + (PWMF6_Get() << 2) + (U1_EN_Get() << 3) + (U2_EN_Get() << 4)+ (check_adc_ivref() << 5);
-//		PetitRegisters[5].ActValue = (int16_t) m35_1.current; // current pwm voltage output value
-//		PetitRegisters[6].ActValue = (int16_t) m35_2.current;
-//		PetitRegisters[7].ActValue = (int16_t) m35_3.current;
-//		PetitRegisters[8].ActValue = (int16_t) m35_4.current;
+		//		PetitRegisters[4].ActValue = (int16_t) (MODBUS_VER << 8) + PWMF15_Get() + (PWMF5_Get() << 1) + (PWMF6_Get() << 2) + (U1_EN_Get() << 3) + (U2_EN_Get() << 4)+ (check_adc_ivref() << 5);
+		//		PetitRegisters[5].ActValue = (int16_t) m35_1.current; // current pwm voltage output value
+		//		PetitRegisters[6].ActValue = (int16_t) m35_2.current;
+		//		PetitRegisters[7].ActValue = (int16_t) m35_3.current;
+		//		PetitRegisters[8].ActValue = (int16_t) m35_4.current;
 
 
 #ifndef G400HZ_NODIS
@@ -760,8 +739,8 @@ int main(void)
 				eaDogM_WriteStringAtPos(7, 0, buffer);
 				sprintf(buffer, "%5i:D %5i %5i %5i  ", m35_1.duty, m35_2.duty, m35_3.duty, m35_4.duty);
 				eaDogM_WriteStringAtPos(8, 0, buffer);
-//				sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[11].ActValue, (uint16_t) PetitRegisters[12].ActValue, (int16_t) PetitRegisters[13].ActValue, V.modbus_rx, V.modbus_tx);
-//				eaDogM_WriteStringAtPos(9, 0, buffer);
+				//				sprintf(buffer, "MB %4i %3X %3i %4i %4i", (int16_t) PetitRegisters[11].ActValue, (uint16_t) PetitRegisters[12].ActValue, (int16_t) PetitRegisters[13].ActValue, V.modbus_rx, V.modbus_tx);
+				//				eaDogM_WriteStringAtPos(9, 0, buffer);
 				sprintf(buffer, "                     ");
 				eaDogM_WriteStringAtPos(10, 0, buffer);
 				rawtime = time(&rawtime);
